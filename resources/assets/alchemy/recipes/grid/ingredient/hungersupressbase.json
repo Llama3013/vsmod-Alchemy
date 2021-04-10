@@ -1,0 +1,11 @@
+{
+    ingredientPattern: "H,F,T",
+	ingredients: {
+        "H": { type: "block", code: "game:herb-chamomile" },
+        "F": { type: "block", code: "game:flower-edelweiss-*" },
+        "T": { type: "block", code: "alchemy:mortar-pestle-*", isTool: true }
+	},
+	width: 1,
+	height: 3,
+	output: { type: "item", code: "alchemy:potionbase-hungersupress" }
+}

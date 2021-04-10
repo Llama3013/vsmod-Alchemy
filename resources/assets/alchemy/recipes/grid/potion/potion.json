@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "P,B,F",
+	ingredients: {
+		"P": { type: "item", code: "alchemy:potionbase-*", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed"] },
+		"B": { type: "item", code: "alchemy:potionbase-basic" },
+		"F": { type: "block", code: "alchemy:potion-flask-burned" }
+	},
+	width: 1,
+	height: 3,
+	output: { type: "item", code: "alchemy:potion-{potiontype}" }
+}

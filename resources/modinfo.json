@@ -1,0 +1,14 @@
+{
+	"type": "code",
+	"name": "Alchemy",
+	"modid": "alchemy",
+	"version": "1.0.0",
+	
+	"description" : "An alchemy mod that adds a couple of player enhancing potions.",
+	"website": "https://github.com/llama3013/vsmod-AlchemyMod",
+	"authors": [ "Llama3013" ],
+	
+	"dependencies": {
+		"game": "1.14.8"
+	}
+}

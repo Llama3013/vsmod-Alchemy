@@ -1,0 +1,32 @@
+{
+    code: "potionbase",
+    shape: { base: "alchemy:item/potionbase" },
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	variantgroups: [
+        { code: "basetype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed", "basic"] }
+    ],
+    maxstacksize: 64,
+    materialDensity: 620,
+	combustibleProps: {
+		burnTemperature: 400,
+		burnDuration: 6,
+	},
+	guiTransform: {
+		translation: { x: 4, y: 0, z: 0 },
+		rotation: { x: 142, y: 36, z: 0 },
+		origin: { x: 0.45, y: 0.09, z: 0.5 },
+		scale: 2.8
+	},
+	fpHandTransform: {
+		translation: { x: -0.1, y: 0, z: 0 },
+		rotation: { x: 4, y: 9, z: 9 },
+		origin: { x: 0.5, y: 0.4, z: 0.5 },
+		scale: 1.58
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 4, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3.64
+	}
+}

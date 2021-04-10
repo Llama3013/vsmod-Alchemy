@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "K_,WS",
+	ingredients: {
+        "K": { type: "item", code: "game:knife-*" },
+        "W": { type: "block", code: "game:log-*" },
+        "S": { type: "item", code: "game:stick" }
+	},
+	width: 2,
+	height: 2,
+	output: { type: "block", code: "alchemy:mortar-pestle-wood", quantity: 1  }
+}

@@ -1,0 +1,99 @@
+{
+    code: "potion",
+	classByType: {
+		"potion-archer": "ItemArcherPotion",
+		"potion-healingeffect": "ItemHealingEffectPotion",
+		"potion-hungerenhance": "ItemHungerEnhancePotion",
+		"potion-hungersupress": "ItemHungerSupressPotion",
+		"potion-melee": "ItemMeleePotion",
+		"potion-mining": "ItemMiningPotion",
+		"potion-poison": "ItemPoisonPotion",
+		"potion-regen": "ItemRegenPotion",
+		"potion-speed": "ItemSpeedPotion"
+    },
+	attributesByType: {
+		"potion-archer": {
+			archer: 0.5,
+			accuracy: 0.09,
+			bowspeed: 0.5,
+			duration: 180,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-healingeffect": {
+			healingeffect: 0.5,
+			duration: 180,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-hungerenhance": {
+			hungerenhance: 0.5,
+			duration: 300,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-hungersupress": {
+			hungersupress: -0.5,
+			duration: 300,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-melee": {
+			melee: 0.3,
+			duration: 180,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-mining": {
+			mining: 0.3,
+			duration: 180,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-poison": {
+			poison: 1,
+			tickSec: 3,
+			duration: 30,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-regen": {
+			health: 1,
+			tickSec: 3,
+			duration: 30,
+			drankBlockCode: "potion-flask-burned"
+		},
+		"potion-speed": {
+			speed: 0.25,
+			duration: 180,
+			drankBlockCode: "potion-flask-burned"
+		},
+        "*": { drankBlockCode: "potion-flask-burned" }
+    },
+    variantgroups: [
+        { code: "potiontype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed"] }
+    ],
+	maxstacksize: 16,
+	shape: {
+        base: "block/glass/flask-ground-liquid"
+    },
+	creativeinventory: { "general": ["*"], "items": ["*"] },
+	materialDensity: 200,
+	guiTransform: {
+		translation: { x: 3, y: 0, z: 0 },
+		rotation: { x: -28, y: 23, z: 180 },
+		origin: { x: 0.5, y: 0.175, z: 0.5 },
+		scale: 3
+	},
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 1 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3
+	},
+	tpHandTransform: {
+		translation: { x: -0.54, y: -0.16, z: -0.4 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.13, z: 0.5 },
+		scale: 0.66
+	},
+	fpHandTransform: {
+		translation: { x: 0, y: 0.24, z: 0.3 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 2
+	}
+  }

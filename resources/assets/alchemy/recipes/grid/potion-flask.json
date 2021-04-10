@@ -1,0 +1,9 @@
+{
+	ingredientPattern: "Q_Q,_Q_",
+	ingredients: {
+		"Q": { type: "item", code: "game:clearquartz" }
+	},
+	width: 3,
+	height: 2,
+	output: { type: "block", code: "alchemy:potion-flask-raw", quantity: 1  }
+}

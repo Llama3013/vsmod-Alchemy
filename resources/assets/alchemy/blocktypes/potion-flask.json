@@ -1,0 +1,82 @@
+{
+	code: "potion-flask",
+	behaviors: [
+		{ name: "SneakPlacing"}, 
+		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
+		{ name: "RightClickPickup"} 
+	],
+	variantgroups: [
+		{ code:"type", states: ["raw", "burned"] },
+	],
+	drawtype: "json",
+	blockmaterial: "Glass",
+	faceCullMode: "MergeMaterial",
+	attributesByType: {
+		"*": {
+			shelvable: true,
+		}
+	},
+	vertexFlags: {
+		zOffset: 2,
+		shiny: true
+	},
+	combustiblePropsByType: {
+		"potion-flask-raw": {
+			meltingPoint: 650,
+			meltingDuration: 45,
+			smeltedRatio: 1,
+			smeltingType: "bake",
+			smeltedStack: { type: "block", code: "potion-flask-burned" },
+			requiresContainer: false
+		}
+	},
+	shape: { base: "alchemy:block/glass/flask-ground" },
+	texturesByType: {
+		"*-raw": { 
+			mat: { base: "game:block/glass/blue" },
+		},
+	},
+	blockmaterial: "Glass",
+	creativeinventory: { "general": ["*"], "decorative": ["*"] },
+	replaceable: 300,
+	resistance: 0.75,
+	lightAbsorption: 0,
+	renderPass: "Transparent",
+	maxStackSizeByType: {
+		"*": 64,
+	},
+	lightAbsorption: 0,
+	sounds: {
+		"walk": "game:walk/ice",
+		"place": "game:player/buildhigh",
+		"break": "game:block/glass",
+		"hit": "game:block/glass"
+	},
+	sideopaque: {
+		all: false
+	},
+	sidesolid: {
+		all: false
+	},
+	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
+	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
+	guiTransform: {
+		translation: { x: 0, y: 3, z: 0 },
+		origin: { x: 0.5, y: 0.0625, z: 0.5 },
+		scale: 3
+	},
+	groundTransform: {
+		scale: 3.5
+	},
+	fpHandTransform: {
+		translation: { x: 0, y: 0.4, z: 0 },
+		rotation: { x: 0, y: -14, z: 0 },
+		scale: 2
+	},
+	tpHandTransform: {
+		translation: { x: -0.9, y: -0.1, z: -0.8 },
+		rotation: { x: 0, y: -56, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 0.66
+	},
+}
