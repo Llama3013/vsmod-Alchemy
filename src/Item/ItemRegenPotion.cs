@@ -76,7 +76,7 @@ namespace Alchemy
                 potionEntity = byEntity;
 
                 long potionListenerId = api.World.RegisterGameTickListener(onPotionTick, 1000);
-                
+
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
                 potionEntity.Stats.Set("regenpotionid", "potionmod", potionListenerId, false);
 
@@ -128,6 +128,8 @@ namespace Alchemy
             /*This if statement passes when duration amount of seconds pass*/
             if (tickCnt >= duration)
             {
+                long regenPotionId = ((long)potionEntity.Stats.GetBlended("regenpotionid"));
+                potionEntity.World.UnregisterGameTickListener(regenPotionId-1);
                 /*This resets the potion listenerId that is attached to the player*/
                 potionEntity.Stats.Set("regenpotionid", "potionmod", 0, false);
                 tickCnt = 0;

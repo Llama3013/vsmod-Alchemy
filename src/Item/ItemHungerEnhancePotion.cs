@@ -79,18 +79,22 @@ namespace Alchemy
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
                 potionEntity.Stats.Set("hungerenhancepotionid", "potionmod", potionListenerId, false);
 
-                /*This checks if the player has the hunger suppressor potion effect is active*/
-                if (potionEntity.Stats.GetBlended("hungersupresspotionid") != 1)
+                if (potionEntity is EntityPlayer)
                 {
-                    /*Resets hunger rate to default because hunger enhancer and suppressor are active*/
-                    potionEntity.Stats.Set("hungerrate", "potionmod", 0, false);
                     IServerPlayer player = (potionEntity.World.PlayerByUid((potionEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhancer and hunger supressor potion fizzle out.", EnumChatType.Notification);
-                }
-                else
-                {
-                    /*This adds the attribute amount to the player's stats*/
-                    potionEntity.Stats.Set("hungerrate", "potionmod", hungerEnhance, false);
+                    /*This checks if the player has the hunger suppressor potion effect is active*/
+                    if (potionEntity.Stats.GetBlended("hungersupresspotionid") != 1)
+                    {
+                        /*Resets hunger rate to default because hunger enhancer and suppressor are active*/
+                        potionEntity.Stats.Set("hungerrate", "potionmod", 0, false);
+                        player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhancer and hunger supressor potion fizzle out.", EnumChatType.Notification);
+                    }
+                    else
+                    {
+                        player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhancer potion.", EnumChatType.Notification);
+                        /*This adds the attribute amount to the player's stats*/
+                        potionEntity.Stats.Set("hungerrate", "potionmod", hungerEnhance, false);
+                    }
                 }
 
                 Block emptyFlask = api.World.GetBlock(AssetLocation.Create(slot.Itemstack.Collectible.Attributes["drankBlockCode"].AsString(), slot.Itemstack.Collectible.Code.Domain));
@@ -112,12 +116,6 @@ namespace Alchemy
                 }
 
                 slot.MarkDirty();
-
-                if (potionEntity is EntityPlayer)
-                {
-                    IServerPlayer player = (potionEntity.World.PlayerByUid((potionEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhancer potion.", EnumChatType.Notification);
-                }
             }
         }
 

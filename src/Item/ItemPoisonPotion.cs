@@ -125,9 +125,12 @@ namespace Alchemy
             }
 
             float duration = attr["duration"].AsFloat();
+            //api.Logger.Debug("[Potion] tickCnt: {0},  tickSec: {1} and duration: {2}.", tickCnt, tickSec, duration);
             /*This if statement passes when duration amount of seconds pass*/
             if (tickCnt >= duration)
             {
+                long poisonPotionId = ((long)potionEntity.Stats.GetBlended("poisonpotionid"));
+                potionEntity.World.UnregisterGameTickListener(poisonPotionId-1);
                 /*This resets the potion listenerId that is attached to the player*/
                 potionEntity.Stats.Set("poisonpotionid", "potionmod", 0, false);
                 tickCnt = 0;

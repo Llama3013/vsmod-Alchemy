@@ -5,5 +5,5 @@
 	},
 	width: 3,
 	height: 2,
-	output: { type: "block", code: "alchemy:potion-flask-raw", quantity: 1  }
+	output: { type: "block", code: "alchemy:potionflask-raw", quantity: 1  }
 }

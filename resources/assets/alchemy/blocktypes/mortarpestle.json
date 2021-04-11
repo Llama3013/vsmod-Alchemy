@@ -1,5 +1,5 @@
 {
-  code: "mortar-pestle",
+  code: "mortarpestle",
   behaviors: [
     { name: "SneakPlacing"}, 
     { name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
@@ -16,7 +16,7 @@
   durability: 50,
   blockmaterial: "wood",
   shapeByType: {
-    "*": { base: "alchemy:block/wood/mortar-empty-ground" },
+    "*": { base: "alchemy:block/tool/mortarpestle" },
   },
   creativeinventory: { "general": ["*"], "decorative": ["*"] },
   replaceable: 300,
@@ -24,12 +24,16 @@
   lightAbsorption: 0,
 	texturesByType: {
 	  "*-wood": { 
-			floor: { base: "block/wood/oak" },
-			mat: { base: "block/wood/oak" }
+			floor: { base: "game:block/wood/oak" },
+			mat: { base: "game:block/wood/oak" }
+		},
+		"*": { 
+			floor: { base: "game:block/wood/oak" },
+			mat: { base: "game:block/wood/oak" }
 		},
   },
   sounds: {
-		walk: "walk/wood",
+		walk: "game:walk/wood",
 	},
 	sideopaque: {
 		all: false

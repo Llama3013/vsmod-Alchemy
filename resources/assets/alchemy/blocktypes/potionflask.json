@@ -1,5 +1,5 @@
 {
-	code: "potion-flask",
+	code: "potionflask",
 	behaviors: [
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
@@ -8,29 +8,23 @@
 	variantgroups: [
 		{ code:"type", states: ["raw", "burned"] },
 	],
-	drawtype: "json",
 	blockmaterial: "Glass",
-	faceCullMode: "MergeMaterial",
 	attributesByType: {
 		"*": {
 			shelvable: true,
 		}
 	},
-	vertexFlags: {
-		zOffset: 2,
-		shiny: true
-	},
 	combustiblePropsByType: {
-		"potion-flask-raw": {
+		"potionflask-raw": {
 			meltingPoint: 650,
 			meltingDuration: 45,
 			smeltedRatio: 1,
 			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potion-flask-burned" },
+			smeltedStack: { type: "block", code: "potionflask-burned" },
 			requiresContainer: false
 		}
 	},
-	shape: { base: "alchemy:block/glass/flask-ground" },
+	shape: { base: "alchemy:block/glass/flask" },
 	texturesByType: {
 		"*-raw": { 
 			mat: { base: "game:block/glass/blue" },

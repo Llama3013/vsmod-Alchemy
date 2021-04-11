@@ -34,11 +34,11 @@
 
   "itemdesc-potionbase": "Used to make potions.",
 
-  "block-potion-flask-burned": "Potion flask",
-  "blockdesc-potion-flask-burned": "Used to make potions",
-  "block-potion-flask-raw": "Raw potion flask",
-  "block-mortar-pestle-*": "Mortar & pestle",
-  "blockdesc-mortar-pestle-*": "Used to make potion base",
+  "block-potionflask-burned": "Potion flask",
+  "blockdesc-potionflask-burned": "Used to make potions",
+  "block-potionflask-raw": "Raw potion flask",
+  "block-mortarpestle-*": "Mortar & pestle",
+  "blockdesc-mortarpestle-*": "Used to make potion base",
 
   "heldhelp-drink": "Drink"
 }

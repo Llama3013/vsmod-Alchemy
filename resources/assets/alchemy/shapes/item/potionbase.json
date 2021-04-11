@@ -6,8 +6,8 @@
 	"textureWidth": 16,
 	"textureHeight": 16,
 	"textures": {
-		"mat": "item/top_normal",
-		"base": "item/temporalgear"
+		"mat": "game:block/plant/grasscoverage/inventory/top_normal",
+		"base": "game:item/resource/temporalgear"
 	},
 	"elements": [
 		{

@@ -7,5 +7,5 @@
 	},
 	width: 2,
 	height: 2,
-	output: { type: "block", code: "alchemy:mortar-pestle-wood", quantity: 1  }
+	output: { type: "block", code: "alchemy:mortarpestle-wood", quantity: 1  }
 }

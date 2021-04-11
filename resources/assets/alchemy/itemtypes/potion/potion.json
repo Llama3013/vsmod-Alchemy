@@ -17,59 +17,89 @@
 			accuracy: 0.09,
 			bowspeed: 0.5,
 			duration: 180,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-healingeffect": {
 			healingeffect: 0.5,
 			duration: 180,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-hungerenhance": {
 			hungerenhance: 0.5,
 			duration: 300,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-hungersupress": {
 			hungersupress: -0.5,
 			duration: 300,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-melee": {
 			melee: 0.3,
 			duration: 180,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-mining": {
 			mining: 0.3,
 			duration: 180,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-poison": {
 			poison: 1,
 			tickSec: 3,
 			duration: 30,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-regen": {
 			health: 1,
 			tickSec: 3,
 			duration: 30,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
 		"potion-speed": {
 			speed: 0.25,
 			duration: 180,
-			drankBlockCode: "potion-flask-burned"
+			drankBlockCode: "potionflask-burned"
 		},
-        "*": { drankBlockCode: "potion-flask-burned" }
+        "*": { drankBlockCode: "potionflask-burned" }
     },
     variantgroups: [
         { code: "potiontype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed"] }
     ],
 	maxstacksize: 16,
-	shape: {
-        base: "block/glass/flask-ground-liquid"
-    },
+	shape: { base: "alchemy:block/glass/flask-liquid" },
+	texturesByType: {
+		"*-archer": {
+			mat: { base: "alchemy:item/potion/grey_potion"}
+		},
+		"*-healingeffect": {
+			mat: { base: "alchemy:item/potion/red_potion"}
+		},
+		"*-hungerenhance": {
+			mat: { base: "alchemy:item/potion/orange_potion"}
+		},
+		"*-hungersupress": {
+			mat: { base: "alchemy:item/potion/yellow_potion"}
+		},
+		"*-melee": {
+			mat: { base: "alchemy:item/potion/darkred_potion"}
+		},
+		"*-mining": {
+			mat: { base: "alchemy:item/potion/brown_potion"}
+		},
+		"*-poison": {
+			mat: { base: "alchemy:item/potion/purple_potion"}
+		},
+		"*-regen": {
+			mat: { base: "alchemy:item/potion/green_potion"}
+		},
+		"*-speed": {
+			mat: { base: "alchemy:item/potion/turquoise_potion"}
+		},
+		"*": { 
+			mat: { base: "game:block/glass/vintage" }
+		}
+	},
 	creativeinventory: { "general": ["*"], "items": ["*"] },
 	materialDensity: 200,
 	guiTransform: {
