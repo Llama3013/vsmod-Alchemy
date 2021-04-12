@@ -5,7 +5,7 @@ using Vintagestory.API.Common.Entities;
 
 [assembly: ModInfo("AlchemyMod",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
-    Website = "https://github.com/llama3013/vsmod-AlchemyMod",
+    Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" })]
 
 namespace Alchemy
@@ -19,7 +19,7 @@ namespace Alchemy
             base.Start(api);
 
             config = ModConfig.Load(api);
-            
+
             api.RegisterItemClass("ItemRegenPotion", typeof(ItemRegenPotion));
             api.RegisterItemClass("ItemSpeedPotion", typeof(ItemSpeedPotion));
             api.RegisterItemClass("ItemMiningPotion", typeof(ItemMiningPotion));
@@ -48,43 +48,16 @@ namespace Alchemy
                     entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
                     entity.Stats.Set("walkspeed", "potionmod", 0, false);
                     entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-                    entity.Stats.Set("archerpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("healingeffectpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("hungerenhancepotionid", "potionmod", 0, false);
-                    entity.Stats.Set("hungersupresspotionid", "potionmod", 0, false);
-                    entity.Stats.Set("meleepotionid", "potionmod", 0, false);
-                    entity.Stats.Set("miningpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("poisonpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("regenpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("speedpotionid", "potionmod", 0, false);
-                }
-            };
-        }
-
-        /* This override is to reset all of the potion stats to default (might not be needed since already done serverside) */
-        public override void StartClientSide(ICoreClientAPI api)
-        {
-            api.Event.OnEntitySpawn += (Entity entity) =>
-            {
-                if (entity is EntityPlayer)
-                {
-                    entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
-                    entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
-                    entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
-                    entity.Stats.Set("hungerrate", "potionmod", 0, false);
-                    entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
-                    entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
-                    entity.Stats.Set("walkspeed", "potionmod", 0, false);
-                    entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-                    entity.Stats.Set("archerpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("healingeffectpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("hungerenhancepotionid", "potionmod", 0, false);
-                    entity.Stats.Set("hungersupresspotionid", "potionmod", 0, false);
-                    entity.Stats.Set("meleepotionid", "potionmod", 0, false);
-                    entity.Stats.Set("miningpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("poisonpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("regenpotionid", "potionmod", 0, false);
-                    entity.Stats.Set("speedpotionid", "potionmod", 0, false);
+                    entity.WatchedAttributes.SetLong("healingeffectpotionid", 0);
+                    entity.WatchedAttributes.SetLong("regenpotionid", 0);
+                    entity.WatchedAttributes.SetLong("poisonpotionid", 0);
+                    entity.WatchedAttributes.SetLong("archerpotionid", 0);
+                    entity.WatchedAttributes.SetLong("hungerenhancepotionid", 0);
+                    entity.WatchedAttributes.SetLong("hungersupresspotionid", 0);
+                    entity.WatchedAttributes.SetLong("meleepotionid", 0);
+                    entity.WatchedAttributes.SetLong("accuracypotionid", 0);
+                    entity.WatchedAttributes.SetLong("miningpotionid", 0);
+                    entity.WatchedAttributes.SetLong("speedpotionid", 0);
                 }
             };
         }

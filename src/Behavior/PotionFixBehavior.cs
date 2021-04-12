@@ -32,58 +32,58 @@ namespace Alchemy
             RegisterCallback, UnregisterCallback, RegisterGameTickListener and UnregisterGameTickListener. I think this could cause a problem
             if the listener id is too big of a number for float but so far the listeners have only gone to about a thousand with my testing.
             I will create a better system soon. */
-            long archerPotionId = ((long)player.Entity.Stats.GetBlended("archerpotionid"));
-            if (archerPotionId != 1)
+            long archerPotionId = entity.WatchedAttributes.GetLong("archerpotionid");
+            if (archerPotionId != 0)
             {
-                entity.World.UnregisterCallback(archerPotionId - 1);
+                entity.World.UnregisterCallback(archerPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the archer potion dissipate.", EnumChatType.Notification);
             }
-            long hungerEnhancePotionId = ((long)player.Entity.Stats.GetBlended("hungerenhancepotionid"));
-            if (hungerEnhancePotionId != 1)
+            long hungerEnhancePotionId = entity.WatchedAttributes.GetLong("hungeranhancepotionid");
+            if (hungerEnhancePotionId != 0)
             {
-                entity.World.UnregisterCallback(hungerEnhancePotionId - 1);
+                entity.World.UnregisterCallback(hungerEnhancePotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhance potion dissipate.", EnumChatType.Notification);
             }
-            long hungerSupressPotionId = ((long)player.Entity.Stats.GetBlended("hungersupresspotionid"));
-            if (hungerSupressPotionId != 1)
+            long hungerSupressPotionId = entity.WatchedAttributes.GetLong("hungersupresspotionid");
+            if (hungerSupressPotionId != 0)
             {
-                entity.World.UnregisterCallback(hungerSupressPotionId - 1);
+                entity.World.UnregisterCallback(hungerSupressPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger supress potion dissipate.", EnumChatType.Notification);
             }
-            long meleePotionId = ((long)player.Entity.Stats.GetBlended("meleepotionid"));
-            if (meleePotionId != 1)
+            long meleePotionId = entity.WatchedAttributes.GetLong("meleepotionid");
+            if (meleePotionId != 0)
             {
-                entity.World.UnregisterCallback(meleePotionId - 1);
+                entity.World.UnregisterCallback(meleePotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the melee potion dissipate.", EnumChatType.Notification);
             }
-            long poisonPotionId = ((long)player.Entity.Stats.GetBlended("poisonpotionid"));
-            if (poisonPotionId != 1)
+            long poisonPotionId = entity.WatchedAttributes.GetLong("poisonpotionid");
+            if (poisonPotionId != 0)
             {
-                entity.World.UnregisterGameTickListener(poisonPotionId - 1);
+                entity.World.UnregisterGameTickListener(poisonPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the poison potion dissipate.", EnumChatType.Notification);
             }
-            long regenPotionId = ((long)player.Entity.Stats.GetBlended("regenpotionid"));
-            if (regenPotionId != 1)
+            long regenPotionId = entity.WatchedAttributes.GetLong("regenpotionid");
+            if (regenPotionId != 0)
             {
-                entity.World.UnregisterGameTickListener(regenPotionId - 1);
+                entity.World.UnregisterGameTickListener(regenPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the regen potion dissipate.", EnumChatType.Notification);
             }
-            long miningPotionId = ((long)player.Entity.Stats.GetBlended("miningpotionid"));
-            if (miningPotionId != 1)
+            long miningPotionId = entity.WatchedAttributes.GetLong("miningpotionid");
+            if (miningPotionId != 0)
             {
-                entity.World.UnregisterCallback(miningPotionId - 1);
+                entity.World.UnregisterCallback(miningPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the mining potion dissipate.", EnumChatType.Notification);
             }
-            long speedPotionId = ((long)player.Entity.Stats.GetBlended("speedpotionid"));
-            if (speedPotionId != 1)
+            long speedPotionId = entity.WatchedAttributes.GetLong("speedpotionid");
+            if (speedPotionId != 0)
             {
-                entity.World.UnregisterCallback(speedPotionId - 1);
+                entity.World.UnregisterCallback(speedPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the speed potion dissipate.", EnumChatType.Notification);
             }
-            long healingEffectPotionId = ((long)player.Entity.Stats.GetBlended("healingeffectpotionid"));
-            if (healingEffectPotionId != 1)
+            long healingEffectPotionId = entity.WatchedAttributes.GetLong("healingeffectpotionid");
+            if (healingEffectPotionId != 0)
             {
-                entity.World.UnregisterCallback(healingEffectPotionId - 1);
+                entity.World.UnregisterCallback(healingEffectPotionId);
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the speed potion dissipate.", EnumChatType.Notification);
             }
 
@@ -95,16 +95,16 @@ namespace Alchemy
             entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
             entity.Stats.Set("walkspeed", "potionmod", 0, false);
             entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-            entity.Stats.Set("healingeffectpotionid", "potionmod", 0, false);
-            entity.Stats.Set("regenpotionid", "potionmod", 0, false);
-            entity.Stats.Set("poisonpotionid", "potionmod", 0, false);
-            entity.Stats.Set("archerpotionid", "potionmod", 0, false);
-            entity.Stats.Set("hungerenhancepotionid", "potionmod", 0, false);
-            entity.Stats.Set("hungersupresspotionid", "potionmod", 0, false);
-            entity.Stats.Set("meleepotionid", "potionmod", 0, false);
-            entity.Stats.Set("accuracypotionid", "potionmod", 0, false);
-            entity.Stats.Set("miningpotionid", "potionmod", 0, false);
-            entity.Stats.Set("speedpotionid", "potionmod", 0, false);
+            entity.WatchedAttributes.SetLong("healingeffectpotionid", 0);
+            entity.WatchedAttributes.SetLong("regenpotionid", 0);
+            entity.WatchedAttributes.SetLong("poisonpotionid", 0);
+            entity.WatchedAttributes.SetLong("archerpotionid", 0);
+            entity.WatchedAttributes.SetLong("hungerenhancepotionid", 0);
+            entity.WatchedAttributes.SetLong("hungersupresspotionid", 0);
+            entity.WatchedAttributes.SetLong("meleepotionid", 0);
+            entity.WatchedAttributes.SetLong("accuracypotionid", 0);
+            entity.WatchedAttributes.SetLong("miningpotionid", 0);
+            entity.WatchedAttributes.SetLong("speedpotionid", 0);
 
             base.OnEntityDeath(damageSourceForDeath);
         }

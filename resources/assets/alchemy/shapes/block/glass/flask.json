@@ -8,7 +8,7 @@
 	"textureSizes": {
 	},
 	"textures": {
-		"mat": "block/glass/vintage"
+		"mat": "game:block/glass/vintage"
 	},
 	"elements": [
 		{

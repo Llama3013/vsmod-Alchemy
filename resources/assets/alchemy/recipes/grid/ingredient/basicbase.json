@@ -3,7 +3,7 @@
 	ingredients: {
 		"M": { type: "block", code: "game:mushroom-flyagaric-*" },
 		"F": { type: "block", code: "game:flower-horsetail-*" },
-        "T": { type: "block", code: "alchemy:mortarpestle-*", isTool: true }
+        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 	},
 	width: 1,
 	height: 3,

@@ -17,7 +17,7 @@ namespace Alchemy
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             /*This checks if the potion effect callback is on*/
-            if (byEntity.Stats.GetBlended("miningpotionid") == 1)
+            if (byEntity.WatchedAttributes.GetLong("miningpotionid") == 0)
             {
                 byEntity.World.RegisterCallback((dt) =>
                 {
@@ -77,7 +77,7 @@ namespace Alchemy
                 long potionListenerId = potionEntity.World.RegisterCallback(onPotionCall, (1000 * (int)duration));
 
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                potionEntity.Stats.Set("miningpotionid", "potionmod", potionListenerId, false);
+                potionEntity.WatchedAttributes.SetLong("miningpotionid", potionListenerId);
                 
                 /*This adds the attribute amount to the player's stats*/
                 potionEntity.Stats.Set("miningSpeedMul", "potionmod", mining, false);
@@ -114,7 +114,7 @@ namespace Alchemy
         {
             /*These two lines reset the character back to what they were before the potion*/
             potionEntity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
-            potionEntity.Stats.Set("miningpotionid", "potionmod", 0, false);
+            potionEntity.WatchedAttributes.SetLong("miningpotionid", 0);
 
             if (potionEntity is EntityPlayer)
             {

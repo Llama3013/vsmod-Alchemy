@@ -1,9 +1,9 @@
 {
 	ingredientPattern: "H,F,T",
 	ingredients: {
-		"H": { type: "block", code: "game:herb-saffron"},
-		"F": { type: "block", code: "game:flower-forgetmenot-free" },
-        "T": { type: "block", code: "alchemy:mortarpestle-*", isTool: true },
+		"H": { type: "block", code: "game:flower-heather-*"},
+		"F": { type: "block", code: "game:flower-forgetmenot-*" },
+        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
 	},
 	width: 1,
 	height: 3,

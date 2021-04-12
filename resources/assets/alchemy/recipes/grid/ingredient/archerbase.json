@@ -1,9 +1,9 @@
 {
     ingredientPattern: "H,F,T",
 	ingredients: {
-        "H": { type: "block", code: "game:herb-mint" },
-        "F": { type: "block", code: "game:flower-californiapoppy-*" },
-        "T": { type: "block", code: "alchemy:mortarpestle-*", isTool: true }
+        "H": { type: "block", code: "game:flower-lupine-blue-*" },
+        "F": { type: "block", code: "game:flower-orangemallow-*" },
+        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 	},
 	width: 1,
 	height: 3,

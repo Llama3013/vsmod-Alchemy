@@ -17,7 +17,7 @@ namespace Alchemy
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             /*This checks if the potion effect callback is on*/
-            if (byEntity.Stats.GetBlended("archerpotionid") == 1)
+            if (byEntity.WatchedAttributes.GetLong("archerpotionid") == 0)
             {
                 byEntity.World.RegisterCallback((dt) =>
                 {
@@ -79,7 +79,7 @@ namespace Alchemy
                 long potionListenerId = potionEntity.World.RegisterCallback(onPotionCall, (1000 * (int)duration));
 
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                potionEntity.Stats.Set("archerpotionid", "potionmod", potionListenerId, false);
+                potionEntity.WatchedAttributes.SetLong("archerpotionid", potionListenerId);
 
                 /*These three lines adds the attribute amount to the player's stats*/
                 potionEntity.Stats.Set("rangedWeaponsDamage", "potionmod", archer, false);
@@ -120,7 +120,7 @@ namespace Alchemy
             potionEntity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
             potionEntity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
             potionEntity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
-            potionEntity.Stats.Set("archerpotionid", "potionmod", 0, false);
+            potionEntity.WatchedAttributes.SetLong("archerpotionid", 0);
 
             if (potionEntity is EntityPlayer)
             {

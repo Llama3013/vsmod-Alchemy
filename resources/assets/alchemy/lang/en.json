@@ -1,5 +1,5 @@
 {
-  "item-potionbase-*": "A potion base",
+  "item-potionbase*": "A potion base used to make potions",
   "item-potionbase-basic": "Basic potion base",
   "itemdesc-potionbase-basic": "Used to make every potion",
   "item-potionbase-archer": "Archer potion base",
@@ -32,13 +32,12 @@
   "item-potion-regen": "Regeneration potion",
   "item-potion-speed": "Speed potion",
 
-  "itemdesc-potionbase": "Used to make potions.",
+  "item-mortarpestle-*": "Mortar & pestle",
+  "itemdesc-mortarpestle-*": "Used to make potion base",
 
   "block-potionflask-burned": "Potion flask",
   "blockdesc-potionflask-burned": "Used to make potions",
   "block-potionflask-raw": "Raw potion flask",
-  "block-mortarpestle-*": "Mortar & pestle",
-  "blockdesc-mortarpestle-*": "Used to make potion base",
 
   "heldhelp-drink": "Drink"
 }

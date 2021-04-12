@@ -2,8 +2,8 @@
 	"textureWidth": 16,
 	"textureHeight": 16,
 	"textures": {
-		"mat": "block/wood/oak",
-		"floor": "block/wood/oak",
+		"mat": "game:block/wood/oak",
+		"floor": "game:block/wood/oak",
 	},
 	"elements": [
 		{

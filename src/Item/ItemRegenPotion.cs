@@ -20,7 +20,7 @@ namespace Alchemy
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             /*This checks if the potion effect callback is on*/
-            if (byEntity.Stats.GetBlended("regenpotionid") == 1)
+            if (byEntity.WatchedAttributes.GetLong("regenpotionid") == 0)
             {
                 byEntity.World.RegisterCallback((dt) =>
                 {
@@ -78,7 +78,7 @@ namespace Alchemy
                 long potionListenerId = api.World.RegisterGameTickListener(onPotionTick, 1000);
 
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                potionEntity.Stats.Set("regenpotionid", "potionmod", potionListenerId, false);
+                potionEntity.WatchedAttributes.SetLong("regenpotionid", potionListenerId);
 
                 Block emptyFlask = api.World.GetBlock(AssetLocation.Create(slot.Itemstack.Collectible.Attributes["drankBlockCode"].AsString(), slot.Itemstack.Collectible.Code.Domain));
                 ItemStack emptyStack = new ItemStack(emptyFlask);
@@ -112,7 +112,7 @@ namespace Alchemy
         {
             tickCnt++;
 
-            float tickSec = attr["tickSec"].AsFloat();
+            int tickSec = attr["tickSec"].AsInt();
             /*This if statement passes every tickSec amount of seconds*/
             if (tickCnt % tickSec == 0)
             {
@@ -124,14 +124,14 @@ namespace Alchemy
                 }, Math.Abs(health));
             }
 
-            float duration = attr["duration"].AsFloat();
+            int duration = attr["duration"].AsInt();
             /*This if statement passes when duration amount of seconds pass*/
             if (tickCnt >= duration)
             {
-                long regenPotionId = ((long)potionEntity.Stats.GetBlended("regenpotionid"));
-                potionEntity.World.UnregisterGameTickListener(regenPotionId-1);
+                long regenPotionId = potionEntity.WatchedAttributes.GetLong("regenpotionid");
+                potionEntity.World.UnregisterGameTickListener(regenPotionId);
                 /*This resets the potion listenerId that is attached to the player*/
-                potionEntity.Stats.Set("regenpotionid", "potionmod", 0, false);
+                potionEntity.WatchedAttributes.SetLong("regenpotionid", 0);
                 tickCnt = 0;
 
                 if (potionEntity is EntityPlayer)

@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "K_,WS",
+	ingredients: {
+        "K": { type: "item", code: "game:chisel-*", isTool: true },
+        "W": { type: "item", code: "game:stone-*" },
+        "S": { type: "item", code: "game:stick" }
+	},
+	width: 2,
+	height: 2,
+	output: { type: "item", code: "alchemy:mortarpestle-stone", quantity: 1  }
+}

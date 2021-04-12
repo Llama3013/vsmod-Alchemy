@@ -17,7 +17,7 @@ namespace Alchemy
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
             /*This checks if the potion effect callback is on*/
-            if (byEntity.Stats.GetBlended("hungersupresspotionid") == 1)
+            if (byEntity.WatchedAttributes.GetLong("hungersupresspotionid") == 0)
             {
                 byEntity.World.RegisterCallback((dt) =>
                 {
@@ -77,13 +77,13 @@ namespace Alchemy
                 long potionListenerId = potionEntity.World.RegisterCallback(onPotionCall, (1000 * (int)duration));
 
                 /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                potionEntity.Stats.Set("hungersupresspotionid", "potionmod", potionListenerId, false);
+                potionEntity.WatchedAttributes.SetLong("hungersupresspotionid", potionListenerId);
 
                 if (potionEntity is EntityPlayer)
                 {
                     IServerPlayer player = (potionEntity.World.PlayerByUid((potionEntity as EntityPlayer).PlayerUID) as IServerPlayer);
                     /*This checks if the player has the hunger suppressor potion effect is active*/
-                    if (potionEntity.Stats.GetBlended("hungerenhancepotionid") != 1)
+                    if (potionEntity.WatchedAttributes.GetLong("hungerenhancepotionid") != 0)
                     {
                         /*Resets hunger rate to default because hunger enhancer and suppressor are active*/
                         potionEntity.Stats.Set("hungerrate", "potionmod", 0, false);
@@ -123,7 +123,7 @@ namespace Alchemy
         {
             /*These two lines reset the character back to what they were before the potion*/
             potionEntity.Stats.Set("hungerrate", "potionmod", 0, false);
-            potionEntity.Stats.Set("hungersupresspotionid", "potionmod", 0, false);
+            potionEntity.WatchedAttributes.SetLong("hungersupresspotionid", 0);
 
             if (potionEntity is EntityPlayer)
             {
@@ -141,7 +141,7 @@ namespace Alchemy
             {
                 float hungersupress = attr["hungersupress"].AsFloat();
                 float duration = attr["duration"].AsFloat();
-                dsc.AppendLine(Lang.Get("When used: {0}% hungerrate. Lasts for {1} seconds.", hungersupress * 100, duration));
+                dsc.AppendLine(Lang.Get("When used: {0}% hunger rate. Lasts for {1} seconds.", hungersupress * 100, duration));
             }
         }
 
