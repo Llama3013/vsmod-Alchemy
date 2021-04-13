@@ -9,11 +9,6 @@
 		{ code:"type", states: ["raw", "burned"] },
 	],
 	blockmaterial: "Glass",
-	attributesByType: {
-		"*": {
-			shelvable: true,
-		}
-	},
 	combustiblePropsByType: {
 		"potionflask-raw": {
 			meltingPoint: 650,

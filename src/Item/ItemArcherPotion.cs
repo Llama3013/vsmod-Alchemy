@@ -150,8 +150,9 @@ namespace Alchemy
             return new WorldInteraction[] {
                 new WorldInteraction()
                 {
-                    ActionLangCode = "heldhelp-drink",
-                    MouseButton = EnumMouseButton.Right,
+                    /* The ActionLangCode should be heldhelp-drink but it is not working atm */
+                    ActionLangCode = "Drink",
+                    MouseButton = EnumMouseButton.Right
                 }
             }.Append(base.GetHeldInteractionHelp(inSlot));
         }

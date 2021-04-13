@@ -1,4 +1,6 @@
 {
+  "heldhelp-drink": "Drink",
+
   "item-potionbase*": "A potion base used to make potions",
   "item-potionbase-basic": "Basic potion base",
   "itemdesc-potionbase-basic": "Used to make every potion",
@@ -38,6 +40,4 @@
   "block-potionflask-burned": "Potion flask",
   "blockdesc-potionflask-burned": "Used to make potions",
   "block-potionflask-raw": "Raw potion flask",
-
-  "heldhelp-drink": "Drink"
 }
