@@ -1,8 +1,9 @@
 {
-	ingredientPattern: "K_,WS",
+	ingredientPattern: "HC,RS",
 	ingredients: {
-        "K": { type: "item", code: "game:chisel-*", isTool: true },
-        "W": { type: "item", code: "game:stone-*" },
+		"H": { type: "item", code: "game:hammer-*", isTool: true },
+        "C": { type: "item", code: "game:chisel-*", isTool: true },
+        "R": { type: "item", code: "game:stone-*" },
         "S": { type: "item", code: "game:stick" }
 	},
 	width: 2,

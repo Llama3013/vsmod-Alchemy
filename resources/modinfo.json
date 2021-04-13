@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	
 	"description" : "An alchemy mod that adds a couple of player enhancing potions.",
-	"website": "https://github.com/llama3013/vsmod-AlchemyMod",
+	"website": "https://github.com/llama3013/vsmod-Alchemy",
 	"authors": [ "Llama3013" ],
 	
 	"dependencies": {
