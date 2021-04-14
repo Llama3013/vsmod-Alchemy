@@ -19,7 +19,7 @@
 			requiresContainer: false
 		}
 	},
-	shape: { base: "alchemy:block/glass/flask" },
+	shape: { base: "alchemy:block/glass/flask-liquid" },
 	texturesByType: {
 		"*-raw": { 
 			mat: { base: "game:block/glass/blue" },
@@ -29,29 +29,26 @@
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	replaceable: 300,
 	resistance: 0.75,
-	lightAbsorption: 0,
-	renderPass: "Transparent",
 	maxStackSizeByType: {
 		"*": 64,
 	},
-	lightAbsorption: 0,
 	sounds: {
 		"walk": "game:walk/ice",
 		"place": "game:player/buildhigh",
 		"break": "game:block/glass",
 		"hit": "game:block/glass"
 	},
-	sideopaque: {
-		all: false
-	},
-	sidesolid: {
-		all: false
-	},
+	lightAbsorption: 0,
+	sideopaque: { all: false },
+	sideao: { all: true },
+	emitsideao: { all: false },
+	sidesolid: { all: false },
+	renderpass: "transparent",
 	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	guiTransform: {
 		translation: { x: 0, y: 3, z: 0 },
-		origin: { x: 0.5, y: 0.0625, z: 0.5 },
+		origin: { x: 0.5, y: 0.125, z: 0.5 },
 		scale: 3
 	},
 	groundTransform: {
