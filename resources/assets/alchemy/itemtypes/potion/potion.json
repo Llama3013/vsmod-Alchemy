@@ -1,5 +1,8 @@
 {
-    code: "potion",
+	code: "potion",
+	variantgroups: [
+        { code: "potiontype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed"] }
+    ],
 	classByType: {
 		"potion-archer": "ItemArcherPotion",
 		"potion-healingeffect": "ItemHealingEffectPotion",
@@ -10,7 +13,9 @@
 		"potion-poison": "ItemPoisonPotion",
 		"potion-regen": "ItemRegenPotion",
 		"potion-speed": "ItemSpeedPotion"
-    },
+	},
+	drawtype: "JSON",
+	replaceable: 5000,
 	attributesByType: {
 		"potion-archer": {
 			archer: 0.5,
@@ -63,38 +68,35 @@
 		},
         "*": { drankBlockCode: "potionflask-burned" }
     },
-    variantgroups: [
-        { code: "potiontype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "melee", "mining", "poison", "regen", "speed"] }
-    ],
 	maxstacksize: 16,
 	shape: { base: "alchemy:block/glass/flask-liquid" },
 	texturesByType: {
 		"*-archer": {
-			mat: { base: "alchemy:item/potion/grey_potion"}
+			content: { base: "alchemy:item/potion/grey_potion"}
 		},
 		"*-healingeffect": {
-			mat: { base: "alchemy:item/potion/red_potion"}
+			content: { base: "alchemy:item/potion/red_potion"}
 		},
 		"*-hungerenhance": {
-			mat: { base: "alchemy:item/potion/orange_potion"}
+			content: { base: "alchemy:item/potion/orange_potion"}
 		},
 		"*-hungersupress": {
-			mat: { base: "alchemy:item/potion/yellow_potion"}
+			content: { base: "alchemy:item/potion/yellow_potion"}
 		},
 		"*-melee": {
-			mat: { base: "alchemy:item/potion/darkred_potion"}
+			content: { base: "alchemy:item/potion/darkred_potion"}
 		},
 		"*-mining": {
-			mat: { base: "alchemy:item/potion/brown_potion"}
+			content: { base: "alchemy:item/potion/brown_potion"}
 		},
 		"*-poison": {
-			mat: { base: "alchemy:item/potion/purple_potion"}
+			content: { base: "alchemy:item/potion/purple_potion"}
 		},
 		"*-regen": {
-			mat: { base: "alchemy:item/potion/green_potion"}
+			content: { base: "alchemy:item/potion/green_potion"}
 		},
 		"*-speed": {
-			mat: { base: "alchemy:item/potion/turquoise_potion"}
+			content: { base: "alchemy:item/potion/turquoise_potion"}
 		},
 		"*": { 
 			mat: { base: "game:block/glass/vintage" }
@@ -102,6 +104,12 @@
 	},
 	creativeinventory: { "general": ["*"], "items": ["*"] },
 	materialDensity: 200,
+	lightAbsorption: 0,
+	sideopaque: { all: false },
+	sideao: { all: true },
+	emitsideao: { all: false },
+	sidesolid: { all: false },
+	renderpass: "transparent",
 	guiTransform: {
 		translation: { x: 3, y: 0, z: 0 },
 		rotation: { x: -28, y: 23, z: 180 },
