@@ -59,7 +59,7 @@ namespace Alchemy
             entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
             entity.Stats.Set("maxhealthExtraPoints", "potionmod", 0, false);
             EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
-            ebh.UpdateMaxHealth();
+            ebh.MarkDirty();
             entity.Stats.Set("walkspeed", "potionmod", 0, false);
             entity.Stats.Set("hungerrate", "potionmod", 0, false);
             entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);

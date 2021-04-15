@@ -27,13 +27,17 @@ namespace Alchemy
             api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
         }
 
+        ICoreServerAPI sapi;
+
         /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
         public override void StartServerSide(ICoreServerAPI api)
         {
-            api.Event.OnEntitySpawn += (Entity entity) =>
+            this.sapi = api;
+            api.Event.PlayerJoin += (IServerPlayer iServerPlayer) =>
             {
-                if (entity is EntityPlayer)
+                if (iServerPlayer is EntityPlayer)
                 {
+                    Entity entity = iServerPlayer.Entity;
                     entity.AddBehavior(new PotionFixBehavior(entity, config));
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
                     string potionId = "potionid";
