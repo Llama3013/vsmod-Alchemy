@@ -19,6 +19,7 @@
 			requiresContainer: false
 		}
 	},
+	materialDensity: 200,
 	shape: { base: "alchemy:block/glass/flask-liquid" },
 	texturesByType: {
 		"*-raw": { 

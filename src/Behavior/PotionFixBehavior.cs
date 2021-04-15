@@ -1,7 +1,8 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
-using Vintagestory.API.Server;
 using Vintagestory.API.Config;
+using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace Alchemy
 {
@@ -28,83 +29,59 @@ namespace Alchemy
         public override void OnEntityDeath(DamageSource damageSourceForDeath)
         {
             IServerPlayer player = GetIServerPlayer();
-            /* Note that the default value of GetBlended is 1 and as a float. I have converted the listener potion ids value to a long so that it works with
-            RegisterCallback, UnregisterCallback, RegisterGameTickListener and UnregisterGameTickListener. I think this could cause a problem
-            if the listener id is too big of a number for float but so far the listeners have only gone to about a thousand with my testing.
-            I will create a better system soon. */
-            long archerPotionId = entity.WatchedAttributes.GetLong("archerpotionid");
-            if (archerPotionId != 0)
+
+            bool potionReseted = false;
+            string potionId = "potionid";
+            string tickPotionId = "tickpotionid";
+            string[] attributeKey = entity.WatchedAttributes.Keys;
+            int attributeAmnt = entity.WatchedAttributes.Count;
+            for (int i = 0; attributeAmnt > i; i++)
             {
-                entity.World.UnregisterCallback(archerPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the archer potion dissipate.", EnumChatType.Notification);
-            }
-            long hungerEnhancePotionId = entity.WatchedAttributes.GetLong("hungeranhancepotionid");
-            if (hungerEnhancePotionId != 0)
-            {
-                entity.World.UnregisterCallback(hungerEnhancePotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger enhance potion dissipate.", EnumChatType.Notification);
-            }
-            long hungerSupressPotionId = entity.WatchedAttributes.GetLong("hungersupresspotionid");
-            if (hungerSupressPotionId != 0)
-            {
-                entity.World.UnregisterCallback(hungerSupressPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the hunger supress potion dissipate.", EnumChatType.Notification);
-            }
-            long meleePotionId = entity.WatchedAttributes.GetLong("meleepotionid");
-            if (meleePotionId != 0)
-            {
-                entity.World.UnregisterCallback(meleePotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the melee potion dissipate.", EnumChatType.Notification);
-            }
-            long poisonPotionId = entity.WatchedAttributes.GetLong("poisonpotionid");
-            if (poisonPotionId != 0)
-            {
-                entity.World.UnregisterGameTickListener(poisonPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the poison potion dissipate.", EnumChatType.Notification);
-            }
-            long regenPotionId = entity.WatchedAttributes.GetLong("regenpotionid");
-            if (regenPotionId != 0)
-            {
-                entity.World.UnregisterGameTickListener(regenPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the regen potion dissipate.", EnumChatType.Notification);
-            }
-            long miningPotionId = entity.WatchedAttributes.GetLong("miningpotionid");
-            if (miningPotionId != 0)
-            {
-                entity.World.UnregisterCallback(miningPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the mining potion dissipate.", EnumChatType.Notification);
-            }
-            long speedPotionId = entity.WatchedAttributes.GetLong("speedpotionid");
-            if (speedPotionId != 0)
-            {
-                entity.World.UnregisterCallback(speedPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the speed potion dissipate.", EnumChatType.Notification);
-            }
-            long healingEffectPotionId = entity.WatchedAttributes.GetLong("healingeffectpotionid");
-            if (healingEffectPotionId != 0)
-            {
-                entity.World.UnregisterCallback(healingEffectPotionId);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the speed potion dissipate.", EnumChatType.Notification);
+                if (attributeKey[i].Contains(potionId))
+                {
+                    long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
+                    if (potionListenerId != 0)
+                    {
+                        potionReseted = true;
+                        if (attributeKey[i].Contains(tickPotionId))
+                        {
+                            entity.World.UnregisterGameTickListener(potionListenerId);
+                        }
+                        else
+                        {
+                            entity.World.UnregisterCallback(potionListenerId);
+                        }
+                        entity.WatchedAttributes.SetLong(attributeKey[i], 0);
+                    }
+                }
             }
 
-            entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
-            entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
-            entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
+            entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
+            entity.Stats.Set("maxhealthExtraPoints", "potionmod", 0, false);
+            EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
+            ebh.UpdateMaxHealth();
+            entity.Stats.Set("walkspeed", "potionmod", 0, false);
             entity.Stats.Set("hungerrate", "potionmod", 0, false);
-            entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
+            entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
             entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
             entity.Stats.Set("walkspeed", "potionmod", 0, false);
-            entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-            entity.WatchedAttributes.SetLong("healingeffectpotionid", 0);
-            entity.WatchedAttributes.SetLong("regenpotionid", 0);
-            entity.WatchedAttributes.SetLong("poisonpotionid", 0);
-            entity.WatchedAttributes.SetLong("archerpotionid", 0);
-            entity.WatchedAttributes.SetLong("hungerenhancepotionid", 0);
-            entity.WatchedAttributes.SetLong("hungersupresspotionid", 0);
-            entity.WatchedAttributes.SetLong("meleepotionid", 0);
-            entity.WatchedAttributes.SetLong("accuracypotionid", 0);
-            entity.WatchedAttributes.SetLong("miningpotionid", 0);
-            entity.WatchedAttributes.SetLong("speedpotionid", 0);
+            entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
+            entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
+            entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
+            entity.Stats.Set("mechanicalsDamage", "potionmod", 0, false);
+            entity.Stats.Set("animalLootDropRate", "potionmod", 0, false);
+            entity.Stats.Set("forageDropRate", "potionmod", 0, false);
+            entity.Stats.Set("vesselContentsDropRate", "potionmod", 0, false);
+            entity.Stats.Set("wildCropDropRate", "potionmod", 0, false);
+            entity.Stats.Set("oreDropRate", "potionmod", 0, false);
+            entity.Stats.Set("rustyGearDropRate", "potionmod", 0, false);
+            entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
+            entity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
+            entity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
+
+            if (potionReseted) {
+                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of all of your potions dissipate.", EnumChatType.Notification);
+            }
 
             base.OnEntityDeath(damageSourceForDeath);
         }

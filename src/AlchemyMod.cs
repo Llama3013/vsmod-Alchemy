@@ -1,12 +1,17 @@
 ﻿using Vintagestory.API.Common;
-using Vintagestory.API.Client;
-using Vintagestory.API.Server;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 [assembly: ModInfo("AlchemyMod",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" })]
+
+/* Quick reference to all attributes that change the characters Stats:
+   healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
+   rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
+   vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
 
 namespace Alchemy
 {
@@ -19,16 +24,7 @@ namespace Alchemy
             base.Start(api);
 
             config = ModConfig.Load(api);
-
-            api.RegisterItemClass("ItemRegenPotion", typeof(ItemRegenPotion));
-            api.RegisterItemClass("ItemSpeedPotion", typeof(ItemSpeedPotion));
-            api.RegisterItemClass("ItemMiningPotion", typeof(ItemMiningPotion));
-            api.RegisterItemClass("ItemMeleePotion", typeof(ItemMeleePotion));
-            api.RegisterItemClass("ItemHungerSupressPotion", typeof(ItemHungerSupressPotion));
-            api.RegisterItemClass("ItemHungerEnhancePotion", typeof(ItemHungerEnhancePotion));
-            api.RegisterItemClass("ItemArcherPotion", typeof(ItemArcherPotion));
-            api.RegisterItemClass("ItemPoisonPotion", typeof(ItemPoisonPotion));
-            api.RegisterItemClass("ItemHealingEffectPotion", typeof(ItemHealingEffectPotion));
+            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
         }
 
         /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
@@ -40,24 +36,52 @@ namespace Alchemy
                 {
                     entity.AddBehavior(new PotionFixBehavior(entity, config));
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
-                    entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
-                    entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
-                    entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
+                    string potionId = "potionid";
+                    string tickPotionId = "tickpotionid";
+                    string[] attributeKey = entity.WatchedAttributes.Keys;
+                    int attributeAmnt = entity.WatchedAttributes.Count;
+                    for (int i = 0; attributeAmnt > i; i++)
+                    {
+                        if (attributeKey[i].Contains(potionId))
+                        {
+                            long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
+                            if (potionListenerId != 0)
+                            {
+                                if (attributeKey[i].Contains(tickPotionId))
+                                {
+                                    entity.World.UnregisterGameTickListener(potionListenerId);
+                                }
+                                else
+                                {
+                                    entity.World.UnregisterCallback(potionListenerId);
+                                }
+                                entity.WatchedAttributes.SetLong(attributeKey[i], 0);
+                            }
+                        }
+                    }
+
+                    entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
+                    entity.Stats.Set("maxhealthExtraPoints", "potionmod", 0, false);
+                    EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
+                    ebh.UpdateMaxHealth();
+                    entity.Stats.Set("walkspeed", "potionmod", 0, false);
                     entity.Stats.Set("hungerrate", "potionmod", 0, false);
-                    entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
+                    entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
                     entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
                     entity.Stats.Set("walkspeed", "potionmod", 0, false);
-                    entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-                    entity.WatchedAttributes.SetLong("healingeffectpotionid", 0);
-                    entity.WatchedAttributes.SetLong("regenpotionid", 0);
-                    entity.WatchedAttributes.SetLong("poisonpotionid", 0);
-                    entity.WatchedAttributes.SetLong("archerpotionid", 0);
-                    entity.WatchedAttributes.SetLong("hungerenhancepotionid", 0);
-                    entity.WatchedAttributes.SetLong("hungersupresspotionid", 0);
-                    entity.WatchedAttributes.SetLong("meleepotionid", 0);
-                    entity.WatchedAttributes.SetLong("accuracypotionid", 0);
-                    entity.WatchedAttributes.SetLong("miningpotionid", 0);
-                    entity.WatchedAttributes.SetLong("speedpotionid", 0);
+                    entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
+                    entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
+                    entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
+                    entity.Stats.Set("mechanicalsDamage", "potionmod", 0, false);
+                    entity.Stats.Set("animalLootDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("forageDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("vesselContentsDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("wildCropDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("oreDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("rustyGearDropRate", "potionmod", 0, false);
+                    entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
+                    entity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
+                    entity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
                 }
             };
         }

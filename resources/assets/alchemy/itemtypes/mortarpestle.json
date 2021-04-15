@@ -22,17 +22,14 @@
   resistance: 0.75,
   lightAbsorption: 0,
 	texturesByType: {
-	  	"*-wood": { 
-			floor: { base: "game:block/wood/oak" },
-			mat: { base: "game:block/wood/oak" }
+	  	"*-wood": {
+			loam: { base: "game:block/wood/oak" }
 		},
 		"*-stone": { 
-			floor: { base: "game:block/stone/polishedrock/granite" },
-			mat: { base: "game:block/stone/polishedrock/granite" }
+			loam: { base: "game:block/clay/planter/loam" }
 		},
 		"*": { 
-			floor: { base: "game:block/wood/oak" },
-			mat: { base: "game:block/wood/oak" }
+			loam: { base: "game:block/clay/planter/loam" }
 		},
   },
   sounds: {
@@ -49,19 +46,26 @@
 	guiTransform: {
 		translation: { x: 3, y: 0, z: 0 },
 		rotation: { x: -28, y: 23, z: 180 },
-		origin: { x: 0.5, y: 0.175, z: 0.5 },
+		origin: { x: 0.5, y: 0.25, z: 0.5 },
 		scale: 3
 	},
-	fpHandTransform: {
-		translation: { x: 0, y: 0.4, z: 0 },
-		rotation: { x: 0, y: -14, z: 0 },
-		scale: 2
+	groundTransform: {
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 0, y: 0, z: 1 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 3
 	},
 	tpHandTransform: {
-		translation: { x: -0.9, y: -0.1, z: -0.8 },
-		rotation: { x: 0, y: -56, z: 0 },
-		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		translation: { x: 0.3, y: -0.16, z: 0.5 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0, y: 0.13, z: 0 },
 		scale: 0.66
 	},
+	fpHandTransform: {
+		translation: { x: 0, y: 0.24, z: 0.3 },
+		rotation: { x: 0, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 2
+	}
     
 }
