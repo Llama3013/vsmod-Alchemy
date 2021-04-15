@@ -71,13 +71,13 @@
 		},
 		"potion-hungerenhance": {
 			potionId: "hungerenhancepotionid",
-			hungerenhance: 0.5,
+			hunger: 0.5,
 			duration: 300,
 			drankBlockCode: "potionflask-burned"
 		},
 		"potion-hungersupress": {
 			potionId: "hungersupresspotionid",
-			hungersupress: -0.5,
+			hunger: -0.5,
 			duration: 300,
 			drankBlockCode: "potionflask-burned"
 		},
