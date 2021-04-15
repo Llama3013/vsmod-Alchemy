@@ -51,7 +51,7 @@ namespace Alchemy
                         {
                             entity.World.UnregisterCallback(potionListenerId);
                         }
-                        entity.WatchedAttributes.SetLong(attributeKey[i], 0);
+                        entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
                     }
                 }
             }

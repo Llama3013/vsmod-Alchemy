@@ -238,7 +238,7 @@ namespace Alchemy
                 //api.Logger.Debug("[Potion] gameticklistenerid to be reset: {0}", potionListenerId.ToString());
                 potionEntity.World.UnregisterGameTickListener(potionListenerId);
                 /*This resets the potion listenerId that is attached to the player*/
-                potionEntity.WatchedAttributes.SetLong(attr["potionId"].ToString(), 0);
+                potionEntity.WatchedAttributes.RemoveAttribute(attr["potionId"].ToString());
                 tickCnt = 0;
             }
         }
@@ -248,7 +248,7 @@ namespace Alchemy
             resetPotions();
             if (attr["potionId"].Exists)
             {
-                potionEntity.WatchedAttributes.SetLong(attr["potionId"].ToString(), 0);
+                potionEntity.WatchedAttributes.RemoveAttribute(attr["potionId"].ToString());
             }
         }
 

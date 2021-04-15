@@ -33,15 +33,14 @@ namespace Alchemy
         public override void StartServerSide(ICoreServerAPI api)
         {
             this.sapi = api;
-            api.Event.PlayerJoin += (IServerPlayer iServerPlayer) =>
+            api.Event.PlayerNowPlaying += (IServerPlayer iServerPlayer) =>
             {
-                if (iServerPlayer is EntityPlayer)
+                if (iServerPlayer.Entity is EntityPlayer)
                 {
                     Entity entity = iServerPlayer.Entity;
                     entity.AddBehavior(new PotionFixBehavior(entity, config));
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
                     string potionId = "potionid";
-                    string tickPotionId = "tickpotionid";
                     string[] attributeKey = entity.WatchedAttributes.Keys;
                     int attributeAmnt = entity.WatchedAttributes.Count;
                     for (int i = 0; attributeAmnt > i; i++)
@@ -51,15 +50,8 @@ namespace Alchemy
                             long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
                             if (potionListenerId != 0)
                             {
-                                if (attributeKey[i].Contains(tickPotionId))
-                                {
-                                    entity.World.UnregisterGameTickListener(potionListenerId);
-                                }
-                                else
-                                {
-                                    entity.World.UnregisterCallback(potionListenerId);
-                                }
-                                entity.WatchedAttributes.SetLong(attributeKey[i], 0);
+                                //api.Logger.Debug("potion player join {0} and {1}", potionListenerId, attributeKey[i]);
+                                entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
                             }
                         }
                     }
@@ -86,6 +78,7 @@ namespace Alchemy
                     entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
                     entity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
                     entity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
+                    //api.Logger.Debug("potion player ready");
                 }
             };
         }
