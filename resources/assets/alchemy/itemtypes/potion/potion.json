@@ -29,7 +29,7 @@
 			vesselcontent: 0.1,
 			wildcrop: 0.1,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-alltick": {
 			potionId: "alltickpotionid",
@@ -54,7 +54,7 @@
 			duration: 150,
 			health: 1,
 			ticksec: 1,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-archer": {
 			potionId: "archerpotionid",
@@ -62,25 +62,25 @@
 			rangeddamage: 0.5,
 			rangedspeed: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-healingeffect": {
 			potionId: "healingeffectpotionid",
 			healingeffect: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-hungerenhance": {
 			potionId: "hungerenhancepotionid",
 			hunger: 0.5,
 			duration: 300,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-hungersupress": {
 			potionId: "hungersupresspotionid",
 			hunger: -0.5,
 			duration: 300,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-hunter": {
 			potionId: "hunterpotionid",
@@ -89,7 +89,7 @@
 			forage: 0.3,
 			wildcrop: 0.3,
 			duration: 180,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-looter": {
 			potionId: "looterpotionid",
@@ -98,53 +98,53 @@
 			vesselcontent: 0.3,
 			wildcrop: 0.3,
 			duration: 180,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-melee": {
 			potionId: "meleepotionid",
 			melee: 0.3,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-mining": {
 			potionId: "miningpotionid",
 			mining: 0.3,
 			duration: 10,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-poison": {
 			potionId: "poisontickpotionid",
 			health: -1,
 			ticksec: 3,
 			duration: 30,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-predator": {
 			potionId: "predatorpotionid",
 			animalseek: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-regen": {
 			potionId: "regentickpotionid",
 			health: 1,
 			ticksec: 3,
 			duration: 30,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-scentmask": {
 			potionId: "scentmaskpotionid",
 			animalseek: -0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
 		"*-speed": {
 			potionId: "speedpotionid",
 			speed: 0.25,
 			duration: 150,
-			drankBlockCode: "potionflask-normal-burned"
+			drankBlockCode: "potionflask-{flask}-burned"
 		},
-        "*": { drankBlockCode: "potionflask-normal-burned" }
+        "*": { drankBlockCode: "potionflask-{flask}-burned" }
     },
 	maxstacksize: 16,
 	shapeByType: { 
