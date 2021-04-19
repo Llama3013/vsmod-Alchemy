@@ -1,3 +1,4 @@
+using System;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
@@ -39,18 +40,25 @@ namespace Alchemy
             {
                 if (attributeKey[i].Contains(potionId))
                 {
-                    long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
-                    if (potionListenerId != 0)
+                    try
                     {
-                        potionReseted = true;
-                        if (attributeKey[i].Contains(tickPotionId))
+                        long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
+                        if (potionListenerId != 0)
                         {
-                            entity.World.UnregisterGameTickListener(potionListenerId);
+                            potionReseted = true;
+                            if (attributeKey[i].Contains(tickPotionId))
+                            {
+                                entity.World.UnregisterGameTickListener(potionListenerId);
+                            }
+                            else
+                            {
+                                entity.World.UnregisterCallback(potionListenerId);
+                            }
+                            entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
                         }
-                        else
-                        {
-                            entity.World.UnregisterCallback(potionListenerId);
-                        }
+                    }
+                    catch (InvalidCastException)
+                    {
                         entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
                     }
                 }
@@ -79,7 +87,8 @@ namespace Alchemy
             entity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
             entity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
 
-            if (potionReseted) {
+            if (potionReseted)
+            {
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of all of your potions dissipate.", EnumChatType.Notification);
             }
 

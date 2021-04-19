@@ -6,24 +6,45 @@
 		{ name: "RightClickPickup"} 
 	],
 	variantgroups: [
-		{ code:"type", states: ["raw", "burned"] },
+		{ code:"flask", states: ["normal", "round", "tube"] },
+		{ code:"type", states: ["raw", "burned"] }
 	],
 	blockmaterial: "Glass",
 	combustiblePropsByType: {
-		"potionflask-raw": {
+		"*-round-raw": {
 			meltingPoint: 650,
 			meltingDuration: 45,
 			smeltedRatio: 1,
 			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-burned" },
+			smeltedStack: { type: "block", code: "potionflask-round-burned" },
+			requiresContainer: false
+		},
+		"*-tube-raw": {
+			meltingPoint: 650,
+			meltingDuration: 45,
+			smeltedRatio: 1,
+			smeltingType: "bake",
+			smeltedStack: { type: "block", code: "potionflask-tube-burned" },
+			requiresContainer: false
+		},
+		"*-raw": {
+			meltingPoint: 650,
+			meltingDuration: 45,
+			smeltedRatio: 1,
+			smeltingType: "bake",
+			smeltedStack: { type: "block", code: "potionflask-normal-burned" },
 			requiresContainer: false
 		}
 	},
 	materialDensity: 200,
-	shape: { base: "alchemy:block/glass/flask-liquid" },
+	shapeByType: { 
+		"*-round-*": { base: "alchemy:block/glass/roundflask-liquid" },
+		"*-tube-*": { base: "alchemy:block/glass/tubeflask-liquid" },
+		"*": { base: "alchemy:block/glass/flask-liquid" },
+	},
 	texturesByType: {
 		"*-raw": { 
-			mat: { base: "game:block/glass/blue" },
+			glass: { base: "game:block/glass/blue" },
 		},
 	},
 	blockmaterial: "Glass",
@@ -47,13 +68,20 @@
 	renderpass: "transparent",
 	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
-	guiTransform: {
-		translation: { x: 0, y: 3, z: 0 },
-		origin: { x: 0.5, y: 0.125, z: 0.5 },
-		scale: 3
+	guiTransformByType: {
+		"*-tube-*": {
+			translation: { x: 0, y: 3, z: 0 },
+			origin: { x: 0.5, y: 0.2, z: 0.5 },
+			scale: 2.5
+		},
+		"*": {
+			translation: { x: 0, y: 3, z: 0 },
+			origin: { x: 0.5, y: 0.175, z: 0.5 },
+			scale: 2.75
+		}
 	},
 	groundTransform: {
-		scale: 3.5
+		scale: 3
 	},
 	fpHandTransform: {
 		translation: { x: 0, y: 0.4, z: 0 },

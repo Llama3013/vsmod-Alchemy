@@ -4,35 +4,73 @@ using Vintagestory.API;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
-using Vintagestory.API.Util;
 using Vintagestory.API.Config;
-using Vintagestory.API.Server;
 using Vintagestory.API.MathTools;
-using Vintagestory.GameContent;
-using System.Collections.Generic;
+using Vintagestory.API.Util;
 
 namespace Alchemy
 {
+
+    public class PotionAttrClass
+    {
+        public string potionid = "";
+        public float accuracy = 0f;
+        public float animalloot = 0f;
+        public float animalharvest = 0f;
+        public float animalseek = 0f;
+        public float extrahealth = 0f;
+        public float forage = 0f;
+        public float healingeffect = 0f;
+        public float hunger = 0f;
+        public float melee = 0f;
+        public float mechdamage = 0f;
+        public float mining = 0f;
+        public float ore = 0f;
+        public float rangeddamage = 0f;
+        public float rangedspeed = 0f;
+        public float rustygear = 0f;
+        public float speed = 0f;
+        public float vesselcontent = 0f;
+        public float wildcrop = 0f;
+        public int duration = 0;
+        public int ticksec = 0;
+        public float health = 0f;
+        public string drankBlockCode = "";
+    }
+
     public class ItemPotion : Item
     {
-        
-        Dictionary<string, float> potionsDate = new Dictionary<string, float>();
+        public PotionAttrClass attrClass;
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
             return "eat";
         }
 
-        EntityAgent potionEntity;
-        JsonObject attr;
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            JsonObject jsonObj = Attributes;
+            if (jsonObj?.Exists == true)
+            {
+                try
+                {
+                    attrClass = jsonObj.AsObject<PotionAttrClass>();
+                }
+                catch (Exception e)
+                {
+                    api.World.Logger.Error("Failed loading statModifiers for item/block {0}. Will ignore. Exception: {1}", Code, e);
+                    attrClass = null;
+                }
+            }
+        }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
-            attr = slot.Itemstack.Collectible.Attributes;
-            if (attr != null && attr["potionId"].Exists)
+            if (attrClass != null && attrClass.potionid != "")
             {
-                //api.Logger.Debug("[Potion] check if drinkable {0} and {1}", attr["potionId"].ToString(), byEntity.WatchedAttributes.GetLong(attr["potionId"].ToString()));
+                //api.Logger.Debug("[Potion] check if drinkable {0} and {1}", attrClass.potionid, byEntity.WatchedAttributes.GetLong(attrClass.potionid));
                 /*This checks if the potion effect callback is on*/
-                if (byEntity.WatchedAttributes.GetLong(attr["potionId"].ToString()) == 0)
+                if (byEntity.WatchedAttributes.GetLong(attrClass.potionid) == 0)
                 {
                     byEntity.World.RegisterCallback((dt) =>
                     {
@@ -80,297 +118,15 @@ namespace Alchemy
             return true;
         }
 
-        string potionName;
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                potionName = slot.Itemstack.GetName();
-                potionEntity = byEntity;
-
-                if (attr["accuracy"].Exists)
-                {
-                    potionEntity.Stats.Set("rangedWeaponsAcc", "potionmod", attr["accuracy"].AsFloat(), false);
-                }
-                if (attr["animalloot"].Exists)
-                {
-                    potionEntity.Stats.Set("animalLootDropRate", "potionmod", attr["animalloot"].AsFloat(), false);
-                }
-                if (attr["animalharvest"].Exists)
-                {
-                    potionEntity.Stats.Set("animalHarvestingTime", "potionmod", attr["animalharvest"].AsFloat(), false);
-                }
-                if (attr["animalseek"].Exists)
-                {
-                    potionEntity.Stats.Set("animalSeekingRange", "potionmod", attr["animalseek"].AsFloat(), false);
-                }
-                if (attr["extrahealth"].Exists)
-                {
-                    potionEntity.Stats.Set("maxhealthExtraPoints", "potionmod", attr["extrahealth"].AsFloat(), false);
-                    EntityBehaviorHealth ebh = potionEntity.GetBehavior<EntityBehaviorHealth>();
-                    ebh.MarkDirty();
-                }
-                if (attr["forage"].Exists)
-                {
-                    potionEntity.Stats.Set("forageDropRate", "potionmod", attr["forage"].AsFloat(), false);
-                }
-                if (attr["healingeffect"].Exists)
-                {
-                    potionEntity.Stats.Set("healingeffectivness", "potionmod", attr["healingeffect"].AsFloat(), false);
-                }
-                if (attr["hunger"].Exists)
-                {
-                    potionEntity.Stats.Set("hungerrate", "potionmod", attr["hunger"].AsFloat(), false);
-                }
-                if (attr["mechdamage"].Exists)
-                {
-                    potionEntity.Stats.Set("mechanicalsDamage", "potionmod", attr["mechdamage"].AsFloat(), false);
-                }
-                if (attr["melee"].Exists)
-                {
-                    potionEntity.Stats.Set("meleeWeaponsDamage", "potionmod", attr["melee"].AsFloat(), false);
-                }
-                if (attr["mining"].Exists)
-                {
-                    potionEntity.Stats.Set("miningSpeedMul", "potionmod", attr["mining"].AsFloat(), false);
-                }
-                if (attr["ore"].Exists)
-                {
-                    potionEntity.Stats.Set("oreDropRate", "potionmod", attr["ore"].AsFloat(), false);
-                }
-                if (attr["rangeddamage"].Exists)
-                {
-                    potionEntity.Stats.Set("rangedWeaponsDamage", "potionmod", attr["rangeddamage"].AsFloat(), false);
-                }
-                if (attr["rangedspeed"].Exists)
-                {
-                    potionEntity.Stats.Set("rangedWeaponsSpeed", "potionmod", attr["rangedspeed"].AsFloat(), false);
-                }
-                if (attr["rustygear"].Exists)
-                {
-                    potionEntity.Stats.Set("rustyGearDropRate", "potionmod", attr["rustygear"].AsFloat(), false);
-                }
-                if (attr["speed"].Exists)
-                {
-                    potionEntity.Stats.Set("walkspeed", "potionmod", attr["speed"].AsFloat(), false);
-                }
-                if (attr["vesselcontent"].Exists)
-                {
-                    potionEntity.Stats.Set("vesselContentsDropRate", "potionmod", attr["vesselcontent"].AsFloat(), false);
-                }
-                if (attr["wildcrop"].Exists)
-                {
-                    potionEntity.Stats.Set("wildCropDropRate", "potionmod", attr["wildcrop"].AsFloat(), false);
-                }
-
-                if (attr["duration"].Exists && attr["ticksec"].Exists && attr["health"].Exists)
-                {
-                    long potionListenerId = api.World.RegisterGameTickListener(onPotionTick, 1000);
-
-                    /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                    potionEntity.WatchedAttributes.SetLong(attr["potionId"].ToString(), potionListenerId);
-                }
-                else if (attr["duration"].Exists)
-                {
-                    int duration = attr["duration"].AsInt();
-                    long potionListenerId = potionEntity.World.RegisterCallback(onPotionCall, (1000 * duration));
-                    /*This saves the listenerId for registerCallback to the player's stats so I unregister it later*/
-                    potionEntity.WatchedAttributes.SetLong(attr["potionId"].ToString(), potionListenerId);
-                }
-
-                if (potionEntity is EntityPlayer)
-                {
-                    IServerPlayer player = (potionEntity.World.PlayerByUid((potionEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + potionName, EnumChatType.Notification);
-                }
-
-                /*These three lines adds the attribute amount to the player's stats*/
-
-                Block emptyFlask = api.World.GetBlock(AssetLocation.Create(slot.Itemstack.Collectible.Attributes["drankBlockCode"].AsString(), slot.Itemstack.Collectible.Code.Domain));
-                ItemStack emptyStack = new ItemStack(emptyFlask);
-                /*Gives player an empty flask if last in stack or drops an empty flask at players feet*/
-                if (slot.Itemstack.StackSize <= 1)
-                {
-                    slot.Itemstack = emptyStack;
-                }
-                else
-                {
-                    IPlayer player = (byEntity as EntityPlayer)?.Player;
-
-                    slot.TakeOut(1);
-                    if (!player.InventoryManager.TryGiveItemstack(emptyStack, true))
-                    {
-                        byEntity.World.SpawnItemEntity(emptyStack, byEntity.SidedPos.XYZ);
-                    }
-                }
-
-                slot.MarkDirty();
+                PotionEffect potionEffect = new PotionEffect();
+                potionEffect.PotionCheck(byEntity, slot, attrClass, api);
             }
         }
 
-        int tickCnt = 0;
-        private void onPotionTick(float dt)
-        {
-            tickCnt++;
-
-            int tickSec = attr["ticksec"].AsInt();
-            //api.Logger.Debug("Potion tickSec: {0}", tickSec);
-            /*This if statement passes every tickSec amount of seconds*/
-            if (tickSec != 0)
-            {
-                if (tickCnt % tickSec == 0)
-                {
-                    float health = attr["health"].AsFloat();
-                    potionEntity.ReceiveDamage(new DamageSource()
-                    {
-                        Source = EnumDamageSource.Internal,
-                        Type = health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
-                    }, Math.Abs(health));
-                }
-            }
-
-            int duration = attr["duration"].AsInt();
-            /*This if statement passes when duration amount of seconds pass*/
-            if (tickCnt >= duration)
-            {
-                resetPotions();
-                long potionListenerId = potionEntity.WatchedAttributes.GetLong(attr["potionId"].ToString());
-                //api.Logger.Debug("[Potion] gameticklistenerid to be reset: {0}", potionListenerId.ToString());
-                potionEntity.World.UnregisterGameTickListener(potionListenerId);
-                /*This resets the potion listenerId that is attached to the player*/
-                potionEntity.WatchedAttributes.RemoveAttribute(attr["potionId"].ToString());
-                tickCnt = 0;
-            }
-        }
-
-        private void onPotionCall(float dt)
-        {
-            resetPotions();
-            if (attr["potionId"].Exists)
-            {
-                potionEntity.WatchedAttributes.RemoveAttribute(attr["potionId"].ToString());
-            }
-        }
-
-        private void resetPotions()
-        {
-            if (attr["accuracy"].Exists)
-            {
-                //api.Logger.Debug("[Potion] accuracy before: {0}", potionEntity.Stats.GetBlended("rangedWeaponsAcc"));
-                potionEntity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] accuracy after: {0}", potionEntity.Stats.GetBlended("rangedWeaponsAcc"));
-            }
-            if (attr["animalloot"].Exists)
-            {
-                //api.Logger.Debug("[Potion] animalloot before: {0}", potionEntity.Stats.GetBlended("animalLootDropRate"));
-                potionEntity.Stats.Set("animalLootDropRate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] animalloot after: {0}", potionEntity.Stats.GetBlended("animalLootDropRate"));
-            }
-            if (attr["animalharvest"].Exists)
-            {
-                //api.Logger.Debug("[Potion] animalharvest before: {0}", potionEntity.Stats.GetBlended("animalHarvestingTime"));
-                potionEntity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] animalharvest after: {0}", potionEntity.Stats.GetBlended("animalHarvestingTime"));
-            }
-            if (attr["animalseek"].Exists)
-            {
-                //api.Logger.Debug("[Potion] animalseek before: {0}", potionEntity.Stats.GetBlended("animalSeekingRange"));
-                potionEntity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] animalseek after: {0}", potionEntity.Stats.GetBlended("animalSeekingRange"));
-            }
-            if (attr["extrahealth"].Exists)
-            {
-                //api.Logger.Debug("[Potion] extrahealth before: {0}", potionEntity.Stats.GetBlended("maxhealthExtraPoints"));
-                potionEntity.Stats.Set("maxhealthExtraPoints", "potionmod", 0, false);
-                EntityBehaviorHealth ebh = potionEntity.GetBehavior<EntityBehaviorHealth>();
-                ebh.MarkDirty();
-                //api.Logger.Debug("[Potion] extrahealth after: {0}", potionEntity.Stats.GetBlended("maxhealthExtraPoints"));
-            }
-            if (attr["forage"].Exists)
-            {
-                //api.Logger.Debug("[Potion] forage before: {0}", potionEntity.Stats.GetBlended("forageDropRate"));
-                potionEntity.Stats.Set("forageDropRate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] forage after: {0}", potionEntity.Stats.GetBlended("forageDropRate"));
-            }
-            if (attr["healingeffect"].Exists)
-            {
-                //api.Logger.Debug("[Potion] healingeffect before: {0}", potionEntity.Stats.GetBlended("healingeffectivness"));
-                potionEntity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] healingeffect after: {0}", potionEntity.Stats.GetBlended("healingeffectivness"));
-            }
-            if (attr["hunger"].Exists)
-            {
-                //api.Logger.Debug("[Potion] hunger before: {0}", potionEntity.Stats.GetBlended("hungerrate"));
-                potionEntity.Stats.Set("hungerrate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] hunger after: {0}", potionEntity.Stats.GetBlended("hungerrate"));
-            }
-            if (attr["mechdamage"].Exists)
-            {
-                //api.Logger.Debug("[Potion] mechdamage before: {0}", potionEntity.Stats.GetBlended("mechanicalsDamage"));
-                potionEntity.Stats.Set("mechanicalsDamage", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] mechdamage after: {0}", potionEntity.Stats.GetBlended("mechanicalsDamage"));
-            }
-            if (attr["melee"].Exists)
-            {
-                //api.Logger.Debug("[Potion] melee before: {0}", potionEntity.Stats.GetBlended("meleeWeaponsDamage"));
-                potionEntity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] melee before: {0}", potionEntity.Stats.GetBlended("meleeWeaponsDamage"));
-            }
-            if (attr["mining"].Exists)
-            {
-                //api.Logger.Debug("[Potion] mining before: {0}", potionEntity.Stats.GetBlended("miningSpeedMul"));
-                potionEntity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] mining after: {0}", potionEntity.Stats.GetBlended("miningSpeedMul"));
-            }
-            if (attr["ore"].Exists)
-            {
-                //api.Logger.Debug("[Potion] ore before: {0}", potionEntity.Stats.GetBlended("oreDropRate"));
-                potionEntity.Stats.Set("oreDropRate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] ore after: {0}", potionEntity.Stats.GetBlended("oreDropRate"));
-            }
-            if (attr["rangeddamage"].Exists)
-            {
-                //api.Logger.Debug("[Potion] rangeddamage before: {0}", potionEntity.Stats.GetBlended("rangedWeaponsDamage"));
-                potionEntity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] rangeddamage after: {0}", potionEntity.Stats.GetBlended("rangedWeaponsDamage"));
-            }
-            if (attr["rangedspeed"].Exists)
-            {
-                //api.Logger.Debug("[Potion] rangedspeed before: {0}", potionEntity.Stats.GetBlended("rangedWeaponsSpeed"));
-                potionEntity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] rangedspeed after: {0}", potionEntity.Stats.GetBlended("rangedWeaponsSpeed"));
-            }
-            if (attr["rustygear"].Exists)
-            {
-                //api.Logger.Debug("[Potion] rustygear before: {0}", potionEntity.Stats.GetBlended("rustyGearDropRate"));
-                potionEntity.Stats.Set("rustyGearDropRate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] rustygear after: {0}", potionEntity.Stats.GetBlended("rustyGearDropRate"));
-            }
-            if (attr["speed"].Exists)
-            {
-                //api.Logger.Debug("[Potion] speed before: {0}", potionEntity.Stats.GetBlended("walkspeed"));
-                potionEntity.Stats.Set("walkspeed", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] speed after: {0}", potionEntity.Stats.GetBlended("walkspeed"));
-            }
-            if (attr["vesselcontent"].Exists)
-            {
-                //api.Logger.Debug("[Potion] speed before: {0}", potionEntity.Stats.GetBlended("vesselContentsDropRate"));
-                potionEntity.Stats.Set("vesselContentsDropRate", "potionmod", 0, false);
-                //api.Logger.Debug("[Potion] speed after: {0}", potionEntity.Stats.GetBlended("vesselContentsDropRate"));
-            }
-            if (attr["wildcrop"].Exists)
-            {
-                ////api.Logger.Debug("[Potion] wildcrop before: {0}", potionEntity.Stats.GetBlended("wildCropDropRate"));
-                potionEntity.Stats.Set("wildCropDropRate", "potionmod", 0, false);
-                ////api.Logger.Debug("[Potion] wildcrop after: {0}", potionEntity.Stats.GetBlended("wildCropDropRate"));
-            }
-
-            if (potionEntity is EntityPlayer)
-            {
-                IServerPlayer player = (potionEntity.World.PlayerByUid((potionEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + potionName + " dissipate.", EnumChatType.Notification);
-            }
-        }
 
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {

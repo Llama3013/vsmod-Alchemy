@@ -1,4 +1,5 @@
-﻿using Vintagestory.API.Common;
+﻿using System;
+using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
@@ -47,11 +48,19 @@ namespace Alchemy
                     {
                         if (attributeKey[i].Contains(potionId))
                         {
-                            long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
-                            if (potionListenerId != 0)
+                            try
                             {
-                                //api.Logger.Debug("potion player join {0} and {1}", potionListenerId, attributeKey[i]);
+                                long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
+                                if (potionListenerId != 0)
+                                {
+                                    api.Logger.Event("[Potion] player join {0} and {1}", potionListenerId, attributeKey[i]);
+                                    entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
+                                }
+                            }
+                            catch (InvalidCastException e)
+                            {
                                 entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
+                                api.Logger.Error("Failed loading long attribute for entity {0}. Will remove. Exception: {1}", attributeKey[i], e);
                             }
                         }
                     }
