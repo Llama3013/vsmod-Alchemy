@@ -40,7 +40,7 @@ namespace Alchemy
 
     public class ItemPotion : Item
     {
-        public PotionAttrClass attrClass;
+        public PotionAttrClass attrClass = new PotionAttrClass();
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
             return "eat";
@@ -58,7 +58,7 @@ namespace Alchemy
                 }
                 catch (Exception e)
                 {
-                    api.World.Logger.Error("Failed loading statModifiers for item/block {0}. Will ignore. Exception: {1}", Code, e);
+                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     attrClass = null;
                 }
             }
@@ -69,7 +69,7 @@ namespace Alchemy
             if (attrClass != null && attrClass.potionid != "")
             {
                 //api.Logger.Debug("[Potion] check if drinkable {0} and {1}", attrClass.potionid, byEntity.WatchedAttributes.GetLong(attrClass.potionid));
-                /*This checks if the potion effect callback is on*/
+                /* This checks if the potion effect callback is on */
                 if (byEntity.WatchedAttributes.GetLong(attrClass.potionid) == 0)
                 {
                     byEntity.World.RegisterCallback((dt) =>
@@ -123,7 +123,7 @@ namespace Alchemy
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
                 PotionEffect potionEffect = new PotionEffect();
-                potionEffect.PotionCheck(byEntity, slot, attrClass, api);
+                potionEffect.PotionCheck(byEntity, slot, attrClass);
             }
         }
 

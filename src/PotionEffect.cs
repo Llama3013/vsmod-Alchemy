@@ -11,16 +11,14 @@ namespace Alchemy
     {
         PotionAttrClass attrClass;
         Entity entity;
-        ICoreAPI api;
         string potionName;
 
-        public void PotionCheck(Entity byEntity, ItemSlot slot, PotionAttrClass attr, ICoreAPI aapi)
+        public void PotionCheck(Entity byEntity, ItemSlot slot, PotionAttrClass attr)
         {
             potionName = slot.Itemstack.GetName();
             attrClass = attr;
             entity = byEntity;
-            api = aapi;
-
+            
             if (attrClass.accuracy != 0)
             {
                 entity.Stats.Set("rangedWeaponsAcc", "potionmod", attrClass.accuracy, false);
@@ -116,7 +114,7 @@ namespace Alchemy
                 player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + potionName, EnumChatType.Notification);
             }
 
-            Block emptyFlask = api.World.GetBlock(AssetLocation.Create(attrClass.drankBlockCode, slot.Itemstack.Collectible.Code.Domain));
+            Block emptyFlask = entity.World.GetBlock(AssetLocation.Create(attrClass.drankBlockCode, slot.Itemstack.Collectible.Code.Domain));
             ItemStack emptyStack = new ItemStack(emptyFlask);
             /*Gives player an empty flask if last in stack or drops an empty flask at players feet*/
             if (slot.Itemstack.StackSize <= 1)
