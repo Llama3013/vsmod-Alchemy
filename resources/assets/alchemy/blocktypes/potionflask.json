@@ -9,7 +9,9 @@
 		{ code:"flask", states: ["normal", "round", "tube"] },
 		{ code:"type", states: ["raw", "burned"] }
 	],
+	attributes: { shelvable: true },
 	blockmaterial: "Glass",
+	replaceable: 5000,
 	combustiblePropsByType: {
 		"*-round-raw": {
 			meltingPoint: 650,
@@ -47,7 +49,6 @@
 			glass: { base: "game:block/glass/blue" },
 		},
 	},
-	blockmaterial: "Glass",
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	replaceable: 300,
 	resistance: 0.75,
@@ -61,11 +62,11 @@
 		"hit": "game:block/glass"
 	},
 	lightAbsorption: 0,
+	drawtype: "json",
 	sideopaque: { all: false },
 	sideao: { all: true },
-	emitsideao: { all: false },
+	emitsideao: { all: false},
 	sidesolid: { all: false },
-	renderpass: "transparent",
 	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	guiTransformByType: {
@@ -81,7 +82,7 @@
 		}
 	},
 	groundTransform: {
-		scale: 3
+		scale: 1
 	},
 	fpHandTransform: {
 		translation: { x: 0, y: 0.4, z: 0 },

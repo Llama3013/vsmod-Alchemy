@@ -6,21 +6,6 @@
       "value": [
       "/bir remapq alchemy:potionflask-normal-raw alchemy:potionflask-raw force",
       "/bir remapq alchemy:potionflask-normal-burned alchemy:potionflask-burned force", 
-      "/iir remapq alchemy:potion-normal-all alchemy:potion-all force", 
-      "/iir remapq alchemy:potion-normal-alltick alchemy:potion-alltick force", 
-      "/iir remapq alchemy:potion-normal-archer alchemy:potion-archer force", 
-      "/iir remapq alchemy:potion-normal-healingeffect alchemy:potion-healingeffect force", 
-      "/iir remapq alchemy:potion-normal-hungerenhance alchemy:potion-hungerenhance force", 
-      "/iir remapq alchemy:potion-normal-hungersupress alchemy:potion-hungersupress force", 
-      "/iir remapq alchemy:potion-normal-hunter alchemy:potion-hunter force", 
-      "/iir remapq alchemy:potion-normal-looter alchemy:potion-looter force", 
-      "/iir remapq alchemy:potion-normal-melee alchemy:potion-melee force", 
-      "/iir remapq alchemy:potion-normal-mining alchemy:potion-mining force", 
-      "/iir remapq alchemy:potion-normal-poison alchemy:potion-poison force", 
-      "/iir remapq alchemy:potion-normal-predator alchemy:potion-predator force", 
-      "/iir remapq alchemy:potion-normal-regen alchemy:potion-regen force", 
-      "/iir remapq alchemy:potion-normal-scentmask alchemy:potion-scentmask force",
-      "/iir remapq alchemy:potion-normal-speed alchemy:potion-speed force", 
       ]
     }
   ]

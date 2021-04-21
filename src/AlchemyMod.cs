@@ -25,7 +25,7 @@ namespace Alchemy
             base.Start(api);
 
             config = ModConfig.Load(api);
-            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
+            api.RegisterBlockClass("BlockPotion", typeof(BlockPotion));
         }
 
         ICoreServerAPI sapi;

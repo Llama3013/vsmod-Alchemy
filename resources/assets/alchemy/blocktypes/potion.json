@@ -1,10 +1,16 @@
 {
 	code: "potion",
+	behaviors: [
+		{ name: "SneakPlacing"}, 
+		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
+		{ name: "RightClickPickup"} 
+	],
 	variantgroups: [
 		{ code: "flask", states: ["normal", "round", "tube"] },
         { code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] }
     ],
 	class: "ItemPotion" ,
+	blockmaterial: "Glass",
 	drawtype: "JSON",
 	replaceable: 5000,
 	attributesByType: {
@@ -29,7 +35,8 @@
 			vesselcontent: 0.1,
 			wildcrop: 0.1,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-alltick": {
 			potionId: "alltickpotionid",
@@ -54,7 +61,8 @@
 			duration: 150,
 			health: 1,
 			ticksec: 1,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-archer": {
 			potionId: "archerpotionid",
@@ -62,25 +70,29 @@
 			rangeddamage: 0.5,
 			rangedspeed: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-healingeffect": {
 			potionId: "healingeffectpotionid",
 			healingeffect: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-hungerenhance": {
 			potionId: "hungerenhancepotionid",
 			hunger: 0.5,
 			duration: 300,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-hungersupress": {
 			potionId: "hungersupresspotionid",
 			hunger: -0.5,
 			duration: 300,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-hunter": {
 			potionId: "hunterpotionid",
@@ -89,7 +101,8 @@
 			forage: 0.3,
 			wildcrop: 0.3,
 			duration: 180,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-looter": {
 			potionId: "looterpotionid",
@@ -98,59 +111,76 @@
 			vesselcontent: 0.3,
 			wildcrop: 0.3,
 			duration: 180,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-melee": {
 			potionId: "meleepotionid",
 			melee: 0.3,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-mining": {
 			potionId: "miningpotionid",
 			mining: 0.3,
 			duration: 10,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-poison": {
 			potionId: "poisontickpotionid",
 			health: -1,
 			ticksec: 3,
 			duration: 30,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-predator": {
 			potionId: "predatorpotionid",
 			animalseek: 0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-regen": {
 			potionId: "regentickpotionid",
 			health: 1,
 			ticksec: 3,
 			duration: 30,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-scentmask": {
 			potionId: "scentmaskpotionid",
 			animalseek: -0.5,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
 		"*-speed": {
 			potionId: "speedpotionid",
 			speed: 0.25,
 			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned"
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
 		},
-        "*": { drankBlockCode: "potionflask-{flask}-burned" }
+        "*": {
+			drankBlockCode: "potionflask-{flask}-burned",
+			shelvable: true
+		}
     },
 	maxstacksize: 16,
 	shapeByType: { 
 		"*-round-*": {base: "alchemy:block/glass/roundflask-liquid" },
 		"*-tube-*": {base: "alchemy:block/glass/tubeflask-liquid" },
 		"*": {base: "alchemy:block/glass/flask-liquid" }
+	},
+	sounds: {
+		"walk": "game:walk/ice",
+		"place": "game:player/buildhigh",
+		"break": "game:block/glass",
+		"hit": "game:block/glass"
 	},
 	texturesByType: {
 		"*-archer": {
@@ -169,7 +199,7 @@
 			content: { base: "game:block/wood/oak"}
 		},
 		"*-looter": {
-			content: { base: "game:block/stone/polishedrock/granite"}
+			content: { base: "alchemy:item/potion/indigo_potion"}
 		},
 		"*-melee": {
 			content: { base: "alchemy:item/potion/darkred_potion"}
@@ -181,13 +211,13 @@
 			content: { base: "alchemy:item/potion/purple_potion"}
 		},
 		"*-predator": {
-			content: { base: "game:block/liquid/wine"}
+			content: { base: "alchemy:item/potion/rose_potion"}
 		},
 		"*-regen": {
 			content: { base: "alchemy:item/potion/green_potion"}
 		},
 		"*-scentmask": {
-			content: { base: "game:block/liquid/water"}
+			content: { base: "alchemy:item/potion/lavendar_potion"}
 		},
 		"*-speed": {
 			content: { base: "alchemy:item/potion/turquoise_potion"}
@@ -200,45 +230,32 @@
 	sideao: { all: true },
 	emitsideao: { all: false },
 	sidesolid: { all: false },
-	renderpass: "transparent",
+	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
+	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	guiTransformByType: {
 		"*-tube-*": {
-			translation: { x: 3, y: 0, z: 0 },
-			rotation: { x: -28, y: 23, z: 180 },
-			origin: { x: 0.5, y: 0.25, z: 0.5 },
-			scale: 2.75
-		},
-		"*": {
-			translation: { x: 3, y: 0, z: 0 },
-			rotation: { x: -28, y: 23, z: 180 },
+			translation: { x: 0, y: 3, z: 0 },
 			origin: { x: 0.5, y: 0.2, z: 0.5 },
-			scale: 3
-		}
-	},
-	groundTransformByType: {
-		"*-tube-*": {
-			translation: { x: 0, y: 0, z: 0 },
-			rotation: { x: 0, y: 0, z: 1 },
-			origin: { x: 0.5, y: 0, z: 0.5 },
 			scale: 2.5
 		},
 		"*": {
-			translation: { x: 0, y: 0, z: 0 },
-			rotation: { x: 0, y: 0, z: 1 },
-			origin: { x: 0.5, y: 0, z: 0.5 },
-			scale: 3
+			translation: { x: 0, y: 3, z: 0 },
+			origin: { x: 0.5, y: 0.175, z: 0.5 },
+			scale: 2.75
 		}
 	},
-	tpHandTransform: {
-		translation: { x: 0.3, y: 0.05, z: 0.5 },
-		rotation: { x: 0, y: 0, z: -70 },
-		origin: { x: 0, y: 0.13, z: 0 },
-		scale: 0.66
+	groundTransform: {
+		scale: 2
 	},
 	fpHandTransform: {
-		translation: { x: 0, y: 0.24, z: 0.3 },
-		rotation: { x: 0, y: 0, z: 0 },
+		translation: { x: 0, y: 0.4, z: 0 },
+		rotation: { x: 0, y: -14, z: 0 },
+		scale: 2
+	},
+	tpHandTransform: {
+		translation: { x: -0.9, y: -0.1, z: -0.8 },
+		rotation: { x: 0, y: -56, z: 0 },
 		origin: { x: 0.5, y: 0.1, z: 0.5 },
-		scale: 1.75
-	}
+		scale: 0.66
+	},
   }

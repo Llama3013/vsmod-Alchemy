@@ -38,7 +38,7 @@ namespace Alchemy
         public string drankBlockCode = "";
     }
 
-    public class ItemPotion : Item
+    public class ItemPotion : Block
     {
         public PotionAttrClass attrClass = new PotionAttrClass();
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
