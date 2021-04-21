@@ -9,7 +9,7 @@
 		{ code: "flask", states: ["normal", "round", "tube"] },
         { code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] }
     ],
-	class: "ItemPotion" ,
+	class: "BlockPotion" ,
 	blockmaterial: "Glass",
 	drawtype: "JSON",
 	replaceable: 5000,
