@@ -1,9 +1,29 @@
-{
-	ingredientPattern: "Q_Q,_Q_",
-	ingredients: {
-		"Q": { type: "item", code: "game:clearquartz" }
+[
+	{
+		ingredientPattern: "Q_Q,_Q_",
+		ingredients: {
+			"Q": { type: "item", code: "game:clearquartz" }
+		},
+		width: 3,
+		height: 2,
+		output: { type: "block", code: "alchemy:potionflask-normal-raw", quantity: 1  }
 	},
-	width: 3,
-	height: 2,
-	output: { type: "block", code: "alchemy:potionflask-normal-raw", quantity: 1  }
-}
+	{
+		ingredientPattern: "_Q_,Q_Q,_Q_",
+		ingredients: {
+			"Q": { type: "item", code: "game:clearquartz" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-round-raw", quantity: 1  }
+	},
+	{
+		ingredientPattern: "Q_Q,Q_Q",
+		ingredients: {
+			"Q": { type: "item", code: "game:clearquartz" }
+		},
+		width: 3,
+		height: 2,
+		output: { type: "block", code: "alchemy:potionflask-tube-raw", quantity: 1  }
+	}
+]

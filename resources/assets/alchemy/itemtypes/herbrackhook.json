@@ -1,0 +1,20 @@
+{
+    code: "herbrackhook",
+    shape: { base: "alchemy:item/herbhook" },
+    variantgroups: [
+        { code: "metal", states: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] },
+    ],
+    textures: {
+		"hook": { base: "game:block/metal/sheet/{metal}1" }
+    },
+    attributes: {
+        handbook: {
+            excludeByType: {
+                "*-copper": false,
+                "*": true
+            }
+        }
+    },
+    creativeinventory: { "general": ["*-copper"], "decorative": ["*"] },
+    maxstacksize: 64,
+}

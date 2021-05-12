@@ -1,11 +1,35 @@
-{
-	ingredientPattern: "P,B,F",
-	ingredients: {
-		"P": { type: "item", code: "alchemy:potionbase-*", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
-		"B": { type: "item", code: "alchemy:potionbase-basic" },
-		"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+[
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-weak", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-weak" }
 	},
-	width: 1,
-	height: 3,
-	output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}" }
-}
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-medium", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-medium" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-strong", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-strong" }
+	}
+]

@@ -1,0 +1,56 @@
+{
+    code: "cuttings",
+    variantgroups: [
+        { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white"] },
+        { code: "stage", states: [ "raw", "dried", "cooked" ]},
+    ],
+    attributes: {
+        herbrackable: true,
+    },
+    creativeinventory: { "general": ["*"], "items": ["*"] },
+    maxstacksize: 64,
+    transitionablePropsByType: {
+		"*-raw": [
+          {
+            type: "Cure",
+            transitionHours: { avg: 168 },
+            transitionedStack: { type: "item", code: "alchemy:cuttings-{flower}-dried" },
+            transitionRatio: 1
+          },
+          {
+            type: "Perish",
+            transitionHours: { avg: 167 },
+            transitionedStack: { type: "item", code: "game:rot" },
+            transitionRatio: 1
+          },
+        ],
+    },
+    combustiblePropsByType: {
+      "*-dried": {
+        burnTemperature: 200,
+        burnDuration: 8,
+      
+        meltingPoint: 100,
+        meltingDuration: 30,
+        smeltedRatio: 1,
+        smeltingType: "convert",
+        smeltedStack: { type: "item", code: "alchemy:cuttings-{flower}-cooked" },
+        requiresContainer: false
+      },
+    },
+    shapeByType: {
+        "*-wilddaisy-*": { base: "alchemy:item/cut_white_herb_bundle"},
+        "*-lupine-*": { base: "alchemy:item/cut_stacked_herb_bundle"},
+        "*": { base: "alchemy:item/cut_blue_herb_bundle" }
+    },
+    guiTransform: {
+		translation: { x: 3, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.175, z: 0.5 },
+		scale: 3
+    },
+    fpHandTransform: {
+		translation: { x: 0, y: 0.24, z: 0.3 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 2
+	}
+}

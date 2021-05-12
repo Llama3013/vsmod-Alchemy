@@ -1,0 +1,25 @@
+[
+	{
+		ingredientPattern: "K_,WS",
+		ingredients: {
+    	    "K": { type: "item", code: "game:knife-*", isTool: true },
+    	    "W": { type: "block", code: "game:log-*" },
+    	    "S": { type: "item", code: "game:stick" }
+		},
+		width: 2,
+		height: 2,
+		output: { type: "item", code: "alchemy:mortarpestle-wood", quantity: 1  }
+	},
+	{
+		ingredientPattern: "HC,RS",
+		ingredients: {
+			"H": { type: "item", code: "game:hammer-*", isTool: true },
+			"C": { type: "item", code: "game:chisel-*", isTool: true },
+			"R": { type: "item", code: "game:stone-*" },
+			"S": { type: "item", code: "game:stick" }
+		},
+		width: 2,
+		height: 2,
+		output: { type: "item", code: "alchemy:mortarpestle-stone", quantity: 1  }
+	}
+]

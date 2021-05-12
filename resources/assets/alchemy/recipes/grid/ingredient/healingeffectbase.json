@@ -1,11 +1,35 @@
-{
-    ingredientPattern: "H,F,T",
-	ingredients: {
-        "H": { type: "block", code: "game:flower-lupine-orange-*" },
-        "F": { type: "block", code: "game:flower-catmint-*" },
-        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+[
+	{
+    	ingredientPattern: "H,F,T",
+		ingredients: {
+        	"H": { type: "block", code: "game:flower-lupine-orange-*" },
+        	"F": { type: "block", code: "game:flower-catmint-*" },
+        	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-healingeffect-weak" }
 	},
-	width: 1,
-	height: 3,
-	output: { type: "item", code: "alchemy:potionbase-healingeffect" }
-}
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-lupine-orange-dried" },
+			"F": { type: "item", code: "alchemy:cuttings-catmint-dried" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-healingeffect-medium" }
+	},
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-lupine-orange-cooked" },
+			"F": { type: "item", code: "alchemy:cuttings-catmint-cooked" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-healingeffect-strong" }
+	}
+]

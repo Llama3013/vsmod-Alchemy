@@ -52,9 +52,7 @@
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	replaceable: 300,
 	resistance: 0.75,
-	maxStackSizeByType: {
-		"*": 64,
-	},
+	maxStackSize: 64,
 	sounds: {
 		"walk": "game:walk/ice",
 		"place": "game:player/buildhigh",

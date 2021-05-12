@@ -1,11 +1,35 @@
-{
-	ingredientPattern: "H,F,T",
-	ingredients: {
-		"H": { type: "block", code: "game:flower-heather-*"},
-		"F": { type: "block", code: "game:flower-forgetmenot-*" },
-        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
+[
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "block", code: "game:flower-heather-*"},
+			"F": { type: "block", code: "game:flower-forgetmenot-*" },
+    	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-poison-weak"  }
 	},
-	width: 1,
-	height: 3,
-	output: { type: "item", code: "alchemy:potionbase-poison"  }
-}
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-heather-dried"},
+			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-dried" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-poison-medium"  }
+	},
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-heather-cooked"},
+			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-cooked" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-poison-strong"  }
+	}
+]

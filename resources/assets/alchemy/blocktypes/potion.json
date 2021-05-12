@@ -7,167 +7,321 @@
 	],
 	variantgroups: [
 		{ code: "flask", states: ["normal", "round", "tube"] },
-        { code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] }
+		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+		{ code: "strength", states: ["weak", "medium", "strong"] },
     ],
 	class: "BlockPotion" ,
 	blockmaterial: "Glass",
 	drawtype: "JSON",
 	replaceable: 5000,
 	attributesByType: {
-		"*-all": {
-			potionId: "allpotionid",
-			accuracy: 0.01,
-			animalloot: 0.1,
-			animalharvest: 0.1,
-			animalseek: -0.1,
-			extrahealth: 1,
-			forage: 0.1,
-			healingeffect: 0.1,
-			hunger: 0.1,
-			melee: 0.1,
-			mechdamage: 0.1,
-			mining: 0.1,
-			ore: 0.1,
-			rangeddamage: 0.1,
-			rangedspeed: 0.1,
-			rustygear: 0.1,
-			speed: 0.1,
-			vesselcontent: 0.1,
-			wildcrop: 0.1,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-all-*": {
+			potioninfo: {
+				potionId: "allpotionid",
+				duration: 10,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				healingeffectivness: 0.1,
+				maxhealthExtraPoints: 1,
+				walkspeed: 0.1,
+				hungerrate: -0.1,
+				rangedWeaponsAcc: 0.1,
+				rangedWeaponsSpeed: 0.1,
+				rangedWeaponsDamage: 0.1,
+				meleeWeaponsDamage: 0.1,
+				mechanicalsDamage: 0.1,
+				animalLootDropRate: 0.1,
+				forageDropRate: 0.1,
+				wildCropDropRate: 0.1,
+				vesselContentsDropRate: 0.1,
+				oreDropRate: 0.1,
+				rustyGearDropRate: 0.1,
+				miningSpeedMul: 0.1,
+				animalSeekingRange: 0.1,
+				wholeVesselLootChance: 0.1,
+				animalHarvestingTime: 0.1
+			},
+			shelvable: true,
+			handbook: {
+				exclude: true
+			}
 		},
-		"*-alltick": {
-			potionId: "alltickpotionid",
-			accuracy: 0.01,
-			animalloot: 0.1,
-			animalharvest: 0.1,
-			animalseek: -0.1,
-			extrahealth: 1,
-			forage: 0.1,
-			healingeffect: 0.1,
-			hunger: 0.1,
-			melee: 0.1,
-			mechdamage: 0.1,
-			mining: 0.1,
-			ore: 0.1,
-			rangeddamage: 0.1,
-			rangedspeed: 0.1,
-			rustygear: 0.1,
-			speed: 0.1,
-			vesselcontent: 0.1,
-			wildcrop: 0.1,
-			duration: 150,
-			health: 1,
-			ticksec: 1,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-alltick-*": {
+			potioninfo: {
+				potionId: "alltickpotionid",
+				duration: 10,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			tickpotioninfo: {
+				ticksec: 1,
+				health: 1,
+			},
+			effects: {
+				healingeffectivness: 0.1,
+				maxhealthExtraPoints: 1,
+				walkspeed: 0.1,
+				hungerrate: -0.1,
+				rangedWeaponsAcc: 0.1,
+				rangedWeaponsSpeed: 0.1,
+				rangedWeaponsDamage: 0.1,
+				meleeWeaponsDamage: 0.1,
+				mechanicalsDamage: 0.1,
+				animalLootDropRate: 0.1,
+				forageDropRate: 0.1,
+				wildCropDropRate: 0.1,
+				vesselContentsDropRate: 0.1,
+				oreDropRate: 0.1,
+				rustyGearDropRate: 0.1,
+				miningSpeedMul: 0.1,
+				animalSeekingRange: 0.1,
+				wholeVesselLootChance: 0.1,
+				animalHarvestingTime: 0.1
+			},
+			shelvable: true,
+			handbook: {
+				exclude: true
+			}
 		},
-		"*-archer": {
-			potionId: "archerpotionid",
-			accuracy: 0.09,
-			rangeddamage: 0.5,
-			rangedspeed: 0.5,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-archer-*": {
+			potioninfo: {
+				potionId: "archerpotionid",
+				drankBlockCode: "potionflask-{flask}-burned",
+				duration: 150,
+			},
+			effects: {
+				rangedWeaponsAcc: 0.05,
+				rangedWeaponsDamage: 0.2,
+				rangedWeaponsSpeed: 0.2,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-healingeffect": {
-			potionId: "healingeffectpotionid",
-			healingeffect: 0.5,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-healingeffect-*": {
+			potioninfo: {
+				potionId: "healingeffectpotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				healingeffectivness: 0.3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-hungerenhance": {
-			potionId: "hungerenhancepotionid",
-			hunger: 0.5,
-			duration: 300,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-hungerenhance-*": {
+			potioninfo: {
+				potionId: "hungerenhancepotionid",
+				duration: 300,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				hungerrate: 0.3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-hungersupress": {
-			potionId: "hungersupresspotionid",
-			hunger: -0.5,
-			duration: 300,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-hungersupress-*": {
+			potioninfo: {
+				potionId: "hungersupresspotionid",
+				duration: 300,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				hungerrate: -0.3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-hunter": {
-			potionId: "hunterpotionid",
-			animalloot: 0.3,
-			animalseek: -0.5,
-			forage: 0.3,
-			wildcrop: 0.3,
-			duration: 180,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-hunter-*": {
+			potioninfo: {
+				potionId: "hunterpotionid",
+				duration: 180,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				animalLootDropRate: 0.2,
+				animalSeekingRange: -0.3,
+				forageDropRate: 0.2,
+				wildCropDropRate: 0.2,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-looter": {
-			potionId: "looterpotionid",
-			forage: 0.3,
-			rustygear: 0.3,
-			vesselcontent: 0.3,
-			wildcrop: 0.3,
-			duration: 180,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-looter-*": {
+			potioninfo: {
+				potionId: "looterpotionid",
+				duration: 180,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				forageDropRate: 0.2,
+				rustyGearDropRate: 0.2,
+				vesselContentsDropRate: 0.3,
+				wildCropDropRate: 0.2,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-melee": {
-			potionId: "meleepotionid",
-			melee: 0.3,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-melee-*": {
+			potioninfo: {
+				potionId: "meleepotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				meleeWeaponsDamage: 0.3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-mining": {
-			potionId: "miningpotionid",
-			mining: 0.3,
-			duration: 10,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-mining-*": {
+			potioninfo: {
+				potionId: "miningpotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				miningSpeedMul: 0.3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-poison": {
-			potionId: "poisontickpotionid",
-			health: -1,
-			ticksec: 3,
-			duration: 30,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-poison-*": {
+			potioninfo: {
+				potionId: "poisontickpotionid",
+				duration: 30,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			tickpotioninfo: {
+				health: -0.5,
+				ticksec: 3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-predator": {
-			potionId: "predatorpotionid",
-			animalseek: 0.5,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-predator-*": {
+			potioninfo: {
+				potionId: "predatorpotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				animalSeekingRange: 0.4,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-regen": {
-			potionId: "regentickpotionid",
-			health: 1,
-			ticksec: 3,
-			duration: 30,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-regen-*": {
+			potioninfo: {
+				potionId: "regentickpotionid",
+				duration: 30,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			tickpotioninfo: {
+				health: 0.5,
+				ticksec: 3,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-scentmask": {
-			potionId: "scentmaskpotionid",
-			animalseek: -0.5,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-scentmask-*": {
+			potioninfo: {
+				potionId: "scentmaskpotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				animalSeekingRange: -0.4,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
-		"*-speed": {
-			potionId: "speedpotionid",
-			speed: 0.25,
-			duration: 150,
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+		"*-speed-*": {
+			potioninfo: {
+				potionId: "speedpotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			effects: {
+				walkspeed: 0.25,
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
 		},
         "*": {
-			drankBlockCode: "potionflask-{flask}-burned",
-			shelvable: true
+			potioninfo: {
+				drankBlockCode: "potionflask-{flask}-burned",
+			},
+			shelvable: true,
+			handbook: {
+				exclude: true
+			}
 		}
     },
 	maxstacksize: 16,
@@ -183,43 +337,43 @@
 		"hit": "game:block/glass"
 	},
 	texturesByType: {
-		"*-archer": {
+		"*-archer-*": {
 			content: { base: "alchemy:item/potion/grey_potion"}
 		},
-		"*-healingeffect": {
+		"*-healingeffect-*": {
 			content: { base: "alchemy:item/potion/red_potion"}
 		},
-		"*-hungerenhance": {
+		"*-hungerenhance-*": {
 			content: { base: "alchemy:item/potion/orange_potion"}
 		},
-		"*-hungersupress": {
+		"*-hungersupress-*": {
 			content: { base: "alchemy:item/potion/yellow_potion"}
 		},
-		"*-hunter": {
+		"*-hunter-*": {
 			content: { base: "game:block/wood/oak"}
 		},
-		"*-looter": {
+		"*-looter-*": {
 			content: { base: "alchemy:item/potion/indigo_potion"}
 		},
-		"*-melee": {
+		"*-melee-*": {
 			content: { base: "alchemy:item/potion/darkred_potion"}
 		},
-		"*-mining": {
+		"*-mining-*": {
 			content: { base: "alchemy:item/potion/brown_potion"}
 		},
-		"*-poison": {
+		"*-poison-*": {
 			content: { base: "alchemy:item/potion/purple_potion"}
 		},
-		"*-predator": {
+		"*-predator-*": {
 			content: { base: "alchemy:item/potion/rose_potion"}
 		},
-		"*-regen": {
+		"*-regen-*": {
 			content: { base: "alchemy:item/potion/green_potion"}
 		},
-		"*-scentmask": {
+		"*-scentmask-*": {
 			content: { base: "alchemy:item/potion/lavendar_potion"}
 		},
-		"*-speed": {
+		"*-speed-*": {
 			content: { base: "alchemy:item/potion/turquoise_potion"}
 		}
 	},

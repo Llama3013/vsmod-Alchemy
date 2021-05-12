@@ -1,10 +1,32 @@
-{
-    ingredientPattern: "F,F,T",
-	ingredients: {
-        "F": { type: "block", code: "game:flower-orangemallow-*" },
-        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+[
+	{
+    	ingredientPattern: "F,F,T",
+		ingredients: {
+        	"F": { type: "block", code: "game:flower-orangemallow-*" },
+        	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-hunter-weak" }
 	},
-	width: 1,
-	height: 3,
-	output: { type: "item", code: "alchemy:potionbase-hunter" }
-}
+	{
+		ingredientPattern: "F,F,T",
+		ingredients: {
+			"F": { type: "item", code: "alchemy:cuttings-orangemallow-dried" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-hunter-medium" }
+	},
+	{
+		ingredientPattern: "F,F,T",
+		ingredients: {
+			"F": { type: "item", code: "alchemy:cuttings-orangemallow-cooked" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-hunter-strong" }
+	}
+]

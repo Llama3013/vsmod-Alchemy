@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Vintagestory.API;
 using Vintagestory.API.Client;
@@ -6,41 +8,21 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 
 namespace Alchemy
 {
 
-    public class PotionAttrClass
-    {
-        public string potionid = "";
-        public float accuracy = 0f;
-        public float animalloot = 0f;
-        public float animalharvest = 0f;
-        public float animalseek = 0f;
-        public float extrahealth = 0f;
-        public float forage = 0f;
-        public float healingeffect = 0f;
-        public float hunger = 0f;
-        public float melee = 0f;
-        public float mechdamage = 0f;
-        public float mining = 0f;
-        public float ore = 0f;
-        public float rangeddamage = 0f;
-        public float rangedspeed = 0f;
-        public float rustygear = 0f;
-        public float speed = 0f;
-        public float vesselcontent = 0f;
-        public float wildcrop = 0f;
-        public int duration = 0;
-        public int ticksec = 0;
-        public float health = 0f;
-        public string drankBlockCode = "";
-    }
-
     public class BlockPotion : Block
     {
-        public PotionAttrClass attrClass = new PotionAttrClass();
+        public Dictionary<string, float> dic = new Dictionary<string, float>();
+        public string potionId;
+        public string drankBlockCode;
+        public int duration;
+        public int tickSec = 0;
+        public float health;
+
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
             return "eat";
@@ -49,28 +31,92 @@ namespace Alchemy
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
-            JsonObject jsonObj = Attributes;
-            if (jsonObj?.Exists == true)
+            string strength = Variant["strength"] is string str ? string.Intern(str) : "weak";
+            JsonObject potion = Attributes?["potioninfo"];
+            if (potion?.Exists == true)
             {
                 try
                 {
-                    attrClass = jsonObj.AsObject<PotionAttrClass>();
+                    potionId = potion["potionId"].AsString();
+                    drankBlockCode = potion["drankBlockCode"].AsString();
+                    duration = potion["duration"].AsInt();
+                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
                 }
                 catch (Exception e)
                 {
                     api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                    attrClass = null;
+                    potionId = "";
+                    drankBlockCode = "";
+                    duration = 0;
+                }
+            }
+            JsonObject tickPotion = Attributes?["tickpotioninfo"];
+            if (tickPotion?.Exists == true)
+            {
+                try
+                {
+                    tickSec = tickPotion["ticksec"].AsInt();
+                    health = tickPotion["health"].AsFloat();
+                    switch (strength)
+                    {
+                        case "strong":
+                            health *= 3;
+                            break;
+                        case "medium":
+                            health *= 2;
+                            break;
+                        default:
+                            break;
+                    }
+                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
+                }
+                catch (Exception e)
+                {
+                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                    tickSec = 0;
+                    health = 0;
+                }
+            }
+            JsonObject effects = Attributes?["effects"];
+            if (effects?.Exists == true)
+            {
+                try
+                {
+                    dic = effects.AsObject<Dictionary<string, float>>();
+                    switch (strength)
+                    {
+                        case "strong":
+                            foreach (var k in dic.Keys.ToList())
+                            {
+                                dic[k] *= 3;
+                            }
+                            break;
+                        case "medium":
+                            foreach (var k in dic.Keys.ToList())
+                            {
+                                dic[k] *= 2;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                    dic.Clear();
                 }
             }
         }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
         {
-            if (attrClass != null && attrClass.potionid != "")
+            //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
+            if (potionId != "")
             {
-                //api.Logger.Debug("[Potion] check if drinkable {0} and {1}", attrClass.potionid, byEntity.WatchedAttributes.GetLong(attrClass.potionid));
+                //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
                 /* This checks if the potion effect callback is on */
-                if (byEntity.WatchedAttributes.GetLong(attrClass.potionid) == 0)
+                if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
                     byEntity.World.RegisterCallback((dt) =>
                     {
@@ -122,8 +168,39 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                PotionEffect potionEffect = new PotionEffect();
-                potionEffect.PotionCheck(byEntity, slot, attrClass);
+                TempEffect potionEffect = new TempEffect();
+                if (tickSec == 0)
+                {
+                    potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
+                }
+                else
+                {
+                    potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
+                }
+                if (byEntity is EntityPlayer)
+                {
+                    IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
+                    player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + slot.Itemstack.GetName(), EnumChatType.Notification);
+                }
+                Block emptyFlask = byEntity.World.GetBlock(AssetLocation.Create(drankBlockCode, slot.Itemstack.Collectible.Code.Domain));
+                ItemStack emptyStack = new ItemStack(emptyFlask);
+                /*Gives player an empty flask if last in stack or drops an empty flask at players feet*/
+                if (slot.Itemstack.StackSize <= 1)
+                {
+                    slot.Itemstack = emptyStack;
+                }
+                else
+                {
+                    IPlayer player = (byEntity as EntityPlayer)?.Player;
+
+                    slot.TakeOut(1);
+                    if (!player.InventoryManager.TryGiveItemstack(emptyStack, true))
+                    {
+                        byEntity.World.SpawnItemEntity(emptyStack, byEntity.SidedPos.XYZ);
+                    }
+                }
+
+                slot.MarkDirty();
             }
         }
 
@@ -131,108 +208,110 @@ namespace Alchemy
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-
-            JsonObject attr = inSlot.Itemstack.Collectible.Attributes;
-            if (attr != null)
+            if (dic != null)
             {
-                if (attr["accuracy"].Exists)
+                if (dic.ContainsKey("rangedWeaponsAcc"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", attr["accuracy"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", dic["rangedWeaponsAcc"] * 100));
                 }
-                if (attr["animalloot"].Exists)
+                if (dic.ContainsKey("animalLootDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", attr["animalloot"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", dic["animalLootDropRate"] * 100));
                 }
-                if (attr["animalharvest"].Exists)
+                if (dic.ContainsKey("animalHarvestingTime"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", attr["animalharvest"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", dic["animalHarvestingTime"] * 100));
                 }
-                if (attr["animalseek"].Exists)
+                if (dic.ContainsKey("animalSeekingRange"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", attr["animalseek"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", dic["animalSeekingRange"] * 100));
                 }
-                if (attr["extrahealth"].Exists)
+                if (dic.ContainsKey("maxhealthExtraPoints"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", attr["extrahealth"].AsFloat()));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", dic["maxhealthExtraPoints"]));
                 }
-                if (attr["forage"].Exists)
+                if (dic.ContainsKey("forageDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", attr["forage"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", dic["forageDropRate"] * 100));
                 }
-                if (attr["healingeffect"].Exists)
+                if (dic.ContainsKey("healingeffectivness"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", attr["healingeffect"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", dic["healingeffectivness"] * 100));
                 }
-                if (attr["hunger"].Exists)
+                if (dic.ContainsKey("hungerrate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", attr["hunger"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", dic["hungerrate"] * 100));
                 }
-                if (attr["melee"].Exists)
+                if (dic.ContainsKey("meleeWeaponsDamage"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", attr["melee"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", dic["meleeWeaponsDamage"] * 100));
                 }
-                if (attr["mechdamage"].Exists)
+                if (dic.ContainsKey("mechanicalsDamage"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", attr["mechdamage"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", dic["mechanicalsDamage"] * 100));
                 }
-                if (attr["mining"].Exists)
+                if (dic.ContainsKey("miningSpeedMul"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", attr["mining"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", dic["miningSpeedMul"] * 100));
                 }
-                if (attr["ore"].Exists)
+                if (dic.ContainsKey("oreDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", attr["ore"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", dic["oreDropRate"] * 100));
                 }
-                if (attr["rangeddamage"].Exists)
+                if (dic.ContainsKey("rangedWeaponsDamage"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", attr["rangeddamage"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", dic["rangedWeaponsDamage"] * 100));
                 }
-                if (attr["rangedspeed"].Exists)
+                if (dic.ContainsKey("rangedWeaponsSpeed"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", attr["rangedspeed"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", dic["rangedWeaponsSpeed"] * 100));
                 }
-                if (attr["rustygear"].Exists)
+                if (dic.ContainsKey("rustyGearDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", attr["rustygear"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", dic["rustyGearDropRate"] * 100));
                 }
-                if (attr["speed"].Exists)
+                if (dic.ContainsKey("walkspeed"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", attr["speed"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", dic["walkspeed"] * 100));
                 }
-                if (attr["vesselcontent"].Exists)
+                if (dic.ContainsKey("vesselContentsDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", attr["vesselcontent"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", dic["vesselContentsDropRate"] * 100));
                 }
-                if (attr["wildcrop"].Exists)
+                if (dic.ContainsKey("wildCropDropRate"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", attr["wildcrop"].AsFloat() * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", dic["wildCropDropRate"] * 100));
                 }
-                if (attr["health"].Exists)
+                if (dic.ContainsKey("wholeVesselLootChance"))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0} health", attr["health"].AsFloat()));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", dic["wholeVesselLootChance"] * 100));
                 }
-                if (attr["duration"].Exists)
-                {
-                    dsc.AppendLine(Lang.Get("and lasts for {0} seconds", attr["duration"].AsInt()));
-                }
-                if (attr["ticksec"].Exists)
-                {
-                    dsc.AppendLine(Lang.Get("every {0} seconds", attr["ticksec"].AsInt()));
-                }
+            }
+
+            if (duration != 0)
+            {
+                dsc.AppendLine(Lang.Get("and lasts for {0} seconds", duration));
+            }
+            if (health != 0)
+            {
+                dsc.AppendLine(Lang.Get("When potion is used: {0} health", health));
+            }
+            if (tickSec != 0)
+            {
+                dsc.AppendLine(Lang.Get("every {0} seconds", tickSec));
             }
         }
 
-
-        public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
+        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
         {
             return new WorldInteraction[] {
-                new WorldInteraction()
-                {
                     /* The ActionLangCode should be heldhelp-drink but it is not working atm */
-                    ActionLangCode = "Drink",
-                    MouseButton = EnumMouseButton.Right
+                    new WorldInteraction()
+                {
+                    ActionLangCode = "blockhelp-potion-*-drink",
+                    MouseButton = EnumMouseButton.Right,
                 }
-            }.Append(base.GetHeldInteractionHelp(inSlot));
+            }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));
         }
     }
 }

@@ -32,60 +32,10 @@ namespace Alchemy
             IServerPlayer player = GetIServerPlayer();
 
             bool potionReseted = false;
-            string potionId = "potionid";
-            string tickPotionId = "tickpotionid";
-            string[] attributeKey = entity.WatchedAttributes.Keys;
-            int attributeAmnt = entity.WatchedAttributes.Count;
-            for (int i = 0; attributeAmnt > i; i++)
-            {
-                if (attributeKey[i].Contains(potionId))
-                {
-                    try
-                    {
-                        long potionListenerId = entity.WatchedAttributes.GetLong(attributeKey[i]);
-                        if (potionListenerId != 0)
-                        {
-                            potionReseted = true;
-                            if (attributeKey[i].Contains(tickPotionId))
-                            {
-                                entity.World.UnregisterGameTickListener(potionListenerId);
-                            }
-                            else
-                            {
-                                entity.World.UnregisterCallback(potionListenerId);
-                            }
-                            entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
-                        }
-                    }
-                    catch (InvalidCastException)
-                    {
-                        entity.WatchedAttributes.RemoveAttribute(attributeKey[i]);
-                    }
-                }
-            }
 
-            entity.Stats.Set("healingeffectivness", "potionmod", 0, false);
-            entity.Stats.Set("maxhealthExtraPoints", "potionmod", 0, false);
-            EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
-            ebh.MarkDirty();
-            entity.Stats.Set("walkspeed", "potionmod", 0, false);
-            entity.Stats.Set("hungerrate", "potionmod", 0, false);
-            entity.Stats.Set("rangedWeaponsAcc", "potionmod", 0, false);
-            entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
-            entity.Stats.Set("walkspeed", "potionmod", 0, false);
-            entity.Stats.Set("rangedWeaponsSpeed", "potionmod", 0, false);
-            entity.Stats.Set("rangedWeaponsDamage", "potionmod", 0, false);
-            entity.Stats.Set("meleeWeaponsDamage", "potionmod", 0, false);
-            entity.Stats.Set("mechanicalsDamage", "potionmod", 0, false);
-            entity.Stats.Set("animalLootDropRate", "potionmod", 0, false);
-            entity.Stats.Set("forageDropRate", "potionmod", 0, false);
-            entity.Stats.Set("vesselContentsDropRate", "potionmod", 0, false);
-            entity.Stats.Set("wildCropDropRate", "potionmod", 0, false);
-            entity.Stats.Set("oreDropRate", "potionmod", 0, false);
-            entity.Stats.Set("rustyGearDropRate", "potionmod", 0, false);
-            entity.Stats.Set("miningSpeedMul", "potionmod", 0, false);
-            entity.Stats.Set("animalSeekingRange", "potionmod", 0, false);
-            entity.Stats.Set("animalHarvestingTime", "potionmod", 0, false);
+            TempEffect tempEffect = new TempEffect();
+            tempEffect.resetAllTempStats((player.Entity as EntityPlayer), "potionmod");
+            tempEffect.resetAllListeners((player.Entity as EntityPlayer), "potionid", "tickpotionid");
 
             if (potionReseted)
             {

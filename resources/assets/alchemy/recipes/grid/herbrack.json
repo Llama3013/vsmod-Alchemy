@@ -1,0 +1,11 @@
+{
+	ingredientPattern: "PHP,HRH,PHP",
+	ingredients: {
+        "P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged"] },
+        "H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"], quantity: 2 },
+        "R": { type: "item", code: "alchemy:herbracktop-*", name: "top", allowedVariants: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] }
+	},
+	width: 3,
+	height: 3,
+	output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-{top}", quantity: 1  }
+}

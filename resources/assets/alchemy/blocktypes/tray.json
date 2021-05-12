@@ -1,0 +1,22 @@
+{
+    code: "tray",
+    class: "Block",
+    behaviors: [
+		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
+		{ name: "RightClickPickup"} 
+	],
+	variantgroups: [
+		{ code:"type", states: ["raw", "burned"] }
+    ],
+    attributes: { shelvable: true },
+    combustible: {
+		meltingPoint: 650,
+		meltingDuration: 45,
+		smeltedRatio: 1,
+		smeltingType: "bake",
+		smeltedStack: { type: "block", code: "tray-burned" },
+		requiresContainer: false
+    },
+    creativeinventory: { "general": ["*"], "decorative": ["*"] },
+}
+    

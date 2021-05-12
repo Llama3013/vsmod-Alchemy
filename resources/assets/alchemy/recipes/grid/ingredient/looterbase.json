@@ -1,10 +1,32 @@
-{
-    ingredientPattern: "F,F,T",
-	ingredients: {
-        "F": { type: "block", code: "game:flower-lupine-blue-*" },
-        "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+[
+	{
+    	ingredientPattern: "F,F,T",
+		ingredients: {
+    	    "F": { type: "block", code: "game:flower-lupine-blue-*" },
+    	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-weak" }
 	},
-	width: 1,
-	height: 3,
-	output: { type: "item", code: "alchemy:potionbase-looter" }
-}
+	{
+		ingredientPattern: "F,F,T",
+		ingredients: {
+			"F": { type: "item", code: "alchemy:cuttings-lupine-blue-dried" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-medium" }
+	},
+	{
+		ingredientPattern: "F,F,T",
+		ingredients: {
+			"F": { type: "item", code: "alchemy:cuttings-lupine-blue-cooked" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-strong" }
+	}
+]
