@@ -68,6 +68,12 @@ namespace Alchemy
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
+                if (stat.Key == "maxhealthExtraPoints")
+                {
+                    EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                    ebh.MarkDirty();
+                }
+                
             }
         }
 
@@ -80,10 +86,13 @@ namespace Alchemy
         }
 
         int tickCnt = 0;
-        public void onEffectTick(float dt) {
+        public void onEffectTick(float dt)
+        {
             tickCnt++;
-            if (tickCnt % effectTickSec == 0) {
-                if (effectHealth != 0) {
+            if (tickCnt % effectTickSec == 0)
+            {
+                if (effectHealth != 0)
+                {
                     //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
                     effectedEntity.ReceiveDamage(new DamageSource()
                     {
@@ -92,14 +101,16 @@ namespace Alchemy
                     }, Math.Abs(effectHealth));
                 }
             }
-            if (tickCnt >= effectDuration) {
+            if (tickCnt >= effectDuration)
+            {
                 long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
                 effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
                 reset();
             }
         }
 
-        public void reset(){
+        public void reset()
+        {
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Remove(stat.Key, effectCode);
@@ -144,7 +155,9 @@ namespace Alchemy
                     {
                         entity.WatchedAttributes.RemoveAttribute(watch);
                     }
-                } else if (watch.Contains(listenerCode)) {
+                }
+                else if (watch.Contains(listenerCode))
+                {
                     try
                     {
                         long potionListenerId = entity.WatchedAttributes.GetLong(watch);
@@ -182,7 +195,9 @@ namespace Alchemy
                     {
                         entity.WatchedAttributes.RemoveAttribute(watch);
                     }
-                } else if (watch.Contains(listenerCode)) {
+                }
+                else if (watch.Contains(listenerCode))
+                {
                     try
                     {
                         long potionListenerId = entity.WatchedAttributes.GetLong(watch);

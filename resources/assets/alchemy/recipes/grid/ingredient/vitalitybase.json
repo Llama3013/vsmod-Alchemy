@@ -1,0 +1,35 @@
+[
+	{
+    	ingredientPattern: "H,F,T",
+		ingredients: {
+    	    "H": { type: "block", code: "game:flower-californiapoppy-*" },
+    	    "F": { type: "block", code: "game:flower-lupine-purple-*" },
+    	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-vitality-weak" }
+	},
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-californiapoppy-dried" },
+			"F": { type: "item", code: "alchemy:cuttings-lupine-purple-dried" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-vitality-medium" }
+	},
+	{
+		ingredientPattern: "H,F,T",
+		ingredients: {
+			"H": { type: "item", code: "alchemy:cuttings-californiapoppy-cooked" },
+			"F": { type: "item", code: "alchemy:cuttings-lupine-purple-cooked" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-vitality-strong" }
+	}
+]

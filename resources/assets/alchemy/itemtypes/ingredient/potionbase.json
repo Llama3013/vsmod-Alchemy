@@ -3,7 +3,7 @@
     shape: { base: "alchemy:item/potionbase" },
 	creativeinventory: { "general": ["*"], "items": ["*"] },
 	variantgroups: [
-		{ code: "basetype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+		{ code: "basetype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 		{ code: "strength", states: ["weak", "medium", "strong"] }
     ],
     maxstacksize: 64,

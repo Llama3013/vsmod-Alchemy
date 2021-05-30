@@ -31,6 +31,8 @@
   "itemdesc-potionbase-scentmask-weak": "Used to make Scent Mask (weak) potion",
   "item-potionbase-speed-weak": "Sprinter's Flask (weak) base",
   "itemdesc-potionbase-speed-weak": "Used to make Sprinter's Flask (weak) potion",
+  "item-potionbase-vitality-weak": "Vitality Flask (weak) base",
+  "itemdesc-potionbase-vitality-weak": "Used to make Vitality Flask (weak) potion",
 
   "item-potionbase-archer-medium": "Archer's Flask (medium) base",
   "itemdesc-potionbase-archer-medium": "Used to make Archer's Flask (medium) potion",
@@ -58,6 +60,8 @@
   "itemdesc-potionbase-scentmask-medium": "Used to make Scent Mask (medium) potion",
   "item-potionbase-speed-medium": "Sprinter's Flask (medium) base",
   "itemdesc-potionbase-speed-medium": "Used to make Sprinter's Flask (medium) potion",
+  "item-potionbase-vitality-medium": "Vitality Flask (medium) base",
+  "itemdesc-potionbase-vitality-medium": "Used to make Vitality Flask (medium) potion",
   
   "item-potionbase-archer-strong": "Archer's Flask (strong) base",
   "itemdesc-potionbase-archer-strong": "Used to make Archer's Flask (strong) potion",
@@ -85,6 +89,8 @@
   "itemdesc-potionbase-scentmask-strong": "Used to make Scent Mask (strong) potion",
   "item-potionbase-speed-strong": "Sprinter's Flask (strong) base",
   "itemdesc-potionbase-speed-strong": "Used to make Sprinter's Flask (strong) potion",
+  "item-potionbase-vitality-strong": "Vitality Flask (strong) base",
+  "itemdesc-potionbase-vitality-strong": "Used to make Vitality Flask (strong) potion",
 
   "block-potion-normal-all-weak": "Debug potion (weak)",
   "block-potion-normal-alltick-weak": "Debug gametick potion (weak)",
@@ -97,10 +103,11 @@
   "block-potion-normal-melee-weak": "Fighter's Flask (weak)",
   "block-potion-normal-mining-weak": "Miner's Flask (weak)",
   "block-potion-normal-poison-weak": "Spiked Oil (weak)",
-  "block-potion-normal-regen-weak": "Healing Oil (weak)",
-  "block-potion-normal-speed-weak": "Sprinter's Flask (weak)",
   "block-potion-normal-predator-weak": "Predator Pheromones (weak)",
+  "block-potion-normal-regen-weak": "Healing Oil (weak)",
   "block-potion-normal-scentmask-weak": "Scent Mask (weak)",
+  "block-potion-normal-speed-weak": "Sprinter's Flask (weak)",
+  "block-potion-normal-vitality-weak": "Vitality Flask (weak)",
 
   "block-potion-round-all-weak": "Debug potion (weak)",
   "block-potion-round-alltick-weak": "Debug gametick potion (weak)",
@@ -117,6 +124,7 @@
   "block-potion-round-speed-weak": "Sprinter's Flask (weak)",
   "block-potion-round-predator-weak": "Predator Pheromones (weak)",
   "block-potion-round-scentmask-weak": "Scent Mask (weak)",
+  "block-potion-round-vitality-weak": "Vitality Flask (weak)",
 
   "block-potion-tube-all-weak": "Debug potion (weak)",
   "block-potion-tube-alltick-weak": "Debug gametick potion (weak)",
@@ -133,6 +141,7 @@
   "block-potion-tube-speed-weak": "Sprinter's Flask (weak)",
   "block-potion-tube-predator-weak": "Predator Pheromones (weak)",
   "block-potion-tube-scentmask-weak": "Scent Mask (weak)",
+  "block-potion-tube-vitality-weak": "Vitality Flask (weak)",
 
   "block-potion-normal-all-medium": "Debug potion (medium)",
   "block-potion-normal-alltick-medium": "Debug gametick potion (medium)",
@@ -149,6 +158,7 @@
   "block-potion-normal-speed-medium": "Sprinter's Flask (medium)",
   "block-potion-normal-predator-medium": "Predator Pheromones (medium)",
   "block-potion-normal-scentmask-medium": "Scent Mask (medium)",
+  "block-potion-normal-vitality-medium": "Vitality Flask (medium)",
 
   "block-potion-round-all-medium": "Debug potion (medium)",
   "block-potion-round-alltick-medium": "Debug gametick potion (medium)",
@@ -165,6 +175,7 @@
   "block-potion-round-speed-medium": "Sprinter's Flask (medium)",
   "block-potion-round-predator-medium": "Predator Pheromones (medium)",
   "block-potion-round-scentmask-medium": "Scent Mask (medium)",
+  "block-potion-round-vitality-medium": "Vitality Flask (medium)",
 
   "block-potion-tube-all-medium": "Debug potion (medium)",
   "block-potion-tube-alltick-medium": "Debug gametick potion (medium)",
@@ -181,6 +192,7 @@
   "block-potion-tube-speed-medium": "Sprinter's Flask (medium)",
   "block-potion-tube-predator-medium": "Predator Pheromones (medium)",
   "block-potion-tube-scentmask-medium": "Scent Mask (medium)",
+  "block-potion-tube-vitality-medium": "Vitality Flask (medium)",
 
   "block-potion-normal-all-strong": "Debug potion (strong)",
   "block-potion-normal-alltick-strong": "Debug gametick potion (strong)",
@@ -197,6 +209,7 @@
   "block-potion-normal-speed-strong": "Sprinter's Flask (strong)",
   "block-potion-normal-predator-strong": "Predator Pheromones (strong)",
   "block-potion-normal-scentmask-strong": "Scent Mask (strong)",
+  "block-potion-normal-vitality-strong": "Vitality Flask (strong)",
 
   "block-potion-round-all-strong": "Debug potion (strong)",
   "block-potion-round-alltick-strong": "Debug gametick potion (strong)",
@@ -213,6 +226,7 @@
   "block-potion-round-speed-strong": "Sprinter's Flask (strong)",
   "block-potion-round-predator-strong": "Predator Pheromones (strong)",
   "block-potion-round-scentmask-strong": "Scent Mask (strong)",
+  "block-potion-round-vitality-strong": "Vitality Flask (strong)",
 
   "block-potion-tube-all-strong": "Debug potion (strong)",
   "block-potion-tube-alltick-strong": "Debug gametick potion (strong)",
@@ -229,6 +243,7 @@
   "block-potion-tube-speed-strong": "Sprinter's Flask (strong)",
   "block-potion-tube-predator-strong": "Predator Pheromones (strong)",
   "block-potion-tube-scentmask-strong": "Scent Mask (strong)",
+  "block-potion-tube-vitality-strong": "Vitality Flask (strong)",
 
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
   "item-cuttings-forgetmenot-raw": "Raw Cuttings (forgetmenot)",

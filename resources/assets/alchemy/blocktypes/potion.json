@@ -7,7 +7,7 @@
 	],
 	variantgroups: [
 		{ code: "flask", states: ["normal", "round", "tube"] },
-		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed"] },
+		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 		{ code: "strength", states: ["weak", "medium", "strong"] },
     ],
 	class: "BlockPotion" ,
@@ -218,6 +218,7 @@
 			},
 			effects: {
 				miningSpeedMul: 0.3,
+				oreDropRate: 0.15
 			},
 			shelvable: true,
 			handbook: {
@@ -314,6 +315,23 @@
 				}
 			}
 		},
+		"*-vitality-*": {
+			potioninfo: {
+				potionId: "vitalitypotionid",
+				duration: 150,
+				drankBlockCode: "potionflask-{flask}-burned"
+			},
+			effects: {
+				maxhealthExtraPoints: 0.5
+			},
+			shelvable: true,
+			handbook: {
+				excludeByType: {
+					"*-round-*": true,
+					"*-tube-*": true
+				}
+			}
+		},
         "*": {
 			potioninfo: {
 				drankBlockCode: "potionflask-{flask}-burned",
@@ -375,6 +393,9 @@
 		},
 		"*-speed-*": {
 			content: { base: "alchemy:item/potion/turquoise_potion"}
+		},
+		"*-vitality-*": {
+			content: { base: "alchemy:item/potion/black_potion"}
 		}
 	},
 	creativeinventory: { "general": ["*"], "items": ["*"] },
