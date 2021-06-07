@@ -1,11 +1,24 @@
 {
     code: "cuttings",
     variantgroups: [
-        { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white"] },
+        { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white", "basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme"] },
         { code: "stage", states: [ "raw", "dried", "cooked" ]},
     ],
     attributes: {
         herbrackable: true,
+        herbRackTransform: {
+          translation: { x: 0, y: 0, z: 0 },
+          rotation: { x: 0, y: 0, z: 0 },
+          origin: { x: 0, y: 0, z: 0 },
+          scale: 1
+        },
+        meathookable: true,
+        meatHookTransform: {
+          translation: { x: -0.02, y: -0.52, z: 0 },
+          rotation: { x: 0, y: 0, z: 0 },
+          origin: { x: 0.5, y: 0, z: 0.5 },
+          scale: 1
+      },
     },
     creativeinventory: { "general": ["*"], "items": ["*"] },
     maxstacksize: 64,

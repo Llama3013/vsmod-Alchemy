@@ -68,12 +68,11 @@ namespace Alchemy
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
-                if (stat.Key == "maxhealthExtraPoints")
-                {
-                    EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
-                    ebh.MarkDirty();
-                }
-                
+            }
+            if (effectedList.ContainsKey("maxhealthExtraPoints"))
+            {
+                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                ebh.MarkDirty();
             }
         }
 

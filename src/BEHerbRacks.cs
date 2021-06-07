@@ -20,6 +20,7 @@ namespace Alchemy
         public override InventoryBase Inventory => inv;
 
         public override string InventoryClassName => "herbrack";
+        public override string AttributeTransformCode => "herbRackTransform";
 
         Block block;
 
@@ -269,50 +270,66 @@ namespace Alchemy
         {
             float x;
             float z;
+            float rotate;
             //Api.Logger.Debug("potion {0}", index);
             switch (index) {
-                case 4:
-                    x = 8 / 16f;
-                    z = 15.25f / 16f;
+                case 0:
+                    x = 1 / 16f;
+                    z = 8 / 16f;
+                    rotate = 0f;
+                    break;
+                case 1:
+                    x = 2.75f / 16f;
+                    z = 3.25f / 16f;
+                    rotate = 315f;
+                    //rotate = -0.785398175f;
                     break;
                 case 2:
                     x = 3 / 16f;
                     z = 13 / 16f;
+                    rotate = 45f;
+                    //rotate = 0.785398175f;
+                    break;
+                case 3:
+                    x = 8 / 16f;
+                    z = 1f / 16f;
+                    rotate = 270f;
+                    //rotate = 1.57079635f;
+                    break;
+                case 4:
+                    x = 8 / 16f;
+                    z = 15f / 16f;
+                    rotate = 90f;
+                    //rotate = -1.57079635f;
+                    break;
+                case 5:
+                    x = 13.25f / 16f;
+                    z = 3.25f / 16f;
+                    rotate = 225f;
+                    //rotate = -2.356194525f;
                     break;
                 case 6:
                     x = 13 / 16f;
                     z = 13 / 16f;
-                    break;
-                case 0:
-                    x = 1 / 16f;
-                    z = 8 / 16f;
+                    rotate = 135f;
+                    //rotate = 2.356194525f;
                     break;
                 case 7:
-                    x = 15.25f / 16f;
+                    x = 15f / 16f;
                     z = 8 / 16f;
-                    break;
-                case 1:
-                    x = 3 / 16f;
-                    z = 4 / 16f;
-                    break;
-                case 5:
-                    x = 13 / 16f;
-                    z = 4 / 16f;
-                    break;
-                case 3:
-                    x = 8 / 16f;
-                    z = 1.75f / 16f;
+                    rotate = 180f;
+                    //rotate = 0f;
                     break;
                 default:
                     x = 0f;
                     z = 0f;
+                    rotate = 0f;
                     break;
             }
-            float y = 3f / 16f;
 
-            mesh.Scale(new Vec3f(0.5f, 0, 0.5f), 0.75f, 0.75f, 0.75f);
-            mesh.Rotate(new Vec3f(0.5f, 0, 0.5f), 90, 90 * GameMath.DEG2RAD, 180);
-            mesh.Translate(x - 0.5f, y - 0.35f, z - 0.4f);
+            mesh.Scale(new Vec3f(0.5f, 0f, 0.5f), 0.75f, 0.75f, 0.75f);
+            mesh.Rotate(new Vec3f(0.5f, 0f, 0.5f), 0f, rotate * GameMath.DEG2RAD, 0f);
+            mesh.Translate(x - 0.5f, -0.175f, z - 0.5f);
         }
     }
 }

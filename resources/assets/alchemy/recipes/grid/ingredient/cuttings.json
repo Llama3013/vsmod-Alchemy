@@ -1,10 +1,22 @@
-{
-    ingredientPattern: "KF",
-	ingredients: {
-        "F": { type: "block", code: "game:flower-*-free", name: "flower", allowedVariants: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white" ]},
-        "K": { type: "item", code: "game:shears-*", isTool: true }
+[
+    {
+        ingredientPattern: "KF",
+	    ingredients: {
+            "F": { type: "block", code: "game:flower-*-free", name: "flower", allowedVariants: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white" ]},
+            "K": { type: "item", code: "game:shears-*", isTool: true }
+        },
+	    width: 2,
+	    height: 1,
+	    output: { type: "item", code: "alchemy:cuttings-{flower}-raw" }
     },
-	width: 2,
-	height: 1,
-	output: { type: "item", code: "alchemy:cuttings-{flower}-raw" }
-}
+    {
+        ingredientPattern: "KF",
+	    ingredients: {
+            "F": { type: "item", code: "game:herbbundle-*", name: "herb", allowedVariants: [ "basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme" ]},
+            "K": { type: "item", code: "game:shears-*", isTool: true }
+        },
+	    width: 2,
+	    height: 1,
+	    output: { type: "item", code: "alchemy:cuttings-{herb}-raw" }
+    },
+]

@@ -28,5 +28,38 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-looter-strong" }
+	},
+	{
+    	ingredientPattern: "F,H,T",
+		ingredients: {
+            "F": { type: "block", code: "game:flower-lupine-blue-*" },
+            "H": { type: "item", code: "game:herbbundle-chamomile" },
+    	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-weak" }
+	},
+	{
+		ingredientPattern: "F,H,T",
+		ingredients: {
+            "F": { type: "item", code: "alchemy:cuttings-lupine-blue-dried" },
+            "H": { type: "item", code: "game:herbbundle-chamomile" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-medium" }
+	},
+	{
+		ingredientPattern: "F,H,T",
+		ingredients: {
+            "F": { type: "item", code: "alchemy:cuttings-lupine-blue-cooked" },
+            "H": { type: "item", code: "game:herbbundle-chamomile" },
+			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-looter-strong" }
 	}
 ]
