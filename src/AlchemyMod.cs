@@ -8,6 +8,7 @@ using Vintagestory.GameContent;
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" })]
+[assembly: ModDependency("game", "1.15.1")]
 
 /* Quick reference to all attributes that change the characters Stats:
    healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
