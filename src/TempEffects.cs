@@ -88,23 +88,26 @@ namespace Alchemy
         public void onEffectTick(float dt)
         {
             tickCnt++;
-            if (tickCnt % effectTickSec == 0)
+            if (effectTickSec != 0)
             {
-                if (effectHealth != 0)
+                if (tickCnt % effectTickSec == 0)
                 {
-                    //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
-                    effectedEntity.ReceiveDamage(new DamageSource()
+                    if (effectHealth != 0)
                     {
-                        Source = EnumDamageSource.Internal,
-                        Type = effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
-                    }, Math.Abs(effectHealth));
+                        //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
+                        effectedEntity.ReceiveDamage(new DamageSource()
+                        {
+                            Source = EnumDamageSource.Internal,
+                            Type = effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
+                        }, Math.Abs(effectHealth));
+                    }
                 }
-            }
-            if (tickCnt >= effectDuration)
-            {
-                long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
-                effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
-                reset();
+                if (tickCnt >= effectDuration)
+                {
+                    long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
+                    effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
+                    reset();
+                }
             }
         }
 
@@ -118,6 +121,14 @@ namespace Alchemy
             {
                 EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
+            }
+            if (effectId.Contains("tickpotionid"))
+            {
+                long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
+                effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
+                effectDuration = 0;
+                effectHealth = 0;
+                effectTickSec = 0;
             }
             effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
 
