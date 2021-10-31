@@ -10,6 +10,11 @@ using Vintagestory.GameContent;
     Authors = new[] { "Llama3013" })]
 [assembly: ModDependency("game", "1.15.1")]
 
+/*json block glow 
+vertexFlags: {
+    glowLevel: 255
+},*/
+
 /* Quick reference to all attributes that change the characters Stats:
    healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
    rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate

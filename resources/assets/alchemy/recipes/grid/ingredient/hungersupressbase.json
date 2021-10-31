@@ -6,6 +6,7 @@
         	"F": { type: "block", code: "game:flower-edelweiss-*" },
         	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-weak" }
@@ -17,6 +18,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-edelweiss-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-medium" }
@@ -28,6 +30,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-edelweiss-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-strong" }
@@ -39,6 +42,7 @@
         	"F": { type: "block", code: "game:flower-edelweiss-*" },
         	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-weak" }
@@ -50,6 +54,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-edelweiss-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-medium" }
@@ -61,6 +66,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-edelweiss-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-strong" }
@@ -72,6 +78,7 @@
         	"F": { type: "item", code: "game:herbbundle-thyme" },
         	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-weak" }
@@ -83,6 +90,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-thyme-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-medium" }
@@ -94,6 +102,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-thyme-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungersupress-strong" }

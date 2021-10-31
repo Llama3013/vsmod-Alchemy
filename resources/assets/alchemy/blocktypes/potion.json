@@ -7,6 +7,7 @@
 	],
 	variantgroups: [
 		{ code: "flask", states: ["normal", "round", "tube"] },
+		{ code: "colour", states: ["quartz", "smoky", "pink", "green", "violet"] },
 		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 		{ code: "strength", states: ["weak", "medium", "strong"] },
     ],
@@ -19,7 +20,7 @@
 			potioninfo: {
 				potionId: "allpotionid",
 				duration: 10,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				healingeffectivness: 0.1,
@@ -51,7 +52,7 @@
 			potioninfo: {
 				potionId: "alltickpotionid",
 				duration: 10,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				ticksec: 1,
@@ -86,7 +87,7 @@
 		"*-archer-*": {
 			potioninfo: {
 				potionId: "archerpotionid",
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 				duration: 150,
 			},
 			effects: {
@@ -106,7 +107,7 @@
 			potioninfo: {
 				potionId: "healingeffectpotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				healingeffectivness: 0.3,
@@ -123,7 +124,7 @@
 			potioninfo: {
 				potionId: "hungerenhancepotionid",
 				duration: 300,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				hungerrate: 0.3,
@@ -140,7 +141,7 @@
 			potioninfo: {
 				potionId: "hungersupresspotionid",
 				duration: 300,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				hungerrate: -0.3,
@@ -157,7 +158,7 @@
 			potioninfo: {
 				potionId: "hunterpotionid",
 				duration: 180,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalLootDropRate: 0.2,
@@ -177,7 +178,7 @@
 			potioninfo: {
 				potionId: "looterpotionid",
 				duration: 180,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				forageDropRate: 0.2,
@@ -197,7 +198,7 @@
 			potioninfo: {
 				potionId: "meleepotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				meleeWeaponsDamage: 0.3,
@@ -214,7 +215,7 @@
 			potioninfo: {
 				potionId: "miningpotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				miningSpeedMul: 0.3,
@@ -232,7 +233,7 @@
 			potioninfo: {
 				potionId: "poisontickpotionid",
 				duration: 30,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				health: -0.5,
@@ -250,7 +251,7 @@
 			potioninfo: {
 				potionId: "predatorpotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalSeekingRange: 0.4,
@@ -267,7 +268,7 @@
 			potioninfo: {
 				potionId: "regentickpotionid",
 				duration: 30,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				health: 0.5,
@@ -285,7 +286,7 @@
 			potioninfo: {
 				potionId: "scentmaskpotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalSeekingRange: -0.4,
@@ -302,7 +303,7 @@
 			potioninfo: {
 				potionId: "speedpotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				walkspeed: 0.25,
@@ -319,7 +320,7 @@
 			potioninfo: {
 				potionId: "vitalitypotionid",
 				duration: 150,
-				drankBlockCode: "potionflask-{flask}-burned"
+				drankBlockCode: "potionflask-{flask}-{colour}-burned"
 			},
 			effects: {
 				maxhealthExtraPoints: 0.5
@@ -334,7 +335,7 @@
 		},
         "*": {
 			potioninfo: {
-				drankBlockCode: "potionflask-{flask}-burned",
+				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			shelvable: true,
 			handbook: {
@@ -342,6 +343,7 @@
 			}
 		}
     },
+	creativeinventory: { "general": ["potion-normal-quartz*"], "decorative": ["*"] },
 	maxstacksize: 16,
 	shapeByType: { 
 		"*-round-*": {base: "alchemy:block/glass/roundflask-liquid" },
@@ -356,49 +358,61 @@
 	},
 	texturesByType: {
 		"*-archer-*": {
-			content: { base: "alchemy:item/potion/grey_potion"}
+			content: { base: "alchemy:item/potion/grey_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-healingeffect-*": {
-			content: { base: "alchemy:item/potion/red_potion"}
+			content: { base: "alchemy:item/potion/red_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-hungerenhance-*": {
-			content: { base: "alchemy:item/potion/orange_potion"}
+			content: { base: "alchemy:item/potion/orange_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-hungersupress-*": {
-			content: { base: "alchemy:item/potion/yellow_potion"}
+			content: { base: "alchemy:item/potion/yellow_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-hunter-*": {
-			content: { base: "game:block/wood/oak"}
+			content: { base: "game:block/wood/oak"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-looter-*": {
-			content: { base: "alchemy:item/potion/indigo_potion"}
+			content: { base: "alchemy:item/potion/indigo_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-melee-*": {
-			content: { base: "alchemy:item/potion/darkred_potion"}
+			content: { base: "alchemy:item/potion/darkred_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-mining-*": {
-			content: { base: "alchemy:item/potion/brown_potion"}
+			content: { base: "alchemy:item/potion/brown_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-poison-*": {
-			content: { base: "alchemy:item/potion/purple_potion"}
+			content: { base: "alchemy:item/potion/purple_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-predator-*": {
-			content: { base: "alchemy:item/potion/rose_potion"}
+			content: { base: "alchemy:item/potion/rose_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-regen-*": {
-			content: { base: "alchemy:item/potion/green_potion"}
+			content: { base: "alchemy:item/potion/green_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-scentmask-*": {
-			content: { base: "alchemy:item/potion/lavendar_potion"}
+			content: { base: "alchemy:item/potion/lavendar_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-speed-*": {
-			content: { base: "alchemy:item/potion/turquoise_potion"}
+			content: { base: "alchemy:item/potion/turquoise_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		},
 		"*-vitality-*": {
-			content: { base: "alchemy:item/potion/black_potion"}
+			content: { base: "alchemy:item/potion/black_potion"},
 		}
 	},
-	creativeinventory: { "general": ["*"], "items": ["*"] },
 	materialDensity: 800,
 	lightAbsorption: 0,
 	sideopaque: { all: false },

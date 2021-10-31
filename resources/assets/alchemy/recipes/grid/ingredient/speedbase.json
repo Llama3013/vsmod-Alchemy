@@ -6,6 +6,7 @@
     	    "F": { type: "block", code: "game:flower-heather-*" },
     	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-weak" }
@@ -17,6 +18,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-heather-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
@@ -28,6 +30,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-heather-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-strong" }
@@ -39,6 +42,7 @@
     	    "F": { type: "block", code: "game:flower-heather-*" },
     	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-weak" }
@@ -50,6 +54,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-heather-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
@@ -61,6 +66,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-heather-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-strong" }
@@ -72,6 +78,7 @@
     	    "F": { type: "item", code: "game:herbbundle-sage" },
     	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-weak" }
@@ -83,6 +90,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-sage-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
@@ -94,6 +102,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-sage-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-strong" }

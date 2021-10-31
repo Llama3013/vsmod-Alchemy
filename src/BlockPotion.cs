@@ -301,17 +301,5 @@ namespace Alchemy
                 dsc.AppendLine(Lang.Get("every {0} seconds", tickSec));
             }
         }
-
-        public override WorldInteraction[] GetPlacedBlockInteractionHelp(IWorldAccessor world, BlockSelection selection, IPlayer forPlayer)
-        {
-            return new WorldInteraction[] {
-                    /* The ActionLangCode should be heldhelp-drink but it is not working atm */
-                    new WorldInteraction()
-                {
-                    ActionLangCode = "blockhelp-potion-*-drink",
-                    MouseButton = EnumMouseButton.Right,
-                }
-            }.Append(base.GetPlacedBlockInteractionHelp(world, selection, forPlayer));
-        }
     }
 }

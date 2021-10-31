@@ -6,6 +6,7 @@
 			"F": { type: "block", code: "game:flower-forgetmenot-*" },
     	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-poison-weak"  }
@@ -17,6 +18,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-dried" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-poison-medium"  }
@@ -28,6 +30,7 @@
 			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-poison-strong"  }

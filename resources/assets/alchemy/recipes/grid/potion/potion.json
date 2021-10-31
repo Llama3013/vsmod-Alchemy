@@ -4,32 +4,107 @@
 		ingredients: {
 			"P": { type: "item", code: "alchemy:potionbase-*-weak", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 			"B": { type: "item", code: "alchemy:potionbase-basic" },
-			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+			"F": { type: "block", code: "alchemy:potionflask-normal-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"]}
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
-		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-weak" }
+		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-weak" }
 	},
 	{
 		ingredientPattern: "P,B,F",
 		ingredients: {
 			"P": { type: "item", code: "alchemy:potionbase-*-medium", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 			"B": { type: "item", code: "alchemy:potionbase-basic" },
-			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+			"F": { type: "block", code: "alchemy:potionflask-normal-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
-		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-medium" }
+		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-medium" }
 	},
 	{
 		ingredientPattern: "P,B,F",
 		ingredients: {
 			"P": { type: "item", code: "alchemy:potionbase-*-strong", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 			"B": { type: "item", code: "alchemy:potionbase-basic" },
-			"F": { type: "block", code: "alchemy:potionflask-*-burned", name: "flask", allowedVariants: ["normal", "round", "tube"] }
+			"F": { type: "block", code: "alchemy:potionflask-normal-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
 		},
+		shapeless: true,
 		width: 1,
 		height: 3,
-		output: { type: "block", code: "alchemy:potion-{flask}-{potiontype}-strong" }
-	}
+		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-strong" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-weak", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-round-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"]}
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-weak" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-medium", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-round-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-medium" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-strong", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-round-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-strong" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-weak", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-tube-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"]}
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-weak" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-medium", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-tube-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-medium" }
+	},
+	{
+		ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:potionbase-*-strong", name: "potiontype", allowedVariants: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-tube-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"] }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-strong" }
+	},
 ]

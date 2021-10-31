@@ -7,26 +7,28 @@
 	],
 	variantgroups: [
 		{ code:"flask", states: ["normal", "round", "tube"] },
+		{ code:"colour", states: ["quartz", "smoky", "pink", "green", "violet"] },
 		{ code:"type", states: ["raw", "burned"] }
 	],
 	attributes: { shelvable: true },
 	blockmaterial: "Glass",
 	replaceable: 5000,
+	creativeinventory: { "general": ["*normal-quartz-*"], "decorative": ["*"] },
 	combustiblePropsByType: {
-		"*-round-raw": {
+		"*-round-*-raw": {
 			meltingPoint: 650,
 			meltingDuration: 45,
 			smeltedRatio: 1,
 			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-round-burned" },
+			smeltedStack: { type: "block", code: "potionflask-round-{colour}-burned" },
 			requiresContainer: false
 		},
-		"*-tube-raw": {
+		"*-tube-*-raw": {
 			meltingPoint: 650,
 			meltingDuration: 45,
 			smeltedRatio: 1,
 			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-tube-burned" },
+			smeltedStack: { type: "block", code: "potionflask-tube-{colour}-burned" },
 			requiresContainer: false
 		},
 		"*-raw": {
@@ -34,7 +36,7 @@
 			meltingDuration: 45,
 			smeltedRatio: 1,
 			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-normal-burned" },
+			smeltedStack: { type: "block", code: "potionflask-normal-{colour}-burned" },
 			requiresContainer: false
 		}
 	},
@@ -42,14 +44,16 @@
 	shapeByType: { 
 		"*-round-*": { base: "alchemy:block/glass/roundflask-liquid" },
 		"*-tube-*": { base: "alchemy:block/glass/tubeflask-liquid" },
-		"*": { base: "alchemy:block/glass/flask-liquid" },
+		"*": { base: "alchemy:block/glass/flask-liquid" }
 	},
 	texturesByType: {
+		"*-burned": { 
+			glass: { base: "game:block/glass/{colour}"}
+		},
 		"*-raw": { 
-			glass: { base: "game:block/glass/blue" },
+			glass: { base: "game:block/glass/blue" }
 		},
 	},
-	creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	replaceable: 300,
 	resistance: 0.75,
 	maxStackSize: 64,

@@ -2,7 +2,7 @@
     {
         ingredientPattern: "KF",
 	    ingredients: {
-            "F": { type: "block", code: "game:flower-*-free", name: "flower", allowedVariants: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white" ]},
+            "F": { type: "block", code: "game:flower-*-free", name: "flower", allowedVariants: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white", "woad", "cornflower" ]},
             "K": { type: "item", code: "game:shears-*", isTool: true }
         },
 	    width: 2,

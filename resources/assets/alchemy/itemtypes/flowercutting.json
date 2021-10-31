@@ -1,7 +1,7 @@
 {
     code: "cuttings",
     variantgroups: [
-        { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white", "basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme"] },
+        { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white", "basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme", "woad", "cornflower"] },
         { code: "stage", states: [ "raw", "dried", "cooked" ]},
     ],
     attributes: {
@@ -40,9 +40,6 @@
     },
     combustiblePropsByType: {
       "*-dried": {
-        burnTemperature: 200,
-        burnDuration: 8,
-      
         meltingPoint: 100,
         meltingDuration: 30,
         smeltedRatio: 1,
@@ -55,6 +52,13 @@
         "*-wilddaisy-*": { base: "alchemy:item/cut_white_herb_bundle"},
         "*-lupine-*": { base: "alchemy:item/cut_stacked_herb_bundle"},
         "*": { base: "alchemy:item/cut_blue_herb_bundle" }
+    },
+    texturesByType: {
+      "*-lupine-blue": { normal7: { base: "game:block/plant/flower/petal/lupine/blue1-b" } },
+      "*-lupine-orange": { normal7: { base: "game:block/plant/flower/petal/lupine/orange1-b" } },
+      "*-lupine-purple": { normal7: { base: "game:block/plant/flower/petal/lupine/purple1-b" } },
+      "*-lupine-red": { normal7: { base: "game:block/plant/flower/petal/lupine/red1-b" } },
+      "*-lupine-white": { normal7: { base: "game:block/plant/flower/petal/lupine/white1-b" } }
     },
     guiTransform: {
 		translation: { x: 3, y: 0, z: 0 },
