@@ -31,7 +31,7 @@ namespace Alchemy
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
-            string strength = Variant["strength"] is string str ? string.Intern(str) : "weak";
+            string strength = Variant["strength"] is string str ? string.Intern(str) : "none";
             JsonObject potion = Attributes?["potioninfo"];
             if (potion?.Exists == true)
             {
@@ -39,14 +39,22 @@ namespace Alchemy
                 {
                     potionId = potion["potionId"].AsString();
                     drankBlockCode = potion["drankBlockCode"].AsString();
-                    duration = potion["duration"].AsInt();
-                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
                 }
                 catch (Exception e)
                 {
                     api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     potionId = "";
                     drankBlockCode = "";
+                }
+
+                try
+                {
+                    duration = potion["duration"].AsInt();
+                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
+                }
+                catch (Exception e)
+                {
+                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     duration = 0;
                 }
             }
@@ -118,7 +126,7 @@ namespace Alchemy
                 /* This checks if the potion effect callback is on */
                 if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
-                    byEntity.World.RegisterCallback((dt) =>
+                                        byEntity.World.RegisterCallback((dt) =>
                     {
                         if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
                         {
@@ -168,19 +176,28 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                TempEffect potionEffect = new TempEffect();
-                if (tickSec == 0)
+                if (potionId == "recallpotionid") {
+                    
+                }
+                else if (tickSec == 0)
                 {
+                    TempEffect potionEffect = new TempEffect();
                     potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
                 }
                 else
                 {
+                    TempEffect potionEffect = new TempEffect();
                     potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
                 }
                 if (byEntity is EntityPlayer)
                 {
                     IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + slot.Itemstack.GetName(), EnumChatType.Notification);
+                    if (potionId == "recallpotionid") {
+                        FuzzyEntityPos spawn = player.GetSpawnPosition(false);
+                        byEntity.TeleportTo(spawn);
+                    } else {
+                        player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + slot.Itemstack.GetName(), EnumChatType.Notification);
+                    }
                 }
                 Block emptyFlask = byEntity.World.GetBlock(AssetLocation.Create(drankBlockCode, slot.Itemstack.Collectible.Code.Domain));
                 ItemStack emptyStack = new ItemStack(emptyFlask);

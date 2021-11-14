@@ -10,7 +10,9 @@
 		{ code:"colour", states: ["quartz", "smoky", "pink", "green", "violet"] },
 		{ code:"type", states: ["raw", "burned"] }
 	],
-	attributes: { shelvable: true },
+	attributes: {
+		shelvable: true,
+	},
 	blockmaterial: "Glass",
 	replaceable: 5000,
 	creativeinventory: { "general": ["*normal-quartz-*"], "decorative": ["*"] },
@@ -84,7 +86,7 @@
 		}
 	},
 	groundTransform: {
-		scale: 1
+		scale: 2.5
 	},
 	fpHandTransform: {
 		translation: { x: 0, y: 0.4, z: 0 },

@@ -1,14 +1,13 @@
 {
-    code: "potionbase",
+    code: "utilitypotionbase",
     shape: { base: "alchemy:item/potionbase" },
 	creativeinventory: { "general": ["*"], "items": ["*"] },
 	variantgroups: [
-		{ code: "basetype", states: ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
-		{ code: "strength", states: ["weak", "medium", "strong"] }
+		{ code: "basetype", states: ["recall"] },
     ],
 	attributes: {
 		handbook: {
-			groupBy: ["potionbase-{basetype}-*"],
+			groupBy: ["potionbase-{basetype}"],
 		},
 	},
     maxstacksize: 64,

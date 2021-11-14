@@ -90,6 +90,9 @@
   "item-potionbase-vitality-strong": "Vitality Flask (strong) base",
   "itemdesc-potionbase-vitality-strong": "Used to make Vitality Flask (strong) potion",
 
+  "item-utilitypotionbase-recall": "Recall Flask base",
+  "itemdesc-utilitypotionbase-recall": "Used to make Recall Flask potion",
+
   "block-potion-normal-quartz-all-weak": "Debug potion (weak)",
   "block-potion-normal-quartz-alltick-weak": "Debug gametick potion (weak)",
   "block-potion-normal-quartz-archer-weak": "Archer's Flask (weak)",
@@ -854,6 +857,22 @@
   "block-potion-tube-violet-predator-strong": "Predator Pheromones (strong)",
   "block-potion-tube-violet-scentmask-strong": "Scent Mask (strong)",
   "block-potion-tube-violet-vitality-strong": "Vitality Flask (strong)",
+
+  "block-utilitypotion-normal-quartz-recall": "Recall Flask",
+  "block-utilitypotion-round-quartz-recall": "Recall Flask",
+  "block-utilitypotion-tube-quartz-recall": "Recall Flask",
+  "block-utilitypotion-normal-smoky-recall": "Recall Flask",
+  "block-utilitypotion-round-smoky-recall": "Recall Flask",
+  "block-utilitypotion-tube-smoky-recall": "Recall Flask",
+  "block-utilitypotion-normal-pink-recall": "Recall Flask",
+  "block-utilitypotion-round-pink-recall": "Recall Flask",
+  "block-utilitypotion-tube-pink-recall": "Recall Flask",
+  "block-utilitypotion-normal-green-recall": "Recall Flask",
+  "block-utilitypotion-round-green-recall": "Recall Flask",
+  "block-utilitypotion-tube-green-recall": "Recall Flask",
+  "block-utilitypotion-normal-violet-recall": "Recall Flask",
+  "block-utilitypotion-round-violet-recall": "Recall Flask",
+  "block-utilitypotion-tube-violet-recall": "Recall Flask",
 
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
   "item-cuttings-forgetmenot-raw": "Raw Cuttings (forgetmenot)",

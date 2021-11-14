@@ -45,6 +45,11 @@
 			},
 			shelvable: true,
 			handbook: {
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
+				},
 				exclude: true
 			}
 		},
@@ -81,6 +86,11 @@
 			},
 			shelvable: true,
 			handbook: {
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
+				},
 				exclude: true
 			}
 		},
@@ -88,7 +98,7 @@
 			potioninfo: {
 				potionId: "archerpotionid",
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
-				duration: 150,
+				duration: 600,
 			},
 			effects: {
 				rangedWeaponsAcc: 0.05,
@@ -97,16 +107,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-healingeffect-*": {
 			potioninfo: {
 				potionId: "healingeffectpotionid",
-				duration: 150,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -114,16 +125,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-hungerenhance-*": {
 			potioninfo: {
 				potionId: "hungerenhancepotionid",
-				duration: 300,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -131,16 +143,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-hungersupress-*": {
 			potioninfo: {
 				potionId: "hungersupresspotionid",
-				duration: 300,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -148,16 +161,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-hunter-*": {
 			potioninfo: {
 				potionId: "hunterpotionid",
-				duration: 180,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -168,16 +182,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-looter-*": {
 			potioninfo: {
 				potionId: "looterpotionid",
-				duration: 180,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -188,16 +203,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-melee-*": {
 			potioninfo: {
 				potionId: "meleepotionid",
-				duration: 150,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -205,16 +221,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-mining-*": {
 			potioninfo: {
 				potionId: "miningpotionid",
-				duration: 150,
+				duration: 600,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -223,9 +240,10 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
@@ -241,16 +259,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-predator-*": {
 			potioninfo: {
 				potionId: "predatorpotionid",
-				duration: 150,
+				duration: 900,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -258,9 +277,10 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
@@ -276,16 +296,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-scentmask-*": {
 			potioninfo: {
 				potionId: "scentmaskpotionid",
-				duration: 150,
+				duration: 900,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -293,16 +314,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-speed-*": {
 			potioninfo: {
 				potionId: "speedpotionid",
-				duration: 150,
+				duration: 300,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
@@ -310,16 +332,17 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
 		"*-vitality-*": {
 			potioninfo: {
 				potionId: "vitalitypotionid",
-				duration: 150,
+				duration: 300,
 				drankBlockCode: "potionflask-{flask}-{colour}-burned"
 			},
 			effects: {
@@ -327,9 +350,10 @@
 			},
 			shelvable: true,
 			handbook: {
-				excludeByType: {
-					"*-round-*": true,
-					"*-tube-*": true
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
 				}
 			}
 		},
@@ -339,6 +363,11 @@
 			},
 			shelvable: true,
 			handbook: {
+				groupByByType: {
+					"*-weak": ["potion-*-{potiontype}-weak"],
+					"*-medium": ["potion-*-{potiontype}-medium"],
+					"*-strong": ["potion-*-{potiontype}-strong"],
+				},
 				exclude: true
 			}
 		}
@@ -411,6 +440,7 @@
 		},
 		"*-vitality-*": {
 			content: { base: "alchemy:item/potion/black_potion"},
+			glass: { base: "game:block/glass/{colour}"}
 		}
 	},
 	materialDensity: 800,
@@ -434,7 +464,7 @@
 		}
 	},
 	groundTransform: {
-		scale: 2
+		scale: 2.5
 	},
 	fpHandTransform: {
 		translation: { x: 0, y: 0.4, z: 0 },

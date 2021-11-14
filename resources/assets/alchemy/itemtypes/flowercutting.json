@@ -32,7 +32,7 @@
           },
           {
             type: "Perish",
-            transitionHours: { avg: 167 },
+            transitionHours: { avg: 336 },
             transitionedStack: { type: "item", code: "game:rot" },
             transitionRatio: 1
           },
@@ -52,13 +52,6 @@
         "*-wilddaisy-*": { base: "alchemy:item/cut_white_herb_bundle"},
         "*-lupine-*": { base: "alchemy:item/cut_stacked_herb_bundle"},
         "*": { base: "alchemy:item/cut_blue_herb_bundle" }
-    },
-    texturesByType: {
-      "*-lupine-blue": { normal7: { base: "game:block/plant/flower/petal/lupine/blue1-b" } },
-      "*-lupine-orange": { normal7: { base: "game:block/plant/flower/petal/lupine/orange1-b" } },
-      "*-lupine-purple": { normal7: { base: "game:block/plant/flower/petal/lupine/purple1-b" } },
-      "*-lupine-red": { normal7: { base: "game:block/plant/flower/petal/lupine/red1-b" } },
-      "*-lupine-white": { normal7: { base: "game:block/plant/flower/petal/lupine/white1-b" } }
     },
     guiTransform: {
 		translation: { x: 3, y: 0, z: 0 },

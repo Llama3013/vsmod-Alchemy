@@ -9,6 +9,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 1,
 		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-weak" }
 	},
 	{
@@ -21,6 +22,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 2,
 		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-medium" }
 	},
 	{
@@ -33,6 +35,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 3,
 		output: { type: "block", code: "alchemy:potion-normal-{colour}-{potiontype}-strong" }
 	},
 	{
@@ -45,6 +48,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 1,
 		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-weak" }
 	},
 	{
@@ -57,6 +61,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 2,
 		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-medium" }
 	},
 	{
@@ -69,6 +74,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 3,
 		output: { type: "block", code: "alchemy:potion-round-{colour}-{potiontype}-strong" }
 	},
 	{
@@ -81,6 +87,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 1,
 		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-weak" }
 	},
 	{
@@ -93,6 +100,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 2,
 		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-medium" }
 	},
 	{
@@ -105,6 +113,7 @@
 		shapeless: true,
 		width: 1,
 		height: 3,
+		recipeGroup: 3,
 		output: { type: "block", code: "alchemy:potion-tube-{colour}-{potiontype}-strong" }
 	},
 ]
