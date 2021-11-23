@@ -1,5 +1,5 @@
 {
-	enabled: true
+	enabled: true,
 	code: "utilitypotion",
 	behaviors: [
 		{ name: "SneakPlacing"}, 
