@@ -39,13 +39,15 @@ namespace Alchemy
 
         protected override float Inventory_OnAcquireTransitionSpeed(EnumTransitionType transType, ItemStack stack, float baseMul)
         {
-            if (transType == EnumTransitionType.Dry) return 0;
             if (Api == null) return 0;
 
-            if (transType == EnumTransitionType.Cure) {
+            if (transType == EnumTransitionType.Dry) {
                 return 5f;
             }
-            else if (transType == EnumTransitionType.Perish || transType == EnumTransitionType.Ripen)
+            if (transType == EnumTransitionType.Cure) {
+                return 2.5f;
+            }
+            if (transType == EnumTransitionType.Perish || transType == EnumTransitionType.Ripen)
             {
                 float perishRate = GetPerishRate();
                 if (transType == EnumTransitionType.Ripen)
@@ -190,6 +192,8 @@ namespace Alchemy
 
                     float transitionLevel = state.TransitionLevel;
                     float freshHoursLeft = state.FreshHoursLeft / perishRate;
+                    float transitionHoursLeft = (state.TransitionHours - state.TransitionedHours) / 3;
+                    double hoursPerday = Api.World.Calendar.HoursPerDay;
 
                     switch (prop.Type)
                     {
@@ -207,7 +211,6 @@ namespace Alchemy
                             }
                             else
                             {
-                                double hoursPerday = Api.World.Calendar.HoursPerDay;
 
                                 if (freshHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
                                 {
@@ -223,7 +226,28 @@ namespace Alchemy
                                 }
                             }
                             break;
+                        case EnumTransitionType.Dry:
+                            if (nowSpoiling) break;
 
+                            appendLine = true;
+                            if (transitionLevel > 0)
+                            {
+                                dsc.Append(", " + Lang.Get("{1:0.#} days left to dry ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday ));
+                            } else {
+                                if (transitionHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
+                                {
+                                    dsc.Append(", " + Lang.Get("will dry in {0} years", Math.Round(transitionHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear, 1)));
+                                }
+                                else if (transitionHoursLeft > hoursPerday)
+                                {
+                                    dsc.Append(", " + Lang.Get("will dry in {0} days", Math.Round(transitionHoursLeft / hoursPerday, 1)));
+                                }
+                                else
+                                {
+                                    dsc.Append(", " + Lang.Get("will dry in {0} hours", Math.Round(transitionHoursLeft, 1)));
+                                }
+                            }
+                            break;
                         case EnumTransitionType.Cure:
                             if (nowSpoiling) break;
 
@@ -231,11 +255,10 @@ namespace Alchemy
 
                             if (transitionLevel > 0)
                             {
-                                dsc.Append(", " + Lang.Get("{1:0.#} days left to cure ({0}%)", (int)Math.Round(transitionLevel * 100), (state.TransitionHours - state.TransitionedHours) / Api.World.Calendar.HoursPerDay / cureRate));
+                                dsc.Append(", " + Lang.Get("{1:0.#} days left to cure ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday / cureRate));
                             }
                             else
                             {
-                                double hoursPerday = Api.World.Calendar.HoursPerDay;
 
                                 if (freshHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
                                 {

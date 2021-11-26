@@ -20,11 +20,11 @@
             potioninfo: {
 				potionId: "recallpotionid",
 				drankBlockCode: "potionflask-{flask}-{colour}-burned",
-			}
-        },
-        shelvable: true,
-        handbook: {
-            groupBy: ["utilitypotion-*-{potiontype}"]
+			},
+			shelvable: true,
+        	handbook: {
+            	groupBy: ["utilitypotion-*-{potiontype}"]
+        	}
         }
     },
     creativeinventory: { "general": ["utilitypotion-normal-quartz-*"], "decorative": ["*"] },

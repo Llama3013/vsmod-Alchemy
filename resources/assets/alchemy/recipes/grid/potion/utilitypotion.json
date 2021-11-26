@@ -10,5 +10,29 @@
 		width: 1,
 		height: 3,
 		output: { type: "block", code: "alchemy:utilitypotion-normal-{colour}-{potiontype}" }
+    },
+	{
+        ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:utilitypotionbase-*", name: "potiontype", allowedVariants: ["recall"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-round-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"]}
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:utilitypotion-round-{colour}-{potiontype}" }
+    },
+	{
+        ingredientPattern: "P,B,F",
+		ingredients: {
+			"P": { type: "item", code: "alchemy:utilitypotionbase-*", name: "potiontype", allowedVariants: ["recall"] },
+			"B": { type: "item", code: "alchemy:potionbase-basic" },
+			"F": { type: "block", code: "alchemy:potionflask-tube-*-burned", name: "colour", allowedVariants: ["quartz", "smoky", "pink", "green", "violet"]}
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "block", code: "alchemy:utilitypotion-tube-{colour}-{potiontype}" }
     }
 ]

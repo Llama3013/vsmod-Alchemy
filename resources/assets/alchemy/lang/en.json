@@ -859,6 +859,7 @@
   "block-potion-tube-violet-vitality-strong": "Vitality Flask (strong)",
 
   "block-utilitypotion-normal-quartz-recall": "Recall Flask",
+  "blockdesc-utilitypotion-*-recall": "When potion is used: You teleport back to your returning point",
   "block-utilitypotion-round-quartz-recall": "Recall Flask",
   "block-utilitypotion-tube-quartz-recall": "Recall Flask",
   "block-utilitypotion-normal-smoky-recall": "Recall Flask",
@@ -969,63 +970,100 @@
   "item-mortarpestle-*": "Mortar & pestle",
   "itemdesc-mortarpestle-*": "Used to make potion base",
 
-  "block-potionflask-normal-quartz-burned": "Potion flask",
+  "block-potionflask-normal-quartz-burned": "Quartz potion flask",
   "blockdesc-potionflask-normal-quartz-burned": "Used to make potions",
-  "block-potionflask-normal-quartz-raw": "Raw potion flask",
+  "block-potionflask-normal-quartz-raw": "Raw quartz potion flask",
 
-  "block-potionflask-round-quartz-burned": "Potion flask",
+  "block-potionflask-round-quartz-burned": "Quartz potion flask",
   "blockdesc-potionflask-round-quartz-burned": "Used to make potions",
-  "block-potionflask-round-quartz-raw": "Raw potion flask",
+  "block-potionflask-round-quartz-raw": "Raw quartz potion flask",
 
-  "block-potionflask-tube-quartz-burned": "Potion flask",
+  "block-potionflask-tube-quartz-burned": "Quartz potion flask",
   "blockdesc-potionflask-tube-quartz-burned": "Used to make potions",
-  "block-potionflask-tube-quartz-raw": "Raw potion flask",
+  "block-potionflask-tube-quartz-raw": "Raw quartz potion flask",
 
-  "block-potionflask-normal-smoky-burned": "Potion flask",
+  "block-potionflask-normal-smoky-burned": "Smoky potion flask",
   "blockdesc-potionflask-normal-smoky-burned": "Used to make potions",
-  "block-potionflask-normal-smoky-raw": "Raw potion flask",
+  "block-potionflask-normal-smoky-raw": "Raw smoky potion flask",
 
-  "block-potionflask-round-smoky-burned": "Potion flask",
+  "block-potionflask-round-smoky-burned": "Smoky potion flask",
   "blockdesc-potionflask-round-smoky-burned": "Used to make potions",
-  "block-potionflask-round-smoky-raw": "Raw potion flask",
+  "block-potionflask-round-smoky-raw": "Raw smoky potion flask",
 
-  "block-potionflask-tube-smoky-burned": "Potion flask",
+  "block-potionflask-tube-smoky-burned": "Smoky potion flask",
   "blockdesc-potionflask-tube-smoky-burned": "Used to make potions",
-  "block-potionflask-tube-smoky-raw": "Raw potion flask",
+  "block-potionflask-tube-smoky-raw": "Raw smoky potion flask",
 
-  "block-potionflask-normal-pink-burned": "Potion flask",
+  "block-potionflask-normal-pink-burned": "Pink potion flask",
   "blockdesc-potionflask-normal-pink-burned": "Used to make potions",
-  "block-potionflask-normal-pink-raw": "Raw potion flask",
+  "block-potionflask-normal-pink-raw": "Raw pink potion flask",
 
-  "block-potionflask-round-pink-burned": "Potion flask",
+  "block-potionflask-round-pink-burned": "Pink potion flask",
   "blockdesc-potionflask-round-pink-burned": "Used to make potions",
-  "block-potionflask-round-pink-raw": "Raw potion flask",
+  "block-potionflask-round-pink-raw": "Raw pink potion flask",
 
-  "block-potionflask-tube-pink-burned": "Potion flask",
+  "block-potionflask-tube-pink-burned": "Pink potion flask",
   "blockdesc-potionflask-tube-pink-burned": "Used to make potions",
-  "block-potionflask-tube-pink-raw": "Raw potion flask",
+  "block-potionflask-tube-pink-raw": "Raw pink potion flask",
 
-  "block-potionflask-normal-green-burned": "Potion flask",
+  "block-potionflask-normal-green-burned": "Green potion flask",
   "blockdesc-potionflask-normal-green-burned": "Used to make potions",
-  "block-potionflask-normal-green-raw": "Raw potion flask",
+  "block-potionflask-normal-green-raw": "Raw green potion flask",
 
-  "block-potionflask-round-green-burned": "Potion flask",
+  "block-potionflask-round-green-burned": "Green potion flask",
   "blockdesc-potionflask-round-green-burned": "Used to make potions",
-  "block-potionflask-round-green-raw": "Raw potion flask",
+  "block-potionflask-round-green-raw": "Raw green potion flask",
 
-  "block-potionflask-tube-green-burned": "Potion flask",
+  "block-potionflask-tube-green-burned": "Green potion flask",
   "blockdesc-potionflask-tube-green-burned": "Used to make potions",
-  "block-potionflask-tube-green-raw": "Raw potion flask",
+  "block-potionflask-tube-green-raw": "Raw green potion flask",
 
-  "block-potionflask-normal-violet-burned": "Potion flask",
+  "block-potionflask-normal-violet-burned": "Violet potion flask",
   "blockdesc-potionflask-normal-violet-burned": "Used to make potions",
-  "block-potionflask-normal-violet-raw": "Raw potion flask",
+  "block-potionflask-normal-violet-raw": "Raw violet potion flask",
 
-  "block-potionflask-round-violet-burned": "Potion flask",
+  "block-potionflask-round-violet-burned": "Violet potion flask",
   "blockdesc-potionflask-round-violet-burned": "Used to make potions",
-  "block-potionflask-round-violet-raw": "Raw potion flask",
+  "block-potionflask-round-violet-raw": "Raw violet potion flask",
 
-  "block-potionflask-tube-violet-burned": "Potion flask",
+  "block-potionflask-tube-violet-burned": "Violet potion flask",
   "blockdesc-potionflask-tube-violet-burned": "Used to make potions",
-  "block-potionflask-tube-violet-raw": "Raw potion flask"
+  "block-potionflask-tube-violet-raw": "Raw violet potion flask",
+
+  "alchemyguide-title": "Alchemy - Guide to potion making",
+  "alchemyguide-text": "<strong>How to make potions</strong>
+
+  To make potions you will need a couple of things. First you will need potion flasks, second you will need a mortar & pestle and lastly you will need flowers/herbs (herbs are only accessible when you have wild farming mod installed).
+
+  <i>Flasks</i>
+  
+  There are 3 different shaped flasks and 5 different colours.
+
+  The different shapes and colours do not affect the potions, they are just for looks. If you don't care about looks I would reccomend quartz normal shaped <a href=\"handbook://block-alchemy:potionflask-normal-quartz-raw\">flask</a>.
+  
+  Here is a list of different types of different <a href=\"handbooksearch://potion flask\">flasks</a>.
+
+  <i>Mortar & Pestle</i>
+
+  Mortar & pestles are required to grind the flowers/herbs into potion bases. You can craft two different types <a href=\"handbook://item-alchemy:mortarpestle-wood\">wooden</a> or <a href=\"handbook://item-alchemy:mortarpestle-stone\">stone</a>
+
+  <i>Potion Bases</i>
+
+  You will need a <a href=\"handbook://item-alchemy:potionbase-basic\">basic potion base</a> to make any potion. A potion base is made out of fly agaric mushrooms, horsetail flower and a mortar & pestle.
+  To make a potion base other than the basic version you need two specfic flowers/herbs that you combine with a mortar & pestle.
+  Example: <a href=\"handbook://item-alchemy:potionbase-regen-weak\">healing oil potion base</a>.
+
+  You can increase the strength of the potion, which will increase the effects of the potion. To make better strength potion bases you will need to combine shears with the desired flower/herb which will give you a raw cuttings.
+  Example: <a href=\"handbook://item-alchemy:cuttings-catmint-raw\">raw cuttings</a>
+  With this you can leave it in a safe place or place it on a <a href=\"handbook://block-alchemy:herbrack-oak-copper-copper\">herbrack</a> for faster dry time (also <a href=\"handbook://block-expandedfoods:meathooks-oak-copper-east\">meat hooks</a> if you have expanded foods installed).
+  Example medium base: <a href=\"handbook://item-alchemy:cuttings-catmint-dried\">dried cuttings</a>
+  After you have aquired dried cuttings you can craft a medium strength potion or cook the dried cuttings in a firepit.
+  Example: <a href=\"handbook://item-alchemy:cuttings-catmint-cooked\">cooked cuttings</a>
+
+  <i>Potion</i>
+
+  All thats left is to craft a potion
+  Example: <a href=\"handbook://block-alchemy:potion-normal-quartz-regen-weak\">healing oil</a>.
+  List of potions craftable: <a href=\"handbooksearch://when potion is used\">potions</a>.
+  "
 }

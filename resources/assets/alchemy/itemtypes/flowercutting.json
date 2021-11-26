@@ -25,14 +25,16 @@
     transitionablePropsByType: {
 		"*-raw": [
           {
-            type: "Cure",
+            type: "Dry",
+            freshHours: { avg: 0 },
             transitionHours: { avg: 168 },
             transitionedStack: { type: "item", code: "alchemy:cuttings-{flower}-dried" },
             transitionRatio: 1
           },
           {
             type: "Perish",
-            transitionHours: { avg: 336 },
+            freshHours: { avg: 672 },
+            transitionHours: { avg: 120 },
             transitionedStack: { type: "item", code: "game:rot" },
             transitionRatio: 1
           },
