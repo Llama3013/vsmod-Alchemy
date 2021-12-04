@@ -11,7 +11,7 @@ using Vintagestory.GameContent;
     RequiredOnClient = true,
     RequiredOnServer = true,
     IconPath = "modicon.png")]
-[assembly: ModDependency("game", "1.15.1")]
+[assembly: ModDependency("game", "1.16.0-pre.3")]
 
 /*json block glow 
 vertexFlags: {
