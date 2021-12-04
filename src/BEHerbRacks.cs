@@ -284,7 +284,7 @@ namespace Alchemy
             return dsc.ToString();
         }
 
-        protected override void translateMesh(MeshData mesh, int index)
+        public override void TranslateMesh(MeshData mesh, int index)
         {
             float x;
             float z;

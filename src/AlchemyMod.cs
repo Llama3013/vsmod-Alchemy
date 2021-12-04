@@ -7,7 +7,10 @@ using Vintagestory.GameContent;
 [assembly: ModInfo("AlchemyMod",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
-    Authors = new[] { "Llama3013" })]
+    Authors = new[] { "Llama3013" },
+    RequiredOnClient = true,
+    RequiredOnServer = true,
+    IconPath = "modicon.png")]
 [assembly: ModDependency("game", "1.15.1")]
 
 /*json block glow 

@@ -3,7 +3,7 @@
 		ingredientPattern: "M,F,T",
 		ingredients: {
 			"M": { type: "item", code: "game:*meat-*" },
-			"F": { type: "block", code: "game:flower-horsetail-*" },
+			"F": { type: "block", code: "game:flower-horsetail-free" },
     	    "T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
 		shapeless: true,
