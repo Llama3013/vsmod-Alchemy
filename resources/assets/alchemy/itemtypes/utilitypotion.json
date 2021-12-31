@@ -2,7 +2,7 @@
 	enabled: true,
 	code: "utilitypotion",
 	variantgroups: [
-		{ code: "potiontype", states: [ "recall" ] }
+		{ code: "potiontype", states: [ "recall", "glow" ] }
     ],
 	class: "ItemPotion",
 	matterState: "liquid",
@@ -24,7 +24,26 @@
 					stack: { type: "item", code: "utilitypotion-recall" } 
 				}
 			}
-        }
+        },
+		"*-glow": {
+            potioninfo: {
+				potionId: "glowpotionid",
+				duration: 1000
+			},
+        	handbook: {
+            	groupBy: ["utilitypotion-{potiontype}"]
+        	},
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "game:item/resource/temporalgear" },
+				tintIndex: 2,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "utilitypotion-glow" } 
+				}
+			}
+        },
     },
     creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	maxstacksize: 500,

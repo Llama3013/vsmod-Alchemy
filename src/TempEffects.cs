@@ -29,7 +29,10 @@ namespace Alchemy
             effectedList = effectList;
             effectCode = code;
             effectId = id;
-            setTempStats();
+            if (effectedList.Count >= 1)
+            {
+                setTempStats();
+            }
             long effectIdCallback = entity.World.RegisterCallback(resetTempStats, duration * 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
@@ -55,7 +58,10 @@ namespace Alchemy
             effectDuration = duration;
             effectTickSec = tickSec;
             effectHealth = health;
-            setTempStats();
+            if (effectedList.Count >= 1)
+            {
+                setTempStats();
+            }
             long effectIdGametick = entity.World.RegisterGameTickListener(onEffectTick, 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
         }

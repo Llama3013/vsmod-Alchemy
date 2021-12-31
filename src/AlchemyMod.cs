@@ -2,7 +2,8 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
-using Vintagestory.GameContent;
+using HarmonyLib;
+using System.Reflection;
 
 [assembly: ModInfo("AlchemyMod",
     Version = "1.4.1",
@@ -36,6 +37,9 @@ namespace Alchemy
             base.Start(api);
 
             config = ModConfig.Load(api);
+
+            var harmony = new Harmony("llama3013.SinglePause");
+            harmony.PatchAll(Assembly.GetExecutingAssembly());
             
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
             api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
