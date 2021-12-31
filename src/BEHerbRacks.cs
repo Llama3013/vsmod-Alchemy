@@ -41,10 +41,12 @@ namespace Alchemy
         {
             if (Api == null) return 0;
 
-            if (transType == EnumTransitionType.Dry) {
+            if (transType == EnumTransitionType.Dry)
+            {
                 return 5f;
             }
-            if (transType == EnumTransitionType.Cure) {
+            if (transType == EnumTransitionType.Cure)
+            {
                 return 2.5f;
             }
             if (transType == EnumTransitionType.Perish || transType == EnumTransitionType.Ripen)
@@ -205,7 +207,7 @@ namespace Alchemy
                             {
                                 nowSpoiling = true;
                                 dsc.Append(", " + Lang.Get("{0}% spoiled", new object[]
-								{
+                                {
                                     (int)Math.Round(transitionLevel * 100f)
                                 }));
                             }
@@ -232,8 +234,10 @@ namespace Alchemy
                             appendLine = true;
                             if (transitionLevel > 0)
                             {
-                                dsc.Append(", " + Lang.Get("{1:0.#} days left to dry ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday ));
-                            } else {
+                                dsc.Append(", " + Lang.Get("{1:0.#} days left to dry ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday));
+                            }
+                            else
+                            {
                                 if (transitionHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
                                 {
                                     dsc.Append(", " + Lang.Get("will dry in {0} years", Math.Round(transitionHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear, 1)));
@@ -290,7 +294,8 @@ namespace Alchemy
             float z;
             float rotate;
             //Api.Logger.Debug("potion {0}", index);
-            switch (index) {
+            switch (index)
+            {
                 case 0:
                     x = 1 / 16f;
                     z = 8 / 16f;

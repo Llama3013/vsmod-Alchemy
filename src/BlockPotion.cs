@@ -126,7 +126,7 @@ namespace Alchemy
                 /* This checks if the potion effect callback is on */
                 if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
-                                        byEntity.World.RegisterCallback((dt) =>
+                    byEntity.World.RegisterCallback((dt) =>
                     {
                         if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
                         {
@@ -176,8 +176,9 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                if (potionId == "recallpotionid") {
-                    
+                if (potionId == "recallpotionid")
+                {
+
                 }
                 else if (tickSec == 0)
                 {
@@ -192,10 +193,13 @@ namespace Alchemy
                 if (byEntity is EntityPlayer)
                 {
                     IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    if (potionId == "recallpotionid") {
+                    if (potionId == "recallpotionid")
+                    {
                         FuzzyEntityPos spawn = player.GetSpawnPosition(false);
                         byEntity.TeleportTo(spawn);
-                    } else {
+                    }
+                    else
+                    {
                         player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + slot.Itemstack.GetName(), EnumChatType.Notification);
                     }
                 }

@@ -31,16 +31,9 @@ namespace Alchemy
         {
             IServerPlayer player = GetIServerPlayer();
 
-            bool potionReseted = false;
-
             TempEffect tempEffect = new TempEffect();
             tempEffect.resetAllTempStats((player.Entity as EntityPlayer), "potionmod");
             tempEffect.resetAllListeners((player.Entity as EntityPlayer), "potionid", "tickpotionid");
-
-            if (potionReseted)
-            {
-                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of all of your potions dissipate.", EnumChatType.Notification);
-            }
 
             base.OnEntityDeath(damageSourceForDeath);
         }
