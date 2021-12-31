@@ -79,7 +79,7 @@
 		"*-tube-*": {
 			translation: { x: 0, y: 3, z: 0 },
 			origin: { x: 0.5, y: 0.2, z: 0.5 },
-			scale: 2.5
+			scale: 2
 		},
 		"*": {
 			translation: { x: 0, y: 3, z: 0 },
@@ -87,13 +87,26 @@
 			scale: 2.75
 		}
 	},
-	groundTransform: {
-		scale: 2.5
+	groundTransformByType: {
+		"*-tube-*": {
+			scale: 2
+		},
+		"*": {
+			scale: 2.5
+		}
 	},
-	fpHandTransform: {
-		translation: { x: 0, y: 0.4, z: 0 },
-		rotation: { x: 0, y: -14, z: 0 },
-		scale: 2
+	fpHandTransformByType: {
+		"*-tube-*": {
+			translation: { x: 0, y: 0.4, z: 0 },
+			rotation: { x: 0, y: -14, z: 0 },
+			scale: 1.5
+		},
+		"*": {
+			translation: { x: 0, y: 0.4, z: 0 },
+			rotation: { x: 0, y: -14, z: 0 },
+			scale: 2
+		}
+		
 	},
 	tpHandTransform: {
 		translation: { x: -0.9, y: -0.1, z: -0.8 },
