@@ -5,12 +5,14 @@ using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 [assembly: ModInfo("AlchemyMod",
+    Version = "1.4.1",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" },
     RequiredOnClient = true,
     RequiredOnServer = true,
-    IconPath = "modicon.png")]
+    IconPath = "modicon.png"
+    )]
 [assembly: ModDependency("game", "1.16.0-pre.3")]
 
 /*json block glow 
@@ -34,7 +36,9 @@ namespace Alchemy
             base.Start(api);
 
             config = ModConfig.Load(api);
-            api.RegisterBlockClass("BlockPotion", typeof(BlockPotion));
+            
+            api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
+            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
             api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
             api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));
         }

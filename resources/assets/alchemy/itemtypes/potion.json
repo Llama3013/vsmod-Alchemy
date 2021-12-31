@@ -1,26 +1,16 @@
 {
 	code: "potion",
-	behaviors: [
-		{ name: "SneakPlacing"}, 
-		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
-		{ name: "RightClickPickup"} 
-	],
 	variantgroups: [
-		{ code: "flask", states: ["normal", "round", "tube"] },
-		{ code: "colour", states: ["quartz", "smoky", "pink", "green", "violet"] },
 		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 		{ code: "strength", states: ["weak", "medium", "strong"] },
     ],
-	class: "BlockPotion" ,
-	blockmaterial: "Glass",
-	drawtype: "JSON",
-	replaceable: 5000,
+	class: "ItemPotion" ,
+	matterState: "liquid",
 	attributesByType: {
 		"*-all-*": {
 			potioninfo: {
 				potionId: "allpotionid",
 				duration: 10,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				healingeffectivness: 0.1,
@@ -43,12 +33,22 @@
 				wholeVesselLootChance: 0.1,
 				animalHarvestingTime: 0.1
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "game:block/liquid/waterportion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-all-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
-					"*-weak": ["potion-*-{potiontype}-weak"],
-					"*-medium": ["potion-*-{potiontype}-medium"],
-					"*-strong": ["potion-*-{potiontype}-strong"],
+					"*-weak": ["potion-{potiontype}-weak"],
+					"*-medium": ["potion-{potiontype}-medium"],
+					"*-strong": ["potion-{potiontype}-strong"],
 				},
 				exclude: true
 			}
@@ -57,7 +57,6 @@
 			potioninfo: {
 				potionId: "alltickpotionid",
 				duration: 10,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				ticksec: 1,
@@ -84,7 +83,17 @@
 				wholeVesselLootChance: 0.1,
 				animalHarvestingTime: 0.1
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "game:block/liquid/waterportion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-alltick-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -97,7 +106,6 @@
 		"*-archer-*": {
 			potioninfo: {
 				potionId: "archerpotionid",
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 				duration: 600,
 			},
 			effects: {
@@ -105,7 +113,17 @@
 				rangedWeaponsDamage: 0.2,
 				rangedWeaponsSpeed: 0.2,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/grey_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-archer-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -118,12 +136,21 @@
 			potioninfo: {
 				potionId: "healingeffectpotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				healingeffectivness: 0.3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/red_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-healingeffect-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -136,12 +163,21 @@
 			potioninfo: {
 				potionId: "hungerenhancepotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				hungerrate: 0.3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/orange_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-hungerenhance-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -154,12 +190,21 @@
 			potioninfo: {
 				potionId: "hungersupresspotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				hungerrate: -0.3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/yellow_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-hungersupress-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -172,7 +217,6 @@
 			potioninfo: {
 				potionId: "hunterpotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalLootDropRate: 0.2,
@@ -180,7 +224,17 @@
 				forageDropRate: 0.2,
 				wildCropDropRate: 0.2,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "game:block/wood/oak" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-hunter-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -193,7 +247,6 @@
 			potioninfo: {
 				potionId: "looterpotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				forageDropRate: 0.2,
@@ -201,7 +254,17 @@
 				vesselContentsDropRate: 0.3,
 				wildCropDropRate: 0.2,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/indigo_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-looter-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -214,12 +277,21 @@
 			potioninfo: {
 				potionId: "meleepotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				meleeWeaponsDamage: 0.3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/darkred_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-melee-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -232,13 +304,22 @@
 			potioninfo: {
 				potionId: "miningpotionid",
 				duration: 600,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				miningSpeedMul: 0.3,
 				oreDropRate: 0.15
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/brown_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-mining-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -251,13 +332,22 @@
 			potioninfo: {
 				potionId: "poisontickpotionid",
 				duration: 30,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				health: -0.5,
 				ticksec: 3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/purple_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-poison-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -270,12 +360,21 @@
 			potioninfo: {
 				potionId: "predatorpotionid",
 				duration: 900,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalSeekingRange: 0.4,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/rose_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-predator-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -288,13 +387,22 @@
 			potioninfo: {
 				potionId: "regentickpotionid",
 				duration: 30,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			tickpotioninfo: {
 				health: 0.5,
 				ticksec: 3,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/green_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-regen-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -307,12 +415,21 @@
 			potioninfo: {
 				potionId: "scentmaskpotionid",
 				duration: 900,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				animalSeekingRange: -0.4,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/lavendar_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-scentmask-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -325,12 +442,21 @@
 			potioninfo: {
 				potionId: "speedpotionid",
 				duration: 300,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
 			},
 			effects: {
 				walkspeed: 0.25,
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/turquoise_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-speed-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -343,12 +469,21 @@
 			potioninfo: {
 				potionId: "vitalitypotionid",
 				duration: 300,
-				drankBlockCode: "potionflask-{flask}-{colour}-burned"
 			},
 			effects: {
 				maxhealthExtraPoints: 0.5
 			},
-			shelvable: true,
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "alchemy:item/potion/black_potion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-vitality-{strength}" } 
+				}
+			},
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -358,10 +493,17 @@
 			}
 		},
         "*": {
-			potioninfo: {
-				drankBlockCode: "potionflask-{flask}-{colour}-burned",
+			waterTightContainerProps: {
+				containable: true,
+				itemsPerLitre: 10,
+				texture: { base: "game:block/liquid/waterportion" },
+				tintIndex: 2,
+				allowSpill: true,
+				whenSpilled: { 
+					action: "DropContents",
+					stack: { type: "item", code: "potion-{potiontype}-{strength}" } 
+				}
 			},
-			shelvable: true,
 			handbook: {
 				groupByByType: {
 					"*-weak": ["potion-*-{potiontype}-weak"],
@@ -372,109 +514,73 @@
 			}
 		}
     },
-	creativeinventory: { "general": ["potion-normal-quartz*"], "decorative": ["*"] },
-	maxstacksize: 16,
-	shapeByType: { 
-		"*-round-*": {base: "alchemy:block/glass/roundflask-liquid" },
-		"*-tube-*": {base: "alchemy:block/glass/tubeflask-liquid" },
-		"*": {base: "alchemy:block/glass/flask-liquid" }
-	},
-	sounds: {
-		"walk": "game:walk/ice",
-		"place": "game:player/buildhigh",
-		"break": "game:block/glass",
-		"hit": "game:block/glass"
-	},
+	creativeinventory: { "general": ["*"], "decorative": ["*"] },
+	maxstacksize: 500,
+	materialDensity: 200,
+	shape: { base: "game:item/liquid" },
 	texturesByType: {
 		"*-archer-*": {
-			content: { base: "alchemy:item/potion/grey_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/grey_potion" }
 		},
 		"*-healingeffect-*": {
-			content: { base: "alchemy:item/potion/red_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/red_potion" }
 		},
 		"*-hungerenhance-*": {
-			content: { base: "alchemy:item/potion/orange_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/orange_potion" }
 		},
 		"*-hungersupress-*": {
-			content: { base: "alchemy:item/potion/yellow_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/yellow_potion" }
 		},
 		"*-hunter-*": {
-			content: { base: "game:block/wood/oak"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "game:block/wood/oak" }
 		},
 		"*-looter-*": {
-			content: { base: "alchemy:item/potion/indigo_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/indigo_potion" }
 		},
 		"*-melee-*": {
-			content: { base: "alchemy:item/potion/darkred_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/darkred_potion" }
+			
 		},
 		"*-mining-*": {
-			content: { base: "alchemy:item/potion/brown_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/brown_potion" }
+			
 		},
 		"*-poison-*": {
-			content: { base: "alchemy:item/potion/purple_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/purple_potion" }
+			
 		},
 		"*-predator-*": {
-			content: { base: "alchemy:item/potion/rose_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/rose_potion" }
+			
 		},
 		"*-regen-*": {
-			content: { base: "alchemy:item/potion/green_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/green_potion" }
+			
 		},
 		"*-scentmask-*": {
-			content: { base: "alchemy:item/potion/lavendar_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/lavendar_potion" }
+			
 		},
 		"*-speed-*": {
-			content: { base: "alchemy:item/potion/turquoise_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/turquoise_potion" }
+			
 		},
 		"*-vitality-*": {
-			content: { base: "alchemy:item/potion/black_potion"},
-			glass: { base: "game:block/glass/{colour}"}
+			all: { base: "alchemy:item/potion/black_potion" }
+			
 		}
 	},
-	materialDensity: 800,
-	lightAbsorption: 0,
-	sideopaque: { all: false },
-	sideao: { all: true },
-	emitsideao: { all: false },
-	sidesolid: { all: false },
-	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
-	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
-	guiTransformByType: {
-		"*-tube-*": {
-			translation: { x: 0, y: 3, z: 0 },
-			origin: { x: 0.5, y: 0.2, z: 0.5 },
-			scale: 2.5
-		},
-		"*": {
-			translation: { x: 0, y: 3, z: 0 },
-			origin: { x: 0.5, y: 0.175, z: 0.5 },
-			scale: 2.75
-		}
-	},
-	groundTransform: {
-		scale: 2.5
+	guiTransform: {
+		translation: { x: 0, y: 1, z: 0 },
+		rotation: { x: 123, y: -33, z: -13 },
+		origin: { x: 0.5, y: 0, z: 0.5 },
+		scale: 1.4
 	},
 	fpHandTransform: {
-		translation: { x: 0, y: 0.4, z: 0 },
-		rotation: { x: 0, y: -14, z: 0 },
-		scale: 2
+		translation: { x: 0, y: 0, z: 0 },
+		rotation: { x: 25, y: 157, z: -5 }
 	},
 	tpHandTransform: {
-		translation: { x: -0.9, y: -0.1, z: -0.8 },
-		rotation: { x: 0, y: -56, z: 0 },
-		origin: { x: 0.5, y: 0.1, z: 0.5 },
-		scale: 0.66
-	},
+		translation: { x: -1.5, y: -1, z: -1.4 }
+	}
   }

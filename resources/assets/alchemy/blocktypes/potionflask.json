@@ -1,5 +1,6 @@
 {
 	code: "potionflask",
+	classByType: {"*-burned" : "BlockPotionFlask"},
 	behaviors: [
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
@@ -12,6 +13,7 @@
 	],
 	attributes: {
 		shelvable: true,
+		alchemycontainer: true
 	},
 	blockmaterial: "Glass",
 	replaceable: 5000,

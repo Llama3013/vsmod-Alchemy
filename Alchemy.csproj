@@ -20,6 +20,10 @@
 			<HintPath>$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
+		<Reference Include="harmony">
+			<HintPath>$(VINTAGE_STORY)/Lib/0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(Configuration)' == 'Release'">

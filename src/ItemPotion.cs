@@ -9,16 +9,34 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
+using Vintagestory.GameContent;
+using System.Threading.Tasks;
 
 namespace Alchemy
 {
-
-    public class BlockPotion : Block
+    public class ItemPotion : Item
     {
+
+        //Fix flask stacking problem and drink potions in a stack
+
+        public override void OnGroundIdle(EntityItem entityItem)
+        {
+            entityItem.Die(EnumDespawnReason.Removed);
+
+            if (entityItem.World.Side == EnumAppSide.Server)
+            {
+                WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(entityItem.Itemstack);
+                float litres = (float)entityItem.Itemstack.StackSize / props.ItemsPerLitre;
+
+                entityItem.World.SpawnCubeParticles(entityItem.SidedPos.XYZ, entityItem.Itemstack, 0.75f, (int)(litres * 2), 0.45f);
+                entityItem.World.PlaySoundAt(new AssetLocation("sounds/environment/smallsplash"), (float)entityItem.SidedPos.X, (float)entityItem.SidedPos.Y, (float)entityItem.SidedPos.Z, null);
+            }
+
+            base.OnGroundIdle(entityItem);
+        }
+
         public Dictionary<string, float> dic = new Dictionary<string, float>();
         public string potionId;
-        public string drankBlockCode;
         public int duration;
         public int tickSec = 0;
         public float health;
@@ -38,23 +56,21 @@ namespace Alchemy
                 try
                 {
                     potionId = potion["potionId"].AsString();
-                    drankBlockCode = potion["drankBlockCode"].AsString();
                 }
                 catch (Exception e)
                 {
                     api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     potionId = "";
-                    drankBlockCode = "";
                 }
 
                 try
                 {
                     duration = potion["duration"].AsInt();
-                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
+                    //api.Logger.Debug("potion {0}, {1}", potionId, duration);
                 }
                 catch (Exception e)
                 {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                    api.Logger.Debug("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     duration = 0;
                 }
             }
@@ -76,11 +92,11 @@ namespace Alchemy
                         default:
                             break;
                     }
-                    //api.Logger.Debug("potion {0}, {1}, {2}", potionId, drankBlockCode, duration);
+                    //api.Logger.Debug("potion {0}, {1}", potionId, duration);
                 }
                 catch (Exception e)
                 {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                    api.Logger.Debug("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     tickSec = 0;
                     health = 0;
                 }
@@ -111,7 +127,7 @@ namespace Alchemy
                 }
                 catch (Exception e)
                 {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                    api.Logger.Debug("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
                     dic.Clear();
                 }
             }
@@ -126,13 +142,13 @@ namespace Alchemy
                 /* This checks if the potion effect callback is on */
                 if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
-                                        byEntity.World.RegisterCallback((dt) =>
-                    {
-                        if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
+                    byEntity.World.RegisterCallback((dt) =>
                         {
-                            byEntity.World.PlaySoundAt(new AssetLocation("alchemy:sounds/player/drink"), byEntity);
-                        }
-                    }, 200);
+                            if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
+                            {
+                                byEntity.World.PlaySoundAt(new AssetLocation("alchemy:sounds/player/drink"), byEntity);
+                            }
+                        }, 200);
                     handling = EnumHandHandling.PreventDefault;
                     return;
                 }
@@ -176,8 +192,9 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                if (potionId == "recallpotionid") {
-                    
+                if (potionId == "recallpotionid")
+                {
+
                 }
                 else if (tickSec == 0)
                 {
@@ -192,30 +209,18 @@ namespace Alchemy
                 if (byEntity is EntityPlayer)
                 {
                     IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                    if (potionId == "recallpotionid") {
+                    if (potionId == "recallpotionid")
+                    {
                         FuzzyEntityPos spawn = player.GetSpawnPosition(false);
                         byEntity.TeleportTo(spawn);
-                    } else {
+                    }
+                    else
+                    {
                         player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + slot.Itemstack.GetName(), EnumChatType.Notification);
                     }
                 }
-                Block emptyFlask = byEntity.World.GetBlock(AssetLocation.Create(drankBlockCode, slot.Itemstack.Collectible.Code.Domain));
-                ItemStack emptyStack = new ItemStack(emptyFlask);
-                /*Gives player an empty flask if last in stack or drops an empty flask at players feet*/
-                if (slot.Itemstack.StackSize <= 1)
-                {
-                    slot.Itemstack = emptyStack;
-                }
-                else
-                {
-                    IPlayer player = (byEntity as EntityPlayer)?.Player;
 
-                    slot.TakeOut(1);
-                    if (!player.InventoryManager.TryGiveItemstack(emptyStack, true))
-                    {
-                        byEntity.World.SpawnItemEntity(emptyStack, byEntity.SidedPos.XYZ);
-                    }
-                }
+                slot.TakeOut(1);
 
                 slot.MarkDirty();
             }
