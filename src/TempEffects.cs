@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Vintagestory.API.Config;
@@ -33,7 +32,7 @@ namespace Alchemy
             {
                 setTempStats();
             }
-            long effectIdCallback = entity.World.RegisterCallback(resetTempStats, duration * 1000);
+            long effectIdCallback = effectedEntity.World.RegisterCallback(resetTempStats, duration * 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
 

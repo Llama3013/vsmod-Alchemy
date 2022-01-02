@@ -1,12 +1,11 @@
-using System;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
 namespace Alchemy
 {
-	public class BlockHerbRacks : Block
-	{
-		public override void OnLoaded(ICoreAPI api)
+    public class BlockHerbRacks : Block
+    {
+        public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
         }
@@ -23,5 +22,5 @@ namespace Alchemy
 
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
-	}
+    }
 }

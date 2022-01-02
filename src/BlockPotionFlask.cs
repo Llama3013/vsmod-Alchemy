@@ -9,6 +9,7 @@ using System.Linq;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Client;
 using Vintagestory.API.MathTools;
+using System.Text;
 
 namespace Alchemy
 {
@@ -19,56 +20,85 @@ namespace Alchemy
         protected override AssetLocation emptyShapeLoc => new AssetLocation("shapes/block/glass/flask-liquid.json");
         protected override AssetLocation contentShapeLoc => new AssetLocation("shapes/block/glass/flask-liquid.json");
 
-        protected override float liquidMaxYTranslate => 7 / 16f;
-
-
-
-        public override bool DoPlaceBlock(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel, ItemStack byItemStack)
-        {
-            bool val = base.DoPlaceBlock(world, byPlayer, blockSel, byItemStack);
-
-            if (val)
-            {
-                BlockEntityBucket bect = world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityBucket;
-                if (bect != null)
-                {
-                    BlockPos targetPos = blockSel.DidOffset ? blockSel.Position.AddCopy(blockSel.Face.Opposite) : blockSel.Position;
-                    double dx = byPlayer.Entity.Pos.X - (targetPos.X + blockSel.HitPosition.X);
-                    double dz = byPlayer.Entity.Pos.Z - (targetPos.Z + blockSel.HitPosition.Z);
-                    float angleHor = (float)Math.Atan2(dx, dz);
-
-                    float deg22dot5rad = GameMath.PIHALF / 4;
-                    float roundRad = ((int)Math.Round(angleHor / deg22dot5rad)) * deg22dot5rad;
-                    bect.MeshAngle = roundRad;
-                }
-            }
-
-            return val;
-        }
-
-        public bool isAlchContainer = false;
         public Dictionary<string, float> dic = new Dictionary<string, float>();
         public string potionId;
         public int duration;
         public int tickSec = 0;
         public float health;
 
-        public override void OnLoaded(ICoreAPI api)
+        public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
-            base.OnLoaded(api);
+            ItemSlot hotbarSlot = byPlayer.InventoryManager.ActiveHotbarSlot;
 
-            if (Attributes?["alchemycontainer"].Exists == true)
+            if (!hotbarSlot.Empty && hotbarSlot.Itemstack.Collectible.Attributes?.IsTrue("handleLiquidContainerInteract") == true)
             {
-                try
+                EnumHandHandling handling = EnumHandHandling.NotHandled;
+                hotbarSlot.Itemstack.Collectible.OnHeldInteractStart(hotbarSlot, byPlayer.Entity, blockSel, null, true, ref handling);
+                if (handling == EnumHandHandling.PreventDefault || handling == EnumHandHandling.PreventDefaultAction) return true;
+            }
+
+            if (hotbarSlot.Empty || !(hotbarSlot.Itemstack.Collectible is ILiquidInterface)) return base.OnBlockInteractStart(world, byPlayer, blockSel);
+
+
+            CollectibleObject obj = hotbarSlot.Itemstack.Collectible;
+
+            bool singleTake = byPlayer.WorldData.EntityControls.Sneak;
+            bool singlePut = byPlayer.WorldData.EntityControls.Sprint;
+
+            if (obj is ILiquidSource objLso && !singleTake)
+            {
+                var contentStackToMove = objLso.GetContent(hotbarSlot.Itemstack);
+
+                float litres = singlePut ? objLso.TransferSizeLitres : objLso.CapacityLitres;
+                int moved = TryPutLiquid(blockSel.Position, contentStackToMove, litres);
+                
+                if (moved > 0)
                 {
-                    isAlchContainer = Attributes["alchemycontainer"].AsBool();
-                }
-                catch (Exception e)
-                {
-                    api.World.Logger.Error("Failed loading alchemy container {0}. Will ignore. Exception: {1}", Code, e);
-                    isAlchContainer = false;
+                    objLso.TryTakeContent(hotbarSlot.Itemstack, moved);
+                    DoLiquidMovedEffects(byPlayer, contentStackToMove, moved, EnumLiquidDirection.Pour);
+                    return true;
                 }
             }
+
+            if (obj is ILiquidSink objLsi && !singlePut)
+            {
+                ItemStack owncontentStack = GetContent(blockSel.Position);
+
+                if (owncontentStack == null) return base.OnBlockInteractStart(world, byPlayer, blockSel);
+
+                var liquidStackForParticles = owncontentStack.Clone();
+
+                float litres = singleTake ? objLsi.TransferSizeLitres : objLsi.CapacityLitres;
+                int moved;
+
+                if (hotbarSlot.Itemstack.StackSize == 1)
+                {
+                    moved = objLsi.TryPutLiquid(hotbarSlot.Itemstack, owncontentStack, litres);
+                } else
+                {
+                    ItemStack containerStack = hotbarSlot.Itemstack.Clone();
+                    containerStack.StackSize = 1;
+                    moved = objLsi.TryPutLiquid(containerStack, owncontentStack, litres);
+
+                    if (moved > 0)
+                    {
+                        hotbarSlot.TakeOut(1);
+                        if (!byPlayer.InventoryManager.TryGiveItemstack(containerStack, true))
+                        {
+                            api.World.SpawnItemEntity(containerStack, byPlayer.Entity.SidedPos.XYZ);
+                        }
+                    }
+                }
+
+                if (moved > 0)
+                {
+                    TryTakeContent(blockSel.Position, moved);
+                    DoLiquidMovedEffects(byPlayer, liquidStackForParticles, moved, EnumLiquidDirection.Fill);
+                    return true;
+                }
+            }
+
+            return base.OnBlockInteractStart(world, byPlayer, blockSel);
         }
 
         public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
@@ -81,103 +111,108 @@ namespace Alchemy
             ItemStack contentStack = GetContent(slot.Itemstack);
             if (contentStack != null)
             {
-
-
-                string strength = Variant["strength"] is string str ? string.Intern(str) : "none";
-                try
+                if (contentStack.MatchesSearchText(byEntity.World, "potion"))
                 {
-                    JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
-                    if (potion?.Exists == true)
+                    string strength = Variant["strength"] is string str ? string.Intern(str) : "none";
+                    try
                     {
-
-                        potionId = potion["potionId"].AsString();
-                        duration = potion["duration"].AsInt();
-                    }
-                }
-                catch (Exception e)
-                {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                    potionId = "";
-                    duration = 0;
-                }
-                try
-                {
-                    JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
-                    if (tickPotion?.Exists == true)
-                    {
-
-                        tickSec = tickPotion["ticksec"].AsInt();
-                        health = tickPotion["health"].AsFloat();
-                        switch (strength)
+                        JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+                        if (potion?.Exists == true)
                         {
-                            case "strong":
-                                health *= 3;
-                                break;
-                            case "medium":
-                                health *= 2;
-                                break;
-                            default:
-                                break;
-                        }
-                        //api.Logger.Debug("potion {0}, {1}, potionId, duration);
-                    }
-                }
-                catch (Exception e)
-                {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                    tickSec = 0;
-                    health = 0;
-                }
-                try
-                {
-                    JsonObject effects = contentStack.ItemAttributes?["effects"];
-                    if (effects?.Exists == true)
-                    {
 
-                        dic = effects.AsObject<Dictionary<string, float>>();
-                        switch (strength)
-                        {
-                            case "strong":
-                                foreach (var k in dic.Keys.ToList())
-                                {
-                                    dic[k] *= 3;
-                                }
-                                break;
-                            case "medium":
-                                foreach (var k in dic.Keys.ToList())
-                                {
-                                    dic[k] *= 2;
-                                }
-                                break;
-                            default:
-                                break;
+                            potionId = potion["potionId"].AsString();
+                            duration = potion["duration"].AsInt();
                         }
                     }
-                }
-                catch (Exception e)
-                {
-                    api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                    dic.Clear();
-                }
-
-                //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
-                if (potionId != "")
-                {
-                    //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
-                    /* This checks if the potion effect callback is on */
-                    if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
+                    catch (Exception e)
                     {
-                        byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
-                        handling = EnumHandHandling.PreventDefault;
-                        return;
+                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                        potionId = "";
+                        duration = 0;
+                    }
+                    try
+                    {
+                        JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
+                        if (tickPotion?.Exists == true)
+                        {
+
+                            tickSec = tickPotion["ticksec"].AsInt();
+                            health = tickPotion["health"].AsFloat();
+                            switch (strength)
+                            {
+                                case "strong":
+                                    health *= 3;
+                                    break;
+                                case "medium":
+                                    health *= 2;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            //api.Logger.Debug("potion {0}, {1}, potionId, duration);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                        tickSec = 0;
+                        health = 0;
+                    }
+                    try
+                    {
+                        JsonObject effects = contentStack.ItemAttributes?["effects"];
+                        if (effects?.Exists == true)
+                        {
+
+                            dic = effects.AsObject<Dictionary<string, float>>();
+                            switch (strength)
+                            {
+                                case "strong":
+                                    foreach (var k in dic.Keys.ToList())
+                                    {
+                                        dic[k] *= 3;
+                                    }
+                                    break;
+                                case "medium":
+                                    foreach (var k in dic.Keys.ToList())
+                                    {
+                                        dic[k] *= 2;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                        dic.Clear();
+                    }
+
+                    if (potionId != "" && potionId != null)
+                    {
+                        api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
+                        //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                        /* This checks if the potion effect callback is on */
+                        if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
+                        {
+                            api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                            byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
+                            handling = EnumHandHandling.PreventDefault;
+                            return;
+                        }
                     }
                 }
             }
             else
             {
-                return;
+                potionId = "";
+                duration = 0;
+                tickSec = 0;
+                health = 0;
+                dic.Clear();
             }
-            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
@@ -213,54 +248,61 @@ namespace Alchemy
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
         {
-            if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
+            ItemStack content = GetContent(slot.Itemstack);
+            if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && content != null)
             {
-                ItemStack content = GetContent(slot.Itemstack);
-                if (potionId == "recallpotionid")
+                if (content.MatchesSearchText(byEntity.World, "potion"))
                 {
-
-                }
-                else if (tickSec == 0)
-                {
-                    TempEffect potionEffect = new TempEffect();
-                    potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
-                }
-                else
-                {
-                    TempEffect potionEffect = new TempEffect();
-                    potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
-                }
-                if (byEntity is EntityPlayer)
-                {
-                    IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
                     if (potionId == "recallpotionid")
                     {
-                        FuzzyEntityPos spawn = player.GetSpawnPosition(false);
-                        byEntity.TeleportTo(spawn);
+
+                    }
+                    else if (tickSec == 0)
+                    {
+                        TempEffect potionEffect = new TempEffect();
+                        potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
                     }
                     else
                     {
-                        player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
+                        TempEffect potionEffect = new TempEffect();
+                        potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
                     }
+                    if (byEntity is EntityPlayer)
+                    {
+                        IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
+                        if (potionId == "recallpotionid")
+                        {
+                            FuzzyEntityPos spawn = player.GetSpawnPosition(false);
+                            byEntity.TeleportTo(spawn);
+                        }
+                        else
+                        {
+                            player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
+                        }
+                    }
+                    bool empty;
+                    if (content.StackSize <= 1)
+                    {
+                        content = null;
+                        SetContent(slot.Itemstack, content);
+                        empty = slot.Empty;
+                        potionId = "";
+                    }
+                    else
+                    {
+                        content.StackSize = content.StackSize - 1;
+                        SetContent(slot.Itemstack, content);
+                    }
+                    slot.MarkDirty();
+                    EntityPlayer entityPlayer = byEntity as EntityPlayer;
+                    if (entityPlayer == null)
+                    {
+                        return;
+                    }
+                    entityPlayer.Player.InventoryManager.BroadcastHotbarSlot();
                 }
-                bool empty;
-                if (content.StackSize <= 1) {
-                    content = null;
-                    SetContent(slot.Itemstack, content);
-                    empty = slot.Empty;
-                    potionId = "";
-                } else {
-                    content.StackSize = content.StackSize - 1;
-                    SetContent(slot.Itemstack, content);
-                }
-                slot.MarkDirty();
-                EntityPlayer entityPlayer = byEntity as EntityPlayer;
-                if (entityPlayer == null)
-                {
-                    return;
-                }
-                entityPlayer.Player.InventoryManager.BroadcastHotbarSlot();
             }
+            base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Vintagestory.API.Common;
+﻿using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 using HarmonyLib;
@@ -40,8 +39,9 @@ namespace Alchemy
 
             var harmony = new Harmony("llama3013.SinglePause");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
-            
+
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
+            api.RegisterBlockEntityClass("BlockEntityPotionFlask", typeof(BlockEntityPotionFlask));
             api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
             api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
             api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));

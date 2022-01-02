@@ -28,7 +28,7 @@
 		"*-glow": {
             potioninfo: {
 				potionId: "glowpotionid",
-				duration: 1000
+				duration: 10
 			},
         	handbook: {
             	groupBy: ["utilitypotion-{potiontype}"]

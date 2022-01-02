@@ -60,7 +60,10 @@
 	},
 	replaceable: 300,
 	resistance: 0.75,
-	maxStackSize: 64,
+	maxStackSizeByType: {
+		"*-raw": 64,
+		"*-burned": 1
+	},
 	sounds: {
 		"walk": "game:walk/ice",
 		"place": "game:player/buildhigh",
