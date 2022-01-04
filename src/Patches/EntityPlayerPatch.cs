@@ -4,7 +4,7 @@ using Vintagestory.API.Common;
 
 namespace Alchemy
 {
-
+    //This harmony patch allows the glow potion to work
     [HarmonyPatch(typeof(EntityPlayer), "LightHsv", MethodType.Getter)]
     public class EntityPlayerPatch
     {
