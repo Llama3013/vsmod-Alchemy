@@ -1,0 +1,18 @@
+{
+    code: "potionteaportion",
+    creativeinventory: { "general": ["*"], "items": ["*"] },
+    maxstacksize: 200,
+    matterState: "liquid",
+    attributes: {
+        waterTightContainerProps: {
+            containable: true,
+            itemsPerLitre: 4,
+            texture: { base: "alchemy:item/potion/rose_potion" },
+            allowSpill: true,
+            whenSpilled: { 
+                action: "DropContents",
+                stack: { type: "item", code: "potionteaportion" } 
+            }
+        },
+    }
+}

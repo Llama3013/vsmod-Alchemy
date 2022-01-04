@@ -1,6 +1,7 @@
 {
 	code: "potionflask",
-	classByType: {"*-burned" : "BlockPotionFlask"},
+	class: "BlockPotionFlask",
+	entityClass: "BlockEntityBottle",
 	behaviors: [
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
@@ -8,62 +9,35 @@
 	],
 	variantgroups: [
 		{ code:"flask", states: ["normal", "round", "tube"] },
-		{ code:"colour", states: ["quartz", "smoky", "pink", "green", "violet"] },
-		{ code:"type", states: ["raw", "burned"] }
+		{ code:"colour", states: ["quartz", "smoky", "pink", "green", "violet"] }
 	],
-	attributes: {
-		shelvable: true,
-		alchemycontainer: true
+	attributesByType: {
+		"potionflask-tube-*": {
+			shelvable: true,
+			capacityLitres: 0.25,
+		},
+		"potionflask-round-*": {
+			shelvable: true,
+			capacityLitres: 0.5,
+		},
+		"*": {
+			shelvable: true,
+			capacityLitres: 1,
+		},
 	},
 	blockmaterial: "Glass",
 	replaceable: 5000,
-	creativeinventory: { "general": ["*normal-quartz-*"], "decorative": ["*"] },
-	combustiblePropsByType: {
-		"*-round-*-raw": {
-			meltingPoint: 650,
-			meltingDuration: 45,
-			smeltedRatio: 1,
-			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-round-{colour}-burned" },
-			requiresContainer: false
-		},
-		"*-tube-*-raw": {
-			meltingPoint: 650,
-			meltingDuration: 45,
-			smeltedRatio: 1,
-			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-tube-{colour}-burned" },
-			requiresContainer: false
-		},
-		"*-raw": {
-			meltingPoint: 650,
-			meltingDuration: 45,
-			smeltedRatio: 1,
-			smeltingType: "bake",
-			smeltedStack: { type: "block", code: "potionflask-normal-{colour}-burned" },
-			requiresContainer: false
-		}
-	},
+	creativeinventory: { "general": ["*normal-quartz"], "decorative": ["*"] },
 	materialDensity: 200,
 	shapeByType: { 
 		"*-round-*": { base: "alchemy:block/glass/roundflask-liquid" },
 		"*-tube-*": { base: "alchemy:block/glass/tubeflask-liquid" },
 		"*": { base: "alchemy:block/glass/flask-liquid" }
 	},
-	texturesByType: {
-		"*-burned": { 
-			glass: { base: "game:block/glass/{colour}"}
-		},
-		"*-raw": { 
-			glass: { base: "game:block/glass/blue" }
-		},
-	},
+	textures: {	glass: { base: "game:block/glass/{colour}"} },
 	replaceable: 300,
 	resistance: 0.75,
-	maxStackSizeByType: {
-		"*-raw": 64,
-		"*-burned": 1
-	},
+	maxStackSize: 1,
 	sounds: {
 		"walk": "game:walk/ice",
 		"place": "game:player/buildhigh",
@@ -71,7 +45,7 @@
 		"hit": "game:block/glass"
 	},
 	lightAbsorption: 0,
-	drawtype: "json",
+	drawtype: "JSON",
 	sideopaque: { all: false },
 	sideao: { all: true },
 	emitsideao: { all: false},

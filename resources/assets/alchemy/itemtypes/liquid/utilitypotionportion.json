@@ -1,10 +1,10 @@
 {
 	enabled: true,
-	code: "utilitypotion",
+	code: "utilitypotionportion",
 	variantgroups: [
 		{ code: "potiontype", states: [ "recall", "glow" ] }
     ],
-	class: "ItemPotion",
+	class: "ItemPotionPortion",
 	matterState: "liquid",
 	attributesByType: {
         "*-recall": {
@@ -12,44 +12,51 @@
 				potionId: "recallpotionid",
 			},
         	handbook: {
-            	groupBy: ["utilitypotion-{potiontype}"]
+            	groupBy: ["utilitypotionportion-{potiontype}"]
         	},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "game:item/resource/temporalgear" },
 				tintIndex: 2,
 				whenSpilled: { 
 					action: "DropContents",
-					stack: { type: "item", code: "utilitypotion-recall" } 
+					stack: { type: "item", code: "utilitypotionportion-recall" } 
 				}
 			}
         },
 		"*-glow": {
             potioninfo: {
 				potionId: "glowpotionid",
-				duration: 10
+				duration: 1000
 			},
         	handbook: {
-            	groupBy: ["utilitypotion-{potiontype}"]
+            	groupBy: ["utilitypotionportion-{potiontype}"]
         	},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
-				texture: { base: "game:item/resource/temporalgear" },
+				itemsPerLitre: 4,
+				texture: { base: "game:block/fire-yellow" },
 				tintIndex: 2,
 				whenSpilled: { 
 					action: "DropContents",
-					stack: { type: "item", code: "utilitypotion-glow" } 
+					stack: { type: "item", code: "utilitypotionportion-glow" } 
 				}
 			}
         },
     },
     creativeinventory: { "general": ["*"], "decorative": ["*"] },
-	maxstacksize: 500,
+	maxstacksize: 200,
 	materialDensity: 200,
     shape: { base: "game:item/liquid" },
-	texture: { base: "game:item/resource/temporalgear" },
+	texturesByType: {
+		"*-recall": {
+			all: { base: "game:item/resource/temporalgear" }
+		},
+		"*-glow": {
+			all: { base: "game:block/fire-yellow" }
+		},
+	},
 	guiTransform: {
 		translation: { x: 0, y: 1, z: 0 },
 		rotation: { x: 123, y: -33, z: -13 },

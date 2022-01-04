@@ -1,0 +1,56 @@
+{
+	code: "claypotionflask",
+	class: "BlockPotionFlask",
+	entityClass: "BlockEntityBottle",
+	behaviors: [
+		{ name: "SneakPlacing"}, 
+		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
+		{ name: "RightClickPickup"} 
+	],
+	attributes: {
+		shelvable: true,
+		capacityLitres: 0.25,
+	},
+	blockmaterial: "Ceramic",
+	creativeinventory: { "general": ["*"], "decorative": ["*"] },
+	materialDensity: 200,
+	replaceable: 1000,
+	resistance: 0.45,
+	maxStackSize: 1,
+	sounds: {
+		"walk": "game:walk/stone",
+		"break": "block/ceramicbreak",
+		"hit": "block/ceramicbreak",
+		"place": "block/ceramicplace"
+	},
+	lightAbsorption: 0,
+	drawtype: "JSON",
+	sideopaque: {
+		all: false
+	},
+	sidesolid: {
+		all: false
+	},
+    shape: { base: "alchemy:block/glass/flask-liquid" },
+	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
+	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
+	guiTransform: {
+		translation: { x: 0, y: 3, z: 0 },
+		origin: { x: 0.5, y: 0.175, z: 0.5 },
+		scale: 2.75
+	},
+	groundTransform: {
+		scale: 2.5
+	},
+	fpHandTransform: {
+		translation: { x: 0, y: 0.4, z: 0 },
+		rotation: { x: 0, y: -14, z: 0 },
+		scale: 2
+	},
+	tpHandTransform: {
+		translation: { x: -0.9, y: -0.1, z: -0.8 },
+		rotation: { x: 0, y: -56, z: 0 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 0.66
+	},
+}

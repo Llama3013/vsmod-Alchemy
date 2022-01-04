@@ -9,14 +9,15 @@ using System.Linq;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Client;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Util;
 using System.Text;
 
 namespace Alchemy
 {
     public class BlockPotionFlask : BlockBucket
     {
-        public override float CapacityLitres => 0.5f;
-        protected override string meshRefsCacheKey => "flaskMeshRefs";
+        public override float CapacityLitres => Attributes?["capacityLitres"]?.AsFloat(1f) ?? 1f;
+        public override float TransferSizeLitres => 0.25f;
         protected override AssetLocation emptyShapeLoc => new AssetLocation("shapes/block/glass/flask-liquid.json");
         protected override AssetLocation contentShapeLoc => new AssetLocation("shapes/block/glass/flask-liquid.json");
 
@@ -25,6 +26,111 @@ namespace Alchemy
         public int duration;
         public int tickSec = 0;
         public float health;
+
+        public new MeshData GenMesh(ICoreClientAPI capi, ItemStack contentStack, BlockPos forBlockPos = null)
+        {
+            if (this == null || Code.Path.Contains("clay")) return null;
+            Shape shape = null;
+            MeshData bucketmesh = null;
+
+
+            if (contentStack != null)
+            {
+                WaterTightContainableProps props = GetContainableProps(contentStack);
+
+                BottleTextureSource contentSource = new BottleTextureSource(capi, contentStack, props.Texture, this);
+
+                float level = contentStack.StackSize / props.ItemsPerLitre;
+                if (this.CodeWithoutParts(2) == "potionflask-round")
+                {
+                    if (level > 0)
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid.json").ToObject<Shape>();
+                    }
+                    else
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/roundflask-liquid-empty.json").ToObject<Shape>();
+                    }
+                }
+                else if (this.CodeWithoutParts(2) == "potionflask-tube")
+                {
+                    if (level > 0)
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json").ToObject<Shape>();
+                    }
+                    else
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/tubeflask-liquid-empty.json").ToObject<Shape>();
+                    }
+                }
+                else
+                {
+                    if (level > 0)
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/flask-liquid.json").ToObject<Shape>();
+                    }
+                    else
+                    {
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/flask-liquid-empty.json").ToObject<Shape>();
+                    }
+                }
+
+                capi.Tesselator.TesselateShape("bucket", shape, out bucketmesh, contentSource, new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ));
+            }
+
+            return bucketmesh;
+        }
+
+        public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
+        {
+            if (Code.Path.Contains("clay")) return;
+            Dictionary<string, MeshRef> meshrefs = null;
+
+            object obj;
+            if (capi.ObjectCache.TryGetValue("potionFlaskMeshRefs", out obj))
+            {
+                meshrefs = obj as Dictionary<string, MeshRef>;
+            }
+            else
+            {
+                capi.ObjectCache["potionFlaskMeshRefs"] = meshrefs = new Dictionary<string, MeshRef>();
+            }
+
+            ItemStack contentStack = GetContent(itemstack);
+            if (contentStack == null) return;
+
+            MeshRef meshRef = null;
+
+            if (!meshrefs.TryGetValue(contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize, out meshRef))
+            {
+                MeshData meshdata = GenMesh(capi, contentStack);
+
+
+                meshrefs[contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize] = meshRef = capi.Render.UploadMesh(meshdata);
+
+            }
+
+            renderinfo.ModelRef = meshRef;
+        }
+
+        public override void OnUnloaded(ICoreAPI api)
+        {
+            ICoreClientAPI capi = api as ICoreClientAPI;
+            if (capi == null) return;
+
+            object obj;
+            if (capi.ObjectCache.TryGetValue("potionFlaskMeshRefs", out obj))
+            {
+                Dictionary<string, MeshRef> meshrefs = obj as Dictionary<string, MeshRef>;
+
+                foreach (var val in meshrefs)
+                {
+                    val.Value.Dispose();
+                }
+
+                capi.ObjectCache.Remove("potionFlaskMeshRefs");
+            }
+        }
 
         public override bool OnBlockInteractStart(IWorldAccessor world, IPlayer byPlayer, BlockSelection blockSel)
         {
@@ -51,7 +157,7 @@ namespace Alchemy
 
                 float litres = singlePut ? objLso.TransferSizeLitres : objLso.CapacityLitres;
                 int moved = TryPutLiquid(blockSel.Position, contentStackToMove, litres);
-                
+
                 if (moved > 0)
                 {
                     objLso.TryTakeContent(hotbarSlot.Itemstack, moved);
@@ -74,7 +180,8 @@ namespace Alchemy
                 if (hotbarSlot.Itemstack.StackSize == 1)
                 {
                     moved = objLsi.TryPutLiquid(hotbarSlot.Itemstack, owncontentStack, litres);
-                } else
+                }
+                else
                 {
                     ItemStack containerStack = hotbarSlot.Itemstack.Clone();
                     containerStack.StackSize = 1;
@@ -99,11 +206,6 @@ namespace Alchemy
             }
 
             return base.OnBlockInteractStart(world, byPlayer, blockSel);
-        }
-
-        public override void OnBeforeRender(ICoreClientAPI capi, ItemStack itemstack, EnumItemRenderTarget target, ref ItemRenderInfo renderinfo)
-        {
-            return;
         }
 
         public override void OnHeldInteractStart(ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, bool firstEvent, ref EnumHandHandling handling)
@@ -192,12 +294,12 @@ namespace Alchemy
 
                     if (potionId != "" && potionId != null)
                     {
-                        api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
+                        //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
                         //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
                         /* This checks if the potion effect callback is on */
                         if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                         {
-                            api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                            //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
                             byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
                             handling = EnumHandHandling.PreventDefault;
                             return;
@@ -304,5 +406,165 @@ namespace Alchemy
             }
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
+        public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
+        {
+            base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
+            ItemStack content = GetContent(inSlot.Itemstack);
+            if (content != null)
+            {
+                DummySlot dummy = new DummySlot(content);
+                if (dic != null)
+                {
+                    if (dic.ContainsKey("rangedWeaponsAcc"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", dic["rangedWeaponsAcc"] * 100));
+                    }
+                    if (dic.ContainsKey("animalLootDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", dic["animalLootDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("animalHarvestingTime"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", dic["animalHarvestingTime"] * 100));
+                    }
+                    if (dic.ContainsKey("animalSeekingRange"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", dic["animalSeekingRange"] * 100));
+                    }
+                    if (dic.ContainsKey("maxhealthExtraPoints"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", dic["maxhealthExtraPoints"]));
+                    }
+                    if (dic.ContainsKey("forageDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", dic["forageDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("healingeffectivness"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", dic["healingeffectivness"] * 100));
+                    }
+                    if (dic.ContainsKey("hungerrate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", dic["hungerrate"] * 100));
+                    }
+                    if (dic.ContainsKey("meleeWeaponsDamage"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", dic["meleeWeaponsDamage"] * 100));
+                    }
+                    if (dic.ContainsKey("mechanicalsDamage"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", dic["mechanicalsDamage"] * 100));
+                    }
+                    if (dic.ContainsKey("miningSpeedMul"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", dic["miningSpeedMul"] * 100));
+                    }
+                    if (dic.ContainsKey("oreDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", dic["oreDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("rangedWeaponsDamage"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", dic["rangedWeaponsDamage"] * 100));
+                    }
+                    if (dic.ContainsKey("rangedWeaponsSpeed"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", dic["rangedWeaponsSpeed"] * 100));
+                    }
+                    if (dic.ContainsKey("rustyGearDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", dic["rustyGearDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("walkspeed"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", dic["walkspeed"] * 100));
+                    }
+                    if (dic.ContainsKey("vesselContentsDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", dic["vesselContentsDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("wildCropDropRate"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", dic["wildCropDropRate"] * 100));
+                    }
+                    if (dic.ContainsKey("wholeVesselLootChance"))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", dic["wholeVesselLootChance"] * 100));
+                    }
+                }
+
+                if (duration != 0)
+                {
+                    dsc.AppendLine(Lang.Get("and lasts for {0} seconds", duration));
+                }
+                if (health != 0)
+                {
+                    dsc.AppendLine(Lang.Get("When potion is used: {0} health", health));
+                }
+                if (tickSec != 0)
+                {
+                    dsc.AppendLine(Lang.Get("every {0} seconds", tickSec));
+                }
+                content.Collectible.GetHeldItemInfo(dummy, dsc, world, withDebugInfo);
+            }
+        }
     }
+
+    public class BottleTextureSource : ITexPositionSource
+    {
+        public ItemStack forContents;
+        private ICoreClientAPI capi;
+
+        TextureAtlasPosition contentTextPos;
+        TextureAtlasPosition blockTextPos;
+        TextureAtlasPosition corkTextPos;
+        TextureAtlasPosition bracingTextPos;
+        CompositeTexture contentTexture;
+
+        public BottleTextureSource(ICoreClientAPI capi, ItemStack forContents, CompositeTexture contentTexture, Block bottle)
+        {
+            this.capi = capi;
+            this.forContents = forContents;
+            this.contentTexture = contentTexture;
+            this.corkTextPos = capi.BlockTextureAtlas.GetPosition(bottle, "topper");
+            this.blockTextPos = capi.BlockTextureAtlas.GetPosition(bottle, "glass");
+            this.bracingTextPos = capi.BlockTextureAtlas.GetPosition(bottle, "bracing");
+        }
+
+        public TextureAtlasPosition this[string textureCode]
+        {
+            get
+            {
+                if (textureCode == "topper" && corkTextPos != null) return corkTextPos;
+                if (textureCode == "glass" && blockTextPos != null) return blockTextPos;
+                if (textureCode == "bracing" && bracingTextPos != null) return bracingTextPos;
+                if (contentTextPos == null)
+                {
+                    int textureSubId;
+
+                    textureSubId = ObjectCacheUtil.GetOrCreate<int>(capi, "contenttexture-" + contentTexture.ToString(), () =>
+                    {
+                        TextureAtlasPosition texPos;
+                        int id = 0;
+
+                        BitmapRef bmp = capi.Assets.TryGet(contentTexture.Base.Clone().WithPathPrefixOnce("textures/").WithPathAppendixOnce(".png"))?.ToBitmap(capi);
+                        if (bmp != null)
+                        {
+                            capi.BlockTextureAtlas.InsertTexture(bmp, out id, out texPos);
+                            bmp.Dispose();
+                        }
+
+                        return id;
+                    });
+
+                    contentTextPos = capi.BlockTextureAtlas.Positions[textureSubId];
+                }
+
+                return contentTextPos;
+            }
+        }
+
+        public Size2i AtlasSize => capi.BlockTextureAtlas.Size;
+    }
+
 }

@@ -1,10 +1,10 @@
 {
-	code: "potion",
+	code: "potionportion",
 	variantgroups: [
 		{ code: "potiontype", states: ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"] },
 		{ code: "strength", states: ["weak", "medium", "strong"] },
     ],
-	class: "ItemPotion" ,
+	class: "ItemPotionPortion" ,
 	matterState: "liquid",
 	attributesByType: {
 		"*-all-*": {
@@ -35,7 +35,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "game:block/liquid/waterportion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -85,7 +85,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "game:block/liquid/waterportion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -115,7 +115,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/grey_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -142,7 +142,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/red_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -169,7 +169,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/orange_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -196,7 +196,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/yellow_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -226,7 +226,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "game:block/wood/oak" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -256,7 +256,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/indigo_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -283,7 +283,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/darkred_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -311,7 +311,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/brown_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -339,7 +339,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/purple_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -366,7 +366,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/rose_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -394,7 +394,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/green_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -421,7 +421,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/lavendar_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -448,7 +448,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/turquoise_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -475,7 +475,7 @@
 			},
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "alchemy:item/potion/black_potion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -495,7 +495,7 @@
         "*": {
 			waterTightContainerProps: {
 				containable: true,
-				itemsPerLitre: 10,
+				itemsPerLitre: 4,
 				texture: { base: "game:block/liquid/waterportion" },
 				tintIndex: 2,
 				allowSpill: true,
@@ -515,7 +515,7 @@
 		}
     },
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },
-	maxstacksize: 500,
+	maxstacksize: 200,
 	materialDensity: 200,
 	shape: { base: "game:item/liquid" },
 	texturesByType: {

@@ -5,7 +5,7 @@ using HarmonyLib;
 using System.Reflection;
 
 [assembly: ModInfo("AlchemyMod",
-    Version = "1.4.1",
+    Version = "1.5.0",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" },
@@ -41,8 +41,8 @@ namespace Alchemy
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
-            api.RegisterBlockEntityClass("BlockEntityPotionFlask", typeof(BlockEntityPotionFlask));
-            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
+            api.RegisterBlockEntityClass("BlockEntityBottle", typeof(BlockEntityBottle));
+            api.RegisterItemClass("ItemPotionPortion", typeof(ItemPotionPortion));
             api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
             api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));
         }

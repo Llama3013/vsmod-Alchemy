@@ -12,17 +12,26 @@ using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    public class BlockEntityPotionFlask : BlockEntityBucket
+    public class BlockEntityBottle : BlockEntityContainer
     {
-        
+        public override InventoryBase Inventory => inv;
+        InventoryGeneric inv;
+        public override string InventoryClassName => "potionflask";
+
+        public BlockEntityBottle()
+        {
+            inv = new InventoryGeneric(1, null, null);
+        }
+
+        BlockPotionFlask ownBlock;
         MeshData currentMesh;
-        BlockBucket ownBlock;
 
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
 
-            ownBlock = Block as BlockBucket;
+
+            ownBlock = Block as BlockPotionFlask;
             if (Api.Side == EnumAppSide.Client)
             {
                 currentMesh = GenMesh();
@@ -30,20 +39,55 @@ namespace Alchemy
             }
         }
 
-        internal MeshData GenMesh() {
-            if (this.ownBlock == null) return null;
-            
-            MeshData mesh = ownBlock.GenMesh(Api as ICoreClientAPI, GetContent(), Pos);
+        public ItemStack GetContent()
+        {
+            return inv[0].Itemstack;
+        }
 
-            if (mesh.CustomInts != null)
+
+        internal void SetContent(ItemStack stack)
+        {
+            inv[0].Itemstack = stack;
+            MarkDirty(true);
+        }
+
+        public override void OnBlockPlaced(ItemStack byItemStack = null)
+        {
+            base.OnBlockPlaced(byItemStack);
+
+            if (Api.Side == EnumAppSide.Client)
             {
-                for (int i = 0; i < mesh.CustomInts.Count; i++)
-                {
-                    mesh.CustomInts.Values[i] |= 1 << 27; // Disable water wavy
-                }
+                currentMesh = GenMesh();
+                MarkDirty(true);
             }
+        }
+
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
+        {
+            base.FromTreeAttributes(tree, worldForResolving);
+
+            if (Api?.Side == EnumAppSide.Client)
+            {
+                currentMesh = GenMesh();
+                MarkDirty(true);
+            }
+        }
+
+        
+
+        internal MeshData GenMesh()
+        {
+            MeshData mesh = ownBlock.GenMesh(Api as ICoreClientAPI, GetContent(), Pos);
 
             return mesh;
         }
+
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
+        {
+            if (currentMesh == null || ownBlock.Code.Path.Contains("clay")) return false;
+            mesher.AddMeshData(currentMesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, 0, 0));
+            return true;
+        }
+
     }
 }

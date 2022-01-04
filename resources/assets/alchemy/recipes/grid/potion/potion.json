@@ -8,7 +8,7 @@
 		shapeless: true,
 		width: 1,
 		height: 2,
-		output: { type: "item", code: "alchemy:potion-{potiontype}-weak" }
+		output: { type: "item", code: "alchemy:potionportion-{potiontype}-weak" }
 	},
 	{
 		ingredientPattern: "P,B",
@@ -19,7 +19,7 @@
 		shapeless: true,
 		width: 1,
 		height: 2,
-		output: { type: "item", code: "alchemy:potion-{potiontype}-medium" }
+		output: { type: "item", code: "alchemy:potionportion-{potiontype}-medium" }
 	},
 	{
 		ingredientPattern: "P,B",
@@ -30,6 +30,6 @@
 		shapeless: true,
 		width: 1,
 		height: 2,
-		output: { type: "item", code: "alchemy:potion-{potiontype}-strong" }
+		output: { type: "item", code: "alchemy:potionportion-{potiontype}-strong" }
 	}
 ]

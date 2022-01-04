@@ -3,7 +3,7 @@
     shape: { base: "alchemy:item/potionbase" },
 	creativeinventory: { "general": ["*"], "items": ["*"] },
 	variantgroups: [
-		{ code: "basetype", states: ["recall"] },
+		{ code: "basetype", states: ["recall", "glow"] },
     ],
 	attributes: {
 		handbook: {

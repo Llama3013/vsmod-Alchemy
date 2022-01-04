@@ -1,39 +1,40 @@
 [
 	{
-		ingredientPattern: "Q_Q,_Q_",
-		ingredients: {
-			"Q": { type: "item", code: "game:ore-quartz" }
-		},
-		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-quartz-raw", quantity: 1  }
-	},
-	{
-		ingredientPattern: "_Q_,Q_Q,_Q_",
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:ore-quartz" }
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-quartz-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-normal-quartz", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "_Q_,Q_Q,_Q_",
 		ingredients: {
 			"Q": { type: "item", code: "game:ore-quartz" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-quartz-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-round-quartz", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,_Q_",
+		ingredientPattern: "Q,Q",
+		ingredients: {
+			"Q": { type: "item", code: "game:ore-quartz" }
+		},
+		width: 1,
+		height: 2,
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-quartz", quantity: 1  }
+	},
+	{
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:rosequartz" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-pink-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-normal-pink", quantity: 1  }
 	},
 	{
 		ingredientPattern: "_Q_,Q_Q,_Q_",
@@ -42,52 +43,54 @@
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-pink-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-round-pink", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "Q,Q",
 		ingredients: {
 			"Q": { type: "item", code: "game:rosequartz" }
 		},
-		width: 3,
+		width: 1,
 		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-pink-raw", quantity: 1  }
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-pink", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,_Q_",
-		ingredients: {
-			"Q": { type: "item", code: "game:clearquartz" }
-		},
-		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-quartz-raw", quantity: 1  }
-	},
-	{
-		ingredientPattern: "_Q_,Q_Q,_Q_",
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:clearquartz" }
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-quartz-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-normal-quartz", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "_Q_,Q_Q,_Q_",
 		ingredients: {
 			"Q": { type: "item", code: "game:clearquartz" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-quartz-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-round-quartz", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,_Q_",
+		ingredientPattern: "Q,Q",
+		ingredients: {
+			"Q": { type: "item", code: "game:clearquartz" }
+		},
+		width: 1,
+		height: 2,
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-quartz", quantity: 1  }
+	},
+	{
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:ore-olivine" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-green-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-normal-green", quantity: 1  }
 	},
 	{
 		ingredientPattern: "_Q_,Q_Q,_Q_",
@@ -96,25 +99,26 @@
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-green-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-round-green", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "Q,Q",
 		ingredients: {
 			"Q": { type: "item", code: "game:ore-olivine" }
 		},
-		width: 3,
+		width: 1,
 		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-green-raw", quantity: 1  }
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-green", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,_Q_",
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:amethyst" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-violet-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-normal-violet", quantity: 1  }
 	},
 	{
 		ingredientPattern: "_Q_,Q_Q,_Q_",
@@ -123,25 +127,26 @@
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-violet-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-round-violet", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "Q,Q",
 		ingredients: {
 			"Q": { type: "item", code: "game:amethyst" }
 		},
-		width: 3,
+		width: 1,
 		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-violet-raw", quantity: 1  }
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-violet", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,_Q_",
+		ingredientPattern: "Q_Q,Q_Q,QQQ",
 		ingredients: {
 			"Q": { type: "item", code: "game:smokyquartz" }
 		},
 		width: 3,
-		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-normal-smoky-raw", quantity: 1  }
+		height: 3,
+		output: { type: "block", code: "alchemy:potionflask-normal-smoky", quantity: 1  }
 	},
 	{
 		ingredientPattern: "_Q_,Q_Q,_Q_",
@@ -150,15 +155,16 @@
 		},
 		width: 3,
 		height: 3,
-		output: { type: "block", code: "alchemy:potionflask-round-smoky-raw", quantity: 1  }
+		output: { type: "block", code: "alchemy:potionflask-round-smoky", quantity: 1  }
 	},
 	{
-		ingredientPattern: "Q_Q,Q_Q",
+		ingredientPattern: "Q,Q",
 		ingredients: {
 			"Q": { type: "item", code: "game:smokyquartz" }
 		},
-		width: 3,
+		width: 1,
 		height: 2,
-		output: { type: "block", code: "alchemy:potionflask-tube-smoky-raw", quantity: 1  }
+		shapeless: true,
+		output: { type: "block", code: "alchemy:potionflask-tube-smoky", quantity: 1  }
 	},
 ]
