@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-heather-dried"},
-			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-poison-medium"  }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-heather-cooked"},
 			"F": { type: "item", code: "alchemy:cuttings-forgetmenot-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true },

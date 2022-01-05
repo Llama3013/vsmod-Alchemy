@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "M,F,T",
 		ingredients: {
-			"M": { type: "item", code: "alchemy:cuttings-forgetmenot-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-horsetail-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-scentmask-medium" }
-	},
-	{
-		ingredientPattern: "M,F,T",
-		ingredients: {
 			"M": { type: "item", code: "alchemy:cuttings-forgetmenot-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-horsetail-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -50,18 +38,6 @@
 	{
 		ingredientPattern: "M,F,T",
 		ingredients: {
-			"M": { type: "item", code: "alchemy:cuttings-saffron-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-horsetail-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-scentmask-medium" }
-	},
-	{
-		ingredientPattern: "M,F,T",
-		ingredients: {
 			"M": { type: "item", code: "alchemy:cuttings-saffron-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-horsetail-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -82,18 +58,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-scentmask-weak" }
-	},
-	{
-		ingredientPattern: "M,F,T",
-		ingredients: {
-			"M": { type: "item", code: "alchemy:cuttings-forgetmenot-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-saffron-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-scentmask-medium" }
 	},
 	{
 		ingredientPattern: "M,F,T",

@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-westerngorse-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-heather-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-westerngorse-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-heather-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -50,18 +38,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-sage-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-heather-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-sage-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-heather-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -82,18 +58,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-speed-weak" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-westerngorse-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-sage-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-speed-medium" }
 	},
 	{
 		ingredientPattern: "H,F,T",

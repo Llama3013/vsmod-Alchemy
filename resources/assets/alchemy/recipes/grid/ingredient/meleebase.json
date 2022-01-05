@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-lupine-white-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-cowparsley-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-melee-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-lupine-white-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-cowparsley-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -50,18 +38,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-cilantro-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-cowparsley-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-melee-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-cilantro-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-cowparsley-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -82,18 +58,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-melee-weak" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-lupine-white-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-cilantro-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-melee-medium" }
 	},
 	{
 		ingredientPattern: "H,F,T",

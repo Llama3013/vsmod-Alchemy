@@ -2,17 +2,10 @@
 	{
 		code:"alchemy:utilitypotionportion-recall",
 		ingredients: [
-			{ type: "item", code: "alchemy:utilitypotionbase-recall" },
+			{ type: "item", code: "alchemy:utilitypotionbase-*", name: "potiontype", allowedVariants: [ "recall", "glow"] },
 			{ type: "item", code: "alchemy:potionteaportion",  litres: 1 },
 		],
-		output: { type: "item", code: "alchemy:utilitypotionportion-recall", litres: 1 }
-    },
-	{
-		code:"alchemy:utilitypotionportion-glow",
-		ingredients: [
-			{ type: "item", code: "alchemy:utilitypotionbase-glow" },
-			{ type: "item", code: "alchemy:potionteaportion",  litres: 1 },
-		],
-		output: { type: "item", code: "alchemy:utilitypotionportion-glow", litres: 1 }
+		sealHours: 24,
+		output: { type: "item", code: "alchemy:utilitypotionportion-{potiontype}", litres: 1 }
     },
 ]

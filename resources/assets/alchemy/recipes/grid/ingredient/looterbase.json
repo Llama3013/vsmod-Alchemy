@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-woad-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-lupine-blue-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-looter-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-woad-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-lupine-blue-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -50,18 +38,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-chamomile-dried" },
-            "F": { type: "item", code: "alchemy:cuttings-lupine-blue-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-looter-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-chamomile-cooked" },
             "F": { type: "item", code: "alchemy:cuttings-lupine-blue-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -82,18 +58,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-looter-weak" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-chamomile-dried" },
-            "F": { type: "item", code: "alchemy:cuttings-woad-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-looter-medium" }
 	},
 	{
 		ingredientPattern: "H,F,T",

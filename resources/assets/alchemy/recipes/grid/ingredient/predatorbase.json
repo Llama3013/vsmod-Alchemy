@@ -15,18 +15,6 @@
 		ingredientPattern: "M,F,T",
 		ingredients: {
 			"M": { type: "item", code: "game:*meat-*" },
-			"F": { type: "item", code: "alchemy:cuttings-horsetail-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-predator-medium" }
-	},
-	{
-		ingredientPattern: "M,F,T",
-		ingredients: {
-			"M": { type: "item", code: "game:*meat-*" },
 			"F": { type: "item", code: "alchemy:cuttings-horsetail-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
 		},
@@ -46,18 +34,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-predator-weak" }
-	},
-	{
-		ingredientPattern: "M,F,T",
-		ingredients: {
-			"M": { type: "item", code: "game:*meat-*" },
-			"F": { type: "item", code: "alchemy:cuttings-cornflower-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-predator-medium" }
 	},
 	{
 		ingredientPattern: "M,F,T",

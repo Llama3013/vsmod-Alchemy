@@ -4,7 +4,7 @@
 	variantgroups: [
 		{ code: "potiontype", states: [ "recall", "glow" ] }
     ],
-	class: "ItemPotionPortion",
+	class: "ItemPotion",
 	matterState: "liquid",
 	attributesByType: {
         "*-recall": {
@@ -12,13 +12,14 @@
 				potionId: "recallpotionid",
 			},
         	handbook: {
+				ignoreCreativeInvStacks: true,
             	groupBy: ["utilitypotionportion-{potiontype}"]
         	},
 			waterTightContainerProps: {
 				containable: true,
 				itemsPerLitre: 4,
 				texture: { base: "game:item/resource/temporalgear" },
-				tintIndex: 2,
+				allowSpill: true,
 				whenSpilled: { 
 					action: "DropContents",
 					stack: { type: "item", code: "utilitypotionportion-recall" } 
@@ -31,13 +32,14 @@
 				duration: 1000
 			},
         	handbook: {
+				ignoreCreativeInvStacks: true,
             	groupBy: ["utilitypotionportion-{potiontype}"]
         	},
 			waterTightContainerProps: {
 				containable: true,
 				itemsPerLitre: 4,
 				texture: { base: "game:block/fire-yellow" },
-				tintIndex: 2,
+				allowSpill: true,
 				whenSpilled: { 
 					action: "DropContents",
 					stack: { type: "item", code: "utilitypotionportion-glow" } 
@@ -45,7 +47,12 @@
 			}
         },
     },
-    creativeinventory: { "general": ["*"], "decorative": ["*"] },
+    creativeinventoryStacks: [ { tabs: ["general", "liquids"],
+		stacks: [
+			{ type: "block", code: "alchemy:potionflask-normal-quartz", attributes: { ucontents: [ { type:"item", code: "alchemy:utilitypotionportion-{potiontype}", makefull: true } ] } },
+			{ type: "block", code: "game:woodbucket", attributes: { ucontents: [ { type:"item", code: "alchemy:utilitypotionportion-{potiontype}", makefull: true },
+		]
+	} } ] } ],
 	maxstacksize: 200,
 	materialDensity: 200,
     shape: { base: "game:item/liquid" },

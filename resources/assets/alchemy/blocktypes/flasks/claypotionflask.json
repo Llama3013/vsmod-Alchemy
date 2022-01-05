@@ -1,22 +1,48 @@
 {
 	code: "claypotionflask",
-	class: "BlockPotionFlask",
-	entityClass: "BlockEntityBottle",
+	classByType: {
+		"*-fired": "BlockPotionFlask"
+	},
+	entityClass: "BlockEntityPotionFlask",
 	behaviors: [
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
 		{ name: "RightClickPickup"} 
 	],
-	attributes: {
-		shelvable: true,
-		capacityLitres: 0.25,
+	variantgroups: [
+		{ code:"type", states: ["raw", "fired"] },
+	],
+	attributesByType: {
+		"*-raw": {
+			shelvable: true
+		},
+		"*-fired": {
+			shelvable: true,
+			liquidContainerProps: {
+				capacityLitres: 0.25,
+				transferSizeLitres: 0.25
+			}
+		}
+	},
+	combustiblePropsByType: {
+		"claypotionflask-raw": {
+			meltingPoint: 650,
+			meltingDuration: 45,
+			smeltedRatio: 1,
+			smeltingType: "fire",
+			smeltedStack: { type: "block", code: "alchemy:claypotionflask-fired" },
+			requiresContainer: false
+		}
 	},
 	blockmaterial: "Ceramic",
 	creativeinventory: { "general": ["*"], "decorative": ["*"] },
 	materialDensity: 200,
 	replaceable: 1000,
 	resistance: 0.45,
-	maxStackSize: 1,
+	maxStackSizeByType: {
+		"*-raw": 64,
+		"*-fired": 1
+	},
 	sounds: {
 		"walk": "game:walk/stone",
 		"break": "block/ceramicbreak",
@@ -31,7 +57,15 @@
 	sidesolid: {
 		all: false
 	},
-    shape: { base: "alchemy:block/glass/flask-liquid" },
+	texturesByType: {
+		"*-raw": { 
+			glass: { base: "game:block/clay/blueclay" }
+		},
+		"*-fired": {
+			glass: { base: "game:block/clay/ceramic" }
+		}
+	},
+    shape: { base: "alchemy:block/glass/flask-empty" },
 	collisionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	selectionbox: { x1: 0.375, y1: 0, z1: 0.375, x2: 0.625, y2: 0.275, z2: 0.625 },
 	guiTransform: {

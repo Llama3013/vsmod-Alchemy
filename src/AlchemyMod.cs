@@ -37,12 +37,12 @@ namespace Alchemy
 
             config = ModConfig.Load(api);
 
-            var harmony = new Harmony("llama3013.SinglePause");
-            harmony.PatchAll(Assembly.GetExecutingAssembly());
+            //var harmony = new Harmony("llama3013.SinglePause");
+            //harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
-            api.RegisterBlockEntityClass("BlockEntityBottle", typeof(BlockEntityBottle));
-            api.RegisterItemClass("ItemPotionPortion", typeof(ItemPotionPortion));
+            api.RegisterBlockEntityClass("BlockEntityPotionFlask", typeof(BlockEntityPotionFlask));
+            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
             api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
             api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));
         }

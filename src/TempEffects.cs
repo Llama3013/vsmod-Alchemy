@@ -70,6 +70,9 @@ namespace Alchemy
         /// </summary>
         public void setTempStats()
         {
+            if (effectedList.ContainsKey("maxhealthExtraPoints")) {
+                effectedList["maxhealthExtraPoints"] = (15f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints")) * effectedList["maxhealthExtraPoints"];
+            }
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
@@ -145,7 +148,6 @@ namespace Alchemy
         {
             foreach (var stats in entity.Stats)
             {
-
                 entity.Stats.Remove(stats.Key, effectCode);
             }
             EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();

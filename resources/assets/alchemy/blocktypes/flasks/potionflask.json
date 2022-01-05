@@ -1,7 +1,7 @@
 {
 	code: "potionflask",
 	class: "BlockPotionFlask",
-	entityClass: "BlockEntityBottle",
+	entityClass: "BlockEntityPotionFlask",
 	behaviors: [
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
@@ -14,20 +14,36 @@
 	attributesByType: {
 		"potionflask-tube-*": {
 			shelvable: true,
-			capacityLitres: 0.25,
+			liquidContainerProps: {
+				capacityLitres: 0.25,
+				transferSizeLitres: 0.25,
+				emptyShapeLoc: "shapes/block/glass/tubeflask-empty.json",
+				liquidContentShapeLoc: "shapes/block/glass/tubeflask-liquid.json"
+			}
 		},
 		"potionflask-round-*": {
 			shelvable: true,
-			capacityLitres: 0.5,
+			liquidContainerProps: {
+				capacityLitres: 0.5,
+				transferSizeLitres: 0.25,
+				emptyShapeLoc: "shapes/block/glass/roundflask-empty.json",
+				liquidContentShapeLoc: "shapes/block/glass/roundflask-liquid.json"
+
+			}
 		},
 		"*": {
 			shelvable: true,
-			capacityLitres: 1,
+			liquidContainerProps: {
+				capacityLitres: 1,
+				transferSizeLitres: 0.25,
+				emptyShapeLoc: "shapes/block/glass/flask-empty.json",
+				liquidContentShapeLoc: "shapes/block/glass/flask-liquid.json"
+			}
 		},
 	},
 	blockmaterial: "Glass",
 	replaceable: 5000,
-	creativeinventory: { "general": ["*normal-quartz"], "decorative": ["*"] },
+	creativeinventory: { "general": ["*-quartz"], "decorative": ["*"] },
 	materialDensity: 200,
 	shapeByType: { 
 		"*-round-*": { base: "alchemy:block/glass/roundflask-liquid" },

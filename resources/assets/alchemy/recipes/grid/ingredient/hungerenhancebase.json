@@ -14,18 +14,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-lupine-purple-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-westerngorse-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-hungerenhance-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-lupine-purple-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-westerngorse-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -50,18 +38,6 @@
 	{
 		ingredientPattern: "H,F,T",
 		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-mint-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-westerngorse-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-hungerenhance-medium" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
 			"H": { type: "item", code: "alchemy:cuttings-mint-cooked" },
 			"F": { type: "item", code: "alchemy:cuttings-westerngorse-cooked" },
 			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -82,18 +58,6 @@
 		width: 1,
 		height: 3,
 		output: { type: "item", code: "alchemy:potionbase-hungerenhance-weak" }
-	},
-	{
-		ingredientPattern: "H,F,T",
-		ingredients: {
-			"H": { type: "item", code: "alchemy:cuttings-mint-dried" },
-			"F": { type: "item", code: "alchemy:cuttings-lupine-purple-dried" },
-			"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
-		},
-		shapeless: true,
-		width: 1,
-		height: 3,
-		output: { type: "item", code: "alchemy:potionbase-hungerenhance-medium" }
 	},
 	{
 		ingredientPattern: "H,F,T",
