@@ -37,7 +37,7 @@ namespace Alchemy
 
             config = ModConfig.Load(api);
 
-            var harmony = new Harmony("llama3013.SinglePause");
+            var harmony = new Harmony("llama3013.Alchemy");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));

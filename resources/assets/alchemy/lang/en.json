@@ -158,22 +158,22 @@
 	"block-claypotionflask-fired": "Ceramic Potion Flask (Fired)",
 	"block-tray-raw": "Tray (Raw)",
 	"block-tray-burned": "Tray (Burned)",
-	"item-herbball-all": "Potion Herb Ball (All)",
-	"item-herbball-alltick": "Potion Herb Ball (Alltick)",
-	"item-herbball-archer": "Potion Herb Ball (Archer)",
-	"item-herbball-healingeffect": "Potion Herb Ball (Healingeffect)",
-	"item-herbball-hungerenhance": "Potion Herb Ball (Hungerenhance)",
-	"item-herbball-hungersupress": "Potion Herb Ball (Hungersupress)",
-	"item-herbball-hunter": "Potion Herb Ball (Hunter)",
-	"item-herbball-looter": "Potion Herb Ball (Looter)",
-	"item-herbball-melee": "Potion Herb Ball (Melee)",
-	"item-herbball-mining": "Potion Herb Ball (Mining)",
-	"item-herbball-poison": "Potion Herb Ball (Poison)",
-	"item-herbball-predator": "Potion Herb Ball (Predator)",
-	"item-herbball-regen": "Potion Herb Ball (Regen)",
-	"item-herbball-scentmask": "Potion Herb Ball (Scentmask)",
-	"item-herbball-speed": "Potion Herb Ball (Speed)",
-	"item-herbball-vitality": "Potion Herb Ball (Vitality)",
+	"item-herbball-all": "Edible Potion Herbs (All)",
+	"item-herbball-alltick": "Edible Potion Herbs (Alltick)",
+	"item-herbball-archer": "Edible Potion Herbs (Archer)",
+	"item-herbball-healingeffect": "Edible Potion Herbs (Healingeffect)",
+	"item-herbball-hungerenhance": "Edible Potion Herbs (Hungerenhance)",
+	"item-herbball-hungersupress": "Edible Potion Herbs (Hungersupress)",
+	"item-herbball-hunter": "Edible Potion Herbs (Hunter)",
+	"item-herbball-looter": "Edible Potion Herbs (Looter)",
+	"item-herbball-melee": "Edible Potion Herbs (Melee)",
+	"item-herbball-mining": "Edible Potion Herbs (Mining)",
+	"item-herbball-poison": "Edible Potion Herbs (Poison)",
+	"item-herbball-predator": "Edible Potion Herbs (Predator)",
+	"item-herbball-regen": "Edible Potion Herbs (Regen)",
+	"item-herbball-scentmask": "Edible Potion Herbs (Scentmask)",
+	"item-herbball-speed": "Edible Potion Herbs (Speed)",
+	"item-herbball-vitality": "Edible Potion Herbs (Vitality)",
 
   "item-potionportion-all-weak": "Debug potion (weak)",
   "item-potionportion-alltick-weak": "Debug gametick potion (weak)",
@@ -333,6 +333,8 @@
 
   "alchemyguide-title": "Alchemy - Guide to potion making",
   "alchemyguide-text": "<strong>How to make potions</strong>
+
+  <i>Outdated</i>
 
   To make potions you will need a couple of things. First you will need potion flasks, second you will need a mortar & pestle and lastly you will need flowers/herbs (herbs are only accessible when you have wild farming mod installed).
 
