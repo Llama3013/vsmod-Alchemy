@@ -25,11 +25,7 @@
 		"_#_",
 		"___",
 	],
-	[
-		"___",
-		"_#_",
-		"___",
-	]],
+	],
 	name: "claypotionflask",
 	output: { type: "block", code: "alchemy:claypotionflask-raw" }
 }
