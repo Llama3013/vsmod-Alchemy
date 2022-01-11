@@ -45,9 +45,9 @@
 	},
 	sounds: {
 		"walk": "game:walk/stone",
-		"break": "block/ceramicbreak",
-		"hit": "block/ceramicbreak",
-		"place": "block/ceramicplace"
+		"break": "game:block/ceramicbreak",
+		"hit": "game:block/ceramicbreak",
+		"place": "game:block/ceramicplace"
 	},
 	lightAbsorption: 0,
 	drawtype: "JSON",

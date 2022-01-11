@@ -325,10 +325,10 @@
   "block-potionflask-normal-*": "Large potion flask",
   "blockdesc-potionflask-normal-*": "Used to hold potions",
 
-  "block-potionflask-round-*": "Quartz potion flask",
+  "block-potionflask-round-*": "Medium potion flask",
   "blockdesc-potionflask-round-*": "Used to hold potions",
 
-  "block-potionflask-tube-*": "Quartz potion flask",
+  "block-potionflask-tube-*": "Small potion flask",
   "blockdesc-potionflask-tube-*": "Used to hold potions",
 
   "alchemyguide-title": "Alchemy - Guide to potion making",
