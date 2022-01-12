@@ -18,7 +18,8 @@
 				capacityLitres: 0.25,
 				transferSizeLitres: 0.25,
 				emptyShapeLoc: "shapes/block/glass/tubeflask-empty.json",
-				liquidContentShapeLoc: "shapes/block/glass/tubeflask-liquid.json"
+				opaqueContentShapeLoc: "shapes/block/glass/tubeflask-content.json",
+				liquidContentShapeLoc: "shapes/block/glass/tubeflask-liquidcontents.json"
 			}
 		},
 		"potionflask-round-*": {
@@ -27,8 +28,8 @@
 				capacityLitres: 0.5,
 				transferSizeLitres: 0.25,
 				emptyShapeLoc: "shapes/block/glass/roundflask-empty.json",
-				liquidContentShapeLoc: "shapes/block/glass/roundflask-liquid.json"
-
+				opaqueContentShapeLoc: "shapes/block/glass/roundflask-content.json",
+				liquidContentShapeLoc: "shapes/block/glass/roundflask-liquidcontents.json"
 			}
 		},
 		"*": {
@@ -37,7 +38,8 @@
 				capacityLitres: 1,
 				transferSizeLitres: 0.25,
 				emptyShapeLoc: "shapes/block/glass/flask-empty.json",
-				liquidContentShapeLoc: "shapes/block/glass/flask-liquid.json"
+				opaqueContentShapeLoc: "shapes/block/glass/flask-content.json",
+				liquidContentShapeLoc: "shapes/block/glass/flask-liquidcontents.json"
 			}
 		},
 	},

@@ -21,15 +21,18 @@ namespace Alchemy
         public override float TransferSizeLitres => Props.TransferSizeLitres;
         public override float CapacityLitres => Props.CapacityLitres;
 
-        protected override string meshRefsCacheKey => "potionFlaskMeshRefs";
+        protected override string meshRefsCacheKey => Code.ToShortString() + "meshRefs";
         protected override AssetLocation emptyShapeLoc => Props.EmptyShapeLoc;
         protected override AssetLocation contentShapeLoc => Props.LiquidContentShapeLoc;
+        protected override AssetLocation liquidContentShapeLoc => Props.LiquidContentShapeLoc;
+        protected override float liquidMaxYTranslate => Props.LiquidMaxYTranslate;
+        protected override float liquidYTranslatePerLitre => liquidMaxYTranslate / CapacityLitres;
 
         public Dictionary<string, float> dic = new Dictionary<string, float>();
-        public string potionId;
-        public int duration;
+        public string potionId = "";
+        public int duration = 0;
         public int tickSec = 0;
-        public float health;
+        public float health = 0;
 
         public override void OnLoaded(ICoreAPI api)
         {
@@ -75,7 +78,7 @@ namespace Alchemy
                     }
                     else if (level > 0.75)
                     {
-                        shape = capi.Assets.TryGet(contentShapeLoc).ToObject<Shape>();
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/flask-liquid.json").ToObject<Shape>();
                     }
                 }
                 else if (Code.Path.Contains("flask-round"))
@@ -90,7 +93,7 @@ namespace Alchemy
                     }
                     else if (level > 0.5)
                     {
-                        shape = capi.Assets.TryGet(contentShapeLoc).ToObject<Shape>();
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid.json").ToObject<Shape>();
                     }
                 }
                 else
@@ -101,7 +104,7 @@ namespace Alchemy
                     }
                     else if (level > 0)
                     {
-                        shape = capi.Assets.TryGet(contentShapeLoc).ToObject<Shape>();
+                        shape = capi.Assets.TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json").ToObject<Shape>();
                     }
                 }
 
@@ -117,13 +120,13 @@ namespace Alchemy
             Dictionary<string, MeshRef> meshrefs = null;
 
             object obj;
-            if (capi.ObjectCache.TryGetValue("potionFlaskMeshRefs", out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
                 meshrefs = obj as Dictionary<string, MeshRef>;
             }
             else
             {
-                capi.ObjectCache["potionFlaskMeshRefs"] = meshrefs = new Dictionary<string, MeshRef>();
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<string, MeshRef>();
             }
 
             ItemStack contentStack = GetContent(itemstack);
@@ -149,7 +152,7 @@ namespace Alchemy
             if (capi == null) return;
 
             object obj;
-            if (capi.ObjectCache.TryGetValue("potionFlaskMeshRefs", out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
                 Dictionary<string, MeshRef> meshrefs = obj as Dictionary<string, MeshRef>;
 
@@ -158,7 +161,7 @@ namespace Alchemy
                     val.Value.Dispose();
                 }
 
-                capi.ObjectCache.Remove("potionFlaskMeshRefs");
+                capi.ObjectCache.Remove(meshRefsCacheKey);
             }
         }
 
