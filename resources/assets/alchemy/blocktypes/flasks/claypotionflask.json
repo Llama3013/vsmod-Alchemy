@@ -17,7 +17,7 @@
 			shelvable: true
 		},
 		"*-fired": {
-			shelvable: true,
+			shelvable: false,
 			liquidContainerProps: {
 				capacityLitres: 0.25,
 				transferSizeLitres: 0.25
