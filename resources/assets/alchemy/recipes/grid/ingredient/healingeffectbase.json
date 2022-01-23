@@ -26,6 +26,18 @@
 	{
     	ingredientPattern: "H,F,T",
 		ingredients: {
+        	"H": { type: "item", code: "wildcraft:herbs-basil" },
+        	"F": { type: "block", code: "game:flower-catmint-*" },
+        	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-healingeffect-weak" }
+	},
+	{
+    	ingredientPattern: "H,F,T",
+		ingredients: {
         	"H": { type: "item", code: "game:herbbundle-basil" },
         	"F": { type: "block", code: "game:flower-catmint-*" },
         	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
@@ -48,6 +60,18 @@
 		output: { type: "item", code: "alchemy:potionbase-healingeffect-strong" }
     },
     {
+    	ingredientPattern: "H,F,T",
+		ingredients: {
+        	"H": { type: "block", code: "game:flower-lupine-orange-*" },
+        	"F": { type: "item", code: "wildcraft:herbs-basil" },
+        	"T": { type: "item", code: "alchemy:mortarpestle-*", isTool: true }
+		},
+		shapeless: true,
+		width: 1,
+		height: 3,
+		output: { type: "item", code: "alchemy:potionbase-healingeffect-weak" }
+	},
+	{
     	ingredientPattern: "H,F,T",
 		ingredients: {
         	"H": { type: "block", code: "game:flower-lupine-orange-*" },
