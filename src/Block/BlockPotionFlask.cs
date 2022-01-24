@@ -339,7 +339,6 @@ namespace Alchemy
                     }
                     return;
                 }
-                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             }
             else
             {
@@ -349,6 +348,7 @@ namespace Alchemy
                 health = 0;
                 dic.Clear();
             }
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
