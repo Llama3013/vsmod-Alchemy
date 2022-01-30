@@ -24,21 +24,20 @@
   maxstacksize: 64,
   transitionablePropsByType: {
 	  "*-raw": [
-        {
-          type: "Dry",
-          freshHours: { avg: 0 },
-          transitionHours: { avg: 168 },
-          transitionedStack: { type: "item", code: "alchemy:cuttings-{flower}-dried" },
-          transitionRatio: 1
-        },
-        {
-          type: "Perish",
-          freshHours: { avg: 672 },
-          transitionHours: { avg: 120 },
-          transitionedStack: { type: "item", code: "game:rot" },
-          transitionRatio: 1
-        },
-      ],
+      {
+        type: "Perish",
+        freshHours: { avg: 480 },
+        transitionHours: { avg: 86 },
+        transitionedStack: { type: "item", code: "game:rot" },
+        transitionRatio: 1
+      },
+      {
+        type: "Dry",
+        freshHours: { avg:  6 },
+        transitionHours: { avg: 86 },
+        transitionedStack: { type: "item", code: "alchemy:cuttings-{flower}-dried" },
+        transitionRatio: 1
+      }],
   },
   combustiblePropsByType: {
     "*-dried": {

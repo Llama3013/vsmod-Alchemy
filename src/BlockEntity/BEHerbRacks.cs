@@ -34,7 +34,7 @@ namespace Alchemy
 
         protected override float Inventory_OnAcquireTransitionSpeed(EnumTransitionType transType, ItemStack stack, float baseMul)
         {
-            if (Api == null) return 0;
+            if (Api == null) return 1;
 
             if (transType == EnumTransitionType.Dry)
             {
@@ -55,7 +55,7 @@ namespace Alchemy
                 return baseMul * perishRate;
             }
 
-            return 1;
+            return base.Inventory_OnAcquireTransitionSpeed(transType, stack, baseMul);
 
         }
 
