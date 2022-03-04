@@ -5,7 +5,7 @@ using HarmonyLib;
 using System.Reflection;
 
 [assembly: ModInfo("AlchemyMod",
-    Version = "1.5.8",
+    Version = "1.6.0",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" },

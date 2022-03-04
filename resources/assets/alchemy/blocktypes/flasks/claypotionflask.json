@@ -45,7 +45,7 @@
 	lightAbsorption: 1,
 	maxStackSizeByType: {
 		"*-raw": 64,
-		"*-fired": 1
+		"*-fired": 16
 	},
 	sidesolid: {
 		all: false

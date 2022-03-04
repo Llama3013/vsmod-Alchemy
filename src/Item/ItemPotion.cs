@@ -217,6 +217,7 @@ namespace Alchemy
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             if (dic != null)
             {
+                dsc.AppendLine(Lang.Get("\n"));
                 if (dic.ContainsKey("rangedWeaponsAcc"))
                 {
                     dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", dic["rangedWeaponsAcc"] * 100));

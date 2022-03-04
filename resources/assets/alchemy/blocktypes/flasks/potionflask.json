@@ -55,7 +55,7 @@
 	textures: {	glass: { base: "game:block/glass/{colour}"} },
 	replaceable: 300,
 	resistance: 0.75,
-	maxStackSize: 1,
+	maxStackSize: 16,
 	sounds: {
 		"walk": "game:walk/ice",
 		"place": "game:player/buildhigh",

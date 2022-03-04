@@ -54,6 +54,7 @@ namespace Alchemy
             if (contentStack != null)
             {
                 WaterTightContainableProps props = GetContainableProps(contentStack);
+                if (props == null) return null;
 
                 FlaskTextureSource contentSource = new FlaskTextureSource(capi, contentStack, props.Texture, this);
 
@@ -137,6 +138,7 @@ namespace Alchemy
             if (!meshrefs.TryGetValue(contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize, out meshRef))
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
+                if (meshdata == null) return;
 
 
                 meshrefs[contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize] = meshRef = capi.Render.UploadMesh(meshdata);
@@ -405,30 +407,25 @@ namespace Alchemy
                     }
                     if (byEntity is EntityPlayer)
                     {
-                        IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
+                        IServerPlayer sPlayer = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
                         if (potionId == "recallpotionid")
                         {
-                            FuzzyEntityPos spawn = player.GetSpawnPosition(false);
-                            byEntity.TeleportTo(spawn);
+                            if (api.Side.IsServer())
+                            {
+                                FuzzyEntityPos spawn = sPlayer.GetSpawnPosition(false);
+                                byEntity.TeleportTo(spawn);
+                            }
+                            sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                         }
                         else
                         {
-                            player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
+                            sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                         }
                     }
-                    bool empty;
-                    if (content.StackSize <= 1)
-                    {
-                        content = null;
-                        SetContent(slot.Itemstack, content);
-                        empty = slot.Empty;
-                        potionId = "";
-                    }
-                    else
-                    {
-                        content.StackSize = content.StackSize - 1;
-                        SetContent(slot.Itemstack, content);
-                    }
+                    IPlayer player = null;
+                    if (byEntity is EntityPlayer) player = byEntity.World.PlayerByUid(((EntityPlayer)byEntity).PlayerUID);
+
+                    splitStackAndPerformAction(byEntity, slot, (stack) => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0);
                     slot.MarkDirty();
                     EntityPlayer entityPlayer = byEntity as EntityPlayer;
                     if (entityPlayer == null)
@@ -440,106 +437,68 @@ namespace Alchemy
             }
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
+
+        private int splitStackAndPerformAction(Entity byEntity, ItemSlot slot, System.Func<ItemStack, int> action)
+        {
+            if (slot.Itemstack.StackSize == 1)
+            {
+                int moved = action(slot.Itemstack);
+
+                if (moved > 0)
+                {
+                    int maxstacksize = slot.Itemstack.Collectible.MaxStackSize;
+
+                    (byEntity as EntityPlayer)?.WalkInventory((pslot) =>
+                    {
+                        if (pslot.Empty || pslot is ItemSlotCreative || pslot.StackSize == pslot.Itemstack.Collectible.MaxStackSize) return true;
+                        int mergableq = slot.Itemstack.Collectible.GetMergableQuantity(slot.Itemstack, pslot.Itemstack, EnumMergePriority.DirectMerge);
+                        if (mergableq == 0) return true;
+
+                        var selfLiqBlock = slot.Itemstack.Collectible as BlockLiquidContainerBase;
+                        var invLiqBlock = pslot.Itemstack.Collectible as BlockLiquidContainerBase;
+
+                        if ((selfLiqBlock?.GetContent(slot.Itemstack)?.StackSize ?? 0) != (invLiqBlock?.GetContent(pslot.Itemstack)?.StackSize ?? 0)) return true;
+
+                        slot.Itemstack.StackSize += mergableq;
+                        pslot.TakeOut(mergableq);
+
+                        slot.MarkDirty();
+                        pslot.MarkDirty();
+                        return true;
+                    });
+                }
+
+                return moved;
+            }
+            else
+            {
+                ItemStack containerStack = slot.Itemstack.Clone();
+                containerStack.StackSize = 1;
+
+                int moved = action(containerStack);
+
+                if (moved > 0)
+                {
+                    slot.TakeOut(1);
+                    if ((byEntity as EntityPlayer)?.Player.InventoryManager.TryGiveItemstack(containerStack, true) != true)
+                    {
+                        api.World.SpawnItemEntity(containerStack, byEntity.SidedPos.XYZ);
+                    }
+
+                    slot.MarkDirty();
+                }
+
+                return moved;
+            }
+        }
+
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             ItemStack content = GetContent(inSlot.Itemstack);
             if (content != null)
             {
-                DummySlot dummy = new DummySlot(content);
-                if (dic != null)
-                {
-                    if (dic.ContainsKey("rangedWeaponsAcc"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", dic["rangedWeaponsAcc"] * 100));
-                    }
-                    if (dic.ContainsKey("animalLootDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", dic["animalLootDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("animalHarvestingTime"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", dic["animalHarvestingTime"] * 100));
-                    }
-                    if (dic.ContainsKey("animalSeekingRange"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", dic["animalSeekingRange"] * 100));
-                    }
-                    if (dic.ContainsKey("maxhealthExtraPoints"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", dic["maxhealthExtraPoints"]));
-                    }
-                    if (dic.ContainsKey("forageDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", dic["forageDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("healingeffectivness"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", dic["healingeffectivness"] * 100));
-                    }
-                    if (dic.ContainsKey("hungerrate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", dic["hungerrate"] * 100));
-                    }
-                    if (dic.ContainsKey("meleeWeaponsDamage"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", dic["meleeWeaponsDamage"] * 100));
-                    }
-                    if (dic.ContainsKey("mechanicalsDamage"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", dic["mechanicalsDamage"] * 100));
-                    }
-                    if (dic.ContainsKey("miningSpeedMul"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", dic["miningSpeedMul"] * 100));
-                    }
-                    if (dic.ContainsKey("oreDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", dic["oreDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("rangedWeaponsDamage"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", dic["rangedWeaponsDamage"] * 100));
-                    }
-                    if (dic.ContainsKey("rangedWeaponsSpeed"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", dic["rangedWeaponsSpeed"] * 100));
-                    }
-                    if (dic.ContainsKey("rustyGearDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", dic["rustyGearDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("walkspeed"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", dic["walkspeed"] * 100));
-                    }
-                    if (dic.ContainsKey("vesselContentsDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", dic["vesselContentsDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("wildCropDropRate"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", dic["wildCropDropRate"] * 100));
-                    }
-                    if (dic.ContainsKey("wholeVesselLootChance"))
-                    {
-                        dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", dic["wholeVesselLootChance"] * 100));
-                    }
-                }
-
-                if (duration != 0)
-                {
-                    dsc.Append(Lang.Get(" and lasts for {0} seconds", duration));
-                }
-                if (health != 0)
-                {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0} health", health));
-                }
-                if (tickSec != 0)
-                {
-                    dsc.Append(Lang.Get(" every {0} seconds", tickSec));
-                }
-                content.Collectible.GetHeldItemInfo(dummy, dsc, world, withDebugInfo);
+                content.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             }
         }
     }
