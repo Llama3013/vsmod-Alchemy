@@ -3,9 +3,9 @@
 	class: "BlockHerbRacks",
     entityClass: "HerbRacks",
     variantgroups: [
-		{ code: "wood", states: ["acacia", "birch", "kapok", "maple", "oak", "pine", "aged"] },
-		{ code: "hook", states: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] },
-		{ code: "top", states: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] },
+		{ code: "wood", states: ["aged"], loadFromProperties: "block/wood" },
+		{ code: "hook", loadFromProperties: "block/metal" },
+		{ code: "top", loadFromProperties: "block/metal" },
 	],
 	shape: { base: "alchemy:block/drying_rack" },
 	textures: {

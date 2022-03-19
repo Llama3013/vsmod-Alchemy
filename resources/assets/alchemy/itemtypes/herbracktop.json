@@ -2,7 +2,7 @@
     code: "herbracktop",
     shape: { base: "alchemy:item/herbracktop" },
     variantgroups: [
-        { code: "metal", states: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] },
+        { code: "metal", loadFromProperties: "block/metal" },
     ],
     textures: {
 		"top": { base: "game:block/metal/sheet/{metal}1" }

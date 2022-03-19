@@ -71,7 +71,9 @@ namespace Alchemy
         public void setTempStats()
         {
             if (effectedList.ContainsKey("maxhealthExtraPoints")) {
-                effectedList["maxhealthExtraPoints"] = (15f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints")) * effectedList["maxhealthExtraPoints"];
+                effectedEntity.World.Api.Logger.Debug("blendedhealth {0}", effectedEntity.Stats.GetBlended("maxhealthExtraPoints"));
+                effectedEntity.World.Api.Logger.Debug("maxhealthExtraPoints {0}", effectedList["maxhealthExtraPoints"]);
+                effectedList["maxhealthExtraPoints"] = (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints")) * effectedList["maxhealthExtraPoints"];
             }
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
@@ -82,6 +84,9 @@ namespace Alchemy
                 EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
+            effectCode = "";
+            effectedList.Clear();
+            
         }
 
         /// <summary>

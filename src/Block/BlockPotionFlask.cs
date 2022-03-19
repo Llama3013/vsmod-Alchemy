@@ -250,7 +250,7 @@ namespace Alchemy
             {
                 if (contentStack.MatchesSearchText(byEntity.World, "potion"))
                 {
-                    string strength = Variant["strength"] is string str ? string.Intern(str) : "none";
+                    string strength = contentStack.Item.Variant["strength"] is string str ? string.Intern(str) : "none";
                     try
                     {
                         JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
@@ -288,6 +288,11 @@ namespace Alchemy
                             }
                             //api.Logger.Debug("potion {0}, {1}, potionId, duration);
                         }
+                        else
+                        {
+                            tickSec = 0;
+                            health = 0;
+                        }
                     }
                     catch (Exception e)
                     {
@@ -319,6 +324,10 @@ namespace Alchemy
                                 default:
                                     break;
                             }
+                        }
+                        else
+                        {
+                            dic.Clear();
                         }
                     }
                     catch (Exception e)
@@ -421,6 +430,11 @@ namespace Alchemy
                         {
                             sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                         }
+                        potionId = "";
+                        duration = 0;
+                        tickSec = 0;
+                        health = 0;
+                        dic.Clear();
                     }
                     IPlayer player = null;
                     if (byEntity is EntityPlayer) player = byEntity.World.PlayerByUid(((EntityPlayer)byEntity).PlayerUID);
@@ -430,11 +444,21 @@ namespace Alchemy
                     EntityPlayer entityPlayer = byEntity as EntityPlayer;
                     if (entityPlayer == null)
                     {
+                        potionId = "";
+                        duration = 0;
+                        tickSec = 0;
+                        health = 0;
+                        dic.Clear();
                         return;
                     }
                     entityPlayer.Player.InventoryManager.BroadcastHotbarSlot();
                 }
             }
+            potionId = "";
+            duration = 0;
+            tickSec = 0;
+            health = 0;
+            dic.Clear();
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
 

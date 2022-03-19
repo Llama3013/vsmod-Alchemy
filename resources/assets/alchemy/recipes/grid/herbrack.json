@@ -1,11 +1,255 @@
-{
-	ingredientPattern: "PHP,HRH,PHP",
-	ingredients: {
-        "P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged"] },
-        "H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"], quantity: 2 },
-        "R": { type: "item", code: "alchemy:herbracktop-*", name: "top", allowedVariants: ["copper", "brass", "tinbronze", "bismuthbronze", "blackbronze", "silver", "gold", "iron", "lead", "tin", "zinc", "bismuth", "chromium", "platinum", "titanium", "molybdochalkos", "meteoriciron", "steel"] }
+[
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-bismuth" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-bismuth", quantity: 1  }
 	},
-	width: 3,
-	height: 3,
-	output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-{top}", quantity: 1  }
-}
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-bismuthbronze" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-bismuthbronze", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-blackbronze" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-blackbronze", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-brass" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-brass", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-chromium" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-chromium", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-copper" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-copper", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-gold" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-gold", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-iron" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-iron", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-meteoriciron" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-meteoriciron", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-lead" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-lead", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-molybdochalkos" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-molybdochalkos", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-platinum" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-platinum", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-chromium" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-chromium", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-platinum" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-platinum", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-silver" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-silver", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-rhodium" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-rhodium", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-stainlesssteel" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-stainlesssteel", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-steel" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-steel", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-tin" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-tin", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-tinbronze" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-tinbronze", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-titanium" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-titanium", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-uranium" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-uranium", quantity: 1  }
+	},
+	{
+		ingredientPattern: "PHP,HRH,PHP",
+		ingredients: {
+        	"P": { type: "item", code: "game:plank-*", name: "wood", allowedVariants: ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"] },
+        	"H": { type: "item", code: "alchemy:herbrackhook-*", name: "hook", allowedVariants: ["bismuth", "bismuthbronze", "blackbronze", "brass", "chromium", "copper", "gold", "iron", "meteoriciron", "lead", "molybdochalkos", "platinum", "chromium", "platinum", "silver", "rhodium", "stainlesssteel", "steel", "tin", "tinbronze", "titanium", "uranium", "zinc"], quantity: 2 },
+        	"R": { type: "item", code: "alchemy:herbracktop-zinc" }
+		},
+		width: 3,
+		height: 3,
+		output: { type: "block", code: "alchemy:herbrack-{wood}-{hook}-zinc", quantity: 1 }
+	}
+]
