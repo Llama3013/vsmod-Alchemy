@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-thyme" },
+      "F": { "type": "block", "code": "game:flower-edelweiss-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-red-*" },
+      "F": { "type": "item", "code": "wildcraft:herbs-thyme" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-thyme-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-edelweiss-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-red-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-thyme-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-strong" }
+  }
+]

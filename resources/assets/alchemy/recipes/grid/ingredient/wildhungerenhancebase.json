@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-mint" },
+      "F": { "type": "block", "code": "game:flower-westerngorse-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-mint" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-mint-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-westerngorse-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-mint-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  }
+]

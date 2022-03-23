@@ -84,9 +84,6 @@ namespace Alchemy
                 EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
-            effectCode = "";
-            effectedList.Clear();
-            
         }
 
         /// <summary>
@@ -126,6 +123,7 @@ namespace Alchemy
 
         public void reset()
         {
+            
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Remove(stat.Key, effectCode);

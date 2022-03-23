@@ -214,8 +214,6 @@
 
   "block-claypotionflask-raw": "Ceramic Potion Flask (Raw)",
 	"block-claypotionflask-fired": "Ceramic Potion Flask (Fired)",
-	"block-tray-raw": "Tray (Raw)",
-	"block-tray-burned": "Tray (Burned)",
 	"item-herbball-all": "Edible Potion Herbs (All)",
 	"item-herbball-alltick": "Edible Potion Herbs (Alltick)",
 	"item-herbball-archer": "Edible Potion Herbs (Archer)",

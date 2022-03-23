@@ -442,7 +442,7 @@
 		"*-vitality-*": {
 			potioninfo: {
 				potionId: "vitalitypotionid",
-				duration: 300,
+				duration: 10,
 			},
 			effects: {
 				maxhealthExtraPoints: 0.25

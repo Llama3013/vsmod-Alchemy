@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-basil" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "item", "code": "wildcraft:herbs-basil" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-basil-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-basil-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  }
+]

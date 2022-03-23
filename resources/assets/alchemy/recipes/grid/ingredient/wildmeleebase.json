@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-cilantro" },
+      "F": { "type": "block", "code": "game:flower-cowparsley-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-white-*" },
+      "F": { "type": "item", "code": "wildcraft:herbs-cilantro" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cilantro-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cowparsley-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-white-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cilantro-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-strong" }
+  }
+]

@@ -430,17 +430,13 @@ namespace Alchemy
                         {
                             sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                         }
-                        potionId = "";
-                        duration = 0;
-                        tickSec = 0;
-                        health = 0;
-                        dic.Clear();
                     }
                     IPlayer player = null;
                     if (byEntity is EntityPlayer) player = byEntity.World.PlayerByUid(((EntityPlayer)byEntity).PlayerUID);
 
                     splitStackAndPerformAction(byEntity, slot, (stack) => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0);
                     slot.MarkDirty();
+
                     EntityPlayer entityPlayer = byEntity as EntityPlayer;
                     if (entityPlayer == null)
                     {
@@ -454,11 +450,6 @@ namespace Alchemy
                     entityPlayer.Player.InventoryManager.BroadcastHotbarSlot();
                 }
             }
-            potionId = "";
-            duration = 0;
-            tickSec = 0;
-            health = 0;
-            dic.Clear();
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
 
@@ -472,16 +463,47 @@ namespace Alchemy
                 {
                     int maxstacksize = slot.Itemstack.Collectible.MaxStackSize;
 
+                    EntityPlayer entityPlayer = byEntity as EntityPlayer;
+                    if (entityPlayer == null)
+                    {
+                        return moved;
+                    }
                     (byEntity as EntityPlayer)?.WalkInventory((pslot) =>
                     {
                         if (pslot.Empty || pslot is ItemSlotCreative || pslot.StackSize == pslot.Itemstack.Collectible.MaxStackSize) return true;
                         int mergableq = slot.Itemstack.Collectible.GetMergableQuantity(slot.Itemstack, pslot.Itemstack, EnumMergePriority.DirectMerge);
                         if (mergableq == 0) return true;
 
-                        var selfLiqBlock = slot.Itemstack.Collectible as BlockLiquidContainerBase;
-                        var invLiqBlock = pslot.Itemstack.Collectible as BlockLiquidContainerBase;
+                        BlockLiquidContainerBase selfLiqBlock = slot.Itemstack.Collectible as BlockLiquidContainerBase;
+                        BlockLiquidContainerBase invLiqBlock = pslot.Itemstack.Collectible as BlockLiquidContainerBase;
 
-                        if ((selfLiqBlock?.GetContent(slot.Itemstack)?.StackSize ?? 0) != (invLiqBlock?.GetContent(pslot.Itemstack)?.StackSize ?? 0)) return true;
+                        int? num3;
+                        if (selfLiqBlock == null)
+                        {
+                            num3 = null;
+                        }
+                        else
+                        {
+                            ItemStack content = selfLiqBlock.GetContent(slot.Itemstack);
+                            num3 = ((content != null) ? new int?(content.StackSize) : null);
+                        }
+                        int? num4 = num3;
+                        int valueOrDefault = num4.GetValueOrDefault();
+                        int? num5;
+                        if (invLiqBlock == null)
+                        {
+                            num5 = null;
+                        }
+                        else
+                        {
+                            ItemStack content2 = invLiqBlock.GetContent(pslot.Itemstack);
+                            num5 = ((content2 != null) ? new int?(content2.StackSize) : null);
+                        }
+                        num4 = num5;
+                        if (valueOrDefault != num4.GetValueOrDefault())
+                        {
+                            return true;
+                        }
 
                         slot.Itemstack.StackSize += mergableq;
                         pslot.TakeOut(mergableq);

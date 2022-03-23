@@ -3,6 +3,8 @@
 	class: "BlockPotionFlask",
 	entityClass: "BlockEntityPotionFlask",
 	behaviors: [
+		{ name: "GroundStorable", properties: { layout: 'Quadrants', placeRemoveSound: 'sounds/player/build',	collisionBox: { x1: 0, y1: 0, z1: 0, x2: 1, y2: 0.4375, z2: 1 } } },
+		{ name: "Unplaceable", "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility" },
 		{ name: "SneakPlacing"}, 
 		{ name: "UnstableFalling", properties: { attachmentArea: { x1: 5, y1: 0, z1: 5, x2: 10, y2: 0, z2: 10 } }}, 
 		{ name: "RightClickPickup"} 
@@ -52,6 +54,7 @@
 		"*-tube-*": { base: "alchemy:block/glass/tubeflask-liquid" },
 		"*": { base: "alchemy:block/glass/flask-liquid" }
 	},
+	doNotRenderAtLod2: true,
 	textures: {	glass: { base: "game:block/glass/{colour}"} },
 	replaceable: 300,
 	resistance: 0.75,
