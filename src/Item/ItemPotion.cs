@@ -10,6 +10,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
+using Vintagestory.GameContent;
 
 namespace Alchemy
 {
@@ -25,6 +26,24 @@ namespace Alchemy
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
             return "eat";
+        }
+
+        public override void OnGroundIdle(EntityItem entityItem)
+        {
+            entityItem.Die(EnumDespawnReason.Removed);
+
+            if (entityItem.World.Side == EnumAppSide.Server)
+            {
+                WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(entityItem.Itemstack);
+                float litres = (float)entityItem.Itemstack.StackSize / props.ItemsPerLitre;
+
+                entityItem.World.SpawnCubeParticles(entityItem.SidedPos.XYZ, entityItem.Itemstack, 0.75f, (int)(litres * 2), 0.45f);
+                entityItem.World.PlaySoundAt(new AssetLocation("sounds/environment/smallsplash"), (float)entityItem.SidedPos.X, (float)entityItem.SidedPos.Y, (float)entityItem.SidedPos.Z, null);
+            }
+
+
+            base.OnGroundIdle(entityItem);
+
         }
 
         public override void OnLoaded(ICoreAPI api)
@@ -128,9 +147,12 @@ namespace Alchemy
                     {
                         if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
                         {
-                            if (Code.Path.Contains("portion")) {
+                            if (Code.Path.Contains("portion"))
+                            {
                                 byEntity.World.PlaySoundAt(new AssetLocation("alchemy:sounds/player/drink"), byEntity);
-                            } else {
+                            }
+                            else
+                            {
                                 byEntity.PlayEntitySound("eat", (byEntity as EntityPlayer)?.Player);
                             }
                         }
