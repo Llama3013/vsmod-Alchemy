@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes",
+    "value": {
+      "potionessences": {
+        "forageDropRate": 0.1
+      }
+    },
+    "file": "game:itemtypes/food/bambooshoot.json"
+  }
+]

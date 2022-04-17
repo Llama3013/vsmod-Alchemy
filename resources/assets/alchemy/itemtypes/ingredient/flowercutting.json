@@ -1,0 +1,212 @@
+{
+  code: "cuttings",
+  variantgroups: [
+      { code: "flower", states: [ "catmint", "forgetmenot", "edelweiss", "heather", "horsetail", "orangemallow", "wilddaisy", "westerngorse", "cowparsley", "californiapoppy", "lilyofthevalley", "lupine-blue",  "lupine-orange", "lupine-purple", "lupine-red", "lupine-white", "basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme", "woad", "cornflower"] },
+      { code: "stage", states: [ "raw", "dried", "cooked" ]},
+  ],
+  attributes: {
+    herbrackable: true,
+    herbRackTransform: {
+      translation: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+      origin: { x: 0, y: 0, z: 0 },
+      scale: 1
+    },
+    meathookable: true,
+    meatHookTransform: {
+      translation: { x: -0.02, y: -0.52, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+      origin: { x: 0.5, y: 0, z: 0.5 },
+      scale: 1
+    },
+  },
+  attributesByType: {
+    "*-catmint-*": {
+      potionessences: {
+        hungerrate: 0.2,
+        walkspeed: 0.2,
+        miningSpeedMul: 0.2
+      }
+    },
+    "*-forgetmenot-*": {
+      potionessences: {
+        meleeWeaponsDamage: 0.3,
+        mechanicalsDamage: 0.3,
+        walkspeed: -0.2,
+      }
+    },
+    "*-edelweiss-*": {
+      potionessences: {
+        rangedWeaponsAcc: 0.2,
+        rangedWeaponsSpeed: -0.3,
+        rangedWeaponsDamage: 0.5,
+      }
+    },
+    "*-heather-*": {
+      potionessences: {
+        meleeWeaponsDamage: 0.3,
+        mechanicalsDamage: -0.2,
+      }
+    },
+    "*-horsetail-*": {
+      potionessences: {
+        forageDropRate: 0.1,
+      }
+    },
+    "*-orangemallow-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-wilddaisy-*": {
+      potionessences: {
+        hungerrate: -0.1,
+      }
+    },
+    "*-westerngorse-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-cowparsley-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-californiapoppy-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lilyofthevalley-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lupine-blue-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lupine-orange-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lupine-purple-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lupine-red-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lupine-white-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-basil-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-chamomile-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-cilantro-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-lavender-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-marjoram-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-mint-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-saffron-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-sage-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-thyme-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-woad-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+    "*-cornflower-*": {
+      potionessences: {
+        hungerrate: 0.1,
+      }
+    },
+  },
+  creativeinventory: { "general": ["*"], "items": ["*"] },
+  maxstacksize: 64,
+  transitionablePropsByType: {
+	  "*-raw": [
+      {
+        type: "Perish",
+        freshHours: { avg: 480 },
+        transitionHours: { avg: 86 },
+        transitionedStack: { type: "item", code: "game:rot" },
+        transitionRatio: 1
+      },
+      {
+        type: "Dry",
+        freshHours: { avg:  6 },
+        transitionHours: { avg: 86 },
+        transitionedStack: { type: "item", code: "alchemy:cuttings-{flower}-dried" },
+        transitionRatio: 1
+      },
+    ],
+  },
+  combustiblePropsByType: {
+    "*-dried": {
+      meltingPoint: 100,
+      meltingDuration: 30,
+      smeltedRatio: 1,
+      smeltingType: "convert",
+      smeltedStack: { type: "item", code: "alchemy:cuttings-{flower}-cooked" },
+      requiresContainer: false
+    },
+  },
+  shapeByType: {
+    "*-wilddaisy-*": { base: "alchemy:item/cut_white_herb_bundle"},
+    "*-lupine-*": { base: "alchemy:item/cut_stacked_herb_bundle"},
+    "*": { base: "alchemy:item/cut_blue_herb_bundle" }
+  },
+  guiTransform: {
+		translation: { x: 3, y: 0, z: 0 },
+		origin: { x: 0.5, y: 0.175, z: 0.5 },
+		scale: 3
+  },
+  fpHandTransform: {
+		translation: { x: 0, y: 0.24, z: 0.3 },
+		origin: { x: 0.5, y: 0.1, z: 0.5 },
+		scale: 2
+	}
+}

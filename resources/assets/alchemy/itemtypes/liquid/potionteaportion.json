@@ -5,6 +5,10 @@
     maxstacksize: 200,
     matterState: "liquid",
     attributes: {
+        potionbase: true,
+        potionessences: {
+            duration: 5,
+        },
         waterTightContainerProps: {
             containable: true,
             itemsPerLitre: 4,

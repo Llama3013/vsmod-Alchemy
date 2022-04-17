@@ -1,0 +1,11 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "duration": 30,
+      "hungerrate": -0.1
+    },
+    "file": "game:itemtypes/liquid/brineportion.json"
+  }
+]

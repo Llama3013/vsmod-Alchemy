@@ -29,8 +29,7 @@ namespace Alchemy
             IServerPlayer player = GetIServerPlayer();
 
             TempEffect tempEffect = new TempEffect();
-            tempEffect.resetAllTempStats((player.Entity as EntityPlayer), "potionmod");
-            tempEffect.resetAllListeners((player.Entity as EntityPlayer), "potionid", "tickpotionid");
+            tempEffect.reset((player.Entity as EntityPlayer));
 
             base.OnEntityDeath(damageSourceForDeath);
         }

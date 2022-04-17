@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-temporal",
+    "value": {
+      "potionessences": {
+        "recall": 1
+      }
+    },
+    "file": "game:itemtypes/resource/gear.json"
+  }
+]

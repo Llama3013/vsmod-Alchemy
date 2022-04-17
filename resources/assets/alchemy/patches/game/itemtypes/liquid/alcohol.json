@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "duration": 1000
+    },
+    "file": "game:itemtypes/liquid/alcohol.json"
+  }
+]

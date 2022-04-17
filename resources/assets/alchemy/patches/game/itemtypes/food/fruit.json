@@ -1,0 +1,63 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "fruit-blueberry": {
+        "hungerrate": 0.1,
+      },
+      "fruit-cranberry": {
+        "hungerrate": 0.1,
+      },
+      "fruit-redcurrant": {
+        "hungerrate": 0.1,
+      },
+      "fruit-whitecurrant": {
+        "hungerrate": 0.1,
+      },
+      "fruit-blackcurrant": {
+        "hungerrate": 0.1,
+      },
+      "fruit-saguaro": {
+        "hungerrate": 0.1,
+      },
+      "fruit-pineapple": {
+        "hungerrate": 0.1,
+      },
+      "fruit-redapple": {
+        "hungerrate": 0.1,
+      },
+      "fruit-pinkapple": {
+        "hungerrate": 0.1,
+      },
+      "fruit-yellowapple": {
+        "hungerrate": 0.1,
+      },
+      "fruit-cherry": {
+        "hungerrate": 0.1,
+      },
+      "fruit-peach": {
+        "hungerrate": 0.1,
+      },
+      "fruit-pear": {
+        "hungerrate": 0.1,
+      },
+      "fruit-orange": {
+        "hungerrate": 0.1,
+      },
+      "fruit-mango": {
+        "hungerrate": 0.1,
+      },
+      "fruit-breadfruit": {
+        "hungerrate": 0.1,
+      },
+      "fruit-lychee": {
+        "hungerrate": 0.1,
+      },
+      "fruit-pomegranate": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:itemtypes/food/fruit.json"
+  }
+]

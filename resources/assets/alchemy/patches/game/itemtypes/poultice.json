@@ -1,0 +1,34 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-reed-honey-sulfur/potionessences",
+    "value": {
+      "maxhealthExtraPoints": 0.2
+    },
+    "file": "game:itemtypes/poultice.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-reed-horsetail/potionessences",
+    "value": {
+      "maxhealthExtraPoints": 0.1
+    },
+    "file": "game:itemtypes/poultice.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-linen-honey-sulfur/potionessences",
+    "value": {
+      "maxhealthExtraPoints": 0.3
+    },
+    "file": "game:itemtypes/poultice.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-linen-horsetail/potionessences",
+    "value": {
+      "maxhealthExtraPoints": 0.2
+    },
+    "file": "game:itemtypes/poultice.json"
+  }
+]

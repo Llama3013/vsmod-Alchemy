@@ -1,0 +1,26 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-partbaked/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/bread.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-perfect/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/bread.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-charred/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/bread.json"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-maple/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/resource/treeseed.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-crimsonkingmaple/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/resource/treeseed.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*",
+    "value": {
+      "potionessences": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:itemtypes/resource/treeseed.json"
+  }
+]

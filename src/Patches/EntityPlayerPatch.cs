@@ -9,7 +9,7 @@ namespace Alchemy
     {
         public static void Postfix(EntityPlayer __instance, ref byte[] __result)
         {
-            if (__instance.WatchedAttributes.GetLong("glowpotionid") == 0)
+            if (!__instance.WatchedAttributes.GetBool("glow"))
             {
                 return;
             }

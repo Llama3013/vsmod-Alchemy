@@ -15,22 +15,15 @@ using System.Text;
 namespace Alchemy
 {
     //Add perish time to potions but potion flasks have low perish rates or do not perish
-    public class BlockPotionFlask : BlockBucket
+    public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
         LiquidTopOpenContainerProps Props;
-        public override float TransferSizeLitres => Props.TransferSizeLitres;
-        public override float CapacityLitres => Props.CapacityLitres;
 
         protected override string meshRefsCacheKey => Code.ToShortString() + "meshRefs";
-        protected override AssetLocation emptyShapeLoc => Props.EmptyShapeLoc;
-        protected override AssetLocation contentShapeLoc => Props.LiquidContentShapeLoc;
-        protected override AssetLocation liquidContentShapeLoc => Props.LiquidContentShapeLoc;
-        protected override float liquidMaxYTranslate => Props.LiquidMaxYTranslate;
         protected override float liquidYTranslatePerLitre => liquidMaxYTranslate / CapacityLitres;
-
-        public Dictionary<string, float> dic = new Dictionary<string, float>();
-        public string potionId = "";
-        public int duration = 0;
+        Dictionary<string, float> maxEssenceDic;
+        public Dictionary<string, float> essencesDic = new Dictionary<string, float>();
+        public float duration = 0;
         public int tickSec = 0;
         public float health = 0;
 
@@ -41,6 +34,18 @@ namespace Alchemy
             if (Attributes?["liquidContainerProps"].Exists == true)
             {
                 Props = Attributes["liquidContainerProps"].AsObject<LiquidTopOpenContainerProps>(null, Code.Domain);
+            }
+            try
+            {
+                IAsset maxEssences = api.Assets.TryGet("alchemy:config/essences.json");
+                if (maxEssences != null)
+                {
+                    maxEssenceDic = maxEssences.ToObject<Dictionary<string, float>>();
+                }
+            }
+            catch (Exception e)
+            {
+                api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
             }
         }
 
@@ -139,7 +144,6 @@ namespace Alchemy
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
                 if (meshdata == null) return;
-
 
                 meshrefs[contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize] = meshRef = capi.Render.UploadMesh(meshdata);
 
@@ -250,98 +254,29 @@ namespace Alchemy
             {
                 if (contentStack.MatchesSearchText(byEntity.World, "potion"))
                 {
-                    string strength = contentStack.Item.Variant["strength"] is string str ? string.Intern(str) : "none";
                     try
                     {
-                        JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
-                        if (potion?.Exists == true)
+                        essencesDic.Clear();
+                        ITreeAttribute potion = contentStack.Attributes;
+                        foreach (var essence in maxEssenceDic.Keys.ToList())
                         {
-
-                            potionId = potion["potionId"].AsString();
-                            duration = potion["duration"].AsInt();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                        potionId = "";
-                        duration = 0;
-                    }
-                    try
-                    {
-                        JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
-                        if (tickPotion?.Exists == true)
-                        {
-
-                            tickSec = tickPotion["ticksec"].AsInt();
-                            health = tickPotion["health"].AsFloat();
-                            switch (strength)
+                            if (potion.TryGetFloat("potion" + essence) != null)
                             {
-                                case "strong":
-                                    health *= 3;
-                                    break;
-                                case "medium":
-                                    health *= 2;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            //api.Logger.Debug("potion {0}, {1}, potionId, duration);
-                        }
-                        else
-                        {
-                            tickSec = 0;
-                            health = 0;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                        tickSec = 0;
-                        health = 0;
-                    }
-                    try
-                    {
-                        JsonObject effects = contentStack.ItemAttributes?["effects"];
-                        if (effects?.Exists == true)
-                        {
-
-                            dic = effects.AsObject<Dictionary<string, float>>();
-                            switch (strength)
-                            {
-                                case "strong":
-                                    foreach (var k in dic.Keys.ToList())
-                                    {
-                                        dic[k] *= 3;
-                                    }
-                                    break;
-                                case "medium":
-                                    foreach (var k in dic.Keys.ToList())
-                                    {
-                                        dic[k] *= 2;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                if (!essencesDic.ContainsKey(essence)) essencesDic.Add(essence, 0);
+                                essencesDic[essence] = potion.GetFloat("potion" + essence);
                             }
                         }
-                        else
-                        {
-                            dic.Clear();
-                        }
                     }
                     catch (Exception e)
                     {
                         api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
-                        dic.Clear();
                     }
-
-                    if (potionId != "" && potionId != null)
+                    //api.Logger.Debug("potion {0}, {1}", essencesDic.Count, potionId);
+                    //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                    /* This checks if the potion effect callback is on */
+                    if (essencesDic.Count > 0)
                     {
-                        //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
-                        //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
-                        /* This checks if the potion effect callback is on */
-                        if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
+                        if (byEntity.WatchedAttributes.TryGetLong("potionid") == null || byEntity.WatchedAttributes.TryGetLong("potionid") == 0)
                         {
                             //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
                             byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
@@ -353,11 +288,8 @@ namespace Alchemy
             }
             else
             {
-                potionId = "";
-                duration = 0;
                 tickSec = 0;
-                health = 0;
-                dic.Clear();
+                essencesDic.Clear();
             }
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
@@ -398,53 +330,47 @@ namespace Alchemy
             ItemStack content = GetContent(slot.Itemstack);
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && content != null)
             {
-                if (content.MatchesSearchText(byEntity.World, "potion"))
+                if (essencesDic.TryGetValue("duration", out duration))
                 {
-                    if (potionId == "recallpotionid")
-                    {
-
-                    }
-                    else if (tickSec == 0)
+                    if (!essencesDic.ContainsKey("health"))
                     {
                         TempEffect potionEffect = new TempEffect();
-                        potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
+                        potionEffect.tempEntityStats((byEntity as EntityPlayer), essencesDic);
                     }
                     else
                     {
                         TempEffect potionEffect = new TempEffect();
-                        potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
+                        potionEffect.tempTickEntityStats((byEntity as EntityPlayer), essencesDic, tickSec, essencesDic["health"]);
                     }
                     if (byEntity is EntityPlayer)
                     {
                         IServerPlayer sPlayer = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-                        if (potionId == "recallpotionid")
+                        if (essencesDic.ContainsKey("recall"))
                         {
                             if (api.Side.IsServer())
                             {
                                 FuzzyEntityPos spawn = sPlayer.GetSpawnPosition(false);
                                 byEntity.TeleportTo(spawn);
                             }
-                            sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                         }
-                        else
-                        {
-                            sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
-                        }
+                        sPlayer.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the " + content.GetName(), EnumChatType.Notification);
                     }
                     IPlayer player = null;
                     if (byEntity is EntityPlayer) player = byEntity.World.PlayerByUid(((EntityPlayer)byEntity).PlayerUID);
-
+                    if (slot.StackSize > 1)
+                    {
+                        ItemStack newStack = slot.Itemstack.Clone();
+                        newStack.StackSize = slot.StackSize - 1;
+                        ItemStack newContent = GetContent(newStack);
+                        api.World.SpawnItemEntity(newStack, byEntity.Pos.XYZ);
+                        slot.TakeOut(slot.StackSize - 1);
+                    }
                     splitStackAndPerformAction(byEntity, slot, (stack) => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0);
                     slot.MarkDirty();
 
                     EntityPlayer entityPlayer = byEntity as EntityPlayer;
                     if (entityPlayer == null)
                     {
-                        potionId = "";
-                        duration = 0;
-                        tickSec = 0;
-                        health = 0;
-                        dic.Clear();
                         return;
                     }
                     entityPlayer.Player.InventoryManager.BroadcastHotbarSlot();
@@ -463,47 +389,16 @@ namespace Alchemy
                 {
                     int maxstacksize = slot.Itemstack.Collectible.MaxStackSize;
 
-                    EntityPlayer entityPlayer = byEntity as EntityPlayer;
-                    if (entityPlayer == null)
-                    {
-                        return moved;
-                    }
                     (byEntity as EntityPlayer)?.WalkInventory((pslot) =>
                     {
                         if (pslot.Empty || pslot is ItemSlotCreative || pslot.StackSize == pslot.Itemstack.Collectible.MaxStackSize) return true;
                         int mergableq = slot.Itemstack.Collectible.GetMergableQuantity(slot.Itemstack, pslot.Itemstack, EnumMergePriority.DirectMerge);
                         if (mergableq == 0) return true;
 
-                        BlockLiquidContainerBase selfLiqBlock = slot.Itemstack.Collectible as BlockLiquidContainerBase;
-                        BlockLiquidContainerBase invLiqBlock = pslot.Itemstack.Collectible as BlockLiquidContainerBase;
+                        var selfLiqBlock = slot.Itemstack.Collectible as BlockLiquidContainerBase;
+                        var invLiqBlock = pslot.Itemstack.Collectible as BlockLiquidContainerBase;
 
-                        int? num3;
-                        if (selfLiqBlock == null)
-                        {
-                            num3 = null;
-                        }
-                        else
-                        {
-                            ItemStack content = selfLiqBlock.GetContent(slot.Itemstack);
-                            num3 = ((content != null) ? new int?(content.StackSize) : null);
-                        }
-                        int? num4 = num3;
-                        int valueOrDefault = num4.GetValueOrDefault();
-                        int? num5;
-                        if (invLiqBlock == null)
-                        {
-                            num5 = null;
-                        }
-                        else
-                        {
-                            ItemStack content2 = invLiqBlock.GetContent(pslot.Itemstack);
-                            num5 = ((content2 != null) ? new int?(content2.StackSize) : null);
-                        }
-                        num4 = num5;
-                        if (valueOrDefault != num4.GetValueOrDefault())
-                        {
-                            return true;
-                        }
+                        if ((selfLiqBlock?.GetContent(slot.Itemstack)?.StackSize ?? 0) != (invLiqBlock?.GetContent(pslot.Itemstack)?.StackSize ?? 0)) return true;
 
                         slot.Itemstack.StackSize += mergableq;
                         pslot.TakeOut(mergableq);
@@ -526,12 +421,10 @@ namespace Alchemy
                 if (moved > 0)
                 {
                     slot.TakeOut(1);
-                    if ((byEntity as EntityPlayer)?.Player.InventoryManager.TryGiveItemstack(containerStack, true) != true)
-                    {
+                    /*if ((byEntity as EntityPlayer)?.Player.InventoryManager.TryGiveItemstack(containerStack, true) != true)
+                    {*/
                         api.World.SpawnItemEntity(containerStack, byEntity.SidedPos.XYZ);
-                    }
-
-                    slot.MarkDirty();
+                    //}
                 }
 
                 return moved;
@@ -545,6 +438,126 @@ namespace Alchemy
             if (content != null)
             {
                 content.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
+                ITreeAttribute potion = (ITreeAttribute)content.Attributes;
+                if (potion != null)
+                {
+                    try
+                    {
+                        essencesDic.Clear();
+                        foreach (var essence in maxEssenceDic.Keys.ToList())
+                        {
+                            if (potion.TryGetFloat("potion" + essence) != null)
+                            {
+                                if (!essencesDic.ContainsKey(essence)) essencesDic.Add(essence, 0);
+                                essencesDic[essence] = potion.GetFloat("potion" + essence);
+                            }
+                        }
+
+                        //api.Logger.Debug("potion {0}, {1}, {2}", potionId, duration);
+                    }
+                    catch (Exception e)
+                    {
+                        api.World.Logger.Error("Failed loading potion effects for potion {0}. Will ignore. Exception: {1}", Code, e);
+                        duration = 0;
+                    }
+                }
+                if (essencesDic != null)
+                {
+                    dsc.AppendLine(Lang.Get("\n"));
+                    float value;
+                    if (essencesDic.TryGetValue("rangedWeaponsAcc", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% ranged accuracy", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("animalLootDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more animal loot", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("animalHarvestingTime", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% faster animal harvest", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("animalSeekingRange", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("maxhealthExtraPoints", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health points", value));
+                    }
+                    if (essencesDic.TryGetValue("forageDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("healingeffectivness", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% healing effectiveness", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("hungerrate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("meleeWeaponsDamage", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% melee damage", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("mechanicalsDamage", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% mechanincal damage (not sure if works)", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("miningSpeedMul", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% mining speed", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("oreDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more ore", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("rangedWeaponsDamage", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% ranged damage", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("rangedWeaponsSpeed", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% ranged speed", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("rustyGearDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more gears from metal piles", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("walkspeed", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% walk speed", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("vesselContentsDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% more vessel contents", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("wildCropDropRate", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% wild crop", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("wholeVesselLootChance", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: {0}% chance to get whole vessel", value * 100));
+                    }
+                    if (essencesDic.TryGetValue("glow", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: player starts to glow"));
+                    }
+                    if (essencesDic.TryGetValue("recall", out value))
+                    {
+                        dsc.AppendLine(Lang.Get("When potion is used: player teleports home"));
+                    }
+                    if (essencesDic.TryGetValue("duration", out value))
+                    {
+                        dsc.Append(Lang.Get(" and lasts for {0} seconds", value));
+                    }
+                    if (essencesDic.TryGetValue("health", out value))
+                    {
+                        dsc.Append(Lang.Get(" and lasts for {0} seconds", value));
+                    }
+                }
             }
         }
     }

@@ -1,0 +1,15 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "legume-soybean": {
+        "hungerrate": 0.1,
+      },
+      "legume-peanut": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:itemtypes/food/legume.json"
+  }
+]

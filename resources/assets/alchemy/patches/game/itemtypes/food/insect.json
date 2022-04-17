@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*",
+    "value": {
+      "potionessences": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:itemtypes/food/insect.json"
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "mushroom-beardedtooth-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-whiteoyster-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-pinkoyster-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-dryadsaddle-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-tinderhoof-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-chickenofthewoods-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-reishi-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-funeralbell-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-livermushroom-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-pinkbonnet-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-shiitake-normal-north": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-deerear-normal-north": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:blocktypes/plant/mushroom-side.json"
+  }
+]

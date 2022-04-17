@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "animalSeekingRange": -0.3
+    },
+    "file": "game:itemtypes/resource/crushed/powderedsulfur.json"
+  }
+]

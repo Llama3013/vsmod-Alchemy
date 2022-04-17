@@ -24,8 +24,12 @@
 			<HintPath>$(VINTAGE_STORY)/Lib/0Harmony.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
-		<Reference Include="harmony">
+		<Reference Include="newtonsoft">
 			<HintPath>$(VINTAGE_STORY)/Lib/Newtonsoft.Json.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="cairo">
+			<HintPath>$(VINTAGE_STORY)/Lib/cairo-sharp.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 	</ItemGroup>

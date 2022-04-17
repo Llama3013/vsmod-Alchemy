@@ -5,11 +5,6 @@ namespace Alchemy
 {
     public class BlockHerbRacks : Block
     {
-        public override void OnLoaded(ICoreAPI api)
-        {
-            base.OnLoaded(api);
-        }
-
         public override bool DoParticalSelection(IWorldAccessor world, BlockPos pos)
         {
             return true;

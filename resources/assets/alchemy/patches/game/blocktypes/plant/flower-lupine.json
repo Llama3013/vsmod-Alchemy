@@ -1,0 +1,24 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "flower-lupine-blue-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-lupine-orange-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-lupine-purple-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-lupine-red-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-lupine-white-free": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:blocktypes/plant/flower-lupine.json"
+  }
+]

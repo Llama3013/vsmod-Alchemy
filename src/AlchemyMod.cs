@@ -3,9 +3,10 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 using HarmonyLib;
 using System.Reflection;
+using Vintagestory.API.Client;
 
 [assembly: ModInfo("AlchemyMod",
-    Version = "1.6.3",
+    Version = "1.7.0-pre.1",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" },
@@ -30,6 +31,7 @@ namespace Alchemy
     public class AlchemyMod : ModSystem
     {
         private ModConfig config;
+        public HudPotion hud;
         public override void Start(ICoreAPI api)
         {
             api.Logger.Debug("[Potion] Start");
@@ -45,6 +47,8 @@ namespace Alchemy
             api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
             api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
             api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));
+            api.RegisterBlockClass("BlockCauld", typeof(BlockCauld));
+            api.RegisterBlockEntityClass("Cauld", typeof(BlockEntityCauld));
         }
 
         ICoreServerAPI sapi;
@@ -62,11 +66,45 @@ namespace Alchemy
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
                     TempEffect tempEffect = new TempEffect();
                     EntityPlayer player = (iServerPlayer.Entity as EntityPlayer);
-                    tempEffect.resetAllTempStats(player, "potionmod");
-                    tempEffect.resetAllAttrListeners(player, "potionid", "tickpotionid");
+                    tempEffect.reset(player);
                     //api.Logger.Debug("potion player ready");
                 }
             };
+            base.StartServerSide(api);
+        }
+    }
+
+    public class ModSystemHud : ModSystem
+    {
+        ICoreClientAPI capi;
+        GuiDialog dialog;
+
+        public override bool ShouldLoad(EnumAppSide forSide)
+        {
+            return forSide == EnumAppSide.Client;
+        }
+
+        public override void StartClientSide(ICoreClientAPI api)
+        {
+            base.StartClientSide(api);
+
+            dialog = new HudPotion(api);
+            dialog.TryOpen();
+
+            capi = api;
+            api.Input.RegisterHotKey("potionhud", "Toggle potion hud", GlKeys.LBracket, HotkeyType.GUIOrOtherControls);
+            api.Input.SetHotKeyHandler("potionhud", ToggleGui);
+        }
+
+        private bool ToggleGui(KeyCombination comb)
+        {
+            if (dialog.IsOpened())
+            {
+                dialog.TryClose();
+            }
+            else dialog.TryOpen();
+
+            return true;
         }
     }
 }

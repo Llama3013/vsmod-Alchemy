@@ -1,0 +1,50 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-cookedcattailroot/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-cookedpapyrusroot/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-cabbage/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-pumpkin/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-cassava/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/vegetable.json"
+  }
+]

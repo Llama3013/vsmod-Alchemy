@@ -1,0 +1,37 @@
+[
+  {
+    "op": "add",
+    "path": "/attributesByType/*-flax/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/grain.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*-rice/potionessences",
+    "value": {
+      "hungerrate": 0.1,
+    },
+    "file": "game:itemtypes/food/grain.json"
+  },
+  {
+    "op": "add",
+    "path": "/attributesByType/*/potionessences",
+    "value": {
+      "grain-spelt": {
+        "hungerrate": 0.1,
+      },
+      "grain-rye": {
+        "hungerrate": 0.1,
+      },
+      "grain-amaranth": {
+        "hungerrate": 0.1,
+      },
+      "grain-sunflower": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:itemtypes/food/grain.json"
+  }
+]

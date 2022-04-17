@@ -1,0 +1,48 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "flower-catmint-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-cornflower-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-forgetmenot-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-edelweiss-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-heather-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-horsetail-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-orangemallow-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-wilddaisy-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-westerngorse-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-cowparsley-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-californiapoppy-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-lilyofthevalley-free": {
+        "hungerrate": 0.1,
+      },
+      "flower-woad-free": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:blocktypes/plant/flower.json"
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "crushed-cinnabar": {
+        "glow": 0.9
+      },
+      "crushed-alum": {
+        "walkspeed": 0.3
+      }
+    },
+    "file": "game:itemtypes/resource/crushed/crushed.json"
+  }
+]

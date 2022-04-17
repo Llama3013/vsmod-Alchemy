@@ -1,0 +1,10 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "rangedWeaponsSpeed": 0.15
+    },
+    "file": "game:itemtypes/resource/resin.json"
+  }
+]

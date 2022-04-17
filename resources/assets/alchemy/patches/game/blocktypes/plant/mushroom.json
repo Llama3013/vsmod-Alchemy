@@ -1,0 +1,84 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "mushroom-almondmushroom-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-bitterbolete-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-blacktrumpet-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-chanterelle-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-commonmorel-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-deathcap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-devilstooth-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-devilbolete-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-earthball-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-elfinsaddle-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-fieldmushroom-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-flyagaric-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-golddropmilkcap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-greencrackedrussula-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-indigomilkcap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-jackolantern-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-kingbolete-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-lobster-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-orangeoakbolete-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-paddystraw-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-puffball-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-redwinecap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-saffronmilkcap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-violetwebcap-normal": {
+        "hungerrate": 0.1,
+      },
+      "mushroom-witchhat-normal": {
+        "hungerrate": 0.1,
+      }
+    },
+    "file": "game:blocktypes/plant/mushroom.json"
+  }
+]

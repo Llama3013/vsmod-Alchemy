@@ -56,7 +56,6 @@ namespace Alchemy
             }
 
             return base.Inventory_OnAcquireTransitionSpeed(transType, stack, baseMul);
-
         }
 
         internal bool OnInteract(IPlayer byPlayer, BlockSelection blockSel)
