@@ -1,0 +1,9 @@
+[
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/cauld.json",
+    "dependsOn": [{ "modid": "expandedfoods", "invert": true }]
+  }
+]

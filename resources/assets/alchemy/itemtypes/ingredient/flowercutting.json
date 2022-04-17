@@ -50,52 +50,68 @@
     },
     "*-horsetail-*": {
       potionessences: {
-        forageDropRate: 0.1,
+        duration: 40,
       }
     },
     "*-orangemallow-*": {
       potionessences: {
-        hungerrate: 0.1,
+        animalHarvestingTime: 0.6,
+        animalLootDropRate: 0.2,
+        wildCropDropRate: 0.3,
+        hungerrate: 0.1
       }
     },
     "*-wilddaisy-*": {
       potionessences: {
-        hungerrate: -0.1,
+        oreDropRate: 0.2,
+        miningSpeedMul: 0.3,
+        mechanicalsDamage: -0.3
       }
     },
     "*-westerngorse-*": {
       potionessences: {
-        hungerrate: 0.1,
+        rangedWeaponsSpeed: 0.3,
+        vesselContentsDropRate: 0.2,
+        animalSeekingRange: 0.3
       }
     },
     "*-cowparsley-*": {
       potionessences: {
-        hungerrate: 0.1,
+        healingeffectivness: 0.2,
+        maxhealthExtraPoints: 0.2,
+        rustyGearDropRate: -0.2
       }
     },
     "*-californiapoppy-*": {
       potionessences: {
-        hungerrate: 0.1,
+        hungerrate: -0.3,
+        animalSeekingRange: -0.4,
+        healingeffectivness: -0.2
       }
     },
     "*-lilyofthevalley-*": {
       potionessences: {
-        hungerrate: 0.1,
+        forageDropRate: 0.2,
+        wildCropDropRate: 0.2,
+        animalLootDropRate: 0.3
       }
     },
     "*-lupine-blue-*": {
       potionessences: {
-        hungerrate: 0.1,
+        vesselContentsDropRate: 0.3,
+        wholeVesselLootChance: -0.3
       }
     },
     "*-lupine-orange-*": {
       potionessences: {
-        hungerrate: 0.1,
+        vesselContentsDropRate: -0.3,
+        wholeVesselLootChance: 0.3
       }
     },
     "*-lupine-purple-*": {
       potionessences: {
-        hungerrate: 0.1,
+        temporalGearTLRepairCost: 0.2,
+        animalLootDropRate: -0.2
       }
     },
     "*-lupine-red-*": {

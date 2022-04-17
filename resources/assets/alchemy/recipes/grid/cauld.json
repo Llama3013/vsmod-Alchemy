@@ -1,0 +1,110 @@
+[
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-copper" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-copper" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-copper" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-copper" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-tinbronze" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-tinbronze" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-tinbronze" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-tinbronze" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-blackbronze" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-blackbronze" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-blackbronze" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-blackbronze" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-iron" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-iron" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-iron" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-iron" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-steel" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-steel" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-steel" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-steel" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "expandedfoods:cauldron-meteoriciron" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "alchemy:cauld-meteoriciron" }
+  },
+  {
+    "ingredientPattern": "C",
+    "ingredients": {
+      "C": { "type": "block", "code": "alchemy:cauld-meteoriciron" }
+    },
+    "width": 1,
+    "height": 1,
+    "output": { "type": "block", "code": "expandedfoods:cauldron-meteoriciron" }
+  }
+]
