@@ -86,7 +86,7 @@ namespace Alchemy
         /// </summary>
         public void resetTempStats(float dt)
         {
-            reset(effectedEntity);
+            reset(effectedEntity, true);
         }
 
         int tickCnt = 0;
@@ -111,12 +111,12 @@ namespace Alchemy
                 {
                     long effectIdGametick = effectedEntity.WatchedAttributes.GetLong("potionid");
                     effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
-                    reset(effectedEntity);
+                    reset(effectedEntity, true);
                 }
             }
         }
 
-        public void reset(EntityPlayer entity)
+        public void reset(EntityPlayer entity, bool message)
         {
             foreach (var stats in entity.Stats)
             {
@@ -134,9 +134,11 @@ namespace Alchemy
                 effectTickSec = 0;
                 entity.WatchedAttributes.RemoveAttribute("potionid");
             }
-
-            IServerPlayer player = (entity.World.PlayerByUid((entity as EntityPlayer).PlayerUID) as IServerPlayer);
-            player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the potion disapate", EnumChatType.Notification);
+            if (message)
+            {
+                IServerPlayer player = (entity.World.PlayerByUid((entity as EntityPlayer).PlayerUID) as IServerPlayer);
+                player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the potion disapate", EnumChatType.Notification);
+            }
         }
     }
 }

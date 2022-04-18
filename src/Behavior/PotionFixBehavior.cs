@@ -29,7 +29,7 @@ namespace Alchemy
             IServerPlayer player = GetIServerPlayer();
 
             TempEffect tempEffect = new TempEffect();
-            tempEffect.reset((player.Entity as EntityPlayer));
+            tempEffect.reset((player.Entity as EntityPlayer), false);
 
             base.OnEntityDeath(damageSourceForDeath);
         }

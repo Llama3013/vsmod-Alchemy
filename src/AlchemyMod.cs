@@ -22,9 +22,11 @@ vertexFlags: {
 },*/
 
 /* Quick reference to all attributes that change the characters Stats:
-   healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
-   rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
-   vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
+   healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc,
+   rangedWeaponsSpeed, rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate,
+   forageDropRate, wildCropDropRate, vesselContentsDropRate, oreDropRate, rustyGearDropRate,
+   miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance,
+   temporalGearTLRepairCost, animalHarvestingTime*/
 
 namespace Alchemy
 {
@@ -66,7 +68,7 @@ namespace Alchemy
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
                     TempEffect tempEffect = new TempEffect();
                     EntityPlayer player = (iServerPlayer.Entity as EntityPlayer);
-                    tempEffect.reset(player);
+                    tempEffect.reset(player, false);
                     //api.Logger.Debug("potion player ready");
                 }
             };
