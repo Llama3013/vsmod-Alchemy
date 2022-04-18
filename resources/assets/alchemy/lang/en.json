@@ -17,6 +17,10 @@
 
   "block-claypotionflask-raw": "Ceramic Potion Flask (Raw)",
 	"block-claypotionflask-fired": "Ceramic Potion Flask (Fired)",
+  
+  "block-cauld-*": "Alchemy Cauldron",
+  "block-cauldmold-raw": "Alchemy Cauldron Mold (Raw)",
+  "block-cauldmold-burned": "Alchemy Cauldron Mold (Fired)",
 
   "game:essence-handbook-overview": "Essence Overview",
 
