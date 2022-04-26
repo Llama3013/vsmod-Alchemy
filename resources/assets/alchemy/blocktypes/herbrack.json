@@ -18,7 +18,8 @@
             excludeByType: {
                 "*-oak-copper-copper": false,
                 "*": true
-            }
+            },
+						"groupBy": ["herbrack-*"]
         }
     },
 	heldTpIdleAnimation: "holdunderarm",
