@@ -5,6 +5,6 @@
     "value": {
       "hungerrate": 0.1,
     },
-    "file": "game:itemtypes/food/rawmeat.json"
+    "file": "game:itemtypes/food/redmeat.json"
   }
 ]

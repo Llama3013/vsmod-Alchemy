@@ -4,16 +4,16 @@
     "path": "/attributes/potionessences",
     "value": {
       "fern-cinnamonfern": {
-        "hungerrate": 0.1,
+        "hungerrate": 0.1
       },
       "fern-deerfern": {
-        "hungerrate": 0.1,
+        "hungerrate": 0.1
       },
       "fern-eaglefern": {
-        "hungerrate": 0.1,
+        "hungerrate": 0.1
       },
       "fern-hartstongue": {
-        "hungerrate": 0.1,
+        "hungerrate": 0.1
       }
     },
     "file": "game:blocktypes/plant/fern.json"

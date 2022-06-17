@@ -27,6 +27,7 @@ vertexFlags: {
    forageDropRate, wildCropDropRate, vesselContentsDropRate, oreDropRate, rustyGearDropRate,
    miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance,
    temporalGearTLRepairCost, animalHarvestingTime*/
+   //change alchemy cauldron crafting recipe and add early game potion crafting
 
 namespace Alchemy
 {
@@ -36,7 +37,7 @@ namespace Alchemy
         public HudPotion hud;
         public override void Start(ICoreAPI api)
         {
-            api.Logger.Debug("[Potion] Start");
+            //api.Logger.Debug("[Potion] Start");
             base.Start(api);
 
             config = ModConfig.Load(api);

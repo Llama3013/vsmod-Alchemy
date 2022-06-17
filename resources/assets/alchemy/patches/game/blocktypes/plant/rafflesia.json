@@ -1,0 +1,16 @@
+[
+    {
+      "op": "add",
+      "path": "/attributes/potionessences",
+      "value": {
+        "rafflesia-brown": {
+          "hungerrate": 0.1
+        },
+        "rafflesia-red": {
+          "hungerrate": 0.1
+        }
+      },
+      "file": "game:blocktypes/plant/rafflesia.json"
+    }
+  ]
+  

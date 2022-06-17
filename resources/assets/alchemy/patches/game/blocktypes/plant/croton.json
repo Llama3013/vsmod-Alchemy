@@ -1,0 +1,57 @@
+[
+  {
+    "op": "add",
+    "path": "/attributes/potionessences",
+    "value": {
+      "flower-croton-medium-crimson-brown-green": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-crimson-green": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-crimson-orange": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-darkgreen-gold": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-darkgreen-gold-crimson": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-green-orange": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-lemongreen": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-medium-lemongreen-crimson": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-crimson-brown-green": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-crimson-green": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-crimson-orange": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-darkgreen-gold": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-darkgreen-gold-crimson": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-green-orange": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-lemongreen": {
+        "hungerrate": 0.1
+      },
+      "flower-croton-small-lemongreen-crimson": {
+        "hungerrate": 0.1
+      }
+    },
+    "file": "game:blocktypes/plant/croton.json"
+  }
+]
