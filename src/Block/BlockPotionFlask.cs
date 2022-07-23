@@ -380,12 +380,12 @@ namespace Alchemy
                 health = 0;
                 dic.Clear();
             }
-            /*base.OnHeldInteractStart(slot,
+            base.OnHeldInteractStart(slot,
             byEntity,
             blockSel,
             entitySel,
             firstEvent,
-            ref handling);*/
+            ref handling);
         }
 
         public override bool
