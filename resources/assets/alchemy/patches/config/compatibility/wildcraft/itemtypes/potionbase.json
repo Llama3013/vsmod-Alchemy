@@ -173,5 +173,5 @@
     "value": "false",
     "file": "alchemy:recipes/grid/ingredient/wildvitalitybase.json",
     "dependsOn": [{ "modid": "wildcraft", "invert": true }]
-  },
+  }
 ]

@@ -1,78 +1,127 @@
 {
-	code: "herbrack",
-	class: "BlockHerbRacks",
-    entityClass: "HerbRacks",
-    variantgroups: [
-		{ code: "wood", states: ["aged"], loadFromProperties: "block/wood" },
-		{ code: "metal", loadFromProperties: "block/metal" }
-	],
-	shape: { base: "alchemy:block/drying_rack" },
-	textures: {
-		"wood": { base: "game:block/wood/planks/{wood}1" },
-		"hook": { base: "game:block/metal/sheet/{metal}1" },
-		"top": { base: "game:block/metal/sheet/{metal}1" }
-	},
-	attributes: {
-        handbook: {
-            excludeByType: {
-                "*-oak-copper": false,
-                "*": true
-            },
-						"groupBy": ["herbrack-*"]
-        }
+  "code": "herbrack",
+  "class": "BlockHerbRacks",
+  "entityClass": "HerbRacks",
+  "variantgroups": [
+    { "code": "wood", "states": ["aged"], "loadFromProperties": "block/wood" },
+    { "code": "metal", "loadFromProperties": "block/metal" }
+  ],
+  "shape": { "base": "alchemy:block/drying_rack" },
+  "textures": {
+    "wood": { "base": "game:block/wood/planks/{wood}1" },
+    "hook": { "base": "game:block/metal/sheet/{metal}1" },
+    "top": { "base": "game:block/metal/sheet/{metal}1" }
+  },
+  "attributes": {
+    "handbook": {
+      "excludeByType": {
+        "*-oak-copper": false,
+        "*": true
+      },
+      "groupBy": ["herbrack-*"]
+    }
+  },
+  "heldTpIdleAnimation": "holdbothhands",
+  "creativeinventory": { "general": ["*oak-copper"], "decorative": ["*"] },
+  "blockmaterial": "Wood",
+  "replaceable": 900,
+  "resistance": 1.5,
+  "lightAbsorption": 1,
+  "sidesolid": {
+    "all": false
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "sounds": {
+    "place": "game:block/planks",
+    "hit": "game:block/planks",
+    "break": "game:block/planks",
+    "walk": "game:walk/wood"
+  },
+  "materialDensity": 400,
+  "tpHandTransform": {
+    "translation": { "x": 0.3, "y": -0.58, "z": -0.4 },
+    "rotation": { "x": 71, "y": 9, "z": -66 },
+    "origin": { "x": 0.3, "y": 0.3, "z": 0.3 },
+    "scale": 1
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0, "y": 0, "z": 0 },
+    "scale": 2
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 9, "y": 103, "z": -11 },
+    "origin": { "x": 0.6, "y": 0.3, "z": 0.3 },
+    "scale": 2
+  },
+  "collisionselectionboxes": [
+    {
+      "x1": 0,
+      "y1": 0,
+      "z1": 0.35,
+      "x2": 0.25,
+      "y2": 0.5,
+      "z2": 0.6
     },
-	heldTpIdleAnimation: "holdunderarm",
-	creativeinventory: { "general": ["*oak-copper"], "decorative": ["*"] },
-	blockmaterial: "Wood",
-	replaceable: 900,
-	resistance: 1.5,
-	lightAbsorption: 1,
-	sidesolid: {
-		all: false
-	},	
-	sideopaque: {
-		all: false
-	},
-	sounds: {
-		"place": "game:block/planks",
-		"hit": "game:block/planks",
-		"break": "game:block/planks",
-		"walk": "game:walk/wood"
-	},
-	materialDensity: 400,
-	tpHandTransform: {
-		translation: { x: -0.8, y: -0.68, z: -0.41 },
-		rotation: { x: 99, y: -10, z: -6 },
-		scale: 0.5
-	},
-	fpHandTransform: {
-		translation: { x: 0.08, y: -0.2, z: 0.6 },
-		rotation: { x: 33, y: 134, z: -102 }
-	},
-	collisionselectionboxes: [
-	{
-		x1: 0, y1: 0, z1: 0.35, x2: 0.25, y2: 0.5, z2: 0.6, 
-	}, 
-	{
-		x1: 0.1, y1: 0, z1: 0.05, x2: 0.35, y2: 0.5, z2: 0.3, 
-	}, 
-	{
-		x1: 0.1, y1: 0, z1: 0.7, x2: 0.35, y2: 0.5, z2: 0.95, 
-	}, 
-	{
-		x1: 0.375, y1: 0, z1: 0, x2: 0.625, y2: 0.5, z2: 0.25,
-	},
-	{
-		x1: 0.375, y1: 0, z1: 0.75, x2: 0.625, y2: 0.5, z2: 1,
-	}, 
-	{
-		x1: 0.65, y1: 0, z1: 0.05, x2: 0.9, y2: 0.5, z2: 0.3, 
-	}, 
-	{
-		x1: 0.65, y1: 0, z1: 0.7, x2: 0.9, y2: 0.5, z2: 0.95,
-	},
-	{
-		x1: 0.75, y1: 0, z1: 0.35, x2: 1, y2: 0.5, z2: 0.6,
-	}
-	]
+    {
+      "x1": 0.1,
+      "y1": 0,
+      "z1": 0.05,
+      "x2": 0.35,
+      "y2": 0.5,
+      "z2": 0.3
+    },
+    {
+      "x1": 0.1,
+      "y1": 0,
+      "z1": 0.7,
+      "x2": 0.35,
+      "y2": 0.5,
+      "z2": 0.95
+    },
+    {
+      "x1": 0.375,
+      "y1": 0,
+      "z1": 0,
+      "x2": 0.625,
+      "y2": 0.5,
+      "z2": 0.25
+    },
+    {
+      "x1": 0.375,
+      "y1": 0,
+      "z1": 0.75,
+      "x2": 0.625,
+      "y2": 0.5,
+      "z2": 1
+    },
+    {
+      "x1": 0.65,
+      "y1": 0,
+      "z1": 0.05,
+      "x2": 0.9,
+      "y2": 0.5,
+      "z2": 0.3
+    },
+    {
+      "x1": 0.65,
+      "y1": 0,
+      "z1": 0.7,
+      "x2": 0.9,
+      "y2": 0.5,
+      "z2": 0.95
+    },
+    {
+      "x1": 0.75,
+      "y1": 0,
+      "z1": 0.35,
+      "x2": 1,
+      "y2": 0.5,
+      "z2": 0.6
+    }
+  ]
 }

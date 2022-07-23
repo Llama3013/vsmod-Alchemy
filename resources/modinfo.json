@@ -2,7 +2,7 @@
 	"type": "code",
 	"name": "Alchemy",
 	"modid": "alchemy",
-	"version": "1.6.3",
+	"version": "1.6.4",
 	"iconpath": "modicon.png",
 	
 	"description" : "An alchemy mod that adds a couple of player enhancing potions.",

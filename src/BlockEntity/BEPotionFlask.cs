@@ -3,27 +3,31 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Vintagestory.API.Config;
+
 
 namespace Alchemy
 {
-    public class BlockEntityPotionFlask : BlockEntityContainer
+    public class BlockEntityPotionFlask : BlockEntityLiquidContainer
     {
-        public override InventoryBase Inventory => inv;
-        InventoryGeneric inv;
         public override string InventoryClassName => "potionflask";
-
-        public BlockEntityPotionFlask()
-        {
-            inv = new InventoryGeneric(1, null, null);
-        }
 
         BlockPotionFlask ownBlock;
         MeshData currentMesh;
 
+        public BlockEntityPotionFlask()
+        {
+            inventory = new InventoryGeneric(1, null, null);
+        }
+
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
-
 
             ownBlock = Block as BlockPotionFlask;
             if (Api.Side == EnumAppSide.Client)
@@ -33,16 +37,9 @@ namespace Alchemy
             }
         }
 
-        public ItemStack GetContent()
+        public override void OnBlockBroken(IPlayer byPlayer = null)
         {
-            return inv[0].Itemstack;
-        }
-
-
-        internal void SetContent(ItemStack stack)
-        {
-            inv[0].Itemstack = stack;
-            MarkDirty(true);
+            // Don't drop inventory contents
         }
 
         public override void OnBlockPlaced(ItemStack byItemStack = null)
@@ -55,19 +52,6 @@ namespace Alchemy
                 MarkDirty(true);
             }
         }
-
-        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
-        {
-            base.FromTreeAttributes(tree, worldForResolving);
-
-            if (Api?.Side == EnumAppSide.Client)
-            {
-                currentMesh = GenMesh();
-                MarkDirty(true);
-            }
-        }
-
-
 
         internal MeshData GenMesh()
         {
@@ -83,6 +67,30 @@ namespace Alchemy
             if (currentMesh == null || ownBlock.Code.Path.Contains("clay")) return false;
             mesher.AddMeshData(currentMesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, 0, 0));
             return true;
+        }
+
+        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
+        {
+            base.FromTreeAttributes(tree, worldForResolving);
+
+            if (Api?.Side == EnumAppSide.Client)
+            {
+                currentMesh = GenMesh();
+                MarkDirty(true);
+            }
+        }
+
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
+        {
+            ItemSlot slot = inventory[0];
+
+            if (slot.Empty)
+            {
+                dsc.AppendLine(Lang.Get("Empty"));
+            } else 
+            {
+                dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
+            }
         }
     }
 }

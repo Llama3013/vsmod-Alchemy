@@ -1,31 +1,31 @@
 {
-	ingredient: { type: "item", code: "game:clay-*", name: "type", allowedVariants: ["blue", "fire"] },
-	pattern: [[
-		"###",
-		"###",
-		"###",
-	],
-	[
-		"###",
-		"#_#",
-		"###",
-	],
-	[
-		"###",
-		"#_#",
-		"###",
-	],
-	[
-		"###",
-		"#_#",
-		"###",
-	],
-	[
-		"___",
-		"_#_",
-		"___",
-	],
-	],
-	name: "claypotionflask",
-	output: { type: "block", code: "alchemy:claypotionflask-raw" }
+  "ingredient": { "type": "item", "code": "game:clay-*", "name": "type", "allowedVariants": ["blue", "fire"] },
+  "pattern": [[
+	"###",
+	"###",
+	"###",
+],
+[
+	"###",
+	"#_#",
+	"###",
+],
+[
+	"###",
+	"#_#",
+	"###",
+],
+[
+	"###",
+	"#_#",
+	"###",
+],
+[
+	"___",
+	"_#_",
+	"___",
+],
+],
+  "name": "claypotionflask",
+  "output": { "type": "block", "code": "alchemy:claypotionflask-raw" }
 }

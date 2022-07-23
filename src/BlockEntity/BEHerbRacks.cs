@@ -6,19 +6,19 @@ using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-
 namespace Alchemy
 {
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {
         InventoryGeneric inv;
+
         public override InventoryBase Inventory => inv;
 
         public override string InventoryClassName => "herbrack";
+
         public override string AttributeTransformCode => "herbRackTransform";
 
         Block block;
-
 
         public BlockEntityHerbRacks()
         {
@@ -32,7 +32,12 @@ namespace Alchemy
             base.Initialize(api);
         }
 
-        protected override float Inventory_OnAcquireTransitionSpeed(EnumTransitionType transType, ItemStack stack, float baseMul)
+        protected override float
+        Inventory_OnAcquireTransitionSpeed(
+            EnumTransitionType transType,
+            ItemStack stack,
+            float baseMul
+        )
         {
             if (Api == null) return 1;
 
@@ -44,7 +49,10 @@ namespace Alchemy
             {
                 return 2.5f;
             }
-            if (transType == EnumTransitionType.Perish || transType == EnumTransitionType.Ripen)
+            if (
+                transType == EnumTransitionType.Perish ||
+                transType == EnumTransitionType.Ripen
+            )
             {
                 float perishRate = GetPerishRate();
                 if (transType == EnumTransitionType.Ripen)
@@ -55,8 +63,9 @@ namespace Alchemy
                 return baseMul * perishRate;
             }
 
-            return base.Inventory_OnAcquireTransitionSpeed(transType, stack, baseMul);
-
+            return base.Inventory_OnAcquireTransitionSpeed(transType,
+            stack,
+            baseMul);
         }
 
         internal bool OnInteract(IPlayer byPlayer, BlockSelection blockSel)
@@ -74,13 +83,24 @@ namespace Alchemy
             else
             {
                 CollectibleObject colObj = slot.Itemstack.Collectible;
-                if (colObj.Attributes != null && colObj.Attributes["herbrackable"].AsBool(false) == true)
+                if (
+                    colObj.Attributes != null &&
+                    colObj.Attributes["herbrackable"].AsBool(false) == true
+                )
                 {
                     AssetLocation sound = slot.Itemstack?.Block?.Sounds?.Place;
 
                     if (TryPut(slot, blockSel))
                     {
-                        Api.World.PlaySoundAt(sound != null ? sound : new AssetLocation("sounds/player/build"), byPlayer.Entity, byPlayer, true, 16);
+                        Api
+                            .World
+                            .PlaySoundAt(sound != null
+                                ? sound
+                                : new AssetLocation("sounds/player/build"),
+                            byPlayer.Entity,
+                            byPlayer,
+                            true,
+                            16);
                         updateMeshes();
                         return true;
                     }
@@ -89,19 +109,18 @@ namespace Alchemy
                 }
             }
 
-
             return false;
         }
 
         private bool TryPut(ItemSlot slot, BlockSelection blockSel)
         {
             int selectionBoxIndex = blockSel.SelectionBoxIndex;
-            //Api.Logger.Debug("potion {0}", blockSel.SelectionBoxIndex);
 
+            //Api.Logger.Debug("potion {0}", blockSel.SelectionBoxIndex);
             if (inv[selectionBoxIndex].Empty)
             {
                 int moved = slot.TryPutInto(Api.World, inv[selectionBoxIndex]);
-                updateMesh(selectionBoxIndex);
+                updateMesh (selectionBoxIndex);
                 MarkDirty(true);
                 return moved > 0;
             }
@@ -118,15 +137,26 @@ namespace Alchemy
                 if (byPlayer.InventoryManager.TryGiveItemstack(stack))
                 {
                     AssetLocation sound = stack.Block?.Sounds?.Place;
-                    Api.World.PlaySoundAt(sound != null ? sound : new AssetLocation("sounds/player/build"), byPlayer.Entity, byPlayer, true, 16);
+                    Api
+                        .World
+                        .PlaySoundAt(sound != null
+                            ? sound
+                            : new AssetLocation("sounds/player/build"),
+                        byPlayer.Entity,
+                        byPlayer,
+                        true,
+                        16);
                 }
 
                 if (stack.StackSize > 0)
                 {
-                    Api.World.SpawnItemEntity(stack, Pos.ToVec3d().Add(0.5, 0.5, 0.5));
+                    Api
+                        .World
+                        .SpawnItemEntity(stack,
+                        Pos.ToVec3d().Add(0.5, 0.5, 0.5));
                 }
                 MarkDirty(true);
-                updateMesh(selectionBoxIndex);
+                updateMesh (selectionBoxIndex);
                 return true;
             }
 
@@ -137,22 +167,25 @@ namespace Alchemy
         {
             base.GetBlockInfo(forPlayer, sb);
 
-
-            float cureRate = GameMath.Clamp(((1 - GetPerishRate()) - 0.5f) * 3, 0, 1);
+            float cureRate =
+                GameMath.Clamp(((1 - GetPerishRate()) - 0.5f) * 3, 0, 1);
 
             sb.AppendLine();
 
-            bool up = forPlayer.CurrentBlockSelection != null && forPlayer.CurrentBlockSelection.SelectionBoxIndex > 1;
+            bool up =
+                forPlayer.CurrentBlockSelection != null &&
+                forPlayer.CurrentBlockSelection.SelectionBoxIndex > 1;
 
             for (int j = 7; j >= 0; j--)
             {
-
                 if (inv[j].Empty) continue;
 
                 ItemStack stack = inv[j].Itemstack;
 
-
-                if (stack.Collectible.TransitionableProps != null && stack.Collectible.TransitionableProps.Length > 0)
+                if (
+                    stack.Collectible.TransitionableProps != null &&
+                    stack.Collectible.TransitionableProps.Length > 0
+                )
                 {
                     sb.Append(PerishableInfoCompact(Api, inv[j], cureRate));
                 }
@@ -163,7 +196,13 @@ namespace Alchemy
             }
         }
 
-        public static string PerishableInfoCompact(ICoreAPI Api, ItemSlot contentSlot, float cureRate, bool withStackName = true)
+        public static string
+        PerishableInfoCompact(
+            ICoreAPI Api,
+            ItemSlot contentSlot,
+            float cureRate,
+            bool withStackName = true
+        )
         {
             if (contentSlot.Empty) return "";
 
@@ -174,7 +213,11 @@ namespace Alchemy
                 dsc.Append(contentSlot.Itemstack.GetName());
             }
 
-            TransitionState[] transitionStates = contentSlot.Itemstack?.Collectible.UpdateAndGetTransitionStates(Api.World, contentSlot);
+            TransitionState[] transitionStates =
+                contentSlot
+                    .Itemstack?
+                    .Collectible
+                    .UpdateAndGetTransitionStates(Api.World, contentSlot);
 
             bool nowSpoiling = false;
 
@@ -183,43 +226,73 @@ namespace Alchemy
                 bool appendLine = false;
                 foreach (TransitionState state in transitionStates)
                 {
-
                     TransitionableProperties prop = state.Props;
-                    float perishRate = contentSlot.Itemstack.Collectible.GetTransitionRateMul(Api.World, contentSlot, prop.Type);
+                    float perishRate =
+                        contentSlot
+                            .Itemstack
+                            .Collectible
+                            .GetTransitionRateMul(Api.World,
+                            contentSlot,
+                            prop.Type);
 
                     float transitionLevel = state.TransitionLevel;
                     float freshHoursLeft = state.FreshHoursLeft / perishRate;
-                    float transitionHoursLeft = (state.TransitionHours - state.TransitionedHours) / 3;
+                    float transitionHoursLeft =
+                        (state.TransitionHours - state.TransitionedHours) / 3;
                     double hoursPerday = Api.World.Calendar.HoursPerDay;
 
                     switch (prop.Type)
                     {
                         case EnumTransitionType.Perish:
-
                             appendLine = true;
 
                             if (transitionLevel > 0f)
                             {
                                 nowSpoiling = true;
-                                dsc.Append(", " + Lang.Get("{0}% spoiled", new object[]
-                                {
-                                    (int)Math.Round(transitionLevel * 100f)
-                                }));
+                                dsc
+                                    .Append(", " +
+                                    Lang
+                                        .Get("{0}% spoiled",
+                                        new object[] {
+                                            (int)
+                                            Math.Round(transitionLevel * 100f)
+                                        }));
                             }
                             else
                             {
-
-                                if (freshHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
+                                if (
+                                    freshHoursLeft / hoursPerday >=
+                                    Api.World.Calendar.DaysPerYear
+                                )
                                 {
-                                    dsc.Append(", " + Lang.Get("fresh for {0} years", Math.Round(freshHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("fresh for {0} years",
+                                            Math
+                                                .Round(freshHoursLeft /
+                                                hoursPerday /
+                                                Api.World.Calendar.DaysPerYear,
+                                                1)));
                                 }
                                 else if (freshHoursLeft > hoursPerday)
                                 {
-                                    dsc.Append(", " + Lang.Get("fresh for {0} days", Math.Round(freshHoursLeft / hoursPerday, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("fresh for {0} days",
+                                            Math
+                                                .Round(freshHoursLeft /
+                                                hoursPerday,
+                                                1)));
                                 }
                                 else
                                 {
-                                    dsc.Append(", " + Lang.Get("fresh for {0} hours", Math.Round(freshHoursLeft, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("fresh for {0} hours",
+                                            Math.Round(freshHoursLeft, 1)));
                                 }
                             }
                             break;
@@ -229,21 +302,50 @@ namespace Alchemy
                             appendLine = true;
                             if (transitionLevel > 0)
                             {
-                                dsc.Append(", " + Lang.Get("{1:0.#} days left to dry ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday));
+                                dsc
+                                    .Append(", " +
+                                    Lang
+                                        .Get("{1:0.#} days left to dry ({0}%)",
+                                        (int) Math.Round(transitionLevel * 100),
+                                        transitionHoursLeft / hoursPerday));
                             }
                             else
                             {
-                                if (transitionHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
+                                if (
+                                    transitionHoursLeft / hoursPerday >=
+                                    Api.World.Calendar.DaysPerYear
+                                )
                                 {
-                                    dsc.Append(", " + Lang.Get("will dry in {0} years", Math.Round(transitionHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will dry in {0} years",
+                                            Math
+                                                .Round(transitionHoursLeft /
+                                                hoursPerday /
+                                                Api.World.Calendar.DaysPerYear,
+                                                1)));
                                 }
                                 else if (transitionHoursLeft > hoursPerday)
                                 {
-                                    dsc.Append(", " + Lang.Get("will dry in {0} days", Math.Round(transitionHoursLeft / hoursPerday, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will dry in {0} days",
+                                            Math
+                                                .Round(transitionHoursLeft /
+                                                hoursPerday,
+                                                1)));
                                 }
                                 else
                                 {
-                                    dsc.Append(", " + Lang.Get("will dry in {0} hours", Math.Round(transitionHoursLeft, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will dry in {0} hours",
+                                            Math
+                                                .Round(transitionHoursLeft,
+                                                1)));
                                 }
                             }
                             break;
@@ -254,28 +356,55 @@ namespace Alchemy
 
                             if (transitionLevel > 0)
                             {
-                                dsc.Append(", " + Lang.Get("{1:0.#} days left to cure ({0}%)", (int)Math.Round(transitionLevel * 100), transitionHoursLeft / hoursPerday / cureRate));
+                                dsc
+                                    .Append(", " +
+                                    Lang
+                                        .Get("{1:0.#} days left to cure ({0}%)",
+                                        (int) Math.Round(transitionLevel * 100),
+                                        transitionHoursLeft /
+                                        hoursPerday /
+                                        cureRate));
                             }
                             else
                             {
-
-                                if (freshHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
+                                if (
+                                    freshHoursLeft / hoursPerday >=
+                                    Api.World.Calendar.DaysPerYear
+                                )
                                 {
-                                    dsc.Append(", " + Lang.Get("will cure in {0} years", Math.Round(freshHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will cure in {0} years",
+                                            Math
+                                                .Round(freshHoursLeft /
+                                                hoursPerday /
+                                                Api.World.Calendar.DaysPerYear,
+                                                1)));
                                 }
                                 else if (freshHoursLeft > hoursPerday)
                                 {
-                                    dsc.Append(", " + Lang.Get("will cure in {0} days", Math.Round(freshHoursLeft / hoursPerday, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will cure in {0} days",
+                                            Math
+                                                .Round(freshHoursLeft /
+                                                hoursPerday,
+                                                1)));
                                 }
                                 else
                                 {
-                                    dsc.Append(", " + Lang.Get("will cure in {0} hours", Math.Round(freshHoursLeft, 1)));
+                                    dsc
+                                        .Append(", " +
+                                        Lang
+                                            .Get("will cure in {0} hours",
+                                            Math.Round(freshHoursLeft, 1)));
                                 }
                             }
                             break;
                     }
                 }
-
 
                 if (appendLine) dsc.AppendLine();
             }
@@ -288,6 +417,7 @@ namespace Alchemy
             float x;
             float z;
             float rotate;
+
             //Api.Logger.Debug("potion {0}", index);
             switch (index)
             {
@@ -300,42 +430,49 @@ namespace Alchemy
                     x = 2.75f / 16f;
                     z = 3.25f / 16f;
                     rotate = 315f;
+
                     //rotate = -0.785398175f;
                     break;
                 case 2:
                     x = 3 / 16f;
                     z = 13 / 16f;
                     rotate = 45f;
+
                     //rotate = 0.785398175f;
                     break;
                 case 3:
                     x = 8 / 16f;
                     z = 1f / 16f;
                     rotate = 270f;
+
                     //rotate = 1.57079635f;
                     break;
                 case 4:
                     x = 8 / 16f;
                     z = 15f / 16f;
                     rotate = 90f;
+
                     //rotate = -1.57079635f;
                     break;
                 case 5:
                     x = 13.25f / 16f;
                     z = 3.25f / 16f;
                     rotate = 225f;
+
                     //rotate = -2.356194525f;
                     break;
                 case 6:
                     x = 13 / 16f;
                     z = 13 / 16f;
                     rotate = 135f;
+
                     //rotate = 2.356194525f;
                     break;
                 case 7:
                     x = 15f / 16f;
                     z = 8 / 16f;
                     rotate = 180f;
+
                     //rotate = 0f;
                     break;
                 default:
@@ -346,7 +483,11 @@ namespace Alchemy
             }
 
             mesh.Scale(new Vec3f(0.5f, 0f, 0.5f), 0.75f, 0.75f, 0.75f);
-            mesh.Rotate(new Vec3f(0.5f, 0f, 0.5f), 0f, rotate * GameMath.DEG2RAD, 0f);
+            mesh
+                .Rotate(new Vec3f(0.5f, 0f, 0.5f),
+                0f,
+                rotate * GameMath.DEG2RAD,
+                0f);
             mesh.Translate(x - 0.5f, -0.175f, z - 0.5f);
         }
     }

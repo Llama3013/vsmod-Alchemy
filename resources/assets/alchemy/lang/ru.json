@@ -62,7 +62,7 @@
   "itemdesc-potionbase-speed-medium": "Используется, чтобы приготовить Фляга Бегуна (среднее)",
   "item-potionbase-vitality-medium": "Фляга Жизни (основа, среднее)",
   "itemdesc-potionbase-vitality-medium": "Используется, чтобы приготовить Фляга Жизни (среднее)",
-  
+
   "item-potionbase-archer-strong": "Зелье Лучника (основа, сильное)",
   "itemdesc-potionbase-archer-strong": "Используется, чтобы приготовить Зелье Лучника (сильное)",
   "item-potionbase-healingeffect-strong": "Концентрированное Масло (основа, сильное)",
@@ -244,7 +244,7 @@
   "block-potion-tube-quartz-predator-strong": "Феромоны Хищника (сильное)",
   "block-potion-tube-quartz-scentmask-strong": "Маска Запаха (сильное)",
   "block-potion-tube-quartz-vitality-strong": "Фляга Жизни (сильное)",
-  
+
   "block-potion-normal-smoky-all-weak": "Debug potion (слабое)",
   "block-potion-normal-smoky-alltick-weak": "Debug gametick potion (слабое)",
   "block-potion-normal-smoky-archer-weak": "Зелье Лучника (слабое)",
@@ -912,7 +912,7 @@
   "item-cuttings-thyme-dried": "Сушеные листья (чабрец)",
   "item-cuttings-cornflower-dried": "Сушеные листья ",
   "item-cuttings-woad-dried": "Сушеные листья ",
-  
+
   "item-cuttings-catmint-cooked": "Вареные листья (кошачья мята)",
   "item-cuttings-forgetmenot-cooked": "Вареные листья (незабудка)",
   "item-cuttings-edelweiss-cooked": "Вареные листья (эдельвейс)",
@@ -962,7 +962,7 @@
   "block-potionflask-tube-quartz-burned": "Бутылка для зелий",
   "blockdesc-potionflask-tube-quartz-burned": "Используется, чтобы хранить зелья",
   "block-potionflask-tube-quartz-raw": "Бутылка для зелий (необож.)",
-  
+
   "block-potionflask-normal-smoky-burned": "Бутылка для зелий",
   "blockdesc-potionflask-normal-smoky-burned": "Используется, чтобы хранить зелья",
   "block-potionflask-normal-smoky-raw": "Бутылка для зелий (необож.)",

@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
-using Vintagestory.GameContent;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace Alchemy
 {
     public class TempEffect
     {
         EntityPlayer effectedEntity;
+
         Dictionary<string, float> effectedList;
+
         string effectCode;
+
         string effectId;
 
         /// <summary>
@@ -22,7 +25,13 @@ namespace Alchemy
         /// <param name="code"> The identity of what is changing the stat. If "code" is present on same stat then the latest Set will override it. </param>
         /// <param name="duration"> The amount of time in seconds that the stat will be changed for. </param>
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
-        public void tempEntityStats(EntityPlayer entity, Dictionary<string, float> effectList, string code, int duration, string id)
+        public void tempEntityStats(
+            EntityPlayer entity,
+            Dictionary<string, float> effectList,
+            string code,
+            int duration,
+            string id
+        )
         {
             effectedEntity = entity;
             effectedList = effectList;
@@ -32,12 +41,20 @@ namespace Alchemy
             {
                 setTempStats();
             }
-            long effectIdCallback = effectedEntity.World.RegisterCallback(resetTempStats, duration * 1000);
-            effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
+            long effectIdCallback =
+                effectedEntity
+                    .World
+                    .RegisterCallback(resetTempStats, duration * 1000);
+            effectedEntity.WatchedAttributes.SetLong (
+                effectId,
+                effectIdCallback
+            );
         }
 
         int effectDuration;
+
         int effectTickSec;
+
         float effectHealth = 0;
 
         /// <summary>
@@ -48,7 +65,15 @@ namespace Alchemy
         /// <param name="code"> The identity of what is changing the stat. If "code" is present on same stat then the latest Set will override it. </param>
         /// <param name="duration"> The amount of time in seconds that the stat will be changed for. </param>
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
-        public void tempTickEntityStats(EntityPlayer entity, Dictionary<string, float> effectList, string code, int duration, string id, int tickSec, float health)
+        public void tempTickEntityStats(
+            EntityPlayer entity,
+            Dictionary<string, float> effectList,
+            string code,
+            int duration,
+            string id,
+            int tickSec,
+            float health
+        )
         {
             effectedEntity = entity;
             effectedList = effectList;
@@ -61,8 +86,12 @@ namespace Alchemy
             {
                 setTempStats();
             }
-            long effectIdGametick = entity.World.RegisterGameTickListener(onEffectTick, 1000);
-            effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
+            long effectIdGametick =
+                entity.World.RegisterGameTickListener(onEffectTick, 1000);
+            effectedEntity.WatchedAttributes.SetLong (
+                effectId,
+                effectIdGametick
+            );
         }
 
         /// <summary>
@@ -70,18 +99,37 @@ namespace Alchemy
         /// </summary>
         public void setTempStats()
         {
-            if (effectedList.ContainsKey("maxhealthExtraPoints")) {
-                effectedEntity.World.Api.Logger.Debug("blendedhealth {0}", effectedEntity.Stats.GetBlended("maxhealthExtraPoints"));
-                effectedEntity.World.Api.Logger.Debug("maxhealthExtraPoints {0}", effectedList["maxhealthExtraPoints"]);
-                effectedList["maxhealthExtraPoints"] = (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints")) * effectedList["maxhealthExtraPoints"];
+            if (effectedList.ContainsKey("maxhealthExtraPoints"))
+            {
+                effectedEntity
+                    .World
+                    .Api
+                    .Logger
+                    .Debug("blendedhealth {0}",
+                    effectedEntity.Stats.GetBlended("maxhealthExtraPoints"));
+                effectedEntity
+                    .World
+                    .Api
+                    .Logger
+                    .Debug("maxhealthExtraPoints {0}",
+                    effectedList["maxhealthExtraPoints"]);
+                effectedList["maxhealthExtraPoints"] =
+                    (
+                    14f +
+                    effectedEntity.Stats.GetBlended("maxhealthExtraPoints")
+                    ) *
+                    effectedList["maxhealthExtraPoints"];
             }
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
-                effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
+                effectedEntity
+                    .Stats
+                    .Set(stat.Key, effectCode, stat.Value, false);
             }
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
-                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                EntityBehaviorHealth ebh =
+                    effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
         }
@@ -95,6 +143,7 @@ namespace Alchemy
         }
 
         int tickCnt = 0;
+
         public void onEffectTick(float dt)
         {
             tickCnt++;
@@ -105,17 +154,25 @@ namespace Alchemy
                     if (effectHealth != 0)
                     {
                         //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
-                        effectedEntity.ReceiveDamage(new DamageSource()
-                        {
-                            Source = EnumDamageSource.Internal,
-                            Type = effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
-                        }, Math.Abs(effectHealth));
+                        effectedEntity
+                            .ReceiveDamage(new DamageSource()
+                            {
+                                Source = EnumDamageSource.Internal,
+                                Type =
+                                    effectHealth > 0
+                                        ? EnumDamageType.Heal
+                                        : EnumDamageType.Poison
+                            },
+                            Math.Abs(effectHealth));
                     }
                 }
                 if (tickCnt >= effectDuration)
                 {
-                    long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
-                    effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
+                    long effectIdGametick =
+                        effectedEntity.WatchedAttributes.GetLong(effectId);
+                    effectedEntity.World.UnregisterGameTickListener (
+                        effectIdGametick
+                    );
                     reset();
                 }
             }
@@ -123,28 +180,40 @@ namespace Alchemy
 
         public void reset()
         {
-            
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Remove(stat.Key, effectCode);
             }
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
-                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                EntityBehaviorHealth ebh =
+                    effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
             if (effectId.Contains("tickpotionid"))
             {
-                long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
-                effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
+                long effectIdGametick =
+                    effectedEntity.WatchedAttributes.GetLong(effectId);
+                effectedEntity.World.UnregisterGameTickListener (
+                    effectIdGametick
+                );
                 effectDuration = 0;
                 effectHealth = 0;
                 effectTickSec = 0;
             }
-            effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
+            effectedEntity.WatchedAttributes.RemoveAttribute (effectId);
 
-            IServerPlayer player = (effectedEntity.World.PlayerByUid((effectedEntity as EntityPlayer).PlayerUID) as IServerPlayer);
-            player.SendMessage(GlobalConstants.InfoLogChatGroup, "You feel the effects of the potion disapate", EnumChatType.Notification);
+            IServerPlayer player =
+                (
+                effectedEntity
+                    .World
+                    .PlayerByUid((effectedEntity as EntityPlayer).PlayerUID) as
+                IServerPlayer
+                );
+            player
+                .SendMessage(GlobalConstants.InfoLogChatGroup,
+                "You feel the effects of the potion disapate",
+                EnumChatType.Notification);
         }
 
         public void resetAllTempStats(EntityPlayer entity, string effectCode)
@@ -153,11 +222,16 @@ namespace Alchemy
             {
                 entity.Stats.Remove(stats.Key, effectCode);
             }
-            EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
+            EntityBehaviorHealth ebh =
+                entity.GetBehavior<EntityBehaviorHealth>();
             ebh.MarkDirty();
         }
 
-        public void resetAllAttrListeners(EntityPlayer entity, string callbackCode, string listenerCode)
+        public void resetAllAttrListeners(
+            EntityPlayer entity,
+            string callbackCode,
+            string listenerCode
+        )
         {
             foreach (var watch in entity.WatchedAttributes.Keys)
             {
@@ -165,36 +239,43 @@ namespace Alchemy
                 {
                     try
                     {
-                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId =
+                            entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
-                            entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.WatchedAttributes.RemoveAttribute (watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute(watch);
+                        entity.WatchedAttributes.RemoveAttribute (watch);
                     }
                 }
                 else if (watch.Contains(listenerCode))
                 {
                     try
                     {
-                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId =
+                            entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
-                            entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.WatchedAttributes.RemoveAttribute (watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute(watch);
+                        entity.WatchedAttributes.RemoveAttribute (watch);
                     }
                 }
             }
         }
 
-        public bool resetAllListeners(EntityPlayer entity, string callbackCode, string listenerCode)
+        public bool
+        resetAllListeners(
+            EntityPlayer entity,
+            string callbackCode,
+            string listenerCode
+        )
         {
             bool effectReseted = false;
             foreach (var watch in entity.WatchedAttributes.Keys)
@@ -203,34 +284,38 @@ namespace Alchemy
                 {
                     try
                     {
-                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId =
+                            entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
                             effectReseted = true;
-                            entity.World.UnregisterCallback(potionListenerId);
-                            entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.World.UnregisterCallback (potionListenerId);
+                            entity.WatchedAttributes.RemoveAttribute (watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute(watch);
+                        entity.WatchedAttributes.RemoveAttribute (watch);
                     }
                 }
                 else if (watch.Contains(listenerCode))
                 {
                     try
                     {
-                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId =
+                            entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
                             effectReseted = true;
-                            entity.World.UnregisterGameTickListener(potionListenerId);
-                            entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.World.UnregisterGameTickListener (
+                                potionListenerId
+                            );
+                            entity.WatchedAttributes.RemoveAttribute (watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute(watch);
+                        entity.WatchedAttributes.RemoveAttribute (watch);
                     }
                 }
             }
