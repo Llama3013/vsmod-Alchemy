@@ -2,7 +2,7 @@
   {
     "code": "alchemy:utilitypotionportion-recall",
     "ingredients": [
-      { "type": "item", "code": "alchemy:utilitypotionbase-*", "name": "potiontype", "allowedVariants": ["recall", "glow"] },
+      { "type": "item", "code": "alchemy:utilitypotionbase-*", "name": "potiontype", "allowedVariants": ["recall", "glow", "waterbreathe"] },
       { "type": "item", "code": "alchemy:potionteaportion", "litres": 1 }
     ],
     "sealHours": 24,

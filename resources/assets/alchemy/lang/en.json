@@ -94,6 +94,8 @@
   "itemdesc-utilitypotionbase-recall": "Used to make Recall Flask potion",
   "item-utilitypotionbase-glow": "Glow Flask base",
   "itemdesc-utilitypotionbase-glow": "Used to make Glow Flask potion",
+  "item-utilitypotionbase-waterbreathe": "Water Breathing Flask base",
+  "itemdesc-utilitypotionbase-waterbreathe": "Used to make Water Breathing Flask potion",
 
   "alchemy:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
   "alchemy:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
@@ -148,6 +150,7 @@
 
   "alchemy:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Glow Flask",
+  "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
 
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
 
@@ -204,6 +207,7 @@
 
   "game:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "game:incontainer-item-utilitypotionportion-glow": "Glow Flask",
+  "game:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
 
   "game:incontainer-item-potionteaportion": "Potion tea",
 
@@ -211,6 +215,7 @@
 
   "item-utilitypotionportion-recall": "Recall Flask",
   "item-utilitypotionportion-glow": "Glow Flask",
+  "item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
 
   "block-claypotionflask-raw": "Ceramic Potion Flask (Raw)",
 	"block-claypotionflask-fired": "Ceramic Potion Flask (Fired)",
@@ -283,6 +288,7 @@
   "item-potionportion-vitality-strong": "Vitality Flask (strong)",
   "itemdesc-utilitypotionportion-recall": "When potion is used: You teleport back to your returning point",
   "itemdesc-utilitypotionportion-glow": "When potion is used: You glow brightly",
+  "itemdesc-utilitypotionportion-waterbreathe": "When potion is used: You can breathe underwater",
 
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
   "item-cuttings-forgetmenot-raw": "Raw Cuttings (forgetmenot)",

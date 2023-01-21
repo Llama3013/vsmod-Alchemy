@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "code": "utilitypotionportion",
-  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow"] }],
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe"] }],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributesByType": {
@@ -43,6 +43,26 @@
           "stack": { "type": "item", "code": "utilitypotionportion-glow" }
         }
       }
+    },
+    "*-waterbreathe": {
+      "potioninfo": {
+        "potionId": "waterbreathepotionid",
+        "duration": 1000
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/fire-blue" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-waterbreathe" }
+        }
+      }
     }
   },
   "creativeinventoryStacks": [
@@ -63,6 +83,9 @@
     },
     "*-glow": {
       "all": { "base": "game:block/fire-yellow" }
+    },
+    "*-waterbreathe": {
+      "all": { "base": "game:block/fire-blue" }
     }
   },
   "guiTransform": {

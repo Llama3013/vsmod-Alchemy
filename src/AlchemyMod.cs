@@ -8,7 +8,7 @@ using Vintagestory.API.Server;
     assembly:
     ModInfo(
         "AlchemyMod",
-        Version = "1.6.4",
+        Version = "1.6.5",
         Description =
             "An alchemy mod that adds a couple of player enhancing potions.",
         Website = "https://github.com/llama3013/vsmod-Alchemy",
@@ -17,7 +17,7 @@ using Vintagestory.API.Server;
         RequiredOnServer = true,
         IconPath = "modicon.png")
 ]
-[assembly: ModDependency("game", "1.16.0-pre.3")]
+[assembly: ModDependency("game", "1.17.3")]
 
 /*json block glow 
 vertexFlags: {
