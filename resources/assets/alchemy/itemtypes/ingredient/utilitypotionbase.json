@@ -2,7 +2,7 @@
   "code": "utilitypotionbase",
   "shape": { "base": "alchemy:item/potionbase" },
   "creativeinventory": { "general": ["*"], "items": ["*"] },
-  "variantgroups": [{ "code": "basetype", "states": ["recall", "glow", "waterbreathe"] }],
+  "variantgroups": [{ "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition"] }],
   "attributes": {
     "handbook": {
       "groupBy": ["potionbase-{basetype}"]

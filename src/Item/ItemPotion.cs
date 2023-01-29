@@ -200,7 +200,7 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
-                if (potionId == "recallpotionid")
+                if (potionId == "recallpotionid" || potionId == "nutritionpotionid")
                 {
 
                 }
@@ -219,8 +219,31 @@ namespace Alchemy
                     IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
                     if (potionId == "recallpotionid")
                     {
-                        FuzzyEntityPos spawn = player.GetSpawnPosition(false);
-                        byEntity.TeleportTo(spawn);
+                        if (api.Side.IsServer())
+                        {
+                            FuzzyEntityPos spawn = player.GetSpawnPosition(false);
+                            byEntity.TeleportTo(spawn);
+                        }
+                        player.SendMessage(
+                            GlobalConstants.InfoLogChatGroup,
+                            "You feel the effects of the " + slot.Itemstack.GetName(),
+                            EnumChatType.Notification
+                        );
+                    }
+                    else if (potionId == "nutritionpotionid") {
+                        ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
+                        if (hungerTree != null) {
+                            float fruitLevel = hungerTree.GetFloat("fruitLevel");
+                            float vegetableLevel = hungerTree.GetFloat("vegetableLevel");
+                            float grainLevel = hungerTree.GetFloat("grainLevel");
+                            float proteinLevel = hungerTree.GetFloat("proteinLevel");
+                            float dairyLevel = hungerTree.GetFloat("dairyLevel");
+                            byEntity.World.Logger.Debug("fruit level: {0}", fruitLevel);
+                            byEntity.World.Logger.Debug("vegetableLevel: {0}", vegetableLevel);
+                            byEntity.World.Logger.Debug("grainLevel: {0}", grainLevel);
+                            byEntity.World.Logger.Debug("proteinLevel: {0}", proteinLevel);
+                            byEntity.World.Logger.Debug("dairyLevel: {0}", dairyLevel);
+                        }
                     }
                     else
                     {

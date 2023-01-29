@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "code": "utilitypotionportion",
-  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe"] }],
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition"] }],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributesByType": {
@@ -21,6 +21,25 @@
         "whenSpilled": {
           "action": "DropContents",
           "stack": { "type": "item", "code": "utilitypotionportion-recall" }
+        }
+      }
+    },
+    "*-nutrition": {
+      "potioninfo": {
+        "potionId": "nutritionpotionid"
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/hay/aged-side" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-nutrition" }
         }
       }
     },
