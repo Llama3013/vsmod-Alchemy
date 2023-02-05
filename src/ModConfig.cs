@@ -14,14 +14,14 @@ namespace Alchemy
             if (config == null)
             {
                 config = new ModConfig();
-                Save (api, config);
+                Save(api, config);
             }
             return config;
         }
 
         public static void Save(ICoreAPI api, ModConfig config)
         {
-            api.StoreModConfig (config, filename);
+            api.StoreModConfig(config, filename);
         }
     }
 }

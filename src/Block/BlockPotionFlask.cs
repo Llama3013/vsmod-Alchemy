@@ -217,6 +217,7 @@ namespace Alchemy
         }
 #endregion
 
+#region Interaction
         public override void OnHeldInteractStart(
             ItemSlot slot,
             EntityAgent byEntity,
@@ -453,9 +454,13 @@ namespace Alchemy
                                 EnumChatType.Notification
                             );
                         }
-                        else if (potionId == "nutritionpotionid") {
-                            ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
-                            if (hungerTree != null) {
+                        else if (potionId == "nutritionpotionid")
+                        {
+                            ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute(
+                                "hunger"
+                            );
+                            if (hungerTree != null)
+                            {
                                 // SortedList<string, float> oldSatietyLevels = new SortedList<string, float>();
                                 // oldSatietyLevels.Add("fruitlevel", hungerTree.GetFloat("fruitLevel"));
                                 // oldSatietyLevels.Add("vegetableLevel", hungerTree.GetFloat("vegetableLevel"));
@@ -471,12 +476,22 @@ namespace Alchemy
                                 // {
                                 //     byEntity.World.Logger.Debug("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
                                 // }
-                                float totalSatiety = (hungerTree.GetFloat("fruitLevel") + hungerTree.GetFloat("vegetableLevel") + hungerTree.GetFloat("grainLevel") + hungerTree.GetFloat("proteinLevel") + hungerTree.GetFloat("dairyLevel")) * 0.9f;
-                                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety/5, 0));
-                                hungerTree.SetFloat("vegetableLevel", Math.Max(totalSatiety/5, 0));
-                                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety/5, 0));
-                                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety/5, 0));
-                                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety/5, 0));
+                                float totalSatiety =
+                                    (
+                                        hungerTree.GetFloat("fruitLevel")
+                                        + hungerTree.GetFloat("vegetableLevel")
+                                        + hungerTree.GetFloat("grainLevel")
+                                        + hungerTree.GetFloat("proteinLevel")
+                                        + hungerTree.GetFloat("dairyLevel")
+                                    ) * 0.9f;
+                                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat(
+                                    "vegetableLevel",
+                                    Math.Max(totalSatiety / 5, 0)
+                                );
+                                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
                                 byEntity.WatchedAttributes.MarkPathDirty("hunger");
                             }
                         }
@@ -515,16 +530,7 @@ namespace Alchemy
             }
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
-
-        public static void PrintKeysAndValues(SortedList myList)
-        {
-            Console.WriteLine("\t-KEY-\t-VALUE-");
-            for (int i = 0; i < myList.Count; i++)
-            {
-                Console.WriteLine("\t{0}:\t{1}", myList.GetKey(i), myList.GetByIndex(i));
-            }
-            Console.WriteLine();
-        }
+#endregion
 
         private int splitStackAndPerformAction(
             Entity byEntity,

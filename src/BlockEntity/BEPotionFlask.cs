@@ -3,13 +3,8 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Config;
-
 
 namespace Alchemy
 {
@@ -55,8 +50,9 @@ namespace Alchemy
 
         internal MeshData GenMesh()
         {
-            if (ownBlock == null || ownBlock.Code.Path.Contains("clay")) return null;
-            
+            if (ownBlock == null || ownBlock.Code.Path.Contains("clay"))
+                return null;
+
             MeshData mesh = ownBlock.GenMesh(Api as ICoreClientAPI, GetContent(), Pos);
 
             return mesh;
@@ -64,12 +60,16 @@ namespace Alchemy
 
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
         {
-            if (currentMesh == null || ownBlock.Code.Path.Contains("clay")) return false;
+            if (currentMesh == null || ownBlock.Code.Path.Contains("clay"))
+                return false;
             mesher.AddMeshData(currentMesh.Clone().Rotate(new Vec3f(0.5f, 0.5f, 0.5f), 0, 0, 0));
             return true;
         }
 
-        public override void FromTreeAttributes(ITreeAttribute tree, IWorldAccessor worldForResolving)
+        public override void FromTreeAttributes(
+            ITreeAttribute tree,
+            IWorldAccessor worldForResolving
+        )
         {
             base.FromTreeAttributes(tree, worldForResolving);
 
@@ -87,9 +87,16 @@ namespace Alchemy
             if (slot.Empty)
             {
                 dsc.AppendLine(Lang.Get("Empty"));
-            } else 
+            }
+            else
             {
-                dsc.AppendLine(Lang.Get("Contents: {0}x{1}", slot.Itemstack.StackSize, slot.Itemstack.GetName()));
+                dsc.AppendLine(
+                    Lang.Get(
+                        "Contents: {0}x{1}",
+                        slot.Itemstack.StackSize,
+                        slot.Itemstack.GetName()
+                    )
+                );
             }
         }
     }

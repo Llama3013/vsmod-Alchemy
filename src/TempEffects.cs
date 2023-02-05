@@ -41,14 +41,11 @@ namespace Alchemy
             {
                 setTempStats();
             }
-            long effectIdCallback =
-                effectedEntity
-                    .World
-                    .RegisterCallback(resetTempStats, duration * 1000);
-            effectedEntity.WatchedAttributes.SetLong (
-                effectId,
-                effectIdCallback
+            long effectIdCallback = effectedEntity.World.RegisterCallback(
+                resetTempStats,
+                duration * 1000
             );
+            effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
 
         int effectDuration;
@@ -86,12 +83,8 @@ namespace Alchemy
             {
                 setTempStats();
             }
-            long effectIdGametick =
-                entity.World.RegisterGameTickListener(onEffectTick, 1000);
-            effectedEntity.WatchedAttributes.SetLong (
-                effectId,
-                effectIdGametick
-            );
+            long effectIdGametick = entity.World.RegisterGameTickListener(onEffectTick, 1000);
+            effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
         }
 
         /// <summary>
@@ -101,35 +94,25 @@ namespace Alchemy
         {
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
-                effectedEntity
-                    .World
-                    .Api
-                    .Logger
-                    .Debug("blendedhealth {0}",
-                    effectedEntity.Stats.GetBlended("maxhealthExtraPoints"));
-                effectedEntity
-                    .World
-                    .Api
-                    .Logger
-                    .Debug("maxhealthExtraPoints {0}",
-                    effectedList["maxhealthExtraPoints"]);
-                effectedList["maxhealthExtraPoints"] =
-                    (
-                    14f +
+                effectedEntity.World.Api.Logger.Debug(
+                    "blendedhealth {0}",
                     effectedEntity.Stats.GetBlended("maxhealthExtraPoints")
-                    ) *
-                    effectedList["maxhealthExtraPoints"];
+                );
+                effectedEntity.World.Api.Logger.Debug(
+                    "maxhealthExtraPoints {0}",
+                    effectedList["maxhealthExtraPoints"]
+                );
+                effectedList["maxhealthExtraPoints"] =
+                    (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints"))
+                    * effectedList["maxhealthExtraPoints"];
             }
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
-                effectedEntity
-                    .Stats
-                    .Set(stat.Key, effectCode, stat.Value, false);
+                effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
             }
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
-                EntityBehaviorHealth ebh =
-                    effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
         }
@@ -154,25 +137,21 @@ namespace Alchemy
                     if (effectHealth != 0)
                     {
                         //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
-                        effectedEntity
-                            .ReceiveDamage(new DamageSource()
+                        effectedEntity.ReceiveDamage(
+                            new DamageSource()
                             {
                                 Source = EnumDamageSource.Internal,
                                 Type =
-                                    effectHealth > 0
-                                        ? EnumDamageType.Heal
-                                        : EnumDamageType.Poison
+                                    effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
                             },
-                            Math.Abs(effectHealth));
+                            Math.Abs(effectHealth)
+                        );
                     }
                 }
                 if (tickCnt >= effectDuration)
                 {
-                    long effectIdGametick =
-                        effectedEntity.WatchedAttributes.GetLong(effectId);
-                    effectedEntity.World.UnregisterGameTickListener (
-                        effectIdGametick
-                    );
+                    long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
+                    effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
                     reset();
                 }
             }
@@ -186,34 +165,28 @@ namespace Alchemy
             }
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
-                EntityBehaviorHealth ebh =
-                    effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                 ebh.MarkDirty();
             }
             if (effectId.Contains("tickpotionid"))
             {
-                long effectIdGametick =
-                    effectedEntity.WatchedAttributes.GetLong(effectId);
-                effectedEntity.World.UnregisterGameTickListener (
-                    effectIdGametick
-                );
+                long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
+                effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
                 effectDuration = 0;
                 effectHealth = 0;
                 effectTickSec = 0;
             }
-            effectedEntity.WatchedAttributes.RemoveAttribute (effectId);
+            effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
 
-            IServerPlayer player =
-                (
-                effectedEntity
-                    .World
-                    .PlayerByUid((effectedEntity as EntityPlayer).PlayerUID) as
-                IServerPlayer
-                );
-            player
-                .SendMessage(GlobalConstants.InfoLogChatGroup,
+            IServerPlayer player = (
+                effectedEntity.World.PlayerByUid((effectedEntity as EntityPlayer).PlayerUID)
+                as IServerPlayer
+            );
+            player.SendMessage(
+                GlobalConstants.InfoLogChatGroup,
                 "You feel the effects of the potion disapate",
-                EnumChatType.Notification);
+                EnumChatType.Notification
+            );
         }
 
         public void resetAllTempStats(EntityPlayer entity, string effectCode)
@@ -222,8 +195,7 @@ namespace Alchemy
             {
                 entity.Stats.Remove(stats.Key, effectCode);
             }
-            EntityBehaviorHealth ebh =
-                entity.GetBehavior<EntityBehaviorHealth>();
+            EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
             ebh.MarkDirty();
         }
 
@@ -239,43 +211,36 @@ namespace Alchemy
                 {
                     try
                     {
-                        long potionListenerId =
-                            entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
-                            entity.WatchedAttributes.RemoveAttribute (watch);
+                            entity.WatchedAttributes.RemoveAttribute(watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute (watch);
+                        entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }
                 else if (watch.Contains(listenerCode))
                 {
                     try
                     {
-                        long potionListenerId =
-                            entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
-                            entity.WatchedAttributes.RemoveAttribute (watch);
+                            entity.WatchedAttributes.RemoveAttribute(watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute (watch);
+                        entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }
             }
         }
 
-        public bool
-        resetAllListeners(
-            EntityPlayer entity,
-            string callbackCode,
-            string listenerCode
-        )
+        public bool resetAllListeners(EntityPlayer entity, string callbackCode, string listenerCode)
         {
             bool effectReseted = false;
             foreach (var watch in entity.WatchedAttributes.Keys)
@@ -284,38 +249,34 @@ namespace Alchemy
                 {
                     try
                     {
-                        long potionListenerId =
-                            entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
                             effectReseted = true;
-                            entity.World.UnregisterCallback (potionListenerId);
-                            entity.WatchedAttributes.RemoveAttribute (watch);
+                            entity.World.UnregisterCallback(potionListenerId);
+                            entity.WatchedAttributes.RemoveAttribute(watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute (watch);
+                        entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }
                 else if (watch.Contains(listenerCode))
                 {
                     try
                     {
-                        long potionListenerId =
-                            entity.WatchedAttributes.GetLong(watch);
+                        long potionListenerId = entity.WatchedAttributes.GetLong(watch);
                         if (potionListenerId != 0)
                         {
                             effectReseted = true;
-                            entity.World.UnregisterGameTickListener (
-                                potionListenerId
-                            );
-                            entity.WatchedAttributes.RemoveAttribute (watch);
+                            entity.World.UnregisterGameTickListener(potionListenerId);
+                            entity.WatchedAttributes.RemoveAttribute(watch);
                         }
                     }
                     catch (InvalidCastException)
                     {
-                        entity.WatchedAttributes.RemoveAttribute (watch);
+                        entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }
             }

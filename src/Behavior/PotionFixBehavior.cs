@@ -6,16 +6,10 @@ namespace Alchemy
 {
     public class PotionFixBehavior : EntityBehavior
     {
-        private ModConfig config;
 
-        public PotionFixBehavior(Entity entity, ModConfig config) : base(entity)
+        public PotionFixBehavior(Entity entity) : base(entity)
         {
-            this.config = config;
-        }
-
-        public override string PropertyName()
-        {
-            return "PotionFixBehavior";
+            
         }
 
         private IServerPlayer GetIServerPlayer()
@@ -33,6 +27,11 @@ namespace Alchemy
             tempEffect.resetAllListeners((player.Entity as EntityPlayer), "potionid", "tickpotionid");
 
             base.OnEntityDeath(damageSourceForDeath);
+        }
+        
+        public override string PropertyName()
+        {
+            return "PotionFixBehavior";
         }
     }
 }
