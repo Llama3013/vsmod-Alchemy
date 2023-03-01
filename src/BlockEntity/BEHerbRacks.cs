@@ -11,6 +11,7 @@ namespace Alchemy
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {
         InventoryGeneric inv;
+        static int slotCount = 8;
 
         public override InventoryBase Inventory => inv;
 
@@ -23,7 +24,6 @@ namespace Alchemy
         public BlockEntityHerbRacks()
         {
             inv = new InventoryGeneric(8, "herbrack-0", null, null);
-            meshes = new MeshData[8];
         }
 
         public override void Initialize(ICoreAPI api)
@@ -406,79 +406,88 @@ namespace Alchemy
             return dsc.ToString();
         }
 
-        public override void TranslateMesh(MeshData mesh, int index)
+        protected override float[][] genTransformationMatrices()
         {
-            float x;
-            float z;
-            float rotate;
-
-            //Api.Logger.Debug("potion {0}", index);
-            switch (index)
+            float[][] tfMatrices = new float[slotCount][];
+            for (int index = 0; index < slotCount; index++)
             {
-                case 0:
-                    x = 1 / 16f;
-                    z = 8 / 16f;
-                    rotate = 0f;
-                    break;
-                case 1:
-                    x = 2.75f / 16f;
-                    z = 3.25f / 16f;
-                    rotate = 315f;
+                float x;
+                float y = -(3.10f / 16f);
+                float z;
+                float rotate;
 
-                    //rotate = -0.785398175f;
-                    break;
-                case 2:
-                    x = 3 / 16f;
-                    z = 13 / 16f;
-                    rotate = 45f;
+                //Api.Logger.Debug("potion {0}", index);
+                switch (index)
+                {
+                    case 0:
+                        x = -(5f / 16f);
+                        z = 2f / 16f;
+                        rotate = 0f;
 
-                    //rotate = 0.785398175f;
-                    break;
-                case 3:
-                    x = 8 / 16f;
-                    z = 1f / 16f;
-                    rotate = 270f;
+                        //rotate = 1.57079635f;
+                        break;
+                    case 1:
+                        x = 3.75f / 16f;
+                        z = 11.5f / 16f;
+                        rotate = 135f;
 
-                    //rotate = 1.57079635f;
-                    break;
-                case 4:
-                    x = 8 / 16f;
-                    z = 15f / 16f;
-                    rotate = 90f;
+                        //rotate = -2.356194525f;
+                        break;
+                    case 2:
+                        x = -(5.4f / 16f);
+                        z = 13f / 16f;
+                        rotate = 45f;
 
-                    //rotate = -1.57079635f;
-                    break;
-                case 5:
-                    x = 13.25f / 16f;
-                    z = 3.25f / 16f;
-                    rotate = 225f;
+                        //rotate = -0.785398175f;
+                        break;
+                    case 3:
+                        x = 14f / 16f;
+                        z = -5f / 16f;
+                        rotate = 270f;
 
-                    //rotate = -2.356194525f;
-                    break;
-                case 6:
-                    x = 13 / 16f;
-                    z = 13 / 16f;
-                    rotate = 135f;
+                        //rotate = 0f;
+                        break;
+                    case 4:
+                        x = 2f / 16f;
+                        z = 21f / 16f;
+                        rotate = 90f;
+                        break;
+                    case 5:
+                        x = 21.5f / 16f;
+                        z = 3.25f / 16f;
+                        rotate = 225f;
 
-                    //rotate = 2.356194525f;
-                    break;
-                case 7:
-                    x = 15f / 16f;
-                    z = 8 / 16f;
-                    rotate = 180f;
+                        //rotate = 2.356194525f;
+                        break;
+                    case 6:
+                        x = 13f / 16f;
+                        z = 21.5f / 16f;
+                        rotate = 135f;
 
-                    //rotate = 0f;
-                    break;
-                default:
-                    x = 0f;
-                    z = 0f;
-                    rotate = 0f;
-                    break;
+                        //rotate = awAWW0.785398175f;
+                        break;
+                    case 7:
+                        x = 21f / 16f;
+                        z = 14f / 16f;   
+                        rotate = 180f;
+
+                        //rotate = -1.57079635f;
+                        break;
+                    default:
+                        x = 0f;
+                        z = 0f;
+                        rotate = 0f;
+                        break;
+                }
+                tfMatrices[index] = 
+                    new Matrixf()
+                    .Translate(x, y, z)
+                    .Scale(0.75f, 0.75f, 0.75f)
+                    .RotateYDeg(rotate)
+                    .Values
+                ;
             }
-
-            mesh.Scale(new Vec3f(0.5f, 0f, 0.5f), 0.75f, 0.75f, 0.75f);
-            mesh.Rotate(new Vec3f(0.5f, 0f, 0.5f), 0f, rotate * GameMath.DEG2RAD, 0f);
-            mesh.Translate(x - 0.5f, -0.175f, z - 0.5f);
+            return tfMatrices;
         }
     }
 }
