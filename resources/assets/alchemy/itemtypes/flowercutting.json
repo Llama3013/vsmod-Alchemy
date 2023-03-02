@@ -5,6 +5,7 @@
       "code": "flower",
       "states": [
         "catmint",
+        "cornflower",
         "forgetmenot",
         "edelweiss",
         "heather",
@@ -13,8 +14,9 @@
         "wilddaisy",
         "westerngorse",
         "cowparsley",
-        "californiapoppy",
+        "goldenpoppy",
         "lilyofthevalley",
+        "woad",
         "lupine-blue",
         "lupine-orange",
         "lupine-purple",
@@ -28,9 +30,7 @@
         "mint",
         "saffron",
         "sage",
-        "thyme",
-        "woad",
-        "cornflower"
+        "thyme"
       ]
     },
     { "code": "stage", "states": ["raw", "dried", "cooked"] }

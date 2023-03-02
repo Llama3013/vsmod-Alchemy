@@ -14,7 +14,7 @@
   {
     "ingredientPattern": "H,F,T",
     "ingredients": {
-      "H": { "type": "block", "code": "game:flower-californiapoppy-*" },
+      "H": { "type": "block", "code": "game:flower-goldenpoppy-*" },
       "F": { "type": "item", "code": "wildcraft:herbs-sage" },
       "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
@@ -26,7 +26,7 @@
   {
     "ingredientPattern": "H,F,T",
     "ingredients": {
-      "H": { "type": "item", "code": "alchemy:cuttings-californiapoppy-cooked" },
+      "H": { "type": "item", "code": "alchemy:cuttings-goldenpoppy-cooked" },
       "F": { "type": "item", "code": "alchemy:cuttings-sage-cooked" },
       "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
