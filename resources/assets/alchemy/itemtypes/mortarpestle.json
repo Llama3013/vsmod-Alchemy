@@ -1,6 +1,6 @@
 {
   "code": "mortarpestle",
-  "variantgroups": [{ "code": "material", "states": ["wood", "clay", "stone", "metal"] }],
+  "variantgroups": [{ "code": "material", "states": ["wood", "stone"] }],
   "attributesByType": {
     "*": {
       "shelvable": true
@@ -9,15 +9,11 @@
   "maxstacksize": 1,
   "durabilityByType": {
     "*-wood": 500,
-    "*-clay": 1000,
-    "*-stone": 2000,
-    "*-metal": 6000
+    "*-stone": 2000
   },
   "blockmaterialByType": {
     "*-wood": "wood",
-    "*-clay": "clay",
-    "*-stone": "stone",
-    "*-metal": "metal"
+    "*-stone": "stone"
   },
   "shapeByType": {
     "*": { "base": "alchemy:block/tool/mortarpestle" }
