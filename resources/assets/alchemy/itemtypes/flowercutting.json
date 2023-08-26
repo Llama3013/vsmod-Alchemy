@@ -1,0 +1,99 @@
+{
+  "code": "cuttings",
+  "variantgroups": [
+    {
+      "code": "flower",
+      "states": [
+        "catmint",
+        "cornflower",
+        "forgetmenot",
+        "edelweiss",
+        "heather",
+        "horsetail",
+        "orangemallow",
+        "wilddaisy",
+        "westerngorse",
+        "cowparsley",
+        "goldenpoppy",
+        "lilyofthevalley",
+        "woad",
+        "lupine-blue",
+        "lupine-orange",
+        "lupine-purple",
+        "lupine-red",
+        "lupine-white",
+        "basil",
+        "chamomile",
+        "cilantro",
+        "lavender",
+        "marjoram",
+        "mint",
+        "saffron",
+        "sage",
+        "thyme"
+      ]
+    },
+    { "code": "stage", "states": ["raw", "dried", "cooked"] }
+  ],
+  "attributes": {
+    "herbrackable": true,
+    "herbRackTransform": {
+      "translation": { "x": 0, "y": 0, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "origin": { "x": 0, "y": 0, "z": 0 },
+      "scale": 1
+    },
+    "meathookable": true,
+    "meatHookTransform": {
+      "translation": { "x": -0.02, "y": -0.52, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+      "scale": 1
+    }
+  },
+  "creativeinventory": { "general": ["*"], "items": ["*"] },
+  "maxstacksize": 64,
+  "transitionablePropsByType": {
+    "*-raw": [
+      {
+        "type": "Perish",
+        "freshHours": { "avg": 480 },
+        "transitionHours": { "avg": 86 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
+        "transitionRatio": 1
+      },
+      {
+        "type": "Dry",
+        "freshHours": { "avg": 6 },
+        "transitionHours": { "avg": 86 },
+        "transitionedStack": { "type": "item", "code": "alchemy:cuttings-{flower}-dried" },
+        "transitionRatio": 1
+      }
+    ]
+  },
+  "combustiblePropsByType": {
+    "*-dried": {
+      "meltingPoint": 100,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "convert",
+      "smeltedStack": { "type": "item", "code": "alchemy:cuttings-{flower}-cooked" },
+      "requiresContainer": false
+    }
+  },
+  "shapeByType": {
+    "*-wilddaisy-*": { "base": "alchemy:item/cut_white_herb_bundle" },
+    "*-lupine-*": { "base": "alchemy:item/cut_stacked_herb_bundle" },
+    "*": { "base": "alchemy:item/cut_blue_herb_bundle" }
+  },
+  "guiTransform": {
+    "translation": { "x": 3, "y": 0, "z": 0 },
+    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "scale": 3
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 2
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "wildcraft:herbs-sage" },
+      "F": { "type": "block", "code": "game:flower-heather-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-westerngorse-*" },
+      "F": { "type": "item", "code": "wildcraft:herbs-sage" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-sage-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-heather-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-westerngorse-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-sage-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  }
+]

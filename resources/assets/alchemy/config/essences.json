@@ -1,0 +1,21 @@
+{
+    "alltick": true,
+    "archer": true,
+    "healingeffect": true,
+    "hungerenhance": true,
+    "hungersupress": true,
+    "hunter": true,
+    "looter": true,
+    "melee": true,
+    "mining": true,
+    "poisontick": true,
+    "predator": true,
+    "regen": true,
+    "scentmask": true,
+    "oreDropRate": true,
+    "speed": true,
+    "vitality": true,
+    "waterbreathe": true,
+    "glow": true
+  }
+  

@@ -1,0 +1,75 @@
+{
+  "code": "mortarpestle",
+  "variantgroups": [{ "code": "material", "states": ["wood", "clay", "stone", "metal"] }],
+  "attributesByType": {
+    "*": {
+      "shelvable": true
+    }
+  },
+  "maxstacksize": 1,
+  "durabilityByType": {
+    "*-wood": 500,
+    "*-clay": 1000,
+    "*-stone": 2000,
+    "*-metal": 6000
+  },
+  "blockmaterialByType": {
+    "*-wood": "wood",
+    "*-clay": "clay",
+    "*-stone": "stone",
+    "*-metal": "metal"
+  },
+  "shapeByType": {
+    "*": { "base": "alchemy:block/tool/mortarpestle" }
+  },
+  "creativeinventory": { "general": ["*"], "decorative": ["*"] },
+  "replaceable": 300,
+  "resistance": 0.75,
+  "lightAbsorption": 0,
+  "texturesByType": {
+    "*-wood": {
+      "loam": { "base": "game:block/wood/oak" }
+    },
+    "*-stone": {
+      "loam": { "base": "game:block/clay/planter/loam" }
+    },
+    "*": {
+      "loam": { "base": "game:block/clay/planter/loam" }
+    }
+  },
+  "sounds": {
+    "walk": "game:walk/wood"
+  },
+  "sideopaque": {
+    "all": false
+  },
+  "sidesolid": {
+    "all": false
+  },
+  "collisionbox": { "x1": 0.3125, "y1": 0, "z1": 0.3125, "x2": 0.6875, "y2": 0.125, "z2": 0.6875 },
+  "selectionbox": { "x1": 0.3125, "y1": 0, "z1": 0.3125, "x2": 0.6875, "y2": 0.125, "z2": 0.6875 },
+  "guiTransform": {
+    "translation": { "x": 3, "y": 0, "z": 0 },
+    "rotation": { "x": -28, "y": 23, "z": 180 },
+    "origin": { "x": 0.5, "y": 0.25, "z": 0.5 },
+    "scale": 2.75
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 1 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 3
+  },
+  "tpHandTransform": {
+    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0, "y": 0.13, "z": 0 },
+    "scale": 0.66
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 2
+  }
+}

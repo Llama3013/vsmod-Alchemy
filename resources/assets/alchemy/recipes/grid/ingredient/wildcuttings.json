@@ -1,0 +1,12 @@
+[
+  {
+    "ingredientPattern": "KF",
+    "ingredients": {
+      "F": { "type": "item", "code": "wildcraft:herbs-*", "name": "herb", "allowedVariants": ["basil", "chamomile", "cilantro", "lavender", "marjoram", "mint", "saffron", "sage", "thyme"] },
+      "K": { "type": "item", "code": "game:shears-*", "isTool": true }
+    },
+    "width": 2,
+    "height": 1,
+    "output": { "type": "item", "code": "alchemy:cuttings-{herb}-raw" }
+  }
+]

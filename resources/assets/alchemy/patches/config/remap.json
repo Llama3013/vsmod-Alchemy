@@ -1,0 +1,40 @@
+[
+  {
+    "__comment": "keep path as alchemy:Alchemy it needs the capital A on the second alchemy ",
+    "file": "game:config/remaps.json",
+    "op": "add",
+    "path": "/alchemy:Alchemy",
+    "value": [
+      "/bir remapq alchemy:potionflask-normal-quartz alchemy:potionflask-normal-quartz-raw force",
+      "/bir remapq alchemy:potionflask-normal-quartz alchemy:potionflask-normal-quartz-burned force",
+      "/bir remapq alchemy:potionflask-round-quartz alchemy:potionflask-round-quartz-raw force",
+      "/bir remapq alchemy:potionflask-round-quartz alchemy:potionflask-round-quartz-burned force",
+      "/bir remapq alchemy:potionflask-tube-quartz alchemy:potionflask-tube-quartz-raw force",
+      "/bir remapq alchemy:potionflask-tube-quartz alchemy:potionflask-tube-quartz-burned force",
+      "/bir remapq alchemy:potionflask-normal-violet alchemy:potionflask-normal-violet-raw force",
+      "/bir remapq alchemy:potionflask-normal-violet alchemy:potionflask-normal-violet-burned force",
+      "/bir remapq alchemy:potionflask-round-violet alchemy:potionflask-round-violet-raw force",
+      "/bir remapq alchemy:potionflask-round-violet alchemy:potionflask-round-violet-burned force",
+      "/bir remapq alchemy:potionflask-tube-violet alchemy:potionflask-tube-violet-raw force",
+      "/bir remapq alchemy:potionflask-tube-violet alchemy:potionflask-tube-violet-burned force",
+      "/bir remapq alchemy:potionflask-normal-green alchemy:potionflask-normal-green-raw force",
+      "/bir remapq alchemy:potionflask-normal-green alchemy:potionflask-normal-green-burned force",
+      "/bir remapq alchemy:potionflask-round-green alchemy:potionflask-round-green-raw force",
+      "/bir remapq alchemy:potionflask-round-green alchemy:potionflask-round-green-burned force",
+      "/bir remapq alchemy:potionflask-tube-green alchemy:potionflask-tube-green-raw force",
+      "/bir remapq alchemy:potionflask-tube-green alchemy:potionflask-tube-green-burned force",
+      "/bir remapq alchemy:potionflask-normal-smoky alchemy:potionflask-normal-smoky-raw force",
+      "/bir remapq alchemy:potionflask-normal-smoky alchemy:potionflask-normal-smoky-burned force",
+      "/bir remapq alchemy:potionflask-round-smoky alchemy:potionflask-round-smoky-raw force",
+      "/bir remapq alchemy:potionflask-round-smoky alchemy:potionflask-round-smoky-burned force",
+      "/bir remapq alchemy:potionflask-tube-smoky alchemy:potionflask-tube-smoky-raw force",
+      "/bir remapq alchemy:potionflask-tube-smoky alchemy:potionflask-tube-smoky-burned force",
+      "/bir remapq alchemy:potionflask-normal-pink alchemy:potionflask-normal-pink-raw force",
+      "/bir remapq alchemy:potionflask-normal-pink alchemy:potionflask-normal-pink-burned force",
+      "/bir remapq alchemy:potionflask-round-pink alchemy:potionflask-round-pink-raw force",
+      "/bir remapq alchemy:potionflask-round-pink alchemy:potionflask-round-pink-burned force",
+      "/bir remapq alchemy:potionflask-tube-pink alchemy:potionflask-tube-pink-raw force",
+      "/bir remapq alchemy:potionflask-tube-pink alchemy:potionflask-tube-pink-burned force"
+    ]
+  }
+]

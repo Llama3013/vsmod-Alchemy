@@ -1,0 +1,8 @@
+{
+  "code": "potionteaportion",
+  "ingredients": [
+    { "type": "item", "code": "alchemy:potionbase-basic", "quantity": 1 },
+    { "type": "item", "code": "game:waterportion", "litres": 2 }
+  ],
+  "output": { "type": "item", "code": "alchemy:potionteaportion", "litres": 2 }
+}

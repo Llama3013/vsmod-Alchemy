@@ -1,0 +1,555 @@
+{
+  "code": "potionportion",
+  "variantgroups": [
+    {
+      "code": "potiontype",
+      "states": ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+    },
+    { "code": "strength", "states": ["medium", "strong"] }
+  ],
+  "class": "ItemPotion",
+  "matterStateByType": {
+    "*-medium": "liquid",
+    "*-strong": "liquid"
+  },
+  "attributesByType": {
+    "*-all-*": {
+      "potioninfo": {
+        "potionId": "allpotionid",
+        "duration": 10
+      },
+      "effects": {
+        "healingeffectivness": 0.1,
+        "maxhealthExtraPoints": 0.1,
+        "walkspeed": 0.1,
+        "hungerrate": -0.1,
+        "rangedWeaponsAcc": 0.1,
+        "rangedWeaponsSpeed": 0.1,
+        "rangedWeaponsDamage": 0.1,
+        "meleeWeaponsDamage": 0.1,
+        "mechanicalsDamage": 0.1,
+        "animalLootDropRate": 0.1,
+        "forageDropRate": 0.1,
+        "wildCropDropRate": 0.1,
+        "vesselContentsDropRate": 0.1,
+        "oreDropRate": 0.1,
+        "rustyGearDropRate": 0.1,
+        "miningSpeedMul": 0.1,
+        "animalSeekingRange": 0.1,
+        "wholeVesselLootChance": 0.1,
+        "animalHarvestingTime": 0.1
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/liquid/waterportion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-all-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-{potiontype}-medium"],
+          "*-strong": ["potionportion-{potiontype}-strong"]
+        },
+        "exclude": true
+      }
+    },
+    "*-alltick-*": {
+      "potioninfo": {
+        "potionId": "alltickpotionid",
+        "duration": 10
+      },
+      "tickpotioninfo": {
+        "ticksec": 1,
+        "health": 1
+      },
+      "effects": {
+        "healingeffectivness": 0.1,
+        "maxhealthExtraPoints": 0.1,
+        "walkspeed": 0.1,
+        "hungerrate": -0.1,
+        "rangedWeaponsAcc": 0.1,
+        "rangedWeaponsSpeed": 0.1,
+        "rangedWeaponsDamage": 0.1,
+        "meleeWeaponsDamage": 0.1,
+        "mechanicalsDamage": 0.1,
+        "animalLootDropRate": 0.1,
+        "forageDropRate": 0.1,
+        "wildCropDropRate": 0.1,
+        "vesselContentsDropRate": 0.1,
+        "oreDropRate": 0.1,
+        "rustyGearDropRate": 0.1,
+        "miningSpeedMul": 0.1,
+        "animalSeekingRange": 0.1,
+        "wholeVesselLootChance": 0.1,
+        "animalHarvestingTime": 0.1
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/liquid/waterportion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-alltick-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        },
+        "exclude": true
+      }
+    },
+    "*-archer-*": {
+      "potioninfo": {
+        "potionId": "archerpotionid",
+        "duration": 600
+      },
+      "effects": {
+        "rangedWeaponsAcc": 0.05,
+        "rangedWeaponsDamage": 0.2,
+        "rangedWeaponsSpeed": 0.2
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/grey_potion" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-archer-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-healingeffect-*": {
+      "potioninfo": {
+        "potionId": "healingeffectpotionid",
+        "duration": 600
+      },
+      "effects": {
+        "healingeffectivness": 0.3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/red_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-healingeffect-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-hungerenhance-*": {
+      "potioninfo": {
+        "potionId": "hungerenhancepotionid",
+        "duration": 600
+      },
+      "effects": {
+        "hungerrate": 0.3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/orange_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-hungerenhance-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-hungersupress-*": {
+      "potioninfo": {
+        "potionId": "hungersupresspotionid",
+        "duration": 600
+      },
+      "effects": {
+        "hungerrate": -0.3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/yellow_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-hungersupress-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-hunter-*": {
+      "potioninfo": {
+        "potionId": "hunterpotionid",
+        "duration": 600
+      },
+      "effects": {
+        "animalLootDropRate": 0.2,
+        "animalSeekingRange": -0.3,
+        "forageDropRate": 0.2,
+        "wildCropDropRate": 0.2
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/wood/oak" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-hunter-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-looter-*": {
+      "potioninfo": {
+        "potionId": "looterpotionid",
+        "duration": 600
+      },
+      "effects": {
+        "forageDropRate": 0.2,
+        "rustyGearDropRate": 0.2,
+        "vesselContentsDropRate": 0.3,
+        "wildCropDropRate": 0.2
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/indigo_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-looter-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-melee-*": {
+      "potioninfo": {
+        "potionId": "meleepotionid",
+        "duration": 600
+      },
+      "effects": {
+        "meleeWeaponsDamage": 0.3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/darkred_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-melee-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-mining-*": {
+      "potioninfo": {
+        "potionId": "miningpotionid",
+        "duration": 600
+      },
+      "effects": {
+        "miningSpeedMul": 0.3,
+        "oreDropRate": 0.15
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/brown_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-mining-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-poison-*": {
+      "potioninfo": {
+        "potionId": "poisontickpotionid",
+        "duration": 30
+      },
+      "tickpotioninfo": {
+        "health": -0.5,
+        "ticksec": 3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/purple_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-poison-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-predator-*": {
+      "potioninfo": {
+        "potionId": "predatorpotionid",
+        "duration": 900
+      },
+      "effects": {
+        "animalSeekingRange": 0.4
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/rose_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-predator-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-regen-*": {
+      "potioninfo": {
+        "potionId": "regentickpotionid",
+        "duration": 30
+      },
+      "tickpotioninfo": {
+        "health": 0.5,
+        "ticksec": 3
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/green_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-regen-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-scentmask-*": {
+      "potioninfo": {
+        "potionId": "scentmaskpotionid",
+        "duration": 900
+      },
+      "effects": {
+        "animalSeekingRange": -0.4
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/lavendar_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-scentmask-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-speed-*": {
+      "potioninfo": {
+        "potionId": "speedpotionid",
+        "duration": 300
+      },
+      "effects": {
+        "walkspeed": 0.25
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/turquoise_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-speed-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*-vitality-*": {
+      "potioninfo": {
+        "potionId": "vitalitypotionid",
+        "duration": 300
+      },
+      "effects": {
+        "maxhealthExtraPoints": 0.25
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "alchemy:item/potion/black_potion" },
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "potionportion-vitality-{strength}", "states": ["medium", "strong"] }
+        }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        }
+      }
+    },
+    "*": {
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/liquid/waterportion" }
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupByByType": {
+          "*-medium": ["potionportion-*-{potiontype}-medium"],
+          "*-strong": ["potionportion-*-{potiontype}-strong"]
+        },
+        "exclude": true
+      }
+    }
+  },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "liquids"],
+      "stacks": [
+        { "type": "block", "code": "game:woodbucket", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }] } },
+        { "type": "block", "code": "alchemy:potionflask-normal-quartz", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }] } }
+      ]
+    }
+  ],
+  "maxstacksize": 200,
+  "materialDensity": 200,
+  "shape": { "base": "game:item/liquid" },
+  "texturesByType": {
+    "*-archer-*": {
+      "all": { "base": "alchemy:item/potion/grey_potion" }
+    },
+    "*-healingeffect-*": {
+      "all": { "base": "alchemy:item/potion/red_potion" }
+    },
+    "*-hungerenhance-*": {
+      "all": { "base": "alchemy:item/potion/orange_potion" }
+    },
+    "*-hungersupress-*": {
+      "all": { "base": "alchemy:item/potion/yellow_potion" }
+    },
+    "*-hunter-*": {
+      "all": { "base": "game:block/wood/oak" }
+    },
+    "*-looter-*": {
+      "all": { "base": "alchemy:item/potion/indigo_potion" }
+    },
+    "*-melee-*": {
+      "all": { "base": "alchemy:item/potion/darkred_potion" }
+    },
+    "*-mining-*": {
+      "all": { "base": "alchemy:item/potion/brown_potion" }
+    },
+    "*-poison-*": {
+      "all": { "base": "alchemy:item/potion/purple_potion" }
+    },
+    "*-predator-*": {
+      "all": { "base": "alchemy:item/potion/rose_potion" }
+    },
+    "*-regen-*": {
+      "all": { "base": "alchemy:item/potion/green_potion" }
+    },
+    "*-scentmask-*": {
+      "all": { "base": "alchemy:item/potion/lavendar_potion" }
+    },
+    "*-speed-*": {
+      "all": { "base": "alchemy:item/potion/turquoise_potion" }
+    },
+    "*-vitality-*": {
+      "all": { "base": "alchemy:item/potion/black_potion" }
+    }
+  },
+  "guiTransform": {
+    "translation": { "x": 0, "y": 1, "z": 0 },
+    "rotation": { "x": 123, "y": -33, "z": -13 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 1.4
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 25, "y": 157, "z": -5 }
+  },
+  "tpHandTransform": {
+    "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+  }
+}

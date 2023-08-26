@@ -1,0 +1,126 @@
+{
+  "code": "potionflask",
+  "class": "BlockPotionFlask",
+  "entityClass": "BlockEntityPotionFlask",
+  "behaviors": [
+    { "name": "GroundStorable", "properties": { "layout": "Quadrants", "placeRemoveSound": "game:sounds/player/build", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1 } } },
+    { "name": "Unplaceable", "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility" },
+    { "name": "SneakPlacing" },
+    { "name": "RightClickPickup" }
+  ],
+  "variantgroups": [
+    { "code": "flask", "states": ["normal", "round", "tube"] },
+    { "code": "colour", "states": ["quartz", "smoky", "pink", "green", "violet"] }
+  ],
+  "attributesByType": {
+    "potionflask-tube-*": {
+      "shelvable": true,
+      "liquidContainerProps": {
+        "capacityLitres": 0.25,
+        "transferSizeLitres": 0.25,
+        "emptyShapeLoc": "alchemy:shapes/block/glass/tubeflask-empty",
+        "opaqueContentShapeLoc": "shapes/block/glass/tubeflask-content",
+        "liquidContentShapeLoc": "shapes/block/glass/tubeflask-liquidcontents"
+      }
+    },
+    "potionflask-round-*": {
+      "shelvable": true,
+      "liquidContainerProps": {
+        "capacityLitres": 0.5,
+        "transferSizeLitres": 0.25,
+        "emptyShapeLoc": "alchemy:shapes/block/glass/roundflask-empty",
+        "opaqueContentShapeLoc": "shapes/block/glass/roundflask-content",
+        "liquidContentShapeLoc": "shapes/block/glass/roundflask-liquidcontents"
+      }
+    },
+    "*": {
+      "shelvable": true,
+      "liquidContainerProps": {
+        "capacityLitres": 1,
+        "transferSizeLitres": 0.25,
+        "emptyShapeLoc": "alchemy:shapes/block/glass/flask-empty",
+        "opaqueContentShapeLoc": "alchemy:shapes/block/glass/flask-content",
+        "liquidContentShapeLoc": "alchemy:shapes/block/glass/flask-liquidcontents"
+      }
+    }
+  },
+  "blockmaterial": "Glass",
+  "replaceable": 5000,
+  "creativeinventory": { "general": ["*-quartz"], "decorative": ["*"] },
+  "materialDensity": 200,
+  "shapeByType": {
+    "*-round-*": { "base": "alchemy:block/glass/roundflask-liquid" },
+    "*-tube-*": { "base": "alchemy:block/glass/tubeflask-liquid" },
+    "*": { "base": "alchemy:block/glass/flask-liquid" }
+  },
+  "doNotRenderAtLod2": true,
+  "textures": { "glass": { "base": "game:block/glass/{colour}" } },
+  "resistance": 0.75,
+  "maxStackSize": 16,
+  "sounds": {
+    "walk": "game:walk/ice",
+    "place": "game:player/buildhigh",
+    "break": "game:block/glass",
+    "hit": "game:block/glass"
+  },
+  "lightAbsorption": 0,
+  "drawtype": "JSON",
+  "sideopaque": { "all": false },
+  "sideao": { "all": true },
+  "emitsideao": { "all": false },
+  "sidesolid": { "all": false },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "guiTransformByType": {
+    "*-tube-*": {
+      "translation": { "x": 0, "y": 3, "z": 0 },
+      "origin": { "x": 0.5, "y": 0.2, "z": 0.5 },
+      "scale": 2
+    },
+    "*": {
+      "translation": { "x": 0, "y": 3, "z": 0 },
+      "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+      "scale": 2.75
+    }
+  },
+  "groundTransformByType": {
+    "*-tube-*": {
+      "scale": 2
+    },
+    "*": {
+      "scale": 2.5
+    }
+  },
+  "fpHandTransformByType": {
+    "*-tube-*": {
+      "translation": { "x": 0, "y": 0.4, "z": 0 },
+      "rotation": { "x": 0, "y": -14, "z": 0 },
+      "scale": 1.5
+    },
+    "*": {
+      "translation": { "x": 0, "y": 0.4, "z": 0 },
+      "rotation": { "x": 0, "y": -14, "z": 0 },
+      "scale": 2
+    }
+  },
+  "tpHandTransformByType": {
+    "*-tube-*": {
+      "translation": { "x": -0.9, "y": 0, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -74 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.51 },
+      "scale": 0.66
+    },
+    "*-round-*": {
+      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.51 },
+      "scale": 0.66
+    },
+    "*": {
+      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
+      "scale": 0.66
+    }
+  }
+}

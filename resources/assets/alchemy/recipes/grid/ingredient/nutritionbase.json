@@ -1,0 +1,13 @@
+{
+  "ingredientPattern": "F,R,T",
+  "ingredients": {
+    "F": { "type": "item", "code": "game:fat" },
+    "R": { "type": "item", "code": "game:drygrass" },
+    "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 3,
+  "output": { "type": "item", "code": "alchemy:utilitypotionbase-nutrition" }
+}
+  

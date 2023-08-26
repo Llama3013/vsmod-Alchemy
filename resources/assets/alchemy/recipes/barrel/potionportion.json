@@ -1,0 +1,30 @@
+[
+  {
+    "code": "potionportion",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "alchemy:potionbase-*-weak",
+        "name": "potiontype",
+        "allowedVariants": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+      },
+      { "type": "item", "code": "alchemy:potionteaportion", "litres": 1 }
+    ],
+    "output": { "type": "item", "code": "alchemy:potionportion-{potiontype}-medium", "litres": 1 }
+  },
+  {
+    "code": "potionportion",
+    "sealHours": 24,
+    "ingredients": [
+      {
+        "type": "item",
+        "code": "alchemy:potionbase-*-strong",
+        "name": "potiontype",
+        "allowedVariants": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+      },
+      { "type": "item", "code": "game:alcoholportion", "litres": 1 }
+    ],
+    "output": { "type": "item", "code": "alchemy:potionportion-{potiontype}-strong", "litres": 1 }
+  }
+]

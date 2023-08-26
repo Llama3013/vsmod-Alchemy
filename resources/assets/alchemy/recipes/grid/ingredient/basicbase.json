@@ -1,0 +1,98 @@
+[
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-flyagaric-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bitterbolete-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-devilstooth-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-jackolantern-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-deathcap-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-earthball-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-elfinsaddle-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-golddropmilkcap-normal" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  }
+]

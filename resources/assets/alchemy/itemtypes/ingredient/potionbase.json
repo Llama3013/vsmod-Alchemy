@@ -1,0 +1,47 @@
+{
+  "code": "potionbase",
+  "shape": { "base": "alchemy:item/potionbase" },
+  "creativeinventory": { "general": ["*"], "items": ["*"] },
+  "variantgroups": [
+    {
+      "code": "basetype",
+      "states": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+    },
+    { "code": "strength", "states": ["weak", "strong"] }
+  ],
+  "attributes": {
+    "handbook": {
+      "groupBy": ["potionbase-{basetype}-*"]
+    }
+  },
+  "maxstacksize": 64,
+  "materialDensity": 620,
+  "combustibleProps": {
+    "burnTemperature": 400,
+    "burnDuration": 6
+  },
+  "guiTransform": {
+    "translation": { "x": 3, "y": 0, "z": 0 },
+    "rotation": { "x": -28, "y": 23, "z": 180 },
+    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "scale": 3
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 1 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 3
+  },
+  "tpHandTransform": {
+    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0, "y": 0.13, "z": 0 },
+    "scale": 0.66
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 2
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "ingredientPattern": "P,B",
+  "ingredients": {
+    "P": {
+      "type": "item",
+      "code": "alchemy:potionbase-*-weak",
+      "name": "potiontype",
+      "allowedVariants": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+    },
+    "B": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 2,
+  "output": { "type": "item", "code": "alchemy:herbball-{potiontype}" }
+}

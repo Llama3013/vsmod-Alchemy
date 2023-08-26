@@ -1,0 +1,30 @@
+{
+  "ingredient": {
+    "type": "item",
+    "code": "game:ingot-*",
+    "name": "metal",
+    "allowedVariants": [
+      "copper",
+      "brass",
+      "tinbronze",
+      "bismuthbronze",
+      "blackbronze",
+      "silver",
+      "gold",
+      "iron",
+      "lead",
+      "tin",
+      "zinc",
+      "bismuth",
+      "chromium",
+      "platinum",
+      "titanium",
+      "molybdochalkos",
+      "meteoriciron",
+      "steel"
+    ]
+  },
+  "pattern": [["###__###_", "#_##_#_##"]],
+  "name": "2 Herbrackhooks",
+  "output": { "type": "item", "code": "alchemy:herbrackhook-{metal}", "stacksize": 2 }
+}

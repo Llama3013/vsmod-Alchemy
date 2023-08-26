@@ -1,0 +1,177 @@
+[
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildarcherbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildarcherbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildcuttings.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhealingeffectbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhungerenhancebase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhungersupressbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhunterbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildlooterbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildmeleebase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildminingbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildregenbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildscentmaskbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildspeedbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/0/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildvitalitybase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhealingeffectbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhungerenhancebase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhungersupressbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildhunterbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildlooterbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildmeleebase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildminingbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildregenbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildscentmaskbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildspeedbase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  },
+  {
+    "op": "add",
+    "path": "/1/enabled",
+    "value": "false",
+    "file": "alchemy:recipes/grid/ingredient/wildvitalitybase.json",
+    "dependsOn": [{ "modid": "wildcraft", "invert": true }]
+  }
+]

@@ -1,0 +1,250 @@
+{
+  "code": "herbball",
+  "variantgroups": [
+    {
+      "code": "potiontype",
+      "states": ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+    }
+  ],
+  "class": "ItemPotion",
+  "attributesByType": {
+    "*-all": {
+      "potioninfo": {
+        "potionId": "allpotionid",
+        "duration": 10
+      },
+      "effects": {
+        "healingeffectivness": 0.1,
+        "maxhealthExtraPoints": 1,
+        "walkspeed": 0.1,
+        "hungerrate": -0.1,
+        "rangedWeaponsAcc": 0.1,
+        "rangedWeaponsSpeed": 0.1,
+        "rangedWeaponsDamage": 0.1,
+        "meleeWeaponsDamage": 0.1,
+        "mechanicalsDamage": 0.1,
+        "animalLootDropRate": 0.1,
+        "forageDropRate": 0.1,
+        "wildCropDropRate": 0.1,
+        "vesselContentsDropRate": 0.1,
+        "oreDropRate": 0.1,
+        "rustyGearDropRate": 0.1,
+        "miningSpeedMul": 0.1,
+        "animalSeekingRange": 0.1,
+        "wholeVesselLootChance": 0.1,
+        "animalHarvestingTime": 0.1
+      },
+      "handbook": {
+        "exclude": true
+      }
+    },
+    "*-alltick": {
+      "potioninfo": {
+        "potionId": "alltickpotionid",
+        "duration": 10
+      },
+      "tickpotioninfo": {
+        "ticksec": 1,
+        "health": 1
+      },
+      "effects": {
+        "healingeffectivness": 0.1,
+        "maxhealthExtraPoints": 1,
+        "walkspeed": 0.1,
+        "hungerrate": -0.1,
+        "rangedWeaponsAcc": 0.1,
+        "rangedWeaponsSpeed": 0.1,
+        "rangedWeaponsDamage": 0.1,
+        "meleeWeaponsDamage": 0.1,
+        "mechanicalsDamage": 0.1,
+        "animalLootDropRate": 0.1,
+        "forageDropRate": 0.1,
+        "wildCropDropRate": 0.1,
+        "vesselContentsDropRate": 0.1,
+        "oreDropRate": 0.1,
+        "rustyGearDropRate": 0.1,
+        "miningSpeedMul": 0.1,
+        "animalSeekingRange": 0.1,
+        "wholeVesselLootChance": 0.1,
+        "animalHarvestingTime": 0.1
+      },
+      "handbook": {
+        "exclude": true
+      }
+    },
+    "*-archer": {
+      "potioninfo": {
+        "potionId": "archerpotionid",
+        "duration": 120
+      },
+      "effects": {
+        "rangedWeaponsAcc": 0.05,
+        "rangedWeaponsDamage": 0.2,
+        "rangedWeaponsSpeed": 0.2
+      }
+    },
+    "*-healingeffect": {
+      "potioninfo": {
+        "potionId": "healingeffectpotionid",
+        "duration": 120
+      },
+      "effects": {
+        "healingeffectivness": 0.3
+      }
+    },
+    "*-hungerenhance": {
+      "potioninfo": {
+        "potionId": "hungerenhancepotionid",
+        "duration": 120
+      },
+      "effects": {
+        "hungerrate": 0.3
+      }
+    },
+    "*-hungersupress": {
+      "potioninfo": {
+        "potionId": "hungersupresspotionid",
+        "duration": 120
+      },
+      "effects": {
+        "hungerrate": -0.3
+      }
+    },
+    "*-hunter": {
+      "potioninfo": {
+        "potionId": "hunterpotionid",
+        "duration": 120
+      },
+      "effects": {
+        "animalLootDropRate": 0.2,
+        "animalSeekingRange": -0.3,
+        "forageDropRate": 0.2,
+        "wildCropDropRate": 0.2
+      }
+    },
+    "*-looter": {
+      "potioninfo": {
+        "potionId": "looterpotionid",
+        "duration": 120
+      },
+      "effects": {
+        "forageDropRate": 0.2,
+        "rustyGearDropRate": 0.2,
+        "vesselContentsDropRate": 0.3,
+        "wildCropDropRate": 0.2
+      }
+    },
+    "*-melee": {
+      "potioninfo": {
+        "potionId": "meleepotionid",
+        "duration": 120
+      },
+      "effects": {
+        "meleeWeaponsDamage": 0.3
+      }
+    },
+    "*-mining": {
+      "potioninfo": {
+        "potionId": "miningpotionid",
+        "duration": 120
+      },
+      "effects": {
+        "miningSpeedMul": 0.3,
+        "oreDropRate": 0.15
+      }
+    },
+    "*-poison": {
+      "potioninfo": {
+        "potionId": "poisontickpotionid",
+        "duration": 30
+      },
+      "tickpotioninfo": {
+        "health": -0.5,
+        "ticksec": 3
+      }
+    },
+    "*-predator": {
+      "potioninfo": {
+        "potionId": "predatorpotionid",
+        "duration": 180
+      },
+      "effects": {
+        "animalSeekingRange": 0.4
+      }
+    },
+    "*-regen": {
+      "potioninfo": {
+        "potionId": "regentickpotionid",
+        "duration": 30
+      },
+      "tickpotioninfo": {
+        "health": 0.5,
+        "ticksec": 3
+      }
+    },
+    "*-scentmask": {
+      "potioninfo": {
+        "potionId": "scentmaskpotionid",
+        "duration": 180
+      },
+      "effects": {
+        "animalSeekingRange": -0.4
+      }
+    },
+    "*-speed": {
+      "potioninfo": {
+        "potionId": "speedpotionid",
+        "duration": 60
+      },
+      "effects": {
+        "walkspeed": 0.25
+      }
+    },
+    "*-vitality": {
+      "potioninfo": {
+        "potionId": "vitalitypotionid",
+        "duration": 60
+      },
+      "effects": {
+        "maxhealthExtraPoints": 0.25
+      }
+    },
+    "*": {
+      "handbook": {
+        "exclude": true
+      }
+    }
+  },
+  "shape": { "base": "game:block/beehive/skep-empty" },
+  "textures": {
+    "floor": { "base": "game:item/resource/rot/rot-spill" },
+    "hive": { "base": "game:item/resource/rot/rot-solids" }
+  },
+  "creativeinventory": { "general": ["*"], "items": ["*"] },
+  "maxstacksize": 200,
+  "materialDensity": 200,
+  "guiTransform": {
+    "translation": { "x": 3, "y": 0, "z": 0 },
+    "rotation": { "x": -28, "y": 23, "z": 180 },
+    "origin": { "x": 0.5, "y": 0.25, "z": 0.5 },
+    "scale": 2
+  },
+  "groundTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": 0, "z": 1 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 3
+  },
+  "tpHandTransform": {
+    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0, "y": 0.13, "z": 0 },
+    "scale": 0.33
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
+    "rotation": { "x": 0, "y": 0, "z": 0 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "scale": 1
+  }
+}

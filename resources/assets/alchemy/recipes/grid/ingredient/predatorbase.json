@@ -1,0 +1,50 @@
+[
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "item", "code": "alchemy:cuttings-horsetail-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "block", "code": "game:flower-cornflower-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-strong" }
+  }
+]

@@ -1,0 +1,926 @@
+[
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-bismuth", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-bismuthbronze", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-blackbronze", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-brass", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-chromium", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-copper", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-gold", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-iron", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-meteoriciron", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-lead", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-molybdochalkos", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-platinum", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-chromium", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-platinum", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-silver", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-stainlesssteel", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-steel", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-tin", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-tinbronze", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-titanium", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-uranium", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "PHP,HRH,PHP",
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "allowedVariants": ["birch", "oak", "maple", "pine", "acacia", "kapok", "aged", "baldcypress", "larch", "redwood", "ebony", "walnut", "purpleheart"]
+      },
+      "H": { "type": "item", "code": "alchemy:herbrackhook-zinc", "quantity": 2 },
+      "R": {
+        "type": "item",
+        "code": "alchemy:herbracktop-*",
+        "name": "metal",
+        "allowedVariants": [
+          "bismuth",
+          "bismuthbronze",
+          "blackbronze",
+          "brass",
+          "chromium",
+          "copper",
+          "gold",
+          "iron",
+          "meteoriciron",
+          "lead",
+          "molybdochalkos",
+          "platinum",
+          "silver",
+          "stainlesssteel",
+          "steel",
+          "tin",
+          "tinbronze",
+          "titanium",
+          "uranium",
+          "zinc"
+        ]
+      }
+    },
+    "width": 3,
+    "height": 3,
+    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+  }
+]

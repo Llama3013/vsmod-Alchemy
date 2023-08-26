@@ -1,0 +1,123 @@
+{
+  "enabled": true,
+  "code": "utilitypotionportion",
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition"] }],
+  "class": "ItemPotion",
+  "matterState": "liquid",
+  "attributesByType": {
+    "*-recall": {
+      "potioninfo": {
+        "potionId": "recallpotionid"
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:item/resource/temporalgear" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-recall" }
+        }
+      }
+    },
+    "*-nutrition": {
+      "potioninfo": {
+        "potionId": "nutritionpotionid"
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/hay/aged-side" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-nutrition" }
+        }
+      }
+    },
+    "*-glow": {
+      "potioninfo": {
+        "potionId": "glowpotionid",
+        "duration": 1000
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/fire-yellow" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-glow" }
+        }
+      }
+    },
+    "*-waterbreathe": {
+      "potioninfo": {
+        "potionId": "waterbreathepotionid",
+        "duration": 1000
+      },
+      "handbook": {
+        "ignoreCreativeInvStacks": true,
+        "groupBy": ["utilitypotionportion-{potiontype}"]
+      },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/fire-blue" },
+        "allowSpill": true,
+        "whenSpilled": {
+          "action": "DropContents",
+          "stack": { "type": "item", "code": "utilitypotionportion-waterbreathe" }
+        }
+      }
+    }
+  },
+  "creativeinventoryStacks": [
+    {
+      "tabs": ["general", "liquids"],
+      "stacks": [
+        { "type": "block", "code": "alchemy:potionflask-normal-quartz", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }] } },
+        { "type": "block", "code": "game:woodbucket", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }] } }
+      ]
+    }
+  ],
+  "maxstacksize": 200,
+  "materialDensity": 200,
+  "shape": { "base": "game:item/liquid" },
+  "texturesByType": {
+    "*-recall": {
+      "all": { "base": "game:item/resource/temporalgear" }
+    },
+    "*-glow": {
+      "all": { "base": "game:block/fire-yellow" }
+    },
+    "*-waterbreathe": {
+      "all": { "base": "game:block/fire-blue" }
+    }
+  },
+  "guiTransform": {
+    "translation": { "x": 0, "y": 1, "z": 0 },
+    "rotation": { "x": 123, "y": -33, "z": -13 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 1.4
+  },
+  "fpHandTransform": {
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 25, "y": 157, "z": -5 }
+  },
+  "tpHandTransform": {
+    "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+  }
+}

@@ -1,0 +1,78 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+		"content": "game:block/transparent"
+	},
+	"elements": [
+		{
+			"name": "fluid",
+			"from": [ 5.85, 0.4, 7.125 ], 
+			"to": [ 10.15, 2.4, 8.875 ], 
+			"rotationOrigin": [ 8.0, 1.0, 8.0 ],
+			"rotationY": 135.0,
+			"renderpass": 1,
+			"faces": {
+				"north": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"east": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"south": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"west": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"up": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] },
+				"down": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] }
+			}
+		},
+		{
+			"name": "fluid1",
+			"from": [ 5.85, 0.4, 7.125 ], 
+			"to": [ 10.15, 2.4, 8.875 ], 
+			"rotationOrigin": [ 8.0, 1.0, 8.0 ],
+			"rotationY": 90.0,
+			"renderpass": 1,
+			"faces": {
+				"north": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"east": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"south": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"west": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"up": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] },
+				"down": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] }
+			}
+		},
+		{
+			"name": "fluid2",
+			"from": [ 5.85, 0.4, 7.125 ], 
+			"to": [ 10.15, 2.4, 8.875 ], 
+			"rotationOrigin": [ 8.0, 1.0, 8.0 ],
+			"rotationY": 45.0,
+			"renderpass": 1,
+			"faces": {
+				"north": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"east": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"south": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"west": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"up": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] },
+				"down": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] }
+			}
+		},
+		{
+			"name": "fluid3",
+			"from": [ 5.85, 0.4, 7.125 ], 
+			"to": [ 10.15, 2.4, 8.875 ], 
+			"rotationOrigin": [ 8.0, 1.0, 8.0 ],
+			"rotationY": 180.0,
+			"renderpass": 1,
+			"faces": {
+				"north": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"east": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"south": { "texture": "#content", "uv": [ 3.0, 0.0, 7.0, 2.0 ] },
+				"west": { "texture": "#content", "uv": [ 3.0, 0.0, 4.5, 2.0 ] },
+				"up": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] },
+				"down": { "texture": "#content", "uv": [ 0.0, 0.0, 4.0, 1.5 ] }
+			}
+		}
+	]}

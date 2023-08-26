@@ -1,0 +1,26 @@
+[
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:flower-forgetmenot-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "alchemy:cuttings-forgetmenot-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-horsetail-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-strong" }
+  }
+]
