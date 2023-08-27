@@ -2,7 +2,8 @@
   "ingredient": {
     "type": "item",
     "code": "game:ingot-*",
-    "name": "metal"
+    "name": "metal",
+    "skipVariants": ["blistersteel", "leadsolder", "silversolder"]
   },
   "pattern": [["###__###_", "#_##_#_##", "_________", "###__###_", "#_##_#_##", "_________", "###__###_", "#_##_#_##", "_________", "###__###_", "#_##_#_##"]],
   "name": "8 Herb rack hooks",

@@ -2,7 +2,8 @@
   "ingredient": {
     "type": "item",
     "code": "game:ingot-*",
-    "name": "metal"
+    "name": "metal",
+    "skipVariants": ["blistersteel", "leadsolder", "silversolder"]
   },
   "pattern": [
     ["_____#_____", "_____#_____", "_____#_____", "_____#_____", "____###____", "###########", "____###____", "_____#_____", "_____#_____", "_____#_____", "_____#_____"],

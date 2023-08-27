@@ -8,7 +8,6 @@
     }
   ],
   "__comment": "These are excluded since you cannot craft them",
-  "skipVariants": [ "*-nickel", "*-cupronickel", "*-electrum", "*-uranium", "*-stainlesssteel" ],
   "textures": {
     "hook": { "base": "game:block/metal/sheet/{metal}1" }
   },
