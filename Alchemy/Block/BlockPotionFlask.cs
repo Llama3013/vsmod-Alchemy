@@ -1,6 +1,6 @@
+using Cairo;
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using System.Text;
 using Vintagestory.API.Client;
@@ -26,7 +26,7 @@ namespace Alchemy
 
         public override float CapacityLitres => Props.CapacityLitres;
 
-        public Dictionary<string, float> dic = new Dictionary<string, float>();
+        public Dictionary<string, float> dic = new();
 
         public string potionId = "";
 
@@ -49,11 +49,10 @@ namespace Alchemy
             }
         }
 
-#region Render
-        public new MeshData GenMesh(
+        #region Render
+        public MeshData GenMesh(
             ICoreClientAPI capi,
-            ItemStack contentStack,
-            BlockPos forBlockPos = null
+            ItemStack contentStack
         )
         {
             if (this == null || Code.Path.Contains("clay"))
@@ -67,7 +66,7 @@ namespace Alchemy
                 if (props == null)
                     return null;
 
-                FlaskTextureSource contentSource = new FlaskTextureSource(
+                FlaskTextureSource contentSource = new(
                     capi,
                     contentStack,
                     props.Texture,
@@ -160,38 +159,30 @@ namespace Alchemy
         {
             if (Code.Path.Contains("clay"))
                 return;
-            Dictionary<string, MeshRef> meshrefs = null;
+            Dictionary<int, MeshRef> meshrefs;
 
             object obj;
             if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
-                meshrefs = obj as Dictionary<string, MeshRef>;
+                meshrefs = obj as Dictionary<int, MeshRef>;
             }
             else
             {
-                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<string, MeshRef>();
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<int, MeshRef>();
             }
 
             ItemStack contentStack = GetContent(itemstack);
-            if (contentStack == null)
-                return;
+            if (contentStack == null) return;
 
-            MeshRef meshRef = null;
 
-            if (
-                !meshrefs.TryGetValue(
-                    contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize,
-                    out meshRef
-                )
-            )
+            int hashcode = GetStackCacheHashCode(contentStack);
+
+            if (!meshrefs.TryGetValue(hashcode, out MeshRef meshRef))
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
-                if (meshdata == null)
-                    return;
-
-                meshrefs[contentStack.Collectible.Code.Path + Code.Path + contentStack.StackSize] =
-                    meshRef = capi.Render.UploadMesh(meshdata);
+                meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
             }
+
 
             renderinfo.ModelRef = meshRef;
         }
@@ -199,13 +190,12 @@ namespace Alchemy
         public override void OnUnloaded(ICoreAPI api)
         {
             ICoreClientAPI capi = api as ICoreClientAPI;
-            if (capi == null)
-                return;
+            if (capi == null) return;
 
             object obj;
             if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
             {
-                Dictionary<string, MeshRef> meshrefs = obj as Dictionary<string, MeshRef>;
+                Dictionary<int, MeshRef> meshrefs = obj as Dictionary<int, MeshRef>;
 
                 foreach (var val in meshrefs)
                 {
@@ -215,9 +205,9 @@ namespace Alchemy
                 capi.ObjectCache.Remove(meshRefsCacheKey);
             }
         }
-#endregion
+        #endregion
 
-#region Interaction
+        #region Interaction
         public override void OnHeldInteractStart(
             ItemSlot slot,
             EntityAgent byEntity,
@@ -230,7 +220,7 @@ namespace Alchemy
             ItemStack contentStack = GetContent(slot.Itemstack);
             if (contentStack != null)
             {
-                if (contentStack.MatchesSearchText(byEntity.World, "potion"))
+                if (contentStack.Collectible.Class == "ItemPotion")
                 {
                     string strength = contentStack.Item.Variant["strength"] is string str
                         ? string.Intern(str)
@@ -369,11 +359,9 @@ namespace Alchemy
             Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
             pos.Y -= 0.4f;
 
-            IPlayer player = (byEntity as EntityPlayer).Player;
-
             if (byEntity.World is IClientWorldAccessor)
             {
-                ModelTransform tf = new ModelTransform();
+                ModelTransform tf = new();
                 tf.Origin.Set(1.1f, 0.5f, 0.5f);
                 tf.EnsureDefaultValues();
 
@@ -405,16 +393,16 @@ namespace Alchemy
             EntitySelection entitySel
         )
         {
-            ItemStack content = GetContent(slot.Itemstack);
-            if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && content != null)
+            ItemStack contentStack = GetContent(slot.Itemstack);
+            if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && contentStack != null)
             {
-                if (content.MatchesSearchText(byEntity.World, "potion"))
+                if (contentStack.Collectible.Class == "ItemPotion")
                 {
+                    TempEffect potionEffect = new();
                     if (potionId == "recallpotionid" || potionId == "nutritionpotionid") { }
                     else if (tickSec == 0)
                     {
-                        TempEffect potionEffect = new TempEffect();
-                        potionEffect.tempEntityStats(
+                        potionEffect.TempEntityStats(
                             (byEntity as EntityPlayer),
                             dic,
                             "potionmod",
@@ -424,8 +412,7 @@ namespace Alchemy
                     }
                     else
                     {
-                        TempEffect potionEffect = new TempEffect();
-                        potionEffect.tempTickEntityStats(
+                        potionEffect.TempTickEntityStats(
                             (byEntity as EntityPlayer),
                             dic,
                             "potionmod",
@@ -450,7 +437,7 @@ namespace Alchemy
                             }
                             sPlayer.SendMessage(
                                 GlobalConstants.InfoLogChatGroup,
-                                "You feel the effects of the " + content.GetName(),
+                                "You feel the effects of the " + contentStack.GetName(),
                                 EnumChatType.Notification
                             );
                         }
@@ -461,21 +448,6 @@ namespace Alchemy
                             );
                             if (hungerTree != null)
                             {
-                                // SortedList<string, float> oldSatietyLevels = new SortedList<string, float>();
-                                // oldSatietyLevels.Add("fruitlevel", hungerTree.GetFloat("fruitLevel"));
-                                // oldSatietyLevels.Add("vegetableLevel", hungerTree.GetFloat("vegetableLevel"));
-                                // oldSatietyLevels.Add("grainLevel", hungerTree.GetFloat("grainLevel"));
-                                // oldSatietyLevels.Add("proteinLevel", hungerTree.GetFloat("proteinLevel"));
-                                // oldSatietyLevels.Add("dairyLevel", hungerTree.GetFloat("dairyLevel"));
-                                // foreach( KeyValuePair<string, float> kvp in oldSatietyLevels )
-                                // {
-                                //     byEntity.World.Logger.Debug("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                                // }
-                                // var newSatietyLevels = oldSatietyLevels.OrderByDescending(kvp => kvp.Value);
-                                // foreach( KeyValuePair<string, float> kvp in newSatietyLevels )
-                                // {
-                                //     byEntity.World.Logger.Debug("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                                // }
                                 float totalSatiety =
                                     (
                                         hungerTree.GetFloat("fruitLevel")
@@ -499,24 +471,20 @@ namespace Alchemy
                         {
                             sPlayer.SendMessage(
                                 GlobalConstants.InfoLogChatGroup,
-                                "You feel the effects of the " + content.GetName(),
+                                "You feel the effects of the " + contentStack.GetName(),
                                 EnumChatType.Notification
                             );
                         }
                     }
-                    IPlayer player = null;
-                    if (byEntity is EntityPlayer)
-                        player = byEntity.World.PlayerByUid(((EntityPlayer)byEntity).PlayerUID);
 
-                    splitStackAndPerformAction(
+                    SplitStackAndPerformAction(
                         byEntity,
                         slot,
                         (stack) => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
                     );
                     slot.MarkDirty();
 
-                    EntityPlayer entityPlayer = byEntity as EntityPlayer;
-                    if (entityPlayer == null)
+                    if (byEntity is not EntityPlayer entityPlayer)
                     {
                         potionId = "";
                         duration = 0;
@@ -530,9 +498,9 @@ namespace Alchemy
             }
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
-#endregion
+        #endregion
 
-        private int splitStackAndPerformAction(
+        private int SplitStackAndPerformAction(
             Entity byEntity,
             ItemSlot slot,
             System.Func<ItemStack, int> action
@@ -621,11 +589,8 @@ namespace Alchemy
         )
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            ItemStack content = GetContent(inSlot.Itemstack);
-            if (content != null)
-            {
-                content.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            }
+            ItemStack contentStack = GetContent(inSlot.Itemstack);
+            contentStack?.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
         }
     }
 
@@ -633,17 +598,13 @@ namespace Alchemy
     {
         public ItemStack forContents;
 
-        private ICoreClientAPI capi;
+        private readonly ICoreClientAPI capi;
 
         TextureAtlasPosition contentTextPos;
-
-        TextureAtlasPosition blockTextPos;
-
-        TextureAtlasPosition corkTextPos;
-
-        TextureAtlasPosition bracingTextPos;
-
-        CompositeTexture contentTexture;
+        readonly TextureAtlasPosition blockTextPos;
+        readonly TextureAtlasPosition corkTextPos;
+        readonly TextureAtlasPosition bracingTextPos;
+        readonly CompositeTexture contentTexture;
 
         public FlaskTextureSource(
             ICoreClientAPI capi,
@@ -679,7 +640,6 @@ namespace Alchemy
                         "contenttexture-" + contentTexture.ToString(),
                         () =>
                         {
-                            TextureAtlasPosition texPos;
                             int id = 0;
 
                             BitmapRef bmp = capi.Assets
@@ -692,7 +652,7 @@ namespace Alchemy
                                 ?.ToBitmap(capi);
                             if (bmp != null)
                             {
-                                capi.BlockTextureAtlas.InsertTexture(bmp, out id, out texPos);
+                                capi.BlockTextureAtlas.InsertTexture(bmp, out id, out TextureAtlasPosition texPos);
                                 bmp.Dispose();
                             }
 

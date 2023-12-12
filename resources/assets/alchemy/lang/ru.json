@@ -132,7 +132,7 @@
   "alchemy:incontainer-item-potionportion-predator-medium": "Феромоны Хищника (среднее)",
   "alchemy:incontainer-item-potionportion-scentmask-medium": "Ароматическая маска (среднее)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Зелье Жизни (среднее)",
-  
+
   "alchemy:incontainer-item-potionportion-all-strong": "Отладочное зелье (сильное)",
   "alchemy:incontainer-item-potionportion-alltick-strong": "Отладочное игровое тиковое зелье (сильное)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Зелье Лучника (сильное)",
@@ -148,14 +148,14 @@
   "alchemy:incontainer-item-potionportion-speed-strong": "Зелье Бегуна (сильное)",
   "alchemy:incontainer-item-potionportion-predator-strong": "Феромоны Хищника (сильное)",
   "alchemy:incontainer-item-potionportion-scentmask-strong": "Ароматическая маска (сильное)",
-  "alchemy:incontainer-item-potionportion-vitality-strong": "Зелье Жизни (сильное)",  
-  
+  "alchemy:incontainer-item-potionportion-vitality-strong": "Зелье Жизни (сильное)",
+
   "alchemy:incontainer-item-utilitypotionportion-recall": "Зелье памяти",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Светлячек",
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Подводник",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Питательное зелье",
 
-  "alchemy:incontainer-item-potionteaportion": "Чай с зельем",  
+  "alchemy:incontainer-item-potionteaportion": "Чай с зельем",
 
   "game:incontainer-item-potionportion-all-weak": "Отладочное зелье (слабое)",
   "game:incontainer-item-potionportion-alltick-weak": "Отладочное игровое тиковое зелье (слабое)",
@@ -351,7 +351,7 @@
   "item-cuttings-thyme-dried": "Высушенные черенки (тимьян)",
   "item-cuttings-cornflower-dried": "Высушенные черенки (василёк)",
   "item-cuttings-woad-dried": "Высушенные черенки (вайда)",
-  
+
   "item-cuttings-catmint-cooked": "Приготовленные черенки (кошачья мята)",
   "item-cuttings-forgetmenot-cooked": "Приготовленные черенки (незабудка)",
   "item-cuttings-edelweiss-cooked": "Приготовленные черенки (эдельвейс)",
@@ -426,10 +426,10 @@
   "item-herbracktop-molybdochalkos": "Рамка вешалки для трав (Молибдохалкос)",
 
   "block-herbrack-*": "Полка для трав",
-  
+
   "item-mortarpestle-*": "Ступка и пестик",
   "itemdesc-mortarpestle-*": "Используется, чтобы готовить основы для зельй",
- 
+
   "block-potionflask-normal-*": "Большая колба для зелий",
   "blockdesc-potionflask-normal-*": "Используется для хранения зелий",
 
@@ -438,7 +438,7 @@
 
   "block-potionflask-tube-*": "Маленькая колба для зелий",
   "blockdesc-potionflask-tube-*": "Используется для хранения зелий",
- 
+
   "healingeffectivness": "Эффективность исцеления",
   "maxhealthExtraPoints": "Дополнительные очки здоровья",
   "walkspeed": "Скорость ходьбы",
@@ -467,6 +467,6 @@
   "regen": "Регенерация",
   "poison": "Яд",
 
-  "alchemyguide-title": "Алхимия - Руководство по приготовлению зелий",  
+  "alchemyguide-title": "Алхимия - Руководство по приготовлению зелий",
   "alchemyguide-text": "<strong>Как готовить зелья</strong><br>Для приготовления зелий вам понадобится пара вещей. Во-первых, вам понадобятся колбы для зелий, во-вторых, вам понадобится ступка и пестик и, наконец, вам понадобятся цветы / травы (травы доступны только тогда, когда у вас установлен мод wild farming).<br><br><i>Колбы</i><br>Есть 3 колбы разной формы и 5 разных цветов.<br>Различные формы и цвета не влияют на зелья, они просто для вида. Если вас не волнует внешний вид, я бы порекомендовал кварц нормальной формы <a href=\"handbook://block-alchemy:potionflask-normal-quartz\">колба</a>.Вот список разнообразных типов различных <a href=\"handbooksearch://колба\">колб</a>.<br><br><i>Ступка и пестик</i><br>Ступка и пестики необходимы для измельчения цветов / трав в основу для приготовления зелий. Вы можете создать два разных типа <a href=\"handbook://item-alchemy:mortarpestle-wood\">деревянная</a> или <a href=\"handbook://item-alchemy:mortarpestle-stone\">каменная</a><br><br><i>Основы для зелий</i><br>Вам понадобится <a href=\"handbook://item-alchemy:potionbase-basic\">базовая основа для зелий</a> чтобы приготовить любое зелье. Основа для зелья готовится из грибов-мухоморов, цветков полевого хвоща и ступки с пестиком. Чтобы приготовить основу для зелья, отличную от базовой версии, вам понадобятся два разных специфических цветка / травы, которые вы смешаете в ступке с пестиком.<br>Пример: <a href=\"handbook://item-alchemy:potionbase-regen-weak\">основа для востанавливающего масла</a>.<br><br>Вы можете увеличить силу зелья, что усилит действие зелья. Чтобы приготовить основу для зелья большей крепости, вам нужно будет соединить ножницы с желаемым цветком / травой, что даст вам необработанные черенки.<br>Пример: <a href=\"handbook://item-alchemy:cuttings-catmint-raw\">сырые черенки</a> После этого вы можете оставить его в надежном месте или повесить на <a href=\"handbook://block-alchemy:herbrack-oak-copper-copper\">стеллаж для трав</a> для более быстрого высыхания (также <a href=\"handbook://block-expandedfoods:meathooks-oak-copper-east\">мясные крючки</a> если у вас установлена мод expanded foods.<br>Пример средней основы: <a href=\"handbook://item-alchemy:cuttings-catmint-dried\">высушенные черенки</a> <br><br>После того, как вы получили сушеные черенки, вы можете приготовить зелье средней крепости или приготовить сушеные черенки на костре.<br>Пример: <a href=\"handbook://item-alchemy:cuttings-catmint-cooked\">приготовленные черенки</a><br><br><i>Зелье</i><br>Все, что осталось, - это приготовить зелье. <br>Пример: <a href=\"handbook://block-alchemy:potion-regen-weak\">Востанавливающее Масло</a>.<br>Список <a href=\"handbooksearch://when potion is used\">зелий</a>, которые можно изготовить."
-  }
+}

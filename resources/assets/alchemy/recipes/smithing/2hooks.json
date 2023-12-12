@@ -4,7 +4,11 @@
     "code": "game:ingot-*",
     "name": "metal"
   },
-  "pattern": [["###__###_", "#_##_#_##"]],
+  "pattern": [ [ "###__###_", "#_##_#_##" ] ],
   "name": "2 Herb rack hooks",
-  "output": { "type": "item", "code": "alchemy:herbrackhook-{metal}", "stacksize": 2 }
+  "output": {
+    "type": "item",
+    "code": "alchemy:herbrackhook-{metal}",
+    "stacksize": 2
+  }
 }

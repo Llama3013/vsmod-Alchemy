@@ -1,15 +1,15 @@
 {
-	"type": "code",
-	"name": "Alchemy",
-	"modid": "alchemy",
-	"version": "1.6.16",
-	"iconpath": "modicon.png",
-	
-	"description" : "An alchemy mod that adds a couple of player enhancing potions.",
-	"website": "https://github.com/llama3013/vsmod-Alchemy",
-	"authors": [ "Llama3013" ],
-	
-	"dependencies": {
-		"game": "1.18.8"
-	}
+  "type": "code",
+  "name": "Alchemy",
+  "modid": "alchemy",
+  "version": "1.6.19",
+  "iconpath": "modicon.png",
+
+  "description": "An alchemy mod that adds a couple of player enhancing potions.",
+  "website": "https://github.com/llama3013/vsmod-Alchemy",
+  "authors": [ "Llama3013" ],
+
+  "dependencies": {
+    "game": "1.18.*"
+  }
 }

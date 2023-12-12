@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace Alchemy
@@ -17,7 +16,7 @@ namespace Alchemy
 
     public class ItemPotion : Item
     {
-        public Dictionary<string, float> dic = new Dictionary<string, float>();
+        public Dictionary<string, float> dic = new();
         public string potionId;
         public int duration;
         public int tickSec = 0;
@@ -35,7 +34,7 @@ namespace Alchemy
             if (entityItem.World.Side == EnumAppSide.Server)
             {
                 WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(entityItem.Itemstack);
-                float litres = (float)entityItem.Itemstack.StackSize / props.ItemsPerLitre;
+                float litres = entityItem.Itemstack.StackSize / props.ItemsPerLitre;
 
                 entityItem.World.SpawnCubeParticles(entityItem.SidedPos.XYZ, entityItem.Itemstack, 0.75f, (int)(litres * 2), 0.45f);
                 entityItem.World.PlaySoundAt(new AssetLocation("sounds/environment/smallsplash"), (float)entityItem.SidedPos.X, (float)entityItem.SidedPos.Y, (float)entityItem.SidedPos.Z, null);
@@ -169,12 +168,9 @@ namespace Alchemy
             Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
             pos.Y -= 0.4f;
 
-            IPlayer player = (byEntity as EntityPlayer).Player;
-
-
             if (byEntity.World is IClientWorldAccessor)
             {
-                ModelTransform tf = new ModelTransform();
+                ModelTransform tf = new();
                 tf.Origin.Set(1.1f, 0.5f, 0.5f);
                 tf.EnsureDefaultValues();
 
@@ -200,19 +196,18 @@ namespace Alchemy
         {
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
+                TempEffect potionEffect = new();
                 if (potionId == "recallpotionid" || potionId == "nutritionpotionid")
                 {
 
                 }
                 else if (tickSec == 0)
                 {
-                    TempEffect potionEffect = new TempEffect();
-                    potionEffect.tempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
+                    potionEffect.TempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
                 }
                 else
                 {
-                    TempEffect potionEffect = new TempEffect();
-                    potionEffect.tempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
+                    potionEffect.TempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
                 }
                 if (byEntity is EntityPlayer)
                 {
@@ -230,9 +225,11 @@ namespace Alchemy
                             EnumChatType.Notification
                         );
                     }
-                    else if (potionId == "nutritionpotionid") {
+                    else if (potionId == "nutritionpotionid")
+                    {
                         ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
-                        if (hungerTree != null) {
+                        if (hungerTree != null)
+                        {
                             float fruitLevel = hungerTree.GetFloat("fruitLevel");
                             float vegetableLevel = hungerTree.GetFloat("vegetableLevel");
                             float grainLevel = hungerTree.GetFloat("grainLevel");
@@ -263,81 +260,81 @@ namespace Alchemy
             if (dic != null)
             {
                 dsc.AppendLine(Lang.Get("\n"));
-                if (dic.ContainsKey("rangedWeaponsAcc"))
+                if (dic.TryGetValue("rangedWeaponsAcc", out float rWvalue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", dic["rangedWeaponsAcc"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", rWvalue * 100));
                 }
-                if (dic.ContainsKey("animalLootDropRate"))
+                if (dic.TryGetValue("animalLootDropRate", out float aLValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", dic["animalLootDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", aLValue * 100));
                 }
-                if (dic.ContainsKey("animalHarvestingTime"))
+                if (dic.TryGetValue("animalHarvestingTime", out float ahValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", dic["animalHarvestingTime"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", ahValue * 100));
                 }
-                if (dic.ContainsKey("animalSeekingRange"))
+                if (dic.TryGetValue("animalSeekingRange", out float aSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", dic["animalSeekingRange"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", aSValue * 100));
                 }
-                if (dic.ContainsKey("maxhealthExtraPoints"))
+                if (dic.TryGetValue("maxhealthExtraPoints", out float mHEValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", dic["maxhealthExtraPoints"]));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", mHEValue));
                 }
-                if (dic.ContainsKey("forageDropRate"))
+                if (dic.TryGetValue("forageDropRate", out float fDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", dic["forageDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", fDValue * 100));
                 }
-                if (dic.ContainsKey("healingeffectivness"))
+                if (dic.TryGetValue("healingeffectivness", out float hEValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", dic["healingeffectivness"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", hEValue * 100));
                 }
-                if (dic.ContainsKey("hungerrate"))
+                if (dic.TryGetValue("hungerrate", out float hRValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", dic["hungerrate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", hRValue * 100));
                 }
-                if (dic.ContainsKey("meleeWeaponsDamage"))
+                if (dic.TryGetValue("meleeWeaponsDamage", out float mWValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", dic["meleeWeaponsDamage"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", mWValue * 100));
                 }
-                if (dic.ContainsKey("mechanicalsDamage"))
+                if (dic.TryGetValue("mechanicalsDamage", out float mDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", dic["mechanicalsDamage"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", mDValue * 100));
                 }
-                if (dic.ContainsKey("miningSpeedMul"))
+                if (dic.TryGetValue("miningSpeedMul", out float mSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", dic["miningSpeedMul"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", mSValue * 100));
                 }
-                if (dic.ContainsKey("oreDropRate"))
+                if (dic.TryGetValue("oreDropRate", out float oDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", dic["oreDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", oDValue * 100));
                 }
-                if (dic.ContainsKey("rangedWeaponsDamage"))
+                if (dic.TryGetValue("rangedWeaponsDamage", out float rWDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", dic["rangedWeaponsDamage"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", rWDValue * 100));
                 }
-                if (dic.ContainsKey("rangedWeaponsSpeed"))
+                if (dic.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", dic["rangedWeaponsSpeed"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", rWSValue * 100));
                 }
-                if (dic.ContainsKey("rustyGearDropRate"))
+                if (dic.TryGetValue("rustyGearDropRate", out float rGDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", dic["rustyGearDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", rGDValue * 100));
                 }
-                if (dic.ContainsKey("walkspeed"))
+                if (dic.TryGetValue("walkspeed", out float wSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", dic["walkspeed"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", wSValue * 100));
                 }
-                if (dic.ContainsKey("vesselContentsDropRate"))
+                if (dic.TryGetValue("vesselContentsDropRate", out float vCDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", dic["vesselContentsDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", vCDValue * 100));
                 }
-                if (dic.ContainsKey("wildCropDropRate"))
+                if (dic.TryGetValue("wildCropDropRate", out float wCDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", dic["wildCropDropRate"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", wCDValue * 100));
                 }
-                if (dic.ContainsKey("wholeVesselLootChance"))
+                if (dic.TryGetValue("wholeVesselLootChance", out float wVLValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", dic["wholeVesselLootChance"] * 100));
+                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", wVLValue * 100));
                 }
             }
 

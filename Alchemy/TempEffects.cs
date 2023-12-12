@@ -25,7 +25,7 @@ namespace Alchemy
         /// <param name="code"> The identity of what is changing the stat. If "code" is present on same stat then the latest Set will override it. </param>
         /// <param name="duration"> The amount of time in seconds that the stat will be changed for. </param>
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
-        public void tempEntityStats(
+        public void TempEntityStats(
             EntityPlayer entity,
             Dictionary<string, float> effectList,
             string code,
@@ -39,10 +39,10 @@ namespace Alchemy
             effectId = id;
             if (effectedList.Count >= 1)
             {
-                setTempStats();
+                SetTempStats();
             }
             long effectIdCallback = effectedEntity.World.RegisterCallback(
-                resetTempStats,
+                ResetTempStats,
                 duration * 1000
             );
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
@@ -62,7 +62,7 @@ namespace Alchemy
         /// <param name="code"> The identity of what is changing the stat. If "code" is present on same stat then the latest Set will override it. </param>
         /// <param name="duration"> The amount of time in seconds that the stat will be changed for. </param>
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
-        public void tempTickEntityStats(
+        public void TempTickEntityStats(
             EntityPlayer entity,
             Dictionary<string, float> effectList,
             string code,
@@ -81,16 +81,16 @@ namespace Alchemy
             effectHealth = health;
             if (effectedList.Count >= 1)
             {
-                setTempStats();
+                SetTempStats();
             }
-            long effectIdGametick = entity.World.RegisterGameTickListener(onEffectTick, 1000);
+            long effectIdGametick = entity.World.RegisterGameTickListener(OnEffectTick, 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
         }
 
         /// <summary>
         /// Iterates through the provided effect dictionary and sets every stat provided
         /// </summary>
-        public void setTempStats()
+        public void SetTempStats()
         {
             if (effectedList.ContainsKey("maxhealthExtraPoints"))
             {
@@ -120,14 +120,14 @@ namespace Alchemy
         /// <summary>
         /// Iterates through the provided effect dictionary and resets every stat provided (only resets effects that has the same effectCode)
         /// </summary>
-        public void resetTempStats(float dt)
+        public void ResetTempStats(float dt)
         {
-            reset();
+            Reset();
         }
 
         int tickCnt = 0;
 
-        public void onEffectTick(float dt)
+        public void OnEffectTick(float dt)
         {
             tickCnt++;
             if (effectTickSec != 0)
@@ -152,12 +152,12 @@ namespace Alchemy
                 {
                     long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
                     effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
-                    reset();
+                    Reset();
                 }
             }
         }
 
-        public void reset()
+        public void Reset()
         {
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
@@ -189,7 +189,7 @@ namespace Alchemy
             );
         }
 
-        public void resetAllTempStats(EntityPlayer entity, string effectCode)
+        public static void ResetAllTempStats(EntityPlayer entity, string effectCode)
         {
             foreach (var stats in entity.Stats)
             {
@@ -199,7 +199,7 @@ namespace Alchemy
             ebh.MarkDirty();
         }
 
-        public void resetAllAttrListeners(
+        public static void ResetAllAttrListeners(
             EntityPlayer entity,
             string callbackCode,
             string listenerCode
@@ -240,7 +240,7 @@ namespace Alchemy
             }
         }
 
-        public bool resetAllListeners(EntityPlayer entity, string callbackCode, string listenerCode)
+        public static bool ResetAllListeners(EntityPlayer entity, string callbackCode, string listenerCode)
         {
             bool effectReseted = false;
             foreach (var watch in entity.WatchedAttributes.Keys)

@@ -16,9 +16,7 @@ namespace Alchemy
             BlockSelection blockSel
         )
         {
-            BlockEntityHerbRacks beherbrack =
-                world.BlockAccessor.GetBlockEntity(blockSel.Position) as BlockEntityHerbRacks;
-            if (beherbrack != null)
+            if (world.BlockAccessor.GetBlockEntity(blockSel.Position) is BlockEntityHerbRacks beherbrack)
                 return beherbrack.OnInteract(byPlayer, blockSel);
 
             return base.OnBlockInteractStart(world, byPlayer, blockSel);

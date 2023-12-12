@@ -1,11 +1,11 @@
 using HarmonyLib;
-using Vintagestory.GameContent;
 using Vintagestory.API.Datastructures;
+using Vintagestory.GameContent;
 
 namespace Alchemy
 {
     //This harmony patch allows the water breathing potion to work
-    [HarmonyPatch(typeof (EntityBehaviorBreathe), "Oxygen", MethodType.Getter)]
+    [HarmonyPatch(typeof(EntityBehaviorBreathe), "Oxygen", MethodType.Getter)]
     public class BehaviorBreathePatch
     {
         public static void Postfix(EntityBehaviorBreathe __instance, ref float __result)

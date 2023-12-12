@@ -10,16 +10,14 @@ namespace Alchemy
 {
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {
-        InventoryGeneric inv;
-        static int slotCount = 8;
+        readonly InventoryGeneric inv;
+        static readonly int slotCount = 8;
 
         public override InventoryBase Inventory => inv;
 
         public override string InventoryClassName => "herbrack";
 
         public override string AttributeTransformCode => "herbRackTransform";
-
-        Block block;
 
         public BlockEntityHerbRacks()
         {
@@ -28,7 +26,6 @@ namespace Alchemy
 
         public override void Initialize(ICoreAPI api)
         {
-            block = api.World.BlockAccessor.GetBlock(Pos);
             base.Initialize(api);
         }
 
@@ -88,7 +85,7 @@ namespace Alchemy
                     if (TryPut(slot, blockSel))
                     {
                         Api.World.PlaySoundAt(
-                            sound != null ? sound : new AssetLocation("sounds/player/build"),
+                            sound ?? new AssetLocation("sounds/player/build"),
                             byPlayer.Entity,
                             byPlayer,
                             true,
@@ -131,7 +128,7 @@ namespace Alchemy
                 {
                     AssetLocation sound = stack.Block?.Sounds?.Place;
                     Api.World.PlaySoundAt(
-                        sound != null ? sound : new AssetLocation("sounds/player/build"),
+                        sound ?? new AssetLocation("sounds/player/build"),
                         byPlayer.Entity,
                         byPlayer,
                         true,
@@ -158,10 +155,6 @@ namespace Alchemy
             float cureRate = GameMath.Clamp(((1 - GetPerishRate()) - 0.5f) * 3, 0, 1);
 
             sb.AppendLine();
-
-            bool up =
-                forPlayer.CurrentBlockSelection != null
-                && forPlayer.CurrentBlockSelection.SelectionBoxIndex > 1;
 
             for (int j = 7; j >= 0; j--)
             {
@@ -194,7 +187,7 @@ namespace Alchemy
             if (contentSlot.Empty)
                 return "";
 
-            StringBuilder dsc = new StringBuilder();
+            StringBuilder dsc = new();
 
             if (withStackName)
             {
@@ -468,7 +461,7 @@ namespace Alchemy
                         break;
                     case 7:
                         x = 21f / 16f;
-                        z = 14f / 16f;   
+                        z = 14f / 16f;
                         rotate = 180f;
 
                         //rotate = -1.57079635f;
@@ -479,7 +472,7 @@ namespace Alchemy
                         rotate = 0f;
                         break;
                 }
-                tfMatrices[index] = 
+                tfMatrices[index] =
                     new Matrixf()
                     .Translate(x, y, z)
                     .Scale(0.75f, 0.75f, 0.75f)

@@ -1,9 +1,9 @@
-using Vintagestory.API.Client;
-using Vintagestory.API.Common;
+using Cairo;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Cairo;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 
 namespace Alchemy
@@ -13,8 +13,6 @@ namespace Alchemy
         public override string ToggleKeyCombinationCode => "hudpotion";
         public override bool Focusable => false;
         long id = 0;
-        Dictionary<string, bool> potionsDic;
-        AssetLocation imageLocation;
 
         public GuiHudPotion(ICoreClientAPI capi) : base(capi)
         {
@@ -26,11 +24,6 @@ namespace Alchemy
             try
             {
                 IAsset essences = capi.Assets.TryGet("alchemy:config/essences.json");
-                imageLocation = capi.Assets.TryGet("alchemy:textures/hud/alchemyhud.png").Location;
-                if (essences != null)
-                {
-                    potionsDic = essences.ToObject<Dictionary<string, bool>>();
-                }
             }
             catch (Exception e)
             {
@@ -88,16 +81,15 @@ namespace Alchemy
         public void UpdateText()
         {
             bool activePotion = false;
-            StringBuilder stringBuilder = new StringBuilder();
+            StringBuilder stringBuilder = new();
             stringBuilder.AppendLine(Lang.Get("alchemy:potioneffectTrue"));
             EntityPlayer entity = capi.World.Player.Entity;
             foreach (var stat in entity.Stats)
             {
-                if (stat.Value.ValuesByKey.ContainsKey("potionmod"))
+                if (stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
                 {
-                    var value = stat.Value.ValuesByKey["potionmod"]?.Value;
                     stringBuilder.AppendLine(
-                        string.Format("{0}: {1}", Lang.Get("alchemy:" + stat.Key), value)
+                        string.Format("{0}: {1}", Lang.Get("alchemy:" + stat.Key), value?.Value)
                     );
                     activePotion = true;
                 }
@@ -149,7 +141,6 @@ namespace Alchemy
 
     public class ModSystemHud : ModSystem
     {
-        ICoreClientAPI capi;
         GuiDialog dialog;
 
         public override bool ShouldLoad(EnumAppSide forSide)
@@ -163,7 +154,6 @@ namespace Alchemy
 
             dialog = new GuiHudPotion(api);
 
-            capi = api;
             api.Input.RegisterHotKey(
                 "togglepotionhud",
                 "Toggle potion hud",

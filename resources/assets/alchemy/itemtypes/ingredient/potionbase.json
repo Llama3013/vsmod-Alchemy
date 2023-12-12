@@ -1,17 +1,109 @@
 {
   "code": "potionbase",
   "shape": { "base": "alchemy:item/potionbase" },
-  "creativeinventory": { "general": ["*"], "items": ["*"] },
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ]
+  },
   "variantgroups": [
     {
       "code": "basetype",
-      "states": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+      "states": [ "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality" ]
     },
-    { "code": "strength", "states": ["weak", "strong"] }
+    {
+      "code": "strength",
+      "states": [ "weak", "strong" ]
+    }
   ],
+  "texturesByType": {
+    "potionbase-archer-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lupine-blue" },
+      "mat2": { "base": "alchemy:item/potionbase/lupine-blue" },
+      "mat3": { "base": "alchemy:item/potionbase/orangemallow" },
+      "mat4": { "base": "alchemy:item/potionbase/orangemallow" }
+    },
+    "potionbase-healingeffect-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lupine-orange" },
+      "mat2": { "base": "alchemy:item/potionbase/lupine-orange" },
+      "mat3": { "base": "alchemy:item/potionbase/catmint" },
+      "mat4": { "base": "alchemy:item/potionbase/catmint" }
+    },
+    "potionbase-hungerenhance-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "mat2": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "mat3": { "base": "alchemy:item/potionbase/westerngorse" },
+      "mat4": { "base": "alchemy:item/potionbase/westerngorse" }
+    },
+    "potionbase-hungersupress-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lupine-red" },
+      "mat2": { "base": "alchemy:item/potionbase/lupine-red" },
+      "mat3": { "base": "alchemy:item/potionbase/edelweiss" },
+      "mat4": { "base": "alchemy:item/potionbase/edelweiss" }
+    },
+    "potionbase-hunter-*": {
+      "mat1": { "base": "alchemy:item/potionbase/cornflower" },
+      "mat2": { "base": "alchemy:item/potionbase/cornflower" },
+      "mat3": { "base": "alchemy:item/potionbase/orangemallow" },
+      "mat4": { "base": "alchemy:item/potionbase/orangemallow" }
+    },
+    "potionbase-looter-*": {
+      "mat1": { "base": "alchemy:item/potionbase/woad" },
+      "mat2": { "base": "alchemy:item/potionbase/woad" },
+      "mat3": { "base": "alchemy:item/potionbase/lupine-blue" },
+      "mat4": { "base": "alchemy:item/potionbase/lupine-blue" }
+    },
+    "potionbase-melee-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lupine-white" },
+      "mat2": { "base": "alchemy:item/potionbase/lupine-white" },
+      "mat3": { "base": "alchemy:item/potionbase/cowparsley" },
+      "mat4": { "base": "alchemy:item/potionbase/cowparsley" }
+    },
+    "potionbase-mining-*": {
+      "mat1": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "mat2": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "mat3": { "base": "alchemy:item/potionbase/wilddaisy" },
+      "mat4": { "base": "alchemy:item/potionbase/wilddaisy" }
+    },
+    "potionbase-poison-*": {
+      "mat1": { "base": "alchemy:item/potionbase/heather" },
+      "mat2": { "base": "alchemy:item/potionbase/heather" },
+      "mat3": { "base": "alchemy:item/potionbase/forgetmenot" },
+      "mat4": { "base": "alchemy:item/potionbase/forgetmenot" }
+    },
+    "potionbase-predator-*": {
+      "mat1": { "base": "alchemy:item/potionbase/horsetail" },
+      "mat2": { "base": "alchemy:item/potionbase/cornflower" },
+      "mat3": { "base": "game:block/wood/barrel/raw-bushmeat" },
+      "mat4": { "base": "game:block/wood/barrel/raw-redmeat" }
+    },
+    "potionbase-regen-*": {
+      "mat1": { "base": "alchemy:item/potionbase/lilyofthevalley" },
+      "mat2": { "base": "alchemy:item/potionbase/lilyofthevalley" },
+      "mat3": { "base": "alchemy:item/potionbase/catmint" },
+      "mat4": { "base": "alchemy:item/potionbase/catmint" }
+    },
+    "potionbase-scentmask-*": {
+      "mat1": { "base": "alchemy:item/potionbase/forgetmenot" },
+      "mat2": { "base": "alchemy:item/potionbase/forgetmenot" },
+      "mat3": { "base": "alchemy:item/potionbase/horsetail" },
+      "mat4": { "base": "alchemy:item/potionbase/horsetail" }
+    },
+    "potionbase-speed-*": {
+      "mat1": { "base": "alchemy:item/potionbase/westerngorse" },
+      "mat2": { "base": "alchemy:item/potionbase/westerngorse" },
+      "mat3": { "base": "alchemy:item/potionbase/heather" },
+      "mat4": { "base": "alchemy:item/potionbase/heather" }
+    },
+    "potionbase-vitality-*": {
+      "mat1": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "mat2": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "mat3": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "mat4": { "base": "alchemy:item/potionbase/lupine-purple" }
+    }
+  },
   "attributes": {
     "handbook": {
-      "groupBy": ["potionbase-{basetype}-*"]
+      "groupBy": [ "potionbase-{basetype}-*" ]
     }
   },
   "maxstacksize": 64,
@@ -21,27 +113,75 @@
     "burnDuration": 6
   },
   "guiTransform": {
-    "translation": { "x": 3, "y": 0, "z": 0 },
-    "rotation": { "x": -28, "y": 23, "z": 180 },
-    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "translation": {
+      "x": 3,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -28,
+      "y": 23,
+      "z": 180
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.175,
+      "z": 0.5
+    },
     "scale": 3
   },
   "groundTransform": {
-    "translation": { "x": 0, "y": 0, "z": 0 },
-    "rotation": { "x": 0, "y": 0, "z": 1 },
-    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 1
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
     "scale": 3
   },
   "tpHandTransform": {
-    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
-    "rotation": { "x": 0, "y": 0, "z": 0 },
-    "origin": { "x": 0, "y": 0.13, "z": 0 },
+    "translation": {
+      "x": 0.3,
+      "y": -0.16,
+      "z": 0.5
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0,
+      "y": 0.13,
+      "z": 0
+    },
     "scale": 0.66
   },
   "fpHandTransform": {
-    "translation": { "x": 0, "y": 0.24, "z": 0.3 },
-    "rotation": { "x": 0, "y": 0, "z": 0 },
-    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
+    "translation": {
+      "x": 0,
+      "y": 0.24,
+      "z": 0.3
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.1,
+      "z": 0.5
+    },
     "scale": 2
   }
 }

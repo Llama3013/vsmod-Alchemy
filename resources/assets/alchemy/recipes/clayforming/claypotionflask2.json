@@ -1,37 +1,46 @@
 {
-	"ingredient": { "type": "item", "code": "game:clay-*", "name": "type", "allowedVariants": ["blue", "fire"] },
-	"pattern": [[
-	  "###_###",
-	  "###_###",
-	  "###_###"
+  "ingredient": {
+    "type": "item",
+    "code": "game:clay-*",
+    "name": "type",
+    "allowedVariants": [ "blue", "fire" ]
+  },
+  "pattern": [
+    [
+      "###_###",
+      "###_###",
+      "###_###"
+    ],
+    [
+      "###_###",
+      "#_#_#_#",
+      "###_###"
+    ],
+    [
+      "###_###",
+      "#_#_#_#",
+      "###_###"
+    ],
+    [
+      "###_###",
+      "#_#_#_#",
+      "###_###"
+    ],
+    [
+      "###_###",
+      "#_#_#_#",
+      "###_###"
+    ],
+    [
+      "_______",
+      "_#___#_",
+      "_______"
+    ]
   ],
-  [
-	  "###_###",
-	  "#_#_#_#",
-	  "###_###"
-  ],
-  [
-	  "###_###",
-	  "#_#_#_#",
-	  "###_###"
-  ],
-  [
-	  "###_###",
-	  "#_#_#_#",
-	  "###_###"
-  ],
-  [
-	  "###_###",
-	  "#_#_#_#",
-	  "###_###"
-  ],
-  [
-	  "_______",
-	  "_#___#_",
-	  "_______"
-  ]
-  ],
-	"name": "claypotionflask",
-	"output": { "type": "block", "code": "alchemy:claypotionflask-raw", "stacksize": 2 }
+  "name": "claypotionflask",
+  "output": {
+    "type": "block",
+    "code": "alchemy:claypotionflask-raw",
+    "stacksize": 2
   }
-  
+}

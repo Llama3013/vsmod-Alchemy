@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Reflection;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
-using Vintagestory.API.Client;
 
 [assembly: ModInfo(
     "AlchemyMod",
@@ -51,16 +50,15 @@ namespace Alchemy
         {
             api.Event.PlayerNowPlaying += (IServerPlayer iServerPlayer) =>
             {
-                if (iServerPlayer.Entity is EntityPlayer)
+                if (iServerPlayer.Entity is not null)
                 {
                     Entity entity = iServerPlayer.Entity;
                     entity.AddBehavior(new PotionFixBehavior(entity));
 
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
-                    TempEffect tempEffect = new TempEffect();
-                    EntityPlayer player = (iServerPlayer.Entity as EntityPlayer);
-                    tempEffect.resetAllTempStats(player, "potionmod");
-                    tempEffect.resetAllAttrListeners(player, "potionid", "tickpotionid");
+                    EntityPlayer player = iServerPlayer.Entity;
+                    TempEffect.ResetAllTempStats(player, "potionmod");
+                    TempEffect.ResetAllAttrListeners(player, "potionid", "tickpotionid");
                     //api.Logger.Debug("potion player ready");
                 }
             };

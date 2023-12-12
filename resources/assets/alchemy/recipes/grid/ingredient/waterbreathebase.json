@@ -1,11 +1,21 @@
 {
-    "ingredientPattern": "M,T",
-    "ingredients": {
-        "M": { "type": "item", "code": "game:cattailroot" },
-        "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  "ingredientPattern": "M,T",
+  "ingredients": {
+    "M": {
+      "type": "item",
+      "code": "game:cattailroot"
     },
-    "shapeless": true,
-    "width": 1,
-    "height": 2,
-    "output": { "type": "item", "code": "alchemy:utilitypotionbase-waterbreathe" }
+    "T": {
+      "type": "item",
+      "code": "alchemy:mortarpestle-*",
+      "isTool": true
+    }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 2,
+  "output": {
+    "type": "item",
+    "code": "alchemy:utilitypotionbase-waterbreathe"
+  }
 }

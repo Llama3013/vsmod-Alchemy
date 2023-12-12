@@ -7,7 +7,11 @@
         "code": "game:plank-*",
         "name": "wood"
       },
-      "H": { "type": "item", "code": "alchemy:herbrackhook-*", "quantity": 2 },
+      "H": {
+        "type": "item",
+        "code": "alchemy:herbrackhook-*",
+        "quantity": 2
+      },
       "R": {
         "type": "item",
         "code": "alchemy:herbracktop-*",
@@ -16,6 +20,10 @@
     },
     "width": 3,
     "height": 3,
-    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+    "output": {
+      "type": "block",
+      "code": "alchemy:herbrack-{wood}-{metal}",
+      "quantity": 1
+    }
   }
 ]

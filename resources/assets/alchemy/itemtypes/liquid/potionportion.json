@@ -1,17 +1,18 @@
 {
+  "enabled": true,
   "code": "potionportion",
   "variantgroups": [
     {
       "code": "potiontype",
-      "states": ["all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
+      "states": [ "all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality" ]
     },
-    { "code": "strength", "states": ["medium", "strong"] }
+    {
+      "code": "strength",
+      "states": [ "medium", "strong" ]
+    }
   ],
   "class": "ItemPotion",
-  "matterStateByType": {
-    "*-medium": "liquid",
-    "*-strong": "liquid"
-  },
+  "matterState": "liquid",
   "attributesByType": {
     "*-all-*": {
       "potioninfo": {
@@ -45,14 +46,18 @@
         "texture": { "base": "game:block/liquid/waterportion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-all-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-all-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-{potiontype}-medium"],
-          "*-strong": ["potionportion-{potiontype}-strong"]
+          "*-medium": [ "potionportion-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-{potiontype}-strong" ]
         },
         "exclude": true
       }
@@ -93,14 +98,18 @@
         "texture": { "base": "game:block/liquid/waterportion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-alltick-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-alltick-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         },
         "exclude": true
       }
@@ -122,14 +131,18 @@
         "allowSpill": true,
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-archer-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-archer-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -147,14 +160,18 @@
         "texture": { "base": "alchemy:item/potion/red_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-healingeffect-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-healingeffect-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -172,14 +189,18 @@
         "texture": { "base": "alchemy:item/potion/orange_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-hungerenhance-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-hungerenhance-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -197,14 +218,18 @@
         "texture": { "base": "alchemy:item/potion/yellow_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-hungersupress-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-hungersupress-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -225,14 +250,18 @@
         "texture": { "base": "game:block/wood/oak" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-hunter-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-hunter-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -253,14 +282,18 @@
         "texture": { "base": "alchemy:item/potion/indigo_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-looter-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-looter-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -278,14 +311,18 @@
         "texture": { "base": "alchemy:item/potion/darkred_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-melee-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-melee-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -304,14 +341,18 @@
         "texture": { "base": "alchemy:item/potion/brown_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-mining-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-mining-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -330,14 +371,18 @@
         "texture": { "base": "alchemy:item/potion/purple_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-poison-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-poison-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -355,14 +400,18 @@
         "texture": { "base": "alchemy:item/potion/rose_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-predator-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-predator-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -381,14 +430,18 @@
         "texture": { "base": "alchemy:item/potion/green_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-regen-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-regen-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -406,14 +459,18 @@
         "texture": { "base": "alchemy:item/potion/lavendar_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-scentmask-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-scentmask-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -431,14 +488,18 @@
         "texture": { "base": "alchemy:item/potion/turquoise_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-speed-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-speed-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -456,14 +517,18 @@
         "texture": { "base": "alchemy:item/potion/black_potion" },
         "whenSpilled": {
           "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-vitality-{strength}", "states": ["medium", "strong"] }
+          "stack": {
+            "type": "item",
+            "code": "potionportion-vitality-{strength}",
+            "states": [ "medium", "strong" ]
+          }
         }
       },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         }
       }
     },
@@ -476,8 +541,8 @@
       "handbook": {
         "ignoreCreativeInvStacks": true,
         "groupByByType": {
-          "*-medium": ["potionportion-*-{potiontype}-medium"],
-          "*-strong": ["potionportion-*-{potiontype}-strong"]
+          "*-medium": [ "potionportion-*-{potiontype}-medium" ],
+          "*-strong": [ "potionportion-*-{potiontype}-strong" ]
         },
         "exclude": true
       }
@@ -485,10 +550,35 @@
   },
   "creativeinventoryStacks": [
     {
-      "tabs": ["general", "liquids"],
+      "tabs": [ "general", "liquids" ],
       "stacks": [
-        { "type": "block", "code": "game:woodbucket", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }] } },
-        { "type": "block", "code": "alchemy:potionflask-normal-quartz", "attributes": { "ucontents": [{ "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }] } }
+        {
+          "type": "block",
+          "code": "alchemy:potionflask-normal-quartz",
+          "attributes": {
+            "ucontents": [
+              {
+                "type": "item",
+                "code": "alchemy:potionportion-{potiontype}-{strength}",
+                "makefull": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "block",
+          "code": "game:woodbucket",
+          "attributes": {
+            "ucontents": [
+              {
+                "type": "item",
+                "code": "alchemy:potionportion-{potiontype}-{strength}",
+                "makefull": true
+              }
+            ]
+          }
+        }
+
       ]
     }
   ],
@@ -540,16 +630,40 @@
     }
   },
   "guiTransform": {
-    "translation": { "x": 0, "y": 1, "z": 0 },
-    "rotation": { "x": 123, "y": -33, "z": -13 },
-    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "translation": {
+      "x": 0,
+      "y": 1,
+      "z": 0
+    },
+    "rotation": {
+      "x": 123,
+      "y": -33,
+      "z": -13
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0,
+      "z": 0.5
+    },
     "scale": 1.4
   },
   "fpHandTransform": {
-    "translation": { "x": 0, "y": 0, "z": 0 },
-    "rotation": { "x": 25, "y": 157, "z": -5 }
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 25,
+      "y": 157,
+      "z": -5
+    }
   },
   "tpHandTransform": {
-    "translation": { "x": -1.5, "y": -1, "z": -1.4 }
+    "translation": {
+      "x": -1.5,
+      "y": -1,
+      "z": -1.4
+    }
   }
 }
