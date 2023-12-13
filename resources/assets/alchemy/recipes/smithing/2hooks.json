@@ -2,7 +2,32 @@
   "ingredient": {
     "type": "item",
     "code": "game:ingot-*",
-    "name": "metal"
+    "name": "metal",
+    "allowedVariants": [
+      "bismuth",
+      "bismuthbronze",
+      "blackbronze",
+      "brass",
+      "chromium",
+      "copper",
+      "cupronickel",
+      "electrum",
+      "gold",
+      "iron",
+      "lead",
+      "meteoriciron",
+      "molybdochalkos",
+      "nickel",
+      "platinum",
+      "silver",
+      "stainlesssteel",
+      "steel",
+      "tin",
+      "tinbronze",
+      "titanium",
+      "uranium",
+      "zinc"
+    ]
   },
   "pattern": [ [ "###__###_", "#_##_#_##" ] ],
   "name": "2 Herb rack hooks",
