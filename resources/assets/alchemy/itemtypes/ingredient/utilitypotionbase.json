@@ -25,6 +25,12 @@
       "mat2": { "base": "game:item/resource/fat" },
       "mat3": { "base": "game:item/resource/drygrass" },
       "mat4": { "base": "game:item/resource/drygrass" }
+    },
+    "utilitypotionbase-temporal": {
+      "mat1": { "base": "game:item/resource/ungraded/sulfur" },
+      "mat2": { "base": "game:item/resource/ungraded/sulfur" },
+      "mat3": { "base": "game:item/resource/ungraded/sulfur" },
+      "mat4": { "base": "game:item/resource/ungraded/sulfur" }
     }
   },
   "creativeinventory": {
@@ -34,7 +40,7 @@
   "variantgroups": [
     {
       "code": "basetype",
-      "states": [ "recall", "glow", "waterbreathe", "nutrition" ]
+      "states": [ "recall", "glow", "waterbreathe", "nutrition", "temporal" ]
     }
   ],
   "attributes": {

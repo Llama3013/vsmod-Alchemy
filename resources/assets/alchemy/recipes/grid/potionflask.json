@@ -41,7 +41,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-quartz",
@@ -90,7 +89,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-pink",
@@ -139,7 +137,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-quartz",
@@ -188,7 +185,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-green",
@@ -237,7 +233,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-violet",
@@ -286,7 +281,6 @@
     },
     "width": 1,
     "height": 2,
-    "shapeless": true,
     "output": {
       "type": "block",
       "code": "alchemy:potionflask-tube-smoky",

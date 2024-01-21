@@ -159,16 +159,15 @@ namespace Alchemy
         {
             if (Code.Path.Contains("clay"))
                 return;
-            Dictionary<int, MeshRef> meshrefs;
+            Dictionary<int, MultiTextureMeshRef> meshrefs;
 
-            object obj;
-            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out object obj))
             {
-                meshrefs = obj as Dictionary<int, MeshRef>;
+                meshrefs = obj as Dictionary<int, MultiTextureMeshRef>;
             }
             else
             {
-                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<int, MeshRef>();
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<int, MultiTextureMeshRef>();
             }
 
             ItemStack contentStack = GetContent(itemstack);
@@ -177,25 +176,22 @@ namespace Alchemy
 
             int hashcode = GetStackCacheHashCode(contentStack);
 
-            if (!meshrefs.TryGetValue(hashcode, out MeshRef meshRef))
+            if (!meshrefs.TryGetValue(hashcode, out MultiTextureMeshRef meshRef))
             {
                 MeshData meshdata = GenMesh(capi, contentStack);
-                meshrefs[hashcode] = meshRef = capi.Render.UploadMesh(meshdata);
+                meshrefs[hashcode] = meshRef = capi.Render.UploadMultiTextureMesh(meshdata);
             }
-
 
             renderinfo.ModelRef = meshRef;
         }
 
         public override void OnUnloaded(ICoreAPI api)
         {
-            ICoreClientAPI capi = api as ICoreClientAPI;
-            if (capi == null) return;
+            if (api is not ICoreClientAPI capi) return;
 
-            object obj;
-            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out obj))
+            if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out object obj))
             {
-                Dictionary<int, MeshRef> meshrefs = obj as Dictionary<int, MeshRef>;
+                Dictionary<int, MultiTextureMeshRef> meshrefs = obj as Dictionary<int, MultiTextureMeshRef>;
 
                 foreach (var val in meshrefs)
                 {
@@ -217,125 +213,136 @@ namespace Alchemy
             ref EnumHandHandling handling
         )
         {
-            ItemStack contentStack = GetContent(slot.Itemstack);
-            if (contentStack != null)
+            EnumHandHandling bhHandHandling = EnumHandHandling.NotHandled;
+            bool preventDefault = false;
+
+            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
             {
-                if (contentStack.Collectible.Class == "ItemPotion")
+                EnumHandling bhHandling = EnumHandling.PassThrough;
+
+                behavior.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref bhHandHandling, ref bhHandling);
+                if (bhHandling != EnumHandling.PassThrough)
                 {
-                    string strength = contentStack.Item.Variant["strength"] is string str
-                        ? string.Intern(str)
-                        : "none";
-                    try
+                    handling = bhHandHandling;
+                    preventDefault = true;
+                }
+
+                if (bhHandling == EnumHandling.PreventSubsequent) return;
+            }
+            ItemStack contentStack = GetContent(slot.Itemstack);
+            if (contentStack != null && !preventDefault)
+            {
+                try
+                {
+                    JsonObject potion = contentStack.ItemAttributes["potioninfo"];
+                    if (potion.Exists == true)
                     {
-                        JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
-                        if (potion?.Exists == true)
+                        string strength = contentStack.Item.Variant["strength"] is string str
+                            ? string.Intern(str)
+                            : "none";
+                        potionId = potion["potionId"].AsString();
+                        duration = potion["duration"].AsInt();
+                        try
                         {
-                            potionId = potion["potionId"].AsString();
-                            duration = potion["duration"].AsInt();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        api.World.Logger.Error(
-                            "Failed loading potion effects for potion {0}. Will ignore. Exception: {1}",
-                            Code,
-                            e
-                        );
-                        potionId = "";
-                        duration = 0;
-                    }
-                    try
-                    {
-                        JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
-                        if (tickPotion?.Exists == true)
-                        {
-                            tickSec = tickPotion["ticksec"].AsInt();
-                            health = tickPotion["health"].AsFloat();
-                            switch (strength)
+                            JsonObject tickPotion = contentStack.ItemAttributes["tickpotioninfo"];
+                            if (tickPotion.Exists == true)
                             {
-                                case "strong":
-                                    health *= 3;
-                                    break;
-                                case "medium":
-                                    health *= 2;
-                                    break;
-                                default:
-                                    break;
+                                tickSec = tickPotion["ticksec"].AsInt();
+                                health = tickPotion["health"].AsFloat();
+                                switch (strength)
+                                {
+                                    case "strong":
+                                        health *= 3;
+                                        break;
+                                    case "medium":
+                                        health *= 2;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                //api.Logger.Debug("potion {0}, {1}, potionId, duration);
                             }
-                            //api.Logger.Debug("potion {0}, {1}, potionId, duration);
+                            else
+                            {
+                                tickSec = 0;
+                                health = 0;
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
+                            api.World.Logger.Error(
+                                "Failed loading potion effects for potion {0}. Will ignore. Exception: {1}",
+                                Code,
+                                e
+                            );
                             tickSec = 0;
                             health = 0;
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        api.World.Logger.Error(
-                            "Failed loading potion effects for potion {0}. Will ignore. Exception: {1}",
-                            Code,
-                            e
-                        );
-                        tickSec = 0;
-                        health = 0;
-                    }
-                    try
-                    {
-                        JsonObject effects = contentStack.ItemAttributes?["effects"];
-                        if (effects?.Exists == true)
+                        try
                         {
-                            dic = effects.AsObject<Dictionary<string, float>>();
-                            switch (strength)
+                            JsonObject effects = contentStack.ItemAttributes["effects"];
+                            if (effects.Exists == true)
                             {
-                                case "strong":
-                                    foreach (var k in dic.Keys.ToList())
-                                    {
-                                        dic[k] *= 3;
-                                    }
-                                    break;
-                                case "medium":
-                                    foreach (var k in dic.Keys.ToList())
-                                    {
-                                        dic[k] *= 2;
-                                    }
-                                    break;
-                                default:
-                                    break;
+                                dic = effects.AsObject<Dictionary<string, float>>();
+                                switch (strength)
+                                {
+                                    case "strong":
+                                        foreach (string k in dic.Keys.ToList())
+                                        {
+                                            dic[k] *= 3;
+                                        }
+                                        break;
+                                    case "medium":
+                                        foreach (string k in dic.Keys.ToList())
+                                        {
+                                            dic[k] *= 2;
+                                        }
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                dic.Clear();
                             }
                         }
-                        else
+                        catch (Exception e)
                         {
+                            api.World.Logger.Error(
+                                "Failed loading potion effects for potion {0}. Will ignore. Exception: {1}",
+                                Code,
+                                e
+                            );
                             dic.Clear();
                         }
                     }
-                    catch (Exception e)
-                    {
-                        api.World.Logger.Error(
-                            "Failed loading potion effects for potion {0}. Will ignore. Exception: {1}",
-                            Code,
-                            e
-                        );
-                        dic.Clear();
-                    }
-
-                    if (potionId != "" && potionId != null)
-                    {
-                        //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
-                        //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
-                        /* This checks if the potion effect callback is on */
-                        if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
-                        {
-                            //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
-                            byEntity.World.RegisterCallback(
-                                (dt) => playEatSound(byEntity, "drink", 1),
-                                500
-                            );
-                            handling = EnumHandHandling.PreventDefault;
-                        }
-                    }
-                    return;
                 }
+                catch (Exception e)
+                {
+                    api.World.Logger.Error(
+                        "Failed loading potion info for potion {0}. Will ignore. Exception: {1}",
+                        Code,
+                        e
+                    );
+                    potionId = "";
+                    duration = 0;
+                }
+
+                if (potionId != "" && potionId != null)
+                {
+                    //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
+                    //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                    /* This checks if the potion effect callback is on */
+                    if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
+                    {
+                        //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                        byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
+                        byEntity.AnimManager?.StartAnimation("eat");
+                        handling = EnumHandHandling.PreventDefault;
+                    }
+                }
+                return;
             }
             else
             {
@@ -345,7 +352,6 @@ namespace Alchemy
                 health = 0;
                 dic.Clear();
             }
-            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
 
         public override bool OnHeldInteractStep(
@@ -356,32 +362,62 @@ namespace Alchemy
             EntitySelection entitySel
         )
         {
-            Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
-            pos.Y -= 0.4f;
+
+            bool result = true;
+            bool preventDefault = false;
+
+            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
+            {
+                EnumHandling handled = EnumHandling.PassThrough;
+
+                bool behaviorResult = behavior.OnHeldInteractStep(secondsUsed, slot, byEntity, blockSel, entitySel, ref handled);
+                if (handled != EnumHandling.PassThrough)
+                {
+                    result &= behaviorResult;
+                    preventDefault = true;
+                }
+
+                if (handled == EnumHandling.PreventSubsequent) return result;
+            }
+
+            if (preventDefault) return result;
+
+            Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
+            pos.X += byEntity.LocalEyePos.X;
+            pos.Y += byEntity.LocalEyePos.Y - 0.4f;
+            pos.Z += byEntity.LocalEyePos.Z;
+
+            if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
+            {
+                byEntity.World.SpawnCubeParticles(pos, slot.Itemstack, 0.3f, 4, 0.5f, (byEntity as EntityPlayer)?.Player);
+            }
+
 
             if (byEntity.World is IClientWorldAccessor)
             {
                 ModelTransform tf = new();
-                tf.Origin.Set(1.1f, 0.5f, 0.5f);
+
                 tf.EnsureDefaultValues();
 
-                tf.Translation.X -=
-                    Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Rotation.X +=
-                    Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
+                tf.Origin.Set(0f, 0, 0f);
 
                 if (secondsUsed > 0.5f)
                 {
-                    tf.Translation.Y +=
-                        GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
+                    tf.Translation.Y = Math.Min(0.02f, GameMath.Sin(20 * secondsUsed) / 10);
                 }
 
-                byEntity.Controls.UsingHeldItemTransformBefore = tf;
+                tf.Translation.X -= Math.Min(1f, secondsUsed * 4 * 1.57f);
+                tf.Translation.Y -= Math.Min(0.05f, secondsUsed * 2);
+
+                tf.Rotation.X += Math.Min(30f, secondsUsed * 350);
+                tf.Rotation.Y += Math.Min(80f, secondsUsed * 350);
+
+                byEntity.Controls.UsingHeldItemTransformAfter = tf;
 
                 return secondsUsed <= 1.5f;
             }
+
+            // Let the client decide when he is done eating
             return true;
         }
 
@@ -393,41 +429,29 @@ namespace Alchemy
             EntitySelection entitySel
         )
         {
+            bool preventDefault = false;
+
+            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
+            {
+                EnumHandling handled = EnumHandling.PassThrough;
+
+                behavior.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel, ref handled);
+                if (handled != EnumHandling.PassThrough) preventDefault = true;
+
+                if (handled == EnumHandling.PreventSubsequent) return;
+            }
+
+            if (preventDefault) return;
+
             ItemStack contentStack = GetContent(slot.Itemstack);
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && contentStack != null)
             {
-                if (contentStack.Collectible.Class == "ItemPotion")
+                if (potionId != "")
                 {
                     TempEffect potionEffect = new();
-                    if (potionId == "recallpotionid" || potionId == "nutritionpotionid") { }
-                    else if (tickSec == 0)
-                    {
-                        potionEffect.TempEntityStats(
-                            (byEntity as EntityPlayer),
-                            dic,
-                            "potionmod",
-                            duration,
-                            potionId
-                        );
-                    }
-                    else
-                    {
-                        potionEffect.TempTickEntityStats(
-                            (byEntity as EntityPlayer),
-                            dic,
-                            "potionmod",
-                            duration,
-                            potionId,
-                            tickSec,
-                            health
-                        );
-                    }
                     if (byEntity is EntityPlayer)
                     {
-                        IServerPlayer sPlayer = (
-                            byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID)
-                            as IServerPlayer
-                        );
+                        IServerPlayer sPlayer = ((IServerPlayer)byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID));
                         if (potionId == "recallpotionid")
                         {
                             if (api.Side.IsServer())
@@ -467,14 +491,37 @@ namespace Alchemy
                                 byEntity.WatchedAttributes.MarkPathDirty("hunger");
                             }
                         }
+                        else if (potionId == "temporalpotionid")
+                        {
+                            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
+                        }
+                        else if (tickSec != 0)
+                        {
+                            potionEffect.TempTickEntityStats(
+                                (byEntity as EntityPlayer),
+                                dic,
+                                "potionmod",
+                                duration,
+                                potionId,
+                                tickSec,
+                                health
+                            );
+                        }
                         else
                         {
-                            sPlayer.SendMessage(
+                            potionEffect.TempEntityStats(
+                                (byEntity as EntityPlayer),
+                                dic,
+                                "potionmod",
+                                duration,
+                                potionId
+                            );
+                        }
+                        sPlayer.SendMessage(
                                 GlobalConstants.InfoLogChatGroup,
                                 "You feel the effects of the " + contentStack.GetName(),
                                 EnumChatType.Notification
                             );
-                        }
                     }
 
                     SplitStackAndPerformAction(

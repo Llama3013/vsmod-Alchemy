@@ -96,6 +96,8 @@
   "itemdesc-utilitypotionbase-glow": "Used to make Glow Flask potion",
   "item-utilitypotionbase-waterbreathe": "Water Breathing Flask base",
   "itemdesc-utilitypotionbase-waterbreathe": "Used to make Water Breathing Flask potion",
+  "item-utilitypotionbase-temporal": "Stability Flask base",
+  "itemdesc-utilitypotionbase-temporal": "Used to make Stability Flask potion",
   "item-utilitypotionbase-nutrition": "Nutrition Flask base",
   "itemdesc-utilitypotionbase-nutrition": "Used to make Nutrition Flask potion",
 
@@ -153,6 +155,7 @@
   "alchemy:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
+  "alchemy:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
 
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
@@ -211,6 +214,7 @@
   "game:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "game:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "game:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
+  "game:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "game:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
 
   "game:incontainer-item-potionteaportion": "Potion tea",
@@ -220,6 +224,7 @@
   "item-utilitypotionportion-recall": "Recall Flask",
   "item-utilitypotionportion-glow": "Glow Flask",
   "item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
+  "item-utilitypotionportion-temporal": "Stability Flask",
   "item-utilitypotionportion-nutrition": "Nutrition Flask",
 
   "block-claypotionflask-raw": "Ceramic Potion Flask (Raw)",
@@ -294,6 +299,7 @@
   "itemdesc-utilitypotionportion-recall": "When potion is used: You teleport back to your returning point",
   "itemdesc-utilitypotionportion-glow": "When potion is used: You glow brightly",
   "itemdesc-utilitypotionportion-waterbreathe": "When potion is used: You can breathe underwater",
+  "itemdesc-utilitypotionportion-temporal": "When potion is used: You gain some temporal stability",
   "itemdesc-utilitypotionportion-nutrition": "When potion is used: You gain satiety in your lower nutrition levels",
 
   "item-cuttings-*-raw": "Raw Cuttings",

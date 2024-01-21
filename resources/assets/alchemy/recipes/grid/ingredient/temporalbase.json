@@ -1,0 +1,21 @@
+{
+  "ingredientPattern": "M,T",
+  "ingredients": {
+    "M": {
+      "type": "item",
+      "code": "game:powderedsulfur"
+    },
+    "T": {
+      "type": "item",
+      "code": "alchemy:mortarpestle-*",
+      "isTool": true
+    }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 2,
+  "output": {
+    "type": "item",
+    "code": "alchemy:utilitypotionbase-temporal"
+  }
+}

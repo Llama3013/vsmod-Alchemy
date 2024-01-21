@@ -197,7 +197,7 @@ namespace Alchemy
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
                 TempEffect potionEffect = new();
-                if (potionId == "recallpotionid" || potionId == "nutritionpotionid")
+                if (potionId == "recallpotionid" || potionId == "nutritionpotionid" || potionId == "temporalpotionid")
                 {
 
                 }
