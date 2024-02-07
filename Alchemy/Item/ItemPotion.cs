@@ -259,96 +259,95 @@ namespace Alchemy
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             if (dic != null)
             {
-                dsc.AppendLine(Lang.Get("\n"));
                 if (dic.TryGetValue("rangedWeaponsAcc", out float rWvalue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged accuracy", rWvalue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-archer-accuracy-effect", rWvalue * 100));
                 }
                 if (dic.TryGetValue("animalLootDropRate", out float aLValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more animal loot", aLValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-animal-loot-effect", aLValue * 100));
                 }
                 if (dic.TryGetValue("animalHarvestingTime", out float ahValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% faster animal harvest", ahValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-animal-harvest-effect", ahValue * 100));
                 }
                 if (dic.TryGetValue("animalSeekingRange", out float aSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% animal seek range", aSValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-animal-seek-effect", aSValue * 100));
                 }
                 if (dic.TryGetValue("maxhealthExtraPoints", out float mHEValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0} extra max health", mHEValue));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-max-health-effect", mHEValue));
                 }
                 if (dic.TryGetValue("forageDropRate", out float fDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% more forage amount", fDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-forage-amount-effect", fDValue * 100));
                 }
                 if (dic.TryGetValue("healingeffectivness", out float hEValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% healing effectiveness", hEValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-heal-effectiveness-effect", hEValue * 100));
                 }
                 if (dic.TryGetValue("hungerrate", out float hRValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: {0}% hunger rate", hRValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-melee-damage-effect", hRValue * 100));
                 }
                 if (dic.TryGetValue("meleeWeaponsDamage", out float mWValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% melee damage", mWValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-melee-damage-effect", mWValue * 100));
                 }
                 if (dic.TryGetValue("mechanicalsDamage", out float mDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mechanincal damage (not sure if works)", mDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-mech-damage-effect", mDValue * 100));
                 }
                 if (dic.TryGetValue("miningSpeedMul", out float mSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% mining speed", mSValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-mining-speed-effect", mSValue * 100));
                 }
                 if (dic.TryGetValue("oreDropRate", out float oDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more ore", oDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-ore-amount-effect", oDValue * 100));
                 }
                 if (dic.TryGetValue("rangedWeaponsDamage", out float rWDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged damage", rWDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-archer-damage-effect", rWDValue * 100));
                 }
                 if (dic.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% ranged speed", rWSValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-archer-speed-effect", rWSValue * 100));
                 }
                 if (dic.TryGetValue("rustyGearDropRate", out float rGDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more gears from metal piles", rGDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-gear-amount-effect", rGDValue * 100));
                 }
                 if (dic.TryGetValue("walkspeed", out float wSValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% walk speed", wSValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-walk-speed-effect", wSValue * 100));
                 }
                 if (dic.TryGetValue("vesselContentsDropRate", out float vCDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% more vessel contents", vCDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-vessel-amount-effect", vCDValue * 100));
                 }
                 if (dic.TryGetValue("wildCropDropRate", out float wCDValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% wild crop", wCDValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-wild-crop-effect", wCDValue * 100));
                 }
                 if (dic.TryGetValue("wholeVesselLootChance", out float wVLValue))
                 {
-                    dsc.AppendLine(Lang.Get("When potion is used: +{0}% chance to get whole vessel", wVLValue * 100));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-whole-vessel-effect", wVLValue * 100));
                 }
             }
 
-            if (duration != 0)
-            {
-                dsc.AppendLine(Lang.Get("and lasts for {0} seconds", duration));
-            }
             if (health != 0)
             {
-                dsc.AppendLine(Lang.Get("When potion is used: {0} health", health));
+                dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", health));
             }
             if (tickSec != 0)
             {
-                dsc.AppendLine(Lang.Get("every {0} seconds", tickSec));
+                dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", tickSec));
+            }
+            if (duration != 0)
+            {
+                dsc.AppendLine(Lang.Get("alchemy:potion-duration", duration));
             }
         }
     }
