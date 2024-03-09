@@ -13,7 +13,6 @@ using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-
     public class ItemPotion : Item
     {
         public Dictionary<string, float> dic = new();
@@ -45,6 +44,7 @@ namespace Alchemy
 
             base.OnGroundIdle(entityItem);
         }
+
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
@@ -85,9 +85,11 @@ namespace Alchemy
                         case "strong":
                             health *= 3;
                             break;
+
                         case "medium":
                             health *= 2;
                             break;
+
                         default:
                             break;
                     }
@@ -114,12 +116,14 @@ namespace Alchemy
                                 dic[k] *= 3;
                             }
                             break;
+
                         case "medium":
                             foreach (var k in dic.Keys.ToList())
                             {
                                 dic[k] *= 2;
                             }
                             break;
+
                         default:
                             break;
                     }
@@ -186,7 +190,6 @@ namespace Alchemy
 
                 byEntity.Controls.UsingHeldItemTransformBefore = tf;
 
-
                 return secondsUsed <= 1.5f;
             }
             return true;
@@ -197,21 +200,20 @@ namespace Alchemy
             if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server)
             {
                 TempEffect potionEffect = new();
-                if (potionId == "recallpotionid" || potionId == "nutritionpotionid" || potionId == "temporalpotionid")
+                if (potionId is "recallpotionid" or "nutritionpotionid" or "temporalpotionid")
                 {
-
                 }
                 else if (tickSec == 0)
                 {
-                    potionEffect.TempEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId);
+                    potionEffect.TempEntityStats(byEntity as EntityPlayer, dic, "potionmod", duration, potionId);
                 }
                 else
                 {
-                    potionEffect.TempTickEntityStats((byEntity as EntityPlayer), dic, "potionmod", duration, potionId, tickSec, health);
+                    potionEffect.TempTickEntityStats(byEntity as EntityPlayer, dic, "potionmod", duration, potionId, tickSec, health);
                 }
                 if (byEntity is EntityPlayer)
                 {
-                    IServerPlayer player = (byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer);
+                    IServerPlayer player = byEntity.World.PlayerByUid((byEntity as EntityPlayer).PlayerUID) as IServerPlayer;
                     if (potionId == "recallpotionid")
                     {
                         if (api.Side.IsServer())
@@ -252,7 +254,6 @@ namespace Alchemy
                 slot.MarkDirty();
             }
         }
-
 
         public override void GetHeldItemInfo(ItemSlot inSlot, StringBuilder dsc, IWorldAccessor world, bool withDebugInfo)
         {

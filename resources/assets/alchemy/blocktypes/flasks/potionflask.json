@@ -22,7 +22,6 @@
       "name": "Unplaceable",
       "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility"
     },
-    { "name": "SneakPlacing" },
     { "name": "RightClickPickup" }
   ],
   "variantgroups": [
@@ -44,6 +43,14 @@
         "emptyShapeLoc": "alchemy:shapes/block/glass/tubeflask-empty",
         "opaqueContentShapeLoc": "shapes/block/glass/tubeflask-content",
         "liquidContentShapeLoc": "shapes/block/glass/tubeflask-liquidcontents"
+      },
+      "groundStorageTransform": {
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 0.85
       }
     },
     "potionflask-round-*": {

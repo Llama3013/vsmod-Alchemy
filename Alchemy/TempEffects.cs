@@ -9,13 +9,13 @@ namespace Alchemy
 {
     public class TempEffect
     {
-        EntityPlayer effectedEntity;
+        private EntityPlayer effectedEntity;
 
-        Dictionary<string, float> effectedList;
+        private Dictionary<string, float> effectedList;
 
-        string effectCode;
+        private string effectCode;
 
-        string effectId;
+        private string effectId;
 
         /// <summary>
         /// This needs to be called to give the entity the new stats and to give setTempStats and resetTempStats the variables it needs.
@@ -48,11 +48,11 @@ namespace Alchemy
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
 
-        int effectDuration;
+        private int effectDuration;
 
-        int effectTickSec;
+        private int effectTickSec;
 
-        float effectHealth = 0;
+        private float effectHealth = 0;
 
         /// <summary>
         /// This needs to be called to give the entity the new stats and to give setTempStats and resetTempStats the variables it needs.
@@ -92,19 +92,11 @@ namespace Alchemy
         /// </summary>
         public void SetTempStats()
         {
-            if (effectedList.ContainsKey("maxhealthExtraPoints"))
+            if (effectedList.TryGetValue("maxhealthExtraPoints", out float value))
             {
-                effectedEntity.World.Api.Logger.Debug(
-                    "blendedhealth {0}",
-                    effectedEntity.Stats.GetBlended("maxhealthExtraPoints")
-                );
-                effectedEntity.World.Api.Logger.Debug(
-                    "maxhealthExtraPoints {0}",
-                    effectedList["maxhealthExtraPoints"]
-                );
                 effectedList["maxhealthExtraPoints"] =
                     (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints"))
-                    * effectedList["maxhealthExtraPoints"];
+                    * value;
             }
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
@@ -125,7 +117,7 @@ namespace Alchemy
             Reset();
         }
 
-        int tickCnt = 0;
+        private int tickCnt = 0;
 
         public void OnEffectTick(float dt)
         {
@@ -162,11 +154,8 @@ namespace Alchemy
             foreach (KeyValuePair<string, float> stat in effectedList)
             {
                 effectedEntity.Stats.Remove(stat.Key, effectCode);
-            }
-            if (effectedList.ContainsKey("maxhealthExtraPoints"))
-            {
-                EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
-                ebh.MarkDirty();
+                if (stat.Key == "maxhealthExtraPoints")
+                    effectedEntity.GetBehavior<EntityBehaviorHealth>().MarkDirty();
             }
             if (effectId.Contains("tickpotionid"))
             {
@@ -179,7 +168,7 @@ namespace Alchemy
             effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
 
             IServerPlayer player = (
-                effectedEntity.World.PlayerByUid((effectedEntity as EntityPlayer).PlayerUID)
+                effectedEntity.World.PlayerByUid(effectedEntity.PlayerUID)
                 as IServerPlayer
             );
             player.SendMessage(
@@ -191,7 +180,7 @@ namespace Alchemy
 
         public static void ResetAllTempStats(EntityPlayer entity, string effectCode)
         {
-            foreach (var stats in entity.Stats)
+            foreach (KeyValuePair<string, EntityFloatStats> stats in entity.Stats)
             {
                 entity.Stats.Remove(stats.Key, effectCode);
             }
@@ -205,7 +194,7 @@ namespace Alchemy
             string listenerCode
         )
         {
-            foreach (var watch in entity.WatchedAttributes.Keys)
+            foreach (string watch in entity.WatchedAttributes.Keys)
             {
                 if (watch.Contains(callbackCode))
                 {

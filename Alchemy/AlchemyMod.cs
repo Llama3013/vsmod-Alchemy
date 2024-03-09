@@ -15,7 +15,6 @@ using Vintagestory.API.Server;
     IconPath = "modicon.png"
 )]
 [assembly: ModDependency("game", "1.19.0")]
-
 /*json block glow
 vertexFlags: {
     glowLevel: 255
@@ -24,11 +23,12 @@ vertexFlags: {
    healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
    rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
    vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
+
 namespace Alchemy
 {
     public class AlchemyMod : ModSystem
     {
-        public GuiHudPotion hud;
+        public GuiHudPotion alchemyHUD;
 
         public override void Start(ICoreAPI api)
         {
@@ -46,6 +46,7 @@ namespace Alchemy
         }
 
         /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
+
         public override void StartServerSide(ICoreServerAPI api)
         {
             api.Event.PlayerNowPlaying += (IServerPlayer iServerPlayer) =>
