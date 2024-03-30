@@ -3,11 +3,12 @@
   "class": "BlockPotionFlask",
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
+    { "name": "RightClickPickup" },
+    { "name": "SneakPlacing" },
     {
       "name": "GroundStorable",
       "properties": {
         "layout": "Quadrants",
-        "placeRemoveSound": "game:sounds/player/build",
         "collisionBox": {
           "x1": 0,
           "y1": 0,
@@ -22,7 +23,19 @@
       "name": "Unplaceable",
       "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility"
     },
-    { "name": "RightClickPickup" }
+    {
+      "name": "UnstableFalling",
+      "properties": {
+        "attachmentArea": {
+          "x1": 5,
+          "y1": 0,
+          "z1": 5,
+          "x2": 10,
+          "y2": 0,
+          "z2": 10
+        }
+      }
+    }
   ],
   "variantgroups": [
     {
@@ -41,8 +54,8 @@
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/glass/tubeflask-empty",
-        "opaqueContentShapeLoc": "shapes/block/glass/tubeflask-content",
-        "liquidContentShapeLoc": "shapes/block/glass/tubeflask-liquidcontents"
+        "opaqueContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-content",
+        "liquidContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-liquidcontents"
       },
       "groundStorageTransform": {
         "origin": {
@@ -59,8 +72,8 @@
         "capacityLitres": 0.5,
         "transferSizeLitres": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/glass/roundflask-empty",
-        "opaqueContentShapeLoc": "shapes/block/glass/roundflask-content",
-        "liquidContentShapeLoc": "shapes/block/glass/roundflask-liquidcontents"
+        "opaqueContentShapeLoc": "alchemy:shapes/block/glass/roundflask-content",
+        "liquidContentShapeLoc": "alchemy:shapes/block/glass/roundflask-liquidcontents"
       }
     },
     "*": {
@@ -82,11 +95,10 @@
   },
   "materialDensity": 200,
   "shapeByType": {
-    "*-round-*": { "base": "alchemy:block/glass/roundflask-liquid" },
-    "*-tube-*": { "base": "alchemy:block/glass/tubeflask-liquid" },
-    "*": { "base": "alchemy:block/glass/flask-liquid" }
+    "*-round-*": { "base": "alchemy:block/glass/roundflask-empty" },
+    "*-tube-*": { "base": "alchemy:block/glass/tubeflask-empty" },
+    "*": { "base": "alchemy:block/glass/flask-empty" }
   },
-  "doNotRenderAtLod2": true,
   "textures": { "glass": { "base": "game:block/glass/{colour}" } },
   "resistance": 0.75,
   "maxStackSize": 16,

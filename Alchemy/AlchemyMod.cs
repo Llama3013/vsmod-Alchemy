@@ -58,7 +58,7 @@ namespace Alchemy
 
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
                     EntityPlayer player = iServerPlayer.Entity;
-                    TempEffect.ResetAllTempStats(player, "potionmod");
+                    TempEffect.ResetAllTempStats(player);
                     TempEffect.ResetAllAttrListeners(player, "potionid", "tickpotionid");
                     //api.Logger.Debug("potion player ready");
                 }

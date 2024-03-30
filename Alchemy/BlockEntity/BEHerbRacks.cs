@@ -10,8 +10,8 @@ namespace Alchemy
 {
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {
-        readonly InventoryGeneric inv;
-        static readonly int slotCount = 8;
+        private readonly InventoryGeneric inv;
+        private static readonly int slotCount = 8;
 
         public override InventoryBase Inventory => inv;
 
@@ -275,6 +275,7 @@ namespace Alchemy
                                 }
                             }
                             break;
+
                         case EnumTransitionType.Dry:
                             if (nowSpoiling)
                                 break;
@@ -333,6 +334,7 @@ namespace Alchemy
                                 }
                             }
                             break;
+
                         case EnumTransitionType.Cure:
                             if (nowSpoiling)
                                 break;
@@ -419,6 +421,7 @@ namespace Alchemy
 
                         //rotate = 1.57079635f;
                         break;
+
                     case 1:
                         x = 3.75f / 16f;
                         z = 11.5f / 16f;
@@ -426,6 +429,7 @@ namespace Alchemy
 
                         //rotate = -2.356194525f;
                         break;
+
                     case 2:
                         x = -(5.4f / 16f);
                         z = 13f / 16f;
@@ -433,6 +437,7 @@ namespace Alchemy
 
                         //rotate = -0.785398175f;
                         break;
+
                     case 3:
                         x = 14f / 16f;
                         z = -5f / 16f;
@@ -440,11 +445,13 @@ namespace Alchemy
 
                         //rotate = 0f;
                         break;
+
                     case 4:
                         x = 2f / 16f;
                         z = 21f / 16f;
                         rotate = 90f;
                         break;
+
                     case 5:
                         x = 21.5f / 16f;
                         z = 3.25f / 16f;
@@ -452,6 +459,7 @@ namespace Alchemy
 
                         //rotate = 2.356194525f;
                         break;
+
                     case 6:
                         x = 13f / 16f;
                         z = 21.5f / 16f;
@@ -459,6 +467,7 @@ namespace Alchemy
 
                         //rotate = awAWW0.785398175f;
                         break;
+
                     case 7:
                         x = 21f / 16f;
                         z = 14f / 16f;
@@ -466,6 +475,7 @@ namespace Alchemy
 
                         //rotate = -1.57079635f;
                         break;
+
                     default:
                         x = 0f;
                         z = 0f;

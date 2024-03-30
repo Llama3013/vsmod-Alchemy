@@ -1,5 +1,3 @@
-using Cairo;
-using System;
 using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;

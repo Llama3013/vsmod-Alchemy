@@ -141,7 +141,6 @@ namespace Alchemy
             //api.Logger.Debug("potion {0}, {1}", dic.Count, potionId);
             if (potionId != "" && potionId != null)
             {
-                string poop = potionId;
                 //api.Logger.Debug("[Potion] check if drinkable {0}", byEntity.WatchedAttributes.GetLong(potionId));
                 /* This checks if the potion effect callback is on */
                 if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
@@ -165,6 +164,7 @@ namespace Alchemy
                 }
             }
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            return;
         }
 
         public override bool OnHeldInteractStep(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel)
@@ -205,11 +205,11 @@ namespace Alchemy
                 }
                 else if (tickSec == 0)
                 {
-                    potionEffect.TempEntityStats(byEntity as EntityPlayer, dic, "potionmod", duration, potionId);
+                    potionEffect.TempEntityStats(byEntity as EntityPlayer, dic, duration, potionId);
                 }
                 else
                 {
-                    potionEffect.TempTickEntityStats(byEntity as EntityPlayer, dic, "potionmod", duration, potionId, tickSec, health);
+                    potionEffect.TempTickEntityStats(byEntity as EntityPlayer, dic, duration, potionId, tickSec, health);
                 }
                 if (byEntity is EntityPlayer)
                 {

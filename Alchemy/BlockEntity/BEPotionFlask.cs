@@ -12,8 +12,8 @@ namespace Alchemy
     {
         public override string InventoryClassName => "potionflask";
 
-        BlockPotionFlask ownBlock;
-        MeshData currentMesh;
+        private BlockPotionFlask ownBlock;
+        private MeshData currentMesh;
 
         public BlockEntityPotionFlask()
         {
