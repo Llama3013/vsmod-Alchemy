@@ -50,6 +50,7 @@
   "attributesByType": {
     "potionflask-tube-*": {
       "shelvable": true,
+      "displaycaseable": true,
       "liquidContainerProps": {
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
@@ -68,6 +69,7 @@
     },
     "potionflask-round-*": {
       "shelvable": true,
+      "displaycaseable": true,
       "liquidContainerProps": {
         "capacityLitres": 0.5,
         "transferSizeLitres": 0.25,
@@ -78,6 +80,7 @@
     },
     "*": {
       "shelvable": true,
+      "displaycaseable": true,
       "liquidContainerProps": {
         "capacityLitres": 1,
         "transferSizeLitres": 0.25,

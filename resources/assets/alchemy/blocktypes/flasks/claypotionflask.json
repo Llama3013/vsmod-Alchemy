@@ -20,11 +20,12 @@
     "*-fired": { "glass": { "base": "game:block/clay/ceramic-dark" } }
   },
   "behaviors": [
+    { "name": "RightClickPickup" },
+    { "name": "SneakPlacing" },
     {
       "name": "GroundStorable",
       "properties": {
         "layout": "Quadrants",
-        "placeRemoveSound": "game:sounds/player/build",
         "collisionBox": {
           "x1": 0,
           "y1": 0,
@@ -39,11 +40,23 @@
       "name": "Unplaceable",
       "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility"
     },
-    { "name": "SneakPlacing" },
-    { "name": "RightClickPickup" }
+    {
+      "name": "UnstableFalling",
+      "properties": {
+        "attachmentArea": {
+          "x1": 5,
+          "y1": 0,
+          "z1": 5,
+          "x2": 10,
+          "y2": 0,
+          "z2": 10
+        }
+      }
+    }
   ],
   "attributes": {
     "shelvable": true,
+    "displaycaseable": true,
     "liquidContainerPropsByType": {
       "*-fired": {
         "capacityLitres": 0.25,

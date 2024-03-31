@@ -17,152 +17,14 @@ namespace Alchemy
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
-        private LiquidTopOpenContainerProps Props;
-
-        protected override float liquidYTranslatePerLitre => liquidMaxYTranslate / CapacityLitres;
-
-        public override float TransferSizeLitres => Props.TransferSizeLitres;
-
-        public override float CapacityLitres => Props.CapacityLitres;
 
         public Dictionary<string, float> effectList = new();
-
         public string potionId = "";
-
         public int duration = 0;
-
         public int tickSec = 0;
-
         public float health = 0;
 
-        public override void OnLoaded(ICoreAPI api)
-        {
-            base.OnLoaded(api);
-
-            if (Attributes?["liquidContainerProps"].Exists == true)
-            {
-                Props = Attributes["liquidContainerProps"].AsObject<LiquidTopOpenContainerProps>(
-                    null,
-                    Code.Domain
-                );
-            }
-        }
-
         #region Render
-
-        private MeshData origcontainermesh;
-        private Shape contentShape;
-        private Shape liquidContentShape;
-
-        public MeshData GenMesh(ICoreClientAPI capi, ItemStack contentStack)
-        {
-            if (origcontainermesh == null)
-            {
-                Shape shape = Vintagestory.API.Common.Shape.TryGet(capi, emptyShapeLoc.WithPathAppendixOnce(".json").WithPathPrefixOnce("shapes/"));
-                if (shape == null)
-                {
-                    capi.World.Logger.Error("Empty shape {0} not found. Liquid container {1} will be invisible.", emptyShapeLoc, Code);
-                    return new MeshData();
-                }
-                capi.Tesselator.TesselateShape(this, shape, out origcontainermesh, new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ));
-            }
-
-            MeshData containerMesh = origcontainermesh.Clone();
-
-            if (contentStack != null)
-            {
-                WaterTightContainableProps props = GetContainableProps(contentStack);
-                if (props == null)
-                {
-                    capi.World.Logger.Error("Contents ('{0}') has no liquid properties, contents of liquid container {1} will be invisible.", contentStack.GetName(), Code);
-                    return containerMesh;
-                }
-
-                FlaskTextureSource contentSource = new(
-                    capi,
-                    contentStack,
-                    props.Texture,
-                    this
-                );
-                Shape shape = props.IsOpaque ? contentShape : liquidContentShape;
-                AssetLocation loc = props.IsOpaque ? contentShapeLoc : liquidContentShapeLoc;
-                if (shape == null)
-                {
-                    shape = Vintagestory.API.Common.Shape.TryGet(capi, loc.WithPathAppendixOnce(".json").WithPathPrefixOnce("shapes/"));
-
-                    if (props.IsOpaque) contentShape = shape;
-                    else liquidContentShape = shape;
-                }
-                float level = contentStack.StackSize / props.ItemsPerLitre;
-                if (Code.Path.Contains("flask-normal"))
-                {
-                    if (level > 0 && level <= 0.25)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
-                            .ToObject<Shape>();
-                    }
-                    else if (level <= 0.5)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
-                            .ToObject<Shape>();
-                    }
-                    else if (level <= 0.75)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
-                            .ToObject<Shape>();
-                    }
-                    else if (level > 0.75)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/flask-liquid.json")
-                            .ToObject<Shape>();
-                    }
-                }
-                else if (Code.Path.Contains("flask-round"))
-                {
-                    if (level <= 0.5)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/roundflask-liquid-1.json")
-                            .ToObject<Shape>();
-                    }
-                    else if (level > 0.5)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
-                            .ToObject<Shape>();
-                    }
-                }
-                else
-                {
-                    if (level > 0)
-                    {
-                        shape = capi.Assets
-                            .TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
-                            .ToObject<Shape>();
-                    }
-                }
-                if (shape == null)
-                {
-                    capi.World.Logger.Error("Content shape {0} not found. Contents of liquid container {1} will be invisible.", loc, Code);
-                    return containerMesh;
-                }
-
-                capi.Tesselator.TesselateShape(
-                    "potionflask",
-                    shape,
-                    out containerMesh,
-                    contentSource,
-                    new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ)
-                );
-            }
-
-            return containerMesh;
-        }
-
         public override void OnBeforeRender(
             ICoreClientAPI capi,
             ItemStack itemstack,
@@ -180,11 +42,13 @@ namespace Alchemy
             }
             else
             {
-                capi.ObjectCache[meshRefsCacheKey] = meshrefs = new Dictionary<int, MultiTextureMeshRef>();
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs =
+                    new Dictionary<int, MultiTextureMeshRef>();
             }
 
             ItemStack contentStack = GetContent(itemstack);
-            if (contentStack == null) return;
+            if (contentStack == null)
+                return;
 
             int hashcode = GetStackCacheHashCode(contentStack);
 
@@ -197,13 +61,149 @@ namespace Alchemy
             renderinfo.ModelRef = meshRef;
         }
 
+
+        private MeshData origContainerMesh;
+        private Shape contentShape;
+        private Shape liquidContentShape;
+
+        public MeshData GenMesh(ICoreClientAPI capi, ItemStack contentStack)
+        {
+            if (origContainerMesh == null)
+            {
+                Shape shape = Vintagestory.API.Common.Shape.TryGet(
+                    capi,
+                    emptyShapeLoc.WithPathAppendixOnce(".json").WithPathPrefixOnce("shapes/")
+                );
+                if (shape == null)
+                {
+                    capi.World.Logger.Error(
+                        "Empty shape {0} not found. Liquid container {1} will be invisible.",
+                        emptyShapeLoc,
+                        Code
+                    );
+                    return new MeshData();
+                }
+                capi.Tesselator.TesselateShape(
+                    this,
+                    shape,
+                    out origContainerMesh,
+                    new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ)
+                );
+            }
+
+            MeshData containerMesh = origContainerMesh.Clone();
+
+            if (contentStack != null)
+            {
+                WaterTightContainableProps props = GetContainableProps(contentStack);
+                if (props == null)
+                {
+                    capi.World.Logger.Error(
+                        "Contents ('{0}') has no liquid properties, contents of liquid container {1} will be invisible.",
+                        contentStack.GetName(),
+                        Code
+                    );
+                    return containerMesh;
+                }
+
+                FlaskTextureSource contentSource = new(capi, contentStack, props.Texture, this);
+                Shape shape = props.IsOpaque ? contentShape : liquidContentShape;
+                AssetLocation loc = props.IsOpaque ? contentShapeLoc : liquidContentShapeLoc;
+                if (shape == null)
+                {
+                    shape = Vintagestory.API.Common.Shape.TryGet(
+                        capi,
+                        loc.WithPathAppendixOnce(".json").WithPathPrefixOnce("shapes/")
+                    );
+
+                    if (props.IsOpaque)
+                        contentShape = shape;
+                    else
+                        liquidContentShape = shape;
+                }
+                float level = contentStack.StackSize / props.ItemsPerLitre;
+                if (Code.Path.Contains("flask-normal"))
+                {
+                    if (level > 0 && level <= 0.25)
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
+                            .ToObject<Shape>();
+                    }
+                    else if (level <= 0.5)
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
+                            .ToObject<Shape>();
+                    }
+                    else if (level < 1)
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
+                            .ToObject<Shape>();
+                    }
+                    else
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/flask-liquid.json")
+                            .ToObject<Shape>();
+                    }
+                }
+                else if (Code.Path.Contains("flask-round"))
+                {
+                    if (level < 1)
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/roundflask-liquid-1.json")
+                            .ToObject<Shape>();
+                    }
+                    else
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
+                            .ToObject<Shape>();
+                    }
+                }
+                else
+                {
+                    if (level > 0)
+                    {
+                        shape = capi.Assets
+                            .TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
+                            .ToObject<Shape>();
+                    }
+                }
+                if (shape == null)
+                {
+                    capi.World.Logger.Error(
+                        "Content shape {0} not found. Contents of liquid container {1} will be invisible.",
+                        loc,
+                        Code
+                    );
+                    return containerMesh;
+                }
+
+                capi.Tesselator.TesselateShape(
+                    "potionflask",
+                    shape,
+                    out containerMesh,
+                    contentSource,
+                    new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ)
+                );
+            }
+
+            return containerMesh;
+        }
+
         public override void OnUnloaded(ICoreAPI api)
         {
-            if (api is not ICoreClientAPI capi) return;
+            if (api is not ICoreClientAPI capi)
+                return;
 
             if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out object obj))
             {
-                Dictionary<int, MultiTextureMeshRef> meshrefs = obj as Dictionary<int, MultiTextureMeshRef>;
+                Dictionary<int, MultiTextureMeshRef> meshrefs =
+                    obj as Dictionary<int, MultiTextureMeshRef>;
 
                 foreach (var val in meshrefs)
                 {
@@ -250,11 +250,11 @@ namespace Alchemy
                                 switch (strength)
                                 {
                                     case "strong":
-                                        health *= 3;
+                                        health *= MathF.Round(health * 3, 2);
                                         break;
 
                                     case "medium":
-                                        health *= 2;
+                                        health *= MathF.Round(health * 2, 2);
                                         break;
 
                                     default:
@@ -289,14 +289,14 @@ namespace Alchemy
                                     case "strong":
                                         foreach (string effect in effectList.Keys.ToList())
                                         {
-                                            effectList[effect] *= 3;
+                                            effectList[effect] = MathF.Round(effectList[effect] * 3, 2);
                                         }
                                         break;
 
                                     case "medium":
                                         foreach (string effect in effectList.Keys.ToList())
                                         {
-                                            effectList[effect] *= 2;
+                                            effectList[effect] *= MathF.Round(effectList[effect] * 2, 2);
                                         }
                                         break;
 
@@ -339,12 +339,15 @@ namespace Alchemy
                     if (byEntity.WatchedAttributes.GetLong(potionId) == 0)
                     {
                         //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
-                        byEntity.World.RegisterCallback((dt) => playEatSound(byEntity, "drink", 1), 500);
+                        byEntity.World.RegisterCallback(
+                            (dt) => playEatSound(byEntity, "drink", 1),
+                            500
+                        );
                         byEntity.AnimManager?.StartAnimation("eat");
                         handling = EnumHandHandling.PreventDefault;
+                        return;
                     }
                 }
-                return;
             }
             else
             {
@@ -353,9 +356,9 @@ namespace Alchemy
                 tickSec = 0;
                 health = 0;
                 effectList.Clear();
-                base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
-                return;
             }
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+            return;
         }
 
         public override bool OnHeldInteractStep(
@@ -373,17 +376,26 @@ namespace Alchemy
             {
                 EnumHandling handled = EnumHandling.PassThrough;
 
-                bool behaviorResult = behavior.OnHeldInteractStep(secondsUsed, slot, byEntity, blockSel, entitySel, ref handled);
+                bool behaviorResult = behavior.OnHeldInteractStep(
+                    secondsUsed,
+                    slot,
+                    byEntity,
+                    blockSel,
+                    entitySel,
+                    ref handled
+                );
                 if (handled != EnumHandling.PassThrough)
                 {
                     result &= behaviorResult;
                     preventDefault = true;
                 }
 
-                if (handled == EnumHandling.PreventSubsequent) return result;
+                if (handled == EnumHandling.PreventSubsequent)
+                    return result;
             }
 
-            if (preventDefault) return result;
+            if (preventDefault)
+                return result;
 
             Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
             pos.X += byEntity.LocalEyePos.X;
@@ -392,7 +404,14 @@ namespace Alchemy
 
             if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
             {
-                byEntity.World.SpawnCubeParticles(pos, slot.Itemstack, 0.3f, 4, 0.5f, (byEntity as EntityPlayer)?.Player);
+                byEntity.World.SpawnCubeParticles(
+                    pos,
+                    slot.Itemstack,
+                    0.3f,
+                    4,
+                    0.5f,
+                    (byEntity as EntityPlayer)?.Player
+                );
             }
 
             if (byEntity.World is IClientWorldAccessor)
@@ -437,18 +456,32 @@ namespace Alchemy
             {
                 EnumHandling handled = EnumHandling.PassThrough;
 
-                behavior.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel, ref handled);
-                if (handled != EnumHandling.PassThrough) preventDefault = true;
+                behavior.OnHeldInteractStop(
+                    secondsUsed,
+                    slot,
+                    byEntity,
+                    blockSel,
+                    entitySel,
+                    ref handled
+                );
+                if (handled != EnumHandling.PassThrough)
+                    preventDefault = true;
 
-                if (handled == EnumHandling.PreventSubsequent) return;
+                if (handled == EnumHandling.PreventSubsequent)
+                    return;
             }
 
-            if (preventDefault) return;
+            if (preventDefault)
+                return;
 
             ItemStack contentStack = GetContent(slot.Itemstack);
-            if (secondsUsed > 1.45f && byEntity.World.Side == EnumAppSide.Server && contentStack != null)
+            if (
+                secondsUsed > 1.45f
+                && byEntity.World.Side == EnumAppSide.Server
+                && contentStack != null
+            )
             {
-                if (potionId != "")
+                if (potionId != "" && byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
                     TempEffect potionEffect = new();
                     if ((byEntity as EntityPlayer).Player is IServerPlayer sPlayer)
@@ -489,7 +522,9 @@ namespace Alchemy
                         }
                         else if (potionId == "temporalpotionid")
                         {
-                            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
+                            byEntity
+                                .GetBehavior<EntityBehaviorTemporalStabilityAffected>()
+                                .OwnStability += 0.2;
                         }
                         else if (tickSec != 0)
                         {
@@ -512,10 +547,10 @@ namespace Alchemy
                             );
                         }
                         sPlayer.SendMessage(
-                                GlobalConstants.InfoLogChatGroup,
-                                "You feel the effects of the " + contentStack.GetName(),
-                                EnumChatType.Notification
-                            );
+                            GlobalConstants.InfoLogChatGroup,
+                            "You feel the effects of the " + contentStack.GetName(),
+                            EnumChatType.Notification
+                        );
                     }
 
                     SplitStackAndPerformAction(
@@ -694,7 +729,11 @@ namespace Alchemy
                                 ?.ToBitmap(capi);
                             if (bmp != null)
                             {
-                                capi.BlockTextureAtlas.InsertTexture(bmp, out id, out TextureAtlasPosition texPos);
+                                capi.BlockTextureAtlas.InsertTexture(
+                                    bmp,
+                                    out id,
+                                    out TextureAtlasPosition texPos
+                                );
                                 bmp.Dispose();
                             }
 
