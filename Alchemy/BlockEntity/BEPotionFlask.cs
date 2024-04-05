@@ -32,11 +32,6 @@ namespace Alchemy
             }
         }
 
-        public override void OnBlockBroken(IPlayer byPlayer = null)
-        {
-            // Don't drop inventory contents
-        }
-
         public override void OnBlockPlaced(ItemStack byItemStack = null)
         {
             base.OnBlockPlaced(byItemStack);

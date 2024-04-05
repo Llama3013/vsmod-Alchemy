@@ -17,7 +17,6 @@ namespace Alchemy
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
-
         public Dictionary<string, float> effectList = new();
         public string potionId = "";
         public int duration = 0;
@@ -25,6 +24,7 @@ namespace Alchemy
         public float health = 0;
 
         #region Render
+
         public override void OnBeforeRender(
             ICoreClientAPI capi,
             ItemStack itemstack,
@@ -60,7 +60,6 @@ namespace Alchemy
 
             renderinfo.ModelRef = meshRef;
         }
-
 
         private MeshData origContainerMesh;
         private Shape contentShape;
@@ -289,14 +288,20 @@ namespace Alchemy
                                     case "strong":
                                         foreach (string effect in effectList.Keys.ToList())
                                         {
-                                            effectList[effect] = MathF.Round(effectList[effect] * 3, 2);
+                                            effectList[effect] = MathF.Round(
+                                                effectList[effect] * 3,
+                                                2
+                                            );
                                         }
                                         break;
 
                                     case "medium":
                                         foreach (string effect in effectList.Keys.ToList())
                                         {
-                                            effectList[effect] *= MathF.Round(effectList[effect] * 2, 2);
+                                            effectList[effect] *= MathF.Round(
+                                                effectList[effect] * 2,
+                                                2
+                                            );
                                         }
                                         break;
 
@@ -348,14 +353,6 @@ namespace Alchemy
                         return;
                     }
                 }
-            }
-            else
-            {
-                potionId = "";
-                duration = 0;
-                tickSec = 0;
-                health = 0;
-                effectList.Clear();
             }
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             return;
@@ -710,30 +707,38 @@ namespace Alchemy
                     return bracingTextPos;
                 if (contentTextPos == null)
                 {
-                    int textureSubId;
-
-                    textureSubId = ObjectCacheUtil.GetOrCreate<int>(
+                    int textureSubId = ObjectCacheUtil.GetOrCreate(
                         capi,
-                        "contenttexture-" + contentTexture.ToString(),
+                        "contenttexture-" + contentTexture?.ToString() ?? "unkown",
                         () =>
                         {
                             int id = 0;
 
                             BitmapRef bmp = capi.Assets
                                 .TryGet(
-                                    contentTexture.Base
+                                    contentTexture?.Base
                                         .Clone()
                                         .WithPathPrefixOnce("textures/")
                                         .WithPathAppendixOnce(".png")
+                                        ?? new AssetLocation(
+                                            "alchemy:textures/item/potion/black_potion.png"
+                                        )
                                 )
                                 ?.ToBitmap(capi);
                             if (bmp != null)
                             {
-                                capi.BlockTextureAtlas.InsertTexture(
-                                    bmp,
-                                    out id,
-                                    out TextureAtlasPosition texPos
-                                );
+                                try
+                                {
+                                    capi.BlockTextureAtlas.InsertTexture(
+                                        bmp,
+                                        out id,
+                                        out TextureAtlasPosition texPos
+                                    );
+                                }
+                                catch
+                                {
+                                    capi.World.Logger.Error("Error on insert texture");
+                                }
                                 bmp.Dispose();
                             }
 
