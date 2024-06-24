@@ -249,11 +249,11 @@ namespace Alchemy
                                 switch (strength)
                                 {
                                     case "strong":
-                                        health *= MathF.Round(health * 3, 2);
+                                        health = MathF.Round(health * 3, 2);
                                         break;
 
                                     case "medium":
-                                        health *= MathF.Round(health * 2, 2);
+                                        health = MathF.Round(health * 2, 2);
                                         break;
 
                                     default:
@@ -690,9 +690,9 @@ namespace Alchemy
             this.capi = capi;
             this.forContents = forContents;
             this.contentTexture = contentTexture;
-            corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
-            blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
-            bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
+            corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper", true);
+            blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass", true);
+            bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing", true);
         }
 
         public TextureAtlasPosition this[string textureCode]

@@ -12,7 +12,7 @@
   "potion-heal-effectiveness-effect": "When potion is used: {0}% healing effectivness",
   "potion-hunger-rate-effect": "When potion is used: {0}% hunger rate",
   "potion-melee-damage-effect": "When potion is used: +{0}% melee damage",
-  "potion-mech-damage-effect": "When potion is used: +{0}% mechanincal damage (not sure if works)",
+  "potion-mech-damage-effect": "When potion is used: +{0}% mechanincal damage",
   "potion-mining-speed-effect": "When potion is used: +{0}% mining speed",
   "potion-ore-amount-effect": "When potion is used: +{0}% more ore",
   "potion-archer-damage-effect": "When potion is used: +{0}% ranged damage",

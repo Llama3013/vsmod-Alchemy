@@ -21,7 +21,7 @@ namespace Alchemy
 
         public BlockEntityHerbRacks()
         {
-            inv = new InventoryGeneric(8, "herbrack-0", null, null);
+            inv = new InventoryDisplayed(this, 8, "herbrack-0", null, null);
         }
 
         public override void Initialize(ICoreAPI api)
@@ -465,7 +465,7 @@ namespace Alchemy
                         z = 21.5f / 16f;
                         rotate = 135f;
 
-                        //rotate = awAWW0.785398175f;
+                        //rotate = 0.785398175f;
                         break;
 
                     case 7:
