@@ -7,7 +7,7 @@
   "potion-animal-loot-effect": "When potion is used: +{0}% more animal loot",
   "potion-animal-harvest-effect": "When potion is used: +{0}% faster animal harvest",
   "potion-animal-seek-effect": "When potion is used: {0}% animal seek range",
-  "potion-max-health-effect": "When potion is used: {0} extra max health",
+  "potion-max-health-effect": "When potion is used: {0}% extra max health",
   "potion-forage-amount-effect": "When potion is used: {0}% more forage amount",
   "potion-heal-effectiveness-effect": "When potion is used: {0}% healing effectivness",
   "potion-hunger-rate-effect": "When potion is used: {0}% hunger rate",

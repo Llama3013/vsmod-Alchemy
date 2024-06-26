@@ -17,11 +17,11 @@ namespace Alchemy
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
-        public Dictionary<string, float> effectList = new();
-        public string potionId = "";
-        public int duration = 0;
-        public int tickSec = 0;
-        public float health = 0;
+        private Dictionary<string, float> effectList = new();
+        private string potionId = "";
+        private int duration = 0;
+        private int tickSec = 0;
+        private float health = 0f;
 
         #region Render
 
@@ -298,11 +298,12 @@ namespace Alchemy
                                     case "medium":
                                         foreach (string effect in effectList.Keys.ToList())
                                         {
-                                            effectList[effect] *= MathF.Round(
+                                            effectList[effect] = MathF.Round(
                                                 effectList[effect] * 2,
                                                 2
                                             );
                                         }
+
                                         break;
 
                                     default:
