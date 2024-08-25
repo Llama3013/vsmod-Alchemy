@@ -1,4 +1,7 @@
 {
+  "effect-lose": "You feel the effects of the potion dissipate",
+  "effect-gain": "You feel the effects of the {0}",
+
   "item-potionbase*": "A potion base used to make potions",
   "item-potionbase-basic": "Basic potion base",
   "itemdesc-potionbase-basic": "Used to make every potion",

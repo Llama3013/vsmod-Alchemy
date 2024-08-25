@@ -14,9 +14,7 @@ namespace Alchemy
 
         private const string effectCode = "potionmod";
         private string effectId;
-        private int effectDuration;
-        private int effectTickSec;
-        private int tickCnt = 0;
+        private int effectDuration, effectTickSec, tickCnt = 0;
         private float effectHealth = 0;
 
         /// <summary>
@@ -144,11 +142,11 @@ namespace Alchemy
             }
             effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
             effectId = null;
-            if (effectedEntity.World.PlayerByUid(effectedEntity.PlayerUID) is IServerPlayer sPlayer)
+            if (effectedEntity.World.PlayerByUid(effectedEntity.PlayerUID) is IServerPlayer serverPlayer)
             {
-                sPlayer.SendMessage(
+                serverPlayer.SendMessage(
                     GlobalConstants.InfoLogChatGroup,
-                    "You feel the effects of the potion disapate",
+                    Lang.Get("alchemy:effect-lose"),
                     EnumChatType.Notification
                 );
             }

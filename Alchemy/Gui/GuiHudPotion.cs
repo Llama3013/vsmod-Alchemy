@@ -110,7 +110,7 @@ namespace Alchemy
             //capi.Logger.Debug("checking for effects active");
             bool activePotion = false;
             StringBuilder stringBuilder = new();
-            stringBuilder.AppendLine(Lang.Get("alchemy:potioneffectTrue"));
+            stringBuilder.AppendLine(Lang.GetIfExists("alchemy:potioneffectTrue"));
             EntityPlayer entity = capi.World.Player.Entity;
             foreach (KeyValuePair<string, EntityFloatStats> stat in entity.Stats)
             {
@@ -143,14 +143,14 @@ namespace Alchemy
             //capi.Logger.Debug("readingeffects active");
             bool activePotion = false;
             StringBuilder stringBuilder = new();
-            stringBuilder.AppendLine(Lang.Get("alchemy:potioneffectTrue"));
+            stringBuilder.AppendLine(Lang.GetIfExists("alchemy:potioneffectTrue"));
             EntityPlayer entity = capi.World.Player.Entity;
             foreach (KeyValuePair<string, EntityFloatStats> stat in entity.Stats)
             {
                 if (stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
                 {
                     stringBuilder.AppendLine(
-                        string.Format("{0}: {1}", Lang.Get("alchemy:" + stat.Key), value?.Value)
+                        string.Format("{0}: {1}", Lang.GetIfExists("alchemy:" + stat.Key), value?.Value)
                     );
                     activePotion = true;
                 }
@@ -158,17 +158,17 @@ namespace Alchemy
             if (entity.WatchedAttributes.HasAttribute("glow"))
             {
                 bool value = capi.World.Player.Entity.WatchedAttributes.GetBool("glow");
-                stringBuilder.AppendLine(string.Format(Lang.Get("alchemy:glow") + ": {0}", value));
+                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:glow") + ": {0}", value));
                 activePotion = true;
             }
             if (entity.WatchedAttributes.HasAttribute("regentickpotionid"))
             {
-                stringBuilder.AppendLine(string.Format(Lang.Get("alchemy:regen") + ": {0}", true));
+                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:regen") + ": {0}", true));
                 activePotion = true;
             }
             if (entity.WatchedAttributes.HasAttribute("poisontickpotionid"))
             {
-                stringBuilder.AppendLine(string.Format(Lang.Get("alchemy:poison") + ": {0}", true));
+                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:poison") + ": {0}", true));
                 activePotion = true;
             }
             if (activePotion)
