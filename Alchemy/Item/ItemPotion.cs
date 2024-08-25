@@ -315,6 +315,7 @@ namespace Alchemy
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             if (effectList != null)
             {
+                dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
                 if (effectList.TryGetValue("rangedWeaponsAcc", out float rWvalue))
                 {
                     dsc.AppendLine(
