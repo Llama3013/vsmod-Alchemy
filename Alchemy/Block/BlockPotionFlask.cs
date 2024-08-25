@@ -98,7 +98,7 @@ namespace Alchemy
                     );
                     return containerMesh;
                 }
-
+                if(props.Texture == null || this == null) return containerMesh;
                 FlaskTextureSource contentSource = new(capi, contentStack, props.Texture, this);
                 Shape shape = props.IsOpaque ? contentShape : liquidContentShape;
                 AssetLocation loc = props.IsOpaque ? contentShapeLoc : liquidContentShapeLoc;
