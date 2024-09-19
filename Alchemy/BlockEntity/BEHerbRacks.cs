@@ -27,16 +27,17 @@ namespace Alchemy
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
+            inv.OnAcquireTransitionSpeed += Inventory_OnAcquireTransitionSpeed;
         }
 
-        protected override float Inventory_OnAcquireTransitionSpeed(
+        private float Inventory_OnAcquireTransitionSpeed(
             EnumTransitionType transType,
             ItemStack stack,
             float baseMul
         )
         {
             if (Api == null)
-                return 1;
+                return 0;
 
             if (transType == EnumTransitionType.Dry)
             {
@@ -48,7 +49,7 @@ namespace Alchemy
             }
             if (transType == EnumTransitionType.Perish || transType == EnumTransitionType.Ripen)
             {
-                float perishRate = GetPerishRate();
+                float perishRate = container.GetPerishRate();
                 if (transType == EnumTransitionType.Ripen)
                 {
                     return GameMath.Clamp(((1 - perishRate) - 0.5f) * 3, 0, 1);
@@ -57,7 +58,7 @@ namespace Alchemy
                 return baseMul * perishRate;
             }
 
-            return base.Inventory_OnAcquireTransitionSpeed(transType, stack, baseMul);
+            return 1;
         }
 
         internal bool OnInteract(IPlayer byPlayer, BlockSelection blockSel)
@@ -152,7 +153,7 @@ namespace Alchemy
         {
             base.GetBlockInfo(forPlayer, sb);
 
-            float cureRate = GameMath.Clamp(((1 - GetPerishRate()) - 0.5f) * 3, 0, 1);
+            float cureRate = GameMath.Clamp(((1 - container.GetPerishRate()) - 0.5f) * 3, 0, 1);
 
             sb.AppendLine();
 
