@@ -3,7 +3,7 @@
   "ingredients": {
     "M": {
       "type": "item",
-      "code": "game:powderedsulfur"
+      "code": "game:powder-sulfur"
     },
     "T": {
       "type": "item",

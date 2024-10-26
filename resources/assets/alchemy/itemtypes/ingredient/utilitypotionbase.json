@@ -23,8 +23,8 @@
     "utilitypotionbase-nutrition": {
       "mat1": { "base": "game:item/resource/fat" },
       "mat2": { "base": "game:item/resource/fat" },
-      "mat3": { "base": "game:item/resource/drygrass" },
-      "mat4": { "base": "game:item/resource/drygrass" }
+      "mat3": { "base": "game:block/hay/bundle" },
+      "mat4": { "base": "game:block/hay/bundle" }
     },
     "utilitypotionbase-temporal": {
       "mat1": { "base": "game:item/resource/ungraded/sulfur" },
