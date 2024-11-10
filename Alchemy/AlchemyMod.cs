@@ -6,7 +6,7 @@ using Vintagestory.API.Server;
 
 [assembly: ModInfo(
     "AlchemyMod",
-    Version = "1.6.37",
+    Version = "1.6.38",
     Description = "An alchemy mod that adds a couple of player enhancing potions.",
     Website = "https://github.com/llama3013/vsmod-Alchemy",
     Authors = new[] { "Llama3013" },
@@ -14,7 +14,7 @@ using Vintagestory.API.Server;
     RequiredOnServer = true,
     IconPath = "modicon.png"
 )]
-[assembly: ModDependency("game", "1.20.0-pre.7")]
+[assembly: ModDependency("game", "1.20.0-pre.9")]
 /*json block glow
 vertexFlags: {
     glowLevel: 255
@@ -35,7 +35,7 @@ namespace Alchemy
             //api.Logger.Debug("[Potion] Start");
             base.Start(api);
 
-            var harmony = new Harmony("llama3013.Alchemy");
+            Harmony harmony = new("llama3013.Alchemy");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
             api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
@@ -60,7 +60,7 @@ namespace Alchemy
                     EntityPlayer player = iServerPlayer.Entity;
                     TempEffect.ResetAllTempStats(player);
                     TempEffect.ResetAllAttrListeners(player, "potionid", "tickpotionid");
-                    //api.Logger.Debug("potion player ready");
+                   // api.Logger.Debug("potion player ready");
                 }
             };
         }

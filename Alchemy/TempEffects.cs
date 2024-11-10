@@ -179,10 +179,13 @@ namespace Alchemy
                         if (potionListenerId != 0)
                         {
                             entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.World.UnregisterCallback(potionListenerId);
                         }
                     }
                     catch (InvalidCastException)
                     {
+                        entity.Api.Logger.Error("Error on potion remove");
+                        entity.Api.Logger.Error(watch);
                         entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }
@@ -194,10 +197,13 @@ namespace Alchemy
                         if (potionListenerId != 0)
                         {
                             entity.WatchedAttributes.RemoveAttribute(watch);
+                            entity.World.UnregisterGameTickListener(potionListenerId);
                         }
                     }
                     catch (InvalidCastException)
                     {
+                        entity.Api.Logger.Error("Error on remove potion tick");
+                        entity.Api.Logger.Error(watch);
                         entity.WatchedAttributes.RemoveAttribute(watch);
                     }
                 }

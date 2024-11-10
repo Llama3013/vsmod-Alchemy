@@ -250,6 +250,16 @@ namespace Alchemy
             return;
         }
 
+        public override void TryMergeStacks(ItemStackMergeOperation op)
+        {
+            ItemStack sourceStack = GetContent(op.SourceSlot.Itemstack);
+            ItemStack sinkStack = GetContent(op.SinkSlot.Itemstack);
+            if (op.SourceSlot.Itemstack.StackSize > 1 && sourceStack != null && sinkStack != null && sourceStack.StackSize != sinkStack.StackSize)
+                return;
+
+            base.TryMergeStacks(op);
+        }
+
         public override bool OnHeldInteractStep(
             float secondsUsed,
             ItemSlot slot,
@@ -538,10 +548,11 @@ namespace Alchemy
                             EnumChatType.Notification
                         );
 
+
                         SplitStackAndPerformAction(
-                            byEntity,
+                            playerEntity,
                             slot,
-                            (stack) => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
+                            stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
                         );
                         slot.MarkDirty();
 
