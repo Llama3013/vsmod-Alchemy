@@ -14,7 +14,7 @@ using Vintagestory.API.Server;
     RequiredOnServer = true,
     IconPath = "modicon.png"
 )]
-[assembly: ModDependency("game", "1.20.0-pre.9")]
+[assembly: ModDependency("game", "1.19.8")]
 /*json block glow
 vertexFlags: {
     glowLevel: 255
