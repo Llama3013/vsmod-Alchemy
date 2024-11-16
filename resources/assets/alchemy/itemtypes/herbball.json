@@ -41,7 +41,8 @@
     "*-alltick": {
       "potioninfo": {
         "potionId": "alltickpotionid",
-        "duration": 10
+        "duration": 10,
+        "ignoreArmour": true
       },
       "tickpotioninfo": {
         "ticksec": 1,

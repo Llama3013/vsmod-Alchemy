@@ -359,7 +359,8 @@
     "*-poison-*": {
       "potioninfo": {
         "potionId": "poisontickpotionid",
-        "duration": 30
+        "duration": 30,
+        "ignoreArmour": true
       },
       "tickpotioninfo": {
         "health": -0.5,
@@ -418,7 +419,8 @@
     "*-regen-*": {
       "potioninfo": {
         "potionId": "regentickpotionid",
-        "duration": 30
+        "duration": 30,
+        "ignoreArmour": true
       },
       "tickpotioninfo": {
         "health": 0.5,
