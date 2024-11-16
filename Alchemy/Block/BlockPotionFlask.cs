@@ -384,6 +384,7 @@ namespace Alchemy
             {
                 Dictionary<string, float> effectList = new();
                 string potionId = null;
+                bool ignoreArmour;
                 int duration,
                     tickSec = 0;
                 float health = 0f;
@@ -391,6 +392,7 @@ namespace Alchemy
                 if (potion?.Exists ?? false)
                 {
                     potionId = potion?["potionId"].AsString();
+                    ignoreArmour = potion["ignoreArmour"].AsBool(false);
                     //api.Logger.Debug("[Potion] potionId {0}", potionId);
                     //api.Logger.Debug(
                     //    "[Potion] drinkable if number is zero: {0}",
@@ -527,7 +529,8 @@ namespace Alchemy
                                             duration,
                                             potionId,
                                             tickSec,
-                                            health
+                                            health,
+                                            ignoreArmour
                                         );
                                     }
                                     else

@@ -17,6 +17,7 @@ namespace Alchemy
     {
         private Dictionary<string, float> effectList = new();
         private string potionId = "";
+        private bool ignoreArmour = false;
 
         private int duration,
             tickSec = 0;
@@ -72,6 +73,7 @@ namespace Alchemy
             if (potion?.Exists ?? false)
             {
                 potionId = potion["potionId"].AsString();
+                ignoreArmour = potion["ignoreArmour"].AsBool(false);
             }
             if (string.IsNullOrWhiteSpace(potionId))
                 return;
@@ -277,7 +279,8 @@ namespace Alchemy
                                         duration,
                                         potionId,
                                         tickSec,
-                                        health
+                                        health,
+                                        ignoreArmour
                                     );
                                 }
                                 else

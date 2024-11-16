@@ -9,6 +9,7 @@ namespace Alchemy
 {
     public class TempEffect
     {
+        //Why didn't I make a contstructor?
         private EntityPlayer effectedEntity;
         private Dictionary<string, float> effectedList;
 
@@ -16,6 +17,7 @@ namespace Alchemy
         private string effectId;
         private int effectDuration, effectTickSec, tickCnt = 0;
         private float effectHealth = 0;
+        private bool ignoreArmourFlag;
 
         /// <summary>
         /// This needs to be called to give the entity the new stats and to give setTempStats and resetTempStats the variables it needs.
@@ -56,7 +58,8 @@ namespace Alchemy
             int duration,
             string id,
             int tickSec,
-            float health
+            float health,
+            bool ignoreArmour
         )
         {
             effectedEntity = entity;
@@ -65,6 +68,7 @@ namespace Alchemy
             effectDuration = duration;
             effectTickSec = tickSec;
             effectHealth = health;
+            ignoreArmourFlag = ignoreArmour;
             SetTempStats(effectedList);
             long effectIdGametick = entity.World.RegisterGameTickListener(OnEffectTick, 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
@@ -100,6 +104,25 @@ namespace Alchemy
                 {
                     if (effectHealth != 0)
                     {
+                        float healeffectivnessArmour;
+                        if (ignoreArmourFlag)
+                        {
+                            try
+                            {
+                                healeffectivnessArmour = effectedEntity.WatchedAttributes.GetTreeAttribute("stats").GetTreeAttribute("healingeffectivness").GetFloat("wearablemod");
+                            }
+                            catch (NullReferenceException)
+                            {
+                                effectedEntity.Api.Logger.Error("Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe...");
+                                healeffectivnessArmour = 0;
+                            }
+                        }
+                        else
+                        {
+                            healeffectivnessArmour = 0;
+                        }
+                        if (healeffectivnessArmour != 0)
+                            effectedEntity.Stats.Set("healingeffectivness", "wearablemod", 0, false);
                         //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
                         effectedEntity.ReceiveDamage(
                             new DamageSource()
@@ -110,6 +133,8 @@ namespace Alchemy
                             },
                             Math.Abs(effectHealth)
                         );
+                        if (healeffectivnessArmour != 0)
+                            effectedEntity.Stats.Set("healingeffectivness", "wearablemod", healeffectivnessArmour, false);
                     }
                 }
                 if (tickCnt >= effectDuration)
