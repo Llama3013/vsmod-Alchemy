@@ -98,7 +98,7 @@ namespace Alchemy
                     );
                     return containerMesh;
                 }
-                if(props.Texture == null || this == null) return containerMesh;
+                if (props.Texture == null || this == null) return containerMesh;
                 FlaskTextureSource contentSource = new(capi, contentStack, props.Texture, this);
                 Shape shape = props.IsOpaque ? contentShape : liquidContentShape;
                 AssetLocation loc = props.IsOpaque ? contentShapeLoc : liquidContentShapeLoc;
@@ -349,222 +349,209 @@ namespace Alchemy
             EntitySelection entitySel
         )
         {
+            if (HandleCollectibleBehaviorsForDrink(secondsUsed, slot, byEntity, blockSel, entitySel))
+                return;
+
+            ItemStack contentStack = GetContent(slot.Itemstack);
+            if (IsValidPotionUsage(secondsUsed, byEntity, contentStack, out EntityPlayer playerEntity, out IServerPlayer serverPlayer))
+            {
+                ProcessPotionEffects(contentStack, byEntity, playerEntity, serverPlayer);
+                SplitStackAndPerformAction(playerEntity, slot, stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0);
+                slot.MarkDirty();
+                playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
+            }
+
+            base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
+        }
+
+        private bool HandleCollectibleBehaviorsForDrink(
+            float secondsUsed,
+            ItemSlot slot,
+            EntityAgent byEntity,
+            BlockSelection blockSel,
+            EntitySelection entitySel
+        )
+        {
             bool preventDefault = false;
 
             foreach (CollectibleBehavior behavior in CollectibleBehaviors)
             {
                 EnumHandling handled = EnumHandling.PassThrough;
 
-                behavior.OnHeldInteractStop(
-                    secondsUsed,
-                    slot,
-                    byEntity,
-                    blockSel,
-                    entitySel,
-                    ref handled
-                );
+                behavior.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel, ref handled);
                 if (handled != EnumHandling.PassThrough)
                     preventDefault = true;
 
                 if (handled == EnumHandling.PreventSubsequent)
-                    return;
+                    return true;
             }
 
-            if (preventDefault)
-                return;
+            return preventDefault;
+        }
 
-            ItemStack contentStack = GetContent(slot.Itemstack);
-            if (
-                secondsUsed > 1.45f
+        private static bool IsValidPotionUsage(
+            float secondsUsed,
+            EntityAgent byEntity,
+            ItemStack contentStack,
+            out EntityPlayer playerEntity,
+            out IServerPlayer serverPlayer
+        )
+        {
+            playerEntity = byEntity as EntityPlayer;
+            serverPlayer = playerEntity?.Player as IServerPlayer;
+
+            return secondsUsed > 1.45f
                 && byEntity.World.Side == EnumAppSide.Server
                 && contentStack != null
-                && byEntity is EntityPlayer playerEntity
-                && playerEntity.Player is IServerPlayer serverPlayer
-            )
+                && playerEntity != null
+                && serverPlayer != null;
+        }
+
+        private void ProcessPotionEffects(
+            ItemStack contentStack,
+            EntityAgent byEntity,
+            EntityPlayer playerEntity,
+            IServerPlayer serverPlayer
+        )
+        {
+            JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+            if (potion?.Exists ?? false)
             {
-                Dictionary<string, float> effectList = new();
-                string potionId = null;
-                bool ignoreArmour;
-                int duration,
-                    tickSec = 0;
-                float health = 0f;
-                JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
-                if (potion?.Exists ?? false)
+                string potionId = potion["potionId"].AsString();
+                bool ignoreArmour = potion["ignoreArmour"].AsBool(false);
+
+                if (!string.IsNullOrWhiteSpace(potionId) && byEntity.WatchedAttributes.GetLong(potionId) == 0)
                 {
-                    potionId = potion?["potionId"].AsString();
-                    ignoreArmour = potion["ignoreArmour"].AsBool(false);
-                    //api.Logger.Debug("[Potion] potionId {0}", potionId);
-                    //api.Logger.Debug(
-                    //    "[Potion] drinkable if number is zero: {0}",
-                    //    byEntity.WatchedAttributes.GetLong(potionId)
-                    //);
-                    if (
-                        !string.IsNullOrWhiteSpace(potionId)
-                        && byEntity.WatchedAttributes.GetLong(potionId) == 0
-                    )
+                    switch (potionId)
                     {
-                        switch (potionId)
-                        {
-                            case "nutritionpotionid":
-                                {
-                                    ITreeAttribute hungerTree =
-                                        byEntity.WatchedAttributes.GetTreeAttribute("hunger");
-                                    if (hungerTree != null)
-                                    {
-                                        float totalSatiety =
-                                            (
-                                                hungerTree.GetFloat("fruitLevel")
-                                                + hungerTree.GetFloat("vegetableLevel")
-                                                + hungerTree.GetFloat("grainLevel")
-                                                + hungerTree.GetFloat("proteinLevel")
-                                                + hungerTree.GetFloat("dairyLevel")
-                                            ) * 0.9f;
-                                        hungerTree.SetFloat(
-                                            "fruitLevel",
-                                            Math.Max(totalSatiety / 5, 0)
-                                        );
-                                        hungerTree.SetFloat(
-                                            "vegetableLevel",
-                                            Math.Max(totalSatiety / 5, 0)
-                                        );
-                                        hungerTree.SetFloat(
-                                            "grainLevel",
-                                            Math.Max(totalSatiety / 5, 0)
-                                        );
-                                        hungerTree.SetFloat(
-                                            "proteinLevel",
-                                            Math.Max(totalSatiety / 5, 0)
-                                        );
-                                        hungerTree.SetFloat(
-                                            "dairyLevel",
-                                            Math.Max(totalSatiety / 5, 0)
-                                        );
-                                        byEntity.WatchedAttributes.MarkPathDirty("hunger");
-                                    }
-                                    break;
-                                }
-                            case "recallpotionid":
-                                {
-                                    if (api.Side.IsServer())
-                                    {
-                                        FuzzyEntityPos spawn = serverPlayer.GetSpawnPosition(false);
-                                        byEntity.TeleportTo(spawn);
-                                    }
-                                    break;
-                                }
-                            case "temporalpotionid":
-                                {
-                                    byEntity
-                                        .GetBehavior<EntityBehaviorTemporalStabilityAffected>()
-                                        .OwnStability += 0.2;
-                                    break;
-                                }
-                            default:
-                                {
-                                    TempEffect potionEffect = new();
-                                    string strength = !string.IsNullOrWhiteSpace(
-                                        contentStack.Item.Variant?["strength"]
-                                    )
-                                        ? string.Intern(contentStack.Item.Variant?["strength"])
-                                        : "none";
-                                    duration = potion["duration"].AsInt(0);
-                                    JsonObject tickPotion = contentStack
-                                        .ItemAttributes
-                                        ?["tickpotioninfo"];
-                                    if (tickPotion?.Exists ?? false)
-                                    {
-                                        tickSec = tickPotion["ticksec"].AsInt();
-                                        health = tickPotion["health"].AsFloat();
-                                        switch (strength)
-                                        {
-                                            case "strong":
-                                                health = MathF.Round(health * 3, 2);
-                                                break;
+                        case "nutritionpotionid":
+                            ApplyNutritionPotion(byEntity);
+                            break;
 
-                                            case "medium":
-                                                health = MathF.Round(health * 2, 2);
-                                                break;
+                        case "recallpotionid":
+                            ApplyRecallPotion(serverPlayer, byEntity);
+                            break;
 
-                                            default:
-                                                break;
-                                        }
-                                        //api.Logger.Debug("potion {0}, {1}, potionId, duration);
-                                    }
-                                    JsonObject effects = contentStack.ItemAttributes?["effects"];
-                                    if (effects?.Exists ?? false)
-                                    {
-                                        effectList = effects.AsObject<Dictionary<string, float>>();
-                                        switch (strength)
-                                        {
-                                            case "strong":
-                                                foreach (string effect in effectList.Keys.ToList())
-                                                {
-                                                    effectList[effect] = MathF.Round(
-                                                        effectList[effect] * 3,
-                                                        2
-                                                    );
-                                                }
-                                                break;
+                        case "temporalpotionid":
+                            ApplyTemporalPotion(byEntity);
+                            break;
 
-                                            case "medium":
-                                                foreach (string effect in effectList.Keys.ToList())
-                                                {
-                                                    effectList[effect] = MathF.Round(
-                                                        effectList[effect] * 2,
-                                                        2
-                                                    );
-                                                }
-
-                                                break;
-
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                    if (tickSec != 0)
-                                    {
-                                        potionEffect.TempTickEntityStats(
-                                            playerEntity,
-                                            effectList,
-                                            duration,
-                                            potionId,
-                                            tickSec,
-                                            health,
-                                            ignoreArmour
-                                        );
-                                    }
-                                    else
-                                    {
-                                        potionEffect.TempEntityStats(
-                                            playerEntity,
-                                            effectList,
-                                            duration,
-                                            potionId
-                                        );
-                                    }
-                                    break;
-                                }
-                        }
-                        serverPlayer.SendMessage(
-                            GlobalConstants.InfoLogChatGroup,
-                            Lang.Get("alchemy:effect-gain", contentStack.GetName()),
-                            EnumChatType.Notification
-                        );
-
-
-                        SplitStackAndPerformAction(
-                            playerEntity,
-                            slot,
-                            stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                        );
-                        slot.MarkDirty();
-
-                        playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
+                        default:
+                            ApplyCustomPotion(contentStack, playerEntity, potionId, ignoreArmour);
+                            break;
                     }
+
+                    serverPlayer.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:effect-gain", contentStack.GetName()),
+                        EnumChatType.Notification
+                    );
                 }
             }
-            base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
+
+        private static void ApplyNutritionPotion(EntityAgent byEntity)
+        {
+            ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
+            if (hungerTree != null)
+            {
+                float totalSatiety = (
+                    hungerTree.GetFloat("fruitLevel")
+                    + hungerTree.GetFloat("vegetableLevel")
+                    + hungerTree.GetFloat("grainLevel")
+                    + hungerTree.GetFloat("proteinLevel")
+                    + hungerTree.GetFloat("dairyLevel")
+                ) * 0.9f;
+
+                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
+                hungerTree.SetFloat("vegetableLevel", Math.Max(totalSatiety / 5, 0));
+                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
+                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
+                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
+                byEntity.WatchedAttributes.MarkPathDirty("hunger");
+            }
+        }
+
+        private void ApplyRecallPotion(IServerPlayer serverPlayer, EntityAgent byEntity)
+        {
+            if (api.Side.IsServer())
+            {
+                FuzzyEntityPos spawn = serverPlayer.GetSpawnPosition(false);
+                byEntity.TeleportTo(spawn);
+            }
+        }
+
+        private static void ApplyTemporalPotion(EntityAgent byEntity)
+        {
+            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
+        }
+
+        private static void ApplyCustomPotion(
+            ItemStack contentStack,
+            EntityPlayer playerEntity,
+            string potionId,
+            bool ignoreArmour
+        )
+        {
+            TempEffect potionEffect = new();
+            string strength = contentStack.Item.Variant?["strength"] ?? "none";
+            int duration = contentStack.ItemAttributes?["potioninfo"]?["duration"].AsInt(0) ?? 0;
+            JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
+            int tickSec = tickPotion?["ticksec"].AsInt() ?? 0;
+            float health = tickPotion?["health"].AsFloat() ?? 0;
+
+            AdjustPotionStrength(ref health, strength);
+
+            Dictionary<string, float> effectList = GetPotionEffects(contentStack, strength);
+
+            if (tickSec != 0)
+            {
+                potionEffect.TempTickEntityStats(playerEntity, effectList, duration, potionId, tickSec, health, ignoreArmour);
+            }
+            else
+            {
+                potionEffect.TempEntityStats(playerEntity, effectList, duration, potionId);
+            }
+        }
+
+        private static void AdjustPotionStrength(ref float health, string strength)
+        {
+            switch (strength)
+            {
+                case "strong":
+                    health = MathF.Round(health * 3, 2);
+                    break;
+
+                case "medium":
+                    health = MathF.Round(health * 2, 2);
+                    break;
+            }
+        }
+
+        private static Dictionary<string, float> GetPotionEffects(ItemStack contentStack, string strength)
+        {
+            Dictionary<string, float> effectList = contentStack.ItemAttributes?["effects"]?.AsObject<Dictionary<string, float>>() ?? new();
+
+            switch (strength)
+            {
+                case "strong":
+                    foreach (string effect in effectList.Keys.ToList())
+                    {
+                        effectList[effect] = MathF.Round(effectList[effect] * 3, 2);
+                    }
+                    break;
+
+                case "medium":
+                    foreach (string effect in effectList.Keys.ToList())
+                    {
+                        effectList[effect] = MathF.Round(effectList[effect] * 2, 2);
+                    }
+                    break;
+            }
+
+            return effectList;
+        }
+
         #endregion Interaction
 
         public override void GetHeldItemInfo(
@@ -599,19 +586,19 @@ namespace Alchemy
             Block flask
         )
         {
-            this.capi = capi;
-            this.forContents = forContents;
-            this.contentTexture = contentTexture;
-            corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper", true);
-            blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass", true);
-            bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing", true);
+            this.capi = capi ?? throw new ArgumentNullException(nameof(capi));
+            this.forContents = forContents ?? throw new ArgumentNullException(nameof(forContents));
+            this.contentTexture = contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
+            corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
+            blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
+            bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
         }
 
         public TextureAtlasPosition this[string textureCode]
         {
             get
             {
-                if (this != null && textureCode != null)
+                if (textureCode != null)
                 {
                     if (textureCode == "topper" && corkTextPos != null)
                         return corkTextPos;
@@ -624,10 +611,10 @@ namespace Alchemy
                 {
                     int textureSubId = ObjectCacheUtil.GetOrCreate(
                         capi,
-                        "contenttexture-" + contentTexture?.ToString() ?? "unkown",
+                        "contenttexture-" + contentTexture?.ToString() ?? "unknown",
                         () =>
                         {
-                            int id = 0;
+                            int id = -1;
 
                             BitmapRef bmp = capi.Assets
                                 .TryGet(
@@ -635,35 +622,43 @@ namespace Alchemy
                                         .Clone()
                                         .WithPathPrefixOnce("textures/")
                                         .WithPathAppendixOnce(".png")
-                                        ?? new AssetLocation(
-                                            "alchemy:textures/item/potion/black_potion.png"
-                                        )
+                                    ?? new AssetLocation("alchemy:textures/item/potion/black_potion.png")
                                 )
                                 ?.ToBitmap(capi);
+
                             if (bmp != null)
                             {
                                 try
                                 {
-                                    capi.BlockTextureAtlas.InsertTexture(
-                                        bmp,
-                                        out id,
-                                        out TextureAtlasPosition texPos
-                                    );
+                                    capi.BlockTextureAtlas.InsertTexture(bmp, out id, out TextureAtlasPosition texPos);
                                 }
-                                catch
+                                catch (Exception ex)
                                 {
-                                    capi.World.Logger.Error("Error on insert texture");
+                                    capi.World.Logger.Error($"Error inserting texture: {ex.Message}");
+                                    id = -1;
                                 }
                                 bmp.Dispose();
+                            }
+                            else
+                            {
+                                capi.World.Logger.Warning("Bitmap for content texture is null.");
                             }
 
                             return id;
                         }
                     );
 
-                    contentTextPos = capi.BlockTextureAtlas.Positions[textureSubId];
+                    // Check if the index is valid
+                    if (textureSubId >= 0 && textureSubId < capi.BlockTextureAtlas.Positions.Length)
+                    {
+                        contentTextPos = capi.BlockTextureAtlas.Positions[textureSubId];
+                    }
+                    else
+                    {
+                        capi.World.Logger.Error($"Invalid textureSubId: {textureSubId}. Positions length: {capi.BlockTextureAtlas.Positions.Length}");
+                        contentTextPos = null;
+                    }
                 }
-
                 return contentTextPos;
             }
         }

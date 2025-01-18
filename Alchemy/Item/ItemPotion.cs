@@ -144,7 +144,6 @@ namespace Alchemy
                 byEntity.World.RegisterCallback(
                     (dt) =>
                     {
-
                         if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
                         {
                             if (Code.Path.Contains("portion"))
@@ -166,6 +165,7 @@ namespace Alchemy
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
             return;
         }
+
         public override bool OnHeldInteractStep(
             float secondsUsed,
             ItemSlot slot,

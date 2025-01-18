@@ -11,6 +11,7 @@ namespace Alchemy
     {
         //Why didn't I make a contstructor?
         private EntityPlayer effectedEntity;
+
         private Dictionary<string, float> effectedList;
 
         private const string effectCode = "potionmod";
