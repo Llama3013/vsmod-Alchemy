@@ -13,7 +13,7 @@
       "loadFromProperties": "block/metal"
     }
   ],
-  "shape": { "base": "alchemy:block/drying_rack" },
+  "shape": { "base": "alchemy:block/dryingrack" },
   "textures": {
     "wood": { "base": "game:block/wood/planks/{wood}1" },
     "hook": { "base": "game:block/metal/sheet/{metal}1" },
@@ -35,7 +35,10 @@
   "heldTpIdleAnimation": "holdbothhands",
   "creativeinventory": {
     "general": [ "*-oak-copper" ],
-    "decorative": [ "*" ]
+    "decorative": [ "*" ],
+    "alchemy": [
+        "*"
+    ]
   },
   "blockmaterial": "Wood",
   "replaceable": 900,

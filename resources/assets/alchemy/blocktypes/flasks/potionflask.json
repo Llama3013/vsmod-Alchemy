@@ -94,7 +94,10 @@
   "replaceable": 5000,
   "creativeinventory": {
     "general": [ "*-quartz" ],
-    "decorative": [ "*" ]
+    "decorative": [ "*" ],
+    "alchemy": [
+        "*"
+    ]
   },
   "materialDensity": 200,
   "shapeByType": {

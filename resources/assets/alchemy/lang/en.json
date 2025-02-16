@@ -469,6 +469,10 @@
   "item-herbracktop-zinc": "Herb Rack Frame (Zinc)",
   "item-herbracktop-molybdochalkos": "Herb Rack Frame (Molybdochalkos)",
 
+  "block-herbrackmold-raw-herbrackhook": "Raw herb rack hook mold",
+  "block-herbrackmold-burned-herbrackhook": "Herb rack hook mold",
+  "block-herbrackmold-raw-herbracktop": "Raw herb rack top mold",
+  "block-herbrackmold-burned-herbracktop": "Herb rack top mold",
   "block-herbrack-*": "Herb Rack",
 
   "item-mortarpestle-*": "Mortar & pestle",
@@ -510,6 +514,8 @@
   "potioneffectTrue": "Potion effects active",
   "regen": "Regeneration",
   "poison": "Poison",
+
+  "game:tabname-alchemy": "Alchemy",
 
   "alchemy:alchemyguide-title": "Alchemy: Making potions",
   "alchemy:alchemyguide-text": "To get started in alchemy the first need to make a <a href=\"handbook://item-alchemy:mortarpestle-wood\">mortar and pestle</a>. Next you will need to gather herbs and flowers. These can be combined in different variations to create different potions. The ingredients you will need the most of are any poisonous mushrooms and horsetail, which will create be used to create <a href=\"handbook://item-alchemy:potionbase-basic\">Basic potion base</a>. Once you have a mortar and pestle, basic potion base and a collection of flowers/herbs you can create <a href=\"handbooksearch://edible herb\">edible herbs</a>. These are the weakest variant but can be created without the use of any metal tools. Once you have access to metal (more specifically a <a href=\"handbook://block-barrel\">barrel</a>) you can start creating better liquid potions. Firstly you will need to mix your basic potion base with water in a barrel to create a <a href=\"handbook://item-alchemy:potionteaportion\">potion tea</a>. This will be the new base ingredient for the medium tier potions. Then mix the potion tea with a weak potionbase. To drink the potions you will need to create some <a href=\"handbooksearch://potion flask\">flasks</a>. Lastly to create the best potions you will need <a href=\"handbook://item-alcoholportion\">aqua vitae</a> and a <a href=\"handbook://block-alchemy:herbrack-oak-copper\">herb rack</a>. There are many different variants of herb racks if you want a different colour <a href=\"handbooksearch://herb rack\">herb racks</a>. Using a herb rack you will need to hang your herbs/flowers on them to dry into <a href=\"handbooksearch://dried cuttings\">dried cuttings</a> (you can dry them through other means but the herb rack should be the best way to do it and they shouldn't spoil on them). Once they have dried you will then need to cook them on a fire to create <a href=\"handbooksearch://cooked cuttings\">cooked cuttings</a>. The cooked cuttings are then combined into a strong base. Using a strong base and aqua vitae, mix them in a barrel to create a strong potion.\n\nList of potions:\n<a href=\"handbooksearch://edible herbs\">List of weak edible herbs</a>\n<a href=\"handbooksearch:// (medium)\">List of medium strength potions</a>\n<a href=\"handbooksearch:// (strong)\">List of strong strength potions</a>\nUtility potions: <a href=\"handbook://item-alchemy:utilitypotionportion-recall\">recall potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-waterbreathe\">water breathing potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-glow\">Glow potion</a> and <a href=\"handbook://item-alchemy:utilitypotionportion-nutrition\">Nutrition potion</a>\n\nIf you have any suggestions or bugs let me know on the offical vintage story discord on the alchemy mod thread. If you can't go there feel free to leave a comment on the mod page."

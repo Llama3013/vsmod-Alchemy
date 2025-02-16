@@ -111,7 +111,7 @@
   },
   "creativeinventoryStacks": [
     {
-      "tabs": [ "general", "liquids" ],
+      "tabs": [ "general", "liquids", "alchemy" ],
       "stacks": [
         {
           "type": "block",

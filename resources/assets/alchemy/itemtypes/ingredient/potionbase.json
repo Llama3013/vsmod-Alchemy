@@ -3,7 +3,10 @@
   "shape": { "base": "alchemy:item/potionbase" },
   "creativeinventory": {
     "general": [ "*" ],
-    "items": [ "*" ]
+    "items": [ "*" ],
+    "alchemy": [
+        "*"
+    ]
   },
   "variantgroups": [
     {

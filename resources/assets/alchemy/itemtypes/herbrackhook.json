@@ -1,35 +1,56 @@
 {
   "code": "herbrackhook",
-  "shape": { "base": "alchemy:item/herbhook" },
+  "shape": {
+    "base": "alchemy:item/herbhook"
+  },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
   "variantgroups": [
     {
       "code": "metal",
       "loadFromProperties": "block/metal"
     }
   ],
-  "__comment": "These are excluded since you cannot craft them",
   "textures": {
-    "hook": { "base": "game:block/metal/sheet/{metal}1" }
+    "hook": {
+      "base": "game:block/metal/sheet/{metal}1"
+    }
   },
   "attributes": {
     "handbook": {
-      "groupBy": [ "herbrackhook-*" ]
+      "groupBy": [
+        "herbrackhook-*"
+      ]
     }
   },
   "guiTransform": {
     "translation": {
-      "x": 3,
+      "x": 0,
       "y": 0,
       "z": 0
     },
     "rotation": {
-      "x": 0,
+      "x": 80,
       "y": 0,
-      "z": 180
+      "z": 0
     },
     "origin": {
       "x": 0.5,
-      "y": 0.33,
+      "y": 0,
       "z": 0.5
     },
     "scale": 3
@@ -89,8 +110,13 @@
     "scale": 2.5
   },
   "creativeinventory": {
-    "general": [ "*-copper" ],
-    "decorative": [ "*" ]
+    "general": [
+      "*-copper"
+    ],
+    "decorative": [
+      "*"
+    ],
+    "alchemy": [ "*" ]
   },
   "maxstacksize": 64
 }

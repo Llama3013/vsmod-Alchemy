@@ -9,7 +9,10 @@
   },
   "creativeinventory": {
     "general": [ "*" ],
-    "items": [ "*" ]
+    "items": [ "*" ],
+    "alchemy": [
+        "*"
+    ]
   },
   "maxstacksize": 64,
   "materialDensity": 620,

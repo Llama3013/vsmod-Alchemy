@@ -80,7 +80,8 @@
   },
   "creativeinventory": {
     "general": [ "*" ],
-    "items": [ "*" ]
+    "items": [ "*" ],
+    "alchemy": [ "*" ]
   },
   "maxstacksize": 64,
   "transitionablePropsByType": {

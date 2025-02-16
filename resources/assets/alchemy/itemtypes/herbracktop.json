@@ -1,6 +1,16 @@
 {
   "code": "herbracktop",
-  "shape": { "base": "alchemy:item/herbracktop" },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "SingleCenter"
+      }
+    }
+  ],
+  "shape": {
+    "base": "alchemy:item/herbracktop"
+  },
   "variantgroups": [
     {
       "code": "metal",
@@ -8,11 +18,15 @@
     }
   ],
   "textures": {
-    "top": { "base": "game:block/metal/sheet/{metal}1" }
+    "top": {
+      "base": "game:block/metal/sheet/{metal}1"
+    }
   },
   "attributes": {
     "handbook": {
-      "groupBy": [ "herbracktop-{metal}" ]
+      "groupBy": [
+        "herbracktop-{metal}"
+      ]
     }
   },
   "heldTpIdleAnimation": "holdbothhands",
@@ -29,7 +43,7 @@
     },
     "origin": {
       "x": 0.1,
-      "y": 0.35,
+      "y": -0.1,
       "z": 0
     },
     "scale": 1.73
@@ -54,8 +68,8 @@
   },
   "tpHandTransform": {
     "translation": {
-      "x": 1,
-      "y": 0.4,
+      "x": 0,
+      "y": 0.1,
       "z": 0.05
     },
     "rotation": {
@@ -65,8 +79,8 @@
     },
     "origin": {
       "x": 0,
-      "y": 0,
-      "z": 0
+      "y": 0.2,
+      "z": 0.1
     },
     "scale": 1
   },
@@ -89,8 +103,13 @@
     "scale": 3
   },
   "creativeinventory": {
-    "general": [ "*-copper" ],
-    "decorative": [ "*" ]
+    "general": [
+      "*-copper"
+    ],
+    "decorative": [
+      "*"
+    ],
+    "alchemy": [ "*" ]
   },
   "maxstacksize": 64
 }

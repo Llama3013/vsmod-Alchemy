@@ -51,6 +51,10 @@
     </Content>
 </ItemGroup>
 
+<ItemGroup>
+  <Content Remove="..\resources\assets\alchemy\recipes\clayforming\claypotionflask2.json" />
+</ItemGroup>
+
 <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

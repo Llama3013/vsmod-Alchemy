@@ -1,0 +1,326 @@
+{
+    "code": "herbrackmold",
+    "classByType": {
+        "herbrackmold-raw-*": "Block",
+        "herbrackmold-burned-*": "BlockToolMold"
+    },
+    "behaviorsByType": {
+        "*-raw-*": [
+            {
+                "name": "GroundStorable",
+                "properties": {
+                    "layout": "SingleCenter"
+                }
+            },
+            {
+                "name": "Unplaceable",
+                "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility"
+            },
+            {
+                "name": "RightClickPickup"
+            }
+        ],
+        "*": [
+            {
+                "name": "Lockable"
+            },
+            {
+                "name": "UnstableFalling"
+            },
+            {
+                "name": "HorizontalOrientable"
+            }
+        ]
+    },
+    "entityBehaviorsByType": {
+        "herbrackmold-burned-*": [
+            {
+                "name": "TemperatureSensitive"
+            }
+        ]
+    },
+    "variantgroups": [
+        {
+            "code": "materialtype",
+            "states": [
+                "raw",
+                "burned"
+            ]
+        },
+        {
+            "code": "herbracktype",
+            "states": [
+                "herbracktop",
+                "herbrackhook"
+            ]
+        }
+    ],
+    "shapebytype": {
+        "*": {
+            "base": "block/clay/mold/{herbracktype}",
+            "rotateY": 90
+        }
+    },
+    "texturesByType": {
+        "herbrackmold-raw-*": {
+            "all": {
+                "base": "game:block/clay/blueclay"
+            }
+        },
+        "herbrackmold-burned-*": {
+            "floor": {
+                "base": "game:block/clay/ceramic-dark"
+            },
+            "ceramic": {
+                "base": "game:block/clay/ceramic"
+            }
+        }
+    },
+    "attributes": {
+        "reinforcable": true,
+        "shatteredShape": {
+            "base": "game:block/clay/mold/shattered-ingot"
+        },
+        "onTongTransform": {
+            "translation": {
+                "x": -0.9,
+                "y": -1.5,
+                "z": -0.6
+            },
+            "rotation": {
+                "x": 117,
+                "y": 0,
+                "z": 0
+            },
+            "scale": 0.74
+        },
+        "drop": {
+            "type": "item",
+            "code": "{herbracktype}-{metal}"
+        }
+    },
+  "attributesByType": {
+    "herbrackmold-burned-herbracktop": {
+      "requiredUnits": 100,
+      "fillHeight": 8,
+      "moldrackable": false,
+      "fillQuadsByLevel": [
+        {
+          "x1": 2,
+          "z1": 2,
+          "x2": 14,
+          "z2": 14
+        }
+      ]
+    },
+    "herbrackmold-burned-herbrackhook": {
+      "requiredUnits": 200,
+      "fillHeight": 1,
+      "moldrackable": true,
+      "onmoldrackTransform": {
+        "rotation": {
+          "z": 90
+        }
+      }
+    }
+  },
+    "entityClassByType": {
+        "herbrackmold-burned-*": "ToolMold"
+    },
+    "combustiblePropsByType": {
+        "herbrackmold-raw-*": {
+            "meltingPoint": 650,
+            "meltingDuration": 45,
+            "smeltedRatio": 1,
+            "smeltingType": "fire",
+            "smeltedStack": {
+                "type": "block",
+                "code": "herbrackmold-burned-{herbracktype}"
+            },
+            "requiresContainer": false
+        }
+    },
+    "blockmaterial": "Ceramic",
+    "creativeinventory": {
+        "general": [
+            "*"
+        ],
+        "construction": [
+            "*"
+        ],
+        "alchemy": [
+            "*"
+        ]
+    },
+    "replaceable": 700,
+    "resistance": 1.5,
+    "maxStackSize": 8,
+    "lightAbsorption": 0,
+    "sounds": {
+        "walk": "walk/stone"
+    },
+    "collisionboxByType": {
+        "*-herbracktop": {
+            "x1": 0.0625,
+            "y1": 0,
+            "z1": 0.0625,
+            "x2": 0.9375,
+            "y2": 0.5625,
+            "z2": 0.9375
+        },
+        "*": {
+            "x1": 0.0625,
+            "y1": 0,
+            "z1": 0.0625,
+            "x2": 0.9375,
+            "y2": 0.125,
+            "z2": 0.9375
+        }
+    },
+    "selectionboxByType": {
+        "*-herbracktop": {
+            "x1": 0.0625,
+            "y1": 0,
+            "z1": 0.0625,
+            "x2": 0.9375,
+            "y2": 0.5625,
+            "z2": 0.9375
+        },
+        "*": {
+            "x1": 0.0625,
+            "y1": 0,
+            "z1": 0.0625,
+            "x2": 0.9375,
+            "y2": 0.125,
+            "z2": 0.9375
+        }
+    },
+    "sideopaque": {
+        "all": false
+    },
+    "sidesolid": {
+        "all": false
+    },
+    "heldTpIdleAnimationByType": {
+        "*-herbracktop": "holdbothhandslarge"
+    },
+    "heldTpUseAnimationByType": {
+        "*-herbracktop": "twohandplaceblock"
+    },
+    "guiTransformByType": {
+        "*-herbracktop": {
+            "origin": {
+                "x": 0.5,
+                "y": 0.18,
+                "z": 0.5
+            },
+            "scale": 1.33
+        },
+        "*": {
+            "translation": {
+                "x": 0,
+                "y": 3,
+                "z": 0
+            },
+            "origin": {
+                "x": 0.5,
+                "y": 0.0625,
+                "z": 0.5
+            },
+            "scale": 1.33
+        }
+    },
+    "tpHandTransformByType": {
+        "*-herbracktop": {
+            "translation": {
+                "x": -0.6,
+                "y": -0.4,
+                "z": -0.5
+            },
+            "rotation": {
+                "x": 12,
+                "y": 12,
+                "z": -92
+            },
+            "origin": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.5
+            },
+            "scale": 0.8
+        },
+        "*": {
+            "translation": {
+                "x": -1,
+                "y": -0.6,
+                "z": -1.05
+            },
+            "rotation": {
+                "x": -87,
+                "y": 9,
+                "z": 4
+            },
+            "origin": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.5
+            },
+            "scale": 0.5
+        }
+    },
+    "fpHandTransformByType": {
+        "*-herbracktop": {
+            "translation": {
+                "x": -0.3,
+                "y": 0,
+                "z": 0.5
+            },
+            "rotation": {
+                "x": 16,
+                "y": -50,
+                "z": 1
+            },
+            "origin": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.5
+            },
+            "scale": 0.8
+        },
+        "*": {
+            "translation": {
+                "x": -0.3,
+                "y": 0,
+                "z": 0.5
+            },
+            "rotation": {
+                "x": 16,
+                "y": -51,
+                "z": 91
+            },
+            "origin": {
+                "x": 0.5,
+                "y": 0.125,
+                "z": 0.5
+            }
+        }
+    },
+    "groundTransform": {
+        "translation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "rotation": {
+            "x": 0,
+            "y": -45,
+            "z": 0
+        },
+        "origin": {
+            "x": 0.5,
+            "y": 0,
+            "z": 0.5
+        },
+        "scale": 2.2
+    }
+}

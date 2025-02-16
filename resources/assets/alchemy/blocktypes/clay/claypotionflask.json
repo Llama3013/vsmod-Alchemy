@@ -70,7 +70,10 @@
   "doNotRenderAtLod2": true,
   "creativeinventory": {
     "general": [ "*" ],
-    "decorative": [ "*" ]
+    "decorative": [ "*" ],
+    "alchemy": [
+        "*"
+    ]
   },
   "blockmaterial": "Ceramic",
   "replaceable": 900,

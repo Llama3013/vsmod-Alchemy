@@ -25,7 +25,8 @@
   },
   "creativeinventory": {
     "general": [ "*" ],
-    "decorative": [ "*" ]
+    "decorative": [ "*" ],
+    "alchemy": [ "*" ]
   },
   "replaceable": 300,
   "resistance": 0.75,
