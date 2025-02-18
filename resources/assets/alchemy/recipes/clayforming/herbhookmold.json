@@ -47,6 +47,6 @@
     "output": {
         "type": "block",
         "code": "alchemy:herbrackmold-raw-herbrackhook",
-        "stacksize": 1
+        "stacksize": 8
     }
 }

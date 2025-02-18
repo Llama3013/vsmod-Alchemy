@@ -3,8 +3,12 @@
   "class": "BlockPotionFlask",
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
-    { "name": "RightClickPickup" },
-    { "name": "SneakPlacing" },
+    {
+      "name": "RightClickPickup"
+    },
+    {
+      "name": "SneakPlacing"
+    },
     {
       "name": "GroundStorable",
       "properties": {
@@ -40,11 +44,21 @@
   "variantgroups": [
     {
       "code": "flask",
-      "states": [ "normal", "round", "tube" ]
+      "states": [
+        "normal",
+        "round",
+        "tube"
+      ]
     },
     {
       "code": "colour",
-      "states": [ "quartz", "smoky", "pink", "green", "violet" ]
+      "states": [
+        "quartz",
+        "smoky",
+        "pink",
+        "green",
+        "violet"
+      ]
     }
   ],
   "attributesByType": {
@@ -93,19 +107,33 @@
   "blockmaterial": "Glass",
   "replaceable": 5000,
   "creativeinventory": {
-    "general": [ "*-quartz" ],
-    "decorative": [ "*" ],
+    "general": [
+      "*-quartz"
+    ],
+    "decorative": [
+      "*"
+    ],
     "alchemy": [
-        "*"
+      "*"
     ]
   },
   "materialDensity": 200,
   "shapeByType": {
-    "*-round-*": { "base": "alchemy:block/glass/roundflask-empty" },
-    "*-tube-*": { "base": "alchemy:block/glass/tubeflask-empty" },
-    "*": { "base": "alchemy:block/glass/flask-empty" }
+    "*-round-*": {
+      "base": "alchemy:block/glass/roundflask-empty"
+    },
+    "*-tube-*": {
+      "base": "alchemy:block/glass/tubeflask-empty"
+    },
+    "*": {
+      "base": "alchemy:block/glass/flask-empty"
+    }
   },
-  "textures": { "glass": { "base": "game:block/glass/{colour}" } },
+  "textures": {
+    "glass": {
+      "base": "game:block/glass/{colour}"
+    }
+  },
   "resistance": 0.75,
   "maxStackSize": 16,
   "sounds": {
@@ -116,10 +144,18 @@
   },
   "lightAbsorption": 0,
   "drawtype": "JSON",
-  "sideopaque": { "all": false },
-  "sideao": { "all": true },
-  "emitsideao": { "all": false },
-  "sidesolid": { "all": false },
+  "sideopaque": {
+    "all": false
+  },
+  "sideao": {
+    "all": true
+  },
+  "emitsideao": {
+    "all": false
+  },
+  "sidesolid": {
+    "all": false
+  },
   "collisionbox": {
     "x1": 0.375,
     "y1": 0,
