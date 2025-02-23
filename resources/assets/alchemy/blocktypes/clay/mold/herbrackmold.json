@@ -94,10 +94,6 @@
             },
             "scale": 0.74
         },
-        "drop": {
-            "type": "item",
-            "code": "{herbracktype}-{metal}"
-        }
     },
   "attributesByType": {
     "herbrackmold-burned-herbracktop": {
@@ -111,7 +107,12 @@
           "x2": 14,
           "z2": 14
         }
-      ]
+      ],
+      "drop": {
+        "type": "item",
+        "code": "{herbracktype}-{metal}",
+        "quantity": 1
+      }
     },
     "herbrackmold-burned-herbrackhook": {
       "requiredUnits": 200,
@@ -121,6 +122,11 @@
         "rotation": {
           "z": 90
         }
+      },
+      "drop": {
+        "type": "item",
+        "code": "{herbracktype}-{metal}",
+        "quantity": 8
       }
     }
   },
