@@ -17,36 +17,6 @@
       "to": [ 7.0, 0.0, 7.0 ],
       "rotationOrigin": [ 7.5, 0.5, 9.5 ],
       "faces": {
-        "north": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        },
-        "east": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        },
-        "south": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        },
-        "west": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        },
-        "up": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        },
-        "down": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.5, 0.5 ],
-          "enabled": false
-        }
       },
       "children": [
         {

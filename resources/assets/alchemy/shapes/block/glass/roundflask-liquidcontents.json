@@ -328,9 +328,9 @@
           "from": [ 0.25, 0.6, -0.85 ],
           "to": [ 1.75, 1.9, 2.85 ],
           "rotationOrigin": [ 1.0, 1.5, 1.0 ],
-          "rotationX": -179.99996780508306,
+          "rotationX": -180,
           "rotationY": 5.0089554488415E-6,
-          "rotationZ": -179.99996780508306,
+          "rotationZ": -180,
           "renderpass": 4,
           "faces": {
             "north": {
@@ -364,9 +364,9 @@
           "from": [ 0.25, 0.6, -0.85 ],
           "to": [ 1.75, 1.9, 2.85 ],
           "rotationOrigin": [ 1.0, 1.5, 1.0 ],
-          "rotationX": -179.99996780508306,
+          "rotationX": -180,
           "rotationY": -45.0,
-          "rotationZ": -179.99996780508306,
+          "rotationZ": -180,
           "renderpass": 4,
           "faces": {
             "north": {
@@ -400,9 +400,9 @@
           "from": [ 0.25, 0.6, -0.85 ],
           "to": [ 1.75, 1.9, 2.85 ],
           "rotationOrigin": [ 1.0, 1.5, 1.0 ],
-          "rotationX": -179.99996780508306,
+          "rotationX": -180,
           "rotationY": -90.0,
-          "rotationZ": -179.99996780508306,
+          "rotationZ": -180,
           "renderpass": 4,
           "faces": {
             "north": {
@@ -436,9 +436,9 @@
           "from": [ 0.25, 0.6, -0.85 ],
           "to": [ 1.75, 1.9, 2.85 ],
           "rotationOrigin": [ 1.0, 1.5, 1.0 ],
-          "rotationX": -179.99996780508306,
+          "rotationX": -180,
           "rotationY": -135.0,
-          "rotationZ": -179.99996780508306,
+          "rotationZ": -180,
           "renderpass": 4,
           "faces": {
             "north": {

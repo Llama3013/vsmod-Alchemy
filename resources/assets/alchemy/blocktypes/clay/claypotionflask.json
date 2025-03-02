@@ -10,18 +10,34 @@
   "variantgroups": [
     {
       "code": "state",
-      "states": [ "raw", "fired" ]
+      "states": [
+        "raw",
+        "fired"
+      ]
     }
   ],
-  "shape": { "base": "alchemy:block/glass/clayflask" },
-
+  "shape": {
+    "base": "alchemy:block/clay/clayflask"
+  },
   "texturesByType": {
-    "*-raw": { "glass": { "base": "game:block/clay/blueclay" } },
-    "*-fired": { "glass": { "base": "game:block/clay/ceramic-dark" } }
+    "*-raw": {
+      "glass": {
+        "base": "game:block/clay/blueclay"
+      }
+    },
+    "*-fired": {
+      "glass": {
+        "base": "game:block/clay/ceramic-dark"
+      }
+    }
   },
   "behaviors": [
-    { "name": "RightClickPickup" },
-    { "name": "SneakPlacing" },
+    {
+      "name": "RightClickPickup"
+    },
+    {
+      "name": "SneakPlacing"
+    },
     {
       "name": "GroundStorable",
       "properties": {
@@ -61,7 +77,7 @@
       "*-fired": {
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
-        "emptyShapeLoc": "alchemy:shapes/block/glass/clayflask",
+        "emptyShapeLoc": "alchemy:shapes/block/clay/clayflask",
         "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
         "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
       }
@@ -69,10 +85,14 @@
   },
   "doNotRenderAtLod2": true,
   "creativeinventory": {
-    "general": [ "*" ],
-    "decorative": [ "*" ],
+    "general": [
+      "*"
+    ],
+    "decorative": [
+      "*"
+    ],
     "alchemy": [
-        "*"
+      "*"
     ]
   },
   "blockmaterial": "Ceramic",

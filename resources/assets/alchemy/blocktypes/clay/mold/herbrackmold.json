@@ -93,43 +93,43 @@
                 "z": 0
             },
             "scale": 0.74
+        }
+    },
+    "attributesByType": {
+        "herbrackmold-burned-herbracktop": {
+            "requiredUnits": 100,
+            "fillHeight": 8,
+            "moldrackable": false,
+            "fillQuadsByLevel": [
+                {
+                    "x1": 2,
+                    "z1": 2,
+                    "x2": 14,
+                    "z2": 14
+                }
+            ],
+            "drop": {
+                "type": "item",
+                "code": "{herbracktype}-{metal}",
+                "quantity": 1
+            }
         },
-    },
-  "attributesByType": {
-    "herbrackmold-burned-herbracktop": {
-      "requiredUnits": 100,
-      "fillHeight": 8,
-      "moldrackable": false,
-      "fillQuadsByLevel": [
-        {
-          "x1": 2,
-          "z1": 2,
-          "x2": 14,
-          "z2": 14
+        "herbrackmold-burned-herbrackhook": {
+            "requiredUnits": 200,
+            "fillHeight": 1,
+            "moldrackable": true,
+            "onmoldrackTransform": {
+                "rotation": {
+                    "z": 90
+                }
+            },
+            "drop": {
+                "type": "item",
+                "code": "{herbracktype}-{metal}",
+                "quantity": 8
+            }
         }
-      ],
-      "drop": {
-        "type": "item",
-        "code": "{herbracktype}-{metal}",
-        "quantity": 1
-      }
     },
-    "herbrackmold-burned-herbrackhook": {
-      "requiredUnits": 200,
-      "fillHeight": 1,
-      "moldrackable": true,
-      "onmoldrackTransform": {
-        "rotation": {
-          "z": 90
-        }
-      },
-      "drop": {
-        "type": "item",
-        "code": "{herbracktype}-{metal}",
-        "quantity": 8
-      }
-    }
-  },
     "entityClassByType": {
         "herbrackmold-burned-*": "ToolMold"
     },

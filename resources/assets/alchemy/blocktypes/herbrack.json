@@ -5,7 +5,9 @@
   "variantgroups": [
     {
       "code": "wood",
-      "states": [ "aged" ],
+      "states": [
+        "aged"
+      ],
       "loadFromProperties": "block/wood"
     },
     {
@@ -13,15 +15,25 @@
       "loadFromProperties": "block/metal"
     }
   ],
-  "shape": { "base": "alchemy:block/dryingrack" },
+  "shape": {
+    "base": "alchemy:block/dryingrack"
+  },
   "textures": {
-    "wood": { "base": "game:block/wood/planks/{wood}1" },
-    "hook": { "base": "game:block/metal/sheet/{metal}1" },
-    "top": { "base": "game:block/metal/sheet/{metal}1" }
+    "wood": {
+      "base": "game:block/wood/planks/{wood}1"
+    },
+    "hook": {
+      "base": "game:block/metal/sheet/{metal}1"
+    },
+    "top": {
+      "base": "game:block/metal/sheet/{metal}1"
+    }
   },
   "attributes": {
     "handbook": {
-      "groupBy": [ "herbrack-*" ],
+      "groupBy": [
+        "herbrack-*"
+      ],
       "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",
       "excludeByType": {
         "*-nickel": true,
@@ -34,10 +46,14 @@
   },
   "heldTpIdleAnimation": "holdbothhands",
   "creativeinventory": {
-    "general": [ "*-oak-copper" ],
-    "decorative": [ "*" ],
+    "general": [
+      "*-oak-copper"
+    ],
+    "decorative": [
+      "*"
+    ],
     "alchemy": [
-        "*"
+      "*"
     ]
   },
   "blockmaterial": "Wood",
