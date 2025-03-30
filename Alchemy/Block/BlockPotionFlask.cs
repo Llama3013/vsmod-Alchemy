@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
+using Vintagestory.API.Util;
 
 namespace Alchemy
 {
@@ -317,6 +317,17 @@ namespace Alchemy
                     string potionId = potion["potionId"].AsString();
                     //api.Logger.Debug("[Potion] potionId {0}", potionId);
                     //api.Logger.Debug("[Potion] drinkable if number is zero: {0}", byEntity.WatchedAttributes.GetLong(potionId));
+                    if (potionId == "recallpotionid" && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null && WildcardUtil.Match("boat-sailed-*", byEntity.MountedOn.MountSupplier.OnEntity.Code.Path) && byEntity.World.Side == EnumAppSide.Server)
+                    {
+                        var playerEntity = byEntity as EntityPlayer;
+                        var serverPlayer = playerEntity?.Player as IServerPlayer;
+                        serverPlayer.SendMessage(
+                            GlobalConstants.InfoLogChatGroup,
+                            Lang.Get("alchemy:boat-block"),
+                            EnumChatType.Notification
+                        );
+                        return;
+                    }
                     /* This checks if the potion effect callback is on */
                     if (
                         !string.IsNullOrWhiteSpace(potionId)
@@ -542,15 +553,15 @@ namespace Alchemy
                     switch (potionId)
                     {
                         case "nutritionpotionid":
-                            ApplyNutritionPotion(byEntity);
+                            UtilityEffects.ApplyNutritionPotion(byEntity);
                             break;
 
                         case "recallpotionid":
-                            ApplyRecallPotion(serverPlayer, byEntity);
+                            UtilityEffects.ApplyRecallPotion(serverPlayer, byEntity, api);
                             break;
 
                         case "temporalpotionid":
-                            ApplyTemporalPotion(byEntity);
+                            UtilityEffects.ApplyTemporalPotion(byEntity);
                             break;
 
                         default:
@@ -567,42 +578,6 @@ namespace Alchemy
             }
         }
 
-        private static void ApplyNutritionPotion(EntityAgent byEntity)
-        {
-            ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
-            if (hungerTree != null)
-            {
-                float totalSatiety =
-                    (
-                        hungerTree.GetFloat("fruitLevel")
-                        + hungerTree.GetFloat("vegetableLevel")
-                        + hungerTree.GetFloat("grainLevel")
-                        + hungerTree.GetFloat("proteinLevel")
-                        + hungerTree.GetFloat("dairyLevel")
-                    ) * 0.9f;
-
-                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("vegetableLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
-                byEntity.WatchedAttributes.MarkPathDirty("hunger");
-            }
-        }
-
-        private void ApplyRecallPotion(IServerPlayer serverPlayer, EntityAgent byEntity)
-        {
-            if (api.Side.IsServer())
-            {
-                FuzzyEntityPos spawn = serverPlayer.GetSpawnPosition(false);
-                byEntity.TeleportTo(spawn);
-            }
-        }
-
-        private static void ApplyTemporalPotion(EntityAgent byEntity)
-        {
-            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
-        }
 
         private static void ApplyCustomPotion(
             ItemStack contentStack,

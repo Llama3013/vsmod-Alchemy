@@ -5,7 +5,7 @@
     "general": [ "*" ],
     "items": [ "*" ],
     "alchemy": [
-        "*"
+      "*"
     ]
   },
   "variantgroups": [
@@ -18,6 +18,70 @@
       "states": [ "weak", "strong" ]
     }
   ],
+  "attributes": {
+    "handbook": {
+      "groupBy": [ "potionbase-{basetype}-*" ]
+    }
+  },
+  "attributesByType": {
+    "potionbase-archer-*": {
+      "handbook": {
+        
+      }
+    },
+    "potionbase-healingeffect-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-hungerenhance-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-hungersupress-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-hunter-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-looter-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-melee-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-mining-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-poison-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-predator-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-regen-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-scentmask-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-speed-*": {
+      "handbook": {
+      }
+    },
+    "potionbase-vitality-*": {
+      "handbook": {
+      }
+    }
+  },
   "texturesByType": {
     "potionbase-archer-*": {
       "mat1": { "base": "alchemy:item/potionbase/lupine-blue" },
@@ -102,11 +166,6 @@
       "mat2": { "base": "alchemy:item/potionbase/goldenpoppy" },
       "mat3": { "base": "alchemy:item/potionbase/lupine-purple" },
       "mat4": { "base": "alchemy:item/potionbase/lupine-purple" }
-    }
-  },
-  "attributes": {
-    "handbook": {
-      "groupBy": [ "potionbase-{basetype}-*" ]
     }
   },
   "maxstacksize": 64,

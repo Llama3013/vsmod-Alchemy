@@ -3,7 +3,7 @@
   "variantgroups": [
     {
       "code": "potiontype",
-      "states": [ "all", "alltick", "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality" ]
+      "states": [ "archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality", "all", "alltick" ]
     }
   ],
   "class": "ItemPotion",

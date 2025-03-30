@@ -1375,11 +1375,6 @@
           "texture": "#topper",
           "uv": [ 1.5, 2.0, 6.0, 2.5 ],
           "autoUv": false
-        },
-        "down": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 3.0, 0.5 ],
-          "windMode": [ -1, -1, -1, -1 ]
         }
       },
       "children": [

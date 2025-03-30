@@ -17,38 +17,6 @@
       "from": [ 8.0, 0.0, 8.0 ],
       "to": [ 8.0, 0.0, 8.0 ],
       "rotationOrigin": [ 8.0, 0.0, 8.0 ],
-      "faces": {
-        "north": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        },
-        "east": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        },
-        "south": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        },
-        "west": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        },
-        "up": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        },
-        "down": {
-          "texture": "#null",
-          "uv": [ 0.0, 0.0, 0.0, 0.0 ],
-          "enabled": false
-        }
-      },
       "children": [
         {
           "name": "Cube1",

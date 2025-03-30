@@ -32,6 +32,9 @@
             "code": "utilitypotionportion-{potiontype}"
           }
         }
+      },
+      "handbook": {
+
       }
     },
     "*-nutrition": {
@@ -50,6 +53,9 @@
             "code": "utilitypotionportion-{potiontype}"
           }
         }
+      },
+      "handbook": {
+
       }
     },
     "*-glow": {
@@ -69,6 +75,9 @@
             "code": "utilitypotionportion-{potiontype}"
           }
         }
+      },
+      "handbook": {
+
       }
     },
     "*-waterbreathe": {
@@ -88,6 +97,9 @@
             "code": "utilitypotionportion-{potiontype}"
           }
         }
+      },
+      "handbook": {
+
       }
     },
     "*-temporal": {
@@ -106,6 +118,9 @@
             "code": "utilitypotionportion-{potiontype}"
           }
         }
+      },
+      "handbook": {
+
       }
     }
   },

@@ -4,19 +4,6 @@
     {
       "code": "flower",
       "states": [
-        "catmint",
-        "cornflower",
-        "forgetmenot",
-        "edelweiss",
-        "heather",
-        "horsetail",
-        "orangemallow",
-        "wilddaisy",
-        "westerngorse",
-        "cowparsley",
-        "goldenpoppy",
-        "lilyofthevalley",
-        "woad",
         "lupine-blue",
         "lupine-orange",
         "lupine-purple",
@@ -31,11 +18,16 @@
         "saffron",
         "sage",
         "thyme"
-      ]
+      ],
+      "loadFromProperties": "block/flower"
     },
     {
       "code": "stage",
-      "states": [ "raw", "dried", "cooked" ]
+      "states": [
+        "raw",
+        "dried",
+        "cooked"
+      ]
     }
   ],
   "attributes": {
@@ -79,17 +71,27 @@
     }
   },
   "creativeinventory": {
-    "general": [ "*" ],
-    "items": [ "*" ],
-    "alchemy": [ "*" ]
+    "general": [
+      "*"
+    ],
+    "items": [
+      "*"
+    ],
+    "alchemy": [
+      "*"
+    ]
   },
   "maxstacksize": 64,
   "transitionablePropsByType": {
     "*-raw": [
       {
         "type": "Perish",
-        "freshHours": { "avg": 480 },
-        "transitionHours": { "avg": 86 },
+        "freshHours": {
+          "avg": 480
+        },
+        "transitionHours": {
+          "avg": 86
+        },
         "transitionedStack": {
           "type": "item",
           "code": "game:rot"
@@ -98,8 +100,12 @@
       },
       {
         "type": "Dry",
-        "freshHours": { "avg": 6 },
-        "transitionHours": { "avg": 86 },
+        "freshHours": {
+          "avg": 6
+        },
+        "transitionHours": {
+          "avg": 64
+        },
         "transitionedStack": {
           "type": "item",
           "code": "alchemy:cuttings-{flower}-dried"
@@ -122,9 +128,56 @@
     }
   },
   "shapeByType": {
-    "*-wilddaisy-*": { "base": "alchemy:item/cut_white_herb_bundle" },
-    "*-lupine-*": { "base": "alchemy:item/cut_stacked_herb_bundle" },
-    "*": { "base": "alchemy:item/cut_blue_herb_bundle" }
+    "*-wilddaisy-*": {
+      "base": "alchemy:item/cut_white_herb_bundle"
+    },
+    "*-lupine-*": {
+      "base": "alchemy:item/cut_stacked_herb_bundle"
+    },
+    "*": {
+      "base": "alchemy:item/cut_blue_herb_bundle"
+    }
+  },
+  "texturesByType": {
+    "*-wilddaisy-*": {
+      "flower": { "base": "game:block/plant/flower/petal/lupine/white3-a" }
+    },
+    "*-lupine-blue-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/blue1-a"
+      }
+    },
+    "*-lupine-orange-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/orange1-a"
+      }
+    },
+    "*-lupine-purple-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/purple1-a"
+      }
+    },
+    "*-lupine-red-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/red1-a"
+      }
+    },
+    "*-lupine-white-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white1-a"
+      }
+    },
+    "*-lilyofthevalley-*": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lilyofthevalley2"
+      }
+    },
+    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-.*": {
+      "flower": { "base": "game:block/plant/herb/petal/{flower}" }
+    },
+    "*": {
+      "flower": { "base": "game:block/plant/potted/{flower}" }
+    }
   },
   "guiTransform": {
     "translation": {

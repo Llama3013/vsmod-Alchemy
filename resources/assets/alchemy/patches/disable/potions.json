@@ -1,0 +1,941 @@
+[
+  // Use this patch to remove certain potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
+
+//  // Vitality
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/13",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/13",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/13",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/13",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/13",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/vitalitybase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/vitalitybase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-vitality-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-vitality-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-vitality/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Speed
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/12",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/12",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/12",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/12",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/12",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/speedbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/speedbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-speed-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-speed-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-speed/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Scentmask
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/11",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/11",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/11",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/11",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/11",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/scentmaskbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/scentmaskbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-scentmask-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-scentmask-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-scentmask/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Regen
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/10",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/10",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/10",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/10",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/10",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/regenbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/regenbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-regen-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-regen-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-regen/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Predator
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/9",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/9",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/9",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/9",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/9",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/predatorbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/predatorbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-predator-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-predator-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-predator/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Poison
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/8",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/8",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/8",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/8",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/8",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/poisonbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/poisonbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-poison-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-poison-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-poison/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  //Mining
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/7",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/7",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/7",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/7",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/7",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/miningbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/miningbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-mining-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-mining-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-mining/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Melee
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/6",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/6",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/6",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/6",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/6",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/meleebase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/meleebase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-melee-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-melee-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-melee/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Looter
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/5",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/5",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/5",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/5",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/5",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/looterbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/looterbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-looter-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-looter-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-looter/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Hunter
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/4",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/4",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/4",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/4",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/4",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hunterbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hunterbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-hunter-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-hunter-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-hunter/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Hunger supress
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/3",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/3",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/3",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/3",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/3",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hungersupressbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hungersupressbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-hungersupress-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-hungersupress-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-hungersupress/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Hunger enhance
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/2",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/2",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/2",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/2",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/2",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hungerenhancebase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/hungerenhancebase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-hungerenhance-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-hungerenhance-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-hungerenhance/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Healing effect
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/1",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/1",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/1",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/1",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/1",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/healingeffectbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/healingeffectbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-healingeffect-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-healingeffect-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-healingeffect/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+
+//  // Archer
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/0",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "remove",
+//    "path": "/variantgroups/0/states/0",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/potion/herbball.json",
+//    "op": "remove",
+//    "path": "/ingredients/P/allowedVariants/0",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/0/ingredients/0/allowedVariants/0",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/barrel/potionportion.json",
+//    "op": "remove",
+//    "path": "/1/ingredients/0/allowedVariants/0",
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/archerbase.json",
+//    "op": "addmerge",
+//    "path": "/0/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:recipes/grid/ingredient/archerbase.json",
+//    "op": "addmerge",
+//    "path": "/1/enabled",
+//    "value": false,
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/liquid/potionportion.json",
+//    "op": "replace",
+//    "path": "/attributesByType/*-archer-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/ingredient/potionbase.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/potionbase-archer-*/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  },
+//  {
+//    "file": "alchemy:itemtypes/herbball.json",
+//    "op": "addmerge",
+//    "path": "/attributesByType/*-archer/handbook",
+//    "value": { "exclude": true },
+//    "side": "server"
+//  }
+]

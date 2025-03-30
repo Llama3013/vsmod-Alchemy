@@ -37,7 +37,7 @@
     "general": [ "*" ],
     "items": [ "*" ],
     "alchemy": [
-        "*"
+      "*"
     ]
   },
   "variantgroups": [
@@ -49,6 +49,33 @@
   "attributes": {
     "handbook": {
       "groupBy": [ "potionbase-{basetype}" ]
+    }
+  },
+  "attributesByType": {
+    "potionbase-recall": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-glow": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-waterbreathe": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-nutrition": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-temporal": {
+      "handbook": {
+
+      }
     }
   },
   "maxstacksize": 64,

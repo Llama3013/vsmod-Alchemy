@@ -16,7 +16,11 @@ namespace Alchemy
 
         private const string effectCode = "potionmod";
         private string effectId;
-        private int effectDuration, effectTickSec, tickCnt = 0;
+
+        private int effectDuration,
+            effectTickSec,
+            tickCnt = 0;
+
         private float effectHealth = 0;
         private bool ignoreArmourFlag;
 
@@ -38,10 +42,7 @@ namespace Alchemy
             effectedList = effectList;
             effectId = id;
             SetTempStats(effectedList);
-            long effectIdCallback = effectedEntity.World.RegisterCallback(
-                Reset,
-                duration * 1000
-            );
+            long effectIdCallback = effectedEntity.World.RegisterCallback(Reset, duration * 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
 
@@ -82,16 +83,21 @@ namespace Alchemy
         {
             foreach (KeyValuePair<string, float> stat in newEffectedList)
             {
-                if (stat.Key != "maxhealthExtraPoints")
+                if (stat.Key == "maxhealthExtraPoints")
                 {
-                    effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
+                    effectedEntity.Stats.Set(
+                        stat.Key,
+                        effectCode,
+                        (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints"))
+                            * stat.Value,
+                        false
+                    );
+                    EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
+                    ebh.MarkDirty();
                 }
                 else
                 {
-                    effectedEntity.Stats.Set(stat.Key, effectCode, (14f + effectedEntity.Stats.GetBlended("maxhealthExtraPoints"))
-                        * stat.Value, false);
-                    EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
-                    ebh.MarkDirty();
+                    effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
                 }
             }
         }
@@ -110,11 +116,16 @@ namespace Alchemy
                         {
                             try
                             {
-                                healeffectivnessArmour = effectedEntity.WatchedAttributes.GetTreeAttribute("stats").GetTreeAttribute("healingeffectivness").GetFloat("wearablemod");
+                                healeffectivnessArmour = effectedEntity.WatchedAttributes
+                                    .GetTreeAttribute("stats")
+                                    .GetTreeAttribute("healingeffectivness")
+                                    .GetFloat("wearablemod");
                             }
                             catch (NullReferenceException)
                             {
-                                effectedEntity.Api.Logger.Error("Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe...");
+                                effectedEntity.Api.Logger.Error(
+                                    "Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe..."
+                                );
                                 healeffectivnessArmour = 0;
                             }
                         }
@@ -123,7 +134,12 @@ namespace Alchemy
                             healeffectivnessArmour = 0;
                         }
                         if (healeffectivnessArmour != 0)
-                            effectedEntity.Stats.Set("healingeffectivness", "wearablemod", 0, false);
+                            effectedEntity.Stats.Set(
+                                "healingeffectivness",
+                                "wearablemod",
+                                0,
+                                false
+                            );
                         //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
                         effectedEntity.ReceiveDamage(
                             new DamageSource()
@@ -135,7 +151,12 @@ namespace Alchemy
                             Math.Abs(effectHealth)
                         );
                         if (healeffectivnessArmour != 0)
-                            effectedEntity.Stats.Set("healingeffectivness", "wearablemod", healeffectivnessArmour, false);
+                            effectedEntity.Stats.Set(
+                                "healingeffectivness",
+                                "wearablemod",
+                                healeffectivnessArmour,
+                                false
+                            );
                     }
                 }
                 if (tickCnt >= effectDuration)
@@ -168,7 +189,10 @@ namespace Alchemy
             }
             effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
             effectId = null;
-            if (effectedEntity.World.PlayerByUid(effectedEntity.PlayerUID) is IServerPlayer serverPlayer)
+            if (
+                effectedEntity.World.PlayerByUid(effectedEntity.PlayerUID)
+                is IServerPlayer serverPlayer
+            )
             {
                 serverPlayer.SendMessage(
                     GlobalConstants.InfoLogChatGroup,
@@ -236,7 +260,11 @@ namespace Alchemy
             }
         }
 
-        public static bool ResetAllListeners(EntityPlayer entity, string callbackCode, string listenerCode)
+        public static bool ResetAllListeners(
+            EntityPlayer entity,
+            string callbackCode,
+            string listenerCode
+        )
         {
             bool effectReseted = false;
             foreach (var watch in entity.WatchedAttributes.Keys)
