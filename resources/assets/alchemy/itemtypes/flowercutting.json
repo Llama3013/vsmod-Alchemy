@@ -139,58 +139,228 @@
     }
   },
   "texturesByType": {
-    "*-wilddaisy-*": {
-      "flower": { "base": "game:block/plant/flower/petal/lupine/white3-a" }
+    "*-wilddaisy-raw": {
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white3-a"
+      }
     },
-    "*-lupine-blue-*": {
+    "*-wilddaisy-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white3-a"
+      }
+    },
+    "*-wilddaisy-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white3-a"
+      }
+    },
+    "*-lupine-blue-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lupine/blue1-a"
       }
     },
-    "*-lupine-orange-*": {
+    "*-lupine-blue-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/blue1-a"
+      }
+    },
+    "*-lupine-blue-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/blue1-a"
+      }
+    },
+    "*-lupine-orange-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lupine/orange1-a"
       }
     },
-    "*-lupine-purple-*": {
+    "*-lupine-orange-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/orange1-a"
+      }
+    },
+    "*-lupine-orange-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/orange1-a"
+      }
+    },
+    "*-lupine-purple-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lupine/purple1-a"
       }
     },
-    "*-lupine-red-*": {
+    "*-lupine-purple-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/purple1-a"
+      }
+    },
+    "*-lupine-purple-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/purple1-a"
+      }
+    },
+    "*-lupine-red-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lupine/red1-a"
       }
     },
-    "*-lupine-white-*": {
+    "*-lupine-red-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/red1-a"
+      }
+    },
+    "*-lupine-red-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/red1-a"
+      }
+    },
+    "*-lupine-white-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lupine/white1-a"
       }
     },
-    "*-lilyofthevalley-*": {
+    "*-lupine-white-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white1-a"
+      }
+    },
+    "*-lupine-white-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lupine/white1-a"
+      }
+    },
+    "*-lilyofthevalley-raw": {
       "flower": {
         "base": "game:block/plant/flower/petal/lilyofthevalley2"
       }
     },
-    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-.*": {
-      "flower": { "base": "game:block/plant/herb/petal/{flower}" }
+    "*-lilyofthevalley-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lilyofthevalley2"
+      }
+    },
+    "*-lilyofthevalley-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/flower/petal/lilyofthevalley2"
+      }
+    },
+    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": {
+      "flower": {
+        "base": "game:block/plant/herb/petal/{flower}"
+      }
+    },
+    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/herb/petal/{flower}"
+      }
+    },
+    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/herb/petal/{flower}"
+      }
+    },
+    "*-dried": {
+      "normal7": {
+        "base": "game:block/soil/flooring/strawbedding1*"
+      },
+      "flower": {
+        "base": "game:block/plant/potted/{flower}"
+      }
+    },
+    "*-cooked": {
+      "normal7": {
+        "base": "game:block/wood-generic"
+      },
+      "flower": {
+        "base": "game:block/plant/potted/{flower}"
+      }
     },
     "*": {
-      "flower": { "base": "game:block/plant/potted/{flower}" }
+      "flower": {
+        "base": "game:block/plant/potted/{flower}"
+      }
     }
   },
-  "guiTransform": {
-    "translation": {
-      "x": 3,
-      "y": 0,
-      "z": 0
+  "guiTransformByType": {
+    "*-cooked": {
+        "translation": {
+          "x": 3,
+          "y": 0,
+          "z": 0
+        },
+        "origin": {
+          "x": 0.5,
+          "y": 0.25,
+          "z": 0.5
+        },
+        "scale": 3
     },
-    "origin": {
-      "x": 0.5,
-      "y": 0.175,
-      "z": 0.5
-    },
-    "scale": 3
+    "*": {
+      "translation": {
+        "x": 3,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -180
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.3,
+        "z": 0.5
+      },
+      "scale": 3
+    }
   },
   "fpHandTransform": {
     "translation": {
