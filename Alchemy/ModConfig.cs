@@ -6,7 +6,7 @@ namespace Alchemy
     {
         public bool TODO = true;
 
-        public static string filename = "AlchemyMod.json";
+        const string filename = "AlchemyMod.json";
 
         public static ModConfig Load(ICoreAPI api)
         {

@@ -15,7 +15,7 @@ namespace Alchemy
 {
     public class ItemPotion : Item
     {
-        private Dictionary<string, float> effectList = new();
+        private Dictionary<string, float> effectList = [];
         private string potionId = "";
         private bool ignoreArmour = false;
 

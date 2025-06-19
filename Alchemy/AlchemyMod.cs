@@ -38,11 +38,11 @@ namespace Alchemy
 
         public override void StartServerSide(ICoreServerAPI api)
         {
-            api.Event.PlayerNowPlaying += (IServerPlayer iServerPlayer) =>
+            api.Event.PlayerNowPlaying += iServerPlayer =>
             {
                 if (iServerPlayer.Entity is not null)
                 {
-                    Entity entity = iServerPlayer.Entity;
+                    EntityPlayer entity = iServerPlayer.Entity;
                     entity.AddBehavior(new PotionFixBehavior(entity));
 
                     //api.Logger.Debug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");

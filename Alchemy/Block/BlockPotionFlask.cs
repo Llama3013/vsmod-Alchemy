@@ -10,7 +10,6 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
-using Vintagestory.API.Util;
 
 namespace Alchemy
 {
@@ -37,7 +36,7 @@ namespace Alchemy
             else
             {
                 capi.ObjectCache[meshRefsCacheKey] = meshrefs =
-                    new Dictionary<int, MultiTextureMeshRef>();
+                    [];
             }
 
             ItemStack contentStack = GetContent(itemstack);
@@ -636,7 +635,7 @@ namespace Alchemy
         {
             Dictionary<string, float> effectList =
                 contentStack.ItemAttributes?["effects"]?.AsObject<Dictionary<string, float>>()
-                ?? new();
+                ?? [];
 
             switch (strength)
             {
@@ -673,33 +672,23 @@ namespace Alchemy
         }
     }
 
-    public class FlaskTextureSource : ITexPositionSource
+    public class FlaskTextureSource(
+        ICoreClientAPI capi,
+        ItemStack forContents,
+        CompositeTexture contentTexture,
+        Block flask
+        ) : ITexPositionSource
     {
-        public ItemStack forContents;
+        public ItemStack forContents = forContents ?? throw new ArgumentNullException(nameof(forContents));
 
-        private readonly ICoreClientAPI capi;
+        private readonly ICoreClientAPI capi = capi ?? throw new ArgumentNullException(nameof(capi));
 
         private TextureAtlasPosition contentTextPos;
-        private readonly TextureAtlasPosition blockTextPos;
-        private readonly TextureAtlasPosition corkTextPos;
-        private readonly TextureAtlasPosition bracingTextPos;
-        private readonly CompositeTexture contentTexture;
-
-        public FlaskTextureSource(
-            ICoreClientAPI capi,
-            ItemStack forContents,
-            CompositeTexture contentTexture,
-            Block flask
-        )
-        {
-            this.capi = capi ?? throw new ArgumentNullException(nameof(capi));
-            this.forContents = forContents ?? throw new ArgumentNullException(nameof(forContents));
-            this.contentTexture =
+        private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
+        private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
+        private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
+        private readonly CompositeTexture contentTexture =
                 contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
-            corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
-            blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
-            bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
-        }
 
         public TextureAtlasPosition this[string textureCode]
         {
