@@ -5,6 +5,12 @@
     "op": "add",
     "path": "/alchemy:Alchemy",
     "value": [
+      "/bir remapq alchemy:claypotionflask-blue-raw alchemy:claypotionflask-raw force",
+      "/bir remapq alchemy:claypotionflask-black-fired alchemy:claypotionflask-burned force",
+      "/bir remapq alchemy:herbrackmold-blue-raw-herbrackhook alchemy:herbrackmold-raw-herbrackhook force",
+      "/bir remapq alchemy:herbrackmold-black-raw-herbrackhook alchemy:herbrackmold-burned-herbrackhook force",
+      "/bir remapq alchemy:herbrackmold-blue-raw-herbracktop alchemy:herbrackmold-raw-herbracktop force",
+      "/bir remapq alchemy:herbrackmold-black-fired-herbracktop alchemy:herbrackmold-burned-herbracktop force",
       "/bir remapq alchemy:potionflask-normal-quartz alchemy:potionflask-normal-quartz-raw force",
       "/bir remapq alchemy:potionflask-normal-quartz alchemy:potionflask-normal-quartz-burned force",
       "/bir remapq alchemy:potionflask-round-quartz alchemy:potionflask-round-quartz-raw force",

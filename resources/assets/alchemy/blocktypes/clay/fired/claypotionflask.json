@@ -1,43 +1,22 @@
 {
   "code": "claypotionflask",
-  "class": "Block",
-  "classByType": {
-    "*-fired": "BlockPotionFlask"
-  },
-  "entityClassByType": {
-    "*-fired": "BlockEntityPotionFlask"
-  },
+  "class": "BlockPotionFlask",
+  "entityClass": "BlockEntityPotionFlask",
   "variantgroups": [
     {
+      "code": "color",
+      "states": [ "blue", "fire", "black", "brown", "cream", "gray", "orange", "red", "tan" ]
+    },
+    {
       "code": "state",
-      "states": [
-        "raw",
-        "fired"
-      ]
+      "states": [ "fired" ]
     }
   ],
   "shape": {
     "base": "alchemy:block/clay/clayflask"
   },
-  "texturesByType": {
-    "*-raw": {
-      "glass": {
-        "base": "game:block/clay/blueclay"
-      }
-    },
-    "*-fired": {
-      "glass": {
-        "base": "game:block/clay/ceramic-dark"
-      }
-    }
-  },
+  "textures": { "glass": { "base": "game:block/clay/hardened/{color}" } },
   "behaviors": [
-    {
-      "name": "RightClickPickup"
-    },
-    {
-      "name": "SneakPlacing"
-    },
     {
       "name": "GroundStorable",
       "properties": {
@@ -52,25 +31,42 @@
         }
       }
     },
+    { "name": "Unplaceable" }, // The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility
+    { "name": "RightClickPickup" },
     {
-      "name": "Unplaceable",
-      "__comment": "The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility"
-    },
-    {
-      "name": "UnstableFalling",
-      "properties": {
-        "attachmentArea": {
-          "x1": 5,
-          "y1": 0,
-          "z1": 5,
-          "x2": 10,
-          "y2": 0,
-          "z2": 10
-        }
-      }
+      "name": "SneakPlacing"
     }
   ],
   "attributes": {
+    "groundStorageTransform": {
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 0.85
+    },
+    "onDisplayTransform": {
+      "origin": {
+        "x": 0.5,
+        "y": 0,
+        "z": 0.5
+      },
+      "scale": 0.75
+    },
+    "onTongTransform": {
+      "translation": {
+        "x": -1.61,
+        "y": -0.87,
+        "z": -1.11
+      },
+      "rotation": {
+        "x": -108,
+        "y": 71,
+        "z": -83
+      },
+      "scale": 0.6
+    },
     "shelvable": true,
     "displaycaseable": true,
     "liquidContainerPropsByType": {
@@ -100,10 +96,7 @@
   "resistance": 1.5,
   "liquidSelectable": 1,
   "lightAbsorption": 1,
-  "maxStackSizeByType": {
-    "*-raw": 64,
-    "*-fired": 16
-  },
+  "maxStackSize": 16,
   "sidesolid": {
     "all": false
   },
@@ -112,19 +105,6 @@
   },
   "emitsideao": {
     "all": false
-  },
-  "combustiblePropsByType": {
-    "claypotionflask-raw": {
-      "meltingPoint": 600,
-      "meltingDuration": 30,
-      "smeltedRatio": 1,
-      "smeltingType": "fire",
-      "smeltedStack": {
-        "type": "block",
-        "code": "claypotionflask-fired"
-      },
-      "requiresContainer": false
-    }
   },
   "collisionbox": {
     "x1": 0.375,

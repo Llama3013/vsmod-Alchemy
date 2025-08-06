@@ -256,8 +256,8 @@
   "item-utilitypotionportion-temporal": "Stability Flask",
   "item-utilitypotionportion-nutrition": "Nutrition Flask",
 
-  "block-claypotionflask-raw": "Ceramic Potion Flask (Raw)",
-  "block-claypotionflask-fired": "Ceramic Potion Flask (Fired)",
+  "block-claypotionflask-*-raw": "Ceramic Potion Flask (Raw)",
+  "block-claypotionflask-*-fired": "Ceramic Potion Flask (Fired)",
   "item-herbball-all": "Edible Herbs All (weak)",
   "item-herbball-alltick": "Edible Herbs Alltick (weak)",
   "item-herbball-archer": "Edible Herbs Archer (weak)",
@@ -470,10 +470,10 @@
   "item-herbracktop-zinc": "Herb Rack Frame (Zinc)",
   "item-herbracktop-molybdochalkos": "Herb Rack Frame (Molybdochalkos)",
 
-  "block-herbrackmold-raw-herbrackhook": "Raw herb rack hook mold",
-  "block-herbrackmold-burned-herbrackhook": "Herb rack hook mold",
-  "block-herbrackmold-raw-herbracktop": "Raw herb rack top mold",
-  "block-herbrackmold-burned-herbracktop": "Herb rack top mold",
+  "block-herbrackmold-*-raw-herbrackhook": "Raw herb rack hook mold",
+  "block-herbrackmold-*-fired-herbrackhook": "Herb rack hook mold",
+  "block-herbrackmold-*-raw-herbracktop": "Raw herb rack top mold",
+  "block-herbrackmold-*-fired-herbracktop": "Herb rack top mold",
   "block-herbrack-*": "Herb Rack",
 
   "item-mortarpestle-*": "Mortar & pestle",

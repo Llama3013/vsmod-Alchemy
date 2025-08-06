@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System.Reflection;
 using Vintagestory.API.Common;
-using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 
 /*json block glow

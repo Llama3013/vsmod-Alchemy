@@ -222,8 +222,8 @@
   "item-utilitypotionportion-waterbreathe": "Подводник",
   "item-utilitypotionportion-nutrition": "Питательное зелье",
 
-  "block-claypotionflask-raw": "Глиняная колба для зелий (необработанная)",
-  "block-claypotionflask-fired": "Глиняная колба для зелий (Обоженная)",
+  "block-claypotionflask-*-raw": "Глиняная колба для зелий (необработанная)",
+  "block-claypotionflask-*-fired": "Глиняная колба для зелий (Обоженная)",
   "item-herbball-all": "Пищевые пряные травы (All)",
   "item-herbball-alltick": "Пищевые пряные травы (Alltick)",
   "item-herbball-archer": "Пищевые пряные травы (Лучник)",

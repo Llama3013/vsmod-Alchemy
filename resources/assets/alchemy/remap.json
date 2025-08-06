@@ -1,0 +1,34 @@
+{
+  "remaps": [
+    {
+      "type": "block",
+      "from": "alchemy:herbrackmold-raw-herbracktop",
+      "to": "alchemy:herbrackmold-blue-raw-herbracktop"
+    },
+    {
+      "type": "block",
+      "from": "alchemy:herbrackmold-burned-herbracktop",
+      "to": "alchemy:herbrackmold-black-fired-herbracktop"
+    },
+    {
+      "type": "block",
+      "from": "alchemy:herbrackmold-raw-herbrackhook",
+      "to": "alchemy:herbrackmold-blue-raw-herbrackhook"
+    },
+    {
+      "type": "block",
+      "from": "alchemy:herbrackmold-burned-herbrackhook",
+      "to": "alchemy:herbrackmold-black-fired-herbrackhook"
+    },
+    {
+      "type": "block",
+      "from": "alchemy:claypotionflask-raw",
+      "to": "alchemy:claypotionflask-blue-raw"
+    },
+    {
+      "type": "block",
+      "from": "alchemy:claypotionflask-burned",
+      "to": "alchemy:claypotionflask-black-fired"
+    }
+  ]
+}

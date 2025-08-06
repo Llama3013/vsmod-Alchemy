@@ -222,8 +222,8 @@
   "item-utilitypotionportion-waterbreathe": "Frasco de respiración bajo el agua",
   "item-utilitypotionportion-nutrition": "Frasco de nutrición",
 
-  "block-claypotionflask-raw": "Frasco de poción de cerámica (crudo)",
-  "block-claypotionflask-fired": "Frasco de Poción de Cerámica (Cocido)",
+  "block-claypotionflask-*-raw": "Frasco de poción de cerámica (crudo)",
+  "block-claypotionflask-*-fired": "Frasco de Poción de Cerámica (Cocido)",
   "item-herbball-all": "Hierbas Comestibles de Poción (Todas)",
   "item-herbball-alltick": "Hierbas Comestibles de Poción (AllTicks)",
   "item-herbball-archer": "Hierbas Comestibles de Poción (Arquero)",

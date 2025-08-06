@@ -250,8 +250,8 @@
   "item-utilitypotionportion-temporal": "Stabilitätstrank",
   "item-utilitypotionportion-nutrition": "Ernährungstrank",
 
-  "block-claypotionflask-raw": "Keramiktrankflasche (roh)",
-  "block-claypotionflask-fired": "Keramiktrankflasche (gebrannt)",
+  "block-claypotionflask-*-raw": "Keramiktrankflasche (roh)",
+  "block-claypotionflask-*-fired": "Keramiktrankflasche (gebrannt)",
   "item-herbball-all": "Essbare Kräuter Alle (schwach)",
   "item-herbball-alltick": "Essbare Kräuter Alltick (schwach)",
   "item-herbball-archer": "Essbare Kräuter Bogenschütze (schwach)",

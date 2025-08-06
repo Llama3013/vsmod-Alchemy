@@ -250,8 +250,8 @@
   "item-utilitypotionportion-temporal": "Mikstura Stabilności",
   "item-utilitypotionportion-nutrition": "Napar Odżywczy",
 
-  "block-claypotionflask-raw": "Gliniana fiolka (Surowa)",
-  "block-claypotionflask-fired": "Gliniana fiolka (Wypalona)",
+  "block-claypotionflask-*-raw": "Gliniana fiolka (Surowa)",
+  "block-claypotionflask-*-fired": "Gliniana fiolka (Wypalona)",
   "item-herbball-all": "Deweloperskie Jadalne Zioła (słabe)",
   "item-herbball-alltick": "Deweloperskie Czasowe Jadalne Zioła (słabe)",
   "item-herbball-archer": "Jadalne Zioła Łucznika (słabe)",
