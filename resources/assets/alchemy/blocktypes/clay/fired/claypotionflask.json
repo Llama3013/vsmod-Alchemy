@@ -15,8 +15,8 @@
   "shape": {
     "base": "alchemy:block/clay/clayflask"
   },
-  "textures": { "glass": { "base": "game:block/clay/hardened/{color}" } },
-  "behaviors": [
+  "textures": { "ceramic": { "base": "game:block/clay/hardened/{color}" } },
+  "beFixhaviors": [
     {
       "name": "GroundStorable",
       "properties": {
