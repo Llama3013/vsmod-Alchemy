@@ -2,7 +2,7 @@
   "ingredient": {
     "type": "item",
     "code": "game:clay-*",
-    "name": "type",
+    "name": "color",
     "allowedVariants": [ "blue", "fire", "red" ]
   },
   "pattern": [
@@ -65,7 +65,7 @@
   "name": "claypotionflask",
   "output": {
     "type": "block",
-    "code": "alchemy:claypotionflask-raw",
+    "code": "alchemy:claypotionflask-{color}-raw",
     "stacksize": 4
   }
 }

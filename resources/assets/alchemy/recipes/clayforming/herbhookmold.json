@@ -2,7 +2,7 @@
     "ingredient": {
         "type": "item",
         "code": "game:clay-*",
-        "name": "type",
+        "name": "color",
         "allowedVariants": [
             "blue",
             "fire",
@@ -46,7 +46,7 @@
     "name": "herb rack hook mold",
     "output": {
         "type": "block",
-        "code": "alchemy:herbrackmold-raw-herbrackhook",
+        "code": "alchemy:herbrackmold-{color}-raw-herbrackhook",
         "stacksize": 1
     }
 }

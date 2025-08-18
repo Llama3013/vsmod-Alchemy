@@ -2,7 +2,7 @@
     "ingredient": {
         "type": "item",
         "code": "game:clay-*",
-        "name": "type",
+        "name": "color",
         "allowedVariants": [
             "blue",
             "fire",
@@ -158,7 +158,7 @@
     "name": "Herb rack top mold",
     "output": {
         "type": "block",
-        "code": "alchemy:herbrackmold-raw-herbracktop",
+        "code": "alchemy:herbrackmold-{color}-raw-herbracktop",
         "stacksize": 1
     }
 }
