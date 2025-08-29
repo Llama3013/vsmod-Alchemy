@@ -2,7 +2,7 @@
   "type": "code",
   "name": "Alchemy",
   "modid": "alchemy",
-  "version": "1.7.12",
+  "version": "1.7.13",
   "iconpath": "modicon.png",
 
   "description": "An alchemy mod that adds a couple of player enhancing potions.",
@@ -10,6 +10,6 @@
   "authors": [ "Llama3013" ],
 
   "dependencies": {
-    "game": "1.21.0-pre.4"
+    "game": "1.21.0"
   }
 }

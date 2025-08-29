@@ -134,6 +134,15 @@
     "*-lupine-*": {
       "base": "alchemy:item/cut_stacked_herb_bundle"
     },
+    "*-chamomile-raw": {
+      "base": "alchemy:item/chamomile-fresh-herb-bundle"
+    },
+    "*-chamomile-dried": {
+      "base": "alchemy:item/chamomile-dried-herb-bundle"
+    },
+    "*-chamomile-cooked": {
+      "base": "alchemy:item/chamomile-dried-herb-bundle"
+    },
     "*": {
       "base": "alchemy:item/cut_blue_herb_bundle"
     }
@@ -286,12 +295,15 @@
         "base": "game:block/plant/flower/petal/lilyofthevalley2"
       }
     },
-    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": {
+    "*-chamomile-*": {
+      "chamomile": { "base": "alchemy:item/chamomile" }
+    },
+    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": {
       "flower": {
         "base": "game:block/plant/herb/petal/{flower}"
       }
     },
-    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-dried": {
+    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-dried": {
       "normal7": {
         "base": "game:block/soil/flooring/strawbedding1*"
       },
@@ -299,7 +311,7 @@
         "base": "game:block/plant/herb/petal/{flower}"
       }
     },
-    "@.*-(basil|chamomile|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": {
+    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": {
       "normal7": {
         "base": "game:block/wood-generic"
       },
@@ -331,17 +343,17 @@
   },
   "guiTransformByType": {
     "*-cooked": {
-        "translation": {
-          "x": 3,
-          "y": 0,
-          "z": 0
-        },
-        "origin": {
-          "x": 0.5,
-          "y": 0.25,
-          "z": 0.5
-        },
-        "scale": 3
+      "translation": {
+        "x": 3,
+        "y": 0,
+        "z": 0
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.25,
+        "z": 0.5
+      },
+      "scale": 3
     },
     "*": {
       "translation": {
@@ -362,6 +374,24 @@
       "scale": 3
     }
   },
+  "tpHandTransform": {
+    "translation": {
+      "x": -1.1,
+      "y": -0.2,
+      "z": -0.6
+    },
+    "rotation": {
+      "x": 48,
+      "y": -172,
+      "z": -87
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.1,
+      "z": 0.5
+    },
+    "scale": 0.8
+  },
   "fpHandTransform": {
     "translation": {
       "x": 0,
@@ -374,5 +404,8 @@
       "z": 0.5
     },
     "scale": 2
+  },
+  "groundTransform": {
+    "scale": 4.5
   }
 }
