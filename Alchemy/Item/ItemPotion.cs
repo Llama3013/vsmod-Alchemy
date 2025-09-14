@@ -179,24 +179,19 @@ namespace Alchemy
 
             if (byEntity.World is IClientWorldAccessor)
             {
-                ModelTransform tf = new();
+                ModelTransform tf = new ModelTransform();
                 tf.Origin.Set(1.1f, 0.5f, 0.5f);
                 tf.EnsureDefaultValues();
 
-                tf.Translation.X -=
-                    Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
+                tf.Translation.X -= Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
                 tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
                 tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Rotation.X +=
-                    Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
+                tf.Rotation.X += Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
 
                 if (secondsUsed > 0.5f)
                 {
-                    tf.Translation.Y +=
-                        GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
+                    tf.Translation.Y += GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
                 }
-
-                byEntity.Controls.UsingHeldItemTransformBefore = tf;
 
                 return secondsUsed <= 1.5f;
             }
