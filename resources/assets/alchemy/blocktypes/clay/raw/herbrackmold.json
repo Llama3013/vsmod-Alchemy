@@ -55,19 +55,19 @@
       "beehivekiln": {
         "0": {
           "type": "block",
-          "code": "herbrackmold-tan-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-tan-fired-{tooltype}"
         },
         "1": {
           "type": "block",
-          "code": "herbrackmold-orange-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-orange-fired-{tooltype}"
         },
         "2": {
           "type": "block",
-          "code": "herbrackmold-red-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-red-fired-{tooltype}"
         },
         "3": {
           "type": "block",
-          "code": "herbrackmold-brown-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-brown-fired-{tooltype}"
         }
       }
     },
@@ -75,19 +75,19 @@
       "beehivekiln": {
         "0": {
           "type": "block",
-          "code": "herbrackmold-cream-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-cream-fired-{tooltype}"
         },
         "1": {
           "type": "block",
-          "code": "herbrackmold-gray-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-gray-fired-{tooltype}"
         },
         "2": {
           "type": "block",
-          "code": "herbrackmold-black-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-black-fired-{tooltype}"
         },
         "3": {
           "type": "block",
-          "code": "herbrackmold-black-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-black-fired-{tooltype}"
         }
       }
     },
@@ -95,19 +95,19 @@
       "beehivekiln": {
         "0": {
           "type": "block",
-          "code": "herbrackmold-fire-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
         },
         "1": {
           "type": "block",
-          "code": "herbrackmold-fire-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
         },
         "2": {
           "type": "block",
-          "code": "herbrackmold-fire-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
         },
         "3": {
           "type": "block",
-          "code": "herbrackmold-fire-fired-{tooltype}"
+          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
         }
       }
     }
@@ -139,7 +139,7 @@
   "blockmaterial": "Ceramic",
   "creativeinventory": {
     "general": [
-      "*"
+      "*-blue-raw"
     ],
     "construction": [
       "*"
@@ -153,7 +153,7 @@
   "maxStackSize": 8,
   "lightAbsorption": 0,
   "sounds": {
-    "walk": "walk/stone"
+    "walk": "game:walk/stone"
   },
   "collisionboxByType": {
     "*-herbracktop": {

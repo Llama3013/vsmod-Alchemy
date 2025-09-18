@@ -27,6 +27,11 @@ namespace Alchemy
         {
             if (Code.Path.Contains("clay"))
                 return;
+
+            ItemStack contentStack = GetContent(itemstack);
+            if (contentStack == null || contentStack.StackSize <= 0 || contentStack?.Collectible?.Code == null)
+                return;
+
             Dictionary<int, MultiTextureMeshRef> meshrefs;
 
             if (capi.ObjectCache.TryGetValue(meshRefsCacheKey, out object obj))
@@ -38,10 +43,6 @@ namespace Alchemy
                 capi.ObjectCache[meshRefsCacheKey] = meshrefs =
                     [];
             }
-
-            ItemStack contentStack = GetContent(itemstack);
-            if (contentStack == null)
-                return;
 
             int hashcode = GetStackCacheHashCode(contentStack);
 

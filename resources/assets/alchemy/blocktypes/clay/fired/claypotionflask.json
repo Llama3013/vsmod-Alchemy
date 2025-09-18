@@ -16,7 +16,7 @@
     "base": "alchemy:block/clay/clayflask"
   },
   "textures": { "ceramic": { "base": "game:block/clay/hardened/{color}" } },
-  "beFixhaviors": [
+  "behaviors": [
     {
       "name": "GroundStorable",
       "properties": {
@@ -44,7 +44,7 @@
         "y": 0,
         "z": 0.5
       },
-      "scale": 0.85
+      "scale": 0.75
     },
     "onDisplayTransform": {
       "origin": {
@@ -77,12 +77,15 @@
         "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
         "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
       }
+    },
+    "handbook": {
+      "groupBy": [ "claypotionflask-*-{state}" ]
     }
   },
   "doNotRenderAtLod2": true,
   "creativeinventory": {
     "general": [
-      "*"
+      "*-blue-fired"
     ],
     "decorative": [
       "*"
@@ -133,10 +136,10 @@
       "y": 0.175,
       "z": 0.5
     },
-    "scale": 2.75
+    "scale": 1.75
   },
   "groundTransform": {
-    "scale": 2.5
+    "scale": 2
   },
   "fpHandTransform": {
     "translation": {
@@ -149,13 +152,13 @@
       "y": -14,
       "z": 0
     },
-    "scale": 2
+    "scale": 1
   },
   "tpHandTransform": {
     "translation": {
-      "x": -0.9,
-      "y": -0.1,
-      "z": -0.8
+      "x": -0.7,
+      "y": 0,
+      "z": 0.15
     },
     "rotation": {
       "x": 0,
@@ -163,10 +166,10 @@
       "z": -90
     },
     "origin": {
-      "x": 0.5,
-      "y": 0.04,
-      "z": 0.51
+      "x": 0.2,
+      "y": 0.1,
+      "z": 0.1
     },
-    "scale": 0.66
+    "scale": 0.40
   }
 }

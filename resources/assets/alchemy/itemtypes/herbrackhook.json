@@ -33,7 +33,7 @@
   "attributes": {
     "handbook": {
       "groupBy": [
-        "herbrackhook-*"
+        "herbrackhook-{metal}"
       ]
     }
   },
