@@ -300,15 +300,15 @@ namespace Alchemy
         #region Interaction
 
         public override void OnHeldInteractStart(
-            ItemSlot slot,
+            ItemSlot itemslot,
             EntityAgent byEntity,
             BlockSelection blockSel,
             EntitySelection entitySel,
             bool firstEvent,
-            ref EnumHandHandling handling
+            ref EnumHandHandling handHandling
         )
         {
-            ItemStack contentStack = GetContent(slot.Itemstack);
+            ItemStack contentStack = GetContent(itemslot.Itemstack);
             if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
             {
                 JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
@@ -340,13 +340,12 @@ namespace Alchemy
                             500
                         );
                         byEntity.AnimManager?.StartAnimation("eat");
-                        handling = EnumHandHandling.PreventDefault;
+                        handHandling = EnumHandHandling.PreventDefault;
                         return;
                     }
                 }
             }
-            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
-            return;
+            base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
         }
 
         public override void TryMergeStacks(ItemStackMergeOperation op)
@@ -372,72 +371,54 @@ namespace Alchemy
             EntitySelection entitySel
         )
         {
-            bool result = true;
-            bool preventDefault = false;
-
-            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
+            ItemStack contentStack = GetContent(slot.Itemstack);
+            if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
             {
-                EnumHandling handled = EnumHandling.PassThrough;
-
-                bool behaviorResult = behavior.OnHeldInteractStep(
-                    secondsUsed,
-                    slot,
-                    byEntity,
-                    blockSel,
-                    entitySel,
-                    ref handled
-                );
-                if (handled != EnumHandling.PassThrough)
+                JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+                if (potion?.Exists ?? false)
                 {
-                    result &= behaviorResult;
-                    preventDefault = true;
+                    Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
+                    pos.X += byEntity.LocalEyePos.X;
+                    pos.Y += byEntity.LocalEyePos.Y - 0.4f;
+                    pos.Z += byEntity.LocalEyePos.Z;
+
+                    if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
+                    {
+                        byEntity.World.SpawnCubeParticles(
+                            pos,
+                            slot.Itemstack,
+                            0.3f,
+                            4,
+                            0.5f,
+                            (byEntity as EntityPlayer)?.Player
+                        );
+                    }
+
+                    if (byEntity.World is IClientWorldAccessor)
+                    {
+                        ModelTransform tf = new();
+                        tf.Origin.Set(1.1f, 0.5f, 0.5f);
+                        tf.EnsureDefaultValues();
+
+                        tf.Translation.X -= Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
+                        tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
+                        tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
+                        tf.Rotation.X += Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
+
+                        if (secondsUsed > 0.5f)
+                        {
+                            tf.Translation.Y += GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
+                        }
+
+                        return secondsUsed <= 1.5f;
+                    }
+
+                    // Let the client decide when he is done eating
+                    return true;
                 }
-
-                if (handled == EnumHandling.PreventSubsequent)
-                    return result;
             }
 
-            if (preventDefault)
-                return result;
-
-            Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
-            pos.X += byEntity.LocalEyePos.X;
-            pos.Y += byEntity.LocalEyePos.Y - 0.4f;
-            pos.Z += byEntity.LocalEyePos.Z;
-
-            if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
-            {
-                byEntity.World.SpawnCubeParticles(
-                    pos,
-                    slot.Itemstack,
-                    0.3f,
-                    4,
-                    0.5f,
-                    (byEntity as EntityPlayer)?.Player
-                );
-            }
-
-            if (byEntity.World is IClientWorldAccessor)
-            {
-                ModelTransform tf = new();
-                tf.Origin.Set(1.1f, 0.5f, 0.5f);
-                tf.EnsureDefaultValues();
-
-                tf.Translation.X -= Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Rotation.X += Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
-
-                if (secondsUsed > 0.5f)
-                {
-                    tf.Translation.Y += GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
-                }
-
-                return secondsUsed <= 1.5f;
-            }
-
-            // Let the client decide when he is done eating
-            return true;
+            return base.OnHeldInteractStep(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
 
         public override void OnHeldInteractStop(

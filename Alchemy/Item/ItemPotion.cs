@@ -210,95 +210,90 @@ namespace Alchemy
                 secondsUsed > 1.45f
                 && byEntity.World.Side == EnumAppSide.Server
                 && byEntity is EntityPlayer playerEntity
-                && playerEntity.Player is IServerPlayer serverPlayer
+                && playerEntity.Player is IServerPlayer serverPlayer && !string.IsNullOrWhiteSpace(potionId)
+                    && byEntity.WatchedAttributes.GetLong(potionId) == 0
             )
             {
-                if (
-                    !string.IsNullOrWhiteSpace(potionId)
-                    && byEntity.WatchedAttributes.GetLong(potionId) == 0
-                )
+                switch (potionId)
                 {
-                    switch (potionId)
-                    {
-                        case "nutritionpotionid":
+                    case "nutritionpotionid":
+                        {
+                            ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute(
+                                "hunger"
+                            );
+                            if (hungerTree != null)
                             {
-                                ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute(
-                                    "hunger"
+                                float totalSatiety =
+                                    (
+                                        hungerTree.GetFloat("fruitLevel")
+                                        + hungerTree.GetFloat("vegetableLevel")
+                                        + hungerTree.GetFloat("grainLevel")
+                                        + hungerTree.GetFloat("proteinLevel")
+                                        + hungerTree.GetFloat("dairyLevel")
+                                    ) * 0.9f;
+                                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat(
+                                    "vegetableLevel",
+                                    Math.Max(totalSatiety / 5, 0)
                                 );
-                                if (hungerTree != null)
-                                {
-                                    float totalSatiety =
-                                        (
-                                            hungerTree.GetFloat("fruitLevel")
-                                            + hungerTree.GetFloat("vegetableLevel")
-                                            + hungerTree.GetFloat("grainLevel")
-                                            + hungerTree.GetFloat("proteinLevel")
-                                            + hungerTree.GetFloat("dairyLevel")
-                                        ) * 0.9f;
-                                    hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
-                                    hungerTree.SetFloat(
-                                        "vegetableLevel",
-                                        Math.Max(totalSatiety / 5, 0)
-                                    );
-                                    hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
-                                    hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
-                                    hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
-                                    byEntity.WatchedAttributes.MarkPathDirty("hunger");
-                                }
-                                break;
+                                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
+                                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
+                                byEntity.WatchedAttributes.MarkPathDirty("hunger");
                             }
-                        case "recallpotionid":
+                            break;
+                        }
+                    case "recallpotionid":
+                        {
+                            if (api.Side.IsServer())
                             {
-                                if (api.Side.IsServer())
-                                {
-                                    FuzzyEntityPos spawn = serverPlayer.GetSpawnPosition(false);
-                                    byEntity.TeleportTo(spawn);
-                                }
-                                break;
+                                FuzzyEntityPos spawn = serverPlayer.GetSpawnPosition(false);
+                                byEntity.TeleportTo(spawn);
                             }
-                        case "temporalpotionid":
+                            break;
+                        }
+                    case "temporalpotionid":
+                        {
+                            byEntity
+                                .GetBehavior<EntityBehaviorTemporalStabilityAffected>()
+                                .OwnStability += 0.2;
+                            break;
+                        }
+                    default:
+                        {
+                            TempEffect potionEffect = new();
+                            if (tickSec != 0)
                             {
-                                byEntity
-                                    .GetBehavior<EntityBehaviorTemporalStabilityAffected>()
-                                    .OwnStability += 0.2;
-                                break;
+                                potionEffect.TempTickEntityStats(
+                                    playerEntity,
+                                    effectList,
+                                    duration,
+                                    potionId,
+                                    tickSec,
+                                    health,
+                                    ignoreArmour
+                                );
                             }
-                        default:
+                            else
                             {
-                                TempEffect potionEffect = new();
-                                if (tickSec != 0)
-                                {
-                                    potionEffect.TempTickEntityStats(
-                                        playerEntity,
-                                        effectList,
-                                        duration,
-                                        potionId,
-                                        tickSec,
-                                        health,
-                                        ignoreArmour
-                                    );
-                                }
-                                else
-                                {
-                                    potionEffect.TempEntityStats(
-                                        playerEntity,
-                                        effectList,
-                                        duration,
-                                        potionId
-                                    );
-                                }
-                                break;
+                                potionEffect.TempEntityStats(
+                                    playerEntity,
+                                    effectList,
+                                    duration,
+                                    potionId
+                                );
                             }
-                    }
-
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:effect-gain", slot.Itemstack.GetName()),
-                        EnumChatType.Notification
-                    );
-                    slot.TakeOut(1);
-                    slot.MarkDirty();
+                            break;
+                        }
                 }
+
+                serverPlayer.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get("alchemy:effect-gain", slot.Itemstack.GetName()),
+                    EnumChatType.Notification
+                );
+                slot.TakeOut(1);
+                slot.MarkDirty();
             }
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
         }
@@ -454,7 +449,7 @@ namespace Alchemy
                 }
             }
 
-            if (health != 0)
+            if (health is > 0.01f or < 0.01f)
             {
                 dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", health));
             }

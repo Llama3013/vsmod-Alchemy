@@ -240,7 +240,7 @@
       },
       "effects": {
         "animalLootDropRate": 0.2,
-        "animalSeekingRange": -0.3,
+        "animalSeekingRange": -0.05,
         "forageDropRate": 0.2,
         "wildCropDropRate": 0.2
       },
@@ -453,7 +453,7 @@
         "duration": 900
       },
       "effects": {
-        "animalSeekingRange": -0.4
+        "animalSeekingRange": -0.2
       },
       "waterTightContainerProps": {
         "containable": true,
