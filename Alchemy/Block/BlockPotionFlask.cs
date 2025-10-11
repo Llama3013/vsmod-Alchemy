@@ -554,7 +554,6 @@ namespace Alchemy
             }
         }
 
-
         private static void ApplyCustomPotion(
             ItemStack contentStack,
             EntityPlayer playerEntity,
@@ -587,7 +586,7 @@ namespace Alchemy
             }
             else
             {
-                potionEffect.TempEntityStats(playerEntity, effectList, duration, potionId);
+                potionEffect.TempEntityStats(playerEntity, effectList, duration, potionId, ignoreArmour);
             }
         }
 
@@ -664,6 +663,7 @@ namespace Alchemy
         private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
         private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
         private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
+
         private readonly CompositeTexture contentTexture =
                 contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
 

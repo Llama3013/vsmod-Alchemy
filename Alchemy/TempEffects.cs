@@ -1,3 +1,4 @@
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
@@ -35,13 +36,16 @@ namespace Alchemy
             EntityPlayer entity,
             Dictionary<string, float> effectList,
             int duration,
-            string id
+            string id,
+            bool ignoreArmour
         )
         {
             effectedEntity = entity;
             effectedList = effectList;
             effectId = id;
+            ignoreArmourFlag = ignoreArmour;
             SetTempStats(effectedList);
+            RecieveDamage();
             long effectIdCallback = effectedEntity.World.RegisterCallback(Reset, duration * 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
@@ -95,7 +99,11 @@ namespace Alchemy
                     EntityBehaviorHealth ebh = effectedEntity.GetBehavior<EntityBehaviorHealth>();
                     ebh.MarkDirty();
                 }
-                else
+                else if (stat.Key == "health")
+                {
+                    effectHealth = stat.Value;
+                    RecieveDamage();
+                } else 
                 {
                     effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
                 }
@@ -109,55 +117,7 @@ namespace Alchemy
             {
                 if (tickCnt % effectTickSec == 0)
                 {
-                    if (effectHealth != 0)
-                    {
-                        float healeffectivnessArmour;
-                        if (ignoreArmourFlag)
-                        {
-                            try
-                            {
-                                healeffectivnessArmour = effectedEntity.WatchedAttributes
-                                    .GetTreeAttribute("stats")
-                                    .GetTreeAttribute("healingeffectivness")
-                                    .GetFloat("wearablemod");
-                            }
-                            catch (NullReferenceException)
-                            {
-                                effectedEntity.Api.Logger.Error(
-                                    "Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe..."
-                                );
-                                healeffectivnessArmour = 0;
-                            }
-                        }
-                        else
-                        {
-                            healeffectivnessArmour = 0;
-                        }
-                        if (healeffectivnessArmour != 0)
-                            effectedEntity.Stats.Set(
-                                "healingeffectivness",
-                                "wearablemod",
-                                0,
-                                false
-                            );
-                        //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
-                        effectedEntity.ReceiveDamage(
-                            new DamageSource()
-                            {
-                                Source = EnumDamageSource.Internal,
-                                Type =
-                                    effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
-                            },
-                            Math.Abs(effectHealth)
-                        );
-                        if (healeffectivnessArmour != 0)
-                            effectedEntity.Stats.Set(
-                                "healingeffectivness",
-                                "wearablemod",
-                                healeffectivnessArmour,
-                                false
-                            );
-                    }
+                    RecieveDamage();
                 }
                 if (tickCnt >= effectDuration)
                 {
@@ -166,6 +126,60 @@ namespace Alchemy
                     Reset(effectIdGametick);
                 }
             }
+        }
+
+        private void RecieveDamage()
+        {
+            if (effectHealth != 0)
+            {
+                float healeffectivnessArmour;
+                if (ignoreArmourFlag)
+                {
+                    try
+                    {
+                        healeffectivnessArmour = effectedEntity.WatchedAttributes
+                            .GetTreeAttribute("stats")
+                            .GetTreeAttribute("healingeffectivness")
+                            .GetFloat("wearablemod");
+                    }
+                    catch (NullReferenceException)
+                    {
+                        effectedEntity.Api.Logger.Error(
+                            "Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe..."
+                        );
+                        healeffectivnessArmour = 0;
+                    }
+                }
+                else
+                {
+                    healeffectivnessArmour = 0;
+                }
+                if (healeffectivnessArmour != 0)
+                    effectedEntity.Stats.Set(
+                        "healingeffectivness",
+                        "wearablemod",
+                        0,
+                        false
+                    );
+                //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
+                effectedEntity.ReceiveDamage(
+                    new DamageSource()
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type =
+                            effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
+                    },
+                    Math.Abs(effectHealth)
+                );
+                if (healeffectivnessArmour != 0)
+                    effectedEntity.Stats.Set(
+                        "healingeffectivness",
+                        "wearablemod",
+                        healeffectivnessArmour,
+                        false
+                    );
+            }
+
         }
 
         /// <summary>

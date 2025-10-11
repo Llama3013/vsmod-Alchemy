@@ -29,6 +29,7 @@
   "potion-wild-crop-effect": "+{0}% wild crop",
   "potion-whole-vessel-effect": "+{0}% chance to get whole vessel",
   "potion-health-effect": "{0} health",
+  "potion-single-health-effect": "one time of {0} health",
   "potion-duration": "and lasts for {0} seconds",
   "potion-tick-duration": "every {0} seconds",
 

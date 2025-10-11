@@ -280,7 +280,8 @@ namespace Alchemy
                                     playerEntity,
                                     effectList,
                                     duration,
-                                    potionId
+                                    potionId,
+                                    ignoreArmour
                                 );
                             }
                             break;
@@ -447,9 +448,14 @@ namespace Alchemy
                         )
                     );
                 }
+
+                if (effectList.TryGetValue("health", out float health) && health is > 0.01f or < -0.01f)
+                {
+                    dsc.AppendLine(Lang.Get("alchemy:potion-single-health-effect", health));
+                }
             }
 
-            if (health is > 0.01f or < 0.01f)
+            if (health is > 0.01f or < -0.01f)
             {
                 dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", health));
             }

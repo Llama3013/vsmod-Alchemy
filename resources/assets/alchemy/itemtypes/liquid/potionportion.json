@@ -38,7 +38,8 @@
         "miningSpeedMul": 0.1,
         "animalSeekingRange": 0.1,
         "wholeVesselLootChance": 0.1,
-        "animalHarvestingTime": 0.1
+        "animalHarvestingTime": 0.1,
+        "health": 0.5
       },
       "waterTightContainerProps": {
         "containable": true,

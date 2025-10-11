@@ -1,5 +1,21 @@
 {
   "code": "cuttings",
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "Quadrants",
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.125,
+          "z2": 1
+        }
+      }
+    }
+  ],
   "variantgroups": [
     {
       "code": "flower",
@@ -30,6 +46,119 @@
       ]
     }
   ],
+  "attributesByType": {
+    "*-dried": {
+      "groundStorageTransform": {
+        "translation": {
+          "x": 0.15,
+          "y": -0.45,
+          "z": 0.2
+        },
+        "rotation": {
+          "x": 0,
+          "y": -37,
+          "z": -111
+        },
+        "scale": 0.8
+      },
+      "displaycaseable": true,
+      "onDisplayTransform": {
+        "translation": {
+          "x": 0.15,
+          "y": -0.45,
+          "z": 0.1
+        },
+        "rotation": {
+          "x": 0,
+          "y": -37,
+          "z": -111
+        },
+        "scale": 0.8
+      },
+      "shelvable": true,
+      "onshelfTransform": {
+        "translation": {
+          "x": 0.15,
+          "y": -0.45,
+          "z": 0.1
+        },
+        "rotation": {
+          "x": 0,
+          "y": -37,
+          "z": -111
+        },
+        "scale": 0.8
+      },
+      "bakingProperties": {
+        "scale": 0.8,
+        "temp": 100,
+        "levelFrom": 0.95,
+        "levelTo": 1,
+        "startScaleY": 1.0,
+        "endScaleY": 0.90,
+        "resultCode": "alchemy:cuttings-{flower}-cooked",
+        "initialCode": "alchemy:cuttings-{flower}-dried"
+      }
+    },
+    "*-cooked": {
+      "groundStorageTransform": {
+        "translation": {
+          "x": -0.2,
+          "y": -0.45,
+          "z": 0.2
+        },
+        "rotation": {
+          "x": -180,
+          "y": 153,
+          "z": -74
+        },
+        "scale": 0.8
+      },
+      "displaycaseable": true,
+      "onDisplayTransform": {
+        "translation": {
+          "x": -0.2,
+          "y": -0.45,
+          "z": 0.0
+        },
+        "rotation": {
+          "x": -180,
+          "y": 153,
+          "z": -74
+        },
+        "scale": 0.8
+      },
+      "shelvable": true,
+      "onshelfTransform": {
+        "translation": {
+          "x": -0.2,
+          "y": -0.45,
+          "z": 0.1
+        },
+        "rotation": {
+          "x": -180,
+          "y": 153,
+          "z": -74
+        },
+        "scale": 0.8
+      }
+    },
+    "*": {
+      "groundStorageTransform": {
+        "translation": {
+          "x": 0.2,
+          "y": -0.4,
+          "z": 0.2
+        },
+        "rotation": {
+          "x": 0,
+          "y": -37,
+          "z": -89
+        },
+        "scale": 0.8
+      }
+    }
+  },
   "attributes": {
     "herbrackable": true,
     "herbRackTransform": {
@@ -342,11 +471,34 @@
     }
   },
   "guiTransformByType": {
-    "*-cooked": {
+    "*-dried": {
       "translation": {
         "x": 3,
-        "y": 0,
+        "y": 4,
         "z": 0
+      },
+      "rotation": {
+        "x": -26,
+        "y": -29,
+        "z": -48
+      },
+      "origin": {
+        "x": 0.5,
+        "y": 0.3,
+        "z": 0.5
+      },
+      "scale": 3
+    },
+    "*-cooked": {
+      "translation": {
+        "x": -1,
+        "y": 1,
+        "z": 0
+      },
+      "rotation": {
+        "x": 30,
+        "y": -26,
+        "z": 50
       },
       "origin": {
         "x": 0.5,
