@@ -2,13 +2,10 @@
   "effect-lose": "Cítíte, jak účinky lektvaru vyprchávají",
   "effect-gain": "Cítíte účinky {0}",
   "boat-block": "Nemůžete se přemístit, když jste na lodi",
-
   "item-potionbase*": "Základ lektvaru používaný k výrobě lektvarů",
   "item-potionbase-basic": "Lektvarový základ",
   "itemdesc-potionbase-basic": "Používá se k výrobě každého lektvaru",
-
   "potion-when-used": "Když je lektvar použit: ",
-
   "potion-archer-accuracy-effect": "+{0}% přesnost střelby",
   "potion-animal-loot-effect": "+{0}% více kořisti ze zvířat",
   "potion-animal-harvest-effect": "+{0}% kuchání zvířat",
@@ -29,9 +26,9 @@
   "potion-wild-crop-effect": "+{0}% sklizeň z divokých plodin",
   "potion-whole-vessel-effect": "+{0}% šance na získání celé prasklé nádoby",
   "potion-health-effect": "{0} zdraví",
+  "potion-single-health-effect": "jednorázové {0} zdraví",
   "potion-duration": "a trvá {0} sekund",
   "potion-tick-duration": "každých {0} sekund",
-
   "item-potionbase-archer-weak": "Základ lektvaru lučištník (slabý účinek)",
   "itemdesc-potionbase-archer-weak": "Používá se k výrobě lektvaru lučištník (slabý účinek)",
   "item-potionbase-healingeffect-weak": "Základ Léčivého oleje (slabý účinek)",
@@ -60,7 +57,6 @@
   "itemdesc-potionbase-speed-weak": "Používá se k výrobě lektvaru sprintera (slabý účinek)",
   "item-potionbase-vitality-weak": "Základ lektvaru vitality (slabý účinek)",
   "itemdesc-potionbase-vitality-weak": "Používá se k výrobě lektvaru vitality (slabý účinek)",
-
   "item-potionbase-archer-medium": "Základ lektvaru lučištník (střední účinek)",
   "itemdesc-potionbase-archer-medium": "Používá se k výrobě lektvaru lučištník (střední účinek)",
   "item-potionbase-healingeffect-medium": "Základ Léčivého oleje (střední účinek)",
@@ -89,7 +85,6 @@
   "itemdesc-potionbase-speed-medium": "Používá se k výrobě lektvaru sprintera (střední účinek)",
   "item-potionbase-vitality-medium": "Základ lektvaru vitality (střední účinek)",
   "itemdesc-potionbase-vitality-medium": "Používá se k výrobě lektvaru vitality (střední účinek)",
-
   "item-potionbase-archer-strong": "Základ lektvaru lučištník (silný účinek)",
   "itemdesc-potionbase-archer-strong": "Používá se k výrobě lektvaru lučištník (silný účinek)",
   "item-potionbase-healingeffect-strong": "Základ Léčivého oleje (silný účinek)",
@@ -118,7 +113,6 @@
   "itemdesc-potionbase-speed-strong": "Používá se k výrobě lektvaru sprintera (silný účinek)",
   "item-potionbase-vitality-strong": "Základ lektvaru vitality (silný účinek)",
   "itemdesc-potionbase-vitality-strong": "Používá se k výrobě lektvaru vitality (silný účinek)",
-
   "item-utilitypotionbase-recall": "Základ lektvaru návrat domů",
   "itemdesc-utilitypotionbase-recall": "Používá se k výrobě lektvaru návrat domů",
   "item-utilitypotionbase-glow": "Základ lektvaru záře",
@@ -129,7 +123,6 @@
   "itemdesc-utilitypotionbase-temporal": "Používá se k výrobě lektvaru stability",
   "item-utilitypotionbase-nutrition": "Základ lektvaru výživy",
   "itemdesc-utilitypotionbase-nutrition": "Používá se k výrobě lektvaru výživy",
-
   "alchemy:incontainer-item-potionportion-all-weak": "Debug Lektvar (slabý účinek)",
   "alchemy:incontainer-item-potionportion-alltick-weak": "Debug Lektvar na herní tik (slabý účinek)",
   "alchemy:incontainer-item-potionportion-archer-weak": "Lektvar lučištník (slabý účinek)",
@@ -146,7 +139,6 @@
   "alchemy:incontainer-item-potionportion-scentmask-weak": "maskovací parfém (slabý účinek)",
   "alchemy:incontainer-item-potionportion-speed-weak": "Lektvar sprintera (slabý účinek)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Lektvar vitality (slabý účinek)",
-
   "alchemy:incontainer-item-potionportion-all-medium": "Debug Lektvar (střední účinek)",
   "alchemy:incontainer-item-potionportion-alltick-medium": "Debug Lektvar na herní tik (střední účinek)",
   "alchemy:incontainer-item-potionportion-archer-medium": "Lektvar lučištníka (střední účinek)",
@@ -163,7 +155,6 @@
   "alchemy:incontainer-item-potionportion-predator-medium": "Feromony predátora (střední účinek)",
   "alchemy:incontainer-item-potionportion-scentmask-medium": "maskovací parfém (střední účinek)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Lektvar vitality (střední účinek)",
-
   "alchemy:incontainer-item-potionportion-all-strong": "Debug Lektvar (silný účinek)",
   "alchemy:incontainer-item-potionportion-alltick-strong": "Debug Lektvar na herní tik (silný účinek)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Lektvar lučištníka (silný účinek)",
@@ -180,15 +171,12 @@
   "alchemy:incontainer-item-potionportion-predator-strong": "Feromony predátora (silný účinek)",
   "alchemy:incontainer-item-potionportion-scentmask-strong": "maskovací parfém (silný účinek)",
   "alchemy:incontainer-item-potionportion-vitality-strong": "Lektvar vitality (silný účinek)",
-
   "alchemy:incontainer-item-utilitypotionportion-recall": "Lektvar návrat domů",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Lektvar záře",
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Lektvar dýchání pod vodou",
   "alchemy:incontainer-item-utilitypotionportion-temporal": "Lektvar stability",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Lektvar výživy",
-
   "alchemy:incontainer-item-potionteaportion": "Lektvarový roztok",
-
   "game:incontainer-item-potionportion-all-weak": "Debug Lektvar (slabý účinek)",
   "game:incontainer-item-potionportion-alltick-weak": "Debug Lektvar na herní tik (slabý účinek)",
   "game:incontainer-item-potionportion-archer-weak": "Lektvar lučištníka (slabý účinek)",
@@ -205,7 +193,6 @@
   "game:incontainer-item-potionportion-scentmask-weak": "maskovací parfém (slabý účinek)",
   "game:incontainer-item-potionportion-speed-weak": "Lektvar sprintera (slabý účinek)",
   "game:incontainer-item-potionportion-vitality-weak": "Lektvar vitality (slabý účinek)",
-
   "game:incontainer-item-potionportion-all-medium": "Debug Lektvar (střední účinek)",
   "game:incontainer-item-potionportion-alltick-medium": "Debug Lektvar na herní tik (střední účinek)",
   "game:incontainer-item-potionportion-archer-medium": "Lektvar lučištníka (střední účinek)",
@@ -222,7 +209,6 @@
   "game:incontainer-item-potionportion-predator-medium": "Feromony predátora (střední účinek)",
   "game:incontainer-item-potionportion-scentmask-medium": "maskovací parfém (střední účinek)",
   "game:incontainer-item-potionportion-vitality-medium": "Lektvar vitality (střední účinek)",
-
   "game:incontainer-item-potionportion-all-strong": "Debug Lektvar (silný účinek)",
   "game:incontainer-item-potionportion-alltick-strong": "Debug Lektvar na herní tik (silný účinek)",
   "game:incontainer-item-potionportion-archer-strong": "Lektvar lučištníka (silný účinek)",
@@ -239,24 +225,31 @@
   "game:incontainer-item-potionportion-predator-strong": "Feromony predátora (silný účinek)",
   "game:incontainer-item-potionportion-scentmask-strong": "maskovací parfém (silný účinek)",
   "game:incontainer-item-potionportion-vitality-strong": "Lektvar vitality (silný účinek)",
-
   "game:incontainer-item-utilitypotionportion-recall": "Lektvar návrat domů",
   "game:incontainer-item-utilitypotionportion-glow": "Lektvar záře",
   "game:incontainer-item-utilitypotionportion-waterbreathe": "Lektvar dýchání pod vodou",
   "game:incontainer-item-utilitypotionportion-temporal": "Lektvar stability",
   "game:incontainer-item-utilitypotionportion-nutrition": "Lektvar výživy",
-
   "game:incontainer-item-potionteaportion": "Lektvarový roztok",
-
   "alchemy:item-potionteaportion": "Lektvarový roztok",
-
   "item-utilitypotionportion-recall": "Lektvar návrat domů",
   "item-utilitypotionportion-glow": "Lektvar záře",
   "item-utilitypotionportion-waterbreathe": "Lektvar dýchání pod vodou",
   "item-utilitypotionportion-temporal": "Lektvar stability",
   "item-utilitypotionportion-nutrition": "Lektvar výživy",
-
+  "block-claypotionflask-blue-raw": "Láhev s lektvarem z modré hlíny",
+  "block-claypotionflask-fire-raw": "Láhev s lektvarem z modré hlíny",
+  "block-claypotionflask-red-raw": "Láhev s lektvarem z červené hlíny",
   "block-claypotionflask-*-raw": "Keramická lahvička na lektvar (surová)",
+  "block-claypotionflask-blue-fired": "Tmavě hnědá keramická lahvička na lektvary",
+  "block-claypotionflask-fire-fired": "Šamotová keramická lahvička na lektvary",
+  "block-claypotionflask-black-fired": "Černá keramická lahvička na lektvary",
+  "block-claypotionflask-brown-fired": "Hnědá keramická lahvička na lektvary",
+  "block-claypotionflask-cream-fired": "Krémová keramická lahvička na lektvary",
+  "block-claypotionflask-gray-fired": "Šedá keramická lahvička na lektvary",
+  "block-claypotionflask-orange-fired": "Oranžová keramická lahvička na lektvary",
+  "block-claypotionflask-red-fired": "Červená keramická lahvička na lektvary",
+  "block-claypotionflask-tan-fired": "Světle hnědá keramická lahvička na lektvary",
   "block-claypotionflask-*-fired": "Keramická lahvička na lektvar (vypálená)",
   "item-herbball-all": "Jedlé byliny vše (slabé)",
   "item-herbball-alltick": "Jedlé byliny Alltick (slabé)",
@@ -274,7 +267,6 @@
   "item-herbball-scentmask": "Jedlé byliny maskovací parfém (slabé)",
   "item-herbball-speed": "Jedlé byliny rychlost (slabé)",
   "item-herbball-vitality": "Jedlé byliny vitalita (slabé)",
-
   "item-potionportion-all-weak": "Debug lektvar (slabý účinek)",
   "item-potionportion-alltick-weak": "Debug lektvar na herní tik (slabý účinek)",
   "item-potionportion-archer-weak": "lektvar lučištníka (slabý účinek)",
@@ -291,7 +283,6 @@
   "item-potionportion-scentmask-weak": "maskovací parfém (slabý účinek)",
   "item-potionportion-speed-weak": "lektvar sprintera (slabý účinek)",
   "item-potionportion-vitality-weak": "lektvar vitality (slabý účinek)",
-
   "item-potionportion-all-medium": "Debug lektvar (střední účinek)",
   "item-potionportion-alltick-medium": "Debug lektvar na herní tik (střední účinek)",
   "item-potionportion-archer-medium": "lektvar lučištníka (střední účinek)",
@@ -308,7 +299,6 @@
   "item-potionportion-predator-medium": "Feromony predátora (střední účinek)",
   "item-potionportion-scentmask-medium": "maskovací parfém (střední účinek)",
   "item-potionportion-vitality-medium": "lektvar vitality (střední účinek)",
-
   "item-potionportion-all-strong": "Debug lektvar (silný účinek)",
   "item-potionportion-alltick-strong": "Debug lektvar na herní tik (silný účinek)",
   "item-potionportion-archer-strong": "lektvar lučištníka (silný účinek)",
@@ -330,7 +320,6 @@
   "itemdesc-utilitypotionportion-waterbreathe": "Můžete dýchat pod vodou",
   "itemdesc-utilitypotionportion-temporal": "Získáte určitou časovou stabilitu",
   "itemdesc-utilitypotionportion-nutrition": "Získáte nasycení v nižších úrovních výživy",
-
   "item-cuttings-*-raw": "Surové řízky",
   "item-cuttings-catmint-raw": "Surové řízky (šanta kočičí)",
   "item-cuttings-forgetmenot-raw": "Surové řízky (pomněnka)",
@@ -359,7 +348,6 @@
   "item-cuttings-thyme-raw": "Surové řízky (tymián)",
   "item-cuttings-cornflower-raw": "Surové řízky (chrpa)",
   "item-cuttings-woad-raw": "Surové řízky (boryt)",
-
   "item-cuttings-*-dried": "Sušené řízky",
   "item-cuttings-catmint-dried": "Sušené řízky (šanta kočičí)",
   "item-cuttings-forgetmenot-dried": "Sušené řízky (pomněnka)",
@@ -388,7 +376,6 @@
   "item-cuttings-thyme-dried": "Sušené řízky (tymián)",
   "item-cuttings-cornflower-dried": "Sušené řízky (chrpa)",
   "item-cuttings-woad-dried": "Sušené řízky (boryt)",
-
   "item-cuttings-*-cooked": "Vařené řízky",
   "item-cuttings-catmint-cooked": "Vařené řízky (šanta kočičí)",
   "item-cuttings-forgetmenot-cooked": "Vařené řízky (pomněnka)",
@@ -417,7 +404,6 @@
   "item-cuttings-thyme-cooked": "Vařené řízky (tymián)",
   "item-cuttings-cornflower-cooked": "Vařené řízky (chrpa)",
   "item-cuttings-woad-cooked": "Vařené řízky (boryt)",
-
   "item-herbrackhook-*": "Háček na sušení bylin",
   "item-herbrackhook-bismuth": "Háček na sušení bylin (bismut)",
   "item-herbrackhook-bismuthbronze": "Háček na sušení bylin (bismutový bronz)",
@@ -443,7 +429,6 @@
   "item-herbrackhook-uranium": "Háček na sušení bylin (uran)",
   "item-herbrackhook-zinc": "Háček na sušení bylin (zinek)",
   "item-herbrackhook-molybdochalkos": "Háček na sušení bylin (molybdochalkos)",
-
   "item-herbracktop-*": "Rám na sušení bylin",
   "item-herbracktop-bismuth": "Rám na sušení bylin (bismut)",
   "item-herbracktop-bismuthbronze": "Rám na sušení bylin (bismutový bronz)",
@@ -469,63 +454,43 @@
   "item-herbracktop-uranium": "Rám na sušení bylin (uran)",
   "item-herbracktop-zinc": "Rám na sušení bylin (zinek)",
   "item-herbracktop-molybdochalkos": "Rám na sušení bylin (molybdochalkos)",
-
+  "block-herbrackmold-blue-raw-herbracktop": "Surová forma na rám na sušení bylin",
+  "block-herbrackmold-fire-raw-herbracktop": "Surová forma na rám na sušení bylin",
+  "block-herbrackmold-red-raw-herbracktop": "Surová forma na rám na sušení bylin",
+  "block-herbrackmold-blue-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-black-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-brown-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-cream-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-fire-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-gray-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-orange-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-red-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-tan-fired-herbracktop": "Forma na háček na sušení bylin",
+  "block-herbrackmold-blue-raw-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-fire-raw-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-red-raw-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-blue-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-black-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-brown-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-cream-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-fire-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-gray-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-orange-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-red-fired-herbrackhook": "Forma na háček na sušení bylin",
+  "block-herbrackmold-tan-fired-herbrackhook": "Forma na háček na sušení bylin",
   "block-herbrackmold-*-raw-herbrackhook": "Surová forma na háček na sušení bylin",
   "block-herbrackmold-*-fired-herbrackhook": "Forma na háček na sušení bylin",
   "block-herbrackmold-*-raw-herbracktop": "Surová forma na rám na sušení bylin",
   "block-herbrackmold-*-fired-herbracktop": "Forma na rám na sušení bylin",
   "block-herbrack-*": "Závěs na sušení bylin",
-
   "item-mortarpestle-*": "Hmoždíř a tlouček",
   "itemdesc-mortarpestle-*": "Používá se k výrobě základu lektvaru",
-
-  "block-potionflask-normal-quartz": "Velká lahvička na lektvary 1l (čistý křemen)",
-  "blockdesc-potionflask-normal-quartz": "Používá se k uchování lektvarů",
-
-  "block-potionflask-normal-smoky": "Velká lahvička na lektvary 1l (z kouřového křemene)",
-  "blockdesc-potionflask-normal-smoky": "Používá se k uchování lektvarů",
-
-  "block-potionflask-normal-pink": "Velká lahvička na lektvary 1l (z růžového křemene)",
-  "blockdesc-potionflask-normal-pink": "Používá se k uchování lektvarů",
-
-  "block-potionflask-normal-green": "Velká lahvička na lektvary 1l (z olivínu)",
-  "blockdesc-potionflask-normal-green": "Používá se k uchování lektvarů",
-
-  "block-potionflask-normal-violet": "Velká lahvička na lektvary 1l (z ametystu)",
-  "blockdesc-potionflask-normal-violet": "Používá se k uchování lektvarů",
-
-
-  "block-potionflask-round-quartz": "Střední lahvička na lektvary 0.5l (čistý křemen)",
-  "blockdesc-potionflask-round-quartz": "Používá se k uchování lektvarů",
-
-  "block-potionflask-round-smoky": "Střední lahvička na lektvary 0.5l (z kouřového křemene)",
-  "blockdesc-potionflask-round-smoky": "Používá se k uchování lektvarů",
-
-  "block-potionflask-round-pink": "Střední lahvička na lektvary 0.5l (z růžového křemene)",
-  "blockdesc-potionflask-round-pink": "Používá se k uchování lektvarů",
-
-  "block-potionflask-round-green": "Střední lahvička na lektvary 0.5l (z olivínu)",
-  "blockdesc-potionflask-round-green": "Používá se k uchování lektvarů",
-
-  "block-potionflask-round-violet": "Střední lahvička na lektvary 0.5l (z ametystu)",
-  "blockdesc-potionflask-round-violet": "Používá se k uchování lektvarů",
-
-
-  "block-potionflask-tube-quartz": "Malá lahvička na lektvary 0.25l (čistý křemen)",
-  "blockdesc-potionflask-tube-quartz": "Používá se k uchování lektvarů",
-
-  "block-potionflask-tube-smoky": "Malá lahvička na lektvary 0.25l (z kouřového křemene)",
-  "blockdesc-potionflask-tube-smoky": "Používá se k uchování lektvarů",
-
-  "block-potionflask-tube-pink": "Malá lahvička na lektvary 0.25l (z růžového křemene)",
-  "blockdesc-potionflask-tube-pink": "Používá se k uchování lektvarů",
-
-  "block-potionflask-tube-green": "Malá lahvička na lektvary 0.25l (z olivínu)",
-  "blockdesc-potionflask-tube-green": "Používá se k uchování lektvarů",
-
-  "block-potionflask-tube-violet": "Malá lahvička na lektvary 0.25l (z ametystu)",
-  "blockdesc-potionflask-tube-violet": "Používá se k uchování lektvarů",
-
+  "block-potionflask-normal-*": "Velká lahvička s lektvarem",
+  "blockdesc-potionflask-normal-*": "Slouží k uchovávání lektvarů",
+  "block-potionflask-round-*": "Střední lahvička s lektvarem",
+  "blockdesc-potionflask-round-*": "Slouží k uchovávání lektvarů",
+  "block-potionflask-tube-*": "Malá lahvička s lektvarem",
+  "blockdesc-potionflask-tube-*": "Slouží k uchovávání lektvarů",
   "healingeffectivness": "Účinnost léčení",
   "maxhealthExtraPoints": "Extra body zdraví",
   "walkspeed": "Rychlost chůze",
@@ -553,8 +518,7 @@
   "potioneffectTrue": "Účinky lektvarů aktivní",
   "regen": "Regenerace",
   "poison": "Jed",
-
-
+  "game:tabname-alchemy": "Alchymie",
   "alchemy:alchemyguide-title": "Alchymie: Výroba lektvarů",
-  "alchemy:alchemyguide-text": "Chcete-li začít s alchymií, musíte nejprve vyrobit <a href=\"handbook://item-alchemy:mortarpestle-wood\">hmoždíř</a>. Dále budete muset sbírat bylinky a květiny. Ty lze v různých variantách kombinovat a vytvářet tak různé lektvary. Ingredience, které budete nejvíce potřebovat, jsou jakékoli jedovaté houby a přeslička. Použijete je k vytvoření <a href=\"handbook://item-alchemy:potionbase-basic\">Lektvarového základu</a>. Jakmile budete mít hmoždíř s tloučkem,  lektvarový základ a ty správné květiny/byliny, můžete vytvořit <a href=\"handbooksearch://edible herb\">jedlé bylinky</a>. Jedná se o nejslabší variantu, ale lze je vytvořit bez použití jakýchkoliv kovových nástrojů. Jakmile budete mít přístup ke kovu (konkrétněji k <a href=\"handbook://block-barrel\">sudu</a>), můžete začít vytvářet lepší tekuté lektvary. Nejprve budete muset smíchat svůj Lektvarový základ s vodou v sudu a vytvořit <a href=\"handbook://item-alchemy:potionteaportion\">lektvarový roztok</a>. Toto bude nová základní ingredience pro lektvary středního účinku. Poté smíchejte lektvarový roztok se slabý účinekem lektvarovým základem. K pití lektvarů si budete muset vytvořit několik <a href=\"handbooksearch://potion flask\">lahviček</a>. Nakonec k vytvoření nejlepších lektvarů budete potřebovat <a href=\"handbook://item-alcoholportion\">aqua vitae (čistý alkohol)</a> a <a href=\"handbook://block-alchemy:herbrack-oak-copper\" >bylinkový závěs</a>. Existuje mnoho různých variant závěsů na bylinky, pokud chcete jinou barvu <a href=\"handbooksearch://herb rack\">bylinkové závěsy</a>. Pomocí závěsu na bylinky na ně budete muset zavěsit své bylinky/květiny, aby se usušily na <a href=\"handbooksearch://dried cuttings\">sušené řízky</a> (můžete je sušit i jinými prostředky, ale závěs na bylinky by měl být nejlepší způsob, jak to udělat a neměli by se na nich zkazit). Jakmile uschnou, budete je muset vařit na ohni, abyste vytvořili <a href=\"handbooksearch://cooked cuttings\">vařené řízky</a>. Uvařené řízky se pak spojí do pevného základu. Pomocí silný základ a aqua vitae smíchejte v sudu, abyste vytvořili silný lektvar.\n\nSeznam lektvarů:\n<a href=\"handbooksearch://edible herbs\">Seznam jedlých bylin</a>\n<a href=\"handbooksearch:// (medium)\">Seznam středně silných lektvarů</a>\n<a href=\"handbooksearch:// (strong)\">Seznam silných lektvarů</a>\nUžitkové lektvary: <a href=\"handbook://item-alchemy:utilitypotionportion-recall\">lektvar na portování</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-waterbreathe\">lektvar na dýchání vody< /a>, <a href=\"handbook://item-alchemy:utilitypotionportion-glow\">Lektvar záře</a> a <a href=\"handbook://item-alchemy:utilitypotionportion-nutrition\">Výživový lektvar< /a>\n\nPokud máte nějaké návrhy nebo chyby, dejte mi vědět na oficiálním discordu na vlákně alchemy mod. Pokud tam nemůžete jít, neváhejte zanechat komentář na stránce modu. Český překlad -DejFIdOFF-"
+  "alchemy:alchemyguide-text": "Chcete-li začít s alchymií, musíte nejprve vyrobit <a href=\"handbook://item-alchemy:mortarpestle-wood\">hmoždíř</a>. Dále budete muset sbírat bylinky a květiny. Ty lze v různých variantách kombinovat a vytvářet tak různé lektvary. Ingredience, které budete nejvíce potřebovat, jsou jakékoli jedovaté houby a přeslička. Použijete je k vytvoření <a href=\"handbook://item-alchemy:potionbase-basic\">Lektvarového základu</a>. Jakmile budete mít hmoždíř s tloučkem, lektvarový základ a ty správné květiny/byliny, můžete vytvořit <a href=\"handbooksearch://edible herb\">jedlé bylinky</a>. Jedná se o nejslabší variantu, ale lze je vytvořit bez použití jakýchkoliv kovových nástrojů. Jakmile budete mít přístup ke kovu, konkrétněji k <a href=\"handbook://block-barrel\">sudu</a> můžete začít vytvářet lepší tekuté lektvary. Nejprve budete muset smíchat svůj Lektvarový základ s vodou v sudu a vytvořit <a href=\"handbook://item-alchemy:potionteaportion\">lektvarový roztok</a>. Toto bude nová základní ingredience pro lektvary středního účinku. Poté smíchejte lektvarový roztok se slabý účinekem lektvarovým základem. K pití lektvarů si budete muset vytvořit několik <a href=\"handbooksearch://potion flask\">lahviček</a>. Nakonec k vytvoření nejlepších lektvarů budete potřebovat <a href=\"handbook://item-alcoholportion\">aqua vitae (čistý alkohol)</a> a <a href=\"handbook://block-alchemy:herbrack-oak-copper\">bylinkový závěs</a>. Existuje mnoho různých variant závěsů na bylinky, pokud chcete jinou barvu <a href=\"handbooksearch://herb rack\">bylinkové závěsy</a>. Pomocí závěsu na bylinky na ně budete muset zavěsit své bylinky/květiny, aby se usušily na <a href=\"handbooksearch://dried cuttings\">sušené řízky</a> (můžete je sušit i jinými prostředky, ale závěs na bylinky by měl být nejlepší způsob, jak to udělat a neměli by se na nich zkazit). Jakmile uschnou, budete je muset vařit na ohni, abyste vytvořili <a href=\"handbooksearch://cooked cuttings\">vařené řízky</a>. Uvařené řízky se pak spojí do pevného základu. Pomocí silný základ a aqua vitae smíchejte v sudu, abyste vytvořili silný lektvar.\n\nSeznam lektvarů:\n<a href=\"handbooksearch://edible herbs\">Seznam jedlých bylin</a>\n<a href=\"handbooksearch:// (medium)\">Seznam středně silných lektvarů</a>\n<a href=\"handbooksearch:// (strong)\">Seznam silných lektvarů</a>\nUžitkové lektvary: <a href=\"handbook://item-alchemy:utilitypotionportion-recall\">lektvar na portování</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-waterbreathe\">lektvar na dýchání vody</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-glow\">Lektvar záře</a> a <a href=\"handbook://item-alchemy:utilitypotionportion-nutrition\">Výživový lektvar</a>."
 }
