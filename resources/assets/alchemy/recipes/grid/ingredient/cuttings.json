@@ -27,17 +27,11 @@
           "cornflower"
         ]
       },
-      "K": {
-        "type": "item",
-        "code": "game:shears-*",
-        "isTool": true
-      }
+      "K": { "type": "item", "code": "game:shears-*", "isTool": true }
     },
     "width": 2,
     "height": 1,
-    "output": {
-      "type": "item",
-      "code": "alchemy:cuttings-{flower}-raw"
-    }
+    "output": { "type": "item", "code": "alchemy:cuttings-{flower}-raw" }
   }
 ]
+

@@ -3,25 +3,11 @@
   "class": "BlockPotionFlask",
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
-    {
-      "name": "RightClickPickup"
-    },
-    {
-      "name": "SneakPlacing"
-    },
+    { "name": "RightClickPickup" },
+    { "name": "SneakPlacing" },
     {
       "name": "GroundStorable",
-      "properties": {
-        "layout": "Quadrants",
-        "collisionBox": {
-          "x1": 0,
-          "y1": 0,
-          "z1": 0,
-          "x2": 1,
-          "y2": 0.4375,
-          "z2": 1
-        }
-      }
+      "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1 } }
     },
     {
       "name": "Unplaceable",
@@ -29,37 +15,12 @@
     },
     {
       "name": "UnstableFalling",
-      "properties": {
-        "attachmentArea": {
-          "x1": 5,
-          "y1": 0,
-          "z1": 5,
-          "x2": 10,
-          "y2": 0,
-          "z2": 10
-        }
-      }
+      "properties": { "attachmentArea": { "x1": 5, "y1": 0, "z1": 5, "x2": 10, "y2": 0, "z2": 10 } }
     }
   ],
   "variantgroups": [
-    {
-      "code": "flask",
-      "states": [
-        "normal",
-        "round",
-        "tube"
-      ]
-    },
-    {
-      "code": "colour",
-      "states": [
-        "quartz",
-        "smoky",
-        "pink",
-        "green",
-        "violet"
-      ]
-    }
+    { "code": "flask", "states": ["normal", "round", "tube"] },
+    { "code": "colour", "states": ["quartz", "smoky", "pink", "green", "violet"] }
   ],
   "attributesByType": {
     "potionflask-tube-*": {
@@ -72,14 +33,7 @@
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-liquidcontents"
       },
-      "groundStorageTransform": {
-        "origin": {
-          "x": 0.5,
-          "y": 0,
-          "z": 0.5
-        },
-        "scale": 0.85
-      }
+      "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.85 }
     },
     "potionflask-round-*": {
       "shelvable": true,
@@ -106,190 +60,53 @@
   },
   "blockmaterial": "Glass",
   "replaceable": 5000,
-  "creativeinventory": {
-    "general": [
-      "*-quartz"
-    ],
-    "decorative": [
-      "*"
-    ],
-    "alchemy": [
-      "*"
-    ]
-  },
+  "creativeinventory": { "general": ["*-quartz"], "decorative": ["*"], "alchemy": ["*"] },
   "materialDensity": 200,
   "shapeByType": {
-    "*-round-*": {
-      "base": "alchemy:block/glass/roundflask-empty"
-    },
-    "*-tube-*": {
-      "base": "alchemy:block/glass/tubeflask-empty"
-    },
-    "*": {
-      "base": "alchemy:block/glass/flask-empty"
-    }
+    "*-round-*": { "base": "alchemy:block/glass/roundflask-empty" },
+    "*-tube-*": { "base": "alchemy:block/glass/tubeflask-empty" },
+    "*": { "base": "alchemy:block/glass/flask-empty" }
   },
-  "textures": {
-    "glass": {
-      "base": "game:block/glass/{colour}"
-    }
-  },
+  "textures": { "glass": { "base": "game:block/glass/{colour}" } },
   "resistance": 0.75,
   "maxStackSize": 16,
-  "sounds": {
-    "walk": "game:walk/ice",
-    "place": "game:player/buildhigh",
-    "break": "game:block/glass",
-    "hit": "game:block/glass"
-  },
+  "sounds": { "walk": "game:walk/ice", "place": "game:player/buildhigh", "break": "game:block/glass", "hit": "game:block/glass" },
   "lightAbsorption": 0,
   "drawtype": "JSON",
-  "sideopaque": {
-    "all": false
-  },
-  "sideao": {
-    "all": true
-  },
-  "emitsideao": {
-    "all": false
-  },
-  "sidesolid": {
-    "all": false
-  },
-  "collisionbox": {
-    "x1": 0.375,
-    "y1": 0,
-    "z1": 0.375,
-    "x2": 0.625,
-    "y2": 0.4375,
-    "z2": 0.625
-  },
-  "selectionbox": {
-    "x1": 0.375,
-    "y1": 0,
-    "z1": 0.375,
-    "x2": 0.625,
-    "y2": 0.4375,
-    "z2": 0.625
-  },
+  "sideopaque": { "all": false },
+  "sideao": { "all": true },
+  "emitsideao": { "all": false },
+  "sidesolid": { "all": false },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
   "guiTransformByType": {
-    "*-tube-*": {
-      "translation": {
-        "x": 0,
-        "y": 3,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.2,
-        "z": 0.5
-      },
-      "scale": 2
-    },
-    "*": {
-      "translation": {
-        "x": 0,
-        "y": 3,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.175,
-        "z": 0.5
-      },
-      "scale": 2.75
-    }
+    "*-tube-*": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.2, "z": 0.5 }, "scale": 2 },
+    "*": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 2.75 }
   },
-  "groundTransformByType": {
-    "*-tube-*": {
-      "scale": 2
-    },
-    "*": {
-      "scale": 2.5
-    }
-  },
+  "groundTransformByType": { "*-tube-*": { "scale": 2 }, "*": { "scale": 2.5 } },
   "fpHandTransformByType": {
-    "*-tube-*": {
-      "translation": {
-        "x": 0,
-        "y": 0.4,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": -14,
-        "z": 0
-      },
-      "scale": 1.5
-    },
-    "*": {
-      "translation": {
-        "x": 0,
-        "y": 0.4,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": -14,
-        "z": 0
-      },
-      "scale": 2
-    }
+    "*-tube-*": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1.5 },
+    "*": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 2 }
   },
   "tpHandTransformByType": {
     "*-tube-*": {
-      "translation": {
-        "x": -0.9,
-        "y": 0,
-        "z": -0.8
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": -74
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.51
-      },
+      "translation": { "x": -0.9, "y": 0, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -74 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.51 },
       "scale": 0.66
     },
     "*-round-*": {
-      "translation": {
-        "x": -0.9,
-        "y": -0.1,
-        "z": -0.8
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": -90
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.51
-      },
+      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.51 },
       "scale": 0.66
     },
     "*": {
-      "translation": {
-        "x": -0.9,
-        "y": -0.1,
-        "z": -0.8
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": -90
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.05,
-        "z": 0.51
-      },
+      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "rotation": { "x": 0, "y": 0, "z": -90 },
+      "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
       "scale": 0.66
     }
   }
 }
+

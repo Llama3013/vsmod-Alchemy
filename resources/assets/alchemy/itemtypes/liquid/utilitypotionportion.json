@@ -2,122 +2,85 @@
   "enabled": true,
   "code": "utilitypotionportion",
   "variantgroups": [
-    {
-      "code": "potiontype",
-      "states": [ "recall", "glow", "waterbreathe", "nutrition", "temporal" ]
-    }
+    { "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape"] }
   ],
   "class": "ItemPotion",
   "matterState": "liquid",
-  "attributes": {
-    "handbook": {
-      "ignoreCreativeInvStacks": true,
-      "groupBy": [ "utilitypotionportion-{potiontype}" ]
-    }
-  },
+  "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },
   "attributesByType": {
     "*-recall": {
-      "potioninfo": {
-        "potionId": "recallpotionid"
-      },
+      "potioninfo": { "potionId": "recallpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
         "texture": { "base": "game:item/resource/temporalgear" },
         "allowSpill": true,
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": {
-            "type": "item",
-            "code": "utilitypotionportion-{potiontype}"
-          }
-        }
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {
+
+      }
+    },
+    "*-reshape": {
+      "potioninfo": { "potionId": "reshapepotionid" },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:item/resource/temporalgear" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {
 
       }
     },
     "*-nutrition": {
-      "potioninfo": {
-        "potionId": "nutritionpotionid"
-      },
+      "potioninfo": { "potionId": "nutritionpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
         "texture": { "base": "game:block/hay/aged-side" },
         "allowSpill": true,
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": {
-            "type": "item",
-            "code": "utilitypotionportion-{potiontype}"
-          }
-        }
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {
 
       }
     },
     "*-glow": {
-      "potioninfo": {
-        "potionId": "glowpotionid",
-        "duration": 1000
-      },
+      "potioninfo": { "potionId": "glowpotionid", "duration": 1000 },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
         "texture": { "base": "game:block/fire-yellow" },
         "allowSpill": true,
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": {
-            "type": "item",
-            "code": "utilitypotionportion-{potiontype}"
-          }
-        }
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {
 
       }
     },
     "*-waterbreathe": {
-      "potioninfo": {
-        "potionId": "waterbreathepotionid",
-        "duration": 1000
-      },
+      "potioninfo": { "potionId": "waterbreathepotionid", "duration": 1000 },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
         "texture": { "base": "game:block/fire-blue" },
         "allowSpill": true,
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": {
-            "type": "item",
-            "code": "utilitypotionportion-{potiontype}"
-          }
-        }
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {
 
       }
     },
     "*-temporal": {
-      "potioninfo": {
-        "potionId": "temporalpotionid"
-      },
+      "potioninfo": { "potionId": "temporalpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
         "texture": { "base": "game:item/resource/ungraded/sulfur" },
         "allowSpill": true,
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": {
-            "type": "item",
-            "code": "utilitypotionportion-{potiontype}"
-          }
-        }
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {
 
@@ -126,18 +89,23 @@
   },
   "creativeinventoryStacks": [
     {
-      "tabs": [ "general", "liquids", "alchemy" ],
+      "tabs": ["general", "liquids", "alchemy"],
       "stacks": [
+        {
+          "type": "block",
+          "code": "alchemy:potionflask-tube-quartz",
+          "attributes": {
+            "ucontents": [
+              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
+            ]
+          }
+        },
         {
           "type": "block",
           "code": "alchemy:potionflask-normal-quartz",
           "attributes": {
             "ucontents": [
-              {
-                "type": "item",
-                "code": "alchemy:utilitypotionportion-{potiontype}",
-                "makefull": true
-              }
+              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
             ]
           }
         },
@@ -146,11 +114,7 @@
           "code": "game:woodbucket",
           "attributes": {
             "ucontents": [
-              {
-                "type": "item",
-                "code": "alchemy:utilitypotionportion-{potiontype}",
-                "makefull": true
-              }
+              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
             ]
           }
         }
@@ -161,57 +125,19 @@
   "materialDensity": 200,
   "shape": { "base": "game:item/liquid" },
   "texturesByType": {
-    "*-recall": {
-      "all": { "base": "game:item/resource/temporalgear" }
-    },
-    "*-nutrition": {
-      "all": { "base": "game:block/hay/aged-side" }
-    },
-    "*-glow": {
-      "all": { "base": "game:block/fire-yellow" }
-    },
-    "*-waterbreathe": {
-      "all": { "base": "game:block/fire-blue" }
-    },
-    "*-temporal": {
-      "all": { "base": "game:item/resource/ungraded/sulfur" }
-    }
+    "*-recall": { "all": { "base": "game:item/resource/temporalgear" } },
+    "*-nutrition": { "all": { "base": "game:block/hay/aged-side" } },
+    "*-glow": { "all": { "base": "game:block/fire-yellow" } },
+    "*-waterbreathe": { "all": { "base": "game:block/fire-blue" } },
+    "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } }
   },
   "guiTransform": {
-    "translation": {
-      "x": 0,
-      "y": 1,
-      "z": 0
-    },
-    "rotation": {
-      "x": 123,
-      "y": -33,
-      "z": -13
-    },
-    "origin": {
-      "x": 0.5,
-      "y": 0,
-      "z": 0.5
-    },
+    "translation": { "x": 0, "y": 1, "z": 0 },
+    "rotation": { "x": 123, "y": -33, "z": -13 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
     "scale": 1.4
   },
-  "fpHandTransform": {
-    "translation": {
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "rotation": {
-      "x": 25,
-      "y": 157,
-      "z": -5
-    }
-  },
-  "tpHandTransform": {
-    "translation": {
-      "x": -1.5,
-      "y": -1,
-      "z": -1.4
-    }
-  }
+  "fpHandTransform": { "translation": { "x": 0, "y": 0, "z": 0 }, "rotation": { "x": 25, "y": 157, "z": -5 } },
+  "tpHandTransform": { "translation": { "x": -1.5, "y": -1, "z": -1.4 } }
 }
+

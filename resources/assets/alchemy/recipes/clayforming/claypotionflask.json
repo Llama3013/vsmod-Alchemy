@@ -1,49 +1,14 @@
 {
-  "ingredient": {
-    "type": "item",
-    "code": "game:clay-*",
-    "name": "color",
-    "allowedVariants": [
-      "blue",
-      "fire",
-      "red"
-    ]
-  },
+  "ingredient": { "type": "item", "code": "game:clay-*", "name": "color", "allowedVariants": ["blue", "fire", "red"] },
   "pattern": [
-    [
-      "###",
-      "###",
-      "###"
-    ],
-    [
-      "###",
-      "#_#",
-      "###"
-    ],
-    [
-      "###",
-      "#_#",
-      "###"
-    ],
-    [
-      "###",
-      "#_#",
-      "###"
-    ],
-    [
-      "###",
-      "#_#",
-      "###"
-    ],
-    [
-      "___",
-      "_#_",
-      "___"
-    ]
+    ["###", "###", "###"],
+    ["###", "#_#", "###"],
+    ["###", "#_#", "###"],
+    ["###", "#_#", "###"],
+    ["###", "#_#", "###"],
+    ["___", "_#_", "___"]
   ],
   "name": "claypotionflask",
-  "output": {
-    "type": "block",
-    "code": "claypotionflask-{color}-raw"
-  }
+  "output": { "type": "block", "code": "claypotionflask-{color}-raw" }
 }
+

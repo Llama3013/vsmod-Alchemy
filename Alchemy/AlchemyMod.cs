@@ -83,7 +83,7 @@ namespace Alchemy
         //            (config.DisableSpeedPotion, new List<(string code, bool isWildcard)> { ("potionportion-speed-", true), ("potionbase-speed-", true), ("herbball-speed", false) }, "Successfully removed 'Potion Portion - Speed' items and bases."),
         //            (config.DisableVitalityPotion, new List<(string code, bool isWildcard)> { ("potionportion-vitality-", true), ("potionbase-vitality-", true), ("herbball-vitality", false) }, "Successfully removed 'Potion Portion - Vitality' items and bases."),
         //            (config.DisableDebugPotions, new List<(string code, bool isWildcard)> { ("potionportion-all-", true), ("potionbase-alltick-", true), ("herbball-all", false), ("herbball-alltick", false) }, ""),
-                   
+
         //            //(config.DisableClayFlask, new List<(string code, bool isWildcard)> { ("claypotionflask-*", true) }, "Successfully removed 'Clay Potion Flask'."),
         //            //(config.DisableLargeFlask, new List<(string code, bool isWildcard)> { ("potionflask-normal-*", true) }, "Successfully removed 'Glass Potion Flask Large'."),
         //            //(config.DisableMediumFlask, new List<(string code, bool isWildcard)> { ("potionflask-round-*", true) }, "Successfully removed 'Glass Potion Flask Medium'."),
@@ -189,7 +189,9 @@ namespace Alchemy
                     EntityPlayer entity = iServerPlayer.Entity;
                     entity.AddBehavior(new PotionFixBehavior(entity));
 
-                    api.Logger.VerboseDebug("[Potion] Adding PotionFixBehavior to spawned EntityPlayer");
+                    api.Logger.VerboseDebug(
+                        "[Potion] Adding PotionFixBehavior to spawned EntityPlayer"
+                    );
                     EntityPlayer player = iServerPlayer.Entity;
                     TempEffect.ResetAllTempStats(player);
                     TempEffect.ResetAllAttrListeners(player, "potionid", "tickpotionid");

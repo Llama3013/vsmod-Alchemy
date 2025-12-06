@@ -2,277 +2,134 @@
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-flyagaric-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-flyagaric-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-earthball-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-earthball-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-deathcap-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-deathcap-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-elfinsaddle-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-elfinsaddle-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-jackolantern-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-jackolantern-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-devilbolete-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-devilbolete-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-bitterbolete-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-bitterbolete-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-devilstooth-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-devilstooth-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-golddropmilkcap-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-golddropmilkcap-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
-  },
-
-  {
-    "ingredientPattern": "M,F,T",
-    "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-funeralbell-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
-    },
-    "shapeless": true,
-    "width": 1,
-    "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   },
   {
     "ingredientPattern": "M,F,T",
     "ingredients": {
-      "M": {
-        "type": "block",
-        "code": "game:mushroom-pinkbonnet-*"
-      },
-      "F": {
-        "type": "block",
-        "code": "game:flower-horsetail-free"
-      },
-      "T": {
-        "type": "item",
-        "code": "alchemy:mortarpestle-*",
-        "isTool": true
-      }
+      "M": { "type": "block", "code": "game:mushroom-funeralbell-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
     },
     "shapeless": true,
     "width": 1,
     "height": 3,
-    "output": {
-      "type": "item",
-      "code": "alchemy:potionbase-basic"
-    }
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-pinkbonnet-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   }
 ]
+

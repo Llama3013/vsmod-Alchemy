@@ -2,162 +2,68 @@
   "code": "claypotionflask",
   "class": "Block",
   "variantgroups": [
-    {
-      "code": "color",
-      "states": [ "blue", "fire", "red" ]
-    },
-    {
-      "code": "state",
-      "states": [ "raw" ]
-    }
+    { "code": "color", "states": ["blue", "fire", "red"] },
+    { "code": "state", "states": ["raw"] }
   ],
-  "shape": {
-    "base": "alchemy:block/clay/clayflask"
-  },
+  "shape": { "base": "alchemy:block/clay/clayflask" },
   "textures": { "ceramic": { "base": "game:block/clay/{color}clay" } },
   "behaviors": [
     {
       "name": "GroundStorable",
-      "properties": {
-        "layout": "Quadrants",
-        "collisionBox": {
-          "x1": 0,
-          "y1": 0,
-          "z1": 0,
-          "x2": 1,
-          "y2": 0.4375,
-          "z2": 1
-        }
-      }
+      "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1 } }
     },
-    { "name": "Unplaceable" }, // The ground storable obsoletes this being a block. Should be an item, but is kept a block for backwards compatibility
+    { "name": "Unplaceable" },
     { "name": "RightClickPickup" }
   ],
   "attributes": {
-    "groundStorageTransform": {
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.5
-      },
-      "scale": 0.75
-    },
-    "onDisplayTransform": {
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.5
-      },
-      "scale": 0.75
-    },
+    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
     "onTongTransform": {
-      "translation": {
-        "x": -1.61,
-        "y": -0.87,
-        "z": -1.11
-      },
-      "rotation": {
-        "x": -108,
-        "y": 71,
-        "z": -83
-      },
+      "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
+      "rotation": { "x": -108, "y": 71, "z": -83 },
       "scale": 0.6
     },
     "shelvable": true,
     "displaycaseable": true,
-    "handbook": {
-      "groupBy": [ "claypotionflask-*-{state}" ]
-    }
+    "handbook": { "groupBy": ["claypotionflask-*-{state}"] }
   },
   "attributesByType": {
     "claypotionflask-red-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-tan-fired"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-orange-fired"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-red-fired"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-brown-fired"
-        }
+        "0": { "type": "block", "code": "alchemy:claypotionflask-tan-fired" },
+        "1": { "type": "block", "code": "alchemy:claypotionflask-orange-fired" },
+        "2": { "type": "block", "code": "alchemy:claypotionflask-red-fired" },
+        "3": { "type": "block", "code": "alchemy:claypotionflask-brown-fired" }
       }
     },
     "claypotionflask-blue-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-cream-fired"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-gray-fired"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-black-fired"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-black-fired"
-        }
+        "0": { "type": "block", "code": "alchemy:claypotionflask-cream-fired" },
+        "1": { "type": "block", "code": "alchemy:claypotionflask-gray-fired" },
+        "2": { "type": "block", "code": "alchemy:claypotionflask-black-fired" },
+        "3": { "type": "block", "code": "alchemy:claypotionflask-black-fired" }
       }
     },
     "claypotionflask-fire-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-fire-fired"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-fire-fired"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-fire-fired"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:claypotionflask-fire-fired"
-        }
+        "0": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" },
+        "1": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" },
+        "2": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" },
+        "3": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" }
       }
     }
   },
   "doNotRenderAtLod2": true,
-  "creativeinventory": {
-    "general": [
-      "*-blue-raw"
-    ],
-    "decorative": [
-      "*"
-    ],
-    "alchemy": [
-      "*"
-    ]
-  },
+  "creativeinventory": { "general": ["*-blue-raw"], "decorative": ["*"], "alchemy": ["*"] },
   "blockmaterial": "Ceramic",
   "replaceable": 900,
   "resistance": 1.5,
   "liquidSelectable": 1,
   "lightAbsorption": 1,
   "maxStackSize": 64,
-  "sidesolid": {
-    "all": false
-  },
-  "sideopaque": {
-    "all": false
-  },
-  "emitsideao": {
-    "all": false
-  },
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+  "emitsideao": { "all": false },
   "combustiblePropsByType": {
     "claypotionflask-fire-raw": {
       "meltingPoint": 600,
@@ -165,10 +71,7 @@
       "smeltedRatio": 1,
       "smeltingType": "fire",
       "requiresContainer": false,
-      "smeltedStack": {
-        "type": "block",
-        "code": "claypotionflask-fire-fired"
-      }
+      "smeltedStack": { "type": "block", "code": "claypotionflask-fire-fired" }
     },
     "claypotionflask-*-raw": {
       "meltingPoint": 600,
@@ -176,73 +79,19 @@
       "smeltedRatio": 1,
       "smeltingType": "fire",
       "requiresContainer": false,
-      "smeltedStack": {
-        "type": "block",
-        "code": "claypotionflask-blue-fired"
-      }
+      "smeltedStack": { "type": "block", "code": "claypotionflask-blue-fired" }
     }
   },
-  "collisionbox": {
-    "x1": 0.375,
-    "y1": 0,
-    "z1": 0.375,
-    "x2": 0.625,
-    "y2": 0.275,
-    "z2": 0.625
-  },
-  "selectionbox": {
-    "x1": 0.375,
-    "y1": 0,
-    "z1": 0.375,
-    "x2": 0.625,
-    "y2": 0.275,
-    "z2": 0.625
-  },
-  "guiTransform": {
-    "translation": {
-      "x": 0,
-      "y": 3,
-      "z": 0
-    },
-    "origin": {
-      "x": 0.5,
-      "y": 0.175,
-      "z": 0.5
-    },
-    "scale": 1.75
-  },
-  "groundTransform": {
-    "scale": 2
-  },
-  "fpHandTransform": {
-    "translation": {
-      "x": 0,
-      "y": 0.4,
-      "z": 0
-    },
-    "rotation": {
-      "x": 0,
-      "y": -14,
-      "z": 0
-    },
-    "scale": 1
-  },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
+  "guiTransform": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 1.75 },
+  "groundTransform": { "scale": 2 },
+  "fpHandTransform": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1 },
   "tpHandTransform": {
-    "translation": {
-      "x": -0.7,
-      "y": 0,
-      "z": 0.15
-    },
-    "rotation": {
-      "x": 0,
-      "y": 0,
-      "z": -90
-    },
-    "origin": {
-      "x": 0.2,
-      "y": 0.1,
-      "z": 0.1
-    },
-    "scale": 0.40
+    "translation": { "x": -0.7, "y": 0, "z": 0.15 },
+    "rotation": { "x": 0, "y": 0, "z": -90 },
+    "origin": { "x": 0.2, "y": 0.1, "z": 0.1 },
+    "scale": 0.4
   }
 }
+

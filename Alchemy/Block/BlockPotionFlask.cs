@@ -16,6 +16,8 @@ namespace Alchemy
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
+        private const string potionInfo = "potioninfo";
+
         #region Render
 
         public override void OnBeforeRender(
@@ -311,12 +313,10 @@ namespace Alchemy
             ItemStack contentStack = GetContent(itemslot.Itemstack);
             if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
             {
-                JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
                 if (potion?.Exists ?? false)
                 {
                     string potionId = potion["potionId"].AsString();
-                    //api.Logger.Debug("[Potion] potionId {0}", potionId);
-                    //api.Logger.Debug("[Potion] drinkable if number is zero: {0}", byEntity.WatchedAttributes.GetLong(potionId));
                     if (potionId == "recallpotionid" && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null && WildcardUtil.Match("boat-sailed-*", byEntity.MountedOn.MountSupplier.OnEntity.Code.Path) && byEntity.World.Side == EnumAppSide.Server)
                     {
                         var playerEntity = byEntity as EntityPlayer;
@@ -334,7 +334,6 @@ namespace Alchemy
                         && byEntity.WatchedAttributes.GetLong(potionId) == 0
                     )
                     {
-                        //api.Logger.Debug("potion {0}", byEntity.WatchedAttributes.GetLong(potionId));
                         byEntity.World.RegisterCallback(
                             (dt) => playEatSound(byEntity, "drink", 1),
                             500
@@ -374,7 +373,7 @@ namespace Alchemy
             ItemStack contentStack = GetContent(slot.Itemstack);
             if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
             {
-                JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
                 if (potion?.Exists ?? false)
                 {
                     Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
@@ -515,7 +514,7 @@ namespace Alchemy
             IServerPlayer serverPlayer
         )
         {
-            JsonObject potion = contentStack.ItemAttributes?["potioninfo"];
+            JsonObject potion = contentStack.ItemAttributes?[potionInfo];
             if (potion?.Exists ?? false)
             {
                 string potionId = potion["potionId"].AsString();
@@ -540,6 +539,10 @@ namespace Alchemy
                             UtilityEffects.ApplyTemporalPotion(byEntity);
                             break;
 
+                        case "reshapepotionid":
+                            UtilityEffects.ApplyReshapePotion(serverPlayer);
+                            break;
+
                         default:
                             ApplyCustomPotion(contentStack, playerEntity, potionId, ignoreArmour);
                             break;
@@ -550,6 +553,7 @@ namespace Alchemy
                         Lang.Get("alchemy:effect-gain", contentStack.GetName()),
                         EnumChatType.Notification
                     );
+                    api.Logger.Audit("potion {0} activated on player {1}", potionId, serverPlayer.PlayerName);
                 }
             }
         }
@@ -563,7 +567,7 @@ namespace Alchemy
         {
             TempEffect potionEffect = new();
             string strength = contentStack.Item.Variant?["strength"] ?? "none";
-            int duration = contentStack.ItemAttributes?["potioninfo"]?["duration"].AsInt(0) ?? 0;
+            int duration = contentStack.ItemAttributes?[potionInfo]?["duration"].AsInt(0) ?? 0;
             JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
             int tickSec = tickPotion?["ticksec"].AsInt() ?? 0;
             float health = tickPotion?["health"].AsFloat() ?? 0;
@@ -655,7 +659,7 @@ namespace Alchemy
         Block flask
         ) : ITexPositionSource
     {
-        public ItemStack forContents = forContents ?? throw new ArgumentNullException(nameof(forContents));
+        public ItemStack ForContents { get; set; } = forContents ?? throw new ArgumentNullException(nameof(forContents));
 
         private readonly ICoreClientAPI capi = capi ?? throw new ArgumentNullException(nameof(capi));
 

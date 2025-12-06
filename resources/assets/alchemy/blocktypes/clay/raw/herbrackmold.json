@@ -2,113 +2,45 @@
   "code": "herbrackmold",
   "class": "Block",
   "behaviors": [
-    {
-      "name": "GroundStorable",
-      "properties": { "layout": "SingleCenter" }
-    },
+    { "name": "GroundStorable", "properties": { "layout": "SingleCenter" } },
     { "name": "Unplaceable" },
     { "name": "RightClickPickup" }
   ],
   "variantgroups": [
-    {
-      "code": "color",
-      "states": [ "blue", "red", "fire" ]
-    },
-    {
-      "code": "materialtype",
-      "states": [
-        "raw"
-      ]
-    },
-    {
-      "code": "tooltype",
-      "states": [
-        "herbracktop",
-        "herbrackhook"
-      ]
-    }
+    { "code": "color", "states": ["blue", "red", "fire"] },
+    { "code": "materialtype", "states": ["raw"] },
+    { "code": "tooltype", "states": ["herbracktop", "herbrackhook"] }
   ],
-  "shape": {
-    "base": "alchemy:block/clay/mold/{tooltype}",
-    "rotateY": 90
-  },
+  "shape": { "base": "alchemy:block/clay/mold/{tooltype}", "rotateY": 90 },
   "textures": { "all": { "base": "game:block/clay/{color}clay" } },
   "attributes": {
     "reinforcable": true,
-    "onTongTransform": {
-      "translation": {
-        "x": -0.9,
-        "y": -1.5,
-        "z": -0.6
-      },
-      "rotation": {
-        "x": 117,
-        "y": 0,
-        "z": 0
-      },
-      "scale": 0.74
-    },
+    "onTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.74 },
     "shelvable": false
   },
   "attributesByType": {
     "herbrackmold-red-raw-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-tan-fired-{tooltype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-orange-fired-{tooltype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-red-fired-{tooltype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-brown-fired-{tooltype}"
-        }
+        "0": { "type": "block", "code": "alchemy:herbrackmold-tan-fired-{tooltype}" },
+        "1": { "type": "block", "code": "alchemy:herbrackmold-orange-fired-{tooltype}" },
+        "2": { "type": "block", "code": "alchemy:herbrackmold-red-fired-{tooltype}" },
+        "3": { "type": "block", "code": "alchemy:herbrackmold-brown-fired-{tooltype}" }
       }
     },
     "herbrackmold-blue-raw-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-cream-fired-{tooltype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-gray-fired-{tooltype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-black-fired-{tooltype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-black-fired-{tooltype}"
-        }
+        "0": { "type": "block", "code": "alchemy:herbrackmold-cream-fired-{tooltype}" },
+        "1": { "type": "block", "code": "alchemy:herbrackmold-gray-fired-{tooltype}" },
+        "2": { "type": "block", "code": "alchemy:herbrackmold-black-fired-{tooltype}" },
+        "3": { "type": "block", "code": "alchemy:herbrackmold-black-fired-{tooltype}" }
       }
     },
     "herbrackmold-fire-raw-*": {
       "beehivekiln": {
-        "0": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
-        },
-        "1": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
-        },
-        "2": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
-        },
-        "3": {
-          "type": "block",
-          "code": "alchemy:herbrackmold-fire-fired-{tooltype}"
-        }
+        "0": { "type": "block", "code": "alchemy:herbrackmold-fire-fired-{tooltype}" },
+        "1": { "type": "block", "code": "alchemy:herbrackmold-fire-fired-{tooltype}" },
+        "2": { "type": "block", "code": "alchemy:herbrackmold-fire-fired-{tooltype}" },
+        "3": { "type": "block", "code": "alchemy:herbrackmold-fire-fired-{tooltype}" }
       }
     }
   },
@@ -118,10 +50,7 @@
       "meltingDuration": 45,
       "smeltedRatio": 1,
       "smeltingType": "fire",
-      "smeltedStack": {
-        "type": "block",
-        "code": "herbrackmold-fire-fired-{tooltype}"
-      },
+      "smeltedStack": { "type": "block", "code": "herbrackmold-fire-fired-{tooltype}" },
       "requiresContainer": false
     },
     "herbrackmold-*-raw-*": {
@@ -129,194 +58,65 @@
       "meltingDuration": 45,
       "smeltedRatio": 1,
       "smeltingType": "fire",
-      "smeltedStack": {
-        "type": "block",
-        "code": "herbrackmold-blue-fired-{tooltype}"
-      },
+      "smeltedStack": { "type": "block", "code": "herbrackmold-blue-fired-{tooltype}" },
       "requiresContainer": false
     }
   },
   "blockmaterial": "Ceramic",
-  "creativeinventory": {
-    "general": [
-      "*-blue-raw"
-    ],
-    "construction": [
-      "*"
-    ],
-    "alchemy": [
-      "*"
-    ]
-  },
+  "creativeinventory": { "general": ["*-blue-raw"], "construction": ["*"], "alchemy": ["*"] },
   "replaceable": 700,
   "resistance": 1.5,
   "maxStackSize": 8,
   "lightAbsorption": 0,
-  "sounds": {
-    "walk": "game:walk/stone"
-  },
+  "sounds": { "walk": "game:walk/stone" },
   "collisionboxByType": {
-    "*-herbracktop": {
-      "x1": 0.0625,
-      "y1": 0,
-      "z1": 0.0625,
-      "x2": 0.9375,
-      "y2": 0.5625,
-      "z2": 0.9375
-    },
-    "*": {
-      "x1": 0.0625,
-      "y1": 0,
-      "z1": 0.0625,
-      "x2": 0.9375,
-      "y2": 0.125,
-      "z2": 0.9375
-    }
+    "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "selectionboxByType": {
-    "*-herbracktop": {
-      "x1": 0.0625,
-      "y1": 0,
-      "z1": 0.0625,
-      "x2": 0.9375,
-      "y2": 0.5625,
-      "z2": 0.9375
-    },
-    "*": {
-      "x1": 0.0625,
-      "y1": 0,
-      "z1": 0.0625,
-      "x2": 0.9375,
-      "y2": 0.125,
-      "z2": 0.9375
-    }
+    "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
-  "sideopaque": {
-    "all": false
-  },
-  "sidesolid": {
-    "all": false
-  },
-  "heldTpIdleAnimationByType": {
-    "*-herbracktop": "holdbothhandslarge"
-  },
-  "heldTpUseAnimationByType": {
-    "*-herbracktop": "twohandplaceblock"
-  },
+  "sideopaque": { "all": false },
+  "sidesolid": { "all": false },
+  "heldTpIdleAnimationByType": { "*-herbracktop": "holdbothhandslarge" },
+  "heldTpUseAnimationByType": { "*-herbracktop": "twohandplaceblock" },
   "guiTransformByType": {
-    "*-herbracktop": {
-      "origin": {
-        "x": 0.5,
-        "y": 0.18,
-        "z": 0.5
-      },
-      "scale": 1.33
-    },
-    "*": {
-      "translation": {
-        "x": 0,
-        "y": 3,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.0625,
-        "z": 0.5
-      },
-      "scale": 1.33
-    }
+    "*-herbracktop": { "origin": { "x": 0.5, "y": 0.18, "z": 0.5 }, "scale": 1.33 },
+    "*": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.0625, "z": 0.5 }, "scale": 1.33 }
   },
   "tpHandTransformByType": {
     "*-herbracktop": {
-      "translation": {
-        "x": -0.6,
-        "y": -0.4,
-        "z": -0.5
-      },
-      "rotation": {
-        "x": 12,
-        "y": 12,
-        "z": -92
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.125,
-        "z": 0.5
-      },
+      "translation": { "x": -0.6, "y": -0.4, "z": -0.5 },
+      "rotation": { "x": 12, "y": 12, "z": -92 },
+      "origin": { "x": 0.5, "y": 0.125, "z": 0.5 },
       "scale": 0.8
     },
     "*": {
-      "translation": {
-        "x": -1,
-        "y": -0.6,
-        "z": -1.05
-      },
-      "rotation": {
-        "x": -87,
-        "y": 9,
-        "z": 4
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.125,
-        "z": 0.5
-      },
+      "translation": { "x": -1, "y": -0.6, "z": -1.05 },
+      "rotation": { "x": -87, "y": 9, "z": 4 },
+      "origin": { "x": 0.5, "y": 0.125, "z": 0.5 },
       "scale": 0.5
     }
   },
   "fpHandTransformByType": {
     "*-herbracktop": {
-      "translation": {
-        "x": -0.3,
-        "y": 0,
-        "z": 0.5
-      },
-      "rotation": {
-        "x": 16,
-        "y": -50,
-        "z": 1
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.125,
-        "z": 0.5
-      },
+      "translation": { "x": -0.3, "y": 0, "z": 0.5 },
+      "rotation": { "x": 16, "y": -50, "z": 1 },
+      "origin": { "x": 0.5, "y": 0.125, "z": 0.5 },
       "scale": 0.8
     },
     "*": {
-      "translation": {
-        "x": -0.3,
-        "y": 0,
-        "z": 0.5
-      },
-      "rotation": {
-        "x": 16,
-        "y": -51,
-        "z": 91
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.125,
-        "z": 0.5
-      }
+      "translation": { "x": -0.3, "y": 0, "z": 0.5 },
+      "rotation": { "x": 16, "y": -51, "z": 91 },
+      "origin": { "x": 0.5, "y": 0.125, "z": 0.5 }
     }
   },
   "groundTransform": {
-    "translation": {
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "rotation": {
-      "x": 0,
-      "y": -45,
-      "z": 0
-    },
-    "origin": {
-      "x": 0.5,
-      "y": 0,
-      "z": 0.5
-    },
+    "translation": { "x": 0, "y": 0, "z": 0 },
+    "rotation": { "x": 0, "y": -45, "z": 0 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
     "scale": 2.2
   }
 }
+

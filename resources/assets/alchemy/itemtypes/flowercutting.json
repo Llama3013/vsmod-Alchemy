@@ -3,17 +3,7 @@
   "behaviors": [
     {
       "name": "GroundStorable",
-      "properties": {
-        "layout": "Quadrants",
-        "collisionBox": {
-          "x1": 0,
-          "y1": 0,
-          "z1": 0,
-          "x2": 1,
-          "y2": 0.125,
-          "z2": 1
-        }
-      }
+      "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.125, "z2": 1 } }
     }
   ],
   "variantgroups": [
@@ -37,208 +27,93 @@
       ],
       "loadFromProperties": "block/flower"
     },
-    {
-      "code": "stage",
-      "states": [
-        "raw",
-        "dried",
-        "cooked"
-      ]
-    }
+    { "code": "stage", "states": ["raw", "dried", "cooked"] }
   ],
   "attributesByType": {
     "*-dried": {
-      "groundStorageTransform": {
-        "translation": {
-          "x": 0.15,
-          "y": -0.45,
-          "z": 0.2
-        },
-        "rotation": {
-          "x": 0,
-          "y": -37,
-          "z": -111
-        },
-        "scale": 0.8
-      },
+      "groundStorageTransform": { "translation": { "x": 0.15, "y": -0.45, "z": 0.2 }, "rotation": { "x": 0, "y": -37, "z": -111 }, "scale": 0.8 },
       "displaycaseable": true,
-      "onDisplayTransform": {
-        "translation": {
-          "x": 0.15,
-          "y": -0.45,
-          "z": 0.1
-        },
-        "rotation": {
-          "x": 0,
-          "y": -37,
-          "z": -111
-        },
-        "scale": 0.8
-      },
+      "onDisplayTransform": { "translation": { "x": 0.15, "y": -0.45, "z": 0.1 }, "rotation": { "x": 0, "y": -37, "z": -111 }, "scale": 0.8 },
       "shelvable": true,
-      "onshelfTransform": {
-        "translation": {
-          "x": 0.15,
-          "y": -0.45,
-          "z": 0.1
-        },
-        "rotation": {
-          "x": 0,
-          "y": -37,
-          "z": -111
-        },
-        "scale": 0.8
-      },
-      "bakingProperties": {
-        "scale": 0.8,
-        "temp": 100,
-        "levelFrom": 0.95,
-        "levelTo": 1,
-        "startScaleY": 1.0,
-        "endScaleY": 0.90,
-        "resultCode": "alchemy:cuttings-{flower}-cooked",
-        "initialCode": "alchemy:cuttings-{flower}-dried"
-      }
+      "onshelfTransform": { "translation": { "x": 0.15, "y": -0.45, "z": 0.1 }, "rotation": { "x": 0, "y": -37, "z": -111 }, "scale": 0.8 }
     },
     "*-cooked": {
       "groundStorageTransform": {
-        "translation": {
-          "x": -0.2,
-          "y": -0.45,
-          "z": 0.2
-        },
-        "rotation": {
-          "x": -180,
-          "y": 153,
-          "z": -74
-        },
+        "translation": { "x": -0.2, "y": -0.45, "z": 0.2 },
+        "rotation": { "x": -180, "y": 153, "z": -74 },
         "scale": 0.8
       },
       "displaycaseable": true,
       "onDisplayTransform": {
-        "translation": {
-          "x": -0.2,
-          "y": -0.45,
-          "z": 0.0
-        },
-        "rotation": {
-          "x": -180,
-          "y": 153,
-          "z": -74
-        },
+        "translation": { "x": -0.2, "y": -0.45, "z": 0.0 },
+        "rotation": { "x": -180, "y": 153, "z": -74 },
         "scale": 0.8
       },
       "shelvable": true,
       "onshelfTransform": {
-        "translation": {
-          "x": -0.2,
-          "y": -0.45,
-          "z": 0.1
-        },
-        "rotation": {
-          "x": -180,
-          "y": 153,
-          "z": -74
-        },
+        "translation": { "x": -0.2, "y": -0.45, "z": 0.1 },
+        "rotation": { "x": -180, "y": 153, "z": -74 },
         "scale": 0.8
       }
     },
     "*": {
-      "groundStorageTransform": {
-        "translation": {
-          "x": 0.2,
-          "y": -0.4,
-          "z": 0.2
-        },
-        "rotation": {
-          "x": 0,
-          "y": -37,
-          "z": -89
-        },
-        "scale": 0.8
-      }
+      "groundStorageTransform": { "translation": { "x": 0.2, "y": -0.4, "z": 0.2 }, "rotation": { "x": 0, "y": -37, "z": -89 }, "scale": 0.8 }
     }
   },
   "attributes": {
     "herbrackable": true,
     "herbRackTransform": {
-      "translation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
+      "translation": { "x": 0, "y": 0, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "origin": { "x": 0, "y": 0, "z": 0 },
       "scale": 1
     },
     "meathookable": true,
     "meatHookTransform": {
-      "translation": {
-        "x": -0.02,
-        "y": -0.52,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0,
-        "z": 0.5
-      },
+      "translation": { "x": -0.02, "y": -0.52, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": 0 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
       "scale": 1
+    },
+    "bakingPropertiesByType": {
+      "*-dried": {
+        "scale": 0.8,
+        "temp": 100,
+        "levelFrom": 0.9,
+        "levelTo": 1,
+        "startScaleY": 1.0,
+        "endScaleY": 0.9,
+        "resultCode": "alchemy:cuttings-{flower}-cooked",
+        "initialCode": "alchemy:cuttings-{flower}-dried"
+      },
+      "*-cooked": {
+        "scale": 0.8,
+        "temp": 100,
+        "levelFrom": 1,
+        "levelTo": 1,
+        "startScaleY": 0.9,
+        "endScaleY": 0.9,
+        "resultCode": "alchemy:cuttings-{flower}-cooked",
+        "initialCode": "alchemy:cuttings-{flower}-dried"
+      }
     }
   },
-  "creativeinventory": {
-    "general": [
-      "*"
-    ],
-    "items": [
-      "*"
-    ],
-    "alchemy": [
-      "*"
-    ]
-  },
+  "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "maxstacksize": 64,
   "transitionablePropsByType": {
     "*-raw": [
       {
         "type": "Perish",
-        "freshHours": {
-          "avg": 480
-        },
-        "transitionHours": {
-          "avg": 86
-        },
-        "transitionedStack": {
-          "type": "item",
-          "code": "game:rot"
-        },
+        "freshHours": { "avg": 480 },
+        "transitionHours": { "avg": 86 },
+        "transitionedStack": { "type": "item", "code": "game:rot" },
         "transitionRatio": 1
       },
       {
         "type": "Dry",
-        "freshHours": {
-          "avg": 6
-        },
-        "transitionHours": {
-          "avg": 64
-        },
-        "transitionedStack": {
-          "type": "item",
-          "code": "alchemy:cuttings-{flower}-dried"
-        },
+        "freshHours": { "avg": 6 },
+        "transitionHours": { "avg": 64 },
+        "transitionedStack": { "type": "item", "code": "alchemy:cuttings-{flower}-dried" },
         "transitionRatio": 1
       }
     ]
@@ -249,315 +124,123 @@
       "meltingDuration": 30,
       "smeltedRatio": 1,
       "smeltingType": "convert",
-      "smeltedStack": {
-        "type": "item",
-        "code": "alchemy:cuttings-{flower}-cooked"
-      },
+      "smeltedStack": { "type": "item", "code": "alchemy:cuttings-{flower}-cooked" },
       "requiresContainer": false
     }
   },
   "shapeByType": {
-    "*-wilddaisy-*": {
-      "base": "alchemy:item/cut_white_herb_bundle"
-    },
-    "*-lupine-*": {
-      "base": "alchemy:item/cut_stacked_herb_bundle"
-    },
-    "*-chamomile-raw": {
-      "base": "alchemy:item/chamomile-fresh-herb-bundle"
-    },
-    "*-chamomile-dried": {
-      "base": "alchemy:item/chamomile-dried-herb-bundle"
-    },
-    "*-chamomile-cooked": {
-      "base": "alchemy:item/chamomile-dried-herb-bundle"
-    },
-    "*": {
-      "base": "alchemy:item/cut_blue_herb_bundle"
-    }
+    "*-wilddaisy-*": { "base": "alchemy:item/cut_white_herb_bundle" },
+    "*-lupine-*": { "base": "alchemy:item/cut_stacked_herb_bundle" },
+    "*-chamomile-raw": { "base": "alchemy:item/chamomile-fresh-herb-bundle" },
+    "*-chamomile-dried": { "base": "alchemy:item/chamomile-dried-herb-bundle" },
+    "*-chamomile-cooked": { "base": "alchemy:item/chamomile-dried-herb-bundle" },
+    "*": { "base": "alchemy:item/cut_blue_herb_bundle" }
   },
   "texturesByType": {
-    "*-wilddaisy-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white3-a"
-      }
-    },
+    "*-wilddaisy-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/white3-a" } },
     "*-wilddaisy-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white3-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/white3-a" }
     },
     "*-wilddaisy-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white3-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/white3-a" }
     },
-    "*-lupine-blue-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/blue1-a"
-      }
-    },
+    "*-lupine-blue-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/blue1-a" } },
     "*-lupine-blue-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/blue1-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/blue1-a" }
     },
     "*-lupine-blue-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/blue1-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/blue1-a" }
     },
-    "*-lupine-orange-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/orange1-a"
-      }
-    },
+    "*-lupine-orange-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/orange1-a" } },
     "*-lupine-orange-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/orange1-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/orange1-a" }
     },
     "*-lupine-orange-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/orange1-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/orange1-a" }
     },
-    "*-lupine-purple-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/purple1-a"
-      }
-    },
+    "*-lupine-purple-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/purple1-a" } },
     "*-lupine-purple-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/purple1-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/purple1-a" }
     },
     "*-lupine-purple-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/purple1-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/purple1-a" }
     },
-    "*-lupine-red-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/red1-a"
-      }
-    },
+    "*-lupine-red-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/red1-a" } },
     "*-lupine-red-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/red1-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/red1-a" }
     },
     "*-lupine-red-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/red1-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/red1-a" }
     },
-    "*-lupine-white-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white1-a"
-      }
-    },
+    "*-lupine-white-raw": { "flower": { "base": "game:block/plant/flower/petal/lupine/white1-a" } },
     "*-lupine-white-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white1-a"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/white1-a" }
     },
     "*-lupine-white-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lupine/white1-a"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lupine/white1-a" }
     },
-    "*-lilyofthevalley-raw": {
-      "flower": {
-        "base": "game:block/plant/flower/petal/lilyofthevalley2"
-      }
-    },
+    "*-lilyofthevalley-raw": { "flower": { "base": "game:block/plant/flower/petal/lilyofthevalley2" } },
     "*-lilyofthevalley-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lilyofthevalley2"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/lilyofthevalley2" }
     },
     "*-lilyofthevalley-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/flower/petal/lilyofthevalley2"
-      }
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/lilyofthevalley2" }
     },
-    "*-chamomile-*": {
-      "chamomile": { "base": "alchemy:item/chamomile" }
-    },
-    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": {
-      "flower": {
-        "base": "game:block/plant/herb/petal/{flower}"
-      }
-    },
+    "*-chamomile-*": { "chamomile": { "base": "alchemy:item/chamomile" } },
+    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": { "flower": { "base": "game:block/plant/herb/petal/{flower}" } },
     "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/herb/petal/{flower}"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/herb/petal/{flower}" }
     },
-    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/herb/petal/{flower}"
-      }
-    },
+    "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": { "normal7": { "base": "game:block/wood-generic" }, "flower": { "base": "game:block/plant/herb/petal/{flower}" } },
     "*-dried": {
-      "normal7": {
-        "base": "game:block/soil/flooring/strawbedding1*"
-      },
-      "flower": {
-        "base": "game:block/plant/potted/{flower}"
-      }
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/potted/{flower}" }
     },
-    "*-cooked": {
-      "normal7": {
-        "base": "game:block/wood-generic"
-      },
-      "flower": {
-        "base": "game:block/plant/potted/{flower}"
-      }
-    },
-    "*": {
-      "flower": {
-        "base": "game:block/plant/potted/{flower}"
-      }
-    }
+    "*-cooked": { "normal7": { "base": "game:block/wood-generic" }, "flower": { "base": "game:block/plant/potted/{flower}" } },
+    "*": { "flower": { "base": "game:block/plant/potted/{flower}" } }
   },
   "guiTransformByType": {
     "*-dried": {
-      "translation": {
-        "x": 3,
-        "y": 4,
-        "z": 0
-      },
-      "rotation": {
-        "x": -26,
-        "y": -29,
-        "z": -48
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.3,
-        "z": 0.5
-      },
+      "translation": { "x": 3, "y": 4, "z": 0 },
+      "rotation": { "x": -26, "y": -29, "z": -48 },
+      "origin": { "x": 0.5, "y": 0.3, "z": 0.5 },
       "scale": 3
     },
     "*-cooked": {
-      "translation": {
-        "x": -1,
-        "y": 1,
-        "z": 0
-      },
-      "rotation": {
-        "x": 30,
-        "y": -26,
-        "z": 50
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.25,
-        "z": 0.5
-      },
+      "translation": { "x": -1, "y": 1, "z": 0 },
+      "rotation": { "x": 30, "y": -26, "z": 50 },
+      "origin": { "x": 0.5, "y": 0.25, "z": 0.5 },
       "scale": 3
     },
     "*": {
-      "translation": {
-        "x": 3,
-        "y": 0,
-        "z": 0
-      },
-      "rotation": {
-        "x": 0,
-        "y": 0,
-        "z": -180
-      },
-      "origin": {
-        "x": 0.5,
-        "y": 0.3,
-        "z": 0.5
-      },
+      "translation": { "x": 3, "y": 0, "z": 0 },
+      "rotation": { "x": 0, "y": 0, "z": -180 },
+      "origin": { "x": 0.5, "y": 0.3, "z": 0.5 },
       "scale": 3
     }
   },
   "tpHandTransform": {
-    "translation": {
-      "x": -1.1,
-      "y": -0.2,
-      "z": -0.6
-    },
-    "rotation": {
-      "x": 48,
-      "y": -172,
-      "z": -87
-    },
-    "origin": {
-      "x": 0.5,
-      "y": 0.1,
-      "z": 0.5
-    },
+    "translation": { "x": -1.1, "y": -0.2, "z": -0.6 },
+    "rotation": { "x": 48, "y": -172, "z": -87 },
+    "origin": { "x": 0.5, "y": 0.1, "z": 0.5 },
     "scale": 0.8
   },
-  "fpHandTransform": {
-    "translation": {
-      "x": 0,
-      "y": 0.24,
-      "z": 0.3
-    },
-    "origin": {
-      "x": 0.5,
-      "y": 0.1,
-      "z": 0.5
-    },
-    "scale": 2
-  },
-  "groundTransform": {
-    "scale": 4.5
-  }
+  "fpHandTransform": { "translation": { "x": 0, "y": 0.24, "z": 0.3 }, "origin": { "x": 0.5, "y": 0.1, "z": 0.5 }, "scale": 2 },
+  "groundTransform": { "scale": 4.5 }
 }
+

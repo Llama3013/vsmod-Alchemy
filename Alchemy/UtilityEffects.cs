@@ -11,7 +11,7 @@ using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    internal class UtilityEffects
+    internal static class UtilityEffects
     {
         public static void ApplyNutritionPotion(EntityAgent byEntity)
         {
@@ -36,7 +36,11 @@ namespace Alchemy
             }
         }
 
-        public static void ApplyRecallPotion(IServerPlayer serverPlayer, EntityAgent byEntity, ICoreAPI api)
+        public static void ApplyRecallPotion(
+            IServerPlayer serverPlayer,
+            EntityAgent byEntity,
+            ICoreAPI api
+        )
         {
             if (api.Side.IsServer())
             {
@@ -48,6 +52,11 @@ namespace Alchemy
         public static void ApplyTemporalPotion(EntityAgent byEntity)
         {
             byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
+        }
+
+        public static void ApplyReshapePotion(IServerPlayer serverPlayer)
+        {
+            serverPlayer.Entity.WatchedAttributes.SetBool("allowcharselonce", true);
         }
     }
 }

@@ -7,18 +7,11 @@
         "type": "item",
         "code": "alchemy:utilitypotionbase-*",
         "name": "potiontype",
-        "allowedVariants": [ "recall", "glow", "waterbreathe", "nutrition", "temporal" ]
+        "allowedVariants": ["recall", "glow", "waterbreathe", "nutrition", "temporal"]
       },
-      {
-        "type": "item",
-        "code": "alchemy:potionteaportion",
-        "litres": 1
-      }
+      { "type": "item", "code": "alchemy:potionteaportion", "litres": 1 }
     ],
-    "output": {
-      "type": "item",
-      "code": "alchemy:utilitypotionportion-{potiontype}",
-      "litres": 1
-    }
+    "output": { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "litres": 1 }
   }
 ]
+

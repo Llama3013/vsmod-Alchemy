@@ -130,6 +130,8 @@
   "itemdesc-utilitypotionbase-temporal": "Used to make Stability Flask potion",
   "item-utilitypotionbase-nutrition": "Nutrition Flask base",
   "itemdesc-utilitypotionbase-nutrition": "Used to make Nutrition Flask potion",
+  "item-utilitypotionbase-reshape": "Reshape Flask base",
+  "itemdesc-utilitypotionbase-reshape": "Used to make Reshape Flask potion",
 
   "alchemy:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
   "alchemy:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
@@ -187,6 +189,7 @@
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "alchemy:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
+  "alchemy:incontainer-item-utilitypotionportion-rehape": "Reshape Flask",
 
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
 
@@ -246,6 +249,7 @@
   "game:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "game:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "game:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
+  "game:incontainer-item-utilitypotionportion-reshape": "Reshape Flask",
 
   "game:incontainer-item-potionteaportion": "Potion tea",
 
@@ -256,6 +260,7 @@
   "item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "item-utilitypotionportion-temporal": "Stability Flask",
   "item-utilitypotionportion-nutrition": "Nutrition Flask",
+  "item-utilitypotionportion-reshape": "Reshape Flask",
 
   "block-claypotionflask-blue-raw": "Raw blue clay potion flask",
   "block-claypotionflask-fire-raw": "Raw fire clay potion flask",
@@ -344,7 +349,8 @@
   "itemdesc-utilitypotionportion-glow": "You glow brightly",
   "itemdesc-utilitypotionportion-waterbreathe": "You can breathe underwater",
   "itemdesc-utilitypotionportion-temporal": "You gain some temporal stability",
-  "itemdesc-utilitypotionportion-nutrition": "You gain satiety in your lower nutrition levels",
+  "itemdesc-utilitypotionportion-nutrition": "You gain satiety in your lower nutrition but lose satiety in your higher nutrition levels",
+  "itemdesc-utilitypotionportion-reshape": "You are able to reshape your form and origins, using the command .charsel",
 
   "item-cuttings-*-raw": "Raw Cuttings",
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
