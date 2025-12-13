@@ -2,14 +2,10 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 
-namespace Alchemy
+namespace Alchemy.Behavior
 {
-    public class PotionFixBehavior : EntityBehavior
+    public class PotionFixBehavior(Entity entity) : EntityBehavior(entity)
     {
-        public PotionFixBehavior(Entity entity) : base(entity)
-        {
-        }
-
         private IServerPlayer GetIServerPlayer()
         {
             return entity.World.PlayerByUid((entity as EntityPlayer).PlayerUID) as IServerPlayer;

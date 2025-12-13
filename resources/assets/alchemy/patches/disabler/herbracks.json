@@ -1,0 +1,142 @@
+[
+    // {
+    //     "file": "alchemy:blocktypes/herbrack.json",
+    //     "op": "remove",
+    //     "path": "/variantgroups/0/loadFromProperties",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:blocktypes/herbrack.json",
+    //     "op": "replace",
+    //     "path": "/variantgroups/0/states/0",
+    //     "value": "oak",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:blocktypes/herbrack.json",
+    //     "op": "remove",
+    //     "path": "/variantgroups/1/loadFromProperties",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:blocktypes/herbrack.json",
+    //     "op": "addmerge",
+    //     "path": "/variantgroups/1/states",
+    //     "value": ["copper"],
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:recipes/grid/herbrack.json",
+    //     "op": "replace",
+    //     "path": "/0/output/code",
+    //     "value": "alchemy:herbrack-oak-copper",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+
+    // {
+    //     "file": "alchemy:itemtypes/herbracktop.json",
+    //     "op": "remove",
+    //     "path": "/variantgroups/0/loadFromProperties",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:itemtypes/herbracktop.json",
+    //     "op": "addmerge",
+    //     "path": "/variantgroups/0/states",
+    //     "value": ["copper"],
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    
+    // {
+    //     "file": "alchemy:itemtypes/herbrackhook.json",
+    //     "op": "remove",
+    //     "path": "/variantgroups/0/loadFromProperties",
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // },
+    // {
+    //     "file": "alchemy:itemtypes/herbrackhook.json",
+    //     "op": "addmerge",
+    //     "path": "/variantgroups/0/states",
+    //     "value": ["copper"],
+    //     "condition": {
+    //         "when": "AllowDecorativeRacks",
+    //         "isValue": "false"
+    //     }
+    // }
+
+    {
+        "file": "alchemy:blocktypes/herbrack.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/herbracktop.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/herbrackhook.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+
+    {
+        "file": "alchemy:blocktypes/clay/fired/herbrackmold.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRackMolds",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:blocktypes/clay/raw/herbrackmold.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRackMolds",
+            "isValue": "false"
+        }
+    }
+]

@@ -1,0 +1,307 @@
+[
+  // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
+
+  // Reshape
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/5",
+   "condition": {
+      "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/5",
+   "condition": {
+      "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-reshape/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/5",
+   "condition": {
+      "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+
+  // Temporal
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/4",
+   "condition": {
+      "when": "AllowTemporalPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/4",
+   "condition": {
+      "when": "AllowTemporalPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/temporalbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowTemporalPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-temporal/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowTemporalPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/4",
+   "condition": {
+      "when": "AllowTemporalPotion",
+      "isValue": "false"
+    }
+  },
+
+  // Nutrition
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/3",
+   "condition": {
+      "when": "AllowNutritionPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/3",
+   "condition": {
+      "when": "AllowNutritionPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/nutritionbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowNutritionPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-nutrition/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowNutritionPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/3",
+   "condition": {
+      "when": "AllowNutritionPotion",
+      "isValue": "false"
+    }
+  },
+
+  // Waterbreathe
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/2",
+   "condition": {
+      "when": "AllowWaterBreathePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/2",
+   "condition": {
+      "when": "AllowWaterBreathePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/waterbreathebase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowWaterBreathePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-waterbreathe/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowWaterBreathePotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/2",
+   "condition": {
+      "when": "AllowWaterBreathePotion",
+      "isValue": "false"
+    }
+  },
+
+  // Glow
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/1",
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/1",
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/glowbase.json",
+   "op": "addmerge",
+   "path": "/0/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/glowbase.json",
+   "op": "addmerge",
+   "path": "/1/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-glow/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/1",
+   "condition": {
+      "when": "AllowGlowPotion",
+      "isValue": "false"
+    }
+  },
+
+  // Recall
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/0",
+   "condition": {
+      "when": "AllowRecallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/0",
+   "condition": {
+      "when": "AllowRecallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/recallbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowRecallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-recall/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowRecallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/0",
+   "condition": {
+      "when": "AllowRecallPotion",
+      "isValue": "false"
+    }
+  }
+]

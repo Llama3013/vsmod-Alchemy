@@ -1,29 +1,23 @@
-using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    public class TempEffect
+    public class TempEffect()
     {
         //Why didn't I make a contstructor?
         private EntityPlayer effectedEntity;
 
-        private Dictionary<string, float> effectedList;
-
         private const string effectCode = "potionmod";
         private string effectId;
-
-        private int effectDuration,
-            effectTickSec,
-            tickCnt = 0;
-
-        private float effectHealth = 0;
-        private bool ignoreArmourFlag;
+        private int tickCnt = 0;
+        private PotionContext potionContext;
 
         /// <summary>
         /// This needs to be called to give the entity the new stats and to give setTempStats and resetTempStats the variables it needs.
@@ -34,19 +28,16 @@ namespace Alchemy
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
         public void TempEntityStats(
             EntityPlayer entity,
-            Dictionary<string, float> effectList,
-            int duration,
             string id,
-            bool ignoreArmour
+            PotionContext newPotionContext
         )
         {
             effectedEntity = entity;
-            effectedList = effectList;
             effectId = id;
-            ignoreArmourFlag = ignoreArmour;
-            SetTempStats(effectedList);
+            potionContext = newPotionContext;
+            SetTempStats(potionContext.EffectList);
             RecieveDamage();
-            long effectIdCallback = effectedEntity.World.RegisterCallback(Reset, duration * 1000);
+            long effectIdCallback = effectedEntity.World.RegisterCallback(Reset, potionContext.Duration * 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdCallback);
         }
 
@@ -60,22 +51,14 @@ namespace Alchemy
         /// <param name="id"> The id for the RegisterCallback which is saved to WatchedAttributes </param>
         public void TempTickEntityStats(
             EntityPlayer entity,
-            Dictionary<string, float> effectList,
-            int duration,
             string id,
-            int tickSec,
-            float health,
-            bool ignoreArmour
+            PotionContext newPotionContext
         )
         {
             effectedEntity = entity;
-            effectedList = effectList;
             effectId = id;
-            effectDuration = duration;
-            effectTickSec = tickSec;
-            effectHealth = health;
-            ignoreArmourFlag = ignoreArmour;
-            SetTempStats(effectedList);
+            potionContext = newPotionContext;
+            SetTempStats(potionContext.EffectList);
             long effectIdGametick = entity.World.RegisterGameTickListener(OnEffectTick, 1000);
             effectedEntity.WatchedAttributes.SetLong(effectId, effectIdGametick);
         }
@@ -101,9 +84,10 @@ namespace Alchemy
                 }
                 else if (stat.Key == "health")
                 {
-                    effectHealth = stat.Value;
+                    potionContext.Health = stat.Value;
                     RecieveDamage();
-                } else 
+                }
+                else
                 {
                     effectedEntity.Stats.Set(stat.Key, effectCode, stat.Value, false);
                 }
@@ -113,13 +97,13 @@ namespace Alchemy
         public void OnEffectTick(float dt)
         {
             tickCnt++;
-            if (effectTickSec != 0)
+            if (potionContext.TickSec != 0)
             {
-                if (tickCnt % effectTickSec == 0)
+                if (tickCnt % potionContext.TickSec == 0)
                 {
                     RecieveDamage();
                 }
-                if (tickCnt >= effectDuration)
+                if (tickCnt >= potionContext.Duration)
                 {
                     long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
                     effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
@@ -130,19 +114,20 @@ namespace Alchemy
 
         private void RecieveDamage()
         {
-            if (effectHealth != 0)
+            if (Math.Abs(potionContext.Health) > float.Epsilon)
             {
                 float healeffectivnessArmour;
-                if (ignoreArmourFlag)
+                if (potionContext.IgnoreArmour)
                 {
-                    try
+                    ITreeAttribute statsAttr = effectedEntity.WatchedAttributes.GetTreeAttribute(
+                        "stats"
+                    );
+                    ITreeAttribute healingAttr = statsAttr?.GetTreeAttribute("healingeffectivness");
+                    if (statsAttr != null && healingAttr != null)
                     {
-                        healeffectivnessArmour = effectedEntity.WatchedAttributes
-                            .GetTreeAttribute("stats")
-                            .GetTreeAttribute("healingeffectivness")
-                            .GetFloat("wearablemod");
+                        healeffectivnessArmour = healingAttr.GetFloat("wearablemod");
                     }
-                    catch (NullReferenceException)
+                    else
                     {
                         effectedEntity.Api.Logger.Error(
                             "Couldn't gather armour heal effectivness for healing potion. Skipping wearable healeffectivness wipe..."
@@ -154,24 +139,17 @@ namespace Alchemy
                 {
                     healeffectivnessArmour = 0;
                 }
-                if (healeffectivnessArmour != 0)
-                    effectedEntity.Stats.Set(
-                        "healingeffectivness",
-                        "wearablemod",
-                        0,
-                        false
-                    );
-                //api.Logger.Debug("Potion tickSec: {0}", attrClass.ticksec);
+                if (Math.Abs(healeffectivnessArmour) > float.Epsilon)
+                    effectedEntity.Stats.Set("healingeffectivness", "wearablemod", 0, false);
                 effectedEntity.ReceiveDamage(
                     new DamageSource()
                     {
                         Source = EnumDamageSource.Internal,
-                        Type =
-                            effectHealth > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
+                        Type = potionContext.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
                     },
-                    Math.Abs(effectHealth)
+                    Math.Abs(potionContext.Health)
                 );
-                if (healeffectivnessArmour != 0)
+                if (Math.Abs(healeffectivnessArmour) > float.Epsilon)
                     effectedEntity.Stats.Set(
                         "healingeffectivness",
                         "wearablemod",
@@ -179,7 +157,6 @@ namespace Alchemy
                         false
                     );
             }
-
         }
 
         /// <summary>
@@ -187,19 +164,16 @@ namespace Alchemy
         /// </summary>
         public void Reset(float _dt)
         {
-            foreach (KeyValuePair<string, float> stat in effectedList)
+            foreach (string statKey in potionContext.EffectList.Select(stat => stat.Key))
             {
-                effectedEntity.Stats.Remove(stat.Key, effectCode);
-                if (stat.Key == "maxhealthExtraPoints")
+                effectedEntity.Stats.Remove(statKey, effectCode);
+                if (statKey == "maxhealthExtraPoints")
                     effectedEntity.GetBehavior<EntityBehaviorHealth>().MarkDirty();
             }
             if (effectId.Contains("tickpotionid"))
             {
                 long effectIdGametick = effectedEntity.WatchedAttributes.GetLong(effectId);
                 effectedEntity.World.UnregisterGameTickListener(effectIdGametick);
-                effectDuration = 0;
-                effectHealth = 0;
-                effectTickSec = 0;
             }
             effectedEntity.WatchedAttributes.RemoveAttribute(effectId);
             effectId = null;

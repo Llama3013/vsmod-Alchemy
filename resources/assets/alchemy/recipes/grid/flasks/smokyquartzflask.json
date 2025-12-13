@@ -1,0 +1,50 @@
+[
+    {
+        "ingredientPattern": "Q_Q,Q_Q,QQQ",
+        "ingredients": {
+            "Q": {
+                "type": "item",
+                "code": "game:smokyquartz"
+            }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "alchemy:potionflask-normal-smoky",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "_Q_,Q_Q,_Q_",
+        "ingredients": {
+            "Q": {
+                "type": "item",
+                "code": "game:smokyquartz"
+            }
+        },
+        "width": 3,
+        "height": 3,
+        "output": {
+            "type": "block",
+            "code": "alchemy:potionflask-round-smoky",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "Q,Q",
+        "ingredients": {
+            "Q": {
+                "type": "item",
+                "code": "game:smokyquartz"
+            }
+        },
+        "width": 1,
+        "height": 2,
+        "output": {
+            "type": "block",
+            "code": "alchemy:potionflask-tube-smoky",
+            "quantity": 1
+        }
+    }
+]

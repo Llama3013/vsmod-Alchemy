@@ -35,7 +35,7 @@
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [
-    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal"] }
+    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape"] }
   ],
   "attributes": { "handbook": { "groupBy": ["potionbase-{basetype}"] } },
   "attributesByType": {

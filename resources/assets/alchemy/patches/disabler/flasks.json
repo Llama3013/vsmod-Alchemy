@@ -1,0 +1,269 @@
+[
+    {
+        "file": "alchemy:blocktypes/clay/raw/claypotionflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:blocktypes/clay/fired/claypotionflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayFlasks",
+            "isValue": "false"
+        }
+    },
+
+    {
+        "file": "alchemy:blocktypes/flasks/potionflask.json",
+        "op": "remove",
+        "path": "/variantgroups/0/states/2",
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/liquid/potionportion.json",
+        "op": "remove",
+        "path": "/creativeinventoryStacks/0/stacks/1",
+        "value": true,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+        "op": "remove",
+        "path": "/creativeinventoryStacks/0/stacks/1",
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/amethystflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/clearquartzflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/olivineflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/quartzflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/rosequartzflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/smokyquartzflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowSmallFlasks",
+            "isValue": "false"
+        }
+    },
+
+    {
+        "file": "alchemy:blocktypes/flasks/potionflask.json",
+        "op": "remove",
+        "path": "/variantgroups/0/states/1",
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/amethystflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/clearquartzflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/olivineflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/quartzflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/rosequartzflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/smokyquartzflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowMediumFlasks",
+            "isValue": "false"
+        }
+    },
+
+    {
+        "file": "alchemy:blocktypes/flasks/potionflask.json",
+        "op": "remove",
+        "path": "/variantgroups/0/states/0",
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/liquid/potionportion.json",
+        "op": "remove",
+        "path": "/creativeinventoryStacks/0/stacks/0",
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+        "op": "remove",
+        "path": "/creativeinventoryStacks/0/stacks/0",
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/amethystflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/clearquartzflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/olivineflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/quartzflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/rosequartzflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/smokyquartzflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowLargeFlasks",
+            "isValue": "false"
+        }
+    }
+]

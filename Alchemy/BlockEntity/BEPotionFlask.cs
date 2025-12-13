@@ -6,13 +6,13 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace Alchemy
+namespace Alchemy.BlockEntity
 {
     public class BlockEntityPotionFlask : BlockEntityLiquidContainer
     {
         public override string InventoryClassName => "potionflask";
 
-        private BlockPotionFlask ownBlock;
+        private Block.BlockPotionFlask ownBlock;
         private MeshData currentMesh;
 
         public BlockEntityPotionFlask()
@@ -24,7 +24,7 @@ namespace Alchemy
         {
             base.Initialize(api);
 
-            ownBlock = Block as BlockPotionFlask;
+            ownBlock = Block as Block.BlockPotionFlask;
             if (Api.Side == EnumAppSide.Client)
             {
                 currentMesh = GenMesh();
@@ -53,7 +53,10 @@ namespace Alchemy
             return mesh;
         }
 
-        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
+        public override bool OnTesselation(
+            ITerrainMeshPool mesher,
+            ITesselatorAPI tessThreadTesselator
+        )
         {
             if (currentMesh == null || ownBlock.Code.Path.Contains("clay"))
                 return false;

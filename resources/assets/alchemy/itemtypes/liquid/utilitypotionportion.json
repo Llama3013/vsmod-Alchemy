@@ -21,19 +21,6 @@
 
       }
     },
-    "*-reshape": {
-      "potioninfo": { "potionId": "reshapepotionid" },
-      "waterTightContainerProps": {
-        "containable": true,
-        "itemsPerLitre": 4,
-        "texture": { "base": "game:item/resource/temporalgear" },
-        "allowSpill": true,
-        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
-      },
-      "handbook": {
-
-      }
-    },
     "*-nutrition": {
       "potioninfo": { "potionId": "nutritionpotionid" },
       "waterTightContainerProps": {
@@ -85,6 +72,19 @@
       "handbook": {
 
       }
+    },
+    "*-reshape": {
+      "potioninfo": { "potionId": "reshapepotionid" },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:item/resource/temporalgear" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {
+
+      }
     }
   },
   "creativeinventoryStacks": [
@@ -93,7 +93,7 @@
       "stacks": [
         {
           "type": "block",
-          "code": "alchemy:potionflask-tube-quartz",
+          "code": "alchemy:potionflask-normal-quartz",
           "attributes": {
             "ucontents": [
               { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
@@ -102,7 +102,7 @@
         },
         {
           "type": "block",
-          "code": "alchemy:potionflask-normal-quartz",
+          "code": "alchemy:potionflask-tube-quartz",
           "attributes": {
             "ucontents": [
               { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }

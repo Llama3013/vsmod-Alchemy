@@ -1,0 +1,805 @@
+{
+    "version": 1,
+    "file": "alchemy.json",
+    "settings": {
+        "float": {
+            "WEAKPOTIONMULTIPLIER": {
+                "name": "WeakPotionMultiplier",
+                "ingui": "alchemy:WeakPotionMultiplier",
+                "weight": 5.1,
+                "comment": "alchemy:WeakPotionMultiplier-Comment",
+                "default": 1.0,
+                "range": {
+                    "min": 0.01,
+                    "max": 10.0
+                }
+            },
+            "MEDIUMPOTIONMULTIPLIER": {
+                "name": "MediumPotionMultiplier",
+                "ingui": "alchemy:MediumPotionMultiplier",
+                "weight": 5.2,
+                "comment": "alchemy:MediumPotionMultiplier-Comment",
+                "default": 2.0,
+                "range": {
+                    "min": 0.01,
+                    "max": 10.0
+                }
+            },
+            "STRONGPOTIONMULTIPLIER": {
+                "name": "StrongPotionMultiplier",
+                "ingui": "alchemy:StrongPotionMultiplier",
+                "weight": 5.3,
+                "comment": "alchemy:StrongPotionMultiplier-Comment",
+                "default": 3.0,
+                "range": {
+                    "min": 0.01,
+                    "max": 10.0
+                }
+            },
+            "ARCHERPOTIONACC": {
+                "name": "ArcherPotionAcc",
+                "ingui": "alchemy:ArcherPotionAcc",
+                "weight": 10.1,
+                "comment": "alchemy:ArcherPotionAcc-Comment",
+                "default": 0.05,
+                "range": {
+                    "min": 0,
+                    "max": 1
+                }
+            },
+            "ARCHERPOTIONDAMAGE": {
+                "name": "ArcherPotionDamage",
+                "ingui": "alchemy:ArcherPotionDamage",
+                "weight": 10.2,
+                "comment": "alchemy:ArcherPotionDamage-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": 0,
+                    "max": 5
+                }
+            },
+            "ARCHERPOTIONSPEED": {
+                "name": "ArcherPotionSpeed",
+                "ingui": "alchemy:ArcherPotionSpeed",
+                "weight": 10.3,
+                "comment": "alchemy:ArcherPotionSpeed-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": 0,
+                    "max": 1
+                }
+            },
+            "HEALINGEFFECTPOTIONVALUE": {
+                "name": "HealingEffectPotionValue",
+                "ingui": "alchemy:HealingEffectPotionValue",
+                "weight": 11.1,
+                "comment": "alchemy:HealingEffectPotionValue-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": 0.01,
+                    "max": 1
+                }
+            },
+            "HUNGERENHANCEPOTIONVALUE": {
+                "name": "HungerEnhancePotionValue",
+                "ingui": "alchemy:HungerEnhancePotionValue",
+                "weight": 12.1,
+                "comment": "alchemy:HungerEnhancePotionValue-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": 0.01,
+                    "max": 1
+                }
+            },
+            "HUNGERSUPRESSPOTIONVALUE": {
+                "name": "HungerSupressPotionValue",
+                "ingui": "alchemy:HungerSupressPotionValue",
+                "weight": 13.1,
+                "comment": "alchemy:HungerSupressPotionValue-Comment",
+                "default": -0.3,
+                "range": {
+                    "min": -1,
+                    "max": -0.01
+                }
+            },
+            "HUNTERPOTIONANIMALDROP": {
+                "name": "HunterPotionAnimalDrop",
+                "ingui": "alchemy:HunterPotionAnimalDrop",
+                "weight": 14.1,
+                "comment": "alchemy:HunterPotionAnimalDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "HUNTERPOTIONANIMALSEEK": {
+                "name": "HunterPotionAnimalSeek",
+                "ingui": "alchemy:HunterPotionAnimalSeek",
+                "weight": 14.2,
+                "comment": "alchemy:HunterPotionAnimalSeek-Comment",
+                "default": -0.05,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "HUNTERPOTIONFORAGEDROP": {
+                "name": "HunterPotionForageDrop",
+                "ingui": "alchemy:HunterPotionForageDrop",
+                "weight": 14.3,
+                "comment": "alchemy:HunterPotionForageDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "HUNTERPOTIONWILDDROP": {
+                "name": "HunterPotionWildDrop",
+                "ingui": "alchemy:HunterPotionWildDrop",
+                "weight": 14.4,
+                "comment": "alchemy:HunterPotionWildDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "LOOTERPOTIONFORAGEDROP": {
+                "name": "LooterPotionForageDrop",
+                "ingui": "alchemy:LooterPotionForageDrop",
+                "weight": 15.1,
+                "comment": "alchemy:LooterPotionForageDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "LOOTERPOTIONGEARDROP": {
+                "name": "LooterPotionGearDrop",
+                "ingui": "alchemy:LooterPotionGearDrop",
+                "weight": 15.2,
+                "comment": "alchemy:LooterPotionGearDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "LOOTERPOTIONVESSELCONTENTDROP": {
+                "name": "LooterPotionVesselContentDrop",
+                "ingui": "alchemy:LooterPotionVesselContentDrop",
+                "weight": 15.3,
+                "comment": "alchemy:LooterPotionVesselContentDrop-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "LOOTERPOTIONWILDDROP": {
+                "name": "LooterPotionWildDrop",
+                "ingui": "alchemy:LooterPotionWildDrop",
+                "weight": 15.4,
+                "comment": "alchemy:LooterPotionWildDrop-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "MELEEPOTIONDAMAGE": {
+                "name": "MeleePotionDamage",
+                "ingui": "alchemy:MeleePotionDamage",
+                "weight": 16.1,
+                "comment": "alchemy:MeleePotionDamage-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": 0.01,
+                    "max": 5
+                }
+            },
+            "MININGPOTIONSPEED": {
+                "name": "MiningPotionSpeed",
+                "ingui": "alchemy:MiningPotionSpeed",
+                "weight": 17.1,
+                "comment": "alchemy:MiningPotionSpeed-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": -5,
+                    "max": 5
+                }
+            },
+            "MININGPOTIONOREDROP": {
+                "name": "MiningPotionOreDrop",
+                "ingui": "alchemy:MiningPotionOreDrop",
+                "weight": 17.2,
+                "comment": "alchemy:MiningPotionOreDrop-Comment",
+                "default": 0.15,
+                "range": {
+                    "min": -1,
+                    "max": 1
+                }
+            },
+            "POISONPOTIONHEALTH": {
+                "name": "PoisonPotionHealth",
+                "ingui": "alchemy:PoisonPotionHealth",
+                "weight": 18.1,
+                "comment": "alchemy:PoisonPotionHealth-Comment",
+                "default": -0.5,
+                "range": {
+                    "min": -10,
+                    "max": -0.1
+                }
+            },
+            "PREDATOROTIONANIMALSEEK": {
+                "name": "PredatorPotionAnimalSeek",
+                "ingui": "alchemy:PredatorPotionAnimalSeek",
+                "weight": 19.1,
+                "comment": "alchemy:PredatorPotionAnimalSeek-Comment",
+                "default": 0.4,
+                "range": {
+                    "min": 0.01,
+                    "max": 2
+                }
+            },
+            "REGENPOTIONHEALTH": {
+                "name": "RegenPotionHealth",
+                "ingui": "alchemy:RegenPotionHealth",
+                "weight": 20.1,
+                "comment": "alchemy:RegenPotionHealth-Comment",
+                "default": 0.5,
+                "range": {
+                    "min": 0.01,
+                    "max": 5
+                }
+            },
+            "SCENTMASKPOTIONANIMALSEEK": {
+                "name": "ScentMaskPotionAnimalSeek",
+                "ingui": "alchemy:ScentMaskPotionAnimalSeek",
+                "weight": 21.1,
+                "comment": "alchemy:ScentMaskPotionAnimalSeek-Comment",
+                "default": -0.2,
+                "range": {
+                    "min": -0.99,
+                    "max": -0.01
+                }
+            },
+            "SPEEDPOTIONVALUE": {
+                "name": "SpeedPotionValue",
+                "ingui": "alchemy:SpeedPotionValue",
+                "weight": 22.1,
+                "comment": "alchemy:SpeedPotionValue-Comment",
+                "default": 0.25,
+                "range": {
+                    "min": 0.01,
+                    "max": 10
+                }
+            },
+            "VITALITYDPOTIONMAXHEALTH": {
+                "name": "VitalityPotionMaxHealth",
+                "ingui": "alchemy:VitalityPotionMaxHealth",
+                "weight": 23.1,
+                "comment": "alchemy:VitalityPotionMaxHealth-Comment",
+                "default": 0.25,
+                "range": {
+                    "min": 0.01,
+                    "max": 10
+                }
+            }
+        },
+        "integer": {
+            "ARCHERPOTIONDURATION": {
+                "name": "ArcherPotionDuration",
+                "ingui": "alchemy:ArcherPotionDuration",
+                "weight": 10.4,
+                "comment": "alchemy:ArcherPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "HEALINGEFFECTPOTIONDURATION": {
+                "name": "HealingEffectPotionDuration",
+                "ingui": "alchemy:HealingEffectPotionDuration",
+                "weight": 11.2,
+                "comment": "alchemy:HealingEffectPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "HUNGERENHANCEPOTIONDURATION": {
+                "name": "HungerEnhancePotionDuration",
+                "ingui": "alchemy:HungerEnhancePotionDuration",
+                "weight": 12.2,
+                "comment": "alchemy:HungerEnhancePotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "HUNGERSUPRESSPOTIONDURATION": {
+                "name": "HungerSupressPotionDuration",
+                "ingui": "alchemy:HungerSupressPotionDuration",
+                "weight": 13.2,
+                "comment": "alchemy:HungerSupressPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "HUNTERPOTIONDURATION": {
+                "name": "HunterPotionDuration",
+                "ingui": "alchemy:HunterPotionDuration",
+                "weight": 14.5,
+                "comment": "alchemy:HunterPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "LOOTERPOTIONDURATION": {
+                "name": "LooterPotionDuration",
+                "ingui": "alchemy:LooterPotionDuration",
+                "weight": 15.5,
+                "comment": "alchemy:LooterPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "MELEEPOTIONDURATION": {
+                "name": "MeleePotionDuration",
+                "ingui": "alchemy:MeleePotionDuration",
+                "weight": 16.2,
+                "comment": "alchemy:MeleePotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "MININGPOTIONDURATION": {
+                "name": "MiningPotionDuration",
+                "ingui": "alchemy:MiningPotionDuration",
+                "weight": 17.3,
+                "comment": "alchemy:MiningPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "POISONPOTIONDURATION": {
+                "name": "PoisonPotionDuration",
+                "ingui": "alchemy:PoisonPotionDuration",
+                "weight": 18.2,
+                "comment": "alchemy:PoisonPotionDuration-Comment",
+                "default": 30,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "POISONPOTIONTICKSEC": {
+                "name": "PoisonPotionTickSec",
+                "ingui": "alchemy:PoisonPotionTickSec",
+                "weight": 18.3,
+                "comment": "alchemy:PoisonPotionTickSec-Comment",
+                "default": 3,
+                "range": {
+                    "min": 1,
+                    "max": 29
+                }
+            },
+            "PREDATORPOTIONDURATION": {
+                "name": "PredatorPotionDuration",
+                "ingui": "alchemy:PredatorPotionDuration",
+                "weight": 19.2,
+                "comment": "alchemy:PredatorPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "REGENPOTIONDURATION": {
+                "name": "RegenPotionDuration",
+                "ingui": "alchemy:RegenPotionDuration",
+                "weight": 20.2,
+                "comment": "alchemy:RegenPotionDuration-Comment",
+                "default": 30,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "REGENPOTIONTICKSEC": {
+                "name": "RegenPotionTickSec",
+                "ingui": "alchemy:RegenPotionTickSec",
+                "weight": 20.3,
+                "comment": "alchemy:RegenPotionTickSec-Comment",
+                "default": 3,
+                "range": {
+                    "min": 1,
+                    "max": 29
+                }
+            },
+            "SCENTMASKPOTIONDURATION": {
+                "name": "ScentMaskPotionDuration",
+                "ingui": "alchemy:ScentMaskPotionDuration",
+                "weight": 21.2,
+                "comment": "alchemy:ScentMaskPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "SPEEDPOTIONDURATION": {
+                "name": "SpeedPotionDuration",
+                "ingui": "alchemy:SpeedPotionDuration",
+                "weight": 22.2,
+                "comment": "alchemy:SpeedPotionDuration-Comment",
+                "default": 300,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "VITALITYPOTIONDURATION": {
+                "name": "VitalityPotionDuration",
+                "ingui": "alchemy:VitalityPotionDuration",
+                "weight": 23.2,
+                "comment": "alchemy:VitalityPotionDuration-Comment",
+                "default": 300,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "GLOWPOTIONDURATION": {
+                "name": "GlowPotionDuration",
+                "ingui": "alchemy:GlowPotionDuration",
+                "weight": 40.2,
+                "comment": "alchemy:GlowPotionDuration-Comment",
+                "default": 1000,
+                "range": {
+                    "min": 10,
+                    "max": 10000
+                }
+            },
+            "WATERBREATHEPOTIONDURATION": {
+                "name": "WaterBreathePotionDuration",
+                "ingui": "alchemy:WaterBreathePotionDuration",
+                "weight": 41.2,
+                "comment": "alchemy:WaterBreathePotionDuration-Comment",
+                "default": 1000,
+                "range": {
+                    "min": 10,
+                    "max": 10000
+                }
+            }
+        },
+        "boolean": {
+            "ALLOWARCHERPOTION": {
+                "name": "AllowArcherPotion",
+                "ingui": "alchemy:AllowArcherPotion",
+                "weight": 1.01,
+                "comment": "alchemy:AllowArcherPotion-Comment",
+                "default": true
+            },
+            "ALLOWHEALINGEFFECTPOTION": {
+                "name": "AllowHealingEffectPotion",
+                "ingui": "alchemy:AllowHealingEffectPotion",
+                "weight": 1.02,
+                "comment": "alchemy:AllowHealingEffectPotion-Comment",
+                "default": true
+            },
+            "ALLOWHUNGERENHANCEPOTION": {
+                "name": "AllowHungerEnhancePotion",
+                "ingui": "alchemy:AllowHungerEnhancePotion",
+                "weight": 1.03,
+                "comment": "alchemy:AllowHungerEnhancePotion-Comment",
+                "default": true
+            },
+            "ALLOWHUNGERSUPRESSPOTION": {
+                "name": "AllowHungerSupressPotion",
+                "ingui": "alchemy:AllowHungerSupressPotion",
+                "weight": 1.04,
+                "comment": "alchemy:AllowHungerSupressPotion-Comment",
+                "default": true
+            },
+            "ALLOWHUNTERPOTION": {
+                "name": "AllowHunterPotion",
+                "ingui": "alchemy:AllowHunterPotion",
+                "weight": 1.05,
+                "comment": "alchemy:AllowHunterPotion-Comment",
+                "default": true
+            },
+            "ALLOWLOOTERPOTION": {
+                "name": "AllowLooterPotion",
+                "ingui": "alchemy:AllowLooterPotion",
+                "weight": 1.06,
+                "comment": "alchemy:AllowLooterPotion-Comment",
+                "default": true
+            },
+            "ALLOWMELEEPOTION": {
+                "name": "AllowMeleePotion",
+                "ingui": "alchemy:AllowMeleePotion",
+                "weight": 1.07,
+                "comment": "alchemy:AllowMeleePotion-Comment",
+                "default": true
+            },
+            "ALLOWMININGPOTION": {
+                "name": "AllowMiningPotion",
+                "ingui": "alchemy:AllowMiningPotion",
+                "weight": 1.08,
+                "comment": "alchemy:AllowMiningPotion-Comment",
+                "default": true
+            },
+            "ALLOWPOISONPOTION": {
+                "name": "AllowPoisonPotion",
+                "ingui": "alchemy:AllowPoisonPotion",
+                "weight": 1.09,
+                "comment": "alchemy:AllowPoisonPotion-Comment",
+                "default": true
+            },
+            "POISONPOTIONIGNOREARMOUR": {
+                "name": "PoisonPotionIgnoreArmour",
+                "ingui": "alchemy:PoisonPotionIgnoreArmour",
+                "weight": 18.5,
+                "comment": "alchemy:PoisonPotionIgnoreArmour-Comment",
+                "default": true
+            },
+            "ALLOWPREDATORPOTION": {
+                "name": "AllowPredatorPotion",
+                "ingui": "alchemy:AllowPredatorPotion",
+                "weight": 1.10,
+                "comment": "alchemy:AllowPredatorPotion-Comment",
+                "default": true
+            },
+            "ALLOWREGENPOTION": {
+                "name": "AllowRegenPotion",
+                "ingui": "alchemy:AllowRegenPotion",
+                "weight": 1.11,
+                "comment": "alchemy:AllowRegenPotion-Comment",
+                "default": true
+            },
+            "REGENPOTIONIGNOREARMOUR": {
+                "name": "RegenPotionIgnoreArmour",
+                "ingui": "alchemy:RegenPotionIgnoreArmour",
+                "weight": 20.5,
+                "comment": "alchemy:RegenPotionIgnoreArmour-Comment",
+                "default": true
+            },
+            "ALLOWSCENTMASKPOTION": {
+                "name": "AllowScentMaskPotion",
+                "ingui": "alchemy:AllowScentMaskPotion",
+                "weight": 1.12,
+                "comment": "alchemy:AllowScentMaskPotion-Comment",
+                "default": true
+            },
+            "ALLOWSPEEDPOTION": {
+                "name": "AllowSpeedPotion",
+                "ingui": "alchemy:AllowSpeedPotion",
+                "weight": 1.13,
+                "comment": "alchemy:AllowSpeedPotion-Comment",
+                "default": true
+            },
+            "ALLOWVITALITYPOTION": {
+                "name": "AllowVitalityPotion",
+                "ingui": "alchemy:AllowVitalityPotion",
+                "weight": 1.14,
+                "comment": "alchemy:AllowVitalityPotion-Comment",
+                "default": true
+            },
+            "ALLOWRECALLPOTION": {
+                "name": "AllowRecallPotion",
+                "ingui": "alchemy:AllowRecallPotion",
+                "weight": 1.20,
+                "comment": "alchemy:AllowRecallPotion-Comment",
+                "default": true
+            },
+            "ALLOWGLOWPOTION": {
+                "name": "AllowGlowPotion",
+                "ingui": "alchemy:AllowGlowPotion",
+                "weight": 1.21,
+                "comment": "alchemy:AllowGlowPotion-Comment",
+                "default": true
+            },
+            "ALLOWWATERBREATHEPOTION": {
+                "name": "AllowWaterBreathePotion",
+                "ingui": "alchemy:AllowWaterBreathePotion",
+                "weight": 1.22,
+                "comment": "alchemy:AllowWaterBreathePotion-Comment",
+                "default": true
+            },
+            "ALLOWNUTRITIONPOTION": {
+                "name": "AllowNutritionPotion",
+                "ingui": "alchemy:AllowNutritionPotion",
+                "weight": 1.23,
+                "comment": "alchemy:AllowNutritionPotion-Comment",
+                "default": true
+            },
+            "ALLOWTEMPORALPOTION": {
+                "name": "AllowTemporalPotion",
+                "ingui": "alchemy:AllowTemporalPotion",
+                "weight": 1.24,
+                "comment": "alchemy:AllowTemporalPotion-Comment",
+                "default": true
+            },
+            "ALLOWRESHAPEPOTION": {
+                "name": "AllowReshapePotion",
+                "ingui": "alchemy:AllowReshapePotion",
+                "weight": 1.25,
+                "comment": "alchemy:AllowReshapePotion-Comment",
+                "default": true
+            },
+            "ALLOWSTRONGPOTIONS": {
+                "name": "AllowStrongPotions",
+                "ingui": "alchemy:AllowStrongPotions",
+                "weight": 2.1,
+                "comment": "alchemy:AllowStrongPotions-Comment",
+                "default": true
+            },
+            "ALLOWMEDIUMPOTIONS": {
+                "name": "AllowMediumPotions",
+                "ingui": "alchemy:AllowMediumPotions",
+                "weight": 2.2,
+                "comment": "alchemy:AllowMediumPotions-Comment",
+                "default": true
+            },
+            "ALLOWHERBBALLS": {
+                "name": "AllowHerbballs",
+                "ingui": "alchemy:AllowHerbballs",
+                "weight": 2.3,
+                "comment": "alchemy:AllowHerbballs-Comment",
+                "default": true
+            },
+            "ALLOWCLAYFLASKS": {
+                "name": "AllowClayFlasks",
+                "ingui": "alchemy:AllowClayFlasks",
+                "weight": 3.1,
+                "comment": "alchemy:AllowClayFlasks-Comment",
+                "default": true
+            },
+            "ALLOWSMALLFLASKS": {
+                "name": "AllowSmallFlasks",
+                "ingui": "alchemy:AllowSmallFlasks",
+                "weight": 3.2,
+                "comment": "alchemy:AllowSmallFlasks-Comment",
+                "default": true
+            },
+            "ALLOWMEDIUMFLASKS": {
+                "name": "AllowMediumFlasks",
+                "ingui": "alchemy:AllowMediumFlasks",
+                "weight": 3.3,
+                "comment": "alchemy:AllowMediumFlasks-Comment",
+                "default": true
+            },
+            "ALLOWLARGEFLASKS": {
+                "name": "AllowLargeFlasks",
+                "ingui": "alchemy:AllowLargeFlasks",
+                "weight": 3.4,
+                "comment": "alchemy:AllowLargeFlasks-Comment",
+                "default": true
+            },
+            "ALLOWHERBRACKMOLDS": {
+                "name": "AllowHerbRackMolds",
+                "ingui": "alchemy:AllowHerbRackMolds",
+                "weight": 4.1,
+                "comment": "alchemy:AllowHerbRackMolds-Comment",
+                "default": true
+            },
+            "ALLOWHERBRACKS": {
+                "name": "AllowHerbRacks",
+                "ingui": "alchemy:AllowHerbRacks",
+                "weight": 4.2,
+                "comment": "alchemy:AllowHerbRacks-Comment",
+                "default": true
+            }
+        }
+    },
+    "formatting": [
+        {
+            "type": "separator",
+            "title": "alchemy:Allow-Config",
+            "weight": 0.5
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:Strength-Multiplier-Config",
+            "weight": 5
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:ArcherValues-Config",
+            "weight": 10
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:HealingEffectValues-Config",
+            "weight": 11
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:HungerEnhanceValues-Config",
+            "weight": 12
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:HungerSupressValues-Config",
+            "weight": 13
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:HunterValues-Config",
+            "weight": 14
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:LooterValues-Config",
+            "weight": 15
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:MeleeValues-Config",
+            "weight": 16
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:MiningValues-Config",
+            "weight": 17
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:PoisonValues-Config",
+            "weight": 18
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:PredatorValues-Config",
+            "weight": 19
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:RegenValues-Config",
+            "weight": 20
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:ScentMaskValues-Config",
+            "weight": 21
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:SpeedValues-Config",
+            "weight": 22
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:VitalityValues-Config",
+            "weight": 23
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:GlowValues-Config",
+            "weight": 40
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:WaterBreatheValues-Config",
+            "weight": 41
+        }
+    ]
+}

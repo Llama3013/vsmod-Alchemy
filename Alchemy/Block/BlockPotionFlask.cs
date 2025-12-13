@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using Alchemy.Item;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -11,7 +11,7 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace Alchemy
+namespace Alchemy.Block
 {
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
@@ -435,23 +435,15 @@ namespace Alchemy
 
             ItemStack contentStack = GetContent(slot.Itemstack);
             if (
-                IsValidPotionUsage(
-                    secondsUsed,
-                    byEntity,
-                    contentStack,
-                    out EntityPlayer playerEntity,
-                    out IServerPlayer serverPlayer
-                )
-            )
-            {
-                ProcessPotionEffects(contentStack, byEntity, playerEntity, serverPlayer);
-                SplitStackAndPerformAction(
-                    playerEntity,
-                    slot,
-                    stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                );
-                slot.MarkDirty();
-                playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
+                secondsUsed > 1.45f && contentStack.Item is ItemPotion potion && potion.TryProcessPotionEffects(byEntity, contentStack)) {
+                    EntityPlayer playerEntity = byEntity as EntityPlayer;
+                    SplitStackAndPerformAction(
+                        playerEntity,
+                        slot,
+                        stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
+                    );
+                    slot.MarkDirty();
+                    playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
             }
 
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
@@ -489,154 +481,6 @@ namespace Alchemy
             return preventDefault;
         }
 
-        private static bool IsValidPotionUsage(
-            float secondsUsed,
-            EntityAgent byEntity,
-            ItemStack contentStack,
-            out EntityPlayer playerEntity,
-            out IServerPlayer serverPlayer
-        )
-        {
-            playerEntity = byEntity as EntityPlayer;
-            serverPlayer = playerEntity?.Player as IServerPlayer;
-
-            return secondsUsed > 1.45f
-                && byEntity.World.Side == EnumAppSide.Server
-                && contentStack != null
-                && playerEntity != null
-                && serverPlayer != null;
-        }
-
-        private void ProcessPotionEffects(
-            ItemStack contentStack,
-            EntityAgent byEntity,
-            EntityPlayer playerEntity,
-            IServerPlayer serverPlayer
-        )
-        {
-            JsonObject potion = contentStack.ItemAttributes?[potionInfo];
-            if (potion?.Exists ?? false)
-            {
-                string potionId = potion["potionId"].AsString();
-                bool ignoreArmour = potion["ignoreArmour"].AsBool(false);
-
-                if (
-                    !string.IsNullOrWhiteSpace(potionId)
-                    && byEntity.WatchedAttributes.GetLong(potionId) == 0
-                )
-                {
-                    switch (potionId)
-                    {
-                        case "nutritionpotionid":
-                            UtilityEffects.ApplyNutritionPotion(byEntity);
-                            break;
-
-                        case "recallpotionid":
-                            UtilityEffects.ApplyRecallPotion(serverPlayer, byEntity, api);
-                            break;
-
-                        case "temporalpotionid":
-                            UtilityEffects.ApplyTemporalPotion(byEntity);
-                            break;
-
-                        case "reshapepotionid":
-                            UtilityEffects.ApplyReshapePotion(serverPlayer);
-                            break;
-
-                        default:
-                            ApplyCustomPotion(contentStack, playerEntity, potionId, ignoreArmour);
-                            break;
-                    }
-
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:effect-gain", contentStack.GetName()),
-                        EnumChatType.Notification
-                    );
-                    api.Logger.Audit("potion {0} activated on player {1}", potionId, serverPlayer.PlayerName);
-                }
-            }
-        }
-
-        private static void ApplyCustomPotion(
-            ItemStack contentStack,
-            EntityPlayer playerEntity,
-            string potionId,
-            bool ignoreArmour
-        )
-        {
-            TempEffect potionEffect = new();
-            string strength = contentStack.Item.Variant?["strength"] ?? "none";
-            int duration = contentStack.ItemAttributes?[potionInfo]?["duration"].AsInt(0) ?? 0;
-            JsonObject tickPotion = contentStack.ItemAttributes?["tickpotioninfo"];
-            int tickSec = tickPotion?["ticksec"].AsInt() ?? 0;
-            float health = tickPotion?["health"].AsFloat() ?? 0;
-
-            AdjustPotionStrength(ref health, strength);
-
-            Dictionary<string, float> effectList = GetPotionEffects(contentStack, strength);
-
-            if (tickSec != 0)
-            {
-                potionEffect.TempTickEntityStats(
-                    playerEntity,
-                    effectList,
-                    duration,
-                    potionId,
-                    tickSec,
-                    health,
-                    ignoreArmour
-                );
-            }
-            else
-            {
-                potionEffect.TempEntityStats(playerEntity, effectList, duration, potionId, ignoreArmour);
-            }
-        }
-
-        private static void AdjustPotionStrength(ref float health, string strength)
-        {
-            switch (strength)
-            {
-                case "strong":
-                    health = MathF.Round(health * 3, 2);
-                    break;
-
-                case "medium":
-                    health = MathF.Round(health * 2, 2);
-                    break;
-            }
-        }
-
-        private static Dictionary<string, float> GetPotionEffects(
-            ItemStack contentStack,
-            string strength
-        )
-        {
-            Dictionary<string, float> effectList =
-                contentStack.ItemAttributes?["effects"]?.AsObject<Dictionary<string, float>>()
-                ?? [];
-
-            switch (strength)
-            {
-                case "strong":
-                    foreach (string effect in effectList.Keys.ToList())
-                    {
-                        effectList[effect] = MathF.Round(effectList[effect] * 3, 2);
-                    }
-                    break;
-
-                case "medium":
-                    foreach (string effect in effectList.Keys.ToList())
-                    {
-                        effectList[effect] = MathF.Round(effectList[effect] * 2, 2);
-                    }
-                    break;
-            }
-
-            return effectList;
-        }
-
         #endregion Interaction
 
         public override void GetHeldItemInfo(
@@ -656,7 +500,7 @@ namespace Alchemy
         ICoreClientAPI capi,
         ItemStack forContents,
         CompositeTexture contentTexture,
-        Block flask
+        Vintagestory.API.Common.Block flask
         ) : ITexPositionSource
     {
         public ItemStack ForContents { get; set; } = forContents ?? throw new ArgumentNullException(nameof(forContents));
@@ -709,10 +553,10 @@ namespace Alchemy
                             {
                                 try
                                 {
-                                    capi.BlockTextureAtlas.InsertTexture(
+                                    _ = capi.BlockTextureAtlas.InsertTexture(
                                         bmp,
                                         out id,
-                                        out TextureAtlasPosition texPos
+                                        out TextureAtlasPosition _
                                     );
                                 }
                                 catch (Exception ex)

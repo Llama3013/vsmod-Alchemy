@@ -6,7 +6,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace Alchemy
+namespace Alchemy.BlockEntity
 {
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {
@@ -69,10 +69,7 @@ namespace Alchemy
             else
             {
                 CollectibleObject colObj = slot.Itemstack.Collectible;
-                if (
-                    colObj.Attributes != null
-                    && colObj.Attributes["herbrackable"].AsBool(false) == true
-                )
+                if (colObj.Attributes != null && colObj.Attributes["herbrackable"].AsBool(false))
                 {
                     AssetLocation sound = slot.Itemstack?.Block?.Sounds?.Place;
 
@@ -107,7 +104,7 @@ namespace Alchemy
         {
             int index = blockSel.SelectionBoxIndex;
 
-            //Api.Logger.Debug("potion {0}", blockSel.SelectionBoxIndex);
+            Api.Logger.Debug("potion {0}", blockSel.SelectionBoxIndex);
             if (inv[index].Empty)
             {
                 int moved = slot.TryPutInto(Api.World, inv[index]);
@@ -163,13 +160,13 @@ namespace Alchemy
             return false;
         }
 
-        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder sb)
+        public override void GetBlockInfo(IPlayer forPlayer, StringBuilder dsc)
         {
-            base.GetBlockInfo(forPlayer, sb);
+            base.GetBlockInfo(forPlayer, dsc);
 
             float ripenRate = GameMath.Clamp(((1 - container.GetPerishRate()) - 0.5f) * 3, 0, 1);
 
-            sb.AppendLine();
+            dsc.AppendLine();
 
             for (int j = 7; j >= 0; j--)
             {
@@ -183,11 +180,11 @@ namespace Alchemy
                     && stack.Collectible.TransitionableProps.Length > 0
                 )
                 {
-                    sb.Append(PerishableInfoCompact(Api, inv[j], ripenRate));
+                    dsc.Append(PerishableInfoCompact(Api, inv[j], ripenRate));
                 }
                 else
                 {
-                    sb.AppendLine(stack.GetName());
+                    dsc.AppendLine(stack.GetName());
                 }
             }
         }
@@ -245,43 +242,52 @@ namespace Alchemy
                             if (transitionLevel > 0)
                             {
                                 dsc.Append(
-                                    ", " + Lang.Get(
-                                        "{1:0.#} days left to dry ({0}%)",
-                                        (int)Math.Round(transitionLevel * 100),
-                                        transitionHoursLeft / hoursPerday
-                                    )
+                                    ", "
+                                        + Lang.Get(
+                                            "{1:0.#} days left to dry ({0}%)",
+                                            (int)Math.Round(transitionLevel * 100),
+                                            transitionHoursLeft / hoursPerday
+                                        )
                                 );
                             }
                             else
                             {
-                                if (transitionHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
+                                if (
+                                    transitionHoursLeft / hoursPerday
+                                    >= Api.World.Calendar.DaysPerYear
+                                )
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will dry in {0} years",
-                                            Math.Round(
-                                                transitionHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear,
-                                                1
+                                        ", "
+                                            + Lang.Get(
+                                                "will dry in {0} years",
+                                                Math.Round(
+                                                    transitionHoursLeft
+                                                        / hoursPerday
+                                                        / Api.World.Calendar.DaysPerYear,
+                                                    1
+                                                )
                                             )
-                                        )
                                     );
                                 }
                                 else if (transitionHoursLeft > hoursPerday)
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will dry in {0} days",
-                                            Math.Round(transitionHoursLeft / hoursPerday, 1)
-                                        )
+                                        ", "
+                                            + Lang.Get(
+                                                "will dry in {0} days",
+                                                Math.Round(transitionHoursLeft / hoursPerday, 1)
+                                            )
                                     );
                                 }
                                 else
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will dry in {0} hours",
-                                            Math.Round(transitionHoursLeft, 1)
-                                        )
+                                        ", "
+                                            + Lang.Get(
+                                                "will dry in {0} hours",
+                                                Math.Round(transitionHoursLeft, 1)
+                                            )
                                     );
                                 }
                             }
@@ -294,11 +300,12 @@ namespace Alchemy
                             if (transitionLevel > 0)
                             {
                                 dsc.Append(
-                                    ", " + Lang.Get(
-                                        "{1:0.#} days left to cure ({0}%)",
-                                        (int)Math.Round(transitionLevel * 100),
-                                        transitionHoursLeft / hoursPerday / ripenRate
-                                    )
+                                    ", "
+                                        + Lang.Get(
+                                            "{1:0.#} days left to cure ({0}%)",
+                                            (int)Math.Round(transitionLevel * 100),
+                                            transitionHoursLeft / hoursPerday / ripenRate
+                                        )
                                 );
                             }
                             else
@@ -306,31 +313,36 @@ namespace Alchemy
                                 if (freshHoursLeft / hoursPerday >= Api.World.Calendar.DaysPerYear)
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will cure in {0} years",
-                                            Math.Round(
-                                                freshHoursLeft / hoursPerday / Api.World.Calendar.DaysPerYear,
-                                                1
+                                        ", "
+                                            + Lang.Get(
+                                                "will cure in {0} years",
+                                                Math.Round(
+                                                    freshHoursLeft
+                                                        / hoursPerday
+                                                        / Api.World.Calendar.DaysPerYear,
+                                                    1
+                                                )
                                             )
-                                        )
                                     );
                                 }
                                 else if (freshHoursLeft > hoursPerday)
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will cure in {0} days",
-                                            Math.Round(freshHoursLeft / hoursPerday, 1)
-                                        )
+                                        ", "
+                                            + Lang.Get(
+                                                "will cure in {0} days",
+                                                Math.Round(freshHoursLeft / hoursPerday, 1)
+                                            )
                                     );
                                 }
                                 else
                                 {
                                     dsc.Append(
-                                        ", " + Lang.Get(
-                                            "will cure in {0} hours",
-                                            Math.Round(freshHoursLeft, 1)
-                                        )
+                                        ", "
+                                            + Lang.Get(
+                                                "will cure in {0} hours",
+                                                Math.Round(freshHoursLeft, 1)
+                                            )
                                     );
                                 }
                             }
@@ -352,7 +364,6 @@ namespace Alchemy
                 float z;
                 float rotate;
 
-                //Api.Logger.Debug("potion {0}", index);
                 switch (index)
                 {
                     case 0:
@@ -360,7 +371,6 @@ namespace Alchemy
                         z = 2f / 16f;
                         rotate = 0f;
 
-                        //rotate = 1.57079635f;
                         break;
 
                     case 1:
@@ -368,7 +378,6 @@ namespace Alchemy
                         z = 11.5f / 16f;
                         rotate = 135f;
 
-                        //rotate = -2.356194525f;
                         break;
 
                     case 2:
@@ -376,7 +385,6 @@ namespace Alchemy
                         z = 13f / 16f;
                         rotate = 45f;
 
-                        //rotate = -0.785398175f;
                         break;
 
                     case 3:
@@ -384,7 +392,6 @@ namespace Alchemy
                         z = -5f / 16f;
                         rotate = 270f;
 
-                        //rotate = 0f;
                         break;
 
                     case 4:
@@ -398,7 +405,6 @@ namespace Alchemy
                         z = 3.25f / 16f;
                         rotate = 225f;
 
-                        //rotate = 2.356194525f;
                         break;
 
                     case 6:
@@ -406,7 +412,6 @@ namespace Alchemy
                         z = 21.5f / 16f;
                         rotate = 135f;
 
-                        //rotate = 0.785398175f;
                         break;
 
                     case 7:
@@ -414,7 +419,6 @@ namespace Alchemy
                         z = 14f / 16f;
                         rotate = 180f;
 
-                        //rotate = -1.57079635f;
                         break;
 
                     default:

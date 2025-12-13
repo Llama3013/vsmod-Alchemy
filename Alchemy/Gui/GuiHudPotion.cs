@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 
-namespace Alchemy
+namespace Alchemy.GUI
 {
     public class GuiHudPotion : HudElement
     {
@@ -12,8 +13,10 @@ namespace Alchemy
         public override bool Focusable => false;
         private long activeId = 0;
         private long inactiveId = 0;
-        private static readonly AssetLocation activeAlchemyHUDTexture = new("alchemy:textures/hud/activealchemyhud.png");
-        private static readonly AssetLocation inactiveAlchemyHUDTexture = new("alchemy:textures/hud/inactivealchemyhud.png");
+        private static readonly AssetLocation activeAlchemyHUDTexture =
+            new("alchemy:textures/hud/activealchemyhud.png");
+        private static readonly AssetLocation inactiveAlchemyHUDTexture =
+            new("alchemy:textures/hud/inactivealchemyhud.png");
         private GuiComposer activeComposer;
         private GuiComposer inactiveComposer;
 
@@ -36,10 +39,7 @@ namespace Alchemy
 
             inactiveComposer = capi.Gui
                 .CreateCompo("potionhud", hudBounds)
-                .AddImage(
-                    hudBounds.ForkChild(),
-                    inactiveAlchemyHUDTexture
-                )
+                .AddImage(hudBounds.ForkChild(), inactiveAlchemyHUDTexture)
                 .AddHoverText(
                     "shouldn't see this!",
                     font,
@@ -49,10 +49,7 @@ namespace Alchemy
                 );
             activeComposer = capi.Gui
                 .CreateCompo("potionhud", hudBounds)
-                .AddImage(
-                    hudBounds.ForkChild(),
-                    activeAlchemyHUDTexture
-                )
+                .AddImage(hudBounds.ForkChild(), activeAlchemyHUDTexture)
                 .AddHoverText(
                     "shouldn't see this!",
                     font,
@@ -76,13 +73,13 @@ namespace Alchemy
         {
             if (activeId != 0)
             {
-                //capi.Logger.Debug("unregister activeHUD");
+                capi.Logger.Debug("unregister activeHUD");
                 capi.World.UnregisterGameTickListener(activeId);
                 activeId = 0;
             }
             if (inactiveId != 0)
             {
-                //capi.Logger.Debug("unregister inactiveHUD");
+                capi.Logger.Debug("unregister inactiveHUD");
                 capi.World.UnregisterGameTickListener(inactiveId);
                 inactiveId = 0;
             }
@@ -107,18 +104,13 @@ namespace Alchemy
 
         public bool CheckForEffects()
         {
-            //capi.Logger.Debug("checking for effects active");
+            capi.Logger.Debug("checking for effects active");
             bool activePotion = false;
-            StringBuilder stringBuilder = new();
-            stringBuilder.AppendLine(Lang.GetIfExists("alchemy:potioneffectTrue"));
             EntityPlayer entity = capi.World.Player.Entity;
-            foreach (KeyValuePair<string, EntityFloatStats> stat in entity.Stats)
+            if (entity.Stats.Any(stat => stat.Value.ValuesByKey.ContainsKey("potionmod")))
             {
-                if (stat.Value.ValuesByKey.ContainsKey("potionmod"))
-                {
-                    ActivateReadEffects();
-                    activePotion = true;
-                }
+                ActivateReadEffects();
+                activePotion = true;
             }
             if (entity.WatchedAttributes.HasAttribute("glow"))
             {
@@ -140,7 +132,7 @@ namespace Alchemy
 
         public bool ReadEffects()
         {
-            //capi.Logger.Debug("readingeffects active");
+            capi.Logger.Debug("readingeffects active");
             bool activePotion = false;
             StringBuilder stringBuilder = new();
             stringBuilder.AppendLine(Lang.GetIfExists("alchemy:potioneffectTrue"));
@@ -150,7 +142,11 @@ namespace Alchemy
                 if (stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
                 {
                     stringBuilder.AppendLine(
-                        string.Format("{0}: {1}", Lang.GetIfExists("alchemy:" + stat.Key), value?.Value)
+                        string.Format(
+                            "{0}: {1}",
+                            Lang.GetIfExists("alchemy:" + stat.Key),
+                            value?.Value
+                        )
                     );
                     activePotion = true;
                 }
@@ -158,17 +154,23 @@ namespace Alchemy
             if (entity.WatchedAttributes.HasAttribute("glow"))
             {
                 bool value = capi.World.Player.Entity.WatchedAttributes.GetBool("glow");
-                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:glow") + ": {0}", value));
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:glow") + ": {0}", value)
+                );
                 activePotion = true;
             }
             if (entity.WatchedAttributes.HasAttribute("regentickpotionid"))
             {
-                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:regen") + ": {0}", true));
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:regen") + ": {0}", true)
+                );
                 activePotion = true;
             }
             if (entity.WatchedAttributes.HasAttribute("poisontickpotionid"))
             {
-                stringBuilder.AppendLine(string.Format(Lang.GetIfExists("alchemy:poison") + ": {0}", true));
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:poison") + ": {0}", true)
+                );
                 activePotion = true;
             }
             if (activePotion)
@@ -195,22 +197,22 @@ namespace Alchemy
             SingleComposer?.Dispose();
             if (activeId != 0)
             {
-                //capi.Logger.Debug("unregister active");
+                capi.Logger.Debug("unregister active alchemy hud");
                 capi.World.UnregisterGameTickListener(activeId);
                 activeId = 0;
             }
             if (inactiveId != 0)
             {
-                //capi.Logger.Debug("unregister inactive");
+                capi.Logger.Debug("unregister inactive alchemy hud");
                 capi.World.UnregisterGameTickListener(inactiveId);
                 inactiveId = 0;
             }
         }
     }
 
-    public class ModSystemHud : ModSystem
+    public class ModSystemHud : Vintagestory.API.Common.ModSystem
     {
-        private GuiDialog alchemyHUD;
+        private GuiHudPotion alchemyHUD;
 
         public override bool ShouldLoad(EnumAppSide forSide)
         {
@@ -255,7 +257,7 @@ namespace Alchemy
 
         private bool MoveGui(KeyCombination comb)
         {
-            if ((alchemyHUD.IsOpened() && alchemyHUD.SingleComposer.Composed))
+            if (alchemyHUD.IsOpened() && alchemyHUD.SingleComposer.Composed)
             {
                 EnumDialogArea newPosition = alchemyHUD.SingleComposer.Bounds.Alignment + 1;
                 switch (newPosition)

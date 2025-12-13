@@ -2,13 +2,10 @@
   "effect-lose": "You feel the effects of the potion dissipate",
   "effect-gain": "You feel the effects of the {0}",
   "boat-block": "You cannot recall when mounted on a boat",
-
   "item-potionbase*": "A potion base used to make potions",
   "item-potionbase-basic": "Basic potion base",
   "itemdesc-potionbase-basic": "Used to make every potion",
-
   "potion-when-used": "When potion is used: ",
-
   "potion-archer-accuracy-effect": "+{0}% ranged accuracy",
   "potion-animal-loot-effect": "+{0}% more animal loot",
   "potion-animal-harvest-effect": "+{0}% faster animal harvest",
@@ -32,7 +29,6 @@
   "potion-single-health-effect": "one time of {0} health",
   "potion-duration": "and lasts for {0} seconds",
   "potion-tick-duration": "every {0} seconds",
-
   "item-potionbase-archer-weak": "Archer's Flask (weak) base",
   "itemdesc-potionbase-archer-weak": "Used to make Archer's Flask (weak) potion",
   "item-potionbase-healingeffect-weak": "Potent Oil (weak) base",
@@ -61,7 +57,6 @@
   "itemdesc-potionbase-speed-weak": "Used to make Sprinter's Flask (weak) potion",
   "item-potionbase-vitality-weak": "Vitality Flask (weak) base",
   "itemdesc-potionbase-vitality-weak": "Used to make Vitality Flask (weak) potion",
-
   "item-potionbase-archer-medium": "Archer's Flask (medium) base",
   "itemdesc-potionbase-archer-medium": "Used to make Archer's Flask (medium) potion",
   "item-potionbase-healingeffect-medium": "Potent Oil (medium) base",
@@ -90,7 +85,6 @@
   "itemdesc-potionbase-speed-medium": "Used to make Sprinter's Flask (medium) potion",
   "item-potionbase-vitality-medium": "Vitality Flask (medium) base",
   "itemdesc-potionbase-vitality-medium": "Used to make Vitality Flask (medium) potion",
-
   "item-potionbase-archer-strong": "Archer's Flask (strong) base",
   "itemdesc-potionbase-archer-strong": "Used to make Archer's Flask (strong) potion",
   "item-potionbase-healingeffect-strong": "Potent Oil (strong) base",
@@ -119,7 +113,6 @@
   "itemdesc-potionbase-speed-strong": "Used to make Sprinter's Flask (strong) potion",
   "item-potionbase-vitality-strong": "Vitality Flask (strong) base",
   "itemdesc-potionbase-vitality-strong": "Used to make Vitality Flask (strong) potion",
-
   "item-utilitypotionbase-recall": "Recall Flask base",
   "itemdesc-utilitypotionbase-recall": "Used to make Recall Flask potion",
   "item-utilitypotionbase-glow": "Glow Flask base",
@@ -132,7 +125,6 @@
   "itemdesc-utilitypotionbase-nutrition": "Used to make Nutrition Flask potion",
   "item-utilitypotionbase-reshape": "Reshape Flask base",
   "itemdesc-utilitypotionbase-reshape": "Used to make Reshape Flask potion",
-
   "alchemy:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
   "alchemy:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "alchemy:incontainer-item-potionportion-archer-weak": "Archer's Flask (weak)",
@@ -149,7 +141,6 @@
   "alchemy:incontainer-item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "alchemy:incontainer-item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Vitality Flask (weak)",
-
   "alchemy:incontainer-item-potionportion-all-medium": "Debug potion (medium)",
   "alchemy:incontainer-item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "alchemy:incontainer-item-potionportion-archer-medium": "Archer's Flask (medium)",
@@ -166,7 +157,6 @@
   "alchemy:incontainer-item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "alchemy:incontainer-item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Vitality Flask (medium)",
-
   "alchemy:incontainer-item-potionportion-all-strong": "Debug potion (strong)",
   "alchemy:incontainer-item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Archer's Flask (strong)",
@@ -183,16 +173,13 @@
   "alchemy:incontainer-item-potionportion-predator-strong": "Predator Pheromones (strong)",
   "alchemy:incontainer-item-potionportion-scentmask-strong": "Scent Mask (strong)",
   "alchemy:incontainer-item-potionportion-vitality-strong": "Vitality Flask (strong)",
-
   "alchemy:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "alchemy:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
   "alchemy:incontainer-item-utilitypotionportion-rehape": "Reshape Flask",
-
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
-
   "game:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
   "game:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "game:incontainer-item-potionportion-archer-weak": "Archer's Flask (weak)",
@@ -209,7 +196,6 @@
   "game:incontainer-item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "game:incontainer-item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "game:incontainer-item-potionportion-vitality-weak": "Vitality Flask (weak)",
-
   "game:incontainer-item-potionportion-all-medium": "Debug potion (medium)",
   "game:incontainer-item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "game:incontainer-item-potionportion-archer-medium": "Archer's Flask (medium)",
@@ -226,7 +212,6 @@
   "game:incontainer-item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "game:incontainer-item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "game:incontainer-item-potionportion-vitality-medium": "Vitality Flask (medium)",
-
   "game:incontainer-item-potionportion-all-strong": "Debug potion (strong)",
   "game:incontainer-item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "game:incontainer-item-potionportion-archer-strong": "Archer's Flask (strong)",
@@ -243,30 +228,24 @@
   "game:incontainer-item-potionportion-predator-strong": "Predator Pheromones (strong)",
   "game:incontainer-item-potionportion-scentmask-strong": "Scent Mask (strong)",
   "game:incontainer-item-potionportion-vitality-strong": "Vitality Flask (strong)",
-
   "game:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "game:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "game:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "game:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "game:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
   "game:incontainer-item-utilitypotionportion-reshape": "Reshape Flask",
-
   "game:incontainer-item-potionteaportion": "Potion tea",
-
   "alchemy:item-potionteaportion": "Potion tea",
-
   "item-utilitypotionportion-recall": "Recall Flask",
   "item-utilitypotionportion-glow": "Glow Flask",
   "item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "item-utilitypotionportion-temporal": "Stability Flask",
   "item-utilitypotionportion-nutrition": "Nutrition Flask",
   "item-utilitypotionportion-reshape": "Reshape Flask",
-
   "block-claypotionflask-blue-raw": "Raw blue clay potion flask",
   "block-claypotionflask-fire-raw": "Raw fire clay potion flask",
   "block-claypotionflask-red-raw": "Raw red clay potion flask",
   "block-claypotionflask-*-raw": "Raw clay potion flask",
-
   "block-claypotionflask-blue-fired": "Dark brown ceramic potion flask",
   "block-claypotionflask-fire-fired": "Fireclay ceramic potion flask",
   "block-claypotionflask-black-fired": "Black ceramic potion flask",
@@ -277,7 +256,6 @@
   "block-claypotionflask-red-fired": "Red ceramic potion flask",
   "block-claypotionflask-tan-fired": "Tan ceramic potion flask",
   "block-claypotionflask-*-fired": "Ceramic potion flask",
-
   "item-herbball-all": "Edible Herbs All (weak)",
   "item-herbball-alltick": "Edible Herbs Alltick (weak)",
   "item-herbball-archer": "Edible Herbs Archer (weak)",
@@ -294,7 +272,6 @@
   "item-herbball-scentmask": "Edible Herbs Scentmask (weak)",
   "item-herbball-speed": "Edible Herbs Speed (weak)",
   "item-herbball-vitality": "Edible Herbs Vitality (weak)",
-
   "item-potionportion-all-weak": "Debug potion (weak)",
   "item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "item-potionportion-archer-weak": "Archer's Flask (weak)",
@@ -311,7 +288,6 @@
   "item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "item-potionportion-vitality-weak": "Vitality Flask (weak)",
-
   "item-potionportion-all-medium": "Debug potion (medium)",
   "item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "item-potionportion-archer-medium": "Archer's Flask (medium)",
@@ -328,7 +304,6 @@
   "item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "item-potionportion-vitality-medium": "Vitality Flask (medium)",
-
   "item-potionportion-all-strong": "Debug potion (strong)",
   "item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "item-potionportion-archer-strong": "Archer's Flask (strong)",
@@ -351,7 +326,6 @@
   "itemdesc-utilitypotionportion-temporal": "You gain some temporal stability",
   "itemdesc-utilitypotionportion-nutrition": "You gain satiety in your lower nutrition but lose satiety in your higher nutrition levels",
   "itemdesc-utilitypotionportion-reshape": "You are able to reshape your form and origins, using the command .charsel",
-
   "item-cuttings-*-raw": "Raw Cuttings",
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
   "item-cuttings-forgetmenot-raw": "Raw Cuttings (forgetmenot)",
@@ -380,7 +354,6 @@
   "item-cuttings-thyme-raw": "Raw Cuttings (thyme)",
   "item-cuttings-cornflower-raw": "Raw Cuttings (cornflower)",
   "item-cuttings-woad-raw": "Raw Cuttings (woad)",
-
   "item-cuttings-*-dried": "Dried Cuttings",
   "item-cuttings-catmint-dried": "Dried Cuttings (catmint)",
   "item-cuttings-forgetmenot-dried": "Dried Cuttings (forgetmenot)",
@@ -409,7 +382,6 @@
   "item-cuttings-thyme-dried": "Dried Cuttings (thyme)",
   "item-cuttings-cornflower-dried": "Dried Cuttings (cornflower)",
   "item-cuttings-woad-dried": "Dried Cuttings (woad)",
-
   "item-cuttings-*-cooked": "Cooked Cuttings",
   "item-cuttings-catmint-cooked": "Cooked Cuttings (catmint)",
   "item-cuttings-forgetmenot-cooked": "Cooked Cuttings (forgetmenot)",
@@ -438,7 +410,6 @@
   "item-cuttings-thyme-cooked": "Cooked Cuttings (thyme)",
   "item-cuttings-cornflower-cooked": "Cooked Cuttings (cornflower)",
   "item-cuttings-woad-cooked": "Cooked Cuttings (woad)",
-
   "item-herbrackhook-*": "Herb Rack Hook",
   "item-herbrackhook-bismuth": "Herb Rack Hook (Bismuth)",
   "item-herbrackhook-bismuthbronze": "Herb Rack Hook (Bismuth bronze)",
@@ -464,7 +435,6 @@
   "item-herbrackhook-uranium": "Herb Rack Hook (Uranium)",
   "item-herbrackhook-zinc": "Herb Rack Hook (Zinc)",
   "item-herbrackhook-molybdochalkos": "Herb Rack Hook (Molybdochalkos)",
-
   "item-herbracktop-*": "Herb Rack Frame",
   "item-herbracktop-bismuth": "Herb Rack Frame (Bismuth)",
   "item-herbracktop-bismuthbronze": "Herb Rack Frame (Bismuth bronze)",
@@ -490,7 +460,6 @@
   "item-herbracktop-uranium": "Herb Rack Frame (Uranium)",
   "item-herbracktop-zinc": "Herb Rack Frame (Zinc)",
   "item-herbracktop-molybdochalkos": "Herb Rack Frame (Molybdochalkos)",
-
   "block-herbrackmold-blue-raw-herbracktop": "Raw blue herb rack top mold",
   "block-herbrackmold-fire-raw-herbracktop": "Raw fire herb rack top mold",
   "block-herbrackmold-red-raw-herbracktop": "Raw red herb rack top mold",
@@ -503,7 +472,6 @@
   "block-herbrackmold-orange-fired-herbracktop": "Orange ceramic herb rack top mold",
   "block-herbrackmold-red-fired-herbracktop": "Red ceramic herb rack top mold",
   "block-herbrackmold-tan-fired-herbracktop": "Tan ceramic herb rack top mold",
-
   "block-herbrackmold-blue-raw-herbrackhook": "Raw blue herb rack hook mold",
   "block-herbrackmold-fire-raw-herbrackhook": "Raw fire herb rack hook mold",
   "block-herbrackmold-red-raw-herbrackhook": "Raw red herb rack hook mold",
@@ -516,26 +484,19 @@
   "block-herbrackmold-orange-fired-herbrackhook": "Orange ceramic herb rack hook mold",
   "block-herbrackmold-red-fired-herbrackhook": "Red ceramic herb rack hook mold",
   "block-herbrackmold-tan-fired-herbrackhook": "Tan ceramic herb rack hook mold",
-
   "block-herbrackmold-*-raw-herbrackhook": "Raw herb rack hook mold",
   "block-herbrackmold-*-fired-herbrackhook": "Ceramic herb rack hook mold",
   "block-herbrackmold-*-raw-herbracktop": "Raw herb rack top mold",
   "block-herbrackmold-*-fired-herbracktop": "Ceramic herb rack top mold",
-
   "block-herbrack-*": "Herb Rack",
-
   "item-mortarpestle-*": "Mortar & pestle",
   "itemdesc-mortarpestle-*": "Used to make potion base",
-
   "block-potionflask-normal-*": "Large potion flask",
   "blockdesc-potionflask-normal-*": "Used to hold potions",
-
   "block-potionflask-round-*": "Medium potion flask",
   "blockdesc-potionflask-round-*": "Used to hold potions",
-
   "block-potionflask-tube-*": "Small potion flask",
   "blockdesc-potionflask-tube-*": "Used to hold potions",
-
   "healingeffectivness": "Healing effectivness",
   "maxhealthExtraPoints": "Extra health points",
   "walkspeed": "Walk speed",
@@ -563,9 +524,145 @@
   "potioneffectTrue": "Potion effects active",
   "regen": "Regeneration",
   "poison": "Poison",
-
   "game:tabname-alchemy": "Alchemy",
-
   "alchemy:alchemyguide-title": "Alchemy: Making potions",
-  "alchemy:alchemyguide-text": "To get started in alchemy the first need to make a <a href=\"handbook://item-alchemy:mortarpestle-wood\">mortar and pestle</a>. Next you will need to gather herbs and flowers. These can be combined in different variations to create different potions. The ingredients you will need the most of are any poisonous mushrooms and horsetail, which will create be used to create <a href=\"handbook://item-alchemy:potionbase-basic\">Basic potion base</a>. Once you have a mortar and pestle, basic potion base and a collection of flowers/herbs you can create <a href=\"handbooksearch://edible herb\">edible herbs</a>. These are the weakest variant but can be created without the use of any metal tools. Once you have access to metal (more specifically a <a href=\"handbook://block-barrel\">barrel</a>) you can start creating better liquid potions. Firstly you will need to mix your basic potion base with water in a barrel to create a <a href=\"handbook://item-alchemy:potionteaportion\">potion tea</a>. This will be the new base ingredient for the medium tier potions. Then mix the potion tea with a weak potionbase. To drink the potions you will need to create some <a href=\"handbooksearch://potion flask\">flasks</a>. Lastly to create the best potions you will need <a href=\"handbook://item-alcoholportion\">aqua vitae</a> and a <a href=\"handbook://block-alchemy:herbrack-oak-copper\">herb rack</a>. There are many different variants of herb racks if you want a different colour <a href=\"handbooksearch://herb rack\">herb racks</a>. Using a herb rack you will need to hang your herbs/flowers on them to dry into <a href=\"handbooksearch://dried cuttings\">dried cuttings</a> (you can dry them through other means but the herb rack should be the best way to do it and they shouldn't spoil on them). Once they have dried you will then need to cook them on a fire to create <a href=\"handbooksearch://cooked cuttings\">cooked cuttings</a>. The cooked cuttings are then combined into a strong base. Using a strong base and aqua vitae, mix them in a barrel to create a strong potion.\n\nList of potions:\n<a href=\"handbooksearch://edible herbs\">List of weak edible herbs</a>\n<a href=\"handbooksearch:// (medium)\">List of medium strength potions</a>\n<a href=\"handbooksearch:// (strong)\">List of strong strength potions</a>\nUtility potions: <a href=\"handbook://item-alchemy:utilitypotionportion-recall\">recall potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-waterbreathe\">water breathing potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-glow\">Glow potion</a> and <a href=\"handbook://item-alchemy:utilitypotionportion-nutrition\">Nutrition potion</a>\n\nIf you have any suggestions or bugs let me know on the offical vintage story discord on the alchemy mod thread. If you can't go there feel free to leave a comment on the mod page."
+  "alchemy:alchemyguide-text": "To get started in alchemy the first need to make a <a href=\"handbook://item-alchemy:mortarpestle-wood\">mortar and pestle</a>. Next you will need to gather herbs and flowers. These can be combined in different variations to create different potions. The ingredients you will need the most of are any poisonous mushrooms and horsetail, which will create be used to create <a href=\"handbook://item-alchemy:potionbase-basic\">Basic potion base</a>. Once you have a mortar and pestle, basic potion base and a collection of flowers/herbs you can create <a href=\"handbooksearch://edible herb\">edible herbs</a>. These are the weakest variant but can be created without the use of any metal tools. Once you have access to metal (more specifically a <a href=\"handbook://block-barrel\">barrel</a>) you can start creating better liquid potions. Firstly you will need to mix your basic potion base with water in a barrel to create a <a href=\"handbook://item-alchemy:potionteaportion\">potion tea</a>. This will be the new base ingredient for the medium tier potions. Then mix the potion tea with a weak potionbase. To drink the potions you will need to create some <a href=\"handbooksearch://potion flask\">flasks</a>. Lastly to create the best potions you will need <a href=\"handbook://item-alcoholportion\">aqua vitae</a> and a <a href=\"handbook://block-alchemy:herbrack-oak-copper\">herb rack</a>. There are many different variants of herb racks if you want a different colour <a href=\"handbooksearch://herb rack\">herb racks</a>. Using a herb rack you will need to hang your herbs/flowers on them to dry into <a href=\"handbooksearch://dried cuttings\">dried cuttings</a> (you can dry them through other means but the herb rack should be the best way to do it and they shouldn't spoil on them). Once they have dried you will then need to cook them on a fire to create <a href=\"handbooksearch://cooked cuttings\">cooked cuttings</a>. The cooked cuttings are then combined into a strong base. Using a strong base and aqua vitae, mix them in a barrel to create a strong potion.\n\nList of potions:\n<a href=\"handbooksearch://edible herbs\">List of weak edible herbs</a>\n<a href=\"handbooksearch:// (medium)\">List of medium strength potions</a>\n<a href=\"handbooksearch:// (strong)\">List of strong strength potions</a>\nUtility potions: <a href=\"handbook://item-alchemy:utilitypotionportion-recall\">recall potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-waterbreathe\">water breathing potion</a>, <a href=\"handbook://item-alchemy:utilitypotionportion-glow\">Glow potion</a> and <a href=\"handbook://item-alchemy:utilitypotionportion-nutrition\">Nutrition potion</a>\n\nIf you have any suggestions or bugs let me know on the offical vintage story discord on the alchemy mod thread. If you can't go there feel free to leave a comment on the mod page.",
+  
+  "Allow-Config": "List of allowed blocks/items",
+  "Strength-Multiplier-Config": "List of strength modifiers",
+  "ArcherValues-Config": "List of archer flask modifiers",
+  "HealingEffectValues-Config": "List of potent oil modifiers",
+  "HungerEnhanceValues-Config": "List of purging brew modifiers",
+  "HungerSupressValues-Config": "List of settling brew modifiers",
+  "HunterValues-Config": "List of hunter's flask modifiers",
+  "LooterValues-Config": "List of looter's flask modifiers",
+  "MeleeValues-Config": "List of fighter's flask modifiers",
+  "MiningValues-Config": "List of miner's flask modifiers",
+  "PoisonValues-Config": "List of spiked oil modifiers",
+  "PredatorValues-Config": "List of predator pheromones modifiers",
+  "RegenValues-Config": "List of healing oil modifiers",
+  "ScentMaskValues-Config": "List of scent mask flask modifiers",
+  "SpeedValues-Config": "List of sprinter's flask modifiers",
+  "GlowValues-Config": "List of glow flask modifiers",
+  "WaterBreatheValues-Config": "List of water breathing flask modifiers",
+
+  "AllowStrongPotions": "Allow strong potions",
+  "AllowMediumPotions": "Allow medium potions",
+  "AllowHerbballs": "Allow edible herbs",
+  "AllowClayFlasks": "Allow ceramic flasks",
+  "AllowSmallFlasks": "Allow small glass flasks",
+  "AllowMediumFlasks": "Allow medium glass flasks",
+  "AllowLargeFlasks": "Allow large glass flasks",
+  "AllowHerbRackMolds": "Allow herb rack molds",
+  "AllowHerbRacks": "Allow herb racks",
+  "AllowArcherPotion": "Allow archer's flask",
+  "AllowHealingEffectPotion": "Allow potent oil",
+  "AllowHungerEnhancePotion": "Allow purging brew",
+  "AllowHungerSupressPotion": "Allow settling brew",
+  "AllowHunterPotion": "Allow hunter's delight",
+  "AllowLooterPotion": "Allow looter's delight",
+  "AllowMeleePotion": "Allow fighter's flask",
+  "AllowMiningPotion": "Allow miner's flask",
+  "AllowPoisonPotion": "Allow spiked oil",
+  "AllowPredatorPotion": "Allow predator's pheromones",
+  "AllowRegenPotion": "Allow healing oil",
+  "AllowScentMaskPotion": "Allow scent mask",
+  "AllowSpeedPotion": "Allow sprinter's flask",
+  "AllowVitalityPotion": "Allow vitality flask",
+  "AllowRecallPotion": "Allow recall flask",
+  "AllowGlowPotion": "Allow glow flask",
+  "AllowWaterBreathePotion": "Allow water breathing flask",
+  "AllowNutritionPotion": "Allow nutrition flask",
+  "AllowTemporalPotion": "Allow stability flask",
+  "AllowReshapePotion": "Allow reshape flask",
+
+  "WeakPotionMultiplier": "Edible herb multiplier",
+  "WeakPotionMultiplier-Comment": "Edible herb base value effect multiplier.",
+  "MediumPotionMultiplier": "Medium potion multiplier",
+  "MediumPotionMultiplier-Comment": "Medium potion base value effect multiplier.",
+  "StrongPotionMultiplier": "Strong potion multiplier",
+  "StrongPotionMultiplier-Comment": "Strong potion base value effect multiplier.",
+  
+  "ArcherPotionAcc": "Archer's flask's accuracy",
+  "ArcherPotionAcc-Comment": "Archer's flask's Accuracy value before strength multiplier",
+  "ArcherPotionDamage": "Archer's flask's damage",
+  "ArcherPotionDamage-Comment": "Archer's flask's damage value before strength multiplier",
+  "ArcherPotionSpeed": "Archer's flask's draw speed",
+  "ArcherPotionSpeed-Comment": "Archer's flask's draw speed value before strength multiplier",
+  "ArcherPotionDuration": "Archer's flask's duration in seconds",
+  
+  "HealingEffectPotionValue": "Potent oil's healing effectiveness",
+  "HealingEffectPotionValue-Comment": "Potent oil's healing effectiveness value before strength multiplier",
+  "HealingEffectPotionDuration": "Potent oil's duration in seconds",
+  
+  "HungerEnhancePotionValue": "Purging brew's hunger rate",
+  "HungerEnhancePotionValue-Comment": "Purging brew's hunger rate value before strength multiplier",
+  "HungerEnhancePotionDuration": "Purging brew's duration in seconds",
+
+  "HungerSupressPotionValue": "Settling brew's hunger rate",
+  "HungerSupressPotionValue-Comment": "Settling brew's hunger rate value before strength multiplier",
+  "HungerSupressPotionDuration": "Settling brew's duration in seconds",
+
+  "HunterPotionAnimalDrop": "Hunter's flask's animal drop rate",
+  "HunterPotionAnimalDrop-Comment": "Hunter's flask's Animal drop rate value before strength multiplier",
+  "HunterPotionAnimalSeek": "Hunter's flask's animal seek range",
+  "HunterPotionAnimalSeek-Comment": "Hunter's flask's animal seek range value before strength multiplier",
+  "HunterPotionForageDrop": "Hunter's flask's forage drop rate",
+  "HunterPotionForageDrop-Comment": "Hunter's flask's forage drop rate value before strength multiplier",
+  "HunterPotionWildDrop": "Hunter's flask's wild crop drop rate",
+  "HunterPotionWildDrop-Comment": "Hunter's flask's wild crop drop rate value before strength multiplier",
+  "HunterPotionDuration": "Hunter's flask's duration in seconds",
+
+  "LooterPotionForageDrop": "Looter's flask's forage drop rate",
+  "LooterPotionForageDrop-Comment": "Looter's flask's wild crop drop rate value before strength multiplier",
+  "LooterPotionVesselContentDrop": "Looter's flask's vessel content drop rate",
+  "LooterPotionVesselContentDrop-Comment": "Looter's flask's vessel content drop rate value before strength multiplier",
+  "LooterPotionWildDrop": "Looter's flask's wild crop drop rate",
+  "LooterPotionWildDrop-Comment": "Looter's flask's wild crop drop rate value before strength multiplier",
+  "LooterPotionDuration": "Looter's flask's duration in seconds",
+
+  "MeleePotionDamage": "Fighter's flask's melee damage",
+  "MeleePotionDamage-Comment": "Fighter's flask's  melee damage value before strength multiplier",
+  "MeleePotionDuration": "Fighter's flask's duration in seconds",
+
+  "MiningPotionSpeed": "Miner's flask's mining speed",
+  "MiningPotionSpeed-Comment": "Miner's flask's mining speed value before strength multiplier",
+  "MiningPotionOreDrop": "Miner's flask's ore drop rate",
+  "MiningPotionOreDrop-Comment": "Miner's flask's ore drop rate value before strength multiplier",
+  "MiningPotionDuration": "Miner's flask's duration in seconds",
+
+  "PoisonPotionHealth": "Spiked oil's health",
+  "PoisonPotionHealth-Comment": "Spiked oil's health value per tick before strength multiplier",
+  "PoisonPotionDuration": "Spiked oil's duration in seconds",
+  "PoisonPotionTickSec": "Spiked oil's ticks sec",
+  "PoisonPotionTickSec-Comment": "Spiked oil's amount of seconds before a tick. A tick triggers a health change",
+  "PoisonPotionIgnoreArmour": "Spiked oil's ignore armour?",
+  "PoisonPotionIgnoreArmour-Comment": "Should spiked oil ignore armour when calculating the amount of health given?",
+
+  "PredatorPotionAnimalSeek": "Predator pheromone's animal seek range",
+  "PredatorPotionAnimalSeek-Comment": "Predator pheromone's animal seek range value per tick before strength multiplier",
+  "PredatorPotionDuration": "Predator pheromone's duration in seconds",
+
+  "RegenPotionHealth": "Healing oil's health",
+  "RegenPotionHealth-Comment": "Healing oil's health value per tick before strength multiplier",
+  "RegenPotionDuration": "Healing oil's duration in seconds",
+  "RegenPotionTickSec": "Healing oil's ticks sec",
+  "RegenPotionTickSec-Comment": "Healing oil's amount of seconds before a tick. A tick triggers a health change",
+  "RegenPotionIgnoreArmour": "Healing oil's ignore armour?",
+  "RegenPotionIgnoreArmour-Comment": "Should healing oil ignore armour when calculating the amount of health given?",
+
+  "ScentMaskPotionAnimalSeek": "Scent mask's animal seek range",
+  "ScentMaskPotionAnimalSeek-Comment": "Scent mask's animal seek range value per tick before strength multiplier",
+  "ScentMaskPotionDuration": "Scent mask's duration in seconds",
+
+  "SpeedPotionValue": "Sprinter's flask's walk speed",
+  "SpeedPotionValue-Comment": "Sprinter's flask's walk speed value per tick before strength multiplier",
+  "SpeedPotionDuration": "Sprinter's flask's duration in seconds",
+
+  "VitalityPotionMaxHealth": "Vitality flask's max health",
+  "VitalityPotionMaxHealth-Comment": "Vitality flask's max health value per tick before strength multiplier",
+
+  "GlowPotionDuration": "Glow flask's duration in seconds",
+
+  "WaterBreathePotionDuration": "Water breathing flask's duration in seconds"
 }

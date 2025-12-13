@@ -18,9 +18,7 @@
         "regen",
         "scentmask",
         "speed",
-        "vitality",
-        "all",
-        "alltick"
+        "vitality"
       ]
     },
     { "code": "strength", "states": ["medium", "strong"] }
@@ -28,84 +26,6 @@
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributesByType": {
-    "*-all-*": {
-      "potioninfo": { "potionId": "allpotionid", "duration": 10 },
-      "effects": {
-        "healingeffectivness": 0.1,
-        "maxhealthExtraPoints": 0.1,
-        "walkspeed": 0.1,
-        "hungerrate": -0.1,
-        "rangedWeaponsAcc": 0.1,
-        "rangedWeaponsSpeed": 0.1,
-        "rangedWeaponsDamage": 0.1,
-        "meleeWeaponsDamage": 0.1,
-        "mechanicalsDamage": 0.1,
-        "animalLootDropRate": 0.1,
-        "forageDropRate": 0.1,
-        "wildCropDropRate": 0.1,
-        "vesselContentsDropRate": 0.1,
-        "oreDropRate": 0.1,
-        "rustyGearDropRate": 0.1,
-        "miningSpeedMul": 0.1,
-        "animalSeekingRange": 0.1,
-        "wholeVesselLootChance": 0.1,
-        "animalHarvestingTime": 0.1,
-        "health": 0.5
-      },
-      "waterTightContainerProps": {
-        "containable": true,
-        "itemsPerLitre": 4,
-        "texture": { "base": "game:block/liquid/waterportion" },
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-all-{strength}", "states": ["medium", "strong"] }
-        }
-      },
-      "handbook": {
-        "ignoreCreativeInvStacks": true,
-        "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },
-        "exclude": true
-      }
-    },
-    "*-alltick-*": {
-      "potioninfo": { "potionId": "alltickpotionid", "duration": 10 },
-      "tickpotioninfo": { "ticksec": 1, "health": 1 },
-      "effects": {
-        "healingeffectivness": 0.1,
-        "maxhealthExtraPoints": 0.1,
-        "walkspeed": 0.1,
-        "hungerrate": -0.1,
-        "rangedWeaponsAcc": 0.1,
-        "rangedWeaponsSpeed": 0.1,
-        "rangedWeaponsDamage": 0.1,
-        "meleeWeaponsDamage": 0.1,
-        "mechanicalsDamage": 0.1,
-        "animalLootDropRate": 0.1,
-        "forageDropRate": 0.1,
-        "wildCropDropRate": 0.1,
-        "vesselContentsDropRate": 0.1,
-        "oreDropRate": 0.1,
-        "rustyGearDropRate": 0.1,
-        "miningSpeedMul": 0.1,
-        "animalSeekingRange": 0.1,
-        "wholeVesselLootChance": 0.1,
-        "animalHarvestingTime": 0.1
-      },
-      "waterTightContainerProps": {
-        "containable": true,
-        "itemsPerLitre": 4,
-        "texture": { "base": "game:block/liquid/waterportion" },
-        "whenSpilled": {
-          "action": "DropContents",
-          "stack": { "type": "item", "code": "potionportion-alltick-{strength}", "states": ["medium", "strong"] }
-        }
-      },
-      "handbook": {
-        "ignoreCreativeInvStacks": true,
-        "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },
-        "exclude": true
-      }
-    },
     "*-archer-*": {
       "potioninfo": { "potionId": "archerpotionid", "duration": 600 },
       "effects": { "rangedWeaponsAcc": 0.05, "rangedWeaponsDamage": 0.2, "rangedWeaponsSpeed": 0.2 },
@@ -349,7 +269,7 @@
       "waterTightContainerProps": { "containable": true, "itemsPerLitre": 4, "texture": { "base": "game:block/liquid/waterportion" } },
       "handbook": {
         "ignoreCreativeInvStacks": true,
-        "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },
+        // "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },
         "exclude": true
       }
     }
@@ -361,6 +281,15 @@
         {
           "type": "block",
           "code": "alchemy:potionflask-normal-quartz",
+          "attributes": {
+            "ucontents": [
+              { "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }
+            ]
+          }
+        },
+        {
+          "type": "block",
+          "code": "alchemy:potionflask-tube-quartz",
           "attributes": {
             "ucontents": [
               { "type": "item", "code": "alchemy:potionportion-{potiontype}-{strength}", "makefull": true }
