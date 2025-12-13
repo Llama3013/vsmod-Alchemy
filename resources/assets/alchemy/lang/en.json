@@ -543,6 +543,7 @@
   "RegenValues-Config": "List of healing oil modifiers",
   "ScentMaskValues-Config": "List of scent mask flask modifiers",
   "SpeedValues-Config": "List of sprinter's flask modifiers",
+  "VitalityValues-Config": "List of Vitality flask modifiers",
   "GlowValues-Config": "List of glow flask modifiers",
   "WaterBreatheValues-Config": "List of water breathing flask modifiers",
 
