@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Alchemy.Behavior;
 using Alchemy.ModConfig;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -169,15 +170,25 @@ namespace Alchemy.Item
 
         public bool TryProcessPotionEffects(EntityAgent byEntity, ItemStack itemStack)
         {
-            if (
-                byEntity.World.Side != EnumAppSide.Server
-                || byEntity is not EntityPlayer playerEntity
-                || playerEntity.Player is not IServerPlayer serverPlayer
-                || string.IsNullOrWhiteSpace(potionId)
-                || byEntity.WatchedAttributes.GetLong(potionId) != 0
-                || itemStack == null
-            )
+            if (byEntity.World.Side != EnumAppSide.Server)
                 return false;
+
+            if (byEntity is not EntityPlayer playerEntity)
+                return false;
+
+            if (playerEntity.Player is not IServerPlayer serverPlayer)
+                return false;
+
+            if (string.IsNullOrWhiteSpace(potionId))
+                return false;
+
+            if (itemStack == null)
+                return false;
+
+            PotionEffectBehavior behavior = playerEntity.GetBehavior<PotionEffectBehavior>();
+            if (behavior == null)
+                return false;
+
             switch (potionId)
             {
                 case "nutritionpotionid":
@@ -197,21 +208,19 @@ namespace Alchemy.Item
                     break;
                 default:
                 {
-                    PotionContext potionDef = PotionRegistry.BuildPotionDef(potionId, strengthMul);
-                    if (potionDef == null)
+                    PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
+                    if (ctx == null)
                     {
-                        api.Logger.Error("No potion definition for potionId of {0}!", potionId);
+                        api.Logger.Error("No potion definition for potionId {0}", potionId);
                         return false;
                     }
-                    TempEffect potionEffect = new();
-                    if (potionDef.TickSec != 0)
+
+                    if (!behavior.Manager.TryApplyPotion(potionId, ctx))
                     {
-                        potionEffect.TempTickEntityStats(playerEntity, potionId, potionDef);
+                        api.Logger.Error("Cannot apply potion for potionId {0}", potionId);
+                        return false;
                     }
-                    else
-                    {
-                        potionEffect.TempEntityStats(playerEntity, potionId, potionDef);
-                    }
+
                     break;
                 }
             }

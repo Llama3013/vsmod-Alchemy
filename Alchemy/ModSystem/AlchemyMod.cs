@@ -493,7 +493,10 @@ namespace Alchemy.ModSystem
         public override void StartServerSide(ICoreServerAPI api)
         {
             // send connecting players the config settings
-            api.Event.PlayerJoin += OnPlayerJoin; // add method so we can remove it in dispose to prevent memory leaks
+            api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
+            api.Event.PlayerJoin += OnPlayerJoin;
+            api.Event.PlayerDisconnect += OnPlayerDisconnect;
+
             // register network channel to send data to clients
             serverChannel = api.Network
                 .RegisterChannel("alchemy")
@@ -503,22 +506,6 @@ namespace Alchemy.ModSystem
                         /* do nothing. idk why this handler is even needed, but it is */
                     }
                 );
-            api.Event.PlayerNowPlaying += iServerPlayer =>
-            {
-                if (iServerPlayer.Entity is not null)
-                {
-                    EntityPlayer entity = iServerPlayer.Entity;
-                    entity.AddBehavior(new PotionFixBehavior(entity));
-
-                    api.Logger.VerboseDebug(
-                        "[Potion] Adding PotionFixBehavior to spawned EntityPlayer"
-                    );
-                    EntityPlayer player = iServerPlayer.Entity;
-                    TempEffect.ResetAllTempStats(player);
-                    TempEffect.ResetAllAttrListeners(player, "potionid", "tickpotionid");
-                    api.Logger.VerboseDebug("potion player ready");
-                }
-            };
             base.StartServerSide(api);
         }
 
@@ -614,12 +601,33 @@ namespace Alchemy.ModSystem
             );
         }
 
+        private static void OnPlayerReady(IServerPlayer player)
+        {
+            EntityPlayer entity = player.Entity;
+            if (entity == null)
+                return;
+
+            if (!entity.HasBehavior<PotionEffectBehavior>())
+                entity.AddBehavior(new PotionEffectBehavior(entity));
+        }
+
+        private static void OnPlayerDisconnect(IServerPlayer player)
+        {
+            EntityPlayer entity = player.Entity;
+            if (entity == null)
+                return;
+
+            player.Entity?.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
+        }
+
         public override void Dispose()
         {
             // remove our player join listener so we dont create memory leaks
             if (api is ICoreServerAPI sapi)
             {
+                sapi.Event.PlayerNowPlaying -= OnPlayerReady;
                 sapi.Event.PlayerJoin -= OnPlayerJoin;
+                sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
             }
         }
     }
