@@ -24,7 +24,7 @@ namespace Alchemy
         {
             if (string.IsNullOrWhiteSpace(potionId))
                 return null;
-            if (!Apply.TryGetValue(potionId, out var applyDelegate))
+            if (!Apply.TryGetValue(potionId, out PotionApply applyDelegate))
                 return null;
 
             PotionContext def = new() { StrengthMul = strengthMul };

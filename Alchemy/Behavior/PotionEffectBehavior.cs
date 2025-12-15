@@ -16,11 +16,6 @@ namespace Alchemy.Behavior
 
         public PotionEffectManager Manager { get; private set; }
 
-        public override void OnEntityDeath(DamageSource damageSourceForDeath)
-        {
-            Manager.RemoveAll();
-        }
-
         public override string PropertyName() => "potionEffects";
     }
 }

@@ -7,6 +7,8 @@ vertexFlags: {
    rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
    vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
 
+//Max extra health isn't working correctly
+
 namespace Alchemy.ModSystem
 {
     using HarmonyLib;
@@ -496,6 +498,7 @@ namespace Alchemy.ModSystem
             api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
             api.Event.PlayerJoin += OnPlayerJoin;
             api.Event.PlayerDisconnect += OnPlayerDisconnect;
+            api.Event.PlayerDeath += OnPlayerDeath;
 
             // register network channel to send data to clients
             serverChannel = api.Network
@@ -620,6 +623,9 @@ namespace Alchemy.ModSystem
             player.Entity?.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
+        private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource) =>
+            OnPlayerDisconnect(player);
+
         public override void Dispose()
         {
             // remove our player join listener so we dont create memory leaks
@@ -628,6 +634,7 @@ namespace Alchemy.ModSystem
                 sapi.Event.PlayerNowPlaying -= OnPlayerReady;
                 sapi.Event.PlayerJoin -= OnPlayerJoin;
                 sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
+                sapi.Event.PlayerDeath -= OnPlayerDeath;
             }
         }
     }

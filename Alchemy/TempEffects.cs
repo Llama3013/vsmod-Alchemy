@@ -6,11 +6,18 @@ using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    public sealed class TempEffect(string effectId, PotionContext ctx)
+    public sealed class TempEffect
     {
         private const string modCode = "potionmod";
-        public readonly string EffectId = effectId;
-        public readonly PotionContext Context = ctx;
+
+        public readonly string EffectId;
+        public readonly PotionContext Context;
+
+        public TempEffect(string effectId, PotionContext ctx)
+        {
+            EffectId = effectId;
+            Context = ctx;
+        }
 
         public void Apply(EntityPlayer entity)
         {
@@ -21,13 +28,13 @@ namespace Alchemy
                     entity.Stats.Set(
                         stat.Key,
                         modCode,
-                        (14f + entity.Stats.GetBlended("maxhealthExtraPoints"))
-                            * stat.Value,
+                        (14f + entity.Stats.GetBlended("maxhealthExtraPoints")) * stat.Value,
                         false
                     );
                     EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
                     ebh.MarkDirty();
-                } else
+                }
+                else
                     entity.Stats.Set(stat.Key, modCode, stat.Value, false);
             }
             // This will apply health at the start of a potion for ensure no tick health potions still function and will provide instant health from potion
@@ -75,9 +82,7 @@ namespace Alchemy
                 new DamageSource
                 {
                     Source = EnumDamageSource.Internal,
-                    Type = Context.Health > 0
-                        ? EnumDamageType.Heal
-                        : EnumDamageType.Poison
+                    Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
                 },
                 Math.Abs(Context.Health)
             );
@@ -85,6 +90,5 @@ namespace Alchemy
             if (Math.Abs(wearableHealEffect) > float.Epsilon)
                 entity.Stats.Set("healingeffectivness", "wearablemod", wearableHealEffect, false);
         }
-
     }
 }

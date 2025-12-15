@@ -215,9 +215,8 @@ namespace Alchemy.Item
                         return false;
                     }
 
-                    if (!behavior.Manager.TryApplyPotion(potionId, ctx))
+                    if (!behavior.Manager.TryApplyPotion(potionId, ctx, itemStack.GetName()))
                     {
-                        api.Logger.Error("Cannot apply potion for potionId {0}", potionId);
                         return false;
                     }
 

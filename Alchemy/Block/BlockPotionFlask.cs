@@ -288,7 +288,7 @@ namespace Alchemy.Block
                 Dictionary<int, MultiTextureMeshRef> meshrefs =
                     obj as Dictionary<int, MultiTextureMeshRef>;
 
-                foreach (var val in meshrefs)
+                foreach (KeyValuePair<int, MultiTextureMeshRef> val in meshrefs)
                 {
                     val.Value.Dispose();
                 }
@@ -319,8 +319,8 @@ namespace Alchemy.Block
                     string potionId = potion["potionId"].AsString();
                     if (potionId == "recallpotionid" && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null && WildcardUtil.Match("boat-sailed-*", byEntity.MountedOn.MountSupplier.OnEntity.Code.Path) && byEntity.World.Side == EnumAppSide.Server)
                     {
-                        var playerEntity = byEntity as EntityPlayer;
-                        var serverPlayer = playerEntity?.Player as IServerPlayer;
+                        EntityPlayer playerEntity = byEntity as EntityPlayer;
+                        IServerPlayer serverPlayer = playerEntity?.Player as IServerPlayer;
                         serverPlayer.SendMessage(
                             GlobalConstants.InfoLogChatGroup,
                             Lang.Get("alchemy:boat-block"),

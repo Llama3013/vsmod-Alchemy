@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Alchemy.GUI
         public override bool Focusable => false;
         private long activeId = 0;
         private long inactiveId = 0;
+        private bool isActive;
+
         private static readonly AssetLocation activeAlchemyHUDTexture =
             new("alchemy:textures/hud/activealchemyhud.png");
         private static readonly AssetLocation inactiveAlchemyHUDTexture =
@@ -88,18 +91,48 @@ namespace Alchemy.GUI
 
         private void ActivateReadEffects()
         {
-            Dispose();
+            if (isActive)
+                return;
+
+            isActive = true;
+
+            UnregisterInactive();
             SingleComposer = activeComposer;
             SingleComposer.Compose();
-            activeId = capi.World.RegisterGameTickListener(dt => ReadEffects(), 2000);
+
+            activeId = capi.World.RegisterGameTickListener(_ => ReadEffects(), 2000);
         }
 
         private void DeactivateReadEffects()
         {
-            Dispose();
+            if (!isActive)
+                return;
+
+            isActive = false;
+
+            UnregisterActive();
             SingleComposer = inactiveComposer;
             SingleComposer.Compose();
-            inactiveId = capi.World.RegisterGameTickListener(dt => CheckForEffects(), 4000);
+
+            inactiveId = capi.World.RegisterGameTickListener(_ => CheckForEffects(), 4000);
+        }
+
+        private void UnregisterActive()
+        {
+            if (activeId != 0)
+            {
+                capi.World.UnregisterGameTickListener(activeId);
+                activeId = 0;
+            }
+        }
+
+        private void UnregisterInactive()
+        {
+            if (inactiveId != 0)
+            {
+                capi.World.UnregisterGameTickListener(inactiveId);
+                inactiveId = 0;
+            }
         }
 
         public bool CheckForEffects()
@@ -141,16 +174,17 @@ namespace Alchemy.GUI
             {
                 if (stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
                 {
+                    float percent = (float)
+                        Math.Round(value.Value * 100, MidpointRounding.AwayFromZero);
+
                     stringBuilder.AppendLine(
-                        string.Format(
-                            "{0}: {1}",
-                            Lang.GetIfExists("alchemy:" + stat.Key),
-                            value?.Value
-                        )
+                        $"{Lang.GetIfExists("alchemy:" + stat.Key)}: {percent:+0;-0;0}%"
                     );
+
                     activePotion = true;
                 }
             }
+
             if (entity.WatchedAttributes.HasAttribute("glow"))
             {
                 bool value = capi.World.Player.Entity.WatchedAttributes.GetBool("glow");
@@ -193,20 +227,13 @@ namespace Alchemy.GUI
 
         public override void Dispose()
         {
+            UnregisterActive();
+            UnregisterInactive();
+
+            activeComposer?.Dispose();
+            inactiveComposer?.Dispose();
+
             base.Dispose();
-            SingleComposer?.Dispose();
-            if (activeId != 0)
-            {
-                capi.Logger.Debug("unregister active alchemy hud");
-                capi.World.UnregisterGameTickListener(activeId);
-                activeId = 0;
-            }
-            if (inactiveId != 0)
-            {
-                capi.Logger.Debug("unregister inactive alchemy hud");
-                capi.World.UnregisterGameTickListener(inactiveId);
-                inactiveId = 0;
-            }
         }
     }
 
