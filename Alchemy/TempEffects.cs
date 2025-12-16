@@ -25,13 +25,17 @@ namespace Alchemy
             {
                 if (stat.Key == "maxhealthExtraPoints")
                 {
-                    entity.Stats.Set(
-                        stat.Key,
-                        modCode,
-                        (14f + entity.Stats.GetBlended("maxhealthExtraPoints")) * stat.Value,
-                        false
-                    );
                     EntityBehaviorHealth ebh = entity.GetBehavior<EntityBehaviorHealth>();
+                    float baseMax = ebh.BaseMaxHealth;
+                    Dictionary<string, float> MaxHealthModifiers = ebh.MaxHealthModifiers;
+                    if (MaxHealthModifiers != null)
+                    {
+                        foreach (KeyValuePair<string, float> val in MaxHealthModifiers)
+                            baseMax += val.Value;
+                    }
+                    baseMax += entity.Stats.GetBlended("maxhealthExtraPoints") - 1;
+                    float extraHealth = baseMax * stat.Value;
+                    entity.Stats.Set(stat.Key, modCode, extraHealth, false);
                     ebh.MarkDirty();
                 }
                 else
