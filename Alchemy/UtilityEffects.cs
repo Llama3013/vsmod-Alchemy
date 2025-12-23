@@ -9,11 +9,12 @@ namespace Alchemy
 {
     internal static class UtilityEffects
     {
-        public static void ApplyNutritionPotion(EntityAgent byEntity)
+        public static void ApplyNutritionPotion(EntityAgent byEntity, float retainedNutrition)
         {
             ITreeAttribute hungerTree = byEntity.WatchedAttributes.GetTreeAttribute("hunger");
             if (hungerTree != null)
             {
+                float maxSaturation = hungerTree.GetFloat("maxsaturation");
                 float totalSatiety =
                     (
                         hungerTree.GetFloat("fruitLevel")
@@ -21,13 +22,28 @@ namespace Alchemy
                         + hungerTree.GetFloat("grainLevel")
                         + hungerTree.GetFloat("proteinLevel")
                         + hungerTree.GetFloat("dairyLevel")
-                    ) * 0.9f;
+                    ) * retainedNutrition;
 
-                hungerTree.SetFloat("fruitLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("vegetableLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("grainLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("proteinLevel", Math.Max(totalSatiety / 5, 0));
-                hungerTree.SetFloat("dairyLevel", Math.Max(totalSatiety / 5, 0));
+                hungerTree.SetFloat(
+                    "fruitLevel",
+                    Math.Min(Math.Max(totalSatiety / 5, 0), maxSaturation)
+                );
+                hungerTree.SetFloat(
+                    "vegetableLevel",
+                    Math.Min(Math.Max(totalSatiety / 5, 0), maxSaturation)
+                );
+                hungerTree.SetFloat(
+                    "grainLevel",
+                    Math.Min(Math.Max(totalSatiety / 5, 0), maxSaturation)
+                );
+                hungerTree.SetFloat(
+                    "proteinLevel",
+                    Math.Min(Math.Max(totalSatiety / 5, 0), maxSaturation)
+                );
+                hungerTree.SetFloat(
+                    "dairyLevel",
+                    Math.Min(Math.Max(totalSatiety / 5, 0), maxSaturation)
+                );
                 byEntity.WatchedAttributes.MarkPathDirty("hunger");
             }
         }
@@ -45,9 +61,10 @@ namespace Alchemy
             }
         }
 
-        public static void ApplyTemporalPotion(EntityAgent byEntity)
+        public static void ApplyTemporalPotion(EntityAgent byEntity, float stabilityGain)
         {
-            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability += 0.2;
+            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability +=
+                stabilityGain;
         }
 
         public static void ApplyReshapePotion(IServerPlayer serverPlayer)

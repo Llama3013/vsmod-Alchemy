@@ -15,7 +15,7 @@ namespace Alchemy
         public PotionEffectManager(EntityPlayer entity)
         {
             this.entity = entity;
-            this.api = entity.Api;
+            api = entity.Api;
         }
 
         private readonly Dictionary<string, ActiveEffect> active = [];
@@ -31,6 +31,33 @@ namespace Alchemy
 
                 TempEffect effect = new(id, ctx);
                 effect.Apply(entity);
+
+                if (ctx.Respawn)
+                {
+                    UtilityEffects.ApplyRecallPotion(
+                        entity.Player as IServerPlayer,
+                        entity,
+                        api
+                    );
+                }
+                if (ctx.Reshape)
+                {
+                    UtilityEffects.ApplyReshapePotion(
+                        entity.Player as IServerPlayer
+                    );
+                }
+                if(Math.Abs(ctx.NutritionPotionRetainedNutrition) > float.Epsilon)
+                {
+                    UtilityEffects.ApplyNutritionPotion(
+                        entity, ctx.NutritionPotionRetainedNutrition
+                    );
+                }
+                if(Math.Abs(ctx.StabilityPotionTemporalStabilityGain) > float.Epsilon)
+                {
+                    UtilityEffects.ApplyTemporalPotion(
+                        entity, ctx.StabilityPotionTemporalStabilityGain
+                    );
+                }
 
                 long handle;
                 bool ticking;

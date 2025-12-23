@@ -546,6 +546,8 @@
   "VitalityValues-Config": "List of Vitality flask modifiers",
   "GlowValues-Config": "List of glow flask modifiers",
   "WaterBreatheValues-Config": "List of water breathing flask modifiers",
+  "NutritionValues-Config": "List of nutrition flask modifiers",
+  "Stability-Config": "List of stability flask modifiers",
 
   "AllowStrongPotions": "Allow strong potions",
   "AllowMediumPotions": "Allow medium potions",
@@ -665,5 +667,10 @@
 
   "GlowPotionDuration": "Glow flask's duration in seconds",
 
-  "WaterBreathePotionDuration": "Water breathing flask's duration in seconds"
+  "WaterBreathePotionDuration": "Water breathing flask's duration in seconds",
+
+  "NutritionPotionRetainedNutrition": "Nutrition flask's retained nutrition after equalization of nutrients",
+  "NutritionPotionRetainedNutrition-Comment": "0 means you lose all nutrition and 1 means you retain all nutrition and 2 means you double your nutrition",
+
+  "StabilityPotionTemporalStabilityGain": "Temporal flask's stability percentage gain"
 }

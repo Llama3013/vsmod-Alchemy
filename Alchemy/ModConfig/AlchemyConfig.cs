@@ -90,5 +90,7 @@ namespace Alchemy.ModConfig
         public int VitalityPotionDuration { get; set; } = 300;
         public int GlowPotionDuration { get; set; } = 1000;
         public int WaterBreathePotionDuration { get; set; } = 1000;
+        public float NutritionPotionRetainedNutrition { get; set; } = 0.9f;
+        public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
     }
 }

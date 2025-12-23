@@ -189,39 +189,16 @@ namespace Alchemy.Item
             if (behavior == null)
                 return false;
 
-            switch (potionId)
+            PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
+            if (ctx == null)
             {
-                case "nutritionpotionid":
-                    UtilityEffects.ApplyNutritionPotion(byEntity);
-                    break;
+                api.Logger.Error("No potion definition for potionId {0}", potionId);
+                return false;
+            }
 
-                case "recallpotionid":
-                    UtilityEffects.ApplyRecallPotion(serverPlayer, byEntity, api);
-                    break;
-
-                case "temporalpotionid":
-                    UtilityEffects.ApplyTemporalPotion(byEntity);
-                    break;
-
-                case "reshapepotionid":
-                    UtilityEffects.ApplyReshapePotion(serverPlayer);
-                    break;
-                default:
-                {
-                    PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
-                    if (ctx == null)
-                    {
-                        api.Logger.Error("No potion definition for potionId {0}", potionId);
-                        return false;
-                    }
-
-                    if (!behavior.Manager.TryApplyPotion(potionId, ctx, itemStack.GetName()))
-                    {
-                        return false;
-                    }
-
-                    break;
-                }
+            if (!behavior.Manager.TryApplyPotion(potionId, ctx, itemStack.GetName()))
+            {
+                return false;
             }
 
             serverPlayer.SendMessage(
@@ -397,7 +374,9 @@ namespace Alchemy.Item
 
             if (potionDef.Health is > 0.01f or < -0.01f)
             {
-                dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", potionDef.Health));
+                dsc.AppendLine(
+                    Lang.Get("alchemy:potion-health-effect", Math.Round(potionDef.Health, 2))
+                );
             }
             if (potionDef.TickSec != 0)
             {

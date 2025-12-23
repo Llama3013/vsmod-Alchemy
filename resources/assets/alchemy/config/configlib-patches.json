@@ -288,6 +288,28 @@
                     "min": 0.01,
                     "max": 10
                 }
+            },
+            "NUTRITIONPOTIONRETAINEDNUTRITION": {
+                "name": "NutritionPotionRetainedNutrition",
+                "ingui": "alchemy:NutritionPotionRetainedNutrition",
+                "weight": 42.1,
+                "comment": "alchemy:NutritionPotionRetainedNutrition-Comment",
+                "default": 0.9,
+                "range": {
+                    "min": 0.01,
+                    "max": 2
+                }
+            },
+            "TEMPORALPOTIONSTABILITYGAIN": {
+                "name": "StabilityPotionTemporalStabilityGain",
+                "ingui": "alchemy:TemporalPotionStabilityGain",
+                "weight": 43.1,
+                "comment": "alchemy:TemporalPotionStabilityGain-Comment",
+                "default": 0.2,
+                "range": {
+                    "min": 0.01,
+                    "max": 1
+                }
             }
         },
         "integer": {
@@ -800,6 +822,16 @@
             "type": "separator",
             "title": "alchemy:WaterBreatheValues-Config",
             "weight": 41
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:NutritionValues-Config",
+            "weight": 42
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:TemporalValues-Config",
+            "weight": 43
         }
     ]
 }

@@ -297,6 +297,24 @@ namespace Alchemy.Block
             }
         }
 
+        // Replace empty with ctrl + shift to avoid accidental spilling
+        public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
+        {
+            WorldInteraction[] baseInteractions = base.GetHeldInteractionHelp(inSlot);
+
+            for (int i = 0; i < baseInteractions.Length; i++)
+            {
+                if (baseInteractions[i].ActionLangCode == "heldhelp-empty")
+                {
+                    baseInteractions[i].HotKeyCodes = ["ctrl", "shift"];
+                    break;
+                }
+            }
+
+            return baseInteractions;
+        }
+
+
         #endregion Render
 
         #region Interaction
@@ -310,8 +328,15 @@ namespace Alchemy.Block
             ref EnumHandHandling handHandling
         )
         {
+            if (blockSel != null && byEntity.Controls.CtrlKey && byEntity.Controls.ShiftKey)
+            {
+                byEntity.Controls.ShiftKey = false;
+                base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
+                return;
+            }
+            
             ItemStack contentStack = GetContent(itemslot.Itemstack);
-            if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
+            if (contentStack != null && !byEntity.Controls.ShiftKey)
             {
                 JsonObject potion = contentStack.ItemAttributes?[potionInfo];
                 if (potion?.Exists ?? false)
@@ -344,6 +369,14 @@ namespace Alchemy.Block
                     }
                 }
             }
+
+            // Prevent accidental spilling unless CTRL + SHIFT are both held
+            if (blockSel != null && byEntity.Controls.CtrlKey && !byEntity.Controls.ShiftKey)
+            {
+                // We are sprinting but NOT sneaking → block spill
+                handHandling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
             base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
         }
 
@@ -371,7 +404,7 @@ namespace Alchemy.Block
         )
         {
             ItemStack contentStack = GetContent(slot.Itemstack);
-            if (contentStack != null && !byEntity.Controls.Sprint && !byEntity.Controls.Sneak)
+            if (contentStack != null && !byEntity.Controls.ShiftKey)
             {
                 JsonObject potion = contentStack.ItemAttributes?[potionInfo];
                 if (potion?.Exists ?? false)

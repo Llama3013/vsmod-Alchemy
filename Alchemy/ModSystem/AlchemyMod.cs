@@ -33,6 +33,7 @@ namespace Alchemy.ModSystem
             Harmony harmony = new("llama3013.Alchemy");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             RegisterClasses(api);
+            PotionRegistry.Init(api);
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -488,6 +489,14 @@ namespace Alchemy.ModSystem
                     Mod.Logger.Event(
                         $"Received WaterBreathePotionDuration of {packet.WaterBreathePotionDuration} from server"
                     );
+                    AlchemyConfig.Loaded.NutritionPotionRetainedNutrition = packet.NutritionPotionRetainedNutrition;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionRetainedNutrition of {packet.NutritionPotionRetainedNutrition} from server"
+                    );
+                    AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain = packet.StabilityPotionTemporalStabilityGain;
+                    Mod.Logger.Event(
+                        $"Received StabilityPotionTemporalStabilityGain of {packet.StabilityPotionTemporalStabilityGain} from server"
+                    );
                 });
         }
 
@@ -598,7 +607,9 @@ namespace Alchemy.ModSystem
                     VitalityPotionMaxHealth = AlchemyConfig.Loaded.VitalityPotionMaxHealth,
                     VitalityPotionDuration = AlchemyConfig.Loaded.VitalityPotionDuration,
                     GlowPotionDuration = AlchemyConfig.Loaded.GlowPotionDuration,
-                    WaterBreathePotionDuration = AlchemyConfig.Loaded.WaterBreathePotionDuration
+                    WaterBreathePotionDuration = AlchemyConfig.Loaded.WaterBreathePotionDuration,
+                    NutritionPotionRetainedNutrition = AlchemyConfig.Loaded.NutritionPotionRetainedNutrition,
+                    StabilityPotionTemporalStabilityGain = AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain
                 },
                 player
             );
