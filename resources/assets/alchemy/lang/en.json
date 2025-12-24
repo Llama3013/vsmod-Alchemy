@@ -520,6 +520,7 @@
   "temporalGearTLRepairCost": "Temporal gear translocator repair cost",
   "animalHarvestingTime": "Animal harvesting time",
   "glow": "Glowing aura",
+  "waterbreathe": "Water breathing",
   "potioneffectFalse": "No potion effects active",
   "potioneffectTrue": "Potion effects active",
   "regen": "Regeneration",
@@ -547,7 +548,7 @@
   "GlowValues-Config": "List of glow flask modifiers",
   "WaterBreatheValues-Config": "List of water breathing flask modifiers",
   "NutritionValues-Config": "List of nutrition flask modifiers",
-  "Stability-Config": "List of stability flask modifiers",
+  "StabilityValues-Config": "List of stability flask modifiers",
 
   "AllowStrongPotions": "Allow strong potions",
   "AllowMediumPotions": "Allow medium potions",
@@ -664,7 +665,10 @@
 
   "VitalityPotionMaxHealth": "Vitality flask's max health",
   "VitalityPotionMaxHealth-Comment": "Vitality flask's max health value per tick before strength multiplier",
+  "VitalityPotionDuration": "Vitality flask's duration in seconds",
 
+  "GlowPotionStrength": "Glow flask's light strength",
+  "GlowPotionStrength-Comment": "Glow flask's light strength, never really fully understood how this worked with the amount but I remember it crashed when the number was above 31. From my testing it didn't really make much of a difference when changing the value.",
   "GlowPotionDuration": "Glow flask's duration in seconds",
 
   "WaterBreathePotionDuration": "Water breathing flask's duration in seconds",

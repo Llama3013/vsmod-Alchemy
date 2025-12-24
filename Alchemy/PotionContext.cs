@@ -4,8 +4,7 @@ namespace Alchemy
 {
     public sealed class PotionContext
     {
-        private readonly Dictionary<string, float> _effectList = [];
-        public Dictionary<string, float> EffectList => _effectList;
+        public Dictionary<string, float> Effects { get; } = [];
 
         public float StrengthMul { get; set; }
         public int Duration { get; set; }
@@ -16,15 +15,16 @@ namespace Alchemy
         public bool IgnoreArmour { get; set; }
 
         // Utility Effects
-        public float NutritionPotionRetainedNutrition { get; set; }
-        public float StabilityPotionTemporalStabilityGain { get; set; }
+        public float RetainedNutrition { get; set; }
+        public float TemporalStabilityGain { get; set; }
+        public int GlowStrength { get; set; }
         // These two are not inside the config as they would just render potions useless
         public bool Respawn { get; set; }
         public bool Reshape { get; set; }
 
         public void AddEffect(string key, float baseValue)
         {
-            _effectList.Add(key, baseValue * StrengthMul);
+            Effects.Add(key, baseValue * StrengthMul);
         }
 
         public void SetHealth(float healthWithoutMul)

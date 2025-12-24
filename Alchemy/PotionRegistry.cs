@@ -9,7 +9,6 @@ namespace Alchemy
     public static class PotionRegistry
     {
         private static Dictionary<string, PotionApply> apply;
-        private static ICoreAPI api;
         public static Dictionary<string, PotionApply> Apply => apply;
 
         public static PotionContext BuildPotionDef(string potionId, float strengthMul)
@@ -25,9 +24,8 @@ namespace Alchemy
             return def;
         }
 
-        public static void Init(ICoreAPI coreApi)
+        public static void Init()
         {
-            api = coreApi;
             apply = BuildRegistry();
         }
 
@@ -161,6 +159,7 @@ namespace Alchemy
         private static void ApplyGlowPotion(PotionContext ctx)
         {
             ctx.Duration = AlchemyConfig.Loaded.GlowPotionDuration;
+            ctx.GlowStrength = AlchemyConfig.Loaded.GlowPotionStrength;
         }
 
         private static void ApplyWaterBreathePotion(PotionContext ctx)
@@ -170,9 +169,7 @@ namespace Alchemy
 
         private static void ApplyNutritionPotion(PotionContext ctx)
         {
-            ctx.NutritionPotionRetainedNutrition = AlchemyConfig
-                .Loaded
-                .NutritionPotionRetainedNutrition;
+            ctx.RetainedNutrition = AlchemyConfig.Loaded.NutritionPotionRetainedNutrition;
         }
 
         private static void ApplyRecallPotion(PotionContext ctx)
@@ -182,9 +179,7 @@ namespace Alchemy
 
         private static void ApplyTemporalPotion(PotionContext ctx)
         {
-            ctx.StabilityPotionTemporalStabilityGain = AlchemyConfig
-                .Loaded
-                .StabilityPotionTemporalStabilityGain;
+            ctx.TemporalStabilityGain = AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain;
         }
 
         private static void ApplyReshapePotion(PotionContext ctx)

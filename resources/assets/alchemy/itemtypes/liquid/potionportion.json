@@ -27,8 +27,7 @@
   "matterState": "liquid",
   "attributesByType": {
     "*-archer-*": {
-      "potioninfo": { "potionId": "archerpotionid", "duration": 600 },
-      "effects": { "rangedWeaponsAcc": 0.05, "rangedWeaponsDamage": 0.2, "rangedWeaponsSpeed": 0.2 },
+      "potioninfo": { "potionId": "archerpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -45,8 +44,7 @@
       }
     },
     "*-healingeffect-*": {
-      "potioninfo": { "potionId": "healingeffectpotionid", "duration": 600 },
-      "effects": { "healingeffectivness": 0.3 },
+      "potioninfo": { "potionId": "healingeffectpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -62,8 +60,7 @@
       }
     },
     "*-hungerenhance-*": {
-      "potioninfo": { "potionId": "hungerenhancepotionid", "duration": 600 },
-      "effects": { "hungerrate": 0.3 },
+      "potioninfo": { "potionId": "hungerenhancepotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -79,8 +76,7 @@
       }
     },
     "*-hungersupress-*": {
-      "potioninfo": { "potionId": "hungersupresspotionid", "duration": 600 },
-      "effects": { "hungerrate": -0.3 },
+      "potioninfo": { "potionId": "hungersupresspotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -96,8 +92,7 @@
       }
     },
     "*-hunter-*": {
-      "potioninfo": { "potionId": "hunterpotionid", "duration": 600 },
-      "effects": { "animalLootDropRate": 0.2, "animalSeekingRange": -0.05, "forageDropRate": 0.2, "wildCropDropRate": 0.2 },
+      "potioninfo": { "potionId": "hunterpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -113,8 +108,7 @@
       }
     },
     "*-looter-*": {
-      "potioninfo": { "potionId": "looterpotionid", "duration": 600 },
-      "effects": { "forageDropRate": 0.2, "rustyGearDropRate": 0.2, "vesselContentsDropRate": 0.3, "wildCropDropRate": 0.2 },
+      "potioninfo": { "potionId": "looterpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -130,7 +124,7 @@
       }
     },
     "*-melee-*": {
-      "potioninfo": { "potionId": "meleepotionid", "duration": 600 },
+      "potioninfo": { "potionId": "meleepotionid" },
       "effects": { "meleeWeaponsDamage": 0.3 },
       "waterTightContainerProps": {
         "containable": true,
@@ -147,8 +141,7 @@
       }
     },
     "*-mining-*": {
-      "potioninfo": { "potionId": "miningpotionid", "duration": 600 },
-      "effects": { "miningSpeedMul": 0.3, "oreDropRate": 0.15 },
+      "potioninfo": { "potionId": "miningpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -164,8 +157,7 @@
       }
     },
     "*-poison-*": {
-      "potioninfo": { "potionId": "poisontickpotionid", "duration": 30, "ignoreArmour": true },
-      "tickpotioninfo": { "health": -0.5, "ticksec": 3 },
+      "potioninfo": { "potionId": "poisontickpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -181,8 +173,7 @@
       }
     },
     "*-predator-*": {
-      "potioninfo": { "potionId": "predatorpotionid", "duration": 900 },
-      "effects": { "animalSeekingRange": 0.4 },
+      "potioninfo": { "potionId": "predatorpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -198,8 +189,7 @@
       }
     },
     "*-regen-*": {
-      "potioninfo": { "potionId": "regentickpotionid", "duration": 30, "ignoreArmour": true },
-      "tickpotioninfo": { "health": 0.5, "ticksec": 3 },
+      "potioninfo": { "potionId": "regentickpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -215,8 +205,7 @@
       }
     },
     "*-scentmask-*": {
-      "potioninfo": { "potionId": "scentmaskpotionid", "duration": 900 },
-      "effects": { "animalSeekingRange": -0.2 },
+      "potioninfo": { "potionId": "scentmaskpotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
@@ -232,7 +221,7 @@
       }
     },
     "*-speed-*": {
-      "potioninfo": { "potionId": "speedpotionid", "duration": 300 },
+      "potioninfo": { "potionId": "speedpotionid" },
       "effects": { "walkspeed": 0.25 },
       "waterTightContainerProps": {
         "containable": true,
@@ -249,8 +238,7 @@
       }
     },
     "*-vitality-*": {
-      "potioninfo": { "potionId": "vitalitypotionid", "duration": 300 },
-      "effects": { "maxhealthExtraPoints": 0.25 },
+      "potioninfo": { "potionId": "vitalitypotionid" },
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,

@@ -219,12 +219,15 @@ namespace Alchemy.Item
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
             PotionContext potionDef = PotionRegistry.BuildPotionDef(potionId, strengthMul);
             if (potionDef == null)
+            {
+                api.Logger.Error("No potion definition for potionId {0}", potionId);
                 return;
+            }
 
-            if (potionDef.EffectList != null)
+            if (potionDef.Effects != null)
             {
                 dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
-                if (potionDef.EffectList.TryGetValue("rangedWeaponsAcc", out float rWvalue))
+                if (potionDef.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -233,13 +236,13 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("animalLootDropRate", out float aLValue))
+                if (potionDef.Effects.TryGetValue("animalLootDropRate", out float aLValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-loot-effect", Math.Round(aLValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("animalHarvestingTime", out float ahValue))
+                if (potionDef.Effects.TryGetValue("animalHarvestingTime", out float ahValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -248,19 +251,19 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("animalSeekingRange", out float aSValue))
+                if (potionDef.Effects.TryGetValue("animalSeekingRange", out float aSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-seek-effect", Math.Round(aSValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("maxhealthExtraPoints", out float mHEValue))
+                if (potionDef.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-max-health-effect", Math.Round(mHEValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("forageDropRate", out float fDValue))
+                if (potionDef.Effects.TryGetValue("forageDropRate", out float fDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -269,7 +272,7 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("healingeffectivness", out float hEValue))
+                if (potionDef.Effects.TryGetValue("healingeffectivness", out float hEValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -278,37 +281,37 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("hungerrate", out float hRValue))
+                if (potionDef.Effects.TryGetValue("hungerrate", out float hRValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-hunger-rate-effect", Math.Round(hRValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("meleeWeaponsDamage", out float mWValue))
+                if (potionDef.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-melee-damage-effect", Math.Round(mWValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("mechanicalsDamage", out float mDValue))
+                if (potionDef.Effects.TryGetValue("mechanicalsDamage", out float mDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mech-damage-effect", Math.Round(mDValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("miningSpeedMul", out float mSValue))
+                if (potionDef.Effects.TryGetValue("miningSpeedMul", out float mSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mining-speed-effect", Math.Round(mSValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("oreDropRate", out float oDValue))
+                if (potionDef.Effects.TryGetValue("oreDropRate", out float oDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-ore-amount-effect", Math.Round(oDValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("rangedWeaponsDamage", out float rWDValue))
+                if (potionDef.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -317,7 +320,7 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
+                if (potionDef.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -326,19 +329,19 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("rustyGearDropRate", out float rGDValue))
+                if (potionDef.Effects.TryGetValue("rustyGearDropRate", out float rGDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-gear-amount-effect", Math.Round(rGDValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("walkspeed", out float wSValue))
+                if (potionDef.Effects.TryGetValue("walkspeed", out float wSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-walk-speed-effect", Math.Round(wSValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("vesselContentsDropRate", out float vCDValue))
+                if (potionDef.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -347,13 +350,13 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("wildCropDropRate", out float wCDValue))
+                if (potionDef.Effects.TryGetValue("wildCropDropRate", out float wCDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-wild-crop-effect", Math.Round(wCDValue * 100, 0))
                     );
                 }
-                if (potionDef.EffectList.TryGetValue("wholeVesselLootChance", out float wVLValue))
+                if (potionDef.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -364,7 +367,7 @@ namespace Alchemy.Item
                 }
 
                 if (
-                    potionDef.EffectList.TryGetValue("health", out float healthValue)
+                    potionDef.Effects.TryGetValue("health", out float healthValue)
                     && healthValue is > 0.01f or < -0.01f
                 )
                 {

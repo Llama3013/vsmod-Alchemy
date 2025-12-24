@@ -33,7 +33,6 @@ namespace Alchemy.ModSystem
             Harmony harmony = new("llama3013.Alchemy");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             RegisterClasses(api);
-            PotionRegistry.Init(api);
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -489,15 +488,22 @@ namespace Alchemy.ModSystem
                     Mod.Logger.Event(
                         $"Received WaterBreathePotionDuration of {packet.WaterBreathePotionDuration} from server"
                     );
-                    AlchemyConfig.Loaded.NutritionPotionRetainedNutrition = packet.NutritionPotionRetainedNutrition;
+                    AlchemyConfig.Loaded.NutritionPotionRetainedNutrition =
+                        packet.NutritionPotionRetainedNutrition;
                     Mod.Logger.Event(
                         $"Received NutritionPotionRetainedNutrition of {packet.NutritionPotionRetainedNutrition} from server"
                     );
-                    AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain = packet.StabilityPotionTemporalStabilityGain;
+                    AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain =
+                        packet.StabilityPotionTemporalStabilityGain;
                     Mod.Logger.Event(
                         $"Received StabilityPotionTemporalStabilityGain of {packet.StabilityPotionTemporalStabilityGain} from server"
                     );
+                    AlchemyConfig.Loaded.GlowPotionStrength = packet.GlowPotionStrength;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionStrength of {packet.GlowPotionStrength} from server"
+                    );
                 });
+            PotionRegistry.Init();
         }
 
         /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
@@ -608,11 +614,17 @@ namespace Alchemy.ModSystem
                     VitalityPotionDuration = AlchemyConfig.Loaded.VitalityPotionDuration,
                     GlowPotionDuration = AlchemyConfig.Loaded.GlowPotionDuration,
                     WaterBreathePotionDuration = AlchemyConfig.Loaded.WaterBreathePotionDuration,
-                    NutritionPotionRetainedNutrition = AlchemyConfig.Loaded.NutritionPotionRetainedNutrition,
-                    StabilityPotionTemporalStabilityGain = AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain
+                    NutritionPotionRetainedNutrition = AlchemyConfig
+                        .Loaded
+                        .NutritionPotionRetainedNutrition,
+                    StabilityPotionTemporalStabilityGain = AlchemyConfig
+                        .Loaded
+                        .StabilityPotionTemporalStabilityGain,
+                    GlowPotionStrength = AlchemyConfig.Loaded.GlowPotionStrength
                 },
                 player
             );
+            PotionRegistry.Init();
         }
 
         private static void OnPlayerReady(IServerPlayer player)
@@ -622,7 +634,10 @@ namespace Alchemy.ModSystem
                 return;
 
             if (!entity.HasBehavior<PotionEffectBehavior>())
+            {
                 entity.AddBehavior(new PotionEffectBehavior(entity));
+            }
+            entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
         private static void OnPlayerDisconnect(IServerPlayer player)
@@ -631,7 +646,8 @@ namespace Alchemy.ModSystem
             if (entity == null)
                 return;
 
-            player.Entity?.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
+            if (entity.HasBehavior<PotionEffectBehavior>())
+                entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
         private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource) =>

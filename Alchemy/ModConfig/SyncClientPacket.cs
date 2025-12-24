@@ -92,5 +92,6 @@ namespace Alchemy.ModConfig
         public int WaterBreathePotionDuration;
         public float NutritionPotionRetainedNutrition;
         public float StabilityPotionTemporalStabilityGain;
+        public int GlowPotionStrength;
     }
 }

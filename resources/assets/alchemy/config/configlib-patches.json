@@ -302,9 +302,9 @@
             },
             "TEMPORALPOTIONSTABILITYGAIN": {
                 "name": "StabilityPotionTemporalStabilityGain",
-                "ingui": "alchemy:TemporalPotionStabilityGain",
+                "ingui": "alchemy:StabilityPotionTemporalStabilityGain",
                 "weight": 43.1,
-                "comment": "alchemy:TemporalPotionStabilityGain-Comment",
+                "comment": "alchemy:StabilityPotionTemporalStabilityGain-Comment",
                 "default": 0.2,
                 "range": {
                     "min": 0.01,
@@ -498,6 +498,17 @@
                 "range": {
                     "min": 10,
                     "max": 10000
+                }
+            },
+            "GLOWPOTIONSTRENGTH": {
+                "name": "GlowPotionStrength",
+                "ingui": "alchemy:GlowPotionStrength",
+                "weight": 40.1,
+                "comment": "alchemy:GlowPotionStrength-Comment",
+                "default": 31,
+                "range": {
+                    "min": 1,
+                    "max": 31
                 }
             },
             "WATERBREATHEPOTIONDURATION": {
@@ -830,7 +841,7 @@
         },
         {
             "type": "separator",
-            "title": "alchemy:TemporalValues-Config",
+            "title": "alchemy:StabilityValues-Config",
             "weight": 43
         }
     ]

@@ -99,6 +99,7 @@ namespace Alchemy.GUI
             UnregisterInactive();
             SingleComposer = activeComposer;
             SingleComposer.Compose();
+            ReadEffects();
 
             activeId = capi.World.RegisterGameTickListener(_ => ReadEffects(), 2000);
         }
@@ -138,29 +139,33 @@ namespace Alchemy.GUI
         public bool CheckForEffects()
         {
             capi.Logger.Debug("checking for effects active");
-            bool activePotion = false;
             EntityPlayer entity = capi.World.Player.Entity;
             if (entity.Stats.Any(stat => stat.Value.ValuesByKey.ContainsKey("potionmod")))
             {
                 ActivateReadEffects();
-                activePotion = true;
+                return true;
             }
-            if (entity.WatchedAttributes.HasAttribute("glow"))
+            if (entity.WatchedAttributes.HasAttribute("glowpotionid"))
             {
                 ActivateReadEffects();
-                activePotion = true;
+                return true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("waterbreathepotionid"))
+            {
+                ActivateReadEffects();
+                return true;
             }
             if (entity.WatchedAttributes.HasAttribute("regentickpotionid"))
             {
                 ActivateReadEffects();
-                activePotion = true;
+                return true;
             }
             if (entity.WatchedAttributes.HasAttribute("poisontickpotionid"))
             {
                 ActivateReadEffects();
-                activePotion = true;
+                return true;
             }
-            return activePotion;
+            return false;
         }
 
         public bool ReadEffects()
@@ -172,7 +177,16 @@ namespace Alchemy.GUI
             EntityPlayer entity = capi.World.Player.Entity;
             foreach (KeyValuePair<string, EntityFloatStats> stat in entity.Stats)
             {
-                if (stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
+                if (!stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
+                    continue;
+
+                if (stat.Key == "maxhealthExtraPoints")
+                {
+                    float hp = (float)Math.Round(value.Value, MidpointRounding.AwayFromZero);
+
+                    stringBuilder.AppendLine($"{Lang.GetIfExists("alchemy:" + stat.Key)}: +{hp}");
+                }
+                else
                 {
                     float percent = (float)
                         Math.Round(value.Value * 100, MidpointRounding.AwayFromZero);
@@ -180,16 +194,22 @@ namespace Alchemy.GUI
                     stringBuilder.AppendLine(
                         $"{Lang.GetIfExists("alchemy:" + stat.Key)}: {percent:+0;-0;0}%"
                     );
-
-                    activePotion = true;
                 }
+
+                activePotion = true;
             }
 
-            if (entity.WatchedAttributes.HasAttribute("glow"))
+            if (entity.WatchedAttributes.HasAttribute("glowpotionid"))
             {
-                bool value = capi.World.Player.Entity.WatchedAttributes.GetBool("glow");
                 stringBuilder.AppendLine(
-                    string.Format(Lang.GetIfExists("alchemy:glow") + ": {0}", value)
+                    string.Format(Lang.GetIfExists("alchemy:glow") + ": {0}", true)
+                );
+                activePotion = true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("waterbreathepotionid"))
+            {
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:waterbreathe") + ": {0}", true)
                 );
                 activePotion = true;
             }

@@ -32,7 +32,7 @@ namespace Alchemy
                 TempEffect effect = new(id, ctx);
                 effect.Apply(entity);
 
-                if (ctx.Respawn)
+                if (effect.Context.Respawn)
                 {
                     UtilityEffects.ApplyRecallPotion(
                         entity.Player as IServerPlayer,
@@ -40,41 +40,45 @@ namespace Alchemy
                         api
                     );
                 }
-                if (ctx.Reshape)
+                if (effect.Context.Reshape)
                 {
                     UtilityEffects.ApplyReshapePotion(
                         entity.Player as IServerPlayer
                     );
                 }
-                if(Math.Abs(ctx.NutritionPotionRetainedNutrition) > float.Epsilon)
+                if(Math.Abs(effect.Context.RetainedNutrition) > float.Epsilon)
                 {
                     UtilityEffects.ApplyNutritionPotion(
-                        entity, ctx.NutritionPotionRetainedNutrition
+                        entity, effect.Context.RetainedNutrition
                     );
                 }
-                if(Math.Abs(ctx.StabilityPotionTemporalStabilityGain) > float.Epsilon)
+                if(Math.Abs(effect.Context.TemporalStabilityGain) > float.Epsilon)
                 {
                     UtilityEffects.ApplyTemporalPotion(
-                        entity, ctx.StabilityPotionTemporalStabilityGain
+                        entity, effect.Context.TemporalStabilityGain
                     );
+                }
+                if(effect.Context.GlowStrength > 0)
+                {
+                    entity.WatchedAttributes.SetInt("glowStrength", effect.Context.GlowStrength);
                 }
 
                 long handle;
                 bool ticking;
 
-                if (ctx.TickSec > 0)
+                if (effect.Context.TickSec > 0)
                 {
                     handle = entity.World.RegisterGameTickListener(
                         dt => Tick(id),
-                        ctx.TickSec * 1000
+                        effect.Context.TickSec * 1000
                     );
                     ticking = true;
                 }
-                else if (ctx.Duration > 0)
+                else if (effect.Context.Duration > 0)
                 {
                     handle = entity.World.RegisterCallback(
                         dt => RemoveEffect(id),
-                        ctx.Duration * 1000
+                        effect.Context.Duration * 1000
                     );
                     ticking = false;
                 }
@@ -127,6 +131,10 @@ namespace Alchemy
             else
                 entity.World.UnregisterCallback(activeEffect.ListenerId);
 
+            if( activeEffect.Effect.Context.GlowStrength > 0 )
+            {
+                entity.WatchedAttributes.RemoveAttribute("glowStrength");
+            }
             activeEffect.Effect.Remove(entity);
 
             active.Remove(id);
@@ -136,7 +144,17 @@ namespace Alchemy
         public void RemoveAll()
         {
             foreach (string id in active.Keys.ToList())
+            {
                 RemoveEffect(id);
+            }
+
+            // Might be needed to remove potion listener ids from watched attributes
+            // List<string> potionAttributes = [.. entity.WatchedAttributes.Keys.Where(key => key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase))];
+
+            // foreach (string attr in potionAttributes)
+            // {
+            //     entity.WatchedAttributes.RemoveAttribute(attr);
+            // }
         }
     }
 

@@ -13,8 +13,8 @@ namespace Alchemy.Patches
             {
                 return;
             }
-            byte[] glow = [0, 0, 31];
-            __result = glow;
+            int glowStrength = __instance.WatchedAttributes.GetInt("glowStrength", 31);
+            __result = [0, 0, (byte)glowStrength];
         }
     }
 }

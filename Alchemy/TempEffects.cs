@@ -21,7 +21,7 @@ namespace Alchemy
 
         public void Apply(EntityPlayer entity)
         {
-            foreach (KeyValuePair<string, float> stat in Context.EffectList)
+            foreach (KeyValuePair<string, float> stat in Context.Effects)
             {
                 if (stat.Key == "maxhealthExtraPoints")
                 {
@@ -47,7 +47,7 @@ namespace Alchemy
 
         public void Remove(EntityPlayer entity)
         {
-            foreach (string stat in Context.EffectList.Keys)
+            foreach (string stat in Context.Effects.Keys)
             {
                 entity.Stats.Remove(stat, modCode);
                 if (stat == "maxhealthExtraPoints")
