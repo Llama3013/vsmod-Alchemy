@@ -178,7 +178,7 @@
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
   "alchemy:incontainer-item-utilitypotionportion-temporal": "Stability Flask",
   "alchemy:incontainer-item-utilitypotionportion-nutrition": "Nutrition Flask",
-  "alchemy:incontainer-item-utilitypotionportion-rehape": "Reshape Flask",
+  "alchemy:incontainer-item-utilitypotionportion-reshape": "Reshape Flask",
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
   "game:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
   "game:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
