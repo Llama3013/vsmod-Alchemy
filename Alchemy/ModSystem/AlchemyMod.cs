@@ -650,8 +650,10 @@ namespace Alchemy.ModSystem
                 entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
-        private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource) =>
+        private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)
+        {
             OnPlayerDisconnect(player);
+        }
 
         public override void Dispose()
         {

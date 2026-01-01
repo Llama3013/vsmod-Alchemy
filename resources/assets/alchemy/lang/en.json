@@ -1,5 +1,6 @@
 {
   "effect-lose": "You feel the effects of the {0} dissipate",
+  // "effect-lose-all": "You feel the effects of all potions dissipate",
   "effect-gain": "You feel the effects of the {0}",
   "boat-block": "You cannot recall when mounted on a boat",
   "item-potionbase*": "A potion base used to make potions",

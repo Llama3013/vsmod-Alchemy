@@ -16,7 +16,7 @@ namespace Alchemy.Item
     public class ItemPotion : Vintagestory.API.Common.Item
     {
         private string potionId = "";
-        private float strengthMul = 1f;
+        private string strength;
 
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
@@ -60,12 +60,7 @@ namespace Alchemy.Item
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
-            strengthMul = Variant?["strength"] switch
-            {
-                "strong" => AlchemyConfig.Loaded.StrongPotionMultiplier,
-                "medium" => AlchemyConfig.Loaded.MediumPotionMultiplier,
-                _ => AlchemyConfig.Loaded.WeakPotionMultiplier
-            };
+            strength = Variant?["strength"] ?? "weak";
             JsonObject potion = Attributes?["potioninfo"];
             potionId = potion?["potionId"].AsString();
             if (string.IsNullOrWhiteSpace(potionId))
@@ -189,10 +184,16 @@ namespace Alchemy.Item
             if (behavior == null)
                 return false;
 
+            float strengthMul = strength switch
+            {
+                "strong" => AlchemyConfig.Loaded.StrongPotionMultiplier,
+                "medium" => AlchemyConfig.Loaded.MediumPotionMultiplier,
+                _ => AlchemyConfig.Loaded.WeakPotionMultiplier
+            };
             PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
             if (ctx == null)
             {
-                api.Logger.Error("No potion definition for potionId {0}", potionId);
+                api.Logger.Error("No potion definition for potionId of: {0}", potionId);
                 return false;
             }
 
@@ -217,17 +218,26 @@ namespace Alchemy.Item
         )
         {
             base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            PotionContext potionDef = PotionRegistry.BuildPotionDef(potionId, strengthMul);
-            if (potionDef == null)
+            if (string.IsNullOrWhiteSpace(potionId))
             {
-                api.Logger.Error("No potion definition for potionId {0}", potionId);
+                return;
+            }
+            float strengthMul = strength switch
+            {
+                "strong" => AlchemyConfig.Loaded.StrongPotionMultiplier,
+                "medium" => AlchemyConfig.Loaded.MediumPotionMultiplier,
+                _ => AlchemyConfig.Loaded.WeakPotionMultiplier
+            };
+            PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
+            if (ctx == null)
+            {
                 return;
             }
 
-            if (potionDef.Effects != null)
+            if (ctx.Effects != null)
             {
                 dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
-                if (potionDef.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue))
+                if (ctx.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -236,13 +246,13 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("animalLootDropRate", out float aLValue))
+                if (ctx.Effects.TryGetValue("animalLootDropRate", out float aLValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-loot-effect", Math.Round(aLValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("animalHarvestingTime", out float ahValue))
+                if (ctx.Effects.TryGetValue("animalHarvestingTime", out float ahValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -251,19 +261,19 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("animalSeekingRange", out float aSValue))
+                if (ctx.Effects.TryGetValue("animalSeekingRange", out float aSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-seek-effect", Math.Round(aSValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue))
+                if (ctx.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-max-health-effect", Math.Round(mHEValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("forageDropRate", out float fDValue))
+                if (ctx.Effects.TryGetValue("forageDropRate", out float fDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -272,7 +282,7 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("healingeffectivness", out float hEValue))
+                if (ctx.Effects.TryGetValue("healingeffectivness", out float hEValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -281,37 +291,37 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("hungerrate", out float hRValue))
+                if (ctx.Effects.TryGetValue("hungerrate", out float hRValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-hunger-rate-effect", Math.Round(hRValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue))
+                if (ctx.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-melee-damage-effect", Math.Round(mWValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("mechanicalsDamage", out float mDValue))
+                if (ctx.Effects.TryGetValue("mechanicalsDamage", out float mDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mech-damage-effect", Math.Round(mDValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("miningSpeedMul", out float mSValue))
+                if (ctx.Effects.TryGetValue("miningSpeedMul", out float mSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mining-speed-effect", Math.Round(mSValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("oreDropRate", out float oDValue))
+                if (ctx.Effects.TryGetValue("oreDropRate", out float oDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-ore-amount-effect", Math.Round(oDValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue))
+                if (ctx.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -320,7 +330,7 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
+                if (ctx.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -329,19 +339,19 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("rustyGearDropRate", out float rGDValue))
+                if (ctx.Effects.TryGetValue("rustyGearDropRate", out float rGDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-gear-amount-effect", Math.Round(rGDValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("walkspeed", out float wSValue))
+                if (ctx.Effects.TryGetValue("walkspeed", out float wSValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-walk-speed-effect", Math.Round(wSValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue))
+                if (ctx.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -350,13 +360,13 @@ namespace Alchemy.Item
                         )
                     );
                 }
-                if (potionDef.Effects.TryGetValue("wildCropDropRate", out float wCDValue))
+                if (ctx.Effects.TryGetValue("wildCropDropRate", out float wCDValue))
                 {
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-wild-crop-effect", Math.Round(wCDValue * 100, 0))
                     );
                 }
-                if (potionDef.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue))
+                if (ctx.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue))
                 {
                     dsc.AppendLine(
                         Lang.Get(
@@ -367,7 +377,7 @@ namespace Alchemy.Item
                 }
 
                 if (
-                    potionDef.Effects.TryGetValue("health", out float healthValue)
+                    ctx.Effects.TryGetValue("health", out float healthValue)
                     && healthValue is > 0.01f or < -0.01f
                 )
                 {
@@ -375,19 +385,17 @@ namespace Alchemy.Item
                 }
             }
 
-            if (potionDef.Health is > 0.01f or < -0.01f)
+            if (ctx.Health is > 0.01f or < -0.01f)
             {
-                dsc.AppendLine(
-                    Lang.Get("alchemy:potion-health-effect", Math.Round(potionDef.Health, 2))
-                );
+                dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", Math.Round(ctx.Health, 2)));
             }
-            if (potionDef.TickSec != 0)
+            if (ctx.TickSec != 0)
             {
-                dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", potionDef.TickSec));
+                dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", ctx.TickSec));
             }
-            if (potionDef.Duration != 0)
+            if (ctx.Duration != 0)
             {
-                dsc.AppendLine(Lang.Get("alchemy:potion-duration", potionDef.Duration));
+                dsc.AppendLine(Lang.Get("alchemy:potion-duration", ctx.Duration));
             }
         }
     }

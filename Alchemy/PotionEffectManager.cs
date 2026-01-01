@@ -149,12 +149,12 @@ namespace Alchemy
             }
 
             // Might be needed to remove potion listener ids from watched attributes
-            // List<string> potionAttributes = [.. entity.WatchedAttributes.Keys.Where(key => key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase))];
+            List<string> potionAttributes = [.. entity.WatchedAttributes.Keys.Where(key => key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase))];
 
-            // foreach (string attr in potionAttributes)
-            // {
-            //     entity.WatchedAttributes.RemoveAttribute(attr);
-            // }
+            foreach (string attr in potionAttributes)
+            {
+                entity.WatchedAttributes.RemoveAttribute(attr);
+            }
         }
     }
 
