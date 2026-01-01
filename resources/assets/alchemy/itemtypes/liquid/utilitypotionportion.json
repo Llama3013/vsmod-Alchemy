@@ -78,7 +78,7 @@
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 4,
-        "texture": { "base": "game:item/resource/temporalgear" },
+        "texture": { "base": "game:item/resource/rot/rot-solids" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
@@ -129,7 +129,8 @@
     "*-nutrition": { "all": { "base": "game:block/hay/aged-side" } },
     "*-glow": { "all": { "base": "game:block/fire-yellow" } },
     "*-waterbreathe": { "all": { "base": "game:block/fire-blue" } },
-    "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } }
+    "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } },
+    "*-reshape": { "all": { "base": "game:item/resource/rot/rot-solids" } }
   },
   "guiTransform": {
     "translation": { "x": 0, "y": 1, "z": 0 },
@@ -140,4 +141,3 @@
   "fpHandTransform": { "translation": { "x": 0, "y": 0, "z": 0 }, "rotation": { "x": 25, "y": 157, "z": -5 } },
   "tpHandTransform": { "translation": { "x": -1.5, "y": -1, "z": -1.4 } }
 }
-
