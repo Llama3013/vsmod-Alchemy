@@ -3,7 +3,7 @@
   "class": "BlockHerbRacks",
   "entityClass": "HerbRacks",
   "variantgroups": [
-    { "code": "wood", "states": ["aged"], "loadFromProperties": "block/wood" },
+    { "code": "wood", "loadFromProperties": "block/wood" },
     { "code": "metal", "loadFromProperties": "block/metal" }
   ],
   "shape": { "base": "alchemy:block/dryingrack" },

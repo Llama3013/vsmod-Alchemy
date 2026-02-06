@@ -31,6 +31,7 @@
       "*-fired": {
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
+        "drinkPortionSize": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/clay/clayflask",
         "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
         "liquidContentShapeLoc": "game:shapes/block/basic/nothing"

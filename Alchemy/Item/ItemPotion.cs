@@ -38,7 +38,7 @@ namespace Alchemy.Item
                     float litres = entityItem.Itemstack.StackSize / props.ItemsPerLitre;
 
                     entityItem.World.SpawnCubeParticles(
-                        entityItem.SidedPos.XYZ,
+                        entityItem.Pos.XYZ,
                         entityItem.Itemstack,
                         0.75f,
                         (int)(litres * 2),
@@ -46,9 +46,9 @@ namespace Alchemy.Item
                     );
                     entityItem.World.PlaySoundAt(
                         new AssetLocation("sounds/environment/smallsplash"),
-                        (float)entityItem.SidedPos.X,
-                        (float)entityItem.SidedPos.Y,
-                        (float)entityItem.SidedPos.Z,
+                        (float)entityItem.Pos.X,
+                        (float)entityItem.Pos.Y,
+                        (float)entityItem.Pos.Z,
                         null
                     );
                 }

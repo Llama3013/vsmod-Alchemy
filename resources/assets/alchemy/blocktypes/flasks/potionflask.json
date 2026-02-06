@@ -31,6 +31,7 @@
       "liquidContainerProps": {
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
+        "drinkPortionSize": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/glass/tubeflask-empty",
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-liquidcontents"
@@ -41,6 +42,7 @@
       "liquidContainerProps": {
         "capacityLitres": 0.5,
         "transferSizeLitres": 0.25,
+        "drinkPortionSize": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/glass/roundflask-empty",
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/roundflask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/roundflask-liquidcontents"
@@ -50,6 +52,7 @@
       "liquidContainerProps": {
         "capacityLitres": 1,
         "transferSizeLitres": 0.25,
+        "drinkPortionSize": 0.25,
         "emptyShapeLoc": "alchemy:shapes/block/glass/flask-empty",
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/flask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/flask-liquidcontents"

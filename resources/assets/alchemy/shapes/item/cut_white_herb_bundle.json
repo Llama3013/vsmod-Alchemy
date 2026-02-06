@@ -8,7 +8,7 @@
   "textures": {
     "normal7": "game:block/plant/crop/flax/normal7",
     "normal1": "game:block/cloth/linen/normal1",
-    "cap": "game:block/plant/mushroom/fieldmushroom/cap",
+    "cap": "game:block/plant/mushroom/fieldmushroomcap",
     "flower": "game:block/plant/flower/petal/lupine/white3-b"
   },
   "elements": [

@@ -17,9 +17,7 @@
         "regen",
         "scentmask",
         "speed",
-        "vitality",
-        "all",
-        "alltick"
+        "vitality"
       ]
     }
   ],

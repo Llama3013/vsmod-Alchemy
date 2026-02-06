@@ -2,7 +2,15 @@
   {
     "ingredientPattern": "PHP,HRH,PHP",
     "ingredients": {
-      "P": { "type": "item", "code": "game:plank-*", "name": "wood" },
+      "P": {
+        "type": "item",
+        "code": "game:plank-*",
+        "name": "wood",
+        "skipVariants": [
+          "aged",
+          "veryaged"
+        ]
+      },
       "H": {
         "type": "item",
         "code": "alchemy:herbrackhook-*",
@@ -66,7 +74,10 @@
     },
     "width": 3,
     "height": 3,
-    "output": { "type": "block", "code": "alchemy:herbrack-{wood}-{metal}", "quantity": 1 }
+    "output": {
+      "type": "block",
+      "code": "alchemy:herbrack-{wood}-{metal}",
+      "quantity": 1
+    }
   }
 ]
-

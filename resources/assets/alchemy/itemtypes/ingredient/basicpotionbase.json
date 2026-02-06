@@ -2,8 +2,8 @@
   "code": "potionbase-basic",
   "shape": { "base": "alchemy:item/potionbase" },
   "textures": {
-    "mat1": { "base": "game:block/plant/mushroom/flyagaric/cap" },
-    "mat2": { "base": "game:block/plant/mushroom/flyagaric/cap" },
+    "mat1": { "base": "game:block/plant/mushroom/flyagariccap" },
+    "mat2": { "base": "game:block/plant/mushroom/flyagariccap" },
     "mat3": { "base": "alchemy:item/potionbase/horsetail" },
     "mat4": { "base": "alchemy:item/potionbase/horsetail" }
   },

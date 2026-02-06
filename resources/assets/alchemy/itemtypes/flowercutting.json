@@ -201,6 +201,12 @@
       "flower": { "base": "game:block/plant/flower/petal/lilyofthevalley2" }
     },
     "*-chamomile-*": { "chamomile": { "base": "alchemy:item/chamomile" } },
+    "@.*-(bluebell|ghostpipewhite|ghostpipepink|ghostpipered)-raw": { "flower": { "base": "game:block/plant/flower/petal/{flower}1" } },
+    "@.*-(bluebell|ghostpipewhite|ghostpipepink|ghostpipered)-dried": {
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/{flower}1" }
+    },
+    "@.*-(bluebell|ghostpipewhite|ghostpipepink|ghostpipered)-cooked": { "normal7": { "base": "game:block/wood-generic" }, "flower": { "base": "game:block/plant/flower/petal/{flower}1" } },
     "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-raw": { "flower": { "base": "game:block/plant/herb/petal/{flower}" } },
     "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-dried": {
       "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
