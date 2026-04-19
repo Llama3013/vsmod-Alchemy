@@ -58,6 +58,7 @@
     ]
   ],
   "name": "Herb rack top",
-  "output": { "type": "item", "code": "alchemy:herbracktop-{metal}" }
+  "output": { "type": "item", "code": "alchemy:herbracktop-{metal}" },
+  "code": "alchemy:herbracktop-{metal}"
 }
 

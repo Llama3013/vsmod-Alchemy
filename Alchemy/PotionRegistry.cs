@@ -127,7 +127,7 @@ namespace Alchemy
         private static void ApplyPredatorPotion(PotionContext ctx)
         {
             ctx.AddEffect("animalSeekingRange", AlchemyConfig.Loaded.PredatorPotionAnimalSeek);
-            ctx.Duration = AlchemyConfig.Loaded.HunterPotionDuration;
+            ctx.Duration = AlchemyConfig.Loaded.PredatorPotionDuration;
         }
 
         private static void ApplyRegenPotion(PotionContext ctx)

@@ -120,7 +120,7 @@ namespace Alchemy
                 return;
 
             IServerPlayer serverPlayer = entity?.Player as IServerPlayer;
-            serverPlayer.SendMessage(
+            serverPlayer?.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
                 Lang.Get("alchemy:effect-lose", activeEffect.PotionName),
                 EnumChatType.Notification

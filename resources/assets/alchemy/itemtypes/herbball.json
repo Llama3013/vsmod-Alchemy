@@ -3,28 +3,13 @@
   "variantgroups": [
     {
       "code": "potiontype",
-      "states": [
-        "archer",
-        "healingeffect",
-        "hungerenhance",
-        "hungersupress",
-        "hunter",
-        "looter",
-        "melee",
-        "mining",
-        "poison",
-        "predator",
-        "regen",
-        "scentmask",
-        "speed",
-        "vitality"
-      ]
+      "states": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
     }
   ],
   "class": "ItemPotion",
   "attributesByType": {
     "*-archer": {
-      "potioninfo": { "potionId": "archerpotionid"}
+      "potioninfo": { "potionId": "archerpotionid" }
     },
     "*-healingeffect": {
       "potioninfo": { "potionId": "healingeffectpotionid" }
@@ -156,10 +141,9 @@
     "scale": 3
   },
   "tpHandTransform": {
-    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
+    "translation": { "x": 0.1, "y": -0.2, "z": 0.5 },
     "rotation": { "x": 0, "y": 0, "z": 0 },
-    "origin": { "x": 0, "y": 0.13, "z": 0 },
-    "scale": 0.33
+    "origin": { "x": 0, "y": 0, "z": 0 }
   },
   "fpHandTransform": {
     "translation": { "x": 0, "y": 0.24, "z": 0.3 },

@@ -1,8 +1,6 @@
 {
   "code": "mortarpestle",
-  "variantgroups": [
-    { "code": "material", "states": ["wood", "stone"] }
-  ],
+  "variantgroups": [{ "code": "material", "states": ["wood", "stone"] }],
   "behaviors": [
     {
       "name": "GroundStorable",
@@ -41,9 +39,9 @@
     "scale": 3
   },
   "tpHandTransform": {
-    "translation": { "x": 0.3, "y": -0.16, "z": 0.5 },
-    "rotation": { "x": 0, "y": 0, "z": 0 },
-    "origin": { "x": 0, "y": 0.13, "z": 0 },
+    "translation": { "x": -0.13, "y": 0.39, "z": 0.45 },
+    "rotation": { "x": 0, "y": 0, "z": -90 },
+    "origin": { "x": 0, "y": 0, "z": 0 },
     "scale": 0.66
   },
   "fpHandTransform": {
@@ -53,4 +51,3 @@
     "scale": 2
   }
 }
-

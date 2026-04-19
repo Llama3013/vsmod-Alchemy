@@ -45,6 +45,7 @@
     ]
   ],
   "name": "8 Herb rack hooks",
-  "output": { "type": "item", "code": "alchemy:herbrackhook-{metal}", "stacksize": 8 }
+  "output": { "type": "item", "code": "alchemy:herbrackhook-{metal}", "stacksize": 8 },
+  "code": "alchemy:herbrackhook-{metal}-eight"
 }
 
