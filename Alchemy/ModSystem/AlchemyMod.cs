@@ -117,6 +117,8 @@ namespace Alchemy.ModSystem
                 "AllowWaterBreathePotion",
                 AlchemyConfig.Loaded.AllowWaterBreathePotion
             );
+            
+            api.World.Config.SetBool("AllowReshapePotion", AlchemyConfig.Loaded.AllowReshapePotion);
 
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
