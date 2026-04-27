@@ -2,7 +2,7 @@
   "enabled": true,
   "code": "utilitypotionportion",
   "variantgroups": [
-    { "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape"] }
+    { "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"] }
   ],
   "class": "ItemPotion",
   "matterState": "liquid",
@@ -82,9 +82,29 @@
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
+    },
+    "*-grow": {
+      "potioninfo": { "potionId": "growpotionid" },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/soil/flooring/drypackeddirt1a" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
+    },
+    "*-shrink": {
+      "potioninfo": { "potionId": "shrinkpotionid" },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 4,
+        "texture": { "base": "game:block/soil/rammed/light/plain1" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
     }
   },
   "creativeinventoryStacks": [
@@ -130,7 +150,9 @@
     "*-glow": { "all": { "base": "game:block/fire-yellow" } },
     "*-waterbreathe": { "all": { "base": "game:block/fire-blue" } },
     "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } },
-    "*-reshape": { "all": { "base": "game:item/resource/rot/rot-solids" } }
+    "*-reshape": { "all": { "base": "game:item/resource/rot/rot-solids" } },
+    "*-grow": { "all": { "base": "game:block/soil/flooring/drypackeddirt1a" } },
+    "*-shrink": { "all": { "base": "game:block/soil/rammed/light/plain1" } }
   },
   "guiTransform": {
     "translation": { "x": 0, "y": 1, "z": 0 },

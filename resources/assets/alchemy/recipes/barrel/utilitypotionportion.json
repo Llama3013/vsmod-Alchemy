@@ -7,7 +7,7 @@
         "type": "item",
         "code": "alchemy:utilitypotionbase-*",
         "name": "potiontype",
-        "allowedVariants": ["recall", "glow", "waterbreathe", "nutrition", "temporal"]
+        "allowedVariants": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"]
       },
       { "type": "item", "code": "alchemy:potionteaportion", "litres": 1 }
     ],

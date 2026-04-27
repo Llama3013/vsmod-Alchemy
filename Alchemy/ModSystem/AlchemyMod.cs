@@ -24,6 +24,8 @@ namespace Alchemy.ModSystem
         private IServerNetworkChannel serverChannel;
         private ICoreAPI api;
 
+        public static bool PlayerModelLibPresent { get; private set; }
+
         public override void Start(ICoreAPI api)
         {
             this.api = api;
@@ -117,8 +119,10 @@ namespace Alchemy.ModSystem
                 "AllowWaterBreathePotion",
                 AlchemyConfig.Loaded.AllowWaterBreathePotion
             );
-            
+
             api.World.Config.SetBool("AllowReshapePotion", AlchemyConfig.Loaded.AllowReshapePotion);
+            api.World.Config.SetBool("AllowGrowPotion", AlchemyConfig.Loaded.AllowGrowPotion);
+            api.World.Config.SetBool("AllowShrinkPotion", AlchemyConfig.Loaded.AllowShrinkPotion);
 
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
@@ -247,6 +251,16 @@ namespace Alchemy.ModSystem
                     AlchemyConfig.Loaded.AllowReshapePotion = packet.AllowReshapePotion;
                     Mod.Logger.Event(
                         $"Received AllowReshapePotion of {packet.AllowReshapePotion} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowGrowPotion = packet.AllowGrowPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowGrowPotion of {packet.AllowGrowPotion} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowShrinkPotion = packet.AllowShrinkPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowShrinkPotion of {packet.AllowShrinkPotion} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowHerbballs = packet.AllowHerbballs;
@@ -514,7 +528,7 @@ namespace Alchemy.ModSystem
             // send connecting players the config settings
             api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
             api.Event.PlayerJoin += OnPlayerJoin;
-            api.Event.PlayerDisconnect += OnPlayerDisconnect;
+            api.Event.PlayerDisconnect += OnPlayerReset;
             api.Event.PlayerDeath += OnPlayerDeath;
 
             // register network channel to send data to clients
@@ -555,6 +569,8 @@ namespace Alchemy.ModSystem
                     AllowVitalityPotion = AlchemyConfig.Loaded.AllowVitalityPotion,
                     AllowWaterBreathePotion = AlchemyConfig.Loaded.AllowWaterBreathePotion,
                     AllowReshapePotion = AlchemyConfig.Loaded.AllowReshapePotion,
+                    AllowGrowPotion = AlchemyConfig.Loaded.AllowGrowPotion,
+                    AllowShrinkPotion = AlchemyConfig.Loaded.AllowShrinkPotion,
                     AllowHerbballs = AlchemyConfig.Loaded.AllowHerbballs,
                     AllowMediumPotions = AlchemyConfig.Loaded.AllowMediumPotions,
                     AllowStrongPotions = AlchemyConfig.Loaded.AllowStrongPotions,
@@ -627,6 +643,7 @@ namespace Alchemy.ModSystem
                 player
             );
             PotionRegistry.Init();
+            OnPlayerReset(player);
         }
 
         private static void OnPlayerReady(IServerPlayer player)
@@ -642,19 +659,21 @@ namespace Alchemy.ModSystem
             entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
-        private static void OnPlayerDisconnect(IServerPlayer player)
+        private static void OnPlayerReset(IServerPlayer player)
         {
             EntityPlayer entity = player.Entity;
             if (entity == null)
                 return;
 
+            if (player.Entity != null)
+                UtilityEffects.ResetPlayerSize(entity);
             if (entity.HasBehavior<PotionEffectBehavior>())
                 entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
         }
 
         private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)
         {
-            OnPlayerDisconnect(player);
+            OnPlayerReset(player);
         }
 
         public override void Dispose()
@@ -664,7 +683,7 @@ namespace Alchemy.ModSystem
             {
                 sapi.Event.PlayerNowPlaying -= OnPlayerReady;
                 sapi.Event.PlayerJoin -= OnPlayerJoin;
-                sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
+                sapi.Event.PlayerDisconnect -= OnPlayerReset;
                 sapi.Event.PlayerDeath -= OnPlayerDeath;
             }
         }

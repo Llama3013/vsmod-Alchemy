@@ -28,6 +28,8 @@ namespace Alchemy.ModConfig
         public bool AllowSpeedPotion;
         public bool AllowVitalityPotion;
         public bool AllowReshapePotion;
+        public bool AllowGrowPotion;
+        public bool AllowShrinkPotion;
 
         public bool AllowHerbballs;
         public bool AllowMediumPotions;

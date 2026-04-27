@@ -310,6 +310,50 @@
                     "min": 0.01,
                     "max": 1
                 }
+            },
+            "GROWPOTIONSIZECHANGE": {
+                "name": "GrowPotionSizeChange",
+                "ingui": "alchemy:GrowPotionSizeChange",
+                "weight": 44.1,
+                "comment": "alchemy:GrowPotionSizeChange-Comment",
+                "default": 1.0,
+                "range": {
+                    "min": 0.1,
+                    "max": 4.0
+                }
+            },
+            "SHRINKPOTIONSIZECHANGE": {
+                "name": "ShrinkPotionSizeChange",
+                "ingui": "alchemy:ShrinkPotionSizeChange",
+                "weight": 44.2,
+                "comment": "alchemy:ShrinkPotionSizeChange-Comment",
+                "default": -1.0,
+                "range": {
+                    "min": -4.0,
+                    "max": -0.1
+                }
+            },
+            "GROWSHRINKMINHEIGHT": {
+                "name": "GrowShrinkMinHeight",
+                "ingui": "alchemy:GrowShrinkMinHeight",
+                "weight": 44.3,
+                "comment": "alchemy:GrowShrinkMinHeight-Comment",
+                "default": 0.3,
+                "range": {
+                    "min": 0.05,
+                    "max": 4.0
+                }
+            },
+            "GROWSHRINKMAXHEIGHT": {
+                "name": "GrowShrinkMaxHeight",
+                "ingui": "alchemy:GrowShrinkMaxHeight",
+                "weight": 44.4,
+                "comment": "alchemy:GrowShrinkMaxHeight-Comment",
+                "default": 5.0,
+                "range": {
+                    "min": 0.5,
+                    "max": 20.0
+                }
             }
         },
         "integer": {
@@ -676,7 +720,21 @@
                 "ingui": "alchemy:AllowReshapePotion",
                 "weight": 1.25,
                 "comment": "alchemy:AllowReshapePotion-Comment",
-                "default": true
+                "default": false
+            },
+            "ALLOWGROWPOTION": {
+                "name": "AllowGrowPotion",
+                "ingui": "alchemy:AllowGrowPotion",
+                "weight": 1.26,
+                "comment": "alchemy:AllowGrowPotion-Comment",
+                "default": false
+            },
+            "ALLOWSHRINKPOTION": {
+                "name": "AllowShrinkPotion",
+                "ingui": "alchemy:AllowShrinkPotion",
+                "weight": 1.27,
+                "comment": "alchemy:AllowShrinkPotion-Comment",
+                "default": false
             },
             "ALLOWSTRONGPOTIONS": {
                 "name": "AllowStrongPotions",
@@ -843,6 +901,11 @@
             "type": "separator",
             "title": "alchemy:StabilityValues-Config",
             "weight": 43
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:GrowthShrinkValues-Config",
+            "weight": 44
         }
     ]
 }

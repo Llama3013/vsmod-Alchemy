@@ -31,11 +31,29 @@
       "mat2": { "base": "game:item/resource/ungraded/sulfur" },
       "mat3": { "base": "game:item/resource/ungraded/sulfur" },
       "mat4": { "base": "game:item/resource/ungraded/sulfur" }
+    },
+    "utilitypotionbase-reshape": {
+      "mat1": { "base": "game:item/resource/nugget/nativegold" },
+      "mat2": { "base": "game:item/resource/nugget/nativegold" },
+      "mat3": { "base": "alchemy:item/potionbase/daffodil" },
+      "mat4": { "base": "alchemy:item/potionbase/daffodil" }
+    },
+    "utilitypotionbase-grow": {
+      "mat1": { "base": "game:block/food/grain/sunflower" },
+      "mat2": { "base": "game:block/food/grain/sunflower" },
+      "mat3": { "base": "alchemy:item/potionbase/bluebell" },
+      "mat4": { "base": "alchemy:item/potionbase/bluebell" }
+    },
+    "utilitypotionbase-shrink": {
+      "mat1": { "base": "game:block/plant/crop/turnip/bulb" },
+      "mat2": { "base": "game:block/plant/crop/turnip/bulb" },
+      "mat3": { "base": "alchemy:item/potionbase/mugwort" },
+      "mat4": { "base": "alchemy:item/potionbase/mugwort" }
     }
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [
-    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape"] }
+    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"] }
   ],
   "attributes": { "handbook": { "groupBy": ["potionbase-{basetype}"] } },
   "attributesByType": {
@@ -60,6 +78,21 @@
       }
     },
     "potionbase-temporal": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-reshape": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-grow": {
+      "handbook": {
+
+      }
+    },
+    "potionbase-shrink": {
       "handbook": {
 
       }

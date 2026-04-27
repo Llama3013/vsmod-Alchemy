@@ -21,6 +21,7 @@ namespace Alchemy
         // These two are not inside the config as they would just render potions useless
         public bool Respawn { get; set; }
         public bool Reshape { get; set; }
+        public float SizeChange { get; set; }
 
         public void AddEffect(string key, float baseValue)
         {

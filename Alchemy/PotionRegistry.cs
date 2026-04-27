@@ -52,7 +52,9 @@ namespace Alchemy
                 ["nutritionpotionid"] = ApplyNutritionPotion,
                 ["recallpotionid"] = ApplyRecallPotion,
                 ["temporalpotionid"] = ApplyTemporalPotion,
-                ["reshapepotionid"] = ApplyReshapePotion
+                ["reshapepotionid"] = ApplyReshapePotion,
+                ["growpotionid"] = ApplyGrowPotion,
+                ["shrinkpotionid"] = ApplyShrinkPotion
             };
         }
 
@@ -185,6 +187,16 @@ namespace Alchemy
         private static void ApplyReshapePotion(PotionContext ctx)
         {
             ctx.Reshape = true;
+        }
+
+        private static void ApplyGrowPotion(PotionContext ctx)
+        {
+            ctx.SizeChange = AlchemyConfig.Loaded.GrowPotionSizeChange;
+        }
+
+        private static void ApplyShrinkPotion(PotionContext ctx)
+        {
+            ctx.SizeChange = AlchemyConfig.Loaded.ShrinkPotionSizeChange;
         }
     }
 }

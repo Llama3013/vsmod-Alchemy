@@ -1,0 +1,12 @@
+{
+  "ingredientPattern": "G,F,T",
+  "ingredients": {
+    "G": { "type": "item", "code": "game:nugget-nativegold" },
+    "F": { "type": "block", "code": "game:flower-daffodil-*" },
+    "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 3,
+  "output": { "type": "item", "code": "alchemy:utilitypotionbase-reshape" }
+}

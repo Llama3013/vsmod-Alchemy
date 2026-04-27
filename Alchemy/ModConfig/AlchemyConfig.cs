@@ -25,7 +25,9 @@ namespace Alchemy.ModConfig
         public bool AllowScentMaskPotion { get; set; } = true;
         public bool AllowSpeedPotion { get; set; } = true;
         public bool AllowVitalityPotion { get; set; } = true;
-        public bool AllowReshapePotion { get; set; } = true;
+        public bool AllowReshapePotion { get; set; } = false;
+        public bool AllowGrowPotion { get; set; } = false;
+        public bool AllowShrinkPotion { get; set; } = false;
 
         public bool AllowHerbballs { get; set; } = true;
         public bool AllowMediumPotions { get; set; } = true;
@@ -93,5 +95,10 @@ namespace Alchemy.ModConfig
         public float NutritionPotionRetainedNutrition { get; set; } = 0.9f;
         public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
         public int GlowPotionStrength { get; set; } = 31;
+
+        public float GrowPotionSizeChange { get; set; } = 1.0f;
+        public float ShrinkPotionSizeChange { get; set; } = -1.0f;
+        public float GrowShrinkMinHeight { get; set; } = 0.3f;
+        public float GrowShrinkMaxHeight { get; set; } = 5.0f;
     }
 }

@@ -62,6 +62,10 @@ namespace Alchemy
                 {
                     entity.WatchedAttributes.SetInt("glowStrength", effect.Context.GlowStrength);
                 }
+                if (Math.Abs(effect.Context.SizeChange) > float.Epsilon)
+                {
+                    UtilityEffects.ApplySizeChange(entity, effect.Context.SizeChange);
+                }
 
                 long handle;
                 bool ticking;

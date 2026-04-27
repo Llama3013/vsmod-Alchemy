@@ -1,0 +1,12 @@
+{
+  "ingredientPattern": "V,F,T",
+  "ingredients": {
+    "V": { "type": "item", "code": "game:vegetable-turnip" },
+    "F": { "type": "block", "code": "game:flower-mugwort-*" },
+    "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 3,
+  "output": { "type": "item", "code": "alchemy:utilitypotionbase-shrink" }
+}

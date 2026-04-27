@@ -1,6 +1,104 @@
 [
   // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
 
+  // Shrink
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/7",
+   "condition": {
+      "when": "AllowShrinkPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/7",
+   "condition": {
+      "when": "AllowShrinkPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/shrinkbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowShrinkPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-shrink/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowShrinkPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/7",
+   "condition": {
+      "when": "AllowShrinkPotion",
+      "isValue": "false"
+    }
+  },
+
+  // Grow
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/6",
+   "condition": {
+      "when": "AllowGrowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/6",
+   "condition": {
+      "when": "AllowGrowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/growbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowGrowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-grow/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowGrowPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/6",
+   "condition": {
+      "when": "AllowGrowPotion",
+      "isValue": "false"
+    }
+  },
+
   // Reshape
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
