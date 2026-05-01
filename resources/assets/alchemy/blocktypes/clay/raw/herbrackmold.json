@@ -15,7 +15,14 @@
   "textures": { "all": { "base": "game:block/clay/{color}clay" } },
   "attributes": {
     "reinforcable": true,
+		"handbook": {
+			"groupBy": ["toolmold-*-{materialtype}-{tooltype}"]
+		},
+		"tongOpeningByType": {
+			"toolmold-*-raw-herbracktop": "medium"
+		},
     "onTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.74 },
+    "onMetalTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.74 },
     "shelvable": false
   },
   "attributesByType": {
@@ -53,14 +60,22 @@
       "smeltedStack": { "type": "block", "code": "herbrackmold-fire-fired-{tooltype}" },
       "requiresContainer": false
     },
-    "herbrackmold-*-raw-*": {
-      "meltingPoint": 650,
-      "meltingDuration": 45,
-      "smeltedRatio": 1,
-      "smeltingType": "fire",
-      "smeltedStack": { "type": "block", "code": "herbrackmold-blue-fired-{tooltype}" },
-      "requiresContainer": false
-    }
+		"herbrackmold-blue-raw-*": {
+			"meltingPoint": 650,
+			"meltingDuration": 45,
+			"smeltedRatio": 1,
+			"smeltingType": "fire",
+			"smeltedStack": { "type": "block", "code": "herbrackmold-blue-fired-{tooltype}" },
+			"requiresContainer": false
+		},
+		"herbrackmold-red-raw-*": {
+			"meltingPoint": 650,
+			"meltingDuration": 45,
+			"smeltedRatio": 1,
+			"smeltingType": "fire",
+			"smeltedStack": { "type": "block", "code": "herbrackmold-earthyorange-fired-{tooltype}" },
+			"requiresContainer": false
+		}
   },
   "blockmaterial": "Ceramic",
   "creativeinventory": { "general": ["*-blue-raw"], "construction": ["*"], "alchemy": ["*"] },
@@ -119,4 +134,3 @@
     "scale": 2.2
   }
 }
-

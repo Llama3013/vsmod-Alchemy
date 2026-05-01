@@ -9,7 +9,11 @@
   ],
   "variantgroups": [{ "code": "metal", "loadFromProperties": "block/metal" }],
   "textures": { "hook": { "base": "game:block/metal/sheet/{metal}1" } },
-  "attributes": { "handbook": { "groupBy": ["herbrackhook-{metal}"] } },
+  "attributes": {
+    "handbook": { "groupBy": ["herbrackhook-{metal}"] },
+    "onTongTransform": { "translation": { "x": -0.14, "y": -0.19, "z": 0.6 }, "rotation": { "x": 0, "y": -9, "z": -10 }, "origin": { "x": 0, "y": 0, "z": 0 } },
+    "onMetalTongTransform": { "translation": { "x": -0.02, "y": -0.08, "z": -0.1 }, "rotation": { "x": 0, "y": 0, "z": -8 }, "origin": { "x": 0, "y": 0, "z": 0.3 } }
+  },
   "guiTransform": {
     "translation": { "x": 0, "y": 0, "z": 0 },
     "rotation": { "x": 80, "y": 0, "z": 0 },
@@ -26,7 +30,7 @@
     "translation": { "x": 0.5, "y": 0.35, "z": 0.03 },
     "rotation": { "x": -89, "y": 0, "z": 0 },
     "origin": { "x": 0, "y": 0, "z": 0 },
-    "scale": 1.01
+    "scale": 1
   },
   "fpHandTransform": {
     "translation": { "x": 0, "y": 0.2, "z": 0.7 },

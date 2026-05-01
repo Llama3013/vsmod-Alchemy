@@ -2,15 +2,10 @@
   "code": "herbrackmold",
   "class": "BlockToolMold",
   "entityClass": "ToolMold",
-  "behaviors": [
-    { "name": "Lockable" },
-    { "name": "UnstableFalling" }
-  ],
-  "entityBehaviors": [
-    { "name": "TemperatureSensitive" }
-  ],
+  "behaviors": [{ "name": "Lockable" }, { "name": "UnstableFalling" }],
+  "entityBehaviors": [{ "name": "TemperatureSensitive" }],
   "variantgroups": [
-    { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "gray", "orange", "red", "tan"] },
+    { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
     { "code": "materialtype", "states": ["fired"] },
     { "code": "tooltype", "states": ["herbracktop", "herbrackhook"] }
   ],
@@ -19,17 +14,21 @@
   "attributes": {
     "reinforcable": true,
     "shatteredShape": { "base": "game:block/clay/mold/shattered-ingot" },
+    "handbook": {
+      "groupBy": ["herbrackmold-*-{materialtype}-{tooltype}"]
+    },
+    "tongOpeningByType": {
+      "toolmold-*-fired-herbracktop": "medium"
+    },
     "onTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.75 },
-    "handbook": { "groupBy": ["toolmold-*-{materialtype}-{tooltype}"] }
+    "onMetalTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.75 }
   },
   "attributesByType": {
     "herbrackmold-*-fired-herbracktop": {
       "requiredUnits": 100,
       "fillHeight": 8,
       "moldrackable": false,
-      "fillQuadsByLevel": [
-        { "x1": 2, "z1": 2, "x2": 14, "z2": 14 }
-      ],
+      "fillQuadsByLevel": [{ "x1": 2, "z1": 2, "x2": 14, "z2": 14 }],
       "drop": { "type": "item", "code": "herbracktop-{metal}", "quantity": 1 }
     },
     "herbrackmold-*-fired-herbrackhook": {
@@ -97,4 +96,3 @@
     "scale": 2.2
   }
 }
-

@@ -28,7 +28,7 @@
     "handbook": { "groupBy": ["claypotionflask-*-{state}"] }
   },
   "attributesByType": {
-    "claypotionflask-red-*": {
+    "claypotionflask-red-raw": {
       "beehivekiln": {
         "0": { "type": "block", "code": "alchemy:claypotionflask-tan-fired" },
         "1": { "type": "block", "code": "alchemy:claypotionflask-orange-fired" },
@@ -36,7 +36,7 @@
         "3": { "type": "block", "code": "alchemy:claypotionflask-brown-fired" }
       }
     },
-    "claypotionflask-blue-*": {
+    "claypotionflask-blue-raw": {
       "beehivekiln": {
         "0": { "type": "block", "code": "alchemy:claypotionflask-cream-fired" },
         "1": { "type": "block", "code": "alchemy:claypotionflask-gray-fired" },
@@ -44,7 +44,7 @@
         "3": { "type": "block", "code": "alchemy:claypotionflask-black-fired" }
       }
     },
-    "claypotionflask-fire-*": {
+    "claypotionflask-fire-raw": {
       "beehivekiln": {
         "0": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" },
         "1": { "type": "block", "code": "alchemy:claypotionflask-fire-fired" },
@@ -73,15 +73,26 @@
       "requiresContainer": false,
       "smeltedStack": { "type": "block", "code": "claypotionflask-fire-fired" }
     },
-    "claypotionflask-*-raw": {
+    "claypotionflask-blue-raw": {
       "meltingPoint": 600,
       "meltingDuration": 30,
       "smeltedRatio": 1,
       "smeltingType": "fire",
       "requiresContainer": false,
       "smeltedStack": { "type": "block", "code": "claypotionflask-blue-fired" }
+    },
+    "claypotionflask-red-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "claypotionflask-earthyorange-fired" }
     }
   },
+	"sounds": {
+		"walk": "walk/stone",
+	},
   "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "guiTransform": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 1.75 },
@@ -94,4 +105,3 @@
     "scale": 0.4
   }
 }
-

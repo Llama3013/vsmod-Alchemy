@@ -11,7 +11,7 @@
         "height": 3,
         "output": {
             "type": "block",
-            "code": "alchemy:potionflask-normal-quartz",
+            "code": "alchemy:potionflask-normal-plain",
             "quantity": 1
         }
     },
@@ -27,7 +27,7 @@
         "height": 3,
         "output": {
             "type": "block",
-            "code": "alchemy:potionflask-round-quartz",
+            "code": "alchemy:potionflask-round-plain",
             "quantity": 1
         }
     },
@@ -43,7 +43,7 @@
         "height": 2,
         "output": {
             "type": "block",
-            "code": "alchemy:potionflask-tube-quartz",
+            "code": "alchemy:potionflask-tube-plain",
             "quantity": 1
         }
     }

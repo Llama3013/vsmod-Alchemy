@@ -338,7 +338,7 @@
                 "ingui": "alchemy:GrowShrinkMinHeight",
                 "weight": 44.3,
                 "comment": "alchemy:GrowShrinkMinHeight-Comment",
-                "default": 0.3,
+                "default": 0.5,
                 "range": {
                     "min": 0.05,
                     "max": 4.0
@@ -349,7 +349,7 @@
                 "ingui": "alchemy:GrowShrinkMaxHeight",
                 "weight": 44.4,
                 "comment": "alchemy:GrowShrinkMaxHeight-Comment",
-                "default": 5.0,
+                "default": 4.0,
                 "range": {
                     "min": 0.5,
                     "max": 20.0
@@ -904,7 +904,7 @@
         },
         {
             "type": "separator",
-            "title": "alchemy:GrowthShrinkValues-Config",
+            "title": "alchemy:GrowShrinkValues-Config",
             "weight": 44
         }
     ]

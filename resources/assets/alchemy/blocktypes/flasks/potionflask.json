@@ -25,7 +25,15 @@
       "states": ["plain", "quartz", "green", "blue", "violet", "red", "yellow", "brown", "vintage", "smoky", "pink"]
     }
   ],
-  "attributes": { "shelvable": true, "displaycaseable": true },
+  "attributes": {
+    "shelvable": true,
+    "displaycaseable": true,
+    "handbook": {
+      "groupBy": ["potionflask-{flask}-*"],
+      "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",
+      "excludeByType": { "*-blue": true, "*-red": true, "*-yellow": true, "*-brown": true, "*-vintage": true }
+    }
+  },
   "attributesByType": {
     "potionflask-tube-*": {
       "liquidContainerProps": {
@@ -57,8 +65,7 @@
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/flask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/flask-liquidcontents"
       }
-    },
-    "*": { "handbook": { "exclude": true } }
+    }
   },
   "blockmaterial": "Glass",
   "replaceable": 5000,

@@ -1,13 +1,11 @@
 {
   "code": "claypotionflask",
-  "class": "BlockPotionFlask",
-  "entityClass": "BlockEntityPotionFlask",
-  "variantgroups": [
-    { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "gray", "orange", "red", "tan"] },
-    { "code": "state", "states": ["fired"] }
-  ],
-  "shape": { "base": "alchemy:block/clay/clayflask" },
-  "textures": { "ceramic": { "base": "game:block/clay/hardened/{color}" } },
+  "classByType": {
+    "*-fired": "BlockPotionFlask"
+  },
+  "entityClassByType": {
+    "*-fired": "BlockEntityPotionFlask"
+  },
   "behaviors": [
     {
       "name": "GroundStorable",
@@ -17,16 +15,16 @@
     { "name": "RightClickPickup" },
     { "name": "SneakPlacing" }
   ],
+  "variantgroups": [
+    { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
+    { "code": "state", "states": ["fired"] }
+  ],
+  "shape": { "base": "alchemy:block/clay/clayflask" },
+  "textures": { "ceramic": { "base": "game:block/clay/hardened/{color}" } },
   "attributes": {
-    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
-    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
-    "onTongTransform": {
-      "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
-      "rotation": { "x": -108, "y": 71, "z": -83 },
-      "scale": 0.6
+    "handbook": {
+      "groupBy": ["claypotionflask-*-{state}"]
     },
-    "shelvable": true,
-    "displaycaseable": true,
     "liquidContainerPropsByType": {
       "*-fired": {
         "capacityLitres": 0.25,
@@ -37,7 +35,20 @@
         "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
       }
     },
-    "handbook": { "groupBy": ["claypotionflask-*-{state}"] }
+    "shelvable": true,
+    "displaycaseable": true,
+    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
+    "onTongTransform": {
+      "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
+      "rotation": { "x": -108, "y": 71, "z": -83 },
+      "scale": 0.6
+    },
+    "onMetalTongTransform": {
+      "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
+      "rotation": { "x": -108, "y": 71, "z": -83 },
+      "scale": 0.6
+    }
   },
   "doNotRenderAtLod2": true,
   "creativeinventory": { "general": ["*-blue-fired"], "decorative": ["*"], "alchemy": ["*"] },
@@ -47,6 +58,9 @@
   "liquidSelectable": 1,
   "lightAbsorption": 1,
   "maxStackSize": 16,
+	"sounds": {
+		"walk": "walk/stone"
+	},
   "sidesolid": { "all": false },
   "sideopaque": { "all": false },
   "emitsideao": { "all": false },
@@ -62,4 +76,3 @@
     "scale": 0.4
   }
 }
-

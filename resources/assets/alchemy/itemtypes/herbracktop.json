@@ -4,7 +4,11 @@
   "shape": { "base": "alchemy:item/herbracktop" },
   "variantgroups": [{ "code": "metal", "loadFromProperties": "block/metal" }],
   "textures": { "top": { "base": "game:block/metal/sheet/{metal}1" } },
-  "attributes": { "handbook": { "groupBy": ["herbracktop-{metal}"] } },
+  "attributes": {
+    "handbook": { "groupBy": ["herbracktop-{metal}"] },
+    "onTongTransform": { "translation": { "x": -1.06, "y": 0.23, "z": 0.5 }, "rotation": { "x": 2, "y": -90, "z": -90 }, "origin": { "x": 0, "y": 0, "z": 0 } },
+    "onMetalTongTransform": { "translation": { "x": -0.45, "y": 0.39, "z": -0.08 }, "rotation": { "x": 0, "y": -90, "z": -90 }, "origin": { "x": 0, "y": 0, "z": 0.5 } }
+  },
   "heldTpIdleAnimation": "holdbothhands",
   "guiTransform": {
     "translation": { "x": 0, "y": 0, "z": 0 },
