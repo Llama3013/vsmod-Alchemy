@@ -55,44 +55,44 @@
   "variantgroups": [
     { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"] }
   ],
-  "attributes": { "handbook": { "groupBy": ["potionbase-{basetype}"] } },
+  "attributes": { "handbook": { "groupBy": ["utilitypotionbase-{basetype}"] } },
   "attributesByType": {
-    "potionbase-recall": {
+    "utilitypotionbase-recall": {
       "handbook": {
 
       }
     },
-    "potionbase-glow": {
+    "utilitypotionbase-glow": {
       "handbook": {
 
       }
     },
-    "potionbase-waterbreathe": {
+    "utilitypotionbase-waterbreathe": {
       "handbook": {
 
       }
     },
-    "potionbase-nutrition": {
+    "utilitypotionbase-nutrition": {
       "handbook": {
 
       }
     },
-    "potionbase-temporal": {
+    "utilitypotionbase-temporal": {
       "handbook": {
 
       }
     },
-    "potionbase-reshape": {
+    "utilitypotionbase-reshape": {
       "handbook": {
 
       }
     },
-    "potionbase-grow": {
+    "utilitypotionbase-grow": {
       "handbook": {
 
       }
     },
-    "potionbase-shrink": {
+    "utilitypotionbase-shrink": {
       "handbook": {
 
       }

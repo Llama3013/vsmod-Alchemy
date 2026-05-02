@@ -727,14 +727,14 @@
                 "ingui": "alchemy:AllowGrowPotion",
                 "weight": 1.26,
                 "comment": "alchemy:AllowGrowPotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWSHRINKPOTION": {
                 "name": "AllowShrinkPotion",
                 "ingui": "alchemy:AllowShrinkPotion",
                 "weight": 1.27,
                 "comment": "alchemy:AllowShrinkPotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWSTRONGPOTIONS": {
                 "name": "AllowStrongPotions",
@@ -798,6 +798,27 @@
                 "weight": 4.2,
                 "comment": "alchemy:AllowHerbRacks-Comment",
                 "default": true
+            },
+            "ALLOWRESHAPEPOTIONRECIPE": {
+                "name": "AllowReshapePotionRecipe",
+                "ingui": "alchemy:AllowReshapePotionRecipe",
+                "weight": 4.51,
+                "comment": "alchemy:AllowReshapePotionRecipe-Comment",
+                "default": true
+            },
+            "ALLOWGROWPOTIONRECIPE": {
+                "name": "AllowGrowPotionRecipe",
+                "ingui": "alchemy:AllowGrowPotionRecipe",
+                "weight": 4.52,
+                "comment": "alchemy:AllowGrowPotionRecipe-Comment",
+                "default": true
+            },
+            "ALLOWSHRINKPOTIONRECIPE": {
+                "name": "AllowShrinkPotionRecipe",
+                "ingui": "alchemy:AllowShrinkPotionRecipe",
+                "weight": 4.53,
+                "comment": "alchemy:AllowShrinkPotionRecipe-Comment",
+                "default": true
             }
         }
     },
@@ -806,6 +827,11 @@
             "type": "separator",
             "title": "alchemy:Allow-Config",
             "weight": 0.5
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:RecipeAllow-Config",
+            "weight": 4.5
         },
         {
             "type": "separator",

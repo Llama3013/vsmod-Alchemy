@@ -148,6 +148,104 @@
     }
   },
 
+  // Shrink (recipe only - potion item still exists, creative mode only)
+  {
+   "file": "alchemy:recipes/grid/ingredient/shrinkbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowShrinkPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "replace",
+   "path": "/attributesByType/utilitypotionbase-shrink/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowShrinkPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-shrink/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowShrinkPotionRecipe",
+      "isValue": "false"
+    }
+  },
+
+  // Grow (recipe only - potion item still exists, creative mode only)
+  {
+   "file": "alchemy:recipes/grid/ingredient/growbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowGrowPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "replace",
+   "path": "/attributesByType/utilitypotionbase-grow/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowGrowPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-grow/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowGrowPotionRecipe",
+      "isValue": "false"
+    }
+  },
+
+
+  // Reshape (recipe only - potion item still exists, creative mode only)
+  {
+   "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowReshapePotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "replace",
+   "path": "/attributesByType/utilitypotionbase-reshape/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowReshapePotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-reshape/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowReshapePotionRecipe",
+      "isValue": "false"
+    }
+  },
+
+
   // Temporal
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",

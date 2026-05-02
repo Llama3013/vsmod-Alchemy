@@ -123,6 +123,9 @@ namespace Alchemy.ModSystem
             api.World.Config.SetBool("AllowReshapePotion", AlchemyConfig.Loaded.AllowReshapePotion);
             api.World.Config.SetBool("AllowGrowPotion", AlchemyConfig.Loaded.AllowGrowPotion);
             api.World.Config.SetBool("AllowShrinkPotion", AlchemyConfig.Loaded.AllowShrinkPotion);
+            api.World.Config.SetBool("AllowReshapePotionRecipe", AlchemyConfig.Loaded.AllowReshapePotionRecipe);
+            api.World.Config.SetBool("AllowGrowPotionRecipe", AlchemyConfig.Loaded.AllowGrowPotionRecipe);
+            api.World.Config.SetBool("AllowShrinkPotionRecipe", AlchemyConfig.Loaded.AllowShrinkPotionRecipe);
 
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
@@ -261,6 +264,21 @@ namespace Alchemy.ModSystem
                     AlchemyConfig.Loaded.AllowShrinkPotion = packet.AllowShrinkPotion;
                     Mod.Logger.Event(
                         $"Received AllowShrinkPotion of {packet.AllowShrinkPotion} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowReshapePotionRecipe = packet.AllowReshapePotionRecipe;
+                    Mod.Logger.Event(
+                        $"Received AllowReshapePotionRecipe of {packet.AllowReshapePotionRecipe} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowGrowPotionRecipe = packet.AllowGrowPotionRecipe;
+                    Mod.Logger.Event(
+                        $"Received AllowGrowPotionRecipe of {packet.AllowGrowPotionRecipe} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowShrinkPotionRecipe = packet.AllowShrinkPotionRecipe;
+                    Mod.Logger.Event(
+                        $"Received AllowShrinkPotionRecipe of {packet.AllowShrinkPotionRecipe} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowHerbballs = packet.AllowHerbballs;
@@ -571,6 +589,9 @@ namespace Alchemy.ModSystem
                     AllowReshapePotion = AlchemyConfig.Loaded.AllowReshapePotion,
                     AllowGrowPotion = AlchemyConfig.Loaded.AllowGrowPotion,
                     AllowShrinkPotion = AlchemyConfig.Loaded.AllowShrinkPotion,
+                    AllowReshapePotionRecipe = AlchemyConfig.Loaded.AllowReshapePotionRecipe,
+                    AllowGrowPotionRecipe = AlchemyConfig.Loaded.AllowGrowPotionRecipe,
+                    AllowShrinkPotionRecipe = AlchemyConfig.Loaded.AllowShrinkPotionRecipe,
                     AllowHerbballs = AlchemyConfig.Loaded.AllowHerbballs,
                     AllowMediumPotions = AlchemyConfig.Loaded.AllowMediumPotions,
                     AllowStrongPotions = AlchemyConfig.Loaded.AllowStrongPotions,
