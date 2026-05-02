@@ -1,4 +1,3 @@
-# vsmod-Alchemy
-A vintage story mod that adds potions that enhance the player.
+# vsmod-Alchemy-CHS
 
-Link to mod database page: https://mods.vintagestory.at/show/mod/487
+The Chinese translation of the Vintage-Story mod #Alchemy#, https://mods.vintagestory.at/alchemy.
