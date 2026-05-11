@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Alchemy.Behavior;
+using Alchemy.Block;
 using Alchemy.ModConfig;
+using Alchemy.Utility;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -81,33 +84,19 @@ namespace Alchemy.Item
             ref EnumHandHandling handling
         )
         {
-            /* This checks if the potion effect callback is on */
             if (
-                !string.IsNullOrWhiteSpace(potionId)
-                && byEntity.WatchedAttributes.GetLong(potionId) == 0
+                PotionConsumableLogic.HandleDrinkStart(
+                    byEntity,
+                    potionId,
+                    "eat",
+                    () => playEatSound(byEntity, "eat", 1),
+                    ref handling
+                )
             )
             {
-                byEntity.World.RegisterCallback(
-                    (dt) =>
-                    {
-                        if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
-                        {
-                            if (Code.Path.Contains("portion"))
-                            {
-                                playEatSound(byEntity, "drink", 1);
-                            }
-                            else
-                            {
-                                playEatSound(byEntity, "eat", 1);
-                            }
-                        }
-                    },
-                    200
-                );
-                byEntity.AnimManager?.StartAnimation("eat");
-                handling = EnumHandHandling.PreventDefault;
                 return;
             }
+
             base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
 
@@ -119,31 +108,7 @@ namespace Alchemy.Item
             EntitySelection entitySel
         )
         {
-            Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
-            pos.Y -= 0.4f;
-
-            if (byEntity.World is IClientWorldAccessor)
-            {
-                ModelTransform tf = new();
-                tf.Origin.Set(1.1f, 0.5f, 0.5f);
-                tf.EnsureDefaultValues();
-
-                tf.Translation.X -=
-                    Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                tf.Rotation.X +=
-                    Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
-
-                if (secondsUsed > 0.5f)
-                {
-                    tf.Translation.Y +=
-                        GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
-                }
-
-                return secondsUsed <= 1.5f;
-            }
-            return true;
+            return PotionConsumableLogic.HandleDrinkStep(secondsUsed, slot, byEntity, false);
         }
 
         public override void OnHeldInteractStop(
@@ -154,13 +119,46 @@ namespace Alchemy.Item
             EntitySelection entitySel
         )
         {
-            if (secondsUsed > 1.45f && TryProcessPotionEffects(byEntity, slot.Itemstack))
-            {
-                slot.TakeOut(1);
-                slot.MarkDirty();
-            }
+            PotionConsumableLogic.HandleDrinkStop(
+                secondsUsed,
+                byEntity,
+                slot,
+                potionId,
+                strength,
+                () =>
+                {
+                    slot.TakeOut(1);
+                    slot.MarkDirty();
+                    return true;
+                },
+                slot.Itemstack.GetName,
+                api
+            );
 
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
+        }
+
+        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
+        {
+            base.OnHeldIdle(slot, byEntity);
+
+            if (!Code.Path.Contains("herbball"))
+                return;
+
+            PotionConsumableLogic.HandleWeaponCoatingIdle(
+                api,
+                slot,
+                byEntity,
+                potionId,
+                strength,
+                s => s.Itemstack.GetName(),
+                s =>
+                {
+                    s.TakeOut(1);
+                    s.MarkDirty();
+                    return true;
+                }
+            );
         }
 
         public bool TryProcessPotionEffects(EntityAgent byEntity, ItemStack itemStack)
@@ -180,7 +178,8 @@ namespace Alchemy.Item
             if (itemStack == null)
                 return false;
 
-            PotionEffectBehavior behavior = playerEntity.GetBehavior<PotionEffectBehavior>();
+            EntityBehaviorPotionEffect behavior =
+                playerEntity.GetBehavior<EntityBehaviorPotionEffect>();
             if (behavior == null)
                 return false;
 
@@ -188,7 +187,7 @@ namespace Alchemy.Item
             {
                 "strong" => AlchemyConfig.Loaded.StrongPotionMultiplier,
                 "medium" => AlchemyConfig.Loaded.MediumPotionMultiplier,
-                _ => AlchemyConfig.Loaded.WeakPotionMultiplier
+                _ => AlchemyConfig.Loaded.WeakPotionMultiplier,
             };
             PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
             if (ctx == null)
@@ -226,7 +225,7 @@ namespace Alchemy.Item
             {
                 "strong" => AlchemyConfig.Loaded.StrongPotionMultiplier,
                 "medium" => AlchemyConfig.Loaded.MediumPotionMultiplier,
-                _ => AlchemyConfig.Loaded.WeakPotionMultiplier
+                _ => AlchemyConfig.Loaded.WeakPotionMultiplier,
             };
             PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
             if (ctx == null)

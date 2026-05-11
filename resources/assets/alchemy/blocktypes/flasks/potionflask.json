@@ -1,6 +1,7 @@
 {
   "code": "potionflask",
   "class": "BlockPotionFlask",
+	"storageFlags": 257,
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
     { "name": "RightClickPickup" },

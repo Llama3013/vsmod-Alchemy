@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alchemy.Item;
+using Alchemy.ModConfig;
+using Alchemy.Utility;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -31,7 +33,11 @@ namespace Alchemy.Block
                 return;
 
             ItemStack contentStack = GetContent(itemstack);
-            if (contentStack == null || contentStack.StackSize <= 0 || contentStack?.Collectible?.Code == null)
+            if (
+                contentStack == null
+                || contentStack.StackSize <= 0
+                || contentStack?.Collectible?.Code == null
+            )
                 return;
 
             Dictionary<int, MultiTextureMeshRef> meshrefs;
@@ -42,8 +48,7 @@ namespace Alchemy.Block
             }
             else
             {
-                capi.ObjectCache[meshRefsCacheKey] = meshrefs =
-                    [];
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = [];
             }
 
             int hashcode = GetStackCacheHashCode(contentStack);
@@ -189,13 +194,13 @@ namespace Alchemy.Block
                     {
                         containerMesh.CustomInts = new(containerMesh.FlagsCount)
                         {
-                            Count = containerMesh.FlagsCount
+                            Count = containerMesh.FlagsCount,
                         };
                         containerMesh.CustomInts.Values.Fill(0x4000000); // light foam only
 
                         containerMesh.CustomFloats = new(containerMesh.FlagsCount * 2)
                         {
-                            Count = containerMesh.FlagsCount * 2
+                            Count = containerMesh.FlagsCount * 2,
                         };
                     }
                     return containerMesh;
@@ -208,26 +213,26 @@ namespace Alchemy.Block
                     {
                         if (level > 0 && level <= 0.25)
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
                                 .ToObject<Shape>();
                         }
                         else if (level <= 0.5)
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
                                 .ToObject<Shape>();
                         }
                         else if (level < 1)
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
                                 .ToObject<Shape>();
                         }
                         else
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid.json")
                                 .ToObject<Shape>();
                         }
                     }
@@ -235,14 +240,16 @@ namespace Alchemy.Block
                     {
                         if (level < 1)
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/roundflask-liquid-1.json")
+                            shape = capi
+                                .Assets.TryGet(
+                                    "alchemy:shapes/block/glass/roundflask-liquid-1.json"
+                                )
                                 .ToObject<Shape>();
                         }
                         else
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
                                 .ToObject<Shape>();
                         }
                     }
@@ -250,8 +257,8 @@ namespace Alchemy.Block
                     {
                         if (level > 0)
                         {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
+                            shape = capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
                                 .ToObject<Shape>();
                         }
                     }
@@ -314,10 +321,76 @@ namespace Alchemy.Block
             return baseInteractions;
         }
 
-
         #endregion Render
 
         #region Interaction
+
+        private static readonly Dictionary<long, long> coatHoldStartMs = [];
+        private const float CoatHoldDurationSec = 1.5f;
+
+        internal static readonly HashSet<string> AllowedCoatingPotionIds =
+        [
+            "poisontickpotionid",
+            "regentickpotionid",
+        ];
+
+        private TagSet weaponMeleeTag;
+        private bool weaponMeleeTagCached;
+
+        private TagSet GetWeaponMeleeTag()
+        {
+            if (!weaponMeleeTagCached)
+            {
+                weaponMeleeTagCached = true;
+                api.CollectibleTagRegistry.TryCreateTagSet(
+                    out weaponMeleeTag,
+                    new List<string> { "weapon-melee" }
+                );
+            }
+            return weaponMeleeTag;
+        }
+
+        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
+        {
+            base.OnHeldIdle(slot, byEntity);
+
+            ItemStack contentStack = GetContent(slot.Itemstack);
+
+            JsonObject potion = contentStack?.ItemAttributes?[potionInfo];
+
+            string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
+
+            string potionStrength = "weak";
+
+            contentStack?.Collectible?.Variant?.TryGetValue("strength", out potionStrength);
+
+            PotionConsumableLogic.HandleWeaponCoatingIdle(
+                api,
+                slot,
+                byEntity,
+                potionId,
+                potionStrength,
+                s =>
+                {
+                    return GetContent(s.Itemstack)?.GetName()
+                        ?? Lang.Get($"alchemy:coatname-{potionId}");
+                },
+                s =>
+                {
+                    EntityPlayer player = byEntity as EntityPlayer;
+
+                    int consumed = SplitStackAndPerformAction(
+                        player,
+                        s,
+                        stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
+                    );
+
+                    s.MarkDirty();
+
+                    return consumed > 0;
+                }
+            );
+        }
 
         public override void OnHeldInteractStart(
             ItemSlot itemslot,
@@ -331,40 +404,62 @@ namespace Alchemy.Block
             if (blockSel != null && byEntity.Controls.CtrlKey && byEntity.Controls.ShiftKey)
             {
                 byEntity.Controls.ShiftKey = false;
-                base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
+
+                base.OnHeldInteractStart(
+                    itemslot,
+                    byEntity,
+                    blockSel,
+                    entitySel,
+                    firstEvent,
+                    ref handHandling
+                );
+
                 return;
             }
-            
+
             ItemStack contentStack = GetContent(itemslot.Itemstack);
+
             if (contentStack != null && !byEntity.Controls.ShiftKey)
             {
                 JsonObject potion = contentStack.ItemAttributes?[potionInfo];
+
                 if (potion?.Exists ?? false)
                 {
                     string potionId = potion["potionId"].AsString();
-                    if (potionId == "recallpotionid" && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null && WildcardUtil.Match("boat-sailed-*", byEntity.MountedOn.MountSupplier.OnEntity.Code.Path) && byEntity.World.Side == EnumAppSide.Server)
+
+                    if (
+                        potionId == "recallpotionid"
+                        && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null
+                        && WildcardUtil.Match(
+                            "boat-sailed-*",
+                            byEntity.MountedOn.MountSupplier.OnEntity.Code.Path
+                        )
+                        && byEntity.World.Side == EnumAppSide.Server
+                    )
                     {
                         EntityPlayer playerEntity = byEntity as EntityPlayer;
+
                         IServerPlayer serverPlayer = playerEntity?.Player as IServerPlayer;
+
                         serverPlayer.SendMessage(
                             GlobalConstants.InfoLogChatGroup,
                             Lang.Get("alchemy:boat-block"),
                             EnumChatType.Notification
                         );
+
                         return;
                     }
-                    /* This checks if the potion effect callback is on */
+
                     if (
-                        !string.IsNullOrWhiteSpace(potionId)
-                        && byEntity.WatchedAttributes.GetLong(potionId) == 0
+                        PotionConsumableLogic.HandleDrinkStart(
+                            byEntity,
+                            potionId,
+                            "drink",
+                            () => playEatSound(byEntity, "drink", 1),
+                            ref handHandling
+                        )
                     )
                     {
-                        byEntity.World.RegisterCallback(
-                            (dt) => playEatSound(byEntity, "drink", 1),
-                            500
-                        );
-                        byEntity.AnimManager?.StartAnimation("eat");
-                        handHandling = EnumHandHandling.PreventDefault;
                         return;
                     }
                 }
@@ -373,11 +468,18 @@ namespace Alchemy.Block
             // Prevent accidental spilling unless CTRL + SHIFT are both held
             if (blockSel != null && byEntity.Controls.CtrlKey && !byEntity.Controls.ShiftKey)
             {
-                // We are sprinting but NOT sneaking → block spill
                 handHandling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-            base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
+
+            base.OnHeldInteractStart(
+                itemslot,
+                byEntity,
+                blockSel,
+                entitySel,
+                firstEvent,
+                ref handHandling
+            );
         }
 
         public override void TryMergeStacks(ItemStackMergeOperation op)
@@ -403,54 +505,7 @@ namespace Alchemy.Block
             EntitySelection entitySel
         )
         {
-            ItemStack contentStack = GetContent(slot.Itemstack);
-            if (contentStack != null && !byEntity.Controls.ShiftKey)
-            {
-                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
-                if (potion?.Exists ?? false)
-                {
-                    Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
-                    pos.X += byEntity.LocalEyePos.X;
-                    pos.Y += byEntity.LocalEyePos.Y - 0.4f;
-                    pos.Z += byEntity.LocalEyePos.Z;
-
-                    if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
-                    {
-                        byEntity.World.SpawnCubeParticles(
-                            pos,
-                            slot.Itemstack,
-                            0.3f,
-                            4,
-                            0.5f,
-                            (byEntity as EntityPlayer)?.Player
-                        );
-                    }
-
-                    if (byEntity.World is IClientWorldAccessor)
-                    {
-                        ModelTransform tf = new();
-                        tf.Origin.Set(1.1f, 0.5f, 0.5f);
-                        tf.EnsureDefaultValues();
-
-                        tf.Translation.X -= Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Rotation.X += Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
-
-                        if (secondsUsed > 0.5f)
-                        {
-                            tf.Translation.Y += GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
-                        }
-
-                        return secondsUsed <= 1.5f;
-                    }
-
-                    // Let the client decide when he is done eating
-                    return true;
-                }
-            }
-
-            return base.OnHeldInteractStep(secondsUsed, slot, byEntity, blockSel, entitySel);
+            return PotionConsumableLogic.HandleDrinkStep(secondsUsed, slot, byEntity, true);
         }
 
         public override void OnHeldInteractStop(
@@ -464,19 +519,51 @@ namespace Alchemy.Block
             if (
                 HandleCollectibleBehaviorsForDrink(secondsUsed, slot, byEntity, blockSel, entitySel)
             )
+            {
                 return;
+            }
 
             ItemStack contentStack = GetContent(slot.Itemstack);
-            if (
-                secondsUsed > 1.45f && contentStack.Item is ItemPotion potion && potion.TryProcessPotionEffects(byEntity, contentStack)) {
-                    EntityPlayer playerEntity = byEntity as EntityPlayer;
-                    SplitStackAndPerformAction(
-                        playerEntity,
-                        slot,
-                        stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                    );
-                    slot.MarkDirty();
-                    playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
+
+            if (contentStack?.Item is ItemPotion potion)
+            {
+                JsonObject potionData = contentStack.ItemAttributes?[potionInfo];
+
+                string potionId =
+                    potionData?.Exists == true ? potionData["potionId"].AsString() : null;
+
+                string strength = "weak";
+
+                contentStack.Collectible?.Variant?.TryGetValue("strength", out strength);
+
+                PotionConsumableLogic.HandleDrinkStop(
+                    secondsUsed,
+                    byEntity,
+                    slot,
+                    potionId,
+                    strength,
+                    () =>
+                    {
+                        EntityPlayer playerEntity = byEntity as EntityPlayer;
+
+                        int consumed = SplitStackAndPerformAction(
+                            playerEntity,
+                            slot,
+                            stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
+                        );
+
+                        slot.MarkDirty();
+
+                        if (playerEntity?.Player != null)
+                        {
+                            playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
+                        }
+
+                        return consumed > 0;
+                    },
+                    () => contentStack.GetName(),
+                    api
+                );
             }
 
             base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
@@ -534,19 +621,30 @@ namespace Alchemy.Block
         ItemStack forContents,
         CompositeTexture contentTexture,
         Vintagestory.API.Common.Block flask
-        ) : ITexPositionSource
+    ) : ITexPositionSource
     {
-        public ItemStack ForContents { get; set; } = forContents ?? throw new ArgumentNullException(nameof(forContents));
+        public ItemStack ForContents { get; set; } =
+            forContents ?? throw new ArgumentNullException(nameof(forContents));
 
-        private readonly ICoreClientAPI capi = capi ?? throw new ArgumentNullException(nameof(capi));
+        private readonly ICoreClientAPI capi =
+            capi ?? throw new ArgumentNullException(nameof(capi));
 
         private TextureAtlasPosition contentTextPos;
-        private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
-        private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
-        private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
+        private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "glass"
+        );
+        private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "topper"
+        );
+        private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "bracing"
+        );
 
         private readonly CompositeTexture contentTexture =
-                contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
+            contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
 
         public TextureAtlasPosition this[string textureCode]
         {
@@ -570,10 +668,10 @@ namespace Alchemy.Block
                         {
                             int id = -1;
 
-                            BitmapRef bmp = capi.Assets
-                                .TryGet(
-                                    contentTexture?.Base
-                                        .Clone()
+                            BitmapRef bmp = capi
+                                .Assets.TryGet(
+                                    contentTexture
+                                        ?.Base.Clone()
                                         .WithPathPrefixOnce("textures/")
                                         .WithPathAppendixOnce(".png")
                                         ?? new AssetLocation(

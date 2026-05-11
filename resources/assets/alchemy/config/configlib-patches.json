@@ -533,6 +533,28 @@
                     "max": 5000
                 }
             },
+            "WEAPONCOATEFFECTMULTIPLIER": {
+                "name": "WeaponCoatEffectMultiplier",
+                "ingui": "alchemy:WeaponCoatEffectMultiplier",
+                "weight": 25.1,
+                "comment": "alchemy:WeaponCoatEffectMultiplier-Comment",
+                "default": 0.9,
+                "range": {
+                    "min": 0.01,
+                    "max": 5.0
+                }
+            },
+            "WEAPONCOATCHARGES": {
+                "name": "WeaponCoatCharges",
+                "ingui": "alchemy:WeaponCoatCharges",
+                "weight": 25.2,
+                "comment": "alchemy:WeaponCoatCharges-Comment",
+                "default": 5,
+                "range": {
+                    "min": 1,
+                    "max": 50
+                }
+            },
             "GLOWPOTIONDURATION": {
                 "name": "GlowPotionDuration",
                 "ingui": "alchemy:GlowPotionDuration",
@@ -799,6 +821,13 @@
                 "comment": "alchemy:AllowHerbRacks-Comment",
                 "default": true
             },
+            "AllowWeaponCoating": {
+                "name": "AllowWeaponCoating",
+                "ingui": "alchemy:AllowWeaponCoating",
+                "weight": 4.3,
+                "comment": "alchemy:AllowWeaponCoating-Comment",
+                "default": true
+            },
             "ALLOWRESHAPEPOTIONRECIPE": {
                 "name": "AllowReshapePotionRecipe",
                 "ingui": "alchemy:AllowReshapePotionRecipe",
@@ -907,6 +936,11 @@
             "type": "separator",
             "title": "alchemy:VitalityValues-Config",
             "weight": 23
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:WeaponCoatValues-Config",
+            "weight": 25
         },
         {
             "type": "separator",

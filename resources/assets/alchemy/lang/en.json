@@ -577,6 +577,7 @@
   "AllowLargeFlasks": "Allow large glass flasks",
   "AllowHerbRackMolds": "Allow herb rack molds",
   "AllowHerbRacks": "Allow herb racks",
+  "AllowWeaponCoating": "Allow weapon coating",
   "AllowArcherPotion": "Allow archer's flask",
   "AllowHealingEffectPotion": "Allow potent oil",
   "AllowHungerEnhancePotion": "Allow purging brew",
@@ -637,6 +638,7 @@
   "AllowLargeFlasks-Comment": "Allow large flasks!",
   "AllowHerbRackMolds-Comment": "Allow herb rack molds!",
   "AllowHerbRacks-Comment": "Allow herb racks!",
+  "AllowWeaponCoating-Comment": "Allow weapon coating!",
   "ArcherPotionDuration-Comment": "Duration of archer flask!",
   "HealingEffectPotionDuration-Comment": "Duration of potent oil!",
   "HungerEnhancePotionDuration-Comment": "Duration of purging brew",
@@ -762,5 +764,29 @@
   "GrowShrinkMinHeight": "Minimum player height",
   "GrowShrinkMinHeight-Comment": "The minimum height in blocks a player can be shrunk to",
   "GrowShrinkMaxHeight": "Maximum player height",
-  "GrowShrinkMaxHeight-Comment": "The maximum height in blocks a player can be grown to"
+  "GrowShrinkMaxHeight-Comment": "The maximum height in blocks a player can be grown to",
+
+  "alchemy:arrow-coated": "Arrow coated with {0}",
+  "alchemy:weapon-coated": "Weapon coated with {0} ({1} charges remaining)",
+
+  "alchemy:coatname-poisontickpotionid": "Spiked Oil",
+  "alchemy:coatname-regentickpotionid": "Healing Oil",
+  "alchemy:coatname-speedpotionid": "Sprinter's Flask",
+  "alchemy:coatname-meleepotionid": "Fighter's Flask",
+  "alchemy:coatname-archerpotionid": "Archer's Flask",
+  "alchemy:coatname-hunterpotionid": "Hunter's Flask",
+  "alchemy:coatname-looterpotionid": "Looter's Flask",
+  "alchemy:coatname-miningpotionid": "Miner's Flask",
+  "alchemy:coatname-predatorpotionid": "Predator's Pheromones",
+  "alchemy:coatname-scentmaskpotionid": "Scent Mask",
+  "alchemy:coatname-vitalitypotionid": "Vitality Flask",
+  "alchemy:coatname-healingeffectpotionid": "Potent Flask",
+  "alchemy:coatname-hungerenhancepotionid": "Purging Brew",
+  "alchemy:coatname-hungersupresspotionid": "Settling Brew",
+
+  "WeaponCoatValues-Config": "Weapon Coating",
+  "WeaponCoatEffectMultiplier": "Weapon coating strength",
+  "WeaponCoatEffectMultiplier-Comment": "Strength of weapon/arrow coating effects as a fraction of the drinkable potion (0.5 = half the strength)",
+  "WeaponCoatCharges": "Weapon coating charges",
+  "WeaponCoatCharges-Comment": "The max number of melee hits a weapon coating can hold"
 }

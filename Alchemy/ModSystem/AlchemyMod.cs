@@ -6,20 +6,20 @@ vertexFlags: {
    healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
    rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
    vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
-
-//Max extra health isn't working correctly
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Alchemy.Behavior;
+using Alchemy.ModConfig;
+using HarmonyLib;
+using Vintagestory.API.Client;
+using Vintagestory.API.Common;
+using Vintagestory.API.Datastructures;
+using Vintagestory.API.Server;
 
 namespace Alchemy.ModSystem
 {
-    using HarmonyLib;
-    using System.Reflection;
-    using Vintagestory.API.Client;
-    using Vintagestory.API.Common;
-    using Vintagestory.API.Server;
-    using Alchemy.ModConfig;
-    using Alchemy.Behavior;
-
-    public class AlchemyMod : ModSystem
+    public class AlchemyMod : Vintagestory.API.Common.ModSystem
     {
         private IServerNetworkChannel serverChannel;
         private ICoreAPI api;
@@ -123,9 +123,18 @@ namespace Alchemy.ModSystem
             api.World.Config.SetBool("AllowReshapePotion", AlchemyConfig.Loaded.AllowReshapePotion);
             api.World.Config.SetBool("AllowGrowPotion", AlchemyConfig.Loaded.AllowGrowPotion);
             api.World.Config.SetBool("AllowShrinkPotion", AlchemyConfig.Loaded.AllowShrinkPotion);
-            api.World.Config.SetBool("AllowReshapePotionRecipe", AlchemyConfig.Loaded.AllowReshapePotionRecipe);
-            api.World.Config.SetBool("AllowGrowPotionRecipe", AlchemyConfig.Loaded.AllowGrowPotionRecipe);
-            api.World.Config.SetBool("AllowShrinkPotionRecipe", AlchemyConfig.Loaded.AllowShrinkPotionRecipe);
+            api.World.Config.SetBool(
+                "AllowReshapePotionRecipe",
+                AlchemyConfig.Loaded.AllowReshapePotionRecipe
+            );
+            api.World.Config.SetBool(
+                "AllowGrowPotionRecipe",
+                AlchemyConfig.Loaded.AllowGrowPotionRecipe
+            );
+            api.World.Config.SetBool(
+                "AllowShrinkPotionRecipe",
+                AlchemyConfig.Loaded.AllowShrinkPotionRecipe
+            );
 
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
@@ -149,10 +158,39 @@ namespace Alchemy.ModSystem
             base.StartPre(api);
         }
 
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            if (api.Side != EnumAppSide.Client)
+                return;
+
+            api.CollectibleTagRegistry.TryCreateTagSet(
+                out TagSet weaponMeleeTag,
+                new List<string> { "weapon-melee" }
+            );
+
+            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
+                return;
+
+            foreach (CollectibleObject obj in api.World.Collectibles)
+            {
+                if (obj?.Code == null)
+                    continue;
+                bool isArrow = obj.Code.Path.Contains("arrow");
+                bool isMeleeWeapon = obj.Tags.Overlaps(weaponMeleeTag);
+                if (!isArrow && !isMeleeWeapon)
+                    continue;
+
+                obj.CollectibleBehaviors =
+                [
+                    .. obj.CollectibleBehaviors,
+                    new CollectibleBehaviorCoat(obj),
+                ];
+            }
+        }
+
         public override void StartClientSide(ICoreClientAPI api)
         {
-            api.Network
-                .RegisterChannel("alchemy")
+            api.Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
@@ -550,8 +588,8 @@ namespace Alchemy.ModSystem
             api.Event.PlayerDeath += OnPlayerDeath;
 
             // register network channel to send data to clients
-            serverChannel = api.Network
-                .RegisterChannel("alchemy")
+            serverChannel = api
+                .Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
                 .SetMessageHandler<SyncClientPacket>(
                     (player, packet) => {
@@ -659,7 +697,7 @@ namespace Alchemy.ModSystem
                     StabilityPotionTemporalStabilityGain = AlchemyConfig
                         .Loaded
                         .StabilityPotionTemporalStabilityGain,
-                    GlowPotionStrength = AlchemyConfig.Loaded.GlowPotionStrength
+                    GlowPotionStrength = AlchemyConfig.Loaded.GlowPotionStrength,
                 },
                 player
             );
@@ -673,11 +711,11 @@ namespace Alchemy.ModSystem
             if (entity == null)
                 return;
 
-            if (!entity.HasBehavior<PotionEffectBehavior>())
+            if (!entity.HasBehavior<EntityBehaviorPotionEffect>())
             {
-                entity.AddBehavior(new PotionEffectBehavior(entity));
+                entity.AddBehavior(new EntityBehaviorPotionEffect(entity));
             }
-            entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
+            entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
         }
 
         private static void OnPlayerReset(IServerPlayer player)
@@ -688,8 +726,8 @@ namespace Alchemy.ModSystem
 
             if (player.Entity != null)
                 UtilityEffects.ResetPlayerSize(entity);
-            if (entity.HasBehavior<PotionEffectBehavior>())
-                entity.GetBehavior<PotionEffectBehavior>().Manager?.RemoveAll();
+            if (entity.HasBehavior<EntityBehaviorPotionEffect>())
+                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
         }
 
         private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)

@@ -48,6 +48,8 @@ namespace Alchemy.ModConfig
 
         // public bool AllowDecorativeRacks { get; set; } = true;
 
+        public bool AllowWeaponCoating { get; set; } = true;
+
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;
         public float StrongPotionMultiplier { get; set; } = 3.0f;
@@ -103,5 +105,8 @@ namespace Alchemy.ModConfig
         public float ShrinkPotionSizeChange { get; set; } = -1.0f;
         public float GrowShrinkMinHeight { get; set; } = 0.3f;
         public float GrowShrinkMaxHeight { get; set; } = 5.0f;
+
+        public int WeaponCoatCharges { get; set; } = 5;
+        public float WeaponCoatEffectMultiplier { get; set; } = 0.9f;
     }
 }
