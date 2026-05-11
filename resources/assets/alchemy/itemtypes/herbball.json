@@ -126,7 +126,7 @@
     }
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
-  "maxstacksize": 200,
+  "maxstacksize": 64,
   "materialDensity": 200,
   "guiTransform": {
     "translation": { "x": 3, "y": 0, "z": 0 },
