@@ -1,3 +1,5 @@
+using Alchemy.ModConfig;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
@@ -54,6 +56,21 @@ namespace Alchemy.Item
             }
 
             base.OnGroundIdle(entityItem);
+        }
+
+        public override WorldInteraction[] GetHeldInteractionHelp(ItemSlot inSlot)
+        {
+            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
+                return base.GetHeldInteractionHelp(inSlot);
+            return
+            [
+                new WorldInteraction
+                {
+                    ActionLangCode = "alchemy:heldhelp-coat-weapon",
+                    MouseButton = EnumMouseButton.Right,
+                    HotKeyCodes = ["shift"],
+                },
+            ];
         }
 
         public override void OnLoaded(ICoreAPI api)

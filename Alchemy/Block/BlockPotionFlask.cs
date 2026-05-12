@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Alchemy.ModConfig;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
@@ -309,7 +310,19 @@ namespace Alchemy.Block
                 }
             }
 
-            return baseInteractions;
+            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
+                return baseInteractions;
+
+            return
+            [
+                .. baseInteractions,
+                new WorldInteraction
+                {
+                    ActionLangCode = "alchemy:heldhelp-coat-weapon",
+                    MouseButton = EnumMouseButton.Right,
+                    HotKeyCodes = ["shift"],
+                },
+            ];
         }
 
         #endregion Render

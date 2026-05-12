@@ -792,5 +792,6 @@
   "CoatableWeaponTags": "Coatable weapon tags!!!",
   "CoatableWeaponTags-Comment": "Comma-separated VS item tags for weapons that can be coated with potions. \"weapon-melee\" is the default. This will mean every vanilla weapon and every modded weapon with that tag can be coated. If you want to only allow specific weapons with different tags to be coated. For example if you replace it with \"weapon-sword, tool-cleaver\" then only swords and the cleaver will be coatable. MAKE SURE TO HAVE VALID TAGS OR IT WON'T WORK!",
   "AllowVanillaContainerDrinking": "Allow drinking from vanilla containers",
-  "AllowVanillaContainerDrinking-Comment": "Allow potions to be drunk from vanilla bowls, buckets, and jugs. I assume its a little buggy to since the potion flasks handle some interactions differently to vanilla containers."
+  "AllowVanillaContainerDrinking-Comment": "Allow potions to be drunk from vanilla bowls, buckets, and jugs. I assume its a little buggy to since the potion flasks handle some interactions differently to vanilla containers.",
+  "heldhelp-coat-weapon": "Hold in off hand to coat weapon or arrows"
 }

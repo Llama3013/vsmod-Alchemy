@@ -17,7 +17,8 @@ namespace Alchemy.Behavior
             base.Initialize(properties);
             source = properties["source"].AsString("item");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
-            consumeTime = properties["consumeTime"].AsFloat(PotionConsumableLogic.CoatHoldDurationSec);
+            consumeTime = properties["consumeTime"]
+                .AsFloat(PotionConsumableLogic.CoatHoldDurationSec);
         }
 
         public void CoatingIdle(ItemSlot slot, EntityAgent byEntity)
