@@ -1,8 +1,8 @@
 ﻿using System;
+using Alchemy.ModConfig;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
-using Alchemy.ModConfig;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
@@ -24,9 +24,15 @@ namespace Alchemy
                 // accounting for each model's actual ratio and size-slider clamping.
                 // Fallback to the VS standard ratio only if EyeHeight wasn't set (shouldn't happen).
                 float eyeH = (float)entity.Properties.EyeHeight;
-                entity.WatchedAttributes.SetFloat("potionBaseEyeHeight", eyeH > 0.01f ? eyeH : naturalHeight * 0.9054f);
+                entity.WatchedAttributes.SetFloat(
+                    "potionBaseEyeHeight",
+                    eyeH > 0.01f ? eyeH : naturalHeight * 0.9054f
+                );
                 // Store PlayerModelLib's visual scale so we scale on top of it, not from 1.0.
-                entity.WatchedAttributes.SetFloat("potionBaseClientSize", entity.Properties.Client?.Size ?? 1.0f);
+                entity.WatchedAttributes.SetFloat(
+                    "potionBaseClientSize",
+                    entity.Properties.Client?.Size ?? 1.0f
+                );
 
                 if (ModSystem.AlchemyMod.PlayerModelLibPresent)
                 {
@@ -35,7 +41,10 @@ namespace Alchemy
                 }
             }
 
-            float baseHeight = entity.WatchedAttributes.GetFloat("potionBaseHeight", entity.CollisionBox.Y2);
+            float baseHeight = entity.WatchedAttributes.GetFloat(
+                "potionBaseHeight",
+                entity.CollisionBox.Y2
+            );
             float newHeight = GameMath.Clamp(
                 baseHeight + currentDelta + delta,
                 AlchemyConfig.Loaded.GrowShrinkMinHeight,
@@ -52,7 +61,10 @@ namespace Alchemy
             // correct collision box and the custom model visual matches the new height.
             if (ModSystem.AlchemyMod.PlayerModelLibPresent)
             {
-                float baseEntitySize = entity.WatchedAttributes.GetFloat("potionBaseEntitySize", 1.0f);
+                float baseEntitySize = entity.WatchedAttributes.GetFloat(
+                    "potionBaseEntitySize",
+                    1.0f
+                );
                 float modelNaturalHeight = baseHeight / baseEntitySize;
                 entity.WatchedAttributes.SetFloat("entitySize", newHeight / modelNaturalHeight);
                 entity.WatchedAttributes.MarkPathDirty("entitySize");
@@ -77,13 +89,19 @@ namespace Alchemy
                 // model config by restoring entitySize. Do NOT use potionBaseHeight directly here
                 // because it may have been captured from the server's vanilla (1.85m) collision box
                 // rather than the custom model's configured height.
-                float baseEntitySize = entity.WatchedAttributes.GetFloat("potionBaseEntitySize", 1.0f);
+                float baseEntitySize = entity.WatchedAttributes.GetFloat(
+                    "potionBaseEntitySize",
+                    1.0f
+                );
                 entity.WatchedAttributes.SetFloat("potionBaseEntitySize", 0f);
                 entity.WatchedAttributes.SetFloat("entitySize", baseEntitySize);
                 entity.WatchedAttributes.MarkPathDirty("entitySize");
                 if (entity.Properties.Client != null)
                 {
-                    float baseClientSize = entity.WatchedAttributes.GetFloat("potionBaseClientSize", 1.0f);
+                    float baseClientSize = entity.WatchedAttributes.GetFloat(
+                        "potionBaseClientSize",
+                        1.0f
+                    );
                     entity.Properties.Client.Size = baseClientSize > 0.01f ? baseClientSize : 1.0f;
                 }
                 entity.WatchedAttributes.SetFloat("potionBaseClientSize", 0f);
@@ -92,11 +110,17 @@ namespace Alchemy
             {
                 entity.CollisionBox.Y2 = potionBaseHeight;
                 entity.SelectionBox.Y2 = potionBaseHeight;
-                float baseEyeHeight = entity.WatchedAttributes.GetFloat("potionBaseEyeHeight", potionBaseHeight * 0.9054f);
+                float baseEyeHeight = entity.WatchedAttributes.GetFloat(
+                    "potionBaseEyeHeight",
+                    potionBaseHeight * 0.9054f
+                );
                 entity.Properties.EyeHeight = baseEyeHeight;
                 if (entity.Properties.Client != null)
                 {
-                    float baseClientSize = entity.WatchedAttributes.GetFloat("potionBaseClientSize", 1.0f);
+                    float baseClientSize = entity.WatchedAttributes.GetFloat(
+                        "potionBaseClientSize",
+                        1.0f
+                    );
                     entity.Properties.Client.Size = baseClientSize > 0.01f ? baseClientSize : 1.0f;
                 }
                 entity.WatchedAttributes.SetFloat("potionBaseClientSize", 0f);

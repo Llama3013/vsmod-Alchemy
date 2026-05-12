@@ -1,18 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Alchemy.Behavior;
-using Alchemy.Block;
-using Alchemy.Item;
 using Alchemy.ModConfig;
-using Vintagestory.API.Client;
+using Alchemy.Systems;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
-using Vintagestory.GameContent;
 
 namespace Alchemy.Utility
 {
@@ -21,6 +16,7 @@ namespace Alchemy.Utility
         private static readonly Dictionary<long, long> coatHoldStartMs = [];
 
         public const float CoatHoldDurationSec = 1.5f;
+        public const float DefaultConsumeTime = 1.5f;
 
         public static readonly HashSet<string> AllowedCoatingPotionIds =
         [
@@ -35,7 +31,8 @@ namespace Alchemy.Utility
             string potionId,
             string strength,
             System.Func<ItemSlot, string> getDisplayName,
-            System.Func<ItemSlot, bool> consumeCoating
+            System.Func<ItemSlot, bool> consumeCoating,
+            float consumeTime = CoatHoldDurationSec
         )
         {
             if (!AlchemyConfig.Loaded.AllowWeaponCoating)
@@ -61,7 +58,8 @@ namespace Alchemy.Utility
                 strength,
                 eligible,
                 getDisplayName,
-                consumeCoating
+                consumeCoating,
+                consumeTime
             );
         }
 
@@ -110,7 +108,8 @@ namespace Alchemy.Utility
             string strength,
             bool eligible,
             System.Func<ItemSlot, string> getDisplayName,
-            System.Func<ItemSlot, bool> consumeCoating
+            System.Func<ItemSlot, bool> consumeCoating,
+            float consumeTime
         )
         {
             long entityId = byEntity.EntityId;
@@ -151,7 +150,8 @@ namespace Alchemy.Utility
                 return false;
             }
 
-            if ((Environment.TickCount64 - startMs) / 1000f < CoatHoldDurationSec)
+            // I couldn't find a better way to handle the timing of the coating action while using OnHeldIdle and couldn't derive an action on the offhand for OnHeldInteract, so this is a bit jank but it works. Basically I check if the player has been holding the coating for long enough, and if so I apply the coating and consume the potion. If they stop holding before the time is up then nothing happens and they can try again.
+            if ((Environment.TickCount64 - startMs) / 1000f < consumeTime)
                 return false;
 
             coatHoldStartMs.Remove(entityId);
@@ -333,7 +333,8 @@ namespace Alchemy.Utility
             float secondsUsed,
             ItemSlot slot,
             EntityAgent byEntity,
-            bool spawnParticles
+            bool spawnParticles,
+            float consumeTime = DefaultConsumeTime
         )
         {
             if (spawnParticles && secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
@@ -352,33 +353,22 @@ namespace Alchemy.Utility
                 );
             }
 
-            return secondsUsed <= 1.5f;
+            return secondsUsed <= consumeTime;
         }
 
         public static bool HandleDrinkStop(
             float secondsUsed,
             EntityAgent byEntity,
-            ItemSlot slot,
-            string potionId,
-            string strength,
+            PotionData data,
             Func<bool> consumeAction,
-            Func<string> displayName,
-            ICoreAPI api
+            ICoreAPI api,
+            float consumeTime = DefaultConsumeTime
         )
         {
-            if (secondsUsed <= 1.45f)
+            if (secondsUsed <= consumeTime - 0.05f)
                 return false;
 
-            if (
-                !TryProcessPotionEffects(
-                    byEntity,
-                    slot.Itemstack,
-                    potionId,
-                    strength,
-                    displayName(),
-                    api
-                )
-            )
+            if (!TryProcessPotionEffects(byEntity, data, api))
             {
                 return false;
             }
@@ -388,10 +378,7 @@ namespace Alchemy.Utility
 
         public static bool TryProcessPotionEffects(
             EntityAgent byEntity,
-            ItemStack itemStack,
-            string potionId,
-            string strength,
-            string displayName,
+            PotionData data,
             ICoreAPI api
         )
         {
@@ -404,7 +391,7 @@ namespace Alchemy.Utility
             if (playerEntity.Player is not IServerPlayer serverPlayer)
                 return false;
 
-            if (string.IsNullOrWhiteSpace(potionId))
+            if (string.IsNullOrWhiteSpace(data.PotionId))
                 return false;
 
             EntityBehaviorPotionEffect behavior =
@@ -413,25 +400,25 @@ namespace Alchemy.Utility
             if (behavior == null)
                 return false;
 
-            float strengthMul = GetStrengthMultiplier(strength);
+            float strengthMul = GetStrengthMultiplier(data.Strength);
 
-            PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, strengthMul);
+            PotionContext ctx = PotionRegistry.BuildPotionDef(data.PotionId, strengthMul);
 
             if (ctx == null)
             {
-                api.Logger.Error("No potion definition for potionId of: {0}", potionId);
+                api.Logger.Error("No potion definition for potionId of: {0}", data.PotionId);
 
                 return false;
             }
 
-            if (!behavior.Manager.TryApplyPotion(potionId, ctx, displayName))
+            if (!behavior.Manager.TryApplyPotion(data.PotionId, ctx, data.DisplayName))
             {
                 return false;
             }
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
-                Lang.Get("alchemy:effect-gain", displayName),
+                Lang.Get("alchemy:effect-gain", data.DisplayName),
                 EnumChatType.Notification
             );
 

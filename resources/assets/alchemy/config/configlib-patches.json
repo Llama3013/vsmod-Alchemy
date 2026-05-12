@@ -589,6 +589,15 @@
                 }
             }
         },
+        "string": {
+            "COATABLEWEAPONTAGS": {
+                "name": "CoatableWeaponTags",
+                "ingui": "alchemy:CoatableWeaponTags",
+                "weight": 25.3,
+                "comment": "alchemy:CoatableWeaponTags-Comment",
+                "default": "weapon-melee"
+            }
+        },
         "boolean": {
             "ALLOWARCHERPOTION": {
                 "name": "AllowArcherPotion",
@@ -742,7 +751,7 @@
                 "ingui": "alchemy:AllowReshapePotion",
                 "weight": 1.25,
                 "comment": "alchemy:AllowReshapePotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWGROWPOTION": {
                 "name": "AllowGrowPotion",
@@ -821,19 +830,26 @@
                 "comment": "alchemy:AllowHerbRacks-Comment",
                 "default": true
             },
-            "AllowWeaponCoating": {
+            "ALLOWWEAPONCOATING": {
                 "name": "AllowWeaponCoating",
                 "ingui": "alchemy:AllowWeaponCoating",
                 "weight": 4.3,
                 "comment": "alchemy:AllowWeaponCoating-Comment",
                 "default": true
             },
+            "ALLOWVANILLACONTAINERDRINKING": {
+                "name": "AllowVanillaContainerDrinking",
+                "ingui": "alchemy:AllowVanillaContainerDrinking",
+                "weight": 4.35,
+                "comment": "alchemy:AllowVanillaContainerDrinking-Comment",
+                "default": false
+            },
             "ALLOWRESHAPEPOTIONRECIPE": {
                 "name": "AllowReshapePotionRecipe",
                 "ingui": "alchemy:AllowReshapePotionRecipe",
                 "weight": 4.51,
                 "comment": "alchemy:AllowReshapePotionRecipe-Comment",
-                "default": true
+                "default": false
             },
             "ALLOWGROWPOTIONRECIPE": {
                 "name": "AllowGrowPotionRecipe",

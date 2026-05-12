@@ -39,16 +39,22 @@ namespace Alchemy.ModSystem
 
         public static void RegisterClasses(ICoreAPI api)
         {
-            api.RegisterBlockClass("BlockPotionFlask", typeof(Alchemy.Block.BlockPotionFlask));
+            api.RegisterBlockClass("BlockPotionFlask", typeof(Block.BlockPotionFlask));
             api.RegisterBlockEntityClass(
                 "BlockEntityPotionFlask",
-                typeof(Alchemy.BlockEntity.BlockEntityPotionFlask)
+                typeof(BlockEntity.BlockEntityPotionFlask)
             );
-            api.RegisterItemClass("ItemPotion", typeof(Alchemy.Item.ItemPotion));
-            api.RegisterBlockClass("BlockHerbRacks", typeof(Alchemy.Block.BlockHerbRacks));
-            api.RegisterBlockEntityClass(
-                "HerbRacks",
-                typeof(Alchemy.BlockEntity.BlockEntityHerbRacks)
+            api.RegisterItemClass("ItemPotion", typeof(Item.ItemPotion));
+            api.RegisterBlockClass("BlockHerbRacks", typeof(Block.BlockHerbRacks));
+            api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntity.BlockEntityHerbRacks));
+            api.RegisterCollectibleBehaviorClass(
+                "PotionConsumable",
+                typeof(PotionConsumableBehavior)
+            );
+            api.RegisterCollectibleBehaviorClass("PotionCoat", typeof(CollectibleBehaviorCoat));
+            api.RegisterCollectibleBehaviorClass(
+                "PotionCoatSource",
+                typeof(PotionCoatSourceBehavior)
             );
         }
 
@@ -163,21 +169,28 @@ namespace Alchemy.ModSystem
             if (api.Side != EnumAppSide.Client)
                 return;
 
-            api.CollectibleTagRegistry.TryCreateTagSet(
-                out TagSet weaponMeleeTag,
-                new List<string> { "weapon-melee" }
-            );
-
             if (!AlchemyConfig.Loaded.AllowWeaponCoating)
                 return;
+
+            List<string> tagList =
+            [
+                .. AlchemyConfig
+                    .Loaded.CoatableWeaponTags.Split(',')
+                    .Select(t => t.Trim())
+                    .Where(t => t.Length > 0),
+            ];
+
+            api.CollectibleTagRegistry.TryCreateTagSet(out TagSet coatableTags, tagList);
 
             foreach (CollectibleObject obj in api.World.Collectibles)
             {
                 if (obj?.Code == null)
                     continue;
-                bool isArrow = obj.Code.Path.Contains("arrow");
-                bool isMeleeWeapon = obj.Tags.Overlaps(weaponMeleeTag);
-                if (!isArrow && !isMeleeWeapon)
+
+                bool isCoatable =
+                    obj.Tags.Overlaps(coatableTags) || obj.Code.Path.Contains("arrow");
+
+                if (!isCoatable)
                     continue;
 
                 obj.CollectibleBehaviors =

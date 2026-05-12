@@ -1,0 +1,41 @@
+[
+    {
+        "file": "game:blocktypes/clay/fired/bowl.json",
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "PotionConsumable",
+            "properties": { "source": "liquidcontent", "animation": "eat" }
+        },
+        "condition": {
+            "when": "AllowVanillaContainerDrinking",
+            "isValue": "true"
+        }
+    },
+    {
+        "file": "game:blocktypes/wood/bucket.json",
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "PotionConsumable",
+            "properties": { "source": "liquidcontent", "animation": "eat" }
+        },
+        "condition": {
+            "when": "AllowVanillaContainerDrinking",
+            "isValue": "true"
+        }
+    },
+    {
+        "file": "game:blocktypes/clay/fired/jug.json",
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "PotionConsumable",
+            "properties": { "source": "liquidcontent", "animation": "eat" }
+        },
+        "condition": {
+            "when": "AllowVanillaContainerDrinking",
+            "isValue": "true"
+        }
+    }
+]

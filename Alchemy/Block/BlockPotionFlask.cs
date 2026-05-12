@@ -1,15 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alchemy.Item;
-using Alchemy.ModConfig;
-using Alchemy.Utility;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
@@ -18,8 +11,6 @@ namespace Alchemy.Block
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
     {
-        private const string potionInfo = "potioninfo";
-
         #region Render
 
         public override void OnBeforeRender(
@@ -325,80 +316,23 @@ namespace Alchemy.Block
 
         #region Interaction
 
-        private static readonly Dictionary<long, long> coatHoldStartMs = [];
-        private const float CoatHoldDurationSec = 1.5f;
-
-        internal static readonly HashSet<string> AllowedCoatingPotionIds =
-        [
-            "poisontickpotionid",
-            "regentickpotionid",
-        ];
-
-        private TagSet weaponMeleeTag;
-        private bool weaponMeleeTagCached;
-
-        private TagSet GetWeaponMeleeTag()
-        {
-            if (!weaponMeleeTagCached)
-            {
-                weaponMeleeTagCached = true;
-                api.CollectibleTagRegistry.TryCreateTagSet(
-                    out weaponMeleeTag,
-                    new List<string> { "weapon-melee" }
-                );
-            }
-            return weaponMeleeTag;
-        }
-
+        // This is needed as a workaround for now because there is no such OnHeldIdle override on behaviors and hopefully it will be implemented into VS eventually
         public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
         {
             base.OnHeldIdle(slot, byEntity);
-
-            ItemStack contentStack = GetContent(slot.Itemstack);
-
-            JsonObject potion = contentStack?.ItemAttributes?[potionInfo];
-
-            string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-
-            string potionStrength = "weak";
-
-            contentStack?.Collectible?.Variant?.TryGetValue("strength", out potionStrength);
-
-            PotionConsumableLogic.HandleWeaponCoatingIdle(
-                api,
-                slot,
-                byEntity,
-                potionId,
-                potionStrength,
-                s =>
-                {
-                    return GetContent(s.Itemstack)?.GetName()
-                        ?? Lang.Get($"alchemy:coatname-{potionId}");
-                },
-                s =>
-                {
-                    EntityPlayer player = byEntity as EntityPlayer;
-
-                    int consumed = SplitStackAndPerformAction(
-                        player,
-                        s,
-                        stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                    );
-
-                    s.MarkDirty();
-
-                    return consumed > 0;
-                }
-            );
+            if (byEntity.Controls.ShiftKey && byEntity.Controls.RightMouseDown)
+                foreach (CollectibleBehavior bh in CollectibleBehaviors)
+                    if (bh is Behavior.PotionCoatSourceBehavior coat)
+                        coat.CoatingIdle(slot, byEntity);
         }
 
         public override void OnHeldInteractStart(
-            ItemSlot itemslot,
+            ItemSlot slot,
             EntityAgent byEntity,
             BlockSelection blockSel,
             EntitySelection entitySel,
             bool firstEvent,
-            ref EnumHandHandling handHandling
+            ref EnumHandHandling handling
         )
         {
             if (blockSel != null && byEntity.Controls.CtrlKey && byEntity.Controls.ShiftKey)
@@ -406,80 +340,51 @@ namespace Alchemy.Block
                 byEntity.Controls.ShiftKey = false;
 
                 base.OnHeldInteractStart(
-                    itemslot,
+                    slot,
                     byEntity,
                     blockSel,
                     entitySel,
                     firstEvent,
-                    ref handHandling
+                    ref handling
                 );
 
                 return;
             }
 
-            ItemStack contentStack = GetContent(itemslot.Itemstack);
-
-            if (contentStack != null && !byEntity.Controls.ShiftKey)
+            // Prevent accidental spilling unless CTRL + SHIFT are both held
+            if (blockSel != null && byEntity.Controls.CtrlKey && !byEntity.Controls.ShiftKey)
             {
-                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
+                handling = EnumHandHandling.PreventDefaultAction;
+                return;
+            }
 
-                if (potion?.Exists ?? false)
+            // BlockLiquidContainerTopOpened intercepts blockSel interactions for liquid transfer
+            // and does not dispatch CollectibleBehaviors. Explicitly run the consumable behavior
+            // first so drinking takes priority over liquid transfer when the flask holds a potion.
+            if (blockSel != null && !byEntity.Controls.ShiftKey)
+            {
+                foreach (CollectibleBehavior bh in CollectibleBehaviors)
                 {
-                    string potionId = potion["potionId"].AsString();
-
-                    if (
-                        potionId == "recallpotionid"
-                        && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null
-                        && WildcardUtil.Match(
-                            "boat-sailed-*",
-                            byEntity.MountedOn.MountSupplier.OnEntity.Code.Path
-                        )
-                        && byEntity.World.Side == EnumAppSide.Server
-                    )
+                    if (bh is Behavior.PotionConsumableBehavior)
                     {
-                        EntityPlayer playerEntity = byEntity as EntityPlayer;
-
-                        IServerPlayer serverPlayer = playerEntity?.Player as IServerPlayer;
-
-                        serverPlayer.SendMessage(
-                            GlobalConstants.InfoLogChatGroup,
-                            Lang.Get("alchemy:boat-block"),
-                            EnumChatType.Notification
-                        );
-
-                        return;
-                    }
-
-                    if (
-                        PotionConsumableLogic.HandleDrinkStart(
+                        EnumHandling bhHandling = EnumHandling.PassThrough;
+                        bh.OnHeldInteractStart(
+                            slot,
                             byEntity,
-                            potionId,
-                            "drink",
-                            () => playEatSound(byEntity, "drink", 1),
-                            ref handHandling
-                        )
-                    )
-                    {
-                        return;
+                            blockSel,
+                            entitySel,
+                            firstEvent,
+                            ref handling,
+                            ref bhHandling
+                        );
+                        if (bhHandling != EnumHandling.PassThrough)
+                            return;
+                        break;
                     }
                 }
             }
 
-            // Prevent accidental spilling unless CTRL + SHIFT are both held
-            if (blockSel != null && byEntity.Controls.CtrlKey && !byEntity.Controls.ShiftKey)
-            {
-                handHandling = EnumHandHandling.PreventDefaultAction;
-                return;
-            }
-
-            base.OnHeldInteractStart(
-                itemslot,
-                byEntity,
-                blockSel,
-                entitySel,
-                firstEvent,
-                ref handHandling
-            );
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
         }
 
         public override void TryMergeStacks(ItemStackMergeOperation op)
@@ -497,123 +402,7 @@ namespace Alchemy.Block
             base.TryMergeStacks(op);
         }
 
-        public override bool OnHeldInteractStep(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            return PotionConsumableLogic.HandleDrinkStep(secondsUsed, slot, byEntity, true);
-        }
-
-        public override void OnHeldInteractStop(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            if (
-                HandleCollectibleBehaviorsForDrink(secondsUsed, slot, byEntity, blockSel, entitySel)
-            )
-            {
-                return;
-            }
-
-            ItemStack contentStack = GetContent(slot.Itemstack);
-
-            if (contentStack?.Item is ItemPotion potion)
-            {
-                JsonObject potionData = contentStack.ItemAttributes?[potionInfo];
-
-                string potionId =
-                    potionData?.Exists == true ? potionData["potionId"].AsString() : null;
-
-                string strength = "weak";
-
-                contentStack.Collectible?.Variant?.TryGetValue("strength", out strength);
-
-                PotionConsumableLogic.HandleDrinkStop(
-                    secondsUsed,
-                    byEntity,
-                    slot,
-                    potionId,
-                    strength,
-                    () =>
-                    {
-                        EntityPlayer playerEntity = byEntity as EntityPlayer;
-
-                        int consumed = SplitStackAndPerformAction(
-                            playerEntity,
-                            slot,
-                            stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                        );
-
-                        slot.MarkDirty();
-
-                        if (playerEntity?.Player != null)
-                        {
-                            playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
-                        }
-
-                        return consumed > 0;
-                    },
-                    () => contentStack.GetName(),
-                    api
-                );
-            }
-
-            base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
-        }
-
-        private bool HandleCollectibleBehaviorsForDrink(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            bool preventDefault = false;
-
-            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
-            {
-                EnumHandling handled = EnumHandling.PassThrough;
-
-                behavior.OnHeldInteractStop(
-                    secondsUsed,
-                    slot,
-                    byEntity,
-                    blockSel,
-                    entitySel,
-                    ref handled
-                );
-                if (handled != EnumHandling.PassThrough)
-                    preventDefault = true;
-
-                if (handled == EnumHandling.PreventSubsequent)
-                    return true;
-            }
-
-            return preventDefault;
-        }
-
         #endregion Interaction
-
-        public override void GetHeldItemInfo(
-            ItemSlot inSlot,
-            StringBuilder dsc,
-            IWorldAccessor world,
-            bool withDebugInfo
-        )
-        {
-            base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            ItemStack contentStack = GetContent(inSlot.Itemstack);
-            contentStack?.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-        }
     }
 
     public class FlaskTextureSource(

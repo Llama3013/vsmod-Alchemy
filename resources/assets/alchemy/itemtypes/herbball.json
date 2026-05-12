@@ -8,6 +8,16 @@
     }
   ],
   "class": "ItemPotion",
+  "behaviors": [
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "item", "animation": "eat", "sound": "eat" }
+    },
+    {
+      "name": "PotionCoatSource",
+      "properties": { "source": "item" }
+    }
+  ],
   "attributesByType": {
     "*-archer": {
       "potioninfo": { "potionId": "archerpotionid" }

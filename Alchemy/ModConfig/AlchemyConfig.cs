@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace Alchemy.ModConfig
 {
     public class AlchemyConfig
@@ -25,10 +27,10 @@ namespace Alchemy.ModConfig
         public bool AllowScentMaskPotion { get; set; } = true;
         public bool AllowSpeedPotion { get; set; } = true;
         public bool AllowVitalityPotion { get; set; } = true;
-        public bool AllowReshapePotion { get; set; } = false;
-        public bool AllowGrowPotion { get; set; } = false;
-        public bool AllowShrinkPotion { get; set; } = false;
-        public bool AllowReshapePotionRecipe { get; set; } = true;
+        public bool AllowReshapePotion { get; set; } = true;
+        public bool AllowGrowPotion { get; set; } = true;
+        public bool AllowShrinkPotion { get; set; } = true;
+        public bool AllowReshapePotionRecipe { get; set; } = false;
         public bool AllowGrowPotionRecipe { get; set; } = true;
         public bool AllowShrinkPotionRecipe { get; set; } = true;
 
@@ -49,6 +51,7 @@ namespace Alchemy.ModConfig
         // public bool AllowDecorativeRacks { get; set; } = true;
 
         public bool AllowWeaponCoating { get; set; } = true;
+        public bool AllowVanillaContainerDrinking { get; set; } = true;
 
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;
@@ -108,5 +111,8 @@ namespace Alchemy.ModConfig
 
         public int WeaponCoatCharges { get; set; } = 5;
         public float WeaponCoatEffectMultiplier { get; set; } = 0.9f;
+
+        public string CoatableWeaponTags { get; set; } = "weapon-melee";
+        public string CoatableProjectilesCodes { get; set; } = "*arrow*";
     }
 }
