@@ -549,7 +549,7 @@
                 "ingui": "alchemy:GlowPotionStrength",
                 "weight": 40.1,
                 "comment": "alchemy:GlowPotionStrength-Comment",
-                "default": 31,
+                "default": 15,
                 "range": {
                     "min": 1,
                     "max": 31
