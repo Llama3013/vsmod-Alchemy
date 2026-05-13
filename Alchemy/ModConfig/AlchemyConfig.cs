@@ -31,6 +31,8 @@ namespace Alchemy.ModConfig
         public bool AllowReshapePotionRecipe { get; set; } = true;
         public bool AllowGrowPotionRecipe { get; set; } = true;
         public bool AllowShrinkPotionRecipe { get; set; } = true;
+        public bool AllowToxicMushrooms { get; set; } = true;
+        public bool AllowPsychedelicMushrooms { get; set; } = true;
 
         public bool AllowHerbballs { get; set; } = true;
         public bool AllowMediumPotions { get; set; } = true;

@@ -623,6 +623,8 @@
   "AllowGrowPotionRecipe": "Allow growth flask recipe",
   "AllowShrinkPotion": "Allow shrinking flask",
   "AllowShrinkPotionRecipe": "Allow shrinking flask recipe",
+  "AllowToxicMushrooms": "Allow potion base toxic mushroom recipe !!!",
+  "AllowPsychedelicMushrooms": "Allow potion base psychedelic mushroom recipe !!!",
 
   "AllowArcherPotion-Comment": "Allow archer's flask!",
   "AllowHealingEffectPotion-Comment": "Allow potent oil!",
@@ -649,6 +651,8 @@
   "AllowGrowPotionRecipe-Comment": "Allow the recipe to craft the growth flask. When disabled the item still exists but can only be obtained in creative mode.",
   "AllowShrinkPotion-Comment": "Allow shrinking flask!",
   "AllowShrinkPotionRecipe-Comment": "Allow the recipe to craft the shrinking flask. When disabled the item still exists but can only be obtained in creative mode.",
+  "AllowToxicMushrooms-Comment": "Allow toxic mushrooms (earthball, deathcap, elfin saddle, jack-o-lantern, devil bolete, bitter bolete, devil's tooth, gold drop milkcap, fool's conecap, sickener) to be used as ingredients in the basic potion base recipe. DO NOT DISABLE THIS AND PSYCHEDLIC MUSHROOMS RECIPES. THIS ALSO DOESN'T HIDE THE ITEMS FROM THE HANDBOOK BASIC POTION BASE CRAFTING RECIPE. Doing so will leave fly agaric and laughing jim as the only mushroom ingredients as they are both.",
+  "AllowPsychedelicMushrooms-Comment": "Allow psychedelic mushrooms (gold cap, liberty cap, wavy cap, blue meanie) to be used as ingredients in the basic potion base recipe. DO NOT DISABLE THIS AND TOXIC MUSHROOMS RECIPES. THIS ALSO DOESN'T HIDE THE ITEMS FROM THE HANDBOOK BASIC POTION BASE CRAFTING RECIPE. Doing so will leave fly agaric and laughing jim as the only mushroom ingredients as they are both.",
   "AllowStrongPotions-Comment": "Allow strong potions!",
   "AllowMediumPotions-Comment": "Allow medium potions!",
   "AllowHerbballs-Comment": "Allow herbballs!",

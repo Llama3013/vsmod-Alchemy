@@ -1,0 +1,21 @@
+[
+  // Toxic mushrooms recipes disabled
+
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/1/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/2/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/3/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/4/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/5/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/6/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/7/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/8/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/12/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/13/enabled", "value": false, "condition": { "when": "AllowToxicMushrooms", "isValue": "false" } },
+
+  // Psychedelic mushrooms recipes disabled
+
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/14/enabled", "value": false, "condition": { "when": "AllowPsychedelicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/15/enabled", "value": false, "condition": { "when": "AllowPsychedelicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/16/enabled", "value": false, "condition": { "when": "AllowPsychedelicMushrooms", "isValue": "false" } },
+  { "file": "alchemy:recipes/grid/ingredient/basicbase.json", "op": "addmerge", "path": "/17/enabled", "value": false, "condition": { "when": "AllowPsychedelicMushrooms", "isValue": "false" } }
+]
