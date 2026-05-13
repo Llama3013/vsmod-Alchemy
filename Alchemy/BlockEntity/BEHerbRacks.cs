@@ -3,6 +3,7 @@ using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
@@ -28,6 +29,22 @@ namespace Alchemy.BlockEntity
         {
             base.Initialize(api);
             inv.OnAcquireTransitionSpeed += Inventory_OnAcquireTransitionSpeed;
+            inv.SlotModified += OnSlotModified;
+        }
+
+        private void OnSlotModified(int slotId)
+        {
+            updateMesh(slotId);
+            MarkDirty(true);
+        }
+
+        public override void FromTreeAttributes(
+            ITreeAttribute tree,
+            IWorldAccessor worldForResolving
+        )
+        {
+            base.FromTreeAttributes(tree, worldForResolving);
+            RedrawAfterReceivingTreeAttributes(worldForResolving);
         }
 
         private float Inventory_OnAcquireTransitionSpeed(
@@ -207,7 +224,7 @@ namespace Alchemy.BlockEntity
             StringBuilder dsc = new();
             if (baseGamePerishInfo != "")
             {
-                dsc.Append(baseGamePerishInfo);
+                dsc.Append(baseGamePerishInfo.TrimEnd('\r', '\n'));
             }
             TransitionState[] transitionStates =
                 contentSlot.Itemstack?.Collectible.UpdateAndGetTransitionStates(
@@ -351,6 +368,8 @@ namespace Alchemy.BlockEntity
                 }
             }
 
+            if (dsc.Length > 0)
+                dsc.AppendLine();
             return dsc.ToString();
         }
 
