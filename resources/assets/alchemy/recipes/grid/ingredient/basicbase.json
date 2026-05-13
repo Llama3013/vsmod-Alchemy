@@ -166,6 +166,54 @@
     "width": 1,
     "height": 3,
     "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bluemeanie-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-goldcap-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-libertycap-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-wavycap-*" },
+      "F": { "type": "block", "code": "game:flower-horsetail-free" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
   }
 ]
 

@@ -864,6 +864,20 @@
                 "weight": 4.53,
                 "comment": "alchemy:AllowShrinkPotionRecipe-Comment",
                 "default": true
+            },
+            "ALLOWTOXICMUSHROOMS": {
+                "name": "AllowToxicMushrooms",
+                "ingui": "alchemy:AllowToxicMushrooms",
+                "weight": 4.54,
+                "comment": "alchemy:AllowToxicMushrooms-Comment",
+                "default": true
+            },
+            "ALLOWPSYCHEDELICMUSHROOMS": {
+                "name": "AllowPsychedelicMushrooms",
+                "ingui": "alchemy:AllowPsychedelicMushrooms",
+                "weight": 4.55,
+                "comment": "alchemy:AllowPsychedelicMushrooms-Comment",
+                "default": true
             }
         }
     },

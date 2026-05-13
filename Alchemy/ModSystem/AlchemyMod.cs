@@ -141,6 +141,14 @@ namespace Alchemy.ModSystem
                 "AllowShrinkPotionRecipe",
                 AlchemyConfig.Loaded.AllowShrinkPotionRecipe
             );
+            api.World.Config.SetBool(
+                "AllowToxicMushrooms",
+                AlchemyConfig.Loaded.AllowToxicMushrooms
+            );
+            api.World.Config.SetBool(
+                "AllowPsychedelicMushrooms",
+                AlchemyConfig.Loaded.AllowPsychedelicMushrooms
+            );
 
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
@@ -330,6 +338,16 @@ namespace Alchemy.ModSystem
                     AlchemyConfig.Loaded.AllowShrinkPotionRecipe = packet.AllowShrinkPotionRecipe;
                     Mod.Logger.Event(
                         $"Received AllowShrinkPotionRecipe of {packet.AllowShrinkPotionRecipe} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowToxicMushrooms = packet.AllowToxicMushrooms;
+                    Mod.Logger.Event(
+                        $"Received AllowToxicMushrooms of {packet.AllowToxicMushrooms} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowPsychedelicMushrooms = packet.AllowPsychedelicMushrooms;
+                    Mod.Logger.Event(
+                        $"Received AllowPsychedelicMushrooms of {packet.AllowPsychedelicMushrooms} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowHerbballs = packet.AllowHerbballs;
@@ -643,6 +661,8 @@ namespace Alchemy.ModSystem
                     AllowReshapePotionRecipe = AlchemyConfig.Loaded.AllowReshapePotionRecipe,
                     AllowGrowPotionRecipe = AlchemyConfig.Loaded.AllowGrowPotionRecipe,
                     AllowShrinkPotionRecipe = AlchemyConfig.Loaded.AllowShrinkPotionRecipe,
+                    AllowToxicMushrooms = AlchemyConfig.Loaded.AllowToxicMushrooms,
+                    AllowPsychedelicMushrooms = AlchemyConfig.Loaded.AllowPsychedelicMushrooms,
                     AllowHerbballs = AlchemyConfig.Loaded.AllowHerbballs,
                     AllowMediumPotions = AlchemyConfig.Loaded.AllowMediumPotions,
                     AllowStrongPotions = AlchemyConfig.Loaded.AllowStrongPotions,
