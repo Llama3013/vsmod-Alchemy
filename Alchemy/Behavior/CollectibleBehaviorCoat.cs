@@ -1,4 +1,5 @@
 using System.Text;
+using Alchemy.Utility;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 
@@ -32,6 +33,8 @@ namespace Alchemy.Behavior
                 dsc.Append(
                     Lang.Get("alchemy:weapon-coated", potionName, attrs.GetInt("coatCharges"))
                 );
+            if (!PotionConsumableLogic.IsCoatingAllowed(potionId))
+                dsc.Append(" (" + Lang.Get("alchemy:disabled") + ")");
             dsc.AppendLine("</font>");
         }
     }

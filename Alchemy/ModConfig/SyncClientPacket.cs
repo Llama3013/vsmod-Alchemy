@@ -50,6 +50,29 @@ namespace Alchemy.ModConfig
         public bool AllowHerbRacks;
         // public bool AllowDecorativeRacks;
 
+        public bool AllowCoatingArcher;
+        public bool AllowCoatingHealingEffect;
+        public bool AllowCoatingHungerEnhance;
+        public bool AllowCoatingHungerSupress;
+        public bool AllowCoatingHunter;
+        public bool AllowCoatingLooter;
+        public bool AllowCoatingMelee;
+        public bool AllowCoatingMining;
+        public bool AllowCoatingPoison;
+        public bool AllowCoatingPredator;
+        public bool AllowCoatingRegen;
+        public bool AllowCoatingScentMask;
+        public bool AllowCoatingSpeed;
+        public bool AllowCoatingVitality;
+        public bool AllowCoatingRecall;
+        public bool AllowCoatingGlow;
+        public bool AllowCoatingWaterBreathe;
+        public bool AllowCoatingNutrition;
+        public bool AllowCoatingTemporal;
+        public bool AllowCoatingReshape;
+        public bool AllowCoatingGrow;
+        public bool AllowCoatingShrink;
+
         public float WeakPotionMultiplier;
         public float MediumPotionMultiplier;
         public float StrongPotionMultiplier;

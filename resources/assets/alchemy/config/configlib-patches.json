@@ -830,18 +830,172 @@
                 "comment": "alchemy:AllowHerbRacks-Comment",
                 "default": true
             },
-            "ALLOWWEAPONCOATING": {
-                "name": "AllowWeaponCoating",
-                "ingui": "alchemy:AllowWeaponCoating",
-                "weight": 4.3,
-                "comment": "alchemy:AllowWeaponCoating-Comment",
-                "default": true
-            },
             "ALLOWVANILLACONTAINERDRINKING": {
                 "name": "AllowVanillaContainerDrinking",
                 "ingui": "alchemy:AllowVanillaContainerDrinking",
-                "weight": 4.35,
+                "weight": 4.3,
                 "comment": "alchemy:AllowVanillaContainerDrinking-Comment",
+                "default": false
+            },
+            "ALLOWWEAPONCOATING": {
+                "name": "AllowWeaponCoating",
+                "ingui": "alchemy:AllowWeaponCoating",
+                "weight": 4.35,
+                "comment": "alchemy:AllowWeaponCoating-Comment",
+                "default": true
+            },
+            "ALLOWCOATINGPOISON": {
+                "name": "AllowCoatingPoison",
+                "ingui": "alchemy:AllowCoatingPoison",
+                "weight": 4.401,
+                "comment": "alchemy:AllowCoatingPoison-Comment",
+                "default": true
+            },
+            "ALLOWCOATINGREGEN": {
+                "name": "AllowCoatingRegen",
+                "ingui": "alchemy:AllowCoatingRegen",
+                "weight": 4.402,
+                "comment": "alchemy:AllowCoatingRegen-Comment",
+                "default": true
+            },
+            "ALLOWCOATINGARCHER": {
+                "name": "AllowCoatingArcher",
+                "ingui": "alchemy:AllowCoatingArcher",
+                "weight": 4.411,
+                "comment": "alchemy:AllowCoatingArcher-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGHEALINGEFFECT": {
+                "name": "AllowCoatingHealingEffect",
+                "ingui": "alchemy:AllowCoatingHealingEffect",
+                "weight": 4.412,
+                "comment": "alchemy:AllowCoatingHealingEffect-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGHUNGERENHANCE": {
+                "name": "AllowCoatingHungerEnhance",
+                "ingui": "alchemy:AllowCoatingHungerEnhance",
+                "weight": 4.413,
+                "comment": "alchemy:AllowCoatingHungerEnhance-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGHUNGERSUPRESS": {
+                "name": "AllowCoatingHungerSupress",
+                "ingui": "alchemy:AllowCoatingHungerSupress",
+                "weight": 4.414,
+                "comment": "alchemy:AllowCoatingHungerSupress-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGHUNTER": {
+                "name": "AllowCoatingHunter",
+                "ingui": "alchemy:AllowCoatingHunter",
+                "weight": 4.416,
+                "comment": "alchemy:AllowCoatingHunter-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGLOOTER": {
+                "name": "AllowCoatingLooter",
+                "ingui": "alchemy:AllowCoatingLooter",
+                "weight": 4.417,
+                "comment": "alchemy:AllowCoatingLooter-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGMELEE": {
+                "name": "AllowCoatingMelee",
+                "ingui": "alchemy:AllowCoatingMelee",
+                "weight": 4.418,
+                "comment": "alchemy:AllowCoatingMelee-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGMINING": {
+                "name": "AllowCoatingMining",
+                "ingui": "alchemy:AllowCoatingMining",
+                "weight": 4.419,
+                "comment": "alchemy:AllowCoatingMining-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGPREDATOR": {
+                "name": "AllowCoatingPredator",
+                "ingui": "alchemy:AllowCoatingPredator",
+                "weight": 4.420,
+                "comment": "alchemy:AllowCoatingPredator-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGSCENTMASK": {
+                "name": "AllowCoatingScentMask",
+                "ingui": "alchemy:AllowCoatingScentMask",
+                "weight": 4.421,
+                "comment": "alchemy:AllowCoatingScentMask-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGSPEED": {
+                "name": "AllowCoatingSpeed",
+                "ingui": "alchemy:AllowCoatingSpeed",
+                "weight": 4.422,
+                "comment": "alchemy:AllowCoatingSpeed-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGVITALITY": {
+                "name": "AllowCoatingVitality",
+                "ingui": "alchemy:AllowCoatingVitality",
+                "weight": 4.423,
+                "comment": "alchemy:AllowCoatingVitality-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGRECALL": {
+                "name": "AllowCoatingRecall",
+                "ingui": "alchemy:AllowCoatingRecall",
+                "weight": 4.431,
+                "comment": "alchemy:AllowCoatingRecall-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGGLOW": {
+                "name": "AllowCoatingGlow",
+                "ingui": "alchemy:AllowCoatingGlow",
+                "weight": 4.432,
+                "comment": "alchemy:AllowCoatingGlow-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGWATERBREATHE": {
+                "name": "AllowCoatingWaterBreathe",
+                "ingui": "alchemy:AllowCoatingWaterBreathe",
+                "weight": 4.433,
+                "comment": "alchemy:AllowCoatingWaterBreathe-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGNUTRITION": {
+                "name": "AllowCoatingNutrition",
+                "ingui": "alchemy:AllowCoatingNutrition",
+                "weight": 4.434,
+                "comment": "alchemy:AllowCoatingNutrition-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGTEMPORAL": {
+                "name": "AllowCoatingTemporal",
+                "ingui": "alchemy:AllowCoatingTemporal",
+                "weight": 4.435,
+                "comment": "alchemy:AllowCoatingTemporal-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGRESHAPE": {
+                "name": "AllowCoatingReshape",
+                "ingui": "alchemy:AllowCoatingReshape",
+                "weight": 4.436,
+                "comment": "alchemy:AllowCoatingReshape-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGGROW": {
+                "name": "AllowCoatingGrow",
+                "ingui": "alchemy:AllowCoatingGrow",
+                "weight": 4.437,
+                "comment": "alchemy:AllowCoatingGrow-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGSHRINK": {
+                "name": "AllowCoatingShrink",
+                "ingui": "alchemy:AllowCoatingShrink",
+                "weight": 4.438,
+                "comment": "alchemy:AllowCoatingShrink-Comment",
                 "default": false
             },
             "ALLOWRESHAPEPOTIONRECIPE": {
@@ -886,6 +1040,11 @@
             "type": "separator",
             "title": "alchemy:Allow-Config",
             "weight": 0.5
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:Allow-WeaponCoating-Config",
+            "weight": 4.4
         },
         {
             "type": "separator",

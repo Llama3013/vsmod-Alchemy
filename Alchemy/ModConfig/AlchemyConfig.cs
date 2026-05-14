@@ -53,7 +53,30 @@ namespace Alchemy.ModConfig
         // public bool AllowDecorativeRacks { get; set; } = true;
 
         public bool AllowWeaponCoating { get; set; } = true;
-        public bool AllowVanillaContainerDrinking { get; set; } = true;
+        public bool AllowVanillaContainerDrinking { get; set; } = false;
+
+        public bool AllowCoatingArcher { get; set; } = false;
+        public bool AllowCoatingHealingEffect { get; set; } = false;
+        public bool AllowCoatingHungerEnhance { get; set; } = false;
+        public bool AllowCoatingHungerSupress { get; set; } = false;
+        public bool AllowCoatingHunter { get; set; } = false;
+        public bool AllowCoatingLooter { get; set; } = false;
+        public bool AllowCoatingMelee { get; set; } = false;
+        public bool AllowCoatingMining { get; set; } = false;
+        public bool AllowCoatingPoison { get; set; } = true;
+        public bool AllowCoatingPredator { get; set; } = false;
+        public bool AllowCoatingRegen { get; set; } = true;
+        public bool AllowCoatingScentMask { get; set; } = false;
+        public bool AllowCoatingSpeed { get; set; } = false;
+        public bool AllowCoatingVitality { get; set; } = false;
+        public bool AllowCoatingRecall { get; set; } = false;
+        public bool AllowCoatingGlow { get; set; } = false;
+        public bool AllowCoatingWaterBreathe { get; set; } = false;
+        public bool AllowCoatingNutrition { get; set; } = false;
+        public bool AllowCoatingTemporal { get; set; } = false;
+        public bool AllowCoatingReshape { get; set; } = false;
+        public bool AllowCoatingGrow { get; set; } = false;
+        public bool AllowCoatingShrink { get; set; } = false;
 
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;
@@ -104,12 +127,12 @@ namespace Alchemy.ModConfig
         public int WaterBreathePotionDuration { get; set; } = 1000;
         public float NutritionPotionRetainedNutrition { get; set; } = 0.9f;
         public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
-        public int GlowPotionStrength { get; set; } = 31;
+        public int GlowPotionStrength { get; set; } = 15;
 
         public float GrowPotionSizeChange { get; set; } = 1.0f;
         public float ShrinkPotionSizeChange { get; set; } = -1.0f;
-        public float GrowShrinkMinHeight { get; set; } = 0.3f;
-        public float GrowShrinkMaxHeight { get; set; } = 5.0f;
+        public float GrowShrinkMinHeight { get; set; } = 0.5f;
+        public float GrowShrinkMaxHeight { get; set; } = 4.0f;
 
         public int WeaponCoatCharges { get; set; } = 5;
         public float WeaponCoatEffectMultiplier { get; set; } = 0.9f;

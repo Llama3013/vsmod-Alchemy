@@ -6,7 +6,7 @@ using Vintagestory.API.Datastructures;
 
 namespace Alchemy.Behavior
 {
-    public class EntityBehaviorPoisoned(Entity entity) : EntityBehavior(entity)
+    public class EntityBehaviorCoatedPotionEffect(Entity entity) : EntityBehavior(entity)
     {
         private float dmgPerTick;
         private int tickSec;

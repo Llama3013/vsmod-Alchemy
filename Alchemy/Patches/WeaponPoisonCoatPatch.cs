@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Alchemy.Behavior;
 using Alchemy.ModConfig;
+using Alchemy.Utility;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -50,6 +51,9 @@ namespace Alchemy.Patches
                 return;
             }
 
+            if (!PotionConsumableLogic.IsCoatingAllowed(potionId))
+                return;
+
             float multiplier = attrs.GetFloat(
                 "coatMultiplier",
                 AlchemyConfig.Loaded.WeaponCoatEffectMultiplier
@@ -89,6 +93,9 @@ namespace Alchemy.Patches
 
             string potionId = projectileStack.Attributes.GetString("coatedPotionId");
             if (string.IsNullOrEmpty(potionId))
+                return;
+
+            if (!PotionConsumableLogic.IsCoatingAllowed(potionId))
                 return;
 
             float multiplier = projectileStack.Attributes.GetFloat(
@@ -151,13 +158,13 @@ namespace Alchemy.Patches
         {
             if (Math.Abs(ctx.Health) > float.Epsilon)
             {
-                if (agent.HasBehavior<EntityBehaviorPoisoned>())
+                if (agent.HasBehavior<EntityBehaviorCoatedPotionEffect>())
                     agent
-                        .GetBehavior<EntityBehaviorPoisoned>()
+                        .GetBehavior<EntityBehaviorCoatedPotionEffect>()
                         .Refresh(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
                 else
                 {
-                    var b = new EntityBehaviorPoisoned(agent);
+                    var b = new EntityBehaviorCoatedPotionEffect(agent);
                     agent.AddBehavior(b);
                     b.Setup(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
                 }

@@ -18,11 +18,36 @@ namespace Alchemy.Utility
         public const float CoatHoldDurationSec = 1.5f;
         public const float DefaultConsumeTime = 1.5f;
 
-        public static readonly HashSet<string> AllowedCoatingPotionIds =
-        [
-            "poisontickpotionid",
-            "regentickpotionid",
-        ];
+        internal static bool IsCoatingAllowed(string potionId)
+        {
+            AlchemyConfig cfg = AlchemyConfig.Loaded;
+            return potionId switch
+            {
+                "archerpotionid" => cfg.AllowCoatingArcher,
+                "healingeffectpotionid" => cfg.AllowCoatingHealingEffect,
+                "hungerenhancepotionid" => cfg.AllowCoatingHungerEnhance,
+                "hungersupresspotionid" => cfg.AllowCoatingHungerSupress,
+                "hunterpotionid" => cfg.AllowCoatingHunter,
+                "looterpotionid" => cfg.AllowCoatingLooter,
+                "meleepotionid" => cfg.AllowCoatingMelee,
+                "miningpotionid" => cfg.AllowCoatingMining,
+                "poisontickpotionid" => cfg.AllowCoatingPoison,
+                "predatorpotionid" => cfg.AllowCoatingPredator,
+                "regentickpotionid" => cfg.AllowCoatingRegen,
+                "scentmaskpotionid" => cfg.AllowCoatingScentMask,
+                "speedpotionid" => cfg.AllowCoatingSpeed,
+                "vitalitypotionid" => cfg.AllowCoatingVitality,
+                "recallpotionid" => cfg.AllowCoatingRecall,
+                "glowpotionid" => cfg.AllowCoatingGlow,
+                "waterbreathepotionid" => cfg.AllowCoatingWaterBreathe,
+                "nutritionpotionid" => cfg.AllowCoatingNutrition,
+                "temporalpotionid" => cfg.AllowCoatingTemporal,
+                "reshapepotionid" => cfg.AllowCoatingReshape,
+                "growpotionid" => cfg.AllowCoatingGrow,
+                "shrinkpotionid" => cfg.AllowCoatingShrink,
+                _ => false,
+            };
+        }
 
         public static bool HandleWeaponCoatingIdle(
             ICoreAPI api,
@@ -78,7 +103,7 @@ namespace Alchemy.Utility
             if (
                 mainSlot?.Itemstack == null
                 || string.IsNullOrEmpty(potionId)
-                || !AllowedCoatingPotionIds.Contains(potionId)
+                || !IsCoatingAllowed(potionId)
             )
                 return;
 
@@ -138,7 +163,7 @@ namespace Alchemy.Utility
                 return false;
             }
 
-            if (string.IsNullOrEmpty(potionId) || !AllowedCoatingPotionIds.Contains(potionId))
+            if (string.IsNullOrEmpty(potionId) || !IsCoatingAllowed(potionId))
             {
                 coatHoldStartMs.Remove(entityId);
                 return false;

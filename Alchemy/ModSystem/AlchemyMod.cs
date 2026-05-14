@@ -167,6 +167,59 @@ namespace Alchemy.ModSystem
             //     AlchemyConfig.Loaded.AllowDecorativeRacks
             // );
 
+            api.World.Config.SetBool("AllowCoatingArcher", AlchemyConfig.Loaded.AllowCoatingArcher);
+            api.World.Config.SetBool(
+                "AllowCoatingHealingEffect",
+                AlchemyConfig.Loaded.AllowCoatingHealingEffect
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingHungerEnhance",
+                AlchemyConfig.Loaded.AllowCoatingHungerEnhance
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingHungerSupress",
+                AlchemyConfig.Loaded.AllowCoatingHungerSupress
+            );
+            api.World.Config.SetBool("AllowCoatingHunter", AlchemyConfig.Loaded.AllowCoatingHunter);
+            api.World.Config.SetBool("AllowCoatingLooter", AlchemyConfig.Loaded.AllowCoatingLooter);
+            api.World.Config.SetBool("AllowCoatingMelee", AlchemyConfig.Loaded.AllowCoatingMelee);
+            api.World.Config.SetBool("AllowCoatingMining", AlchemyConfig.Loaded.AllowCoatingMining);
+            api.World.Config.SetBool("AllowCoatingPoison", AlchemyConfig.Loaded.AllowCoatingPoison);
+            api.World.Config.SetBool(
+                "AllowCoatingPredator",
+                AlchemyConfig.Loaded.AllowCoatingPredator
+            );
+            api.World.Config.SetBool("AllowCoatingRegen", AlchemyConfig.Loaded.AllowCoatingRegen);
+            api.World.Config.SetBool(
+                "AllowCoatingScentMask",
+                AlchemyConfig.Loaded.AllowCoatingScentMask
+            );
+            api.World.Config.SetBool("AllowCoatingSpeed", AlchemyConfig.Loaded.AllowCoatingSpeed);
+            api.World.Config.SetBool(
+                "AllowCoatingVitality",
+                AlchemyConfig.Loaded.AllowCoatingVitality
+            );
+            api.World.Config.SetBool("AllowCoatingRecall", AlchemyConfig.Loaded.AllowCoatingRecall);
+            api.World.Config.SetBool("AllowCoatingGlow", AlchemyConfig.Loaded.AllowCoatingGlow);
+            api.World.Config.SetBool(
+                "AllowCoatingWaterBreathe",
+                AlchemyConfig.Loaded.AllowCoatingWaterBreathe
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingNutrition",
+                AlchemyConfig.Loaded.AllowCoatingNutrition
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingTemporal",
+                AlchemyConfig.Loaded.AllowCoatingTemporal
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingReshape",
+                AlchemyConfig.Loaded.AllowCoatingReshape
+            );
+            api.World.Config.SetBool("AllowCoatingGrow", AlchemyConfig.Loaded.AllowCoatingGrow);
+            api.World.Config.SetBool("AllowCoatingShrink", AlchemyConfig.Loaded.AllowCoatingShrink);
+
             api.Logger.Debug("Loaded alchemy mod config into world properties.");
 
             base.StartPre(api);
@@ -345,7 +398,8 @@ namespace Alchemy.ModSystem
                         $"Received AllowToxicMushrooms of {packet.AllowToxicMushrooms} from server"
                     );
 
-                    AlchemyConfig.Loaded.AllowPsychedelicMushrooms = packet.AllowPsychedelicMushrooms;
+                    AlchemyConfig.Loaded.AllowPsychedelicMushrooms =
+                        packet.AllowPsychedelicMushrooms;
                     Mod.Logger.Event(
                         $"Received AllowPsychedelicMushrooms of {packet.AllowPsychedelicMushrooms} from server"
                     );
@@ -605,6 +659,98 @@ namespace Alchemy.ModSystem
                     Mod.Logger.Event(
                         $"Received GlowPotionStrength of {packet.GlowPotionStrength} from server"
                     );
+
+                    AlchemyConfig.Loaded.AllowCoatingArcher = packet.AllowCoatingArcher;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingArcher of {packet.AllowCoatingArcher} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingHealingEffect =
+                        packet.AllowCoatingHealingEffect;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingHealingEffect of {packet.AllowCoatingHealingEffect} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingHungerEnhance =
+                        packet.AllowCoatingHungerEnhance;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingHungerEnhance of {packet.AllowCoatingHungerEnhance} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingHungerSupress =
+                        packet.AllowCoatingHungerSupress;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingHungerSupress of {packet.AllowCoatingHungerSupress} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingHunter = packet.AllowCoatingHunter;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingHunter of {packet.AllowCoatingHunter} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingLooter = packet.AllowCoatingLooter;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingLooter of {packet.AllowCoatingLooter} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingMelee = packet.AllowCoatingMelee;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingMelee of {packet.AllowCoatingMelee} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingMining = packet.AllowCoatingMining;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingMining of {packet.AllowCoatingMining} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingPoison = packet.AllowCoatingPoison;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingPoison of {packet.AllowCoatingPoison} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingPredator = packet.AllowCoatingPredator;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingPredator of {packet.AllowCoatingPredator} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingRegen = packet.AllowCoatingRegen;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingRegen of {packet.AllowCoatingRegen} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingScentMask = packet.AllowCoatingScentMask;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingScentMask of {packet.AllowCoatingScentMask} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingSpeed = packet.AllowCoatingSpeed;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingSpeed of {packet.AllowCoatingSpeed} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingVitality = packet.AllowCoatingVitality;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingVitality of {packet.AllowCoatingVitality} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingRecall = packet.AllowCoatingRecall;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingRecall of {packet.AllowCoatingRecall} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingGlow = packet.AllowCoatingGlow;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingGlow of {packet.AllowCoatingGlow} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingWaterBreathe = packet.AllowCoatingWaterBreathe;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingWaterBreathe of {packet.AllowCoatingWaterBreathe} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingNutrition = packet.AllowCoatingNutrition;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingNutrition of {packet.AllowCoatingNutrition} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingTemporal = packet.AllowCoatingTemporal;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingTemporal of {packet.AllowCoatingTemporal} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingReshape = packet.AllowCoatingReshape;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingReshape of {packet.AllowCoatingReshape} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingGrow = packet.AllowCoatingGrow;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingGrow of {packet.AllowCoatingGrow} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingShrink = packet.AllowCoatingShrink;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingShrink of {packet.AllowCoatingShrink} from server"
+                    );
                 });
             PotionRegistry.Init();
         }
@@ -731,6 +877,29 @@ namespace Alchemy.ModSystem
                         .Loaded
                         .StabilityPotionTemporalStabilityGain,
                     GlowPotionStrength = AlchemyConfig.Loaded.GlowPotionStrength,
+
+                    AllowCoatingArcher = AlchemyConfig.Loaded.AllowCoatingArcher,
+                    AllowCoatingHealingEffect = AlchemyConfig.Loaded.AllowCoatingHealingEffect,
+                    AllowCoatingHungerEnhance = AlchemyConfig.Loaded.AllowCoatingHungerEnhance,
+                    AllowCoatingHungerSupress = AlchemyConfig.Loaded.AllowCoatingHungerSupress,
+                    AllowCoatingHunter = AlchemyConfig.Loaded.AllowCoatingHunter,
+                    AllowCoatingLooter = AlchemyConfig.Loaded.AllowCoatingLooter,
+                    AllowCoatingMelee = AlchemyConfig.Loaded.AllowCoatingMelee,
+                    AllowCoatingMining = AlchemyConfig.Loaded.AllowCoatingMining,
+                    AllowCoatingPoison = AlchemyConfig.Loaded.AllowCoatingPoison,
+                    AllowCoatingPredator = AlchemyConfig.Loaded.AllowCoatingPredator,
+                    AllowCoatingRegen = AlchemyConfig.Loaded.AllowCoatingRegen,
+                    AllowCoatingScentMask = AlchemyConfig.Loaded.AllowCoatingScentMask,
+                    AllowCoatingSpeed = AlchemyConfig.Loaded.AllowCoatingSpeed,
+                    AllowCoatingVitality = AlchemyConfig.Loaded.AllowCoatingVitality,
+                    AllowCoatingRecall = AlchemyConfig.Loaded.AllowCoatingRecall,
+                    AllowCoatingGlow = AlchemyConfig.Loaded.AllowCoatingGlow,
+                    AllowCoatingWaterBreathe = AlchemyConfig.Loaded.AllowCoatingWaterBreathe,
+                    AllowCoatingNutrition = AlchemyConfig.Loaded.AllowCoatingNutrition,
+                    AllowCoatingTemporal = AlchemyConfig.Loaded.AllowCoatingTemporal,
+                    AllowCoatingReshape = AlchemyConfig.Loaded.AllowCoatingReshape,
+                    AllowCoatingGrow = AlchemyConfig.Loaded.AllowCoatingGrow,
+                    AllowCoatingShrink = AlchemyConfig.Loaded.AllowCoatingShrink,
                 },
                 player
             );
