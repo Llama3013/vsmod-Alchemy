@@ -99,11 +99,11 @@ namespace Alchemy.ModConfig
         public int WaterBreathePotionDuration { get; set; } = 1000;
         public float NutritionPotionRetainedNutrition { get; set; } = 0.9f;
         public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
-        public int GlowPotionStrength { get; set; } = 31;
+        public int GlowPotionStrength { get; set; } = 15;
 
         public float GrowPotionSizeChange { get; set; } = 1.0f;
         public float ShrinkPotionSizeChange { get; set; } = -1.0f;
-        public float GrowShrinkMinHeight { get; set; } = 0.3f;
-        public float GrowShrinkMaxHeight { get; set; } = 5.0f;
+        public float GrowShrinkMinHeight { get; set; } = 0.5f;
+        public float GrowShrinkMaxHeight { get; set; } = 4.0f;
     }
 }
