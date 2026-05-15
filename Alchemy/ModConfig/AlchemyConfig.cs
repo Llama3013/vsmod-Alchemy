@@ -12,6 +12,9 @@ namespace Alchemy.ModConfig
         public bool AllowWaterBreathePotion { get; set; } = true;
         public bool AllowNutritionPotion { get; set; } = true;
         public bool AllowTemporalPotion { get; set; } = true;
+        public bool AllowReshapePotion { get; set; } = true;
+        public bool AllowGrowPotion { get; set; } = false;
+        public bool AllowShrinkPotion { get; set; } = false;
 
         public bool AllowArcherPotion { get; set; } = true;
         public bool AllowHealingEffectPotion { get; set; } = true;
@@ -27,9 +30,6 @@ namespace Alchemy.ModConfig
         public bool AllowScentMaskPotion { get; set; } = true;
         public bool AllowSpeedPotion { get; set; } = true;
         public bool AllowVitalityPotion { get; set; } = true;
-        public bool AllowReshapePotion { get; set; } = true;
-        public bool AllowGrowPotion { get; set; } = true;
-        public bool AllowShrinkPotion { get; set; } = true;
         public bool AllowReshapePotionRecipe { get; set; } = false;
         public bool AllowGrowPotionRecipe { get; set; } = true;
         public bool AllowShrinkPotionRecipe { get; set; } = true;
@@ -132,7 +132,7 @@ namespace Alchemy.ModConfig
         public float GrowPotionSizeChange { get; set; } = 1.0f;
         public float ShrinkPotionSizeChange { get; set; } = -1.0f;
         public float GrowShrinkMinHeight { get; set; } = 0.5f;
-        public float GrowShrinkMaxHeight { get; set; } = 4.0f;
+        public float GrowShrinkMaxHeight { get; set; } = 3.0f;
 
         public int WeaponCoatCharges { get; set; } = 5;
         public float WeaponCoatEffectMultiplier { get; set; } = 0.9f;
