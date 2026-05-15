@@ -88,7 +88,14 @@ namespace Alchemy
                 }
                 else
                 {
-                    // Instant or broken potion, no need for listeners
+                    // Instant potion: set a brief WatchedAttributes lock so the
+                    // OnHeldInteractStop guard (GetLong != 0) should stop double consume potion
+                    // Might need better fix but works for now and doesn't cause any issues that I know of
+                    long tempHandle = entity.World.RegisterCallback(
+                        dt => entity.WatchedAttributes.RemoveAttribute(id),
+                        500
+                    );
+                    entity.WatchedAttributes.SetLong(id, tempHandle);
                     return true;
                 }
 

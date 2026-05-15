@@ -32,6 +32,8 @@ namespace Alchemy.ModSystem
             base.Start(api);
             api.Logger.Debug("[Potion] Start");
 
+            PlayerModelLibPresent = api.ModLoader.IsModEnabled("playermodellib");
+
             Harmony harmony = new("llama3013.Alchemy");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
             RegisterClasses(api);

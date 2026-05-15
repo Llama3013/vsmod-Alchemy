@@ -1,3 +1,4 @@
+using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -14,8 +15,14 @@ namespace Alchemy.Patches
             if (__instance is not EntityPlayer player)
                 return;
 
+            if (!AlchemyConfig.Loaded.AllowGrowPotion && !AlchemyConfig.Loaded.AllowShrinkPotion)
+                return;
+
             ApplySize(player);
-            player.WatchedAttributes.RegisterModifiedListener("potionSizeDelta", () => ApplySize(player));
+            player.WatchedAttributes.RegisterModifiedListener(
+                "potionSizeDelta",
+                () => ApplySize(player)
+            );
         }
 
         internal static void ApplySize(EntityPlayer entity)
@@ -25,18 +32,42 @@ namespace Alchemy.Patches
                 return;
 
             float delta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
-            float baseEyeHeight = entity.WatchedAttributes.GetFloat("potionBaseEyeHeight", baseHeight * 0.9054f);
+            float baseEyeHeight = entity.WatchedAttributes.GetFloat(
+                "potionBaseEyeHeight",
+                baseHeight * 0.9054f
+            );
             float newHeight = baseHeight + delta;
             float scale = newHeight / baseHeight;
 
-            entity.CollisionBox.Y2 = newHeight;
-            entity.SelectionBox.Y2 = newHeight;
+            // Scale width proportionally from the snapshotted base width so both dimensions
+            // grow/shrink together. Fall back to the current X if no base was stored (old saves).
+            // Update Properties so that any future updateColSelBoxes() call keeps the scaled
+            // dimensions. SetCollisionBox/SetSelectionBox also update the origin boxes.
+            float baseWidth = entity.WatchedAttributes.GetFloat("potionBaseWidth", 0f);
+            float newWidth =
+                baseWidth > 0.01f ? baseWidth * scale : entity.Properties.CollisionBoxSize.X;
+
+            entity.Properties.CollisionBoxSize.X = newWidth;
+            entity.Properties.CollisionBoxSize.Y = newHeight;
+            entity.SetCollisionBox(newWidth, newHeight);
+
+            if (entity.Properties.SelectionBoxSize != null)
+            {
+                entity.Properties.SelectionBoxSize.X = newWidth;
+                entity.Properties.SelectionBoxSize.Y = newHeight;
+            }
+            entity.SetSelectionBox(newWidth, newHeight);
+
             entity.Properties.EyeHeight = baseEyeHeight * scale;
 
             if (entity.Properties.Client != null)
             {
-                float baseClientSize = entity.WatchedAttributes.GetFloat("potionBaseClientSize", 0f);
-                entity.Properties.Client.Size = baseClientSize > 0.01f ? baseClientSize * scale : scale;
+                float baseClientSize = entity.WatchedAttributes.GetFloat(
+                    "potionBaseClientSize",
+                    0f
+                );
+                entity.Properties.Client.Size =
+                    baseClientSize > 0.01f ? baseClientSize * scale : scale;
             }
         }
     }

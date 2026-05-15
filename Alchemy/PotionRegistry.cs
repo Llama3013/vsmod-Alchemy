@@ -166,6 +166,7 @@ namespace Alchemy
 
         private static void ApplyWaterBreathePotion(PotionContext ctx)
         {
+            ctx.WaterBreathe = true;
             ctx.Duration = AlchemyConfig.Loaded.WaterBreathePotionDuration;
         }
 

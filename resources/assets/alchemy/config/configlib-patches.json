@@ -720,21 +720,21 @@
                 "ingui": "alchemy:AllowReshapePotion",
                 "weight": 1.25,
                 "comment": "alchemy:AllowReshapePotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWGROWPOTION": {
                 "name": "AllowGrowPotion",
                 "ingui": "alchemy:AllowGrowPotion",
                 "weight": 1.26,
                 "comment": "alchemy:AllowGrowPotion-Comment",
-                "default": true
+                "default": false
             },
             "ALLOWSHRINKPOTION": {
                 "name": "AllowShrinkPotion",
                 "ingui": "alchemy:AllowShrinkPotion",
                 "weight": 1.27,
                 "comment": "alchemy:AllowShrinkPotion-Comment",
-                "default": true
+                "default": false
             },
             "ALLOWSTRONGPOTIONS": {
                 "name": "AllowStrongPotions",
@@ -804,7 +804,7 @@
                 "ingui": "alchemy:AllowReshapePotionRecipe",
                 "weight": 4.51,
                 "comment": "alchemy:AllowReshapePotionRecipe-Comment",
-                "default": true
+                "default": false
             },
             "ALLOWGROWPOTIONRECIPE": {
                 "name": "AllowGrowPotionRecipe",
