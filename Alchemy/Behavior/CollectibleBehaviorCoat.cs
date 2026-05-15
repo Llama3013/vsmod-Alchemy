@@ -23,8 +23,6 @@ namespace Alchemy.Behavior
                 return;
 
             string potionName = attrs.GetString("coatedDisplayName");
-            if (string.IsNullOrEmpty(potionName))
-                potionName = Lang.Get($"alchemy:coatname-{potionId}");
             bool isArrow = inSlot.Itemstack.Collectible.Code.Path.Contains("arrow");
             dsc.Append(string.Format("<font color=\"{0}\">", "#b8bb00"));
             if (isArrow)

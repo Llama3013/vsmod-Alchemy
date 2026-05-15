@@ -55,7 +55,7 @@ namespace Alchemy.Utility
             EntityAgent byEntity,
             string potionId,
             string strength,
-            System.Func<ItemSlot, string> getDisplayName,
+            string itemCodePath,
             System.Func<ItemSlot, bool> consumeCoating,
             float consumeTime = CoatHoldDurationSec
         )
@@ -82,7 +82,7 @@ namespace Alchemy.Utility
                 potionId,
                 strength,
                 eligible,
-                getDisplayName,
+                itemCodePath,
                 consumeCoating,
                 consumeTime
             );
@@ -132,7 +132,7 @@ namespace Alchemy.Utility
             string potionId,
             string strength,
             bool eligible,
-            System.Func<ItemSlot, string> getDisplayName,
+            string itemCodePath,
             System.Func<ItemSlot, bool> consumeCoating,
             float consumeTime
         )
@@ -189,7 +189,7 @@ namespace Alchemy.Utility
                 byEntity,
                 potionId,
                 AlchemyConfig.Loaded.WeaponCoatEffectMultiplier * strengthMul,
-                getDisplayName,
+                itemCodePath,
                 consumeCoating
             );
 
@@ -222,7 +222,7 @@ namespace Alchemy.Utility
             EntityAgent byEntity,
             string potionId,
             float coatMultiplier,
-            System.Func<ItemSlot, string> getDisplayName,
+            string itemCodePath,
             System.Func<ItemSlot, bool> consumeCoating
         )
         {
@@ -262,8 +262,7 @@ namespace Alchemy.Utility
                     return;
             }
 
-            string displayName =
-                getDisplayName(coatSlot) ?? Lang.Get($"alchemy:coatname-{potionId}");
+            string displayName = Lang.Get($"alchemy:item-{itemCodePath}");
 
             int consumed = consumeCoating(coatSlot) ? 1 : 0;
 
@@ -304,12 +303,11 @@ namespace Alchemy.Utility
 
             if (playerEntity.Player is IServerPlayer serverPlayer)
             {
-                string potionName = Lang.Get($"alchemy:coatname-{potionId}");
                 string msg = isArrow
-                    ? Lang.Get("alchemy:arrow-coated", potionName)
+                    ? Lang.Get("alchemy:arrow-coated", displayName)
                     : Lang.Get(
                         "alchemy:weapon-coated",
-                        potionName,
+                        displayName,
                         mainHandSlot.Itemstack?.Attributes.GetInt("coatCharges") ?? 0
                     );
                 serverPlayer.SendMessage(

@@ -1,6 +1,5 @@
 using Alchemy.Utility;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
@@ -40,9 +39,7 @@ namespace Alchemy.Behavior
                     byEntity,
                     potionId,
                     strength,
-                    s =>
-                        container.GetContent(s.Itemstack)?.GetName()
-                        ?? Lang.Get($"alchemy:coatname-{potionId}"),
+                    contentStack?.Collectible?.Code?.Path ?? "",
                     s =>
                     {
                         int consumed = container.SplitStackAndPerformAction(
@@ -69,7 +66,7 @@ namespace Alchemy.Behavior
                     byEntity,
                     potionId,
                     strength,
-                    s => s.Itemstack.GetName(),
+                    slot.Itemstack.Collectible?.Code?.Path ?? "",
                     s =>
                     {
                         s.TakeOut(1);
