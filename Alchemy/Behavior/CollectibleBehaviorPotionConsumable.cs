@@ -24,7 +24,7 @@ namespace Alchemy.Behavior
             base.Initialize(properties);
             source = properties["source"].AsString("item");
             animation = properties["animation"].AsString("eat");
-            sound = properties["sound"].AsString("drink");
+            sound = properties["sound"].AsString("alchemy:sounds/player/drink");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
             consumeTime = properties["consumeTime"].AsFloat(PotionConsumableLogic.DefaultConsumeTime);
         }
@@ -84,6 +84,9 @@ namespace Alchemy.Behavior
 
         private bool ConsumePotion(ItemSlot slot, EntityAgent byEntity)
         {
+            if (byEntity.World.Side != EnumAppSide.Server)
+                return false;
+
             if (source == "liquidcontent")
             {
                 if (collObj is not BlockLiquidContainerBase container)
@@ -336,6 +339,23 @@ namespace Alchemy.Behavior
                     && healthValue is > 0.01f or < -0.01f
                 )
                     dsc.AppendLine(Lang.Get("alchemy:potion-single-health-effect", healthValue));
+
+                if (ctx.Respawn)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-recall"));
+                if (ctx.GlowStrength > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-glow"));
+                if (ctx.WaterBreathe)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-waterbreathe"));
+                if (ctx.TemporalStabilityGain > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-temporal"));
+                if (ctx.RetainedNutrition > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-nutrition"));
+                if (ctx.Reshape)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-reshape"));
+                if (ctx.SizeChange > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-grow"));
+                if (ctx.SizeChange < 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-shrink"));
             }
 
             if (ctx.Health is > 0.01f or < -0.01f)
@@ -349,7 +369,7 @@ namespace Alchemy.Behavior
         private void PlayDrinkSound(EntityAgent byEntity)
         {
             byEntity.World.PlaySoundAt(
-                new AssetLocation($"sounds/player/{sound}"),
+                new AssetLocation(sound),
                 byEntity,
                 (byEntity as EntityPlayer)?.Player,
                 true,

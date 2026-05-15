@@ -20,7 +20,7 @@
     },
     {
       "name": "PotionConsumable",
-      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "drink" , "consumeTime": 2 }
+      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "alchemy:sounds/player/drink", "consumeTime": 2 }
     },
     {
       "name": "PotionCoatSource",
