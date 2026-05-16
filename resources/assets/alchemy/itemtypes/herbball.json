@@ -7,12 +7,6 @@
     }
   ],
   "class": "ItemPotion",
-  "behaviors": [
-    {
-      "name": "PotionConsumable",
-      "properties": { "source": "item", "animation": "eat", "sound": "sounds/player/eat" }
-    }
-  ],
   "attributesByType": {
     "*-archer": {
       "potioninfo": { "potionId": "archerpotionid" }

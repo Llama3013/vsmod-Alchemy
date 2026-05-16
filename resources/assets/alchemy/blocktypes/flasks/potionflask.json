@@ -16,10 +16,6 @@
     {
       "name": "UnstableFalling",
       "properties": { "attachmentArea": { "x1": 5, "y1": 0, "z1": 5, "x2": 10, "y2": 0, "z2": 10 } }
-    },
-    {
-      "name": "PotionConsumable",
-      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "alchemy:sounds/player/drink", "consumeTime": 2 }
     }
   ],
   "variantgroups": [
