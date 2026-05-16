@@ -20,6 +20,14 @@ namespace Alchemy.Behavior
                 .AsFloat(PotionConsumableLogic.CoatHoldDurationSec);
         }
 
+        private static string GetLangKey(CollectibleObject col)
+        {
+            if (col?.Code == null)
+                return "";
+            string typePrefix = col is Vintagestory.API.Common.Block ? "block" : "item";
+            return $"{col.Code.Domain}:{typePrefix}-{col.Code.Path}";
+        }
+
         public void CoatingIdle(ItemSlot slot, EntityAgent byEntity)
         {
             if (source == "liquidcontent")
@@ -39,7 +47,7 @@ namespace Alchemy.Behavior
                     byEntity,
                     potionId,
                     strength,
-                    contentStack?.Collectible?.Code?.Path ?? "",
+                    GetLangKey(contentStack?.Collectible),
                     s =>
                     {
                         int consumed = container.SplitStackAndPerformAction(
@@ -66,7 +74,7 @@ namespace Alchemy.Behavior
                     byEntity,
                     potionId,
                     strength,
-                    slot.Itemstack.Collectible?.Code?.Path ?? "",
+                    GetLangKey(slot.Itemstack.Collectible),
                     s =>
                     {
                         s.TakeOut(1);

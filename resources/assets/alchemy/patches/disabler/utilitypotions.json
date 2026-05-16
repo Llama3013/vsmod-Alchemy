@@ -1,6 +1,104 @@
 [
   // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
 
+  // Climb
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/9",
+   "condition": {
+      "when": "AllowClimbPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/9",
+   "condition": {
+      "when": "AllowClimbPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/climbbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowClimbPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-climb/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowClimbPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/9",
+   "condition": {
+      "when": "AllowClimbPotion",
+      "isValue": "false"
+    }
+  },
+
+  // Fall
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/8",
+   "condition": {
+      "when": "AllowFallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/barrel/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/0/ingredients/0/allowedVariants/8",
+   "condition": {
+      "when": "AllowFallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/fallbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowFallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-fall/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowFallPotion",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/8",
+   "condition": {
+      "when": "AllowFallPotion",
+      "isValue": "false"
+    }
+  },
+
   // Shrink
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
@@ -144,6 +242,70 @@
    "path": "/variantgroups/0/states/5",
    "condition": {
       "when": "AllowReshapePotion",
+      "isValue": "false"
+    }
+  },
+
+  // Fall (recipe only - potion item still exists, creative mode only)
+  {
+   "file": "alchemy:recipes/grid/ingredient/fallbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowFallPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "replace",
+   "path": "/attributesByType/utilitypotionbase-fall/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowFallPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-fall/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowFallPotionRecipe",
+      "isValue": "false"
+    }
+  },
+
+  // Climb (recipe only - potion item still exists, creative mode only)
+  {
+   "file": "alchemy:recipes/grid/ingredient/climbbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": {
+      "when": "AllowClimbPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "replace",
+   "path": "/attributesByType/utilitypotionbase-climb/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowClimbPotionRecipe",
+      "isValue": "false"
+    }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-climb/handbook",
+   "value": { "exclude": true },
+   "condition": {
+      "when": "AllowClimbPotionRecipe",
       "isValue": "false"
     }
   },

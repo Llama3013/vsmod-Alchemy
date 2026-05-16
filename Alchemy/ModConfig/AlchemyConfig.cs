@@ -77,6 +77,17 @@ namespace Alchemy.ModConfig
         public bool AllowCoatingReshape { get; set; } = false;
         public bool AllowCoatingGrow { get; set; } = false;
         public bool AllowCoatingShrink { get; set; } = false;
+        public bool AllowCoatingFall { get; set; } = false;
+        public bool AllowCoatingClimb { get; set; } = false;
+
+        public bool AllowFallPotion { get; set; } = true;
+        public bool AllowFallPotionRecipe { get; set; } = true;
+        public float FallPotionDamageReduction { get; set; } = 0.75f;
+        public int FallPotionDuration { get; set; } = 600;
+
+        public bool AllowClimbPotion { get; set; } = true;
+        public bool AllowClimbPotionRecipe { get; set; } = true;
+        public int ClimbPotionDuration { get; set; } = 300;
 
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;

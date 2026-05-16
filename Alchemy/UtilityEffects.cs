@@ -174,8 +174,11 @@ namespace Alchemy
 
         public static void ApplyTemporalPotion(EntityAgent byEntity, float stabilityGain)
         {
-            byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>().OwnStability +=
-                stabilityGain;
+            EntityBehaviorTemporalStabilityAffected stabilityBehavior =
+                byEntity.GetBehavior<EntityBehaviorTemporalStabilityAffected>();
+            if (stabilityBehavior == null)
+                return;
+            stabilityBehavior.OwnStability += stabilityGain;
         }
 
         public static void ApplyReshapePotion(IServerPlayer serverPlayer)

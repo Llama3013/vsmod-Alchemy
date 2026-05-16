@@ -17,6 +17,10 @@ namespace Alchemy.Patches
             ITreeAttribute oxygenTree = __instance.entity.WatchedAttributes.GetTreeAttribute(
                 "oxygen"
             );
+            if (oxygenTree == null)
+            {
+                return;
+            }
             float currOxygen = oxygenTree.GetFloat("maxoxygen");
             __result = currOxygen;
         }

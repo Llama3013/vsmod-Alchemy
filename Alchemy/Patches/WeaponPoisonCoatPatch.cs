@@ -6,6 +6,8 @@ using Alchemy.Utility;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 // poison damage shouldn't work on mechanical entities
@@ -44,7 +46,7 @@ namespace Alchemy.Patches
             if (charges <= 0)
             {
                 attrs.RemoveAttribute("coatedPotionId");
-                attrs.RemoveAttribute("coatedDisplayName");
+                attrs.RemoveAttribute("coatedItemCode");
                 attrs.RemoveAttribute("coatCharges");
                 attrs.RemoveAttribute("coatMultiplier");
                 itemslot.MarkDirty();
@@ -58,13 +60,15 @@ namespace Alchemy.Patches
                 "coatMultiplier",
                 AlchemyConfig.Loaded.WeaponCoatEffectMultiplier
             );
-            WeaponCoatEffects.Apply(potionId, attackedEntity, multiplier);
+            string coatedItemCode = attrs.GetString("coatedItemCode");
+            string displayName = WeaponCoatEffects.ResolveDisplayName(coatedItemCode, potionId);
+            WeaponCoatEffects.Apply(potionId, attackedEntity, multiplier, displayName);
 
             charges--;
             if (charges <= 0)
             {
                 attrs.RemoveAttribute("coatedPotionId");
-                attrs.RemoveAttribute("coatedDisplayName");
+                attrs.RemoveAttribute("coatedItemCode");
                 attrs.RemoveAttribute("coatCharges");
                 attrs.RemoveAttribute("coatMultiplier");
             }
@@ -102,12 +106,14 @@ namespace Alchemy.Patches
                 "coatMultiplier",
                 AlchemyConfig.Loaded.WeaponCoatEffectMultiplier
             );
+            string coatedItemCode = projectileStack.Attributes.GetString("coatedItemCode");
+            string displayName = WeaponCoatEffects.ResolveDisplayName(coatedItemCode, potionId);
             projectileStack.Attributes.RemoveAttribute("coatedPotionId");
-            projectileStack.Attributes.RemoveAttribute("coatedDisplayName");
+            projectileStack.Attributes.RemoveAttribute("coatedItemCode");
             projectileStack.Attributes.RemoveAttribute("coatMultiplier");
 
             if (target != null && target.Alive)
-                WeaponCoatEffects.Apply(potionId, target, multiplier);
+                WeaponCoatEffects.Apply(potionId, target, multiplier, displayName);
         }
     }
 
@@ -117,17 +123,29 @@ namespace Alchemy.Patches
         [HarmonyPostfix]
         public static void Postfix(EntityProjectile __instance)
         {
+            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
+                return;
             if (__instance.World.Side != EnumAppSide.Server)
                 return;
             __instance.ProjectileStack?.Attributes.RemoveAttribute("coatedPotionId");
-            __instance.ProjectileStack?.Attributes.RemoveAttribute("coatedDisplayName");
+            __instance.ProjectileStack?.Attributes.RemoveAttribute("coatedItemCode");
             __instance.ProjectileStack?.Attributes.RemoveAttribute("coatMultiplier");
         }
     }
 
     internal static class WeaponCoatEffects
     {
-        internal static void Apply(string potionId, Entity entity, float multiplier)
+        internal static string ResolveDisplayName(string langKey, string fallback)
+        {
+            return string.IsNullOrEmpty(langKey) ? fallback : Lang.Get(langKey);
+        }
+
+        internal static void Apply(
+            string potionId,
+            Entity entity,
+            float multiplier,
+            string displayName
+        )
         {
             if (entity == null || !entity.Alive)
                 return;
@@ -138,8 +156,14 @@ namespace Alchemy.Patches
                 if (behavior?.Manager == null)
                     return;
                 PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, multiplier);
-                if (ctx != null)
-                    behavior.Manager.TryApplyPotion(potionId, ctx, potionId);
+                if (ctx != null && behavior.Manager.TryApplyPotion(potionId, ctx, displayName))
+                {
+                    (playerEntity.Player as IServerPlayer)?.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:effect-gain", displayName),
+                        EnumChatType.Notification
+                    );
+                }
             }
             else if (entity is EntityAgent agent)
             {

@@ -1,31 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alchemy.ModConfig;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
 namespace Alchemy
 {
-    public sealed class PotionEffectManager
+    public sealed class PotionEffectManager(EntityPlayer entity)
     {
-        private readonly EntityPlayer entity;
-        private readonly ICoreAPI api;
-
-        public PotionEffectManager(EntityPlayer entity)
-        {
-            this.entity = entity;
-            api = entity.Api;
-        }
-
+        private readonly EntityPlayer entity = entity;
+        private readonly ICoreAPI api = entity.Api;
         private readonly Dictionary<string, ActiveEffect> active = [];
+
+        private float originalFallDamageMultiplier = 1f;
+        private bool originalCanClimbAnywhere;
+
         public bool TryApplyPotion(string id, PotionContext ctx, string name)
         {
             try
             {
                 if (active.ContainsKey(id))
                 {
-                    api.Logger.Debug("Cannot apply potion for potionId {0}, it is currently already applied!", id);
+                    api.Logger.Debug(
+                        "Cannot apply potion for potionId {0}, it is currently already applied!",
+                        id
+                    );
                     return false;
                 }
 
@@ -34,37 +35,45 @@ namespace Alchemy
 
                 if (effect.Context.Respawn)
                 {
-                    UtilityEffects.ApplyRecallPotion(
-                        entity.Player as IServerPlayer,
-                        entity,
-                        api
-                    );
+                    UtilityEffects.ApplyRecallPotion(entity.Player as IServerPlayer, entity, api);
                 }
                 if (effect.Context.Reshape)
                 {
-                    UtilityEffects.ApplyReshapePotion(
-                        entity.Player as IServerPlayer
-                    );
+                    UtilityEffects.ApplyReshapePotion(entity.Player as IServerPlayer);
                 }
-                if(Math.Abs(effect.Context.RetainedNutrition) > float.Epsilon)
+                if (Math.Abs(effect.Context.RetainedNutrition) > float.Epsilon)
                 {
-                    UtilityEffects.ApplyNutritionPotion(
-                        entity, effect.Context.RetainedNutrition
-                    );
+                    UtilityEffects.ApplyNutritionPotion(entity, effect.Context.RetainedNutrition);
                 }
-                if(Math.Abs(effect.Context.TemporalStabilityGain) > float.Epsilon)
+                if (Math.Abs(effect.Context.TemporalStabilityGain) > float.Epsilon)
                 {
                     UtilityEffects.ApplyTemporalPotion(
-                        entity, effect.Context.TemporalStabilityGain
+                        entity,
+                        effect.Context.TemporalStabilityGain
                     );
                 }
-                if(effect.Context.GlowStrength > 0)
+                if (effect.Context.GlowStrength > 0)
                 {
                     entity.WatchedAttributes.SetInt("glowStrength", effect.Context.GlowStrength);
                 }
                 if (Math.Abs(effect.Context.SizeChange) > float.Epsilon)
                 {
                     UtilityEffects.ApplySizeChange(entity, effect.Context.SizeChange);
+                }
+                if (
+                    Math.Abs(effect.Context.FallDamageReduction) > float.Epsilon
+                    && AlchemyConfig.Loaded.AllowFallPotion
+                )
+                {
+                    originalFallDamageMultiplier = entity.Properties.FallDamageMultiplier;
+                    entity.Properties.FallDamageMultiplier =
+                        1f - Math.Min(effect.Context.FallDamageReduction, 1f);
+                }
+
+                if (effect.Context.CanClimbAnywhere && AlchemyConfig.Loaded.AllowClimbPotion)
+                {
+                    originalCanClimbAnywhere = entity.Properties.CanClimbAnywhere;
+                    entity.Properties.CanClimbAnywhere = true;
                 }
 
                 long handle;
@@ -103,7 +112,8 @@ namespace Alchemy
                 entity.WatchedAttributes.SetLong(id, handle);
 
                 return true;
-            } catch (Exception err)
+            }
+            catch (Exception err)
             {
                 // Probably don't need a try catch but will leave this here just in case
                 api.Logger.Error("Potion of {0}, could not be applied. An error occured", id);
@@ -142,9 +152,21 @@ namespace Alchemy
             else
                 entity.World.UnregisterCallback(activeEffect.ListenerId);
 
-            if( activeEffect.Effect.Context.GlowStrength > 0 )
+            if (activeEffect.Effect.Context.GlowStrength > 0)
             {
                 entity.WatchedAttributes.RemoveAttribute("glowStrength");
+            }
+            if (activeEffect.Effect.Context.FallDamageReduction > 0)
+            {
+                entity.Properties.FallDamageMultiplier = originalFallDamageMultiplier;
+            }
+
+            if (
+                activeEffect.Effect.Context.CanClimbAnywhere
+                && AlchemyConfig.Loaded.AllowClimbPotion
+            )
+            {
+                entity.Properties.CanClimbAnywhere = originalCanClimbAnywhere;
             }
             activeEffect.Effect.Remove(entity);
 
@@ -160,7 +182,12 @@ namespace Alchemy
             }
 
             // Might be needed to remove potion listener ids from watched attributes
-            List<string> potionAttributes = [.. entity.WatchedAttributes.Keys.Where(key => key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase))];
+            List<string> potionAttributes =
+            [
+                .. entity.WatchedAttributes.Keys.Where(key =>
+                    key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase)
+                ),
+            ];
 
             foreach (string attr in potionAttributes)
             {
@@ -171,7 +198,7 @@ namespace Alchemy
 
     internal sealed record ActiveEffect(
         TempEffect Effect,
-        long ListenerId, 
+        long ListenerId,
         bool IsTicking,
         string PotionName
     )

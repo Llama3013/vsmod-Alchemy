@@ -523,7 +523,7 @@ namespace Alchemy.Block
                         contentTextPos = null;
                     }
                 }
-                return contentTextPos;
+                return contentTextPos ?? capi.BlockTextureAtlas.UnknownTexturePosition;
             }
         }
 

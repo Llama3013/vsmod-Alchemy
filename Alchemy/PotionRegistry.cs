@@ -54,7 +54,9 @@ namespace Alchemy
                 ["temporalpotionid"] = ApplyTemporalPotion,
                 ["reshapepotionid"] = ApplyReshapePotion,
                 ["growpotionid"] = ApplyGrowPotion,
-                ["shrinkpotionid"] = ApplyShrinkPotion
+                ["shrinkpotionid"] = ApplyShrinkPotion,
+                ["fallpotionid"] = ApplyFallPotion,
+                ["climbpotionid"] = ApplyClimbPotion,
             };
         }
 
@@ -198,6 +200,18 @@ namespace Alchemy
         private static void ApplyShrinkPotion(PotionContext ctx)
         {
             ctx.SizeChange = AlchemyConfig.Loaded.ShrinkPotionSizeChange;
+        }
+
+        private static void ApplyFallPotion(PotionContext ctx)
+        {
+            ctx.FallDamageReduction = AlchemyConfig.Loaded.FallPotionDamageReduction;
+            ctx.Duration = AlchemyConfig.Loaded.FallPotionDuration;
+        }
+
+        private static void ApplyClimbPotion(PotionContext ctx)
+        {
+            ctx.CanClimbAnywhere = true;
+            ctx.Duration = AlchemyConfig.Loaded.ClimbPotionDuration;
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Alchemy.Utility
     public static class PotionConsumableLogic
     {
         private static readonly Dictionary<long, long> coatHoldStartMs = [];
+        private static TagSet weaponMeleeTagSet;
+        private static bool weaponMeleeTagSetCached;
 
         public const float CoatHoldDurationSec = 1.5f;
         public const float DefaultConsumeTime = 1.5f;
@@ -45,6 +47,8 @@ namespace Alchemy.Utility
                 "reshapepotionid" => cfg.AllowCoatingReshape,
                 "growpotionid" => cfg.AllowCoatingGrow,
                 "shrinkpotionid" => cfg.AllowCoatingShrink,
+                "fallpotionid" => cfg.AllowCoatingFall,
+                "climbpotionid" => cfg.AllowCoatingClimb,
                 _ => false,
             };
         }
@@ -55,7 +59,7 @@ namespace Alchemy.Utility
             EntityAgent byEntity,
             string potionId,
             string strength,
-            string itemCodePath,
+            string itemCode,
             System.Func<ItemSlot, bool> consumeCoating,
             float consumeTime = CoatHoldDurationSec
         )
@@ -82,7 +86,7 @@ namespace Alchemy.Utility
                 potionId,
                 strength,
                 eligible,
-                itemCodePath,
+                itemCode,
                 consumeCoating,
                 consumeTime
             );
@@ -132,7 +136,7 @@ namespace Alchemy.Utility
             string potionId,
             string strength,
             bool eligible,
-            string itemCodePath,
+            string itemCode,
             System.Func<ItemSlot, bool> consumeCoating,
             float consumeTime
         )
@@ -189,7 +193,7 @@ namespace Alchemy.Utility
                 byEntity,
                 potionId,
                 AlchemyConfig.Loaded.WeaponCoatEffectMultiplier * strengthMul,
-                itemCodePath,
+                itemCode,
                 consumeCoating
             );
 
@@ -208,12 +212,15 @@ namespace Alchemy.Utility
 
         private static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
         {
-            api.CollectibleTagRegistry.TryCreateTagSet(
-                out TagSet tagSet,
-                new List<string> { "weapon-melee" }
-            );
-
-            return col.Tags.Overlaps(tagSet);
+            if (!weaponMeleeTagSetCached)
+            {
+                api.CollectibleTagRegistry.TryCreateTagSet(
+                    out weaponMeleeTagSet,
+                    new List<string> { "weapon-melee" }
+                );
+                weaponMeleeTagSetCached = true;
+            }
+            return col.Tags.Overlaps(weaponMeleeTagSet);
         }
 
         private static void ApplyCoating(
@@ -222,7 +229,7 @@ namespace Alchemy.Utility
             EntityAgent byEntity,
             string potionId,
             float coatMultiplier,
-            string itemCodePath,
+            string itemCode,
             System.Func<ItemSlot, bool> consumeCoating
         )
         {
@@ -262,7 +269,7 @@ namespace Alchemy.Utility
                     return;
             }
 
-            string displayName = Lang.Get($"alchemy:item-{itemCodePath}");
+            string displayName = Lang.Get(itemCode);
 
             int consumed = consumeCoating(coatSlot) ? 1 : 0;
 
@@ -282,7 +289,7 @@ namespace Alchemy.Utility
             {
                 ItemStack coatedArrow = mainHandSlot.TakeOut(1);
                 coatedArrow.Attributes.SetString("coatedPotionId", potionId);
-                coatedArrow.Attributes.SetString("coatedDisplayName", displayName);
+                coatedArrow.Attributes.SetString("coatedItemCode", itemCode);
                 coatedArrow.Attributes.SetFloat("coatMultiplier", coatMultiplier);
                 mainHandSlot.MarkDirty();
 
@@ -293,7 +300,7 @@ namespace Alchemy.Utility
             {
                 ITreeAttribute attrs = mainHandSlot.Itemstack.Attributes;
                 attrs.SetString("coatedPotionId", potionId);
-                attrs.SetString("coatedDisplayName", displayName);
+                attrs.SetString("coatedItemCode", itemCode);
                 attrs.SetFloat("coatMultiplier", coatMultiplier);
                 attrs.SetInt("coatCharges", attrs.GetInt("coatCharges") + 1);
                 mainHandSlot.MarkDirty();

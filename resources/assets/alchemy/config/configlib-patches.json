@@ -354,6 +354,17 @@
                     "min": 0.5,
                     "max": 20.0
                 }
+            },
+            "FALLPOTIONDAMAGEREDUCTION": {
+                "name": "FallPotionDamageReduction",
+                "ingui": "alchemy:FallPotionDamageReduction",
+                "weight": 45.1,
+                "comment": "alchemy:FallPotionDamageReduction-Comment",
+                "default": 0.75,
+                "range": {
+                    "min": 0.01,
+                    "max": 1.0
+                }
             }
         },
         "integer": {
@@ -587,6 +598,28 @@
                     "min": 10,
                     "max": 10000
                 }
+            },
+            "FALLPOTIONDURATION": {
+                "name": "FallPotionDuration",
+                "ingui": "alchemy:FallPotionDuration",
+                "weight": 45.2,
+                "comment": "alchemy:FallPotionDuration-Comment",
+                "default": 600,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
+            },
+            "CLIMBPOTIONDURATION": {
+                "name": "ClimbPotionDuration",
+                "ingui": "alchemy:ClimbPotionDuration",
+                "weight": 46.1,
+                "comment": "alchemy:ClimbPotionDuration-Comment",
+                "default": 300,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
             }
         },
         "string": {
@@ -766,6 +799,20 @@
                 "weight": 1.27,
                 "comment": "alchemy:AllowShrinkPotion-Comment",
                 "default": false
+            },
+            "ALLOWFALLPOTION": {
+                "name": "AllowFallPotion",
+                "ingui": "alchemy:AllowFallPotion",
+                "weight": 1.28,
+                "comment": "alchemy:AllowFallPotion-Comment",
+                "default": true
+            },
+            "ALLOWCLIMBPOTION": {
+                "name": "AllowClimbPotion",
+                "ingui": "alchemy:AllowClimbPotion",
+                "weight": 1.29,
+                "comment": "alchemy:AllowClimbPotion-Comment",
+                "default": true
             },
             "ALLOWSTRONGPOTIONS": {
                 "name": "AllowStrongPotions",
@@ -998,6 +1045,20 @@
                 "comment": "alchemy:AllowCoatingShrink-Comment",
                 "default": false
             },
+            "ALLOWCOATINGFALL": {
+                "name": "AllowCoatingFall",
+                "ingui": "alchemy:AllowCoatingFall",
+                "weight": 4.439,
+                "comment": "alchemy:AllowCoatingFall-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGCLIMB": {
+                "name": "AllowCoatingClimb",
+                "ingui": "alchemy:AllowCoatingClimb",
+                "weight": 4.440,
+                "comment": "alchemy:AllowCoatingClimb-Comment",
+                "default": false
+            },
             "ALLOWRESHAPEPOTIONRECIPE": {
                 "name": "AllowReshapePotionRecipe",
                 "ingui": "alchemy:AllowReshapePotionRecipe",
@@ -1017,6 +1078,20 @@
                 "ingui": "alchemy:AllowShrinkPotionRecipe",
                 "weight": 4.53,
                 "comment": "alchemy:AllowShrinkPotionRecipe-Comment",
+                "default": true
+            },
+            "ALLOWFALLPOTIONRECIPE": {
+                "name": "AllowFallPotionRecipe",
+                "ingui": "alchemy:AllowFallPotionRecipe",
+                "weight": 4.56,
+                "comment": "alchemy:AllowFallPotionRecipe-Comment",
+                "default": true
+            },
+            "ALLOWCLIMBPOTIONRECIPE": {
+                "name": "AllowClimbPotionRecipe",
+                "ingui": "alchemy:AllowClimbPotionRecipe",
+                "weight": 4.57,
+                "comment": "alchemy:AllowClimbPotionRecipe-Comment",
                 "default": true
             },
             "ALLOWTOXICMUSHROOMS": {
@@ -1155,6 +1230,16 @@
             "type": "separator",
             "title": "alchemy:GrowShrinkValues-Config",
             "weight": 44
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:FallValues-Config",
+            "weight": 45
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:ClimbValues-Config",
+            "weight": 46
         }
     ]
 }

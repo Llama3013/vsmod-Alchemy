@@ -30,15 +30,21 @@ namespace Alchemy.ModConfig
         public bool AllowReshapePotion;
         public bool AllowGrowPotion;
         public bool AllowShrinkPotion;
+        public bool AllowFallPotion;
+        public bool AllowClimbPotion;
+
         public bool AllowReshapePotionRecipe;
         public bool AllowGrowPotionRecipe;
         public bool AllowShrinkPotionRecipe;
+        public bool AllowFallPotionRecipe;
+        public bool AllowClimbPotionRecipe;
         public bool AllowToxicMushrooms;
         public bool AllowPsychedelicMushrooms;
 
         public bool AllowHerbballs;
         public bool AllowMediumPotions;
         public bool AllowStrongPotions;
+
         // public bool AllowCuttings;
 
         public bool AllowClayFlasks;
@@ -48,6 +54,7 @@ namespace Alchemy.ModConfig
 
         public bool AllowHerbRackMolds;
         public bool AllowHerbRacks;
+
         // public bool AllowDecorativeRacks;
 
         public bool AllowCoatingArcher;
@@ -72,6 +79,8 @@ namespace Alchemy.ModConfig
         public bool AllowCoatingReshape;
         public bool AllowCoatingGrow;
         public bool AllowCoatingShrink;
+        public bool AllowCoatingFall;
+        public bool AllowCoatingClimb;
 
         public float WeakPotionMultiplier;
         public float MediumPotionMultiplier;

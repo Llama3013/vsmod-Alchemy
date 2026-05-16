@@ -1,0 +1,12 @@
+{
+  "ingredientPattern": "V,F,T",
+  "ingredients": {
+    "V": { "type": "block", "code": "game:wildvine-section-*" },
+    "F": { "type": "block", "code": "game:spiderweb" },
+    "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 3,
+  "output": { "type": "item", "code": "alchemy:utilitypotionbase-climb" }
+}

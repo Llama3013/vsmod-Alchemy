@@ -18,11 +18,14 @@ namespace Alchemy
         public float RetainedNutrition { get; set; }
         public float TemporalStabilityGain { get; set; }
         public int GlowStrength { get; set; }
+
         // These are not inside the config as they would just render potions useless
         public bool Respawn { get; set; }
         public bool WaterBreathe { get; set; }
         public bool Reshape { get; set; }
         public float SizeChange { get; set; }
+        public float FallDamageReduction { get; set; }
+        public bool CanClimbAnywhere { get; set; }
 
         public void AddEffect(string key, float baseValue)
         {

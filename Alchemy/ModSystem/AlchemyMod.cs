@@ -221,6 +221,18 @@ namespace Alchemy.ModSystem
             );
             api.World.Config.SetBool("AllowCoatingGrow", AlchemyConfig.Loaded.AllowCoatingGrow);
             api.World.Config.SetBool("AllowCoatingShrink", AlchemyConfig.Loaded.AllowCoatingShrink);
+            api.World.Config.SetBool("AllowCoatingFall", AlchemyConfig.Loaded.AllowCoatingFall);
+            api.World.Config.SetBool("AllowFallPotion", AlchemyConfig.Loaded.AllowFallPotion);
+            api.World.Config.SetBool("AllowCoatingClimb", AlchemyConfig.Loaded.AllowCoatingClimb);
+            api.World.Config.SetBool("AllowClimbPotion", AlchemyConfig.Loaded.AllowClimbPotion);
+            api.World.Config.SetBool(
+                "AllowFallPotionRecipe",
+                AlchemyConfig.Loaded.AllowFallPotionRecipe
+            );
+            api.World.Config.SetBool(
+                "AllowClimbPotionRecipe",
+                AlchemyConfig.Loaded.AllowClimbPotionRecipe
+            );
 
             api.Logger.Debug("Loaded alchemy mod config into world properties.");
 
@@ -753,7 +765,49 @@ namespace Alchemy.ModSystem
                     Mod.Logger.Event(
                         $"Received AllowCoatingShrink of {packet.AllowCoatingShrink} from server"
                     );
+                    AlchemyConfig.Loaded.AllowCoatingFall = packet.AllowCoatingFall;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingFall of {packet.AllowCoatingFall} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowFallPotion = packet.AllowFallPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowFallPotion of {packet.AllowFallPotion} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingClimb = packet.AllowCoatingClimb;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingClimb of {packet.AllowCoatingClimb} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowClimbPotion = packet.AllowClimbPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowClimbPotion of {packet.AllowClimbPotion} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowFallPotionRecipe = packet.AllowFallPotionRecipe;
+                    Mod.Logger.Event(
+                        $"Received AllowFallPotionRecipe of {packet.AllowFallPotionRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowClimbPotionRecipe = packet.AllowClimbPotionRecipe;
+                    Mod.Logger.Event(
+                        $"Received AllowClimbPotionRecipe of {packet.AllowClimbPotionRecipe} from server"
+                    );
                 });
+            api.Event.PlayerEntitySpawn += iPlayer =>
+            {
+                if (iPlayer.Entity is not EntityPlayer player)
+                    return;
+                bool originalCanClimbAnywhere = player.Properties.CanClimbAnywhere;
+                if (player.WatchedAttributes.GetLong("climbpotionid") != 0)
+                    player.Properties.CanClimbAnywhere = true;
+                player.WatchedAttributes.RegisterModifiedListener(
+                    "climbpotionid",
+                    () =>
+                    {
+                        player.Properties.CanClimbAnywhere =
+                            player.WatchedAttributes.GetLong("climbpotionid") != 0
+                            || originalCanClimbAnywhere;
+                    }
+                );
+            };
+
             PotionRegistry.Init();
         }
 
@@ -775,6 +829,7 @@ namespace Alchemy.ModSystem
                         /* do nothing. idk why this handler is even needed, but it is */
                     }
                 );
+            PotionRegistry.Init();
             base.StartServerSide(api);
         }
 
@@ -902,10 +957,15 @@ namespace Alchemy.ModSystem
                     AllowCoatingReshape = AlchemyConfig.Loaded.AllowCoatingReshape,
                     AllowCoatingGrow = AlchemyConfig.Loaded.AllowCoatingGrow,
                     AllowCoatingShrink = AlchemyConfig.Loaded.AllowCoatingShrink,
+                    AllowCoatingFall = AlchemyConfig.Loaded.AllowCoatingFall,
+                    AllowFallPotion = AlchemyConfig.Loaded.AllowFallPotion,
+                    AllowCoatingClimb = AlchemyConfig.Loaded.AllowCoatingClimb,
+                    AllowClimbPotion = AlchemyConfig.Loaded.AllowClimbPotion,
+                    AllowFallPotionRecipe = AlchemyConfig.Loaded.AllowFallPotionRecipe,
+                    AllowClimbPotionRecipe = AlchemyConfig.Loaded.AllowClimbPotionRecipe,
                 },
                 player
             );
-            PotionRegistry.Init();
             OnPlayerReset(player);
         }
 

@@ -49,11 +49,23 @@
       "mat2": { "base": "game:block/plant/crop/turnip/bulb" },
       "mat3": { "base": "alchemy:item/potionbase/mugwort" },
       "mat4": { "base": "alchemy:item/potionbase/mugwort" }
+    },
+    "utilitypotionbase-fall": {
+      "mat1": { "base": "game:item/resource/feather" },
+      "mat2": { "base": "game:item/resource/feather" },
+      "mat3": { "base": "game:block/plant/flower/petal/ghostpipewhite1" },
+      "mat4": { "base": "game:block/plant/flower/petal/ghostpipewhite1" }
+    },
+    "utilitypotionbase-climb": {
+      "mat1": { "base": "game:block/plant/wildvine/wildvine_1" },
+      "mat2": { "base": "game:block/plant/wildvine/wildvine_1" },
+      "mat3": { "base": "game:block/plant/wildvine/wildvine_1" },
+      "mat4": { "base": "game:block/plant/wildvine/wildvine_1" }
     }
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [
-    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"] }
+    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb"] }
   ],
   "attributes": { "handbook": { "groupBy": ["utilitypotionbase-{basetype}"] } },
   "attributesByType": {
@@ -93,6 +105,16 @@
       }
     },
     "utilitypotionbase-shrink": {
+      "handbook": {
+
+      }
+    },
+    "utilitypotionbase-fall": {
+      "handbook": {
+
+      }
+    },
+    "utilitypotionbase-climb": {
       "handbook": {
 
       }

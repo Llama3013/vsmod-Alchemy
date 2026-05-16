@@ -26,7 +26,8 @@ namespace Alchemy.Behavior
             animation = properties["animation"].AsString("eat");
             sound = properties["sound"].AsString("alchemy:sounds/player/drink");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
-            consumeTime = properties["consumeTime"].AsFloat(PotionConsumableLogic.DefaultConsumeTime);
+            consumeTime = properties["consumeTime"]
+                .AsFloat(PotionConsumableLogic.DefaultConsumeTime);
         }
 
         private bool TryGetPotionData(ItemSlot slot, out PotionData data)
@@ -187,7 +188,13 @@ namespace Alchemy.Behavior
                 );
 
             handling = EnumHandling.PreventDefault;
-            return PotionConsumableLogic.HandleDrinkStep(secondsUsed, slot, byEntity, true, consumeTime);
+            return PotionConsumableLogic.HandleDrinkStep(
+                secondsUsed,
+                slot,
+                byEntity,
+                true,
+                consumeTime
+            );
         }
 
         public override void OnHeldInteractStop(
@@ -356,6 +363,10 @@ namespace Alchemy.Behavior
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-grow"));
                 if (ctx.SizeChange < 0)
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-shrink"));
+                if (ctx.FallDamageReduction > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-fall"));
+                if (ctx.CanClimbAnywhere)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-climb"));
             }
 
             if (ctx.Health is > 0.01f or < -0.01f)

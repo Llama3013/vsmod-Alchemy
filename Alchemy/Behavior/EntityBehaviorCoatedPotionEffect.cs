@@ -48,6 +48,7 @@ namespace Alchemy.Behavior
             if (durationAccum >= durationSec)
             {
                 done = true;
+                entity.World.RegisterCallback(_ => entity.RemoveBehavior(this), 1);
                 return;
             }
 

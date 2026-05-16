@@ -1,3 +1,4 @@
+using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Common;
 
@@ -13,7 +14,10 @@ namespace Alchemy.Patches
             {
                 return;
             }
-            int glowStrength = __instance.WatchedAttributes.GetInt("glowStrength", 31);
+            int glowStrength = __instance.WatchedAttributes.GetInt(
+                "glowStrength",
+                AlchemyConfig.Loaded.GlowPotionStrength
+            );
             __result = [0, 0, (byte)glowStrength];
         }
     }
