@@ -1,0 +1,82 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-bluepoppy-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-bluepoppy-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-redpoppy-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-redpoppy-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-pinkpoppy-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-pinkpoppy-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-yellowpoppy-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-yellowpoppy-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-pinklilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-catmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-pinklilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-catmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-purplelilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-catmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-purplelilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-catmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-whitecatmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-whitecatmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-pinkcatmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-pinkcatmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-persianbluecatmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-persianbluecatmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lilyofthevalley-*" },
+      "F": { "type": "block", "code": "game:flower-bluecatmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-bluecatmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  }
+]

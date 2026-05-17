@@ -213,6 +213,24 @@
       "flower": { "base": "game:block/plant/herb/petal/{flower}" }
     },
     "@.*-(basil|cilantro|lavender|marjoram|mint|saffron|sage|thyme)-cooked": { "normal7": { "base": "game:block/wood-generic" }, "flower": { "base": "game:block/plant/herb/petal/{flower}" } },
+    "*-pinklilyofthevalley-raw": { "flower": { "base": "game:block/plant/flower/petal/pinklilyofthevalley2" } },
+    "*-pinklilyofthevalley-dried": {
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/pinklilyofthevalley2" }
+    },
+    "*-pinklilyofthevalley-cooked": {
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/pinklilyofthevalley2" }
+    },
+    "*-purplelilyofthevalley-raw": { "flower": { "base": "game:block/plant/flower/petal/purplelilyofthevalley2" } },
+    "*-purplelilyofthevalley-dried": {
+      "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
+      "flower": { "base": "game:block/plant/flower/petal/purplelilyofthevalley2" }
+    },
+    "*-purplelilyofthevalley-cooked": {
+      "normal7": { "base": "game:block/wood-generic" },
+      "flower": { "base": "game:block/plant/flower/petal/purplelilyofthevalley2" }
+    },
     "*-dried": {
       "normal7": { "base": "game:block/soil/flooring/strawbedding1*" },
       "flower": { "base": "game:block/plant/potted/{flower}" }

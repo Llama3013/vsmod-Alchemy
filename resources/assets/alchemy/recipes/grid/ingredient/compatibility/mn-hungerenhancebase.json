@@ -1,0 +1,82 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "F": { "type": "block", "code": "game:flower-redbroom-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-redbroom-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "F": { "type": "block", "code": "game:flower-orangebroom-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangebroom-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "F": { "type": "block", "code": "game:flower-pinkbroom-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-pinkbroom-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "F": { "type": "block", "code": "game:flower-burgundybroom-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-burgundybroom-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  }
+]

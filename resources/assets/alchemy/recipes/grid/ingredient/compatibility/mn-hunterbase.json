@@ -1,0 +1,162 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-pinkcornflower-*" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-pinkcornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-burgundycornflower-*" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-burgundycornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-redcornflower-*" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-redcornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-whitecornflower-*" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-whitecornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "game:flower-redmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-redmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "game:flower-yellowmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-yellowmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "game:flower-bluemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-bluemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "game:flower-pinkmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-pinkmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  }
+]

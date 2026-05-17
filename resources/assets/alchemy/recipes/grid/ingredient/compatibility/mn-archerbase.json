@@ -1,0 +1,82 @@
+[
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "game:flower-redmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-redmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "game:flower-yellowmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-yellowmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "game:flower-bluemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-bluemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "game:flower-pinkmallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-pinkmallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true, "width": 1, "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  }
+]
