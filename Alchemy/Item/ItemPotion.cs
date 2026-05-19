@@ -18,10 +18,12 @@ namespace Alchemy.Item
         public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
         {
             base.OnHeldIdle(slot, byEntity);
-            if (byEntity.Controls.ShiftKey && byEntity.Controls.RightMouseDown)
-                foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                    if (bh is Behavior.PotionCoatSourceBehavior coat)
-                        coat.CoatingIdle(slot, byEntity);
+            foreach (CollectibleBehavior bh in CollectibleBehaviors)
+                if (bh is Behavior.PotionCoatSourceBehavior coat)
+                {
+                    coat.CoatingIdle(slot, byEntity);
+                    return;
+                }
         }
 
         public override void OnGroundIdle(EntityItem entityItem)

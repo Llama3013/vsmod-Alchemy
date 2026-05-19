@@ -147,6 +147,9 @@ namespace Alchemy.ModConfig
 
         public int WeaponCoatCharges { get; set; } = 5;
         public float WeaponCoatEffectMultiplier { get; set; } = 0.9f;
+        public float WeaponCoatApplyTime { get; set; } = 2f;
+        public float PotionDrinkTime { get; set; } = 1.5f;
+        public float PotionEatTime { get; set; } = 1.5f;
 
         public string CoatableWeaponTags { get; set; } = "weapon-melee";
         public string CoatableProjectilesCodes { get; set; } = "*arrow*";

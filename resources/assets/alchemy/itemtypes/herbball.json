@@ -1,6 +1,6 @@
 {
   "code": "herbball",
-	"storageFlags": 257,
+	"storageFlags": 273,
   "variantgroups": [
     {
       "code": "potiontype",
@@ -11,7 +11,7 @@
   "behaviors": [
     {
       "name": "PotionConsumable",
-      "properties": { "source": "item", "animation": "eat", "sound": "sounds/player/eat" }
+      "properties": { "source": "item", "animation": "eat", "sound": "eat" }
     },
     {
       "name": "PotionCoatSource",

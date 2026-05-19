@@ -1,5 +1,6 @@
 {
   "code": "potionbase",
+	"storageFlags": 17,
   "shape": { "base": "alchemy:item/potionbase" },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [

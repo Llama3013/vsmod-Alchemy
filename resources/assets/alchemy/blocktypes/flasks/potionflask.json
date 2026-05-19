@@ -1,7 +1,7 @@
 {
   "code": "potionflask",
   "class": "BlockPotionFlask",
-	"storageFlags": 257,
+	"storageFlags": 273,
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
     { "name": "RightClickPickup" },
@@ -20,11 +20,11 @@
     },
     {
       "name": "PotionConsumable",
-      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "alchemy:sounds/player/drink", "consumeTime": 2 }
+      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "drink" }
     },
     {
       "name": "PotionCoatSource",
-      "properties": { "source": "liquidcontent", "consumeTime": 2 }
+      "properties": { "source": "liquidcontent" }
     }
   ],
   "variantgroups": [

@@ -14,6 +14,8 @@ namespace Alchemy.Utility
     public static class PotionConsumableLogic
     {
         private static readonly Dictionary<long, long> coatHoldStartMs = [];
+        private static readonly HashSet<long> coatNotifiedEntities = [];
+        private static readonly HashSet<long> drinkNotifiedEntities = [];
         private static TagSet weaponMeleeTagSet;
         private static bool weaponMeleeTagSetCached;
 
@@ -146,6 +148,7 @@ namespace Alchemy.Utility
             if (!eligible)
             {
                 coatHoldStartMs.Remove(entityId);
+                coatNotifiedEntities.Remove(entityId);
                 return false;
             }
 
@@ -169,6 +172,15 @@ namespace Alchemy.Utility
 
             if (string.IsNullOrEmpty(potionId) || !IsCoatingAllowed(potionId))
             {
+                if (
+                    coatNotifiedEntities.Add(entityId)
+                    && byEntity is EntityPlayer { Player: IServerPlayer serverPlayer }
+                )
+                    serverPlayer.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:coating-not-allowed"),
+                        EnumChatType.Notification
+                    );
                 coatHoldStartMs.Remove(entityId);
                 return false;
             }
@@ -179,7 +191,12 @@ namespace Alchemy.Utility
                 return false;
             }
 
-            // I couldn't find a better way to handle the timing of the coating action while using OnHeldIdle and couldn't derive an action on the offhand for OnHeldInteract, so this is a bit jank but it works. Basically I check if the player has been holding the coating for long enough, and if so I apply the coating and consume the potion. If they stop holding before the time is up then nothing happens and they can try again.
+            // I couldn't find a better way to handle the timing of the coating action while
+            // using OnHeldIdle and couldn't derive an action on the offhand for
+            // OnHeldInteract, so this is a bit jank but it works. Basically I check if the
+            // player has been holding the coating for long enough, and if so I apply the coating
+            // and consume the potion. If they stop holding before the time is up then nothing
+            // happens and they can try again.
             if ((Environment.TickCount64 - startMs) / 1000f < consumeTime)
                 return false;
 
@@ -237,6 +254,7 @@ namespace Alchemy.Utility
                 return;
 
             bool isArrow = mainHandSlot.Itemstack.Collectible.Code.Path.Contains("arrow");
+            IServerPlayer serverPlayer = playerEntity.Player as IServerPlayer;
 
             if (
                 isArrow
@@ -244,14 +262,14 @@ namespace Alchemy.Utility
                     mainHandSlot.Itemstack.Attributes.GetString("coatedPotionId")
                 )
             )
+            {
+                serverPlayer?.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get("alchemy:arrow-already-coated"),
+                    EnumChatType.Notification
+                );
                 return;
-
-            if (
-                !isArrow
-                && mainHandSlot.Itemstack.Attributes.GetInt("coatCharges")
-                    >= AlchemyConfig.Loaded.WeaponCoatCharges
-            )
-                return;
+            }
 
             if (!isArrow)
             {
@@ -266,7 +284,28 @@ namespace Alchemy.Utility
                         ) > 0.001f
                     )
                 )
+                {
+                    serverPlayer?.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:coating-conflict"),
+                        EnumChatType.Notification
+                    );
                     return;
+                }
+            }
+
+            if (
+                !isArrow
+                && mainHandSlot.Itemstack.Attributes.GetInt("coatCharges")
+                    >= AlchemyConfig.Loaded.WeaponCoatCharges
+            )
+            {
+                serverPlayer?.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get("alchemy:coating-max-charges"),
+                    EnumChatType.Notification
+                );
+                return;
             }
 
             string displayName = Lang.Get(itemCode);
@@ -308,51 +347,72 @@ namespace Alchemy.Utility
 
             playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
 
-            if (playerEntity.Player is IServerPlayer serverPlayer)
-            {
-                string msg = isArrow
-                    ? Lang.Get("alchemy:arrow-coated", displayName)
-                    : Lang.Get(
-                        "alchemy:weapon-coated",
-                        displayName,
-                        mainHandSlot.Itemstack?.Attributes.GetInt("coatCharges") ?? 0
-                    );
-                serverPlayer.SendMessage(
-                    GlobalConstants.InfoLogChatGroup,
-                    msg,
-                    EnumChatType.Notification
+            string msg = isArrow
+                ? Lang.Get("alchemy:arrow-coated", displayName)
+                : Lang.Get(
+                    "alchemy:weapon-coated",
+                    displayName,
+                    mainHandSlot.Itemstack?.Attributes.GetInt("coatCharges") ?? 0
                 );
-            }
+            serverPlayer.SendMessage(
+                GlobalConstants.InfoLogChatGroup,
+                msg,
+                EnumChatType.Notification
+            );
         }
 
         public static bool HandleDrinkStart(
             EntityAgent byEntity,
             string potionId,
             string animation,
-            Action playSound,
-            ref EnumHandHandling handling
+            string sound,
+            ref EnumHandHandling handling,
+            float consumeTime = DefaultConsumeTime
         )
         {
-            if (
-                string.IsNullOrWhiteSpace(potionId)
-                || byEntity.WatchedAttributes.GetLong(potionId) != 0
-            )
-            {
+            if (string.IsNullOrWhiteSpace(potionId))
                 return false;
-            }
+
+            drinkNotifiedEntities.Remove(byEntity.EntityId);
 
             byEntity.World.RegisterCallback(
                 dt =>
                 {
                     if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
                     {
-                        playSound?.Invoke();
+                        byEntity.PlayEntitySound(sound, (byEntity as EntityPlayer)?.Player);
                     }
                 },
                 200
             );
 
+            // This is used to adapt animations to drink/eat time. I'm unsure if its necessary so for now I will leave it commented
+            // var animsByCode = byEntity.Properties?.Client?.AnimationsByMetaCode;
+            // if (
+            //     byEntity.AnimManager != null
+            //     && animsByCode != null
+            //     && animsByCode.TryGetValue(animation, out AnimationMetaData animdata)
+            // )
+            // {
+            //     float speed = 1.0f / consumeTime;
+            //     AnimationMetaData scaled = animdata.Clone();
+            //     scaled.AnimationSpeed = speed;
+            //     byEntity.AnimManager.ResetAnimation(animation);
+            //     byEntity.AnimManager.StartAnimation(scaled);
+
+            //     // The TP dispatch above starts the FP variant from AnimationsByMetaCode at its
+            //     // original speed. Override it with a scaled clone so FP and TP stay in sync.
+            //     if (animsByCode.TryGetValue(animation + "-fp", out AnimationMetaData fpAnimdata))
+            //     {
+            //         AnimationMetaData scaledFp = fpAnimdata.Clone();
+            //         scaledFp.AnimationSpeed = speed;
+            //         byEntity.AnimManager.StartAnimation(scaledFp);
+            //     }
+            // }
+            // else
+            // {
             byEntity.AnimManager?.StartAnimation(animation);
+            // }
 
             handling = EnumHandHandling.PreventDefault;
 
@@ -400,10 +460,30 @@ namespace Alchemy.Utility
 
             if (!TryProcessPotionEffects(byEntity, data, api))
             {
+                if (
+                    byEntity.World.Side == EnumAppSide.Server
+                    && byEntity is EntityPlayer entityPlayer
+                    && entityPlayer
+                        .GetBehavior<EntityBehaviorPotionEffect>()
+                        ?.Manager.IsActive(data.PotionId) == true
+                    && drinkNotifiedEntities.Add(byEntity.EntityId)
+                    && entityPlayer.Player is IServerPlayer serverPlayer
+                )
+                {
+                    serverPlayer.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:potion-already-active"),
+                        EnumChatType.Notification
+                    );
+                    byEntity.PlayEntitySound("smallhurt", (byEntity as EntityPlayer)?.Player);
+                }
                 return false;
             }
 
-            return consumeAction();
+            bool consumed = consumeAction();
+            if (consumed)
+                drinkNotifiedEntities.Add(byEntity.EntityId);
+            return consumed;
         }
 
         public static bool TryProcessPotionEffects(

@@ -1,3 +1,4 @@
+using Alchemy.ModConfig;
 using Alchemy.Utility;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
@@ -17,7 +18,7 @@ namespace Alchemy.Behavior
             source = properties["source"].AsString("item");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
             consumeTime = properties["consumeTime"]
-                .AsFloat(PotionConsumableLogic.CoatHoldDurationSec);
+                .AsFloat(AlchemyConfig.Loaded.WeaponCoatApplyTime);
         }
 
         private static string GetLangKey(CollectibleObject col)

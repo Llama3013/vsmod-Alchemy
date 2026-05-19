@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Alchemy.ModConfig;
 using Alchemy.Systems;
 using Alchemy.Utility;
 using Vintagestory.API.Common;
@@ -26,8 +27,11 @@ namespace Alchemy.Behavior
             animation = properties["animation"].AsString("eat");
             sound = properties["sound"].AsString("alchemy:sounds/player/drink");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
-            consumeTime = properties["consumeTime"]
-                .AsFloat(PotionConsumableLogic.DefaultConsumeTime);
+            float defaultConsumeTime =
+                source == "liquidcontent"
+                    ? AlchemyConfig.Loaded.PotionDrinkTime
+                    : AlchemyConfig.Loaded.PotionEatTime;
+            consumeTime = properties["consumeTime"].AsFloat(defaultConsumeTime);
         }
 
         private bool TryGetPotionData(ItemSlot slot, out PotionData data)
@@ -143,8 +147,8 @@ namespace Alchemy.Behavior
                 && WildcardUtil.Match("boat-sailed-*", boatPath)
             )
             {
-                if (byEntity is EntityPlayer { Player: IServerPlayer sp })
-                    sp.SendMessage(
+                if (byEntity is EntityPlayer { Player: IServerPlayer serverPlayer })
+                    serverPlayer.SendMessage(
                         GlobalConstants.InfoLogChatGroup,
                         Lang.Get("alchemy:boat-block"),
                         EnumChatType.Notification
@@ -159,8 +163,9 @@ namespace Alchemy.Behavior
                     byEntity,
                     data.PotionId,
                     animation,
-                    () => PlayDrinkSound(byEntity),
-                    ref handling
+                    sound,
+                    ref handling,
+                    consumeTime
                 )
             )
                 return;
@@ -177,7 +182,7 @@ namespace Alchemy.Behavior
             ref EnumHandling handling
         )
         {
-            if (!CanConsume(slot, byEntity))
+            if (!TryGetPotionData(slot, out _))
                 return base.OnHeldInteractStep(
                     secondsUsed,
                     slot,
@@ -209,9 +214,6 @@ namespace Alchemy.Behavior
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
 
-            if (byEntity.WatchedAttributes.GetLong(data.PotionId) != 0)
-                return;
-
             handling = EnumHandling.PreventDefault;
             PotionConsumableLogic.HandleDrinkStop(
                 secondsUsed,
@@ -224,13 +226,13 @@ namespace Alchemy.Behavior
         }
 
         public override void GetHeldItemInfo(
-            ItemSlot inSlot,
+            ItemSlot slot,
             StringBuilder dsc,
             IWorldAccessor world,
             bool withDebugInfo
         )
         {
-            if (!TryGetPotionData(inSlot, out PotionData data))
+            if (!TryGetPotionData(slot, out PotionData data))
                 return;
 
             float strengthMul = PotionConsumableLogic.GetStrengthMultiplier(data.Strength);
@@ -375,18 +377,6 @@ namespace Alchemy.Behavior
                 dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", ctx.TickSec));
             if (ctx.Duration != 0)
                 dsc.AppendLine(Lang.Get("alchemy:potion-duration", ctx.Duration));
-        }
-
-        private void PlayDrinkSound(EntityAgent byEntity)
-        {
-            byEntity.World.PlaySoundAt(
-                new AssetLocation(sound),
-                byEntity,
-                (byEntity as EntityPlayer)?.Player,
-                true,
-                16,
-                1f
-            );
         }
     }
 }

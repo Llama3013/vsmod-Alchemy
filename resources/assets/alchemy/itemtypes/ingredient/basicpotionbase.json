@@ -1,5 +1,6 @@
 {
   "code": "potionbase-basic",
+	"storageFlags": 17,
   "shape": { "base": "alchemy:item/potionbase" },
   "textures": {
     "mat1": { "base": "game:block/plant/mushroom/flyagariccap" },

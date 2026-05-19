@@ -17,11 +17,13 @@ namespace Alchemy
         private float originalFallDamageMultiplier = 1f;
         private bool originalCanClimbAnywhere;
 
+        public bool IsActive(string id) => active.ContainsKey(id);
+
         public bool TryApplyPotion(string id, PotionContext ctx, string name)
         {
             try
             {
-                if (active.ContainsKey(id))
+                if (IsActive(id) || entity.WatchedAttributes.GetLong(id) != 0)
                 {
                     api.Logger.Debug(
                         "Cannot apply potion for potionId {0}, it is currently already applied!",
@@ -116,7 +118,7 @@ namespace Alchemy
             catch (Exception err)
             {
                 // Probably don't need a try catch but will leave this here just in case
-                api.Logger.Error("Potion of {0}, could not be applied. An error occured", id);
+                api.Logger.Error("Potion of {0}, could not be applied. An error occurred", id);
                 api.Logger.Error(err);
                 return false;
             }

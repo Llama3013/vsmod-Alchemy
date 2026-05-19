@@ -1,5 +1,6 @@
 {
   "code": "utilitypotionbase",
+	"storageFlags": 17,
   "shape": { "base": "alchemy:item/potionbase" },
   "texturesByType": {
     "utilitypotionbase-glow": {
