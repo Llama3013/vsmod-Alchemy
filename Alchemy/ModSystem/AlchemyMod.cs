@@ -58,6 +58,10 @@ namespace Alchemy.ModSystem
                 "PotionCoatSource",
                 typeof(PotionCoatSourceBehavior)
             );
+            api.RegisterBlockClass(
+                "BlockPotionBrewingCauldron",
+                typeof(Block.BlockPotionBrewingCauldron)
+            );
         }
 
         public override void StartPre(ICoreAPI api)

@@ -1,0 +1,62 @@
+{
+  "code": "potionbrewingcauldron",
+  "class": "BlockPotionBrewingCauldron",
+  "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "SingleCenter" } }, { "name": "Unplaceable" }, { "name": "RightClickPickup" }],
+  "heldTpIdleAnimation": "holdbothhandslarge",
+  "heldTpUseAnimation": "twohandplaceblock",
+  "variantgroups": [{ "code": "metal", "states": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"] }],
+  "shape": { "base": "alchemy:block/cauldron" },
+  "textures": {
+    "transparent": { "base": "game:block/transparent" },
+    "metal": { "base": "game:block/metal/sheet/{metal}1" }
+  },
+  "attributes": {
+    "tempGlowMode": 1,
+    "shelvable": true,
+    "mealContainer": true,
+    "storageType": 1,
+    "maxTemperature": 200,
+    "isDirtyPot": true,
+    "dirtiedBlockCode": "alchemy:potionbrewingcauldron-{metal}",
+    "cookingContainerSlots": 4,
+    "maxContainerSlotStackSize": 4000,
+    "cookingSlotCapacityLitres": 50,
+    "maxServingSize": 50,
+    "inFirePitProps": {
+      "transform": {
+        "translation": { "x": 0, "y": 0.2, "z": 0 }
+      },
+      "useFirepitModel": "Wide"
+    }
+  },
+  "doNotRenderAtLod2": true,
+  "blockmaterial": "Metal",
+  "creativeinventory": { "general": ["*"], "alchemy": ["*"] },
+  "maxStackSize": 1,
+  "resistance": 6,
+  "lightAbsorption": 0,
+	"sounds": {
+		"place": "game:block/metaldoor-place",
+		"hit": "game:block/metaldoor-place",
+		"break": "game:block/metaldoor-place",
+		"walk": "game:walk/stone*"
+	},
+  "sideopaque": { "all": false },
+  "sidesolid": { "all": false },
+  "collisionbox": { "x1": 0.1, "y1": 0, "z1": 0.1, "x2": 0.9, "y2": 0.9, "z2": 0.9 },
+  "selectionbox": { "x1": 0.1, "y1": 0, "z1": 0.1, "x2": 0.9, "y2": 0.9, "z2": 0.9 },
+  "guiTransform": {
+    "rotation": { "x": -19, "y": -17, "z": 0 },
+    "origin": { "x": 0.35, "y": 0.7, "z": 0 },
+    "scale": 1.5
+  },
+  "groundTransform": {
+    "scale": 3
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.3, "y": 0, "z": -0.5 },
+    "rotation": { "x": -72, "y": 0, "z": -104 },
+    "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+    "scale": 0.76
+  }
+}

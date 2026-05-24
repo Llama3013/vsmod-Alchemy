@@ -1,6 +1,6 @@
 [
   // Use these patch to remove certain potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
-  
+
   //Vitality
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
@@ -30,18 +30,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/13",
+    "path": "/13",
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/13",
+    "path": "/13",
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -129,18 +129,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/12",
+    "path": "/12",
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/12",
+    "path": "/12",
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -228,18 +228,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/11",
+    "path": "/11",
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/11",
+    "path": "/11",
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -327,18 +327,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/10",
+    "path": "/10",
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/10",
+    "path": "/10",
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -426,18 +426,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/9",
+    "path": "/9",
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/9",
+    "path": "/9",
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -545,18 +545,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/8",
+    "path": "/8",
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/8",
+    "path": "/8",
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -644,18 +644,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/7",
+    "path": "/7",
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/7",
+    "path": "/7",
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -743,18 +743,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/6",
+    "path": "/6",
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/6",
+    "path": "/6",
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -842,18 +842,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/5",
+    "path": "/5",
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/5",
+    "path": "/5",
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -961,18 +961,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/4",
+    "path": "/4",
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/4",
+    "path": "/4",
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1060,18 +1060,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/3",
+    "path": "/3",
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/3",
+    "path": "/3",
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1159,18 +1159,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/2",
+    "path": "/2",
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/2",
+    "path": "/2",
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -1258,18 +1258,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/1",
+    "path": "/1",
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/1",
+    "path": "/1",
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -1357,18 +1357,18 @@
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-medium.json",
     "op": "remove",
-    "path": "/0/ingredients/0/allowedVariants/0",
+    "path": "/0",
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
     }
   },
   {
-    "file": "alchemy:recipes/barrel/potionportion.json",
+    "file": "alchemy:recipes/cooking/potionportion-strong.json",
     "op": "remove",
-    "path": "/1/ingredients/0/allowedVariants/0",
+    "path": "/0",
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"

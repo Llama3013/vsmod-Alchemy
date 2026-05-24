@@ -910,6 +910,20 @@
                 "comment": "alchemy:AllowHerbRacks-Comment",
                 "default": true
             },
+            "ALLOWPOTIONBREWINGCAULDRON": {
+                "name": "AllowPotionBrewingCauldron",
+                "ingui": "alchemy:AllowPotionBrewingCauldron",
+                "weight": 4.25,
+                "comment": "alchemy:AllowPotionBrewingCauldron-Comment",
+                "default": true
+            },
+            // "ALLOWPOTIONBREWINGCAULDRONMOLD": {
+            //     "name": "AllowPotionBrewingCauldronMold",
+            //     "ingui": "alchemy:AllowPotionBrewingCauldronMold",
+            //     "weight": 4.26,
+            //     "comment": "alchemy:AllowPotionBrewingCauldronMold-Comment",
+            //     "default": true
+            // },
             "ALLOWVANILLACONTAINERDRINKING": {
                 "name": "AllowVanillaContainerDrinking",
                 "ingui": "alchemy:AllowVanillaContainerDrinking",

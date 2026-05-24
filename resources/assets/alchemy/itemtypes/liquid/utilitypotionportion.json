@@ -10,7 +10,7 @@
       "potioninfo": { "potionId": "recallpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/temporalgear" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -21,7 +21,7 @@
       "potioninfo": { "potionId": "nutritionpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/hay/aged-side" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -32,7 +32,7 @@
       "potioninfo": { "potionId": "glowpotionid", "duration": 1000 },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/fire-yellow" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -43,7 +43,7 @@
       "potioninfo": { "potionId": "waterbreathepotionid", "duration": 1000 },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/fire-blue" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -54,7 +54,7 @@
       "potioninfo": { "potionId": "temporalpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/ungraded/sulfur" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -65,7 +65,7 @@
       "potioninfo": { "potionId": "reshapepotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/rot/rot-solids" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -76,7 +76,7 @@
       "potioninfo": { "potionId": "growpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/soil/flooring/drypackeddirt1a" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -87,7 +87,7 @@
       "potioninfo": { "potionId": "shrinkpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/soil/rammed/light/plain1" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -98,7 +98,7 @@
       "potioninfo": { "potionId": "fallpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/liquid/frost" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -109,7 +109,7 @@
       "potioninfo": { "potionId": "climbpotionid" },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/creature/webbing" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }

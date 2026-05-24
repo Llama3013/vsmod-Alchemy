@@ -7,7 +7,7 @@
   "attributes": {
     "waterTightContainerProps": {
       "containable": true,
-      "itemsPerLitre": 4,
+      "itemsPerLitre": 100,
       "texture": { "base": "game:block/plant/moss" },
       "allowSpill": true,
       "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "potionteaportion" } }

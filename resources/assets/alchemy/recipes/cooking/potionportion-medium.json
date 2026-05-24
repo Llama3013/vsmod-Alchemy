@@ -1,0 +1,142 @@
+[
+  {
+    "code": "potionportion-archer-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-archer-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-archer-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-archer-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-healingeffect-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-healingeffect-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-healingeffect-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-healingeffect-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-hungerenhance-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-hungerenhance-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-hungerenhance-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-hungersupress-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-hungersupress-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-hungersupress-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-hunter-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-hunter-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-hunter-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-hunter-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-looter-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-looter-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-looter-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-looter-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-melee-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-melee-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-melee-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-melee-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-mining-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-mining-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-mining-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-mining-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-poison-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-poison-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-poison-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-poison-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-predator-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-predator-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-predator-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-predator-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-regen-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-regen-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-regen-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-regen-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-scentmask-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-scentmask-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-scentmask-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-scentmask-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-speed-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-speed-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-speed-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-speed-medium", "quantity": 100 }
+  },
+  {
+    "code": "potionportion-vitality-medium",
+    "perishableProps": { "type": "None", "freshHours": { "avg": 48 }, "transitionHours": { "avg": 48 }, "transitionRatio": 1, "transitionedStack": { "type": "item", "code": "alchemy:potionportion-vitality-medium" } },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "potionbase", "validStacks": [{ "type": "item", "code": "alchemy:potionbase-vitality-weak" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:potionportion-vitality-medium", "quantity": 100 }
+  }
+]

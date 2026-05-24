@@ -50,6 +50,9 @@ namespace Alchemy.ModConfig
         public bool AllowHerbRackMolds { get; set; } = true;
         public bool AllowHerbRacks { get; set; } = true;
 
+        public bool AllowPotionBrewingCauldron { get; set; } = true;
+        // public bool AllowPotionBrewingCauldronMold { get; set; } = true;
+
         // public bool AllowDecorativeRacks { get; set; } = true;
 
         public bool AllowWeaponCoating { get; set; } = true;

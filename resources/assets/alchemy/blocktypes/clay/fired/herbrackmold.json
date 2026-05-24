@@ -7,7 +7,14 @@
   "variantgroups": [
     { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
     { "code": "materialtype", "states": ["fired"] },
-    { "code": "tooltype", "states": ["herbracktop", "herbrackhook"] }
+    {
+      "code": "tooltype",
+      "states": [
+        "herbracktop",
+        "herbrackhook"
+        //  "potionbrewingcauldron"
+      ]
+    }
   ],
   "shape": { "base": "alchemy:block/clay/mold/{tooltype}", "rotateY": 90 },
   "textures": { "floor": { "base": "game:block/clay/hardened/{color}" }, "ceramic": { "base": "game:block/clay/hardened/{color}" } },
@@ -18,7 +25,8 @@
       "groupBy": ["herbrackmold-*-{materialtype}-{tooltype}"]
     },
     "tongOpeningByType": {
-      "toolmold-*-fired-herbracktop": "medium"
+      "herbrackmold-*-fired-herbracktop": "medium",
+      "herbrackmold-*-fired-potionbrewingcauldron": "large"
     },
     "onTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.75 },
     "onMetalTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.75 }
@@ -37,6 +45,14 @@
       "moldrackable": true,
       "onmoldrackTransform": { "rotation": { "z": 90 } },
       "drop": { "type": "item", "code": "herbrackhook-{metal}", "quantity": 8 }
+    },
+    "herbrackmold-*-fired-potionbrewingcauldron": {
+      "requiredUnits": 400,
+      "fillHeight": 14,
+      "moldrackable": false,
+      "allowedMetals": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"],
+      "fillQuadsByLevel": [{ "x1": 2, "z1": 2, "x2": 14, "z2": 14 }],
+      "drop": { "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}", "quantity": 1 }
     }
   },
   "blockmaterial": "Ceramic",
@@ -48,10 +64,12 @@
   "sounds": { "walk": "game:walk/stone" },
   "collisionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*-potionbrewingcauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "selectionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*-potionbrewingcauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "sideopaque": { "all": false },

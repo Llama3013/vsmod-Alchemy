@@ -528,7 +528,12 @@ namespace Alchemy.Utility
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
-                Lang.Get("alchemy:effect-gain", data.DisplayName),
+                Lang.Get(
+                    data.PotionId == "reshapepotionid"
+                        ? "alchemy:reshape-gain"
+                        : "alchemy:effect-gain",
+                    data.DisplayName
+                ),
                 EnumChatType.Notification
             );
 

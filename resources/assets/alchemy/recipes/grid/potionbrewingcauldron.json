@@ -1,0 +1,20 @@
+[
+  {
+    "ingredientPattern": "P_P,_P_",
+    "width": 3,
+    "height": 2,
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:metalplate-*",
+        "name": "metal",
+        "allowedVariants": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"]
+      }
+    },
+    "output": {
+      "type": "block",
+      "code": "alchemy:potionbrewingcauldron-{metal}",
+      "quantity": 1
+    }
+  }
+]
