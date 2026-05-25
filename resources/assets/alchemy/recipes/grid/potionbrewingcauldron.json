@@ -1,6 +1,6 @@
 [
   {
-    "ingredientPattern": "P_P,_P_",
+    "ingredientPattern": "PHP,_P_",
     "width": 3,
     "height": 2,
     "ingredients": {
@@ -9,7 +9,8 @@
         "code": "game:metalplate-*",
         "name": "metal",
         "allowedVariants": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"]
-      }
+      },
+      "H": { "type": "item", "tags": ["tool-hammer"], "isTool": true, "toolDurabilityCost": 3 }
     },
     "output": {
       "type": "block",

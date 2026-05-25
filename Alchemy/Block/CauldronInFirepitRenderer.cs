@@ -43,10 +43,11 @@ namespace Alchemy.Block
             12f / 16f,
         ];
         private const float FirepitYOffset = 1.25f / 16f;
-        private const float BubbleMinTemperature = 50f;
+        private const float BubbleMinTemperature = 100f;
+        private const float BubbleMaxTemperature = 200f;
+        private const float BubbleMaxQuantity = 4f;
         private readonly AirBubbleParticles bubbleParticles = new()
         {
-            quantity = 3f,
             Range = 0.2f,
             horVelocityMul = 0.3f,
             LifeLength = 0.8f,
@@ -93,7 +94,8 @@ namespace Alchemy.Block
                 )
                 {
                     liquidStack ??= slot.Itemstack;
-                    WaterTightContainableProps slotProps = BlockLiquidContainerBase.GetContainableProps(slot.Itemstack);
+                    WaterTightContainableProps slotProps =
+                        BlockLiquidContainerBase.GetContainableProps(slot.Itemstack);
                     if (slotProps != null && slotProps.ItemsPerLitre > 0)
                         totalLitres += slot.Itemstack.StackSize / slotProps.ItemsPerLitre;
                 }
@@ -106,7 +108,9 @@ namespace Alchemy.Block
             // and then fall back to the item's own baked texture in the item atlas.
             // If that also somehow doesn't work, I just use the UnknownTexture, which is better than crashing
             usingItemAtlas = false;
-            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(liquidStack);
+            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(
+                liquidStack
+            );
             if (props?.Texture?.Baked != null)
             {
                 liquidTexPos = capi.BlockTextureAtlas.Positions[props.Texture.Baked.TextureSubId];
@@ -218,8 +222,15 @@ namespace Alchemy.Block
             float soundIntensity = GameMath.Clamp((temp - 50) / 50, 0, 1);
             SetCookingSoundVolume(soundIntensity);
 
-            if (temperature >= BubbleMinTemperature)
+            float bubbleIntensity = GameMath.Clamp(
+                (temperature - BubbleMinTemperature)
+                    / (BubbleMaxTemperature - BubbleMinTemperature),
+                0f,
+                1f
+            );
+            if (bubbleIntensity > 0f)
             {
+                bubbleParticles.quantity = bubbleIntensity * BubbleMaxQuantity;
                 bubbleParticles.BasePos.Set(
                     pos.X + 0.5,
                     pos.Y + FirepitYOffset + LevelSurfaceY[currentLevel],
