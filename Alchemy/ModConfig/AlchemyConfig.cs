@@ -143,8 +143,8 @@ namespace Alchemy.ModConfig
         public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
         public int GlowPotionStrength { get; set; } = 15;
 
-        public float GrowPotionSizeChange { get; set; } = 1.0f;
-        public float ShrinkPotionSizeChange { get; set; } = -1.0f;
+        public float GrowPotionSizeChange { get; set; } = 0.5f;
+        public float ShrinkPotionSizeChange { get; set; } = -0.5f;
         public float GrowShrinkMinHeight { get; set; } = 0.5f;
         public float GrowShrinkMaxHeight { get; set; } = 3.0f;
 
