@@ -5,6 +5,12 @@
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },
+  "behaviors": [
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "item" }
+    }
+  ],
   "attributesByType": {
     "*-recall": {
       "potioninfo": { "potionId": "recallpotionid" },

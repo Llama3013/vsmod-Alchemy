@@ -1,5 +1,6 @@
 {
   "code": "claypotionflask",
+  "storageFlags": 273,
   "classByType": {
     "*-fired": "BlockPotionFlask"
   },
@@ -13,7 +14,19 @@
     },
     { "name": "Unplaceable" },
     { "name": "RightClickPickup" },
-    { "name": "SneakPlacing" }
+    {
+      "name": "UnstableFalling",
+      "properties": { "attachmentArea": { "x1": 5, "y1": 0, "z1": 5, "x2": 10, "y2": 0, "z2": 10 } }
+    },
+    { "name": "SneakPlacing" },
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "drink" }
+    },
+    {
+      "name": "PotionCoatSource",
+      "properties": { "source": "liquidcontent" }
+    }
   ],
   "variantgroups": [
     { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
@@ -50,6 +63,7 @@
       "scale": 0.6
     }
   },
+  "materialDensity": 200,
   "doNotRenderAtLod2": true,
   "creativeinventory": { "general": ["*-blue-fired"], "decorative": ["*"], "alchemy": ["*"] },
   "blockmaterial": "Ceramic",
@@ -59,7 +73,10 @@
   "lightAbsorption": 1,
   "maxStackSize": 16,
 	"sounds": {
-		"walk": "walk/stone"
+		"walk": "walk/stone",
+		"place": "block/ceramicplace",
+		"break": "block/ceramicbreak",
+		"hit": "block/ceramichit"
 	},
   "sidesolid": { "all": false },
   "sideopaque": { "all": false },

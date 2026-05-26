@@ -1,8 +1,8 @@
 {
   "ingredientPattern": "V,F,T",
   "ingredients": {
-    "V": { "type": "item", "code": "game:feather" },
-    "F": { "type": "block", "code": "game:flower-ghostpipewhite-*" },
+    "V": { "type": "item", "code": "game:feather", "quantity": 4 },
+    "F": { "type": "block", "code": "game:flower-redtopgrass-*" },
     "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
   },
   "shapeless": true,

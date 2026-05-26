@@ -24,6 +24,12 @@
     { "code": "strength", "states": ["medium", "strong"] }
   ],
   "class": "ItemPotion",
+  "behaviors": [
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "item" }
+    }
+  ],
   "matterState": "liquid",
   "attributesByType": {
     "*-archer-*": {

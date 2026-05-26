@@ -15,18 +15,10 @@
         "lupine-orange",
         "lupine-purple",
         "lupine-red",
-        "lupine-white",
-        "basil",
-        "chamomile",
-        "cilantro",
-        "lavender",
-        "marjoram",
-        "mint",
-        "saffron",
-        "sage",
-        "thyme"
+        "lupine-white"
       ],
-      "loadFromProperties": "block/flower"
+      "loadFromProperties": "block/flower",
+      "skipVariants": ["ghostpipewhite", "ghostpipepink", "ghostpipered"]
     },
     { "code": "stage", "states": ["raw", "dried", "cooked"] }
   ],
