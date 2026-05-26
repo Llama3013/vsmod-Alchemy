@@ -49,7 +49,7 @@ namespace Alchemy.Block
             }
         }
 
-        // I need these two functions overriden otherwise breaking a cauldron will crash the game
+        // I need these two functions overridden otherwise breaking a cauldron will crash the game
         public override int GetRandomColor(
             ICoreClientAPI capi,
             BlockPos pos,
@@ -57,15 +57,17 @@ namespace Alchemy.Block
             int rndIndex = -1
         )
         {
+            string texKey = Attributes?["randomColorTexture"].AsString("metal") ?? "metal";
             return capi.BlockTextureAtlas.GetRandomColor(
-                Textures["metal"].Baked.TextureSubId,
+                Textures[texKey].Baked.TextureSubId,
                 rndIndex
             );
         }
 
         public override int GetRandomColor(ICoreClientAPI capi, ItemStack stack)
         {
-            return capi.BlockTextureAtlas.GetRandomColor(Textures["metal"].Baked.TextureSubId);
+            string texKey = Attributes?["randomColorTexture"].AsString("metal") ?? "metal";
+            return capi.BlockTextureAtlas.GetRandomColor(Textures[texKey].Baked.TextureSubId);
         }
     }
 }

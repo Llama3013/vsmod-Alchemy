@@ -42,7 +42,7 @@ namespace Alchemy.Block
             10f / 16f,
             12f / 16f,
         ];
-        private const float FirepitYOffset = 1.25f / 16f;
+        private readonly float FirepitYOffset;
         private const float BubbleMinTemperature = 100f;
         private const float BubbleMaxTemperature = 200f;
         private const float BubbleMaxQuantity = 4f;
@@ -67,6 +67,11 @@ namespace Alchemy.Block
             this.firepit = firepit;
 
             capacityLitres = stack.Block.Attributes?["cookingSlotCapacityLitres"].AsFloat(6f) ?? 6f;
+            FirepitYOffset =
+                stack.Block.Attributes?["inFirePitProps"]?["transform"]?["translation"]?[
+                    "y"
+                ].AsFloat(1f / 16f)
+                ?? 1f / 16f;
 
             capi.Tesselator.TesselateBlock(stack.Block, out MeshData cauldronMesh);
             cauldronMeshRef = capi.Render.UploadMultiTextureMesh(cauldronMesh);
@@ -190,7 +195,7 @@ namespace Alchemy.Block
                 prog.ModelMatrix = ModelMat
                     .Identity()
                     .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
-                    .Translate(0f, 1f / 16f, 0f)
+                    .Translate(0f, FirepitYOffset, 0f)
                     .Values;
 
                 prog.ViewMatrix = rpi.CameraMatrixOriginf;
@@ -204,7 +209,7 @@ namespace Alchemy.Block
                 prog.ModelMatrix = ModelMat
                     .Identity()
                     .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
-                    .Translate(0f, 1f / 16f, 0f)
+                    .Translate(0f, FirepitYOffset, 0f)
                     .Values;
 
                 prog.ViewMatrix = rpi.CameraMatrixOriginf;
