@@ -526,6 +526,39 @@ namespace Alchemy.Utility
                 return false;
             }
 
+            AlchemyConfig cfg = AlchemyConfig.Loaded;
+            if (cfg.DrinkingPotionIntoxicationAmount > 0)
+            {
+                float intox = playerEntity.WatchedAttributes.GetFloat("intoxication");
+                playerEntity.WatchedAttributes.SetFloat(
+                    "intoxication",
+                    Math.Min(1.1f, intox + cfg.DrinkingPotionIntoxicationAmount)
+                );
+            }
+            if (cfg.DrinkingPotionPsychedelicAmount > 0)
+            {
+                float psyche = playerEntity.WatchedAttributes.GetFloat("psychedelic");
+                playerEntity.WatchedAttributes.SetFloat(
+                    "psychedelic",
+                    Math.Min(2.0f, psyche + cfg.DrinkingPotionPsychedelicAmount)
+                );
+            }
+            if (cfg.DrinkingPotionSaturationLossAmount > 0)
+            {
+                playerEntity.ReceiveSaturation(-cfg.DrinkingPotionSaturationLossAmount);
+            }
+            if (cfg.DrinkingPotionDamageAmount > 0)
+            {
+                playerEntity.ReceiveDamage(
+                    new DamageSource
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type = EnumDamageType.Poison,
+                    },
+                    cfg.DrinkingPotionDamageAmount
+                );
+            }
+
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
                 Lang.Get(

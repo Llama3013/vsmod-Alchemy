@@ -4,12 +4,18 @@
   "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "SingleCenter" } }, { "name": "Unplaceable" }, { "name": "RightClickPickup" }],
   "heldTpIdleAnimation": "holdbothhandslarge",
   "heldTpUseAnimation": "twohandplaceblock",
-  "variantgroups": [{ "code": "metal", "states": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"] }],
+  "variantgroups": [{ "code": "metal", "states": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron", "oldworld"] }],
   "shape": { "base": "game:block/clutter/cauldron-empty", "rotateY": 45 },
   "textures": {
     "transparent": { "base": "game:block/transparent" },
     "metal": { "base": "game:block/metal/sheet/{metal}1" },
     "iron": { "base": "game:block/metal/sheet/{metal}1" }
+  },
+  "texturesByType": {
+    "*-oldworld": {
+      "metal": { "base": "game:block/metal/plate/iron" },
+      "iron": { "base": "game:block/metal/plate/iron" }
+    }
   },
   "attributes": {
     "randomColorTexture": "iron",

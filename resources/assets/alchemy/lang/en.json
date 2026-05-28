@@ -553,6 +553,7 @@
   "block-herbrackmold-earthyorange-fired-potionbrewingcauldron": "Earthy orange ceramic brewing cauldron mold",
   "block-herbrackmold-*-raw-potionbrewingcauldron": "Raw brewing cauldron mold",
   "block-herbrackmold-*-fired-potionbrewingcauldron": "Ceramic brewing cauldron mold",
+  "block-potionbrewingcauldron-oldworld": "Brewing Cauldron (Old World)",
   "block-potionbrewingcauldron-copper": "Brewing Cauldron (Copper)",
   "block-potionbrewingcauldron-tinbronze": "Brewing Cauldron (Tin bronze)",
   "block-potionbrewingcauldron-bismuthbronze": "Brewing Cauldron (Bismuth bronze)",
@@ -923,6 +924,16 @@
   "AllowVanillaContainerDrinking": "Allow drinking from vanilla containers",
   "AllowVanillaContainerDrinking-Comment": "Allow potions to be drunk from vanilla bowls, buckets, and jugs. I assume its a little buggy to since the potion flasks handle some interactions differently to vanilla containers.",
   "heldhelp-coat-weapon": "Hold in off hand to coat weapon or arrows",
+
+  "DrinkingSideEffects-Config": "Drinking side effects",
+  "DrinkingPotionIntoxicationAmount": "Intoxication amount per potion",
+  "DrinkingPotionIntoxicationAmount-Comment": "How much intoxication is added per potion consumed (0 = disabled).",
+  "DrinkingPotionPsychedelicAmount": "Psychedelic amount per potion",
+  "DrinkingPotionPsychedelicAmount-Comment": "How much psychedelic effect is added per potion consumed (0 = disabled).",
+  "DrinkingPotionSaturationLossAmount": "Saturation loss per potion",
+  "DrinkingPotionSaturationLossAmount-Comment": "How much saturation is removed per potion consumed (0 = disabled).",
+  "DrinkingPotionDamageAmount": "Damage per potion",
+  "DrinkingPotionDamageAmount-Comment": "How much damage is dealt to the player per potion consumed (0 = disabled). Uses internal poison-type damage, bypassing armour.",
 
   "disabled": "Disabled by server admin config!"
 }

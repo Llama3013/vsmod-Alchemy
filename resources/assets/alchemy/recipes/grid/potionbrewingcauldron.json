@@ -1,5 +1,19 @@
 [
   {
+    "ingredientPattern": "P,C",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "P": { "type": "item", "code": "alchemy:potionbase-basic" },
+      "C": { "type": "block", "code": "game:clutter", "attributes": { "type": "cauldron-empty" } }
+    },
+    "output": {
+      "type": "block",
+      "code": "alchemy:potionbrewingcauldron-oldworld",
+      "quantity": 1
+    }
+  },
+  {
     "ingredientPattern": "PHP,_P_",
     "width": 3,
     "height": 2,

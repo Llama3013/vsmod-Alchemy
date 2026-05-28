@@ -300,6 +300,50 @@
                     "max": 2
                 }
             },
+            "DRINKINGPOTIONINTOXICATIONAMOUNT": {
+                "name": "DrinkingPotionIntoxicationAmount",
+                "ingui": "alchemy:DrinkingPotionIntoxicationAmount",
+                "weight": 47.4,
+                "comment": "alchemy:DrinkingPotionIntoxicationAmount-Comment",
+                "default": 0.0,
+                "range": {
+                    "min": 0.0,
+                    "max": 1.1
+                }
+            },
+            "DRINKINGPOTIONPSYCHEDELICAMOUNT": {
+                "name": "DrinkingPotionPsychedelicAmount",
+                "ingui": "alchemy:DrinkingPotionPsychedelicAmount",
+                "weight": 47.5,
+                "comment": "alchemy:DrinkingPotionPsychedelicAmount-Comment",
+                "default": 0.0,
+                "range": {
+                    "min": 0.0,
+                    "max": 2.0
+                }
+            },
+            "DRINKINGPOTIONSATURATIONLOSSAMOUNT": {
+                "name": "DrinkingPotionSaturationLossAmount",
+                "ingui": "alchemy:DrinkingPotionSaturationLossAmount",
+                "weight": 47.6,
+                "comment": "alchemy:DrinkingPotionSaturationLossAmount-Comment",
+                "default": 0.0,
+                "range": {
+                    "min": 0.0,
+                    "max": 1500.0
+                }
+            },
+            "DRINKINGPOTIONDAMAGEAMOUNT": {
+                "name": "DrinkingPotionDamageAmount",
+                "ingui": "alchemy:DrinkingPotionDamageAmount",
+                "weight": 47.7,
+                "comment": "alchemy:DrinkingPotionDamageAmount-Comment",
+                "default": 0.0,
+                "range": {
+                    "min": 0.0,
+                    "max": 20.0
+                }
+            },
             "TEMPORALPOTIONSTABILITYGAIN": {
                 "name": "StabilityPotionTemporalStabilityGain",
                 "ingui": "alchemy:StabilityPotionTemporalStabilityGain",
@@ -1154,7 +1198,7 @@
                 "weight": 4.57,
                 "comment": "alchemy:AllowPsychedelicMushrooms-Comment",
                 "default": true
-            }
+            },
         }
     },
     "formatting": [
@@ -1292,6 +1336,11 @@
             "type": "separator",
             "title": "alchemy:ClimbValues-Config",
             "weight": 46
+        },
+        {
+            "type": "separator",
+            "title": "alchemy:DrinkingSideEffects-Config",
+            "weight": 47
         }
     ]
 }

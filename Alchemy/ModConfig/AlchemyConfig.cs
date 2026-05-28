@@ -156,5 +156,10 @@ namespace Alchemy.ModConfig
 
         public string CoatableWeaponTags { get; set; } = "weapon-melee";
         public string CoatableProjectilesCodes { get; set; } = "*arrow*";
+
+        public float DrinkingPotionIntoxicationAmount { get; set; } = 0f;
+        public float DrinkingPotionPsychedelicAmount { get; set; } = 0f;
+        public float DrinkingPotionSaturationLossAmount { get; set; } = 0f;
+        public float DrinkingPotionDamageAmount { get; set; } = 0f;
     }
 }
