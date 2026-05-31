@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using ProtoBuf;
 
-namespace Alchemy.ModConfig
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     [Serializable]
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]

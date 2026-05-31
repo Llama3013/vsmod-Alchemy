@@ -9,7 +9,7 @@
     },
     "output": {
       "type": "block",
-      "code": "alchemy:potionbrewingcauldron-oldworld",
+      "code": "alchemy:potionbrewingcauldron-oldworld-construct0",
       "quantity": 1
     }
   },
@@ -28,7 +28,7 @@
     },
     "output": {
       "type": "block",
-      "code": "alchemy:potionbrewingcauldron-{metal}",
+      "code": "alchemy:potionbrewingcauldron-{metal}-construct0",
       "quantity": 1
     }
   }

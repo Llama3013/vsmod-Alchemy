@@ -1,9 +1,10 @@
-using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     // Keeps the player's collision box, eye height, and visual scale in sync with potionSizeDelta.
     // Runs on both server and client via WatchedAttributes sync.

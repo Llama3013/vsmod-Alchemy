@@ -1,4 +1,4 @@
-﻿/*json block glow
+/*json block glow
 vertexFlags: {
     glowLevel: 255
 },*/
@@ -9,15 +9,15 @@ vertexFlags: {
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alchemy.Behavior;
-using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 
-namespace Alchemy.ModSystem
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class AlchemyMod : Vintagestory.API.Common.ModSystem
     {
@@ -41,14 +41,11 @@ namespace Alchemy.ModSystem
 
         public static void RegisterClasses(ICoreAPI api)
         {
-            api.RegisterBlockClass("BlockPotionFlask", typeof(Block.BlockPotionFlask));
-            api.RegisterBlockEntityClass(
-                "BlockEntityPotionFlask",
-                typeof(BlockEntity.BlockEntityPotionFlask)
-            );
-            api.RegisterItemClass("ItemPotion", typeof(Item.ItemPotion));
-            api.RegisterBlockClass("BlockHerbRacks", typeof(Block.BlockHerbRacks));
-            api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntity.BlockEntityHerbRacks));
+            api.RegisterBlockClass("BlockPotionFlask", typeof(BlockPotionFlask));
+            api.RegisterBlockEntityClass("BlockEntityPotionFlask", typeof(BlockEntityPotionFlask));
+            api.RegisterItemClass("ItemPotion", typeof(ItemPotion));
+            api.RegisterBlockClass("BlockHerbRacks", typeof(BlockHerbRacks));
+            api.RegisterBlockEntityClass("HerbRacks", typeof(BlockEntityHerbRacks));
             api.RegisterCollectibleBehaviorClass(
                 "PotionConsumable",
                 typeof(PotionConsumableBehavior)
@@ -58,9 +55,15 @@ namespace Alchemy.ModSystem
                 "PotionCoatSource",
                 typeof(PotionCoatSourceBehavior)
             );
-            api.RegisterBlockClass(
-                "BlockPotionBrewingCauldron",
-                typeof(Block.BlockPotionBrewingCauldron)
+            // api.RegisterBlockClass(
+            //     "BlockPotionBrewingCauldron",
+            //     typeof(BlockPotionBrewingCauldron)
+            // );
+            api.RegisterItemClass("ItemStirringSpoon", typeof(ItemStirringSpoon));
+            api.RegisterBlockClass("BlockCauldronFirepit", typeof(BlockCauldronFirepit));
+            api.RegisterBlockEntityClass(
+                "BlockEntityCauldronFirepit",
+                typeof(BlockEntityCauldronFirepit)
             );
         }
 

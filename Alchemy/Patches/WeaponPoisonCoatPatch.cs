@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Alchemy.Behavior;
-using Alchemy.ModConfig;
-using Alchemy.Utility;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
@@ -15,7 +13,9 @@ using Vintagestory.GameContent;
 
 // Config should set max amount of charges and effect multiplier for weapon coats
 // Apply strength
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     [HarmonyPatch(typeof(CollectibleObject), "OnAttackingWith")]
     public static class WeaponCoatPatch
@@ -37,7 +37,7 @@ namespace Alchemy.Patches
             if (attackedEntity == null || !attackedEntity.Alive)
                 return;
 
-            var attrs = itemslot.Itemstack.Attributes;
+            ITreeAttribute attrs = itemslot.Itemstack.Attributes;
             string potionId = attrs.GetString("coatedPotionId");
             if (string.IsNullOrEmpty(potionId))
                 return;
@@ -152,7 +152,8 @@ namespace Alchemy.Patches
 
             if (entity is EntityPlayer playerEntity)
             {
-                var behavior = playerEntity.GetBehavior<EntityBehaviorPotionEffect>();
+                EntityBehaviorPotionEffect behavior =
+                    playerEntity.GetBehavior<EntityBehaviorPotionEffect>();
                 if (behavior?.Manager == null)
                     return;
                 PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, multiplier);
@@ -188,7 +189,7 @@ namespace Alchemy.Patches
                         .Refresh(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
                 else
                 {
-                    var b = new EntityBehaviorCoatedPotionEffect(agent);
+                    EntityBehaviorCoatedPotionEffect b = new(agent);
                     agent.AddBehavior(b);
                     b.Setup(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
                 }
@@ -198,11 +199,11 @@ namespace Alchemy.Patches
         private static void ApplyStatEffect(EntityAgent agent, PotionContext ctx)
         {
             const string subkey = "weaponcoat";
-            foreach (var stat in ctx.Effects)
+            foreach (KeyValuePair<string, float> stat in ctx.Effects)
                 agent.Stats.Set(stat.Key, subkey, stat.Value, false);
 
             long agentId = agent.EntityId;
-            var effectKeys = new List<string>(ctx.Effects.Keys);
+            List<string> effectKeys = [.. ctx.Effects.Keys];
             agent.World.RegisterCallback(
                 _ =>
                 {

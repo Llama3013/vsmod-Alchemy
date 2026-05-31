@@ -1,9 +1,11 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
-namespace Alchemy.Block
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class BlockHerbRacks : Vintagestory.API.Common.Block
+    public class BlockHerbRacks : Block
     {
         public override bool DoPartialSelection(IWorldAccessor world, BlockPos pos)
         {
@@ -18,7 +20,7 @@ namespace Alchemy.Block
         {
             if (
                 world.BlockAccessor.GetBlockEntity(blockSel.Position)
-                is BlockEntity.BlockEntityHerbRacks beherbrack
+                is BlockEntityHerbRacks beherbrack
             )
                 return beherbrack.OnInteract(byPlayer, blockSel);
 

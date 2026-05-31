@@ -1,0 +1,72 @@
+[
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-plain" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-plain", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-quartz" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-quartz", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-blue" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-blue", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-green" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-green", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-red" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-red", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-violet" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-violet", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-yellow" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-yellow", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-brown" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-brown", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-pink" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-pink", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "G,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": { "G": { "type": "block", "code": "game:glass-smoky" } },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-smoky", "quantity": 1 }
+  }
+]

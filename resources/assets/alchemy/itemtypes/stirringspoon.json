@@ -1,0 +1,30 @@
+{
+  "code": "stirringspoon",
+  "class": "ItemStirringSpoon",
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "WallHalves",
+        "ctrlKey": true,
+        "selectionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 }
+      }
+    }
+  ],
+  "maxStackSize": 1,
+  "shape": { "base": "alchemy:item/stirringspoon" },
+  "textures": {
+    "material": { "base": "game:block/wood/debarked/oak" }
+  },
+  "creativeinventory": { "general": ["*"], "alchemy": ["*"] },
+  "guiTransform": {
+    "translation": { "x": -0.49548626, "y": 1.2387562, "z": 0 },
+    "rotation": { "x": 93.93076, "y": -46.226463, "z": 3.8064568 },
+    "scale": 2.0
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.8557833, "y": -0.06656431, "z": -0.6771974 },
+    "rotation": { "x": 177.37462, "y": 179.88461, "z": -164.41313 },
+    "scale": 0.8
+  }
+}

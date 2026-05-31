@@ -5,9 +5,11 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
-namespace Alchemy.ModSystem
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class LiquidMigrationCommands : Vintagestory.API.Common.ModSystem
+    public class LiquidMigrationCommands : ModSystem
     {
         private const int LiquidMultiplier = 25;
 
@@ -15,7 +17,7 @@ namespace Alchemy.ModSystem
 
         public override void StartServerSide(ICoreServerAPI api)
         {
-            var cmd = api
+            IChatCommand cmd = api
                 .ChatCommands.Create("alchemymigrate")
                 .WithDescription(
                     "Multiply all alchemy liquid stack sizes by 25 (itemsPerLitre migration from 4 to 100). Subcommands: all, barrels [radius], blockentities [radius], players, player <name>."
@@ -149,7 +151,7 @@ namespace Alchemy.ModSystem
             {
                 if (chunk?.BlockEntities == null)
                     continue;
-                foreach (var be in chunk.BlockEntities.Values)
+                foreach (BlockEntity be in chunk.BlockEntities.Values)
                 {
                     if (be == null)
                         continue;
@@ -249,7 +251,7 @@ namespace Alchemy.ModSystem
         private static int MigratePlayerInventories(ICoreServerAPI api, IServerPlayer target)
         {
             int modified = 0;
-            var players =
+            IServerPlayer[] players =
                 target != null
                     ? [target]
                     : api.World.AllOnlinePlayers.Cast<IServerPlayer>().ToArray();

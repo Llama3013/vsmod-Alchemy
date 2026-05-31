@@ -4,7 +4,9 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 
-namespace Alchemy.Behavior
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class EntityBehaviorCoatedPotionEffect(Entity entity) : EntityBehavior(entity)
     {

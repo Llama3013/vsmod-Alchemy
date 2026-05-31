@@ -1,13 +1,14 @@
-using Alchemy.ModConfig;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Item
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class ItemPotion : Vintagestory.API.Common.Item
+    public class ItemPotion : Item
     {
         public override string GetHeldTpUseAnimation(ItemSlot activeHotbarSlot, Entity forEntity)
         {
@@ -19,7 +20,7 @@ namespace Alchemy.Item
         {
             base.OnHeldIdle(slot, byEntity);
             foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                if (bh is Behavior.PotionCoatSourceBehavior coat)
+                if (bh is PotionCoatSourceBehavior coat)
                 {
                     coat.CoatingIdle(slot, byEntity);
                     return;

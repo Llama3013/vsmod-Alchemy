@@ -1,9 +1,11 @@
 using System.Text;
-using Alchemy.Utility;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 
-namespace Alchemy.Behavior
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class CollectibleBehaviorCoat(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {
@@ -17,7 +19,7 @@ namespace Alchemy.Behavior
             if (inSlot?.Itemstack == null)
                 return;
 
-            var attrs = inSlot.Itemstack.Attributes;
+            ITreeAttribute attrs = inSlot.Itemstack.Attributes;
             string potionId = attrs.GetString("coatedPotionId");
             if (string.IsNullOrEmpty(potionId))
                 return;

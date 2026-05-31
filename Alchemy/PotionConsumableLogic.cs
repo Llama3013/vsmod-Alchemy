@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Alchemy.Behavior;
-using Alchemy.ModConfig;
-using Alchemy.Systems;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
-namespace Alchemy.Utility
+namespace Alchemy
 {
     public static class PotionConsumableLogic
     {

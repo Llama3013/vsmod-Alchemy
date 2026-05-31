@@ -1,8 +1,5 @@
 using System;
 using System.Text;
-using Alchemy.ModConfig;
-using Alchemy.Systems;
-using Alchemy.Utility;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
@@ -10,7 +7,9 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Behavior
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class PotionConsumableBehavior(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {

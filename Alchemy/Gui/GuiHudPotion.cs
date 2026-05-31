@@ -6,7 +6,9 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 
-namespace Alchemy.GUI
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class GuiHudPotion : HudElement
     {
@@ -257,7 +259,7 @@ namespace Alchemy.GUI
         }
     }
 
-    public class ModSystemHud : Vintagestory.API.Common.ModSystem
+    public class ModSystemHud : ModSystem
     {
         private GuiHudPotion alchemyHUD;
 

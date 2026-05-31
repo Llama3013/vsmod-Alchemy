@@ -1,17 +1,19 @@
 using System;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Block
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class CauldronInFirepitRenderer : IInFirepitRenderer, ITexPositionSource
     {
         public double RenderOrder => 0.5;
         public int RenderRange => 20;
 
-        // ITexPositionSource — maps "#liquid" in the shape to the current liquid's texture
         public Size2i AtlasSize =>
             usingItemAtlas ? capi.ItemTextureAtlas.Size : capi.BlockTextureAtlas.Size;
         public TextureAtlasPosition this[string textureCode] =>
@@ -24,6 +26,7 @@ namespace Alchemy.Block
         private readonly BlockEntityFirepit firepit;
         private MultiTextureMeshRef cauldronMeshRef;
         private MultiTextureMeshRef liquidMeshRef;
+        private MultiTextureMeshRef stickMeshRef;
         private TextureAtlasPosition liquidTexPos;
         private bool usingItemAtlas;
         private string lastLiquidCode;
@@ -33,7 +36,6 @@ namespace Alchemy.Block
         private const int LiquidLevels = 4;
         private readonly Matrixf ModelMat = new();
 
-        // World-Y offset above pos.Y for each liquid level's surface (shape Y values / 16)
         private static readonly float[] LevelSurfaceY =
         [
             0f,
@@ -43,23 +45,31 @@ namespace Alchemy.Block
             12f / 16f,
         ];
         private readonly float FirepitYOffset;
+        private const float StirMinTemperature = 50f;
+        private const float StirYOffset = 0.50f;
+        private const float RestYOffset = 0.37f;
+        private const float RestRadialOffsetX = -0.13f;
+        private const float RestRadialOffsetZ = 0.03f;
+        private const float RestXTiltDeg = -10f;
         private const float BubbleMinTemperature = 100f;
         private const float BubbleMaxTemperature = 200f;
         private const float BubbleMaxQuantity = 4f;
         private readonly AirBubbleParticles bubbleParticles = new()
         {
-            Range = 0.2f,
+            Range = 0.4f,
             horVelocityMul = 0.3f,
-            LifeLength = 0.8f,
+            LifeLength = 0.3f,
         };
         private ILoadedSound cookingSound;
         private float temp;
+        private readonly float stickBaseAngle;
 
         public CauldronInFirepitRenderer(
             ICoreClientAPI capi,
             ItemStack stack,
             BlockPos pos,
-            BlockEntityFirepit firepit
+            BlockEntityFirepit firepit,
+            bool drawCauldronMesh = true
         )
         {
             this.capi = capi;
@@ -73,8 +83,26 @@ namespace Alchemy.Block
                 ].AsFloat(1f / 16f)
                 ?? 1f / 16f;
 
-            capi.Tesselator.TesselateBlock(stack.Block, out MeshData cauldronMesh);
-            cauldronMeshRef = capi.Render.UploadMultiTextureMesh(cauldronMesh);
+            if (drawCauldronMesh)
+            {
+                capi.Tesselator.TesselateBlock(stack.Block, out MeshData cauldronMesh);
+                cauldronMeshRef = capi.Render.UploadMultiTextureMesh(cauldronMesh);
+            }
+
+            ItemStack stickStack = (
+                stack.Attributes["stirringSpoon"] as ItemstackAttribute
+            )?.value?.Clone();
+            if (stickStack != null)
+            {
+                stickStack.ResolveBlockOrItem(capi.World);
+                if (stickStack.Item != null)
+                {
+                    capi.Tesselator.TesselateItem(stickStack.Item, out MeshData stickMesh);
+                    stickMeshRef = capi.Render.UploadMultiTextureMesh(stickMesh);
+                }
+            }
+
+            stickBaseAngle = stack.Attributes.GetInt("stirringSpoonFacing", 0) * GameMath.PIHALF;
 
             RebuildLiquidMesh();
         }
@@ -90,19 +118,40 @@ namespace Alchemy.Block
 
             ItemStack liquidStack = null;
             float totalLitres = 0f;
-            foreach (ItemSlot slot in inv.CookingSlots)
+
+            ItemSlot outputSlot = inv[2];
+            if (
+                !outputSlot.Empty
+                && outputSlot.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
+                    == true
+            )
             {
-                if (
-                    !slot.Empty
-                    && slot.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
-                        == true
-                )
+                liquidStack = outputSlot.Itemstack;
+                WaterTightContainableProps outProps = BlockLiquidContainerBase.GetContainableProps(
+                    outputSlot.Itemstack
+                );
+                if (outProps != null && outProps.ItemsPerLitre > 0)
+                    totalLitres = outputSlot.Itemstack.StackSize / outProps.ItemsPerLitre;
+            }
+            else
+            {
+                foreach (ItemSlot slot in inv.CookingSlots)
                 {
-                    liquidStack ??= slot.Itemstack;
-                    WaterTightContainableProps slotProps =
-                        BlockLiquidContainerBase.GetContainableProps(slot.Itemstack);
-                    if (slotProps != null && slotProps.ItemsPerLitre > 0)
-                        totalLitres += slot.Itemstack.StackSize / slotProps.ItemsPerLitre;
+                    if (
+                        !slot.Empty
+                        && slot.Itemstack
+                            ?.Collectible
+                            ?.Attributes
+                            ?["waterTightContainerProps"]
+                            .Exists == true
+                    )
+                    {
+                        liquidStack ??= slot.Itemstack;
+                        WaterTightContainableProps slotProps =
+                            BlockLiquidContainerBase.GetContainableProps(slot.Itemstack);
+                        if (slotProps != null && slotProps.ItemsPerLitre > 0)
+                            totalLitres += slot.Itemstack.StackSize / slotProps.ItemsPerLitre;
+                    }
                 }
             }
 
@@ -162,6 +211,7 @@ namespace Alchemy.Block
         {
             cauldronMeshRef?.Dispose();
             liquidMeshRef?.Dispose();
+            stickMeshRef?.Dispose();
 
             cookingSound?.Stop();
             cookingSound?.Dispose();
@@ -218,6 +268,43 @@ namespace Alchemy.Block
                 rpi.RenderMultiTextureMesh(liquidMeshRef, "tex");
             }
 
+            if (stickMeshRef != null)
+            {
+                float stirAngle =
+                    stickBaseAngle
+                    + (
+                        temp > StirMinTemperature
+                            ? capi.World.ElapsedMilliseconds % 3000L / 3000f * GameMath.TWOPI
+                            : 0f
+                    );
+                bool isStirring = temp > StirMinTemperature;
+                float elapsed = capi.World.ElapsedMilliseconds / 1000f;
+                float bob = isStirring ? GameMath.Sin(elapsed * 4f) * 0.015f : 0f;
+                float wobble = isStirring ? GameMath.Sin(elapsed * 3f) * 4f : 0f;
+
+                float spoonY = isStirring ? StirYOffset + bob : RestYOffset;
+                float xTilt = isStirring ? wobble : RestXTiltDeg;
+                float radialX = isStirring ? 0f : RestRadialOffsetX;
+                float radialZ = isStirring ? 0f : RestRadialOffsetZ;
+
+                prog.ModelMatrix = ModelMat
+                    .Identity()
+                    .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
+                    .Translate(0.5f, FirepitYOffset + spoonY, 0.5f)
+                    .RotateY(stirAngle)
+                    .Translate(-0.25f - radialX, 0f, -0.25f - radialZ)
+                    .RotateX(GameMath.DEG2RAD * (180f + xTilt))
+                    .RotateZ(GameMath.DEG2RAD * 90f)
+                    .Scale(0.75f, 0.85f, 0.75f)
+                    .Translate(-0.7f, -0.4f, -0.7f)
+                    .Values;
+
+                prog.ViewMatrix = rpi.CameraMatrixOriginf;
+                prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
+
+                rpi.RenderMultiTextureMesh(stickMeshRef, "tex");
+            }
+
             prog.Stop();
         }
 
@@ -249,16 +336,31 @@ namespace Alchemy.Block
 
             string currentCode = null;
             int currentAmount = 0;
-            foreach (ItemSlot slot in inv.CookingSlots)
+
+            if (
+                inv[2]?.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
+                == true
+            )
             {
-                if (
-                    !slot.Empty
-                    && slot.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
-                        == true
-                )
+                currentCode = inv[2].Itemstack.Collectible.Code.ToString();
+                currentAmount = inv[2].Itemstack.StackSize;
+            }
+            else
+            {
+                foreach (ItemSlot slot in inv.CookingSlots)
                 {
-                    currentCode ??= slot.Itemstack.Collectible.Code.ToString();
-                    currentAmount += slot.Itemstack.StackSize; // item count is fine for change detection
+                    if (
+                        !slot.Empty
+                        && slot.Itemstack
+                            ?.Collectible
+                            ?.Attributes
+                            ?["waterTightContainerProps"]
+                            .Exists == true
+                    )
+                    {
+                        currentCode ??= slot.Itemstack.Collectible.Code.ToString();
+                        currentAmount += slot.Itemstack.StackSize;
+                    }
                 }
             }
 
@@ -274,27 +376,28 @@ namespace Alchemy.Block
 
         private void SetCookingSoundVolume(float volume)
         {
-            if (volume > 0)
+            float scaledVolume = volume * 0.5f;
+            if (scaledVolume > 0)
             {
                 if (cookingSound == null)
                 {
                     cookingSound = capi.World.LoadSound(
                         new SoundParams()
                         {
-                            Location = new AssetLocation("sounds/effect/cooking.ogg"),
+                            Location = new AssetLocation("sounds/moltenmetal.ogg"),
                             ShouldLoop = true,
                             Position = pos.ToVec3f().Add(0.5f, 0.25f, 0.5f),
                             DisposeOnFinish = false,
                             Range = 10f,
                             ReferenceDistance = 3f,
-                            Volume = volume,
+                            Volume = scaledVolume,
                         }
                     );
                     cookingSound.Start();
                 }
                 else
                 {
-                    cookingSound.SetVolume(volume);
+                    cookingSound.SetVolume(scaledVolume);
                 }
             }
             else

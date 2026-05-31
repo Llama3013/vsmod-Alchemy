@@ -1,5 +1,4 @@
-﻿using System;
-using Alchemy.ModConfig;
+using System;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
@@ -41,7 +40,7 @@ namespace Alchemy
                     "potionBaseClientSize",
                     entity.Properties.Client?.Size ?? 1.0f
                 );
-                if (ModSystem.AlchemyMod.PlayerModelLibPresent)
+                if (AlchemyMod.PlayerModelLibPresent)
                 {
                     entity.WatchedAttributes.SetFloat(
                         "potionBaseEntitySize",
@@ -84,7 +83,7 @@ namespace Alchemy
             entity.WatchedAttributes.SetFloat("potionSizeDelta", 0f);
             entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
 
-            if (ModSystem.AlchemyMod.PlayerModelLibPresent)
+            if (AlchemyMod.PlayerModelLibPresent)
             {
                 float baseEntitySize = entity.WatchedAttributes.GetFloat(
                     "potionBaseEntitySize",

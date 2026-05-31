@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Alchemy.ModConfig;
 using Vintagestory.API.Common;
 
 namespace Alchemy

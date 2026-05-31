@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Alchemy.ModConfig;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Block
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     //Add perish time to potions but potion flasks have low perish rates or do not perish
     public class BlockPotionFlask : BlockLiquidContainerTopOpened
@@ -334,7 +335,7 @@ namespace Alchemy.Block
         {
             base.OnHeldIdle(slot, byEntity);
             foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                if (bh is Behavior.PotionCoatSourceBehavior coat)
+                if (bh is PotionCoatSourceBehavior coat)
                 {
                     coat.CoatingIdle(slot, byEntity);
                     return;
@@ -380,7 +381,7 @@ namespace Alchemy.Block
             {
                 foreach (CollectibleBehavior bh in CollectibleBehaviors)
                 {
-                    if (bh is Behavior.PotionConsumableBehavior)
+                    if (bh is PotionConsumableBehavior)
                     {
                         EnumHandling bhHandling = EnumHandling.PassThrough;
                         bh.OnHeldInteractStart(
@@ -424,7 +425,7 @@ namespace Alchemy.Block
         ICoreClientAPI capi,
         ItemStack forContents,
         CompositeTexture contentTexture,
-        Vintagestory.API.Common.Block flask
+        Block flask
     ) : ITexPositionSource
     {
         public ItemStack ForContents { get; set; } =

@@ -1,8 +1,9 @@
-using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Common;
 
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     //This harmony patch allows the glow potion to work
     [HarmonyPatch(typeof(EntityPlayer), "LightHsv", MethodType.Getter)]

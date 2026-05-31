@@ -1,6 +1,8 @@
 using Vintagestory.API.Common;
 
-namespace Alchemy.Systems
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class PotionData
     {

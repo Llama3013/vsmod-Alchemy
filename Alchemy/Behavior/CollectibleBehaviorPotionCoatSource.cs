@@ -1,10 +1,10 @@
-using Alchemy.ModConfig;
-using Alchemy.Utility;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Behavior
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class PotionCoatSourceBehavior(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {
