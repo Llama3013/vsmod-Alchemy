@@ -5,7 +5,7 @@
     "height": 2,
     "ingredients": {
       "G": { "type": "block", "code": "game:glass-plain" },
-      "O": { "type": "item", "code": "game:clearquartz" }
+      "O": { "type": "item", "code": "game:ore-quartz" }
     },
     "output": { "type": "item", "code": "alchemy:stirringspoon-glass-plain", "quantity": 1 }
   },
@@ -15,7 +15,7 @@
     "height": 2,
     "ingredients": {
       "G": { "type": "block", "code": "game:glass-quartz" },
-      "O": { "type": "item", "code": "game:ore-clearquartz" }
+      "O": { "type": "item", "code": "game:clearquartz" }
     },
     "output": { "type": "item", "code": "alchemy:stirringspoon-glass-quartz", "quantity": 1 }
   },

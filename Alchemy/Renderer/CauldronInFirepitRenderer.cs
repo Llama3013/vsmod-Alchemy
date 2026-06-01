@@ -1,4 +1,3 @@
-using System;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
@@ -31,19 +30,11 @@ namespace Alchemy
         private bool usingItemAtlas;
         private string lastLiquidCode;
         private int lastLiquidAmount = -1;
-        private int currentLevel = 1;
+        private float liquidSurfaceY;
         private readonly float capacityLitres;
-        private const int LiquidLevels = 4;
+        private const float LiquidMinY = 4f / 16f;
+        private const float LiquidMaxY = 15f / 16f;
         private readonly Matrixf ModelMat = new();
-
-        private static readonly float[] LevelSurfaceY =
-        [
-            0f,
-            5f / 16f,
-            8f / 16f,
-            10f / 16f,
-            12f / 16f,
-        ];
         private readonly float FirepitYOffset;
         private const float StirMinTemperature = 50f;
         private const float StirYOffset = 0.50f;
@@ -181,17 +172,14 @@ namespace Alchemy
                 liquidTexPos = capi.BlockTextureAtlas.UnknownTexturePosition;
             }
 
-            float fillRatio = capacityLitres > 0 ? totalLitres / capacityLitres : 0f;
-            currentLevel = GameMath.Clamp(
-                (int)Math.Ceiling(fillRatio * LiquidLevels),
-                1,
-                LiquidLevels
+            float fillRatio = GameMath.Clamp(
+                capacityLitres > 0 ? totalLitres / capacityLitres : 0f,
+                0f,
+                1f
             );
+            liquidSurfaceY = LiquidMinY + fillRatio * (LiquidMaxY - LiquidMinY);
 
-            Shape liquidShape = Shape.TryGet(
-                capi,
-                $"alchemy:shapes/block/cauldron-liquid-{currentLevel}.json"
-            );
+            Shape liquidShape = Shape.TryGet(capi, "alchemy:shapes/block/cauldron-liquid.json");
             if (liquidShape == null)
                 return;
 
@@ -201,6 +189,33 @@ namespace Alchemy
                 out MeshData liquidMesh,
                 this
             );
+            liquidMesh.Translate(0, liquidSurfaceY, 0);
+
+            if (props?.ClimateColorMap != null)
+            {
+                int col = capi.World.ApplyColorMapOnRgba(
+                    props.ClimateColorMap,
+                    null,
+                    ColorUtil.WhiteArgb,
+                    pos.X,
+                    pos.Y,
+                    pos.Z,
+                    false
+                );
+                byte[] tint = ColorUtil.ToBGRABytes(col);
+                byte r = tint[0],
+                    g = tint[1],
+                    b = tint[2],
+                    a = tint[3];
+                byte[] meshRgba = liquidMesh.Rgba;
+                for (int i = 0; i < meshRgba.Length; i += 4)
+                {
+                    meshRgba[i + 0] = (byte)(meshRgba[i + 0] * r / 255);
+                    meshRgba[i + 1] = (byte)(meshRgba[i + 1] * g / 255);
+                    meshRgba[i + 2] = (byte)(meshRgba[i + 2] * b / 255);
+                    meshRgba[i + 3] = (byte)(meshRgba[i + 3] * a / 255);
+                }
+            }
 
             liquidMeshRef = capi.Render.UploadMultiTextureMesh(liquidMesh);
         }
@@ -326,7 +341,7 @@ namespace Alchemy
                 bubbleParticles.quantity = bubbleIntensity * BubbleMaxQuantity;
                 bubbleParticles.BasePos.Set(
                     pos.X + 0.5,
-                    pos.Y + FirepitYOffset + LevelSurfaceY[currentLevel],
+                    pos.Y + FirepitYOffset + liquidSurfaceY,
                     pos.Z + 0.5
                 );
                 capi.World.SpawnParticles(bubbleParticles);
