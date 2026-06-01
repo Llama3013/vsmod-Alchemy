@@ -163,5 +163,5 @@
 //     ]
 //   ],
 //   "name": "Potion brewing cauldron mold",
-//   "output": { "type": "block", "code": "alchemy:herbrackmold-{color}-raw-potionbrewingcauldron", "stacksize": 1 }
+//   "output": { "type": "block", "code": "alchemy:herbrackmold-{color}-raw-potioncauldron", "stacksize": 1 }
 // }

@@ -51,6 +51,9 @@ namespace Alchemy
             }
         }
 
+        private static bool IsVanillaFirepit(BlockEntityFirepit firepit) =>
+            firepit is not BlockEntityCauldronFirepit;
+
         IInFirepitRenderer IInFirepitRendererSupplier.GetRendererWhenInFirepit(
             ItemStack stack,
             BlockEntityFirepit firepit,
@@ -70,7 +73,12 @@ namespace Alchemy
             ItemStack stack,
             BlockEntityFirepit firepit,
             bool isOutputStack
-        ) => EnumFirepitModel.Wide;
+        )
+        {
+            if (IsVanillaFirepit(firepit) && !AlchemyConfig.Loaded.AllowCauldronInVanillaFirepit)
+                return EnumFirepitModel.Normal;
+            return EnumFirepitModel.Wide;
+        }
 
         public bool IsExtinct;
         protected AdvancedParticleProperties[] ringParticles;
@@ -102,10 +110,10 @@ namespace Alchemy
 
                 Cuboidf[] spawnBoxes =
                 [
-                    new Cuboidf(x1: 0.125f, y1: 0, z1: 0.125f, x2: 0.3125f, y2: 0.5f, z2: 0.875f),
-                    new Cuboidf(x1: 0.7125f, y1: 0, z1: 0.125f, x2: 0.875f, y2: 0.5f, z2: 0.875f),
-                    new Cuboidf(x1: 0.125f, y1: 0, z1: 0.125f, x2: 0.875f, y2: 0.5f, z2: 0.3125f),
-                    new Cuboidf(x1: 0.125f, y1: 0, z1: 0.7125f, x2: 0.875f, y2: 0.5f, z2: 0.875f),
+                    new Cuboidf(x1: 0.0f, y1: 0, z1: 0.35f, x2: 0.25f, y2: 0.09f, z2: 0.65f),
+                    new Cuboidf(x1: 0.75f, y1: 0, z1: 0.35f, x2: 1.0f, y2: 0.09f, z2: 0.65f),
+                    new Cuboidf(x1: 0.35f, y1: 0, z1: 0.0f, x2: 0.65f, y2: 0.09f, z2: 0.25f),
+                    new Cuboidf(x1: 0.35f, y1: 0, z1: 0.75f, x2: 0.65f, y2: 0.09f, z2: 1.0f),
                 ];
 
                 for (int i = 0; i < ParticleProperties.Length; i++)
@@ -120,7 +128,7 @@ namespace Alchemy
                         props.PosOffset[0].avg = box.MidX;
                         props.PosOffset[0].var = box.Width / 2;
 
-                        props.PosOffset[1].avg = 0.1f;
+                        props.PosOffset[1].avg = 0.0f;
                         props.PosOffset[1].var = 0.05f;
 
                         props.PosOffset[2].avg = box.MidZ;
@@ -133,6 +141,9 @@ namespace Alchemy
                     }
                 }
             }
+
+            if (api.Side != EnumAppSide.Client)
+                return;
 
             interactions = ObjectCacheUtil.GetOrCreate(
                 api,
@@ -181,6 +192,20 @@ namespace Alchemy
                         if (item?.Code?.Path?.StartsWith("stirringspoon") == true)
                             spoonStacks.Add(new ItemStack(item));
 
+                    List<ItemStack> liquidContainerStacks = [];
+
+                    foreach (CollectibleObject obj in api.World.Collectibles)
+                    {
+                        if (obj is ILiquidSource || obj is ILiquidSink || obj is BlockWateringCan)
+                        {
+                            List<ItemStack> stacks = obj.GetHandBookStacks(capi);
+                            if (stacks != null)
+                                liquidContainerStacks.AddRange(stacks);
+                        }
+                    }
+
+                    ItemStack[] lstacks = [.. liquidContainerStacks];
+
                     return
                     [
                         new()
@@ -209,11 +234,26 @@ namespace Alchemy
                             MouseButton = EnumMouseButton.Right,
                             HotKeyCode = "shift",
                         },
+                        new WorldInteraction()
+                        {
+                            ActionLangCode = "blockhelp-bucket-rightclick",
+                            MouseButton = EnumMouseButton.Right,
+                            Itemstacks = lstacks,
+                            GetMatchingStacks = (wi, bs, ws) =>
+                            {
+                                return lstacks;
+                            },
+                        },
                         new()
                         {
                             ActionLangCode = "alchemy:blockhelp-cauldron-attachspoon",
                             MouseButton = EnumMouseButton.Right,
                             Itemstacks = [.. spoonStacks],
+                        },
+                        new()
+                        {
+                            ActionLangCode = "alchemy:blockhelp-cauldron-detachspoon",
+                            MouseButton = EnumMouseButton.Right,
                         },
                     ];
                 }
@@ -329,26 +369,18 @@ namespace Alchemy
                 return;
             }
 
-            if (
-                manager.BlockAccess.GetBlockEntity(pos) is BlockEntityFirepit bef
-                && bef.CurrentModel == EnumFirepitModel.Wide
-            )
+            for (int i = 0; i < ringParticles.Length; i++)
             {
-                for (int i = 0; i < ringParticles.Length; i++)
-                {
-                    AdvancedParticleProperties bps = ringParticles[i];
-                    bps.WindAffectednesAtPos = windAffectednessAtPos;
-                    bps.basePos.X = pos.X + basePos[i].X;
-                    bps.basePos.Y = pos.InternalY + basePos[i].Y;
-                    bps.basePos.Z = pos.Z + basePos[i].Z;
+                AdvancedParticleProperties bps = ringParticles[i];
+                bps.WindAffectednesAtPos = windAffectednessAtPos;
+                bps.basePos.X = pos.X + basePos[i].X;
+                bps.basePos.Y = pos.InternalY + basePos[i].Y;
+                bps.basePos.Z = pos.Z + basePos[i].Z;
 
-                    manager.Spawn(bps);
-                }
-
-                return;
+                manager.Spawn(bps);
             }
 
-            base.OnAsyncClientParticleTick(manager, pos, windAffectednessAtPos, secondsTicking);
+            return;
         }
 
         private int BaseSelectionBoxCount(IBlockAccessor blockAccessor, BlockPos pos) =>
@@ -649,6 +681,86 @@ namespace Alchemy
                                 }
                                 return true;
                             }
+
+                            if (bef.Inventory is InventorySmelting inv)
+                            {
+                                for (int i = inv.CookingSlots.Length - 1; i >= 0; i--)
+                                {
+                                    ItemSlot cookSlot = inv.CookingSlots[i];
+                                    if (cookSlot.Empty)
+                                        continue;
+                                    WaterTightContainableProps lProps =
+                                        BlockLiquidContainerBase.GetContainableProps(
+                                            cookSlot.Itemstack
+                                        );
+                                    if (lProps == null)
+                                        continue;
+
+                                    if (world.Side == EnumAppSide.Server)
+                                    {
+                                        ItemStack workingStack;
+                                        if (stack.StackSize > 1)
+                                        {
+                                            workingStack = stack.Clone();
+                                            workingStack.StackSize = 1;
+                                        }
+                                        else
+                                        {
+                                            workingStack = stack;
+                                        }
+
+                                        int moved = objLsi.TryPutLiquid(
+                                            workingStack,
+                                            cookSlot.Itemstack,
+                                            objLsi.CapacityLitres
+                                        );
+                                        if (moved > 0)
+                                        {
+                                            cookSlot.Itemstack.StackSize -= moved;
+                                            if (cookSlot.Itemstack.StackSize <= 0)
+                                                cookSlot.Itemstack = null;
+                                            cookSlot.MarkDirty();
+                                            if (stack.StackSize > 1)
+                                            {
+                                                byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(
+                                                    1
+                                                );
+                                                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                                                if (
+                                                    !byPlayer.InventoryManager.TryGiveItemstack(
+                                                        workingStack,
+                                                        true
+                                                    )
+                                                )
+                                                    world.SpawnItemEntity(
+                                                        workingStack,
+                                                        blockSel
+                                                            .Position.ToVec3d()
+                                                            .Add(0.5, 1.0, 0.5)
+                                                    );
+                                            }
+                                            else
+                                            {
+                                                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
+                                            }
+                                            bef.MarkDirty(true);
+                                            float litres = moved / lProps.ItemsPerLitre;
+                                            world.PlaySoundAt(
+                                                lProps.PourSound
+                                                    ?? new AssetLocation(
+                                                        "sounds/effect/water-pour.ogg"
+                                                    ),
+                                                byPlayer.Entity,
+                                                null,
+                                                true,
+                                                16,
+                                                GameMath.Clamp(litres / 5f, 0.35f, 1f)
+                                            );
+                                        }
+                                    }
+                                    return true;
+                                }
+                            }
                         }
                     }
 
@@ -689,59 +801,6 @@ namespace Alchemy
                             if (op.MovedQuantity > 0)
                                 activated = true;
                         }
-                    }
-
-                    if (stack.Collectible.Attributes?.IsTrue("mealContainer") == true && !activated)
-                    {
-                        ItemSlot potSlot = null;
-                        if (bef.inputStack?.Collectible is BlockCookedContainer)
-                        {
-                            potSlot = bef.inputSlot;
-                        }
-                        if (bef.outputStack?.Collectible is BlockCookedContainer)
-                        {
-                            potSlot = bef.outputSlot;
-                        }
-
-                        if (potSlot != null)
-                        {
-                            BlockCookedContainer blockPot =
-                                potSlot.Itemstack.Collectible as BlockCookedContainer;
-                            ItemSlot targetSlot = byPlayer.InventoryManager.ActiveHotbarSlot;
-                            if (byPlayer.InventoryManager.ActiveHotbarSlot.StackSize > 1)
-                            {
-                                targetSlot = new DummySlot(targetSlot.TakeOut(1));
-                                byPlayer.InventoryManager.ActiveHotbarSlot.MarkDirty();
-                                blockPot.ServeIntoStack(targetSlot, potSlot, world);
-                                if (
-                                    !byPlayer.InventoryManager.TryGiveItemstack(
-                                        targetSlot.Itemstack,
-                                        true
-                                    )
-                                )
-                                {
-                                    world.SpawnItemEntity(
-                                        targetSlot.Itemstack,
-                                        byPlayer.Entity.Pos.XYZ
-                                    );
-                                }
-                            }
-                            else
-                                blockPot.ServeIntoStack(targetSlot, potSlot, world);
-                        }
-                        else if (
-                            !bef.inputSlot.Empty
-                            || byPlayer.InventoryManager.ActiveHotbarSlot.TryPutInto(
-                                api.World,
-                                bef.inputSlot,
-                                1
-                            ) == 0
-                        )
-                        {
-                            bef.OnPlayerRightClick(byPlayer, blockSel);
-                        }
-
-                        activated = true;
                     }
 
                     if (
@@ -840,6 +899,7 @@ namespace Alchemy
                 if (be is BlockEntityCauldronFirepit firepit)
                 {
                     firepit.Inventory[0].Itemstack = new ItemStack(obj, 4);
+                    firepit.EnsureCauldronInSlot();
                 }
             }
 
@@ -876,19 +936,22 @@ namespace Alchemy
                     world.BlockAccessor.GetBlockEntity(selection.Position) as BlockEntityFirepit;
                 ItemStack cauldronStack = bef?.inputSlot?.Itemstack;
                 bool hasSpoon = cauldronStack?.Attributes.HasAttribute("stirringSpoon") == true;
-                if (!hasSpoon)
-                {
-                    foreach (WorldInteraction wi in interactions)
-                        if (wi.ActionLangCode == "alchemy:blockhelp-cauldron-attachspoon")
-                            return [wi];
-                }
+                string target = hasSpoon
+                    ? "alchemy:blockhelp-cauldron-detachspoon"
+                    : "alchemy:blockhelp-cauldron-attachspoon";
+                foreach (WorldInteraction wi in interactions)
+                    if (wi.ActionLangCode == target)
+                        return [wi];
                 return [];
             }
 
             List<WorldInteraction> result = [];
             foreach (WorldInteraction wi in interactions)
             {
-                if (wi.ActionLangCode == "alchemy:blockhelp-cauldron-attachspoon")
+                if (
+                    wi.ActionLangCode == "alchemy:blockhelp-cauldron-attachspoon"
+                    || wi.ActionLangCode == "alchemy:blockhelp-cauldron-detachspoon"
+                )
                     continue;
                 result.Add(wi);
             }
@@ -964,6 +1027,16 @@ namespace Alchemy
             ItemSlot outputSlot
         )
         {
+            if (
+                cookingSlotsProvider is InventorySmelting smelting
+                && world.BlockAccessor.GetBlockEntity(smelting.pos)
+                    is not BlockEntityCauldronFirepit
+            )
+            {
+                base.DoSmelt(world, cookingSlotsProvider, inputSlot, outputSlot);
+                return;
+            }
+
             ItemStack[] stacks = GetCookingStacks(cookingSlotsProvider);
             CookingRecipe recipe = GetMatchingCookingRecipe(
                 world,
@@ -998,10 +1071,35 @@ namespace Alchemy
 
             outStack.StackSize *= quantityServings;
 
-            for (int i = 0; i < cookingSlotsProvider.Slots.Length; i++)
-                cookingSlotsProvider.Slots[i].Itemstack = null;
+            if (!outputSlot.Empty)
+            {
+                if (
+                    !outputSlot.Itemstack.Equals(
+                        world,
+                        outStack,
+                        GlobalConstants.IgnoredStackAttributes
+                    )
+                )
+                    return;
+                if (
+                    outputSlot.Itemstack.StackSize + outStack.StackSize
+                    > outputSlot.MaxSlotStackSize
+                )
+                    return;
 
-            outputSlot.Itemstack = outStack;
+                for (int i = 0; i < cookingSlotsProvider.Slots.Length; i++)
+                    cookingSlotsProvider.Slots[i].Itemstack = null;
+
+                outputSlot.Itemstack.StackSize += outStack.StackSize;
+            }
+            else
+            {
+                for (int i = 0; i < cookingSlotsProvider.Slots.Length; i++)
+                    cookingSlotsProvider.Slots[i].Itemstack = null;
+
+                outputSlot.Itemstack = outStack;
+            }
+
             outputSlot.MarkDirty();
         }
     }

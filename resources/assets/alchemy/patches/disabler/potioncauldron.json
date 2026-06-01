@@ -1,6 +1,6 @@
 [
     {
-        "file": "alchemy:blocktypes/potionbrewingcauldron.json",
+        "file": "alchemy:blocktypes/potioncauldron.json",
         "op": "addmerge",
         "path": "/enabled",
         "value": false,

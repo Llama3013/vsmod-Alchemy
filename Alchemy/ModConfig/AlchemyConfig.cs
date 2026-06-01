@@ -53,6 +53,8 @@ namespace Alchemy
         public bool AllowHerbRacks { get; set; } = true;
 
         public bool AllowPotionBrewingCauldron { get; set; } = true;
+        public bool AllowCauldronInVanillaFirepit { get; set; } = false;
+
         // public bool AllowPotionBrewingCauldronMold { get; set; } = true;
 
         // public bool AllowDecorativeRacks { get; set; } = true;

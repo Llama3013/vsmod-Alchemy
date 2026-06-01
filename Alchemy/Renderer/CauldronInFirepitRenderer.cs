@@ -47,9 +47,9 @@ namespace Alchemy
         private readonly float FirepitYOffset;
         private const float StirMinTemperature = 50f;
         private const float StirYOffset = 0.50f;
-        private const float RestYOffset = 0.37f;
-        private const float RestRadialOffsetX = -0.13f;
-        private const float RestRadialOffsetZ = 0.03f;
+        private const float RestYOffset = 0.41f;
+        private const float RestRadialOffsetX = -0.07f;
+        private const float RestRadialOffsetZ = 0.05f;
         private const float RestXTiltDeg = -10f;
         private const float BubbleMinTemperature = 100f;
         private const float BubbleMaxTemperature = 200f;
@@ -295,7 +295,7 @@ namespace Alchemy
                     .Translate(-0.25f - radialX, 0f, -0.25f - radialZ)
                     .RotateX(GameMath.DEG2RAD * (180f + xTilt))
                     .RotateZ(GameMath.DEG2RAD * 90f)
-                    .Scale(0.75f, 0.85f, 0.75f)
+                    .Scale(1, 1, 1)
                     .Translate(-0.7f, -0.4f, -0.7f)
                     .Values;
 
@@ -311,6 +311,7 @@ namespace Alchemy
         public void OnUpdate(float temperature)
         {
             temp = temperature;
+
             float soundIntensity = GameMath.Clamp((temp - 50) / 50, 0, 1);
             SetCookingSoundVolume(soundIntensity);
 

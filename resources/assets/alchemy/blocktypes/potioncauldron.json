@@ -1,5 +1,5 @@
 {
-  "code": "potionbrewingcauldron",
+  "code": "potioncauldron",
   "class": "BlockCauldronFirepit",
   "entityClass": "BlockEntityCauldronFirepit",
   "entityBehaviors": [{ "name": "FirepitAmbient" }, { "name": "TemperatureSensitive" }],
@@ -19,9 +19,9 @@
     "*-construct2": { "base": "alchemy:block/cauldron-construct2" },
     "*-construct3": { "base": "alchemy:block/cauldron-construct3" },
     "*-construct4": { "base": "alchemy:block/cauldron-construct4" },
-    "*-cold":       { "base": "alchemy:block/cauldron-cold" },
-    "*-extinct":    { "base": "alchemy:block/cauldron-extinct" },
-    "*-lit":        { "base": "alchemy:block/cauldron-lit" }
+    "*-cold": { "base": "alchemy:block/cauldron-cold" },
+    "*-extinct": { "base": "alchemy:block/cauldron-extinct" },
+    "*-lit": { "base": "alchemy:block/cauldron-lit" }
   },
   "textures": {
     "transparent": { "base": "game:block/transparent" },
@@ -47,16 +47,20 @@
   "attributes": {
     "randomColorTexture": "iron",
     "tempGlowMode": 1,
-    "mealContainer": true,
     "storageType": 1,
     "maxTemperature": 200,
     "isDirtyPot": true,
-    "inFirePitProps": { "transform": { "translation": { "y": 0 } } },
-    "dirtiedBlockCode": "alchemy:potionbrewingcauldron-{metal}-construct0",
+    "dirtiedBlockCode": "alchemy:potioncauldron-{metal}-construct0",
     "cookingContainerSlots": 4,
-    "maxContainerSlotStackSize": 4000,
+    "maxContainerSlotStackSize": 5000,
     "cookingSlotCapacityLitres": 50,
-    "maxServingSize": 50
+    "maxServingSize": 50,
+    "inFirePitProps": {
+      "transform": {
+        "translation": { "x": 0, "y": 0, "z": 0 }
+      },
+      "useFirepitModel": "Wide"
+    }
   },
   "lightAbsorption": 0,
   "lightHsvByType": {
@@ -176,13 +180,16 @@
     "*-construct0": { "general": ["*"], "alchemy": ["*"] }
   },
   "dropsByType": {
-    "*-construct0": [{ "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
-    "*-construct1": [{ "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
-    "*-construct2": [{ "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
-    "*-construct3": [{ "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
-    "*-construct4": [{ "type": "block", "code": "alchemy:potionbrewingcauldron-{metal}-construct0", "quantity": { "avg": 1 } }]
+    "*-construct0": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-construct1": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-construct2": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-construct3": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-construct4": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-cold": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-extinct": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }],
+    "*-lit": [{ "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0", "quantity": { "avg": 1 } }]
   },
-  "maxStackSize": 1,
+  "maxStackSize": 16,
   "resistance": 6,
   "sounds": {
     "place": "game:block/metaldoor-place",
@@ -193,47 +200,47 @@
   "sideopaque": { "all": false },
   "sidesolid": { "all": false },
   "collisionSelectionBoxes": [
-		{
-			"x1": 0.125,
-			"y1": 0.09375,
-			"z1": 0.125,
-			"x2": 0.875,
-			"y2": 0.15625,
-			"z2": 0.875
-		},
-		{
-			"x1": 0.125,
-			"y1": 0.15625,
-			"z1": 0.125,
-			"x2": 0.875,
-			"y2": 1,
-			"z2": 0.25
-		},
-		{
-			"x1": 0.125,
-			"y1": 0.15625,
-			"z1": 0.75,
-			"x2": 0.875,
-			"y2": 1,
-			"z2": 0.875
-		},
-		{
-			"x1": 0.125,
-			"y1": 0.15625,
-			"z1": 0.25,
-			"x2": 0.25,
-			"y2": 1,
-			"z2": 0.75
-		},
-		{
-			"x1": 0.75,
-			"y1": 0.15625,
-			"z1": 0.25,
-			"x2": 0.875,
-			"y2": 1,
-			"z2": 0.75
-		}
-	],
+    {
+      "x1": 0.125,
+      "y1": 0.09375,
+      "z1": 0.125,
+      "x2": 0.875,
+      "y2": 0.15625,
+      "z2": 0.875
+    },
+    {
+      "x1": 0.125,
+      "y1": 0.15625,
+      "z1": 0.125,
+      "x2": 0.875,
+      "y2": 1,
+      "z2": 0.25
+    },
+    {
+      "x1": 0.125,
+      "y1": 0.15625,
+      "z1": 0.75,
+      "x2": 0.875,
+      "y2": 1,
+      "z2": 0.875
+    },
+    {
+      "x1": 0.125,
+      "y1": 0.15625,
+      "z1": 0.25,
+      "x2": 0.25,
+      "y2": 1,
+      "z2": 0.75
+    },
+    {
+      "x1": 0.75,
+      "y1": 0.15625,
+      "z1": 0.25,
+      "x2": 0.875,
+      "y2": 1,
+      "z2": 0.75
+    }
+  ],
   "guiTransform": {
     "rotation": { "x": -22.6, "y": -68, "z": 0 },
     "scale": 1.1

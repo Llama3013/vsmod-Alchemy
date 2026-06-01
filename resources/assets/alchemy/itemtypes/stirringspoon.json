@@ -11,7 +11,13 @@
       }
     }
   ],
-  "maxStackSize": 1,
+  "attributes": {
+    "groundStorageTransform": {
+      "translation": { "x": 0, "y": 0.14, "z": -0.13 },
+      "rotation": { "x": 0, "y": 90, "z": -70 }
+    }
+  },
+  "maxStackSize": 16,
   "shape": { "base": "alchemy:item/stirringspoon" },
   "textures": {
     "material": { "base": "game:block/wood/debarked/oak" }

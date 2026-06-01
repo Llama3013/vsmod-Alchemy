@@ -14,7 +14,7 @@ namespace Alchemy
 {
     public class BlockEntityCauldronFirepit : BlockEntityFirepit
     {
-        public override string DialogTitle => Lang.Get("alchemy:block-potionbrewingcauldron");
+        public override string DialogTitle => Lang.Get("alchemy:block-potioncauldron");
 
         public override void Initialize(ICoreAPI api)
         {
@@ -51,13 +51,33 @@ namespace Alchemy
             CookingRecipe recipe = cauldronBlock.GetMatchingCookingRecipe(
                 Api.World,
                 cauldronBlock.GetCookingStacks(inv),
-                out _
+                out int quantityServings
             );
 
             if (recipe == null)
             {
                 inputStackCookingTime = 0;
                 return;
+            }
+
+            ItemStack expectedOutput = recipe.CooksInto?.ResolvedItemstack;
+            if (expectedOutput != null && !outputSlot.Empty)
+            {
+                ItemStack outTest = expectedOutput.Clone();
+                outTest.StackSize *= quantityServings;
+                if (
+                    !outputSlot.Itemstack.Equals(
+                        Api.World,
+                        outTest,
+                        GlobalConstants.IgnoredStackAttributes
+                    )
+                    || outputSlot.Itemstack.StackSize + outTest.StackSize
+                        > outputSlot.MaxSlotStackSize
+                )
+                {
+                    inputStackCookingTime = 0;
+                    return;
+                }
             }
 
             if (
@@ -167,7 +187,7 @@ namespace Alchemy
             return true;
         }
 
-        private void EnsureCauldronInSlot()
+        public void EnsureCauldronInSlot()
         {
             if (Api == null)
                 return;
@@ -175,7 +195,9 @@ namespace Alchemy
                 return;
 
             Block block = Api.World.BlockAccessor.GetBlock(Pos);
-            if (block is not BlockCauldronFirepit)
+            if (block is not BlockCauldronFirepit cauldronBlock)
+                return;
+            if (cauldronBlock.Stage < 5)
                 return;
 
             float savedTemp =
@@ -222,7 +244,33 @@ namespace Alchemy
                 dialogTree.RemoveAttribute("oreTemperature");
             }
 
-            dialogTree.SetString("outputText", inv.GetOutputText());
+            string outputText = inv.GetOutputText();
+            if (Block is BlockCauldronFirepit cauldronBlock && !outputSlot.Empty)
+            {
+                CookingRecipe recipe = cauldronBlock.GetMatchingCookingRecipe(
+                    Api.World,
+                    cauldronBlock.GetCookingStacks(inv),
+                    out int qty
+                );
+                if (recipe?.CooksInto?.ResolvedItemstack != null)
+                {
+                    ItemStack outTest = recipe.CooksInto.ResolvedItemstack.Clone();
+                    outTest.StackSize *= qty;
+                    if (
+                        !outputSlot.Itemstack.Equals(
+                            Api.World,
+                            outTest,
+                            GlobalConstants.IgnoredStackAttributes
+                        )
+                        || outputSlot.Itemstack.StackSize + outTest.StackSize
+                            > outputSlot.MaxSlotStackSize
+                    )
+                    {
+                        outputText = Lang.Get("alchemy:cauldron-warning-output-full");
+                    }
+                }
+            }
+            dialogTree.SetString("outputText", outputText);
             dialogTree.SetString("spoonStatus", GetSpoonStatusVtml());
             dialogTree.SetInt("haveCookingContainer", inv.HaveCookingContainer ? 1 : 0);
             dialogTree.SetInt("quantityCookingSlots", inv.CookingSlots.Length);

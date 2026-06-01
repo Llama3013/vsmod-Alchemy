@@ -1,10 +1,11 @@
 [
   {
-    "ingredientPattern": "S,S,S",
+    "ingredientPattern": "S,S,B",
     "width": 1,
     "height": 3,
     "ingredients": {
-      "S": { "type": "item", "code": "game:stick" }
+      "S": { "type": "item", "code": "game:stick" },
+      "B": { "type": "item", "code": "alchemy:potionbase-basic" }
     },
     "output": { "type": "item", "code": "alchemy:stirringspoon", "quantity": 1 }
   }

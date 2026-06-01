@@ -1,8 +1,6 @@
 {
   "code": "stirringspoon-glass",
   "class": "ItemStirringSpoon",
-  "maxStackSize": 1,
-  "shape": { "base": "alchemy:item/stirringspoon" },
   "behaviors": [
     {
       "name": "GroundStorable",
@@ -19,6 +17,14 @@
       "states": ["plain", "quartz", "blue", "green", "red", "violet", "yellow", "brown", "pink", "smoky"]
     }
   ],
+  "attributes": {
+    "groundStorageTransform": {
+      "translation": { "x": 0, "y": 0.14, "z": -0.13 },
+      "rotation": { "x": 0, "y": 90, "z": -70 }
+    }
+  },
+  "maxStackSize": 16,
+  "shape": { "base": "alchemy:item/stirringspoon" },
   "texturesByType": {
     "*-plain": { "material": { "base": "game:block/glass/plain" } },
     "*-quartz": { "material": { "base": "game:block/glass/quartz" } },

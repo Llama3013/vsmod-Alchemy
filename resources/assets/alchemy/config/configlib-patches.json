@@ -959,7 +959,14 @@
                 "ingui": "alchemy:AllowPotionBrewingCauldron",
                 "weight": 4.25,
                 "comment": "alchemy:AllowPotionBrewingCauldron-Comment",
-                "default": true
+                "default": false
+            },
+            "ALLOWCAULDRONINVANILLAFIREPIT": {
+                "name": "AllowCauldronInVanillaFirepit",
+                "ingui": "alchemy:AllowCauldronInVanillaFirepit",
+                "weight": 4.27,
+                "comment": "alchemy:AllowCauldronInVanillaFirepit-Comment",
+                "default": false
             },
             // "ALLOWPOTIONBREWINGCAULDRONMOLD": {
             //     "name": "AllowPotionBrewingCauldronMold",

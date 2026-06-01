@@ -10,7 +10,7 @@
       "states": [
         "herbracktop",
         "herbrackhook"
-        // "potionbrewingcauldron"
+        // "potioncauldron"
       ]
     }
   ],
@@ -89,12 +89,12 @@
   "sounds": { "walk": "game:walk/stone" },
   "collisionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
-    "*-potionbrewingcauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
+    "*-potioncauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "selectionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
-    "*-potionbrewingcauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
+    "*-potioncauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "sideopaque": { "all": false },
