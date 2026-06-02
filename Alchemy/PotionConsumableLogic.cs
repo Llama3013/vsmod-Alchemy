@@ -224,6 +224,197 @@ namespace Alchemy
             };
         }
 
+        private static void ApplyDrinkingSideEffects(
+            EntityPlayer playerEntity,
+            string potionId,
+            float strengthMul
+        )
+        {
+            AlchemyConfig cfg = AlchemyConfig.Loaded;
+
+            (float damage, float intox, float psych, float satLoss) = potionId switch
+            {
+                "archerpotionid" => (
+                    cfg.ArcherPotionDrinkingDamage,
+                    cfg.ArcherPotionDrinkingIntoxication,
+                    cfg.ArcherPotionDrinkingPsychedelic,
+                    cfg.ArcherPotionDrinkingSaturationLoss
+                ),
+                "healingeffectpotionid" => (
+                    cfg.HealingEffectPotionDrinkingDamage,
+                    cfg.HealingEffectPotionDrinkingIntoxication,
+                    cfg.HealingEffectPotionDrinkingPsychedelic,
+                    cfg.HealingEffectPotionDrinkingSaturationLoss
+                ),
+                "hungerenhancepotionid" => (
+                    cfg.HungerEnhancePotionDrinkingDamage,
+                    cfg.HungerEnhancePotionDrinkingIntoxication,
+                    cfg.HungerEnhancePotionDrinkingPsychedelic,
+                    cfg.HungerEnhancePotionDrinkingSaturationLoss
+                ),
+                "hungersupresspotionid" => (
+                    cfg.HungerSupressPotionDrinkingDamage,
+                    cfg.HungerSupressPotionDrinkingIntoxication,
+                    cfg.HungerSupressPotionDrinkingPsychedelic,
+                    cfg.HungerSupressPotionDrinkingSaturationLoss
+                ),
+                "hunterpotionid" => (
+                    cfg.HunterPotionDrinkingDamage,
+                    cfg.HunterPotionDrinkingIntoxication,
+                    cfg.HunterPotionDrinkingPsychedelic,
+                    cfg.HunterPotionDrinkingSaturationLoss
+                ),
+                "looterpotionid" => (
+                    cfg.LooterPotionDrinkingDamage,
+                    cfg.LooterPotionDrinkingIntoxication,
+                    cfg.LooterPotionDrinkingPsychedelic,
+                    cfg.LooterPotionDrinkingSaturationLoss
+                ),
+                "meleepotionid" => (
+                    cfg.MeleePotionDrinkingDamage,
+                    cfg.MeleePotionDrinkingIntoxication,
+                    cfg.MeleePotionDrinkingPsychedelic,
+                    cfg.MeleePotionDrinkingSaturationLoss
+                ),
+                "miningpotionid" => (
+                    cfg.MiningPotionDrinkingDamage,
+                    cfg.MiningPotionDrinkingIntoxication,
+                    cfg.MiningPotionDrinkingPsychedelic,
+                    cfg.MiningPotionDrinkingSaturationLoss
+                ),
+                "poisontickpotionid" => (
+                    cfg.PoisonPotionDrinkingDamage,
+                    cfg.PoisonPotionDrinkingIntoxication,
+                    cfg.PoisonPotionDrinkingPsychedelic,
+                    cfg.PoisonPotionDrinkingSaturationLoss
+                ),
+                "predatorpotionid" => (
+                    cfg.PredatorPotionDrinkingDamage,
+                    cfg.PredatorPotionDrinkingIntoxication,
+                    cfg.PredatorPotionDrinkingPsychedelic,
+                    cfg.PredatorPotionDrinkingSaturationLoss
+                ),
+                "regentickpotionid" => (
+                    cfg.RegenPotionDrinkingDamage,
+                    cfg.RegenPotionDrinkingIntoxication,
+                    cfg.RegenPotionDrinkingPsychedelic,
+                    cfg.RegenPotionDrinkingSaturationLoss
+                ),
+                "scentmaskpotionid" => (
+                    cfg.ScentMaskPotionDrinkingDamage,
+                    cfg.ScentMaskPotionDrinkingIntoxication,
+                    cfg.ScentMaskPotionDrinkingPsychedelic,
+                    cfg.ScentMaskPotionDrinkingSaturationLoss
+                ),
+                "speedpotionid" => (
+                    cfg.SpeedPotionDrinkingDamage,
+                    cfg.SpeedPotionDrinkingIntoxication,
+                    cfg.SpeedPotionDrinkingPsychedelic,
+                    cfg.SpeedPotionDrinkingSaturationLoss
+                ),
+                "vitalitypotionid" => (
+                    cfg.VitalityPotionDrinkingDamage,
+                    cfg.VitalityPotionDrinkingIntoxication,
+                    cfg.VitalityPotionDrinkingPsychedelic,
+                    cfg.VitalityPotionDrinkingSaturationLoss
+                ),
+                "glowpotionid" => (
+                    cfg.GlowPotionDrinkingDamage,
+                    cfg.GlowPotionDrinkingIntoxication,
+                    cfg.GlowPotionDrinkingPsychedelic,
+                    cfg.GlowPotionDrinkingSaturationLoss
+                ),
+                "waterbreathepotionid" => (
+                    cfg.WaterBreathePotionDrinkingDamage,
+                    cfg.WaterBreathePotionDrinkingIntoxication,
+                    cfg.WaterBreathePotionDrinkingPsychedelic,
+                    cfg.WaterBreathePotionDrinkingSaturationLoss
+                ),
+                "nutritionpotionid" => (
+                    cfg.NutritionPotionDrinkingDamage,
+                    cfg.NutritionPotionDrinkingIntoxication,
+                    cfg.NutritionPotionDrinkingPsychedelic,
+                    cfg.NutritionPotionDrinkingSaturationLoss
+                ),
+                "recallpotionid" => (
+                    cfg.RecallPotionDrinkingDamage,
+                    cfg.RecallPotionDrinkingIntoxication,
+                    cfg.RecallPotionDrinkingPsychedelic,
+                    cfg.RecallPotionDrinkingSaturationLoss
+                ),
+                "temporalpotionid" => (
+                    cfg.TemporalPotionDrinkingDamage,
+                    cfg.TemporalPotionDrinkingIntoxication,
+                    cfg.TemporalPotionDrinkingPsychedelic,
+                    cfg.TemporalPotionDrinkingSaturationLoss
+                ),
+                "reshapepotionid" => (
+                    cfg.ReshapePotionDrinkingDamage,
+                    cfg.ReshapePotionDrinkingIntoxication,
+                    cfg.ReshapePotionDrinkingPsychedelic,
+                    cfg.ReshapePotionDrinkingSaturationLoss
+                ),
+                "growpotionid" => (
+                    cfg.GrowPotionDrinkingDamage,
+                    cfg.GrowPotionDrinkingIntoxication,
+                    cfg.GrowPotionDrinkingPsychedelic,
+                    cfg.GrowPotionDrinkingSaturationLoss
+                ),
+                "shrinkpotionid" => (
+                    cfg.ShrinkPotionDrinkingDamage,
+                    cfg.ShrinkPotionDrinkingIntoxication,
+                    cfg.ShrinkPotionDrinkingPsychedelic,
+                    cfg.ShrinkPotionDrinkingSaturationLoss
+                ),
+                "fallpotionid" => (
+                    cfg.FallPotionDrinkingDamage,
+                    cfg.FallPotionDrinkingIntoxication,
+                    cfg.FallPotionDrinkingPsychedelic,
+                    cfg.FallPotionDrinkingSaturationLoss
+                ),
+                "climbpotionid" => (
+                    cfg.ClimbPotionDrinkingDamage,
+                    cfg.ClimbPotionDrinkingIntoxication,
+                    cfg.ClimbPotionDrinkingPsychedelic,
+                    cfg.ClimbPotionDrinkingSaturationLoss
+                ),
+                _ => (0f, 0f, 0f, 0f),
+            };
+
+            float totalIntox = cfg.DrinkingPotionIntoxicationAmount + intox * strengthMul;
+            float totalPsych = cfg.DrinkingPotionPsychedelicAmount + psych * strengthMul;
+            float totalSatLoss = cfg.DrinkingPotionSaturationLossAmount + satLoss * strengthMul;
+            float totalDamage = cfg.DrinkingPotionDamageAmount + damage * strengthMul;
+
+            if (totalIntox > 0)
+            {
+                float current = playerEntity.WatchedAttributes.GetFloat("intoxication");
+                playerEntity.WatchedAttributes.SetFloat(
+                    "intoxication",
+                    Math.Min(1.1f, current + totalIntox)
+                );
+            }
+            if (totalPsych > 0)
+            {
+                float current = playerEntity.WatchedAttributes.GetFloat("psychedelic");
+                playerEntity.WatchedAttributes.SetFloat(
+                    "psychedelic",
+                    Math.Min(2.0f, current + totalPsych)
+                );
+            }
+            if (totalSatLoss > 0)
+                playerEntity.ReceiveSaturation(-totalSatLoss);
+            if (totalDamage > 0)
+                playerEntity.ReceiveDamage(
+                    new DamageSource
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type = EnumDamageType.Poison,
+                    },
+                    totalDamage
+                );
+        }
+
         private static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
         {
             if (!weaponMeleeTagSetCached)
@@ -523,38 +714,7 @@ namespace Alchemy
                 return false;
             }
 
-            AlchemyConfig cfg = AlchemyConfig.Loaded;
-            if (cfg.DrinkingPotionIntoxicationAmount > 0)
-            {
-                float intox = playerEntity.WatchedAttributes.GetFloat("intoxication");
-                playerEntity.WatchedAttributes.SetFloat(
-                    "intoxication",
-                    Math.Min(1.1f, intox + cfg.DrinkingPotionIntoxicationAmount)
-                );
-            }
-            if (cfg.DrinkingPotionPsychedelicAmount > 0)
-            {
-                float psyche = playerEntity.WatchedAttributes.GetFloat("psychedelic");
-                playerEntity.WatchedAttributes.SetFloat(
-                    "psychedelic",
-                    Math.Min(2.0f, psyche + cfg.DrinkingPotionPsychedelicAmount)
-                );
-            }
-            if (cfg.DrinkingPotionSaturationLossAmount > 0)
-            {
-                playerEntity.ReceiveSaturation(-cfg.DrinkingPotionSaturationLossAmount);
-            }
-            if (cfg.DrinkingPotionDamageAmount > 0)
-            {
-                playerEntity.ReceiveDamage(
-                    new DamageSource
-                    {
-                        Source = EnumDamageSource.Internal,
-                        Type = EnumDamageType.Poison,
-                    },
-                    cfg.DrinkingPotionDamageAmount
-                );
-            }
+            ApplyDrinkingSideEffects(playerEntity, data.PotionId, strengthMul);
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,

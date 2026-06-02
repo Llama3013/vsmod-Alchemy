@@ -143,7 +143,7 @@ namespace Alchemy
 
             string blockKey = hasIngredients ? GetSpoonBlockReason(cauldronStack, inv) : null;
             if (blockKey != null)
-                return spoonLine + "\n" + $"<font color=\"#ff8844\">{Lang.Get(blockKey)}</font>";
+                return $"<font color=\"#ff8844\">{Lang.Get(blockKey)}</font>";
 
             return spoonLine;
         }
@@ -281,57 +281,69 @@ namespace Alchemy
         public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator) =>
             false;
 
+        private void DropStirringSpoon()
+        {
+            if (Api?.Side != EnumAppSide.Server)
+                return;
+            ItemStack cauldronStack = Inventory[1].Itemstack;
+            if (cauldronStack?.Attributes.HasAttribute("stirringSpoon") != true)
+                return;
+            ItemStack stickStack = (
+                cauldronStack.Attributes["stirringSpoon"] as ItemstackAttribute
+            )?.value?.Clone();
+            if (stickStack == null)
+                return;
+            stickStack.ResolveBlockOrItem(Api.World);
+            if (stickStack.StackSize > 0 && (stickStack.Item != null || stickStack.Block != null))
+                Api.World.SpawnItemEntity(stickStack, Pos.ToVec3d().Add(0.5, 1.0, 0.5));
+        }
+
+        private void DropFirewoodGrass()
+        {
+            if (Api?.Side != EnumAppSide.Server)
+                return;
+            // construct1 = grass only, construct2 = grass+1 firewood, construct3 = grass+2, construct4 = grass+3
+            int constructStage = Block?.Variant["burnstate"] switch
+            {
+                "construct1" => 1,
+                "construct2" => 2,
+                "construct3" => 3,
+                "construct4" => 4,
+                _ => 0,
+            };
+            if (constructStage >= 1)
+            {
+                Item grass = Api.World.GetItem(new AssetLocation("drygrass"));
+                if (grass != null)
+                    Api.World.SpawnItemEntity(
+                        new ItemStack(grass),
+                        Pos.ToVec3d().Add(0.5, 0.5, 0.5)
+                    );
+            }
+            int firewoodCount = constructStage - 1;
+            if (firewoodCount > 0)
+            {
+                Item firewood = Api.World.GetItem(new AssetLocation("firewood"));
+                if (firewood != null)
+                    Api.World.SpawnItemEntity(
+                        new ItemStack(firewood, firewoodCount),
+                        Pos.ToVec3d().Add(0.5, 0.5, 0.5)
+                    );
+            }
+        }
+
+        public override void OnBlockBroken(IPlayer byPlayer = null)
+        {
+            DropStirringSpoon();
+            DropFirewoodGrass();
+            Inventory[1].Itemstack = null;
+            base.OnBlockBroken(byPlayer);
+        }
+
         public override void OnBlockRemoved()
         {
-            if (Api?.Side == EnumAppSide.Server)
-            {
-                ItemStack cauldronStack = Inventory[1].Itemstack;
-                if (cauldronStack?.Attributes.HasAttribute("stirringSpoon") == true)
-                {
-                    ItemStack stickStack = (
-                        cauldronStack.Attributes["stirringSpoon"] as ItemstackAttribute
-                    )?.value?.Clone();
-                    if (stickStack != null)
-                    {
-                        stickStack.ResolveBlockOrItem(Api.World);
-                        if (
-                            stickStack.StackSize > 0
-                            && (stickStack.Item != null || stickStack.Block != null)
-                        )
-                            Api.World.SpawnItemEntity(stickStack, Pos.ToVec3d().Add(0.5, 1.0, 0.5));
-                    }
-                }
-
-                // construct1 = grass only, construct2 = grass+1 firewood, construct3 = grass+2, construct4 = grass+3
-                int constructStage = Block?.Variant["burnstate"] switch
-                {
-                    "construct1" => 1,
-                    "construct2" => 2,
-                    "construct3" => 3,
-                    "construct4" => 4,
-                    _ => 0,
-                };
-                if (constructStage >= 1)
-                {
-                    Item grass = Api.World.GetItem(new AssetLocation("drygrass"));
-                    if (grass != null)
-                        Api.World.SpawnItemEntity(
-                            new ItemStack(grass),
-                            Pos.ToVec3d().Add(0.5, 0.5, 0.5)
-                        );
-                }
-                int firewoodCount = constructStage - 1;
-                if (firewoodCount > 0)
-                {
-                    Item firewood = Api.World.GetItem(new AssetLocation("firewood"));
-                    if (firewood != null)
-                        Api.World.SpawnItemEntity(
-                            new ItemStack(firewood, firewoodCount),
-                            Pos.ToVec3d().Add(0.5, 0.5, 0.5)
-                        );
-                }
-            }
-
+            DropStirringSpoon();
+            DropFirewoodGrass();
             Inventory[1].Itemstack = null;
             base.OnBlockRemoved();
         }

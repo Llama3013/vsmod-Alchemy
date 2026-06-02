@@ -21,7 +21,8 @@
     "*-construct4": { "base": "alchemy:block/cauldron-construct4" },
     "*-cold": { "base": "alchemy:block/cauldron-cold" },
     "*-extinct": { "base": "alchemy:block/cauldron-extinct" },
-    "*-lit": { "base": "alchemy:block/cauldron-lit" }
+    "*-lit": { "base": "alchemy:block/cauldron-lit" },
+    "*": { "base": "alchemy:block/cauldron-construct0" }
   },
   "textures": {
     "transparent": { "base": "game:block/transparent" },
@@ -199,7 +200,33 @@
   },
   "sideopaque": { "all": false },
   "sidesolid": { "all": false },
-  "collisionSelectionBoxes": [
+  "selectionBoxes": [
+    {
+      "x1": 0.125,
+      "y1": 0.140625,
+      "z1": 0.125,
+      "x2": 0.875,
+      "y2": 0.828125,
+      "z2": 0.875
+    },
+    {
+      "x1": 0.1875,
+      "y1": 0.828125,
+      "z1": 0.1875,
+      "x2": 0.8125,
+      "y2": 0.9375,
+      "z2": 0.8125
+    },
+    {
+      "x1": 0.125,
+      "y1": 0.9375,
+      "z1": 0.125,
+      "x2": 0.875,
+      "y2": 1,
+      "z2": 0.875
+    }
+  ],
+  "collisionBoxes": [
     {
       "x1": 0.125,
       "y1": 0.09375,

@@ -241,101 +241,142 @@ namespace Alchemy
 
             if (ctx.Effects != null)
             {
+                int headerStart = dsc.Length;
                 dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
-                if (ctx.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue))
+                int headerEnd = dsc.Length;
+                if (ctx.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue) && rWvalue != 0f)
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-archer-accuracy-effect",
                             Math.Round(rWvalue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("animalLootDropRate", out float aLValue))
+                if (
+                    ctx.Effects.TryGetValue("animalLootDropRate", out float aLValue)
+                    && aLValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-loot-effect", Math.Round(aLValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("animalHarvestingTime", out float ahValue))
+                if (
+                    ctx.Effects.TryGetValue("animalHarvestingTime", out float ahValue)
+                    && ahValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-animal-harvest-effect",
                             Math.Round(ahValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("animalSeekingRange", out float aSValue))
+                if (
+                    ctx.Effects.TryGetValue("animalSeekingRange", out float aSValue)
+                    && aSValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-seek-effect", Math.Round(aSValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue))
+                if (
+                    ctx.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue)
+                    && mHEValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-max-health-effect", Math.Round(mHEValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("forageDropRate", out float fDValue))
+                if (ctx.Effects.TryGetValue("forageDropRate", out float fDValue) && fDValue != 0f)
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-forage-amount-effect",
                             Math.Round(fDValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("healingeffectivness", out float hEValue))
+                if (
+                    ctx.Effects.TryGetValue("healingeffectivness", out float hEValue)
+                    && hEValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-heal-effectiveness-effect",
                             Math.Round(hEValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("hungerrate", out float hRValue))
+                if (ctx.Effects.TryGetValue("hungerrate", out float hRValue) && hRValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-hunger-rate-effect", Math.Round(hRValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue))
+                if (
+                    ctx.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue)
+                    && mWValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-melee-damage-effect", Math.Round(mWValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("mechanicalsDamage", out float mDValue))
+                if (
+                    ctx.Effects.TryGetValue("mechanicalsDamage", out float mDValue)
+                    && mDValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mech-damage-effect", Math.Round(mDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("miningSpeedMul", out float mSValue))
+                if (ctx.Effects.TryGetValue("miningSpeedMul", out float mSValue) && mSValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mining-speed-effect", Math.Round(mSValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("oreDropRate", out float oDValue))
+                if (ctx.Effects.TryGetValue("oreDropRate", out float oDValue) && oDValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-ore-amount-effect", Math.Round(oDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue))
+                if (
+                    ctx.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue)
+                    && rWDValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-archer-damage-effect",
                             Math.Round(rWDValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue))
+                if (
+                    ctx.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue)
+                    && rWSValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-archer-speed-effect",
                             Math.Round(rWSValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("rustyGearDropRate", out float rGDValue))
+                if (
+                    ctx.Effects.TryGetValue("rustyGearDropRate", out float rGDValue)
+                    && rGDValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-gear-amount-effect", Math.Round(rGDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("walkspeed", out float wSValue))
+                if (ctx.Effects.TryGetValue("walkspeed", out float wSValue) && wSValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-walk-speed-effect", Math.Round(wSValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue))
+                if (
+                    ctx.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue)
+                    && vCDValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-vessel-amount-effect",
                             Math.Round(vCDValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("wildCropDropRate", out float wCDValue))
+                if (
+                    ctx.Effects.TryGetValue("wildCropDropRate", out float wCDValue)
+                    && wCDValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-wild-crop-effect", Math.Round(wCDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue))
+                if (
+                    ctx.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue)
+                    && wVLValue != 0f
+                )
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-whole-vessel-effect",
@@ -368,6 +409,9 @@ namespace Alchemy
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-fall"));
                 if (ctx.CanClimbAnywhere)
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-climb"));
+
+                if (dsc.Length == headerEnd)
+                    dsc.Remove(headerStart, headerEnd - headerStart);
             }
 
             if (ctx.Health is > 0.01f or < -0.01f)

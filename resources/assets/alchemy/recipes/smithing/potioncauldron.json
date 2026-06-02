@@ -42,6 +42,6 @@
 //     ]
 //   ],
 //   "name": "Potion Brewing Cauldron",
-//   "output": { "type": "block", "code": "alchemy:potioncauldron-{metal}-construct0" },
-//   "code": "alchemy:potioncauldron-{metal}-construct0"
+//   "output": { "type": "block", "code": "alchemy:potioncauldron-{metal}-extinct" },
+//   "code": "alchemy:potioncauldron-{metal}-extinct"
 // }
