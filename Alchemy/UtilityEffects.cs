@@ -183,6 +183,7 @@ namespace Alchemy
         public static void ApplyReshapePotion(IServerPlayer serverPlayer)
         {
             serverPlayer.Entity.WatchedAttributes.SetBool("allowcharselonce", true);
+            AlchemyMod.serverChannel?.SendPacket(new OpenCharSelPacket(), serverPlayer);
         }
 
         // Zeroes potion size WatchedAttributes without touching the collision box.

@@ -1191,14 +1191,14 @@
                 "ingui": "alchemy:AllowGrowPotion",
                 "weight": 1.26,
                 "comment": "alchemy:AllowGrowPotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWSHRINKPOTION": {
                 "name": "AllowShrinkPotion",
                 "ingui": "alchemy:AllowShrinkPotion",
                 "weight": 1.27,
                 "comment": "alchemy:AllowShrinkPotion-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWFALLPOTION": {
                 "name": "AllowFallPotion",
@@ -1282,7 +1282,7 @@
                 "ingui": "alchemy:AllowPotionBrewingCauldron",
                 "weight": 4.25,
                 "comment": "alchemy:AllowPotionBrewingCauldron-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWCAULDRONINVANILLAFIREPIT": {
                 "name": "AllowCauldronInVanillaFirepit",
@@ -1485,7 +1485,7 @@
                 "ingui": "alchemy:AllowReshapePotionRecipe",
                 "weight": 4.51,
                 "comment": "alchemy:AllowReshapePotionRecipe-Comment",
-                "default": false
+                "default": true
             },
             "ALLOWGROWPOTIONRECIPE": {
                 "name": "AllowGrowPotionRecipe",

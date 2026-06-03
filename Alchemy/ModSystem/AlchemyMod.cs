@@ -14,14 +14,16 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class AlchemyMod : Vintagestory.API.Common.ModSystem
+    public class AlchemyMod : ModSystem
     {
-        private IServerNetworkChannel serverChannel;
+        internal static IServerNetworkChannel serverChannel;
+        private static GuiDialogCreateCharacter createCharDlg;
         private ICoreAPI api;
 
         public static bool PlayerModelLibPresent { get; private set; }
@@ -287,6 +289,7 @@ namespace Alchemy
         {
             api.Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
+                .RegisterMessageType<OpenCharSelPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
                     AlchemyConfig.Loaded.AllowArcherPotion = packet.AllowArcherPotion;
@@ -796,6 +799,25 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received AllowClimbPotionRecipe of {packet.AllowClimbPotionRecipe} from server"
                     );
+                })
+                .SetMessageHandler<OpenCharSelPacket>(_ =>
+                {
+                    // Pretty much a replica of CharacterSystem.onCharSelCmd. I would just call it but its set to private
+                    bool allowcharselonce =
+                        api.World.Player.Entity.WatchedAttributes.GetBool("allowcharselonce")
+                        || api.World.Player.WorldData.CurrentGameMode == EnumGameMode.Creative;
+
+                    if (createCharDlg == null && allowcharselonce)
+                    {
+                        CharacterSystem charSystem = api.ModLoader.GetModSystem<CharacterSystem>();
+                        createCharDlg = new GuiDialogCreateCharacter(api, charSystem);
+                        createCharDlg.PrepAndOpen();
+                    }
+
+                    if (!createCharDlg.IsOpened())
+                    {
+                        createCharDlg.TryOpen();
+                    }
                 });
             api.Event.PlayerEntitySpawn += iPlayer =>
             {
@@ -831,6 +853,7 @@ namespace Alchemy
             serverChannel = api
                 .Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
+                .RegisterMessageType<OpenCharSelPacket>()
                 .SetMessageHandler<SyncClientPacket>(
                     (player, packet) => {
                         /* do nothing. idk why this handler is even needed, but it is */

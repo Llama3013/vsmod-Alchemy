@@ -138,6 +138,24 @@ namespace Alchemy
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
 
+            // For some reason when the gui for reshape opens the character continues drinking. This is used to prevent it. It's in both start again and stop because for whatever reason its already started when the GUI opens.
+            if (
+                data.PotionId == "reshapepotionid"
+                && byEntity.World.Side == EnumAppSide.Server
+                && byEntity.WatchedAttributes.GetBool("allowcharselonce")
+            )
+            {
+                handling = EnumHandHandling.PreventDefaultAction;
+                bhHandling = EnumHandling.PreventDefault;
+                if (byEntity is EntityPlayer { Player: IServerPlayer serverPlayer })
+                    serverPlayer.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:reshape-block"),
+                        EnumChatType.Notification
+                    );
+                return;
+            }
+
             // Recall potion can't be used while mounted on a sailed boat
             if (
                 data.PotionId == "recallpotionid"
@@ -212,7 +230,16 @@ namespace Alchemy
         {
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
-
+            // For some reason when the gui for reshape opens the character continues drinking. This is used to prevent it. It's in both start and stop because for whatever reason its already started again when the GUI opens.
+            if (
+                data.PotionId == "reshapepotionid"
+                && byEntity.World.Side == EnumAppSide.Server
+                && byEntity.WatchedAttributes.GetBool("allowcharselonce")
+            )
+            {
+                handling = EnumHandling.PreventDefault;
+                return;
+            }
             handling = EnumHandling.PreventDefault;
             PotionConsumableLogic.HandleDrinkStop(
                 secondsUsed,

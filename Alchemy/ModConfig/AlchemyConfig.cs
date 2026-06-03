@@ -15,8 +15,8 @@ namespace Alchemy
         public bool AllowNutritionPotion { get; set; } = true;
         public bool AllowTemporalPotion { get; set; } = true;
         public bool AllowReshapePotion { get; set; } = true;
-        public bool AllowGrowPotion { get; set; } = false;
-        public bool AllowShrinkPotion { get; set; } = false;
+        public bool AllowGrowPotion { get; set; } = true;
+        public bool AllowShrinkPotion { get; set; } = true;
 
         public bool AllowArcherPotion { get; set; } = true;
         public bool AllowHealingEffectPotion { get; set; } = true;
@@ -32,7 +32,7 @@ namespace Alchemy
         public bool AllowScentMaskPotion { get; set; } = true;
         public bool AllowSpeedPotion { get; set; } = true;
         public bool AllowVitalityPotion { get; set; } = true;
-        public bool AllowReshapePotionRecipe { get; set; } = false;
+        public bool AllowReshapePotionRecipe { get; set; } = true;
         public bool AllowGrowPotionRecipe { get; set; } = true;
         public bool AllowShrinkPotionRecipe { get; set; } = true;
         public bool AllowToxicMushrooms { get; set; } = true;
