@@ -20,7 +20,7 @@ namespace Alchemy
             IChatCommand cmd = api
                 .ChatCommands.Create("alchemymigrate")
                 .WithDescription(
-                    "Multiply all alchemy liquid stack sizes by 25 (itemsPerLitre migration from 4 to 100). Subcommands: all, barrels [radius], blockentities [radius], players, player <name>."
+                    "Multiply all alchemy liquid stack sizes by 25 (itemsPerLitre migration from 4 to 100). Subcommands: all, barrels [radius], blockentities [radius], players, player [name]."
                 )
                 .RequiresPrivilege(Privilege.controlserver);
 
