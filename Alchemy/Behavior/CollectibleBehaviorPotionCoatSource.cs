@@ -37,10 +37,11 @@ namespace Alchemy
                     return;
 
                 ItemStack contentStack = container.GetContent(slot.Itemstack);
-                JsonObject potion = contentStack?.ItemAttributes?["potioninfo"];
-                string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-                string strength = "weak";
-                contentStack?.Collectible?.Variant?.TryGetValue("strength", out strength);
+                PotionConsumableLogic.TryReadPotionInfo(
+                    contentStack,
+                    out string potionId,
+                    out string strength
+                );
 
                 PotionConsumableLogic.HandleWeaponCoatingIdle(
                     byEntity.Api,
@@ -64,10 +65,11 @@ namespace Alchemy
             }
             else
             {
-                JsonObject potion = slot.Itemstack.ItemAttributes?["potioninfo"];
-                string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-                string strength = "weak";
-                slot.Itemstack.Collectible?.Variant?.TryGetValue("strength", out strength);
+                PotionConsumableLogic.TryReadPotionInfo(
+                    slot.Itemstack,
+                    out string potionId,
+                    out string strength
+                );
 
                 PotionConsumableLogic.HandleWeaponCoatingIdle(
                     byEntity.Api,

@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
+using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
@@ -17,7 +19,9 @@ namespace Alchemy
         private string animation;
         private string sound;
         private float consumeLitres;
+        private float drinkCheckLitres;
         private float consumeTime;
+        private static readonly HashSet<long> drinkResolvedEntities = [];
 
         public override void Initialize(JsonObject properties)
         {
@@ -26,6 +30,7 @@ namespace Alchemy
             animation = properties["animation"].AsString("eat");
             sound = properties["sound"].AsString("alchemy:sounds/player/drink");
             consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
+            drinkCheckLitres = properties["drinkCheckLitres"].AsFloat(0.24f);
             float defaultConsumeTime =
                 source == "liquidcontent"
                     ? AlchemyConfig.Loaded.PotionDrinkTime
@@ -37,53 +42,28 @@ namespace Alchemy
         {
             data = null;
 
-            if (source == "liquidcontent")
+            ItemStack stack =
+                source == "liquidcontent"
+                    ? (collObj as BlockLiquidContainerBase)?.GetContent(slot.Itemstack)
+                    : slot.Itemstack;
+
+            if (
+                !PotionConsumableLogic.TryReadPotionInfo(
+                    stack,
+                    out string potionId,
+                    out string strength
+                )
+            )
+                return false;
+
+            data = new PotionData
             {
-                if (collObj is not BlockLiquidContainerBase container)
-                    return false;
-
-                ItemStack content = container.GetContent(slot.Itemstack);
-                if (content == null)
-                    return false;
-
-                JsonObject potion = content.ItemAttributes?["potioninfo"];
-                string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-
-                if (string.IsNullOrWhiteSpace(potionId))
-                    return false;
-
-                string strength = "weak";
-                content.Collectible?.Variant?.TryGetValue("strength", out strength);
-
-                data = new PotionData
-                {
-                    PotionId = potionId,
-                    Strength = strength ?? "weak",
-                    DisplayName = content.GetName(),
-                    SourceStack = content,
-                };
-                return true;
-            }
-            else
-            {
-                JsonObject potion = slot.Itemstack.ItemAttributes?["potioninfo"];
-                string potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-
-                if (string.IsNullOrWhiteSpace(potionId))
-                    return false;
-
-                string strength = "weak";
-                slot.Itemstack.Collectible?.Variant?.TryGetValue("strength", out strength);
-
-                data = new PotionData
-                {
-                    PotionId = potionId,
-                    Strength = strength ?? "weak",
-                    DisplayName = slot.Itemstack.GetName(),
-                    SourceStack = slot.Itemstack,
-                };
-                return true;
-            }
+                PotionId = potionId,
+                Strength = strength,
+                DisplayName = stack.GetName(),
+                SourceStack = stack,
+            };
+            return true;
         }
 
         private bool ConsumePotion(ItemSlot slot, EntityAgent byEntity)
@@ -121,6 +101,65 @@ namespace Alchemy
             return byEntity.WatchedAttributes.GetLong(data.PotionId) == 0;
         }
 
+        private bool HasEnoughToDrink(ItemSlot slot)
+        {
+            if (source != "liquidcontent")
+                return true;
+
+            if (collObj is not BlockLiquidContainerBase container)
+                return false;
+
+            return container.GetCurrentLitres(slot.Itemstack) >= drinkCheckLitres;
+        }
+
+        private static bool IsReshapeReentry(EntityAgent byEntity, PotionData data) =>
+            data.PotionId == "reshapepotionid"
+            && byEntity.WatchedAttributes.GetBool("allowcharselonce");
+
+        private static bool IsRecallOnSailedBoat(EntityAgent byEntity, PotionData data) =>
+            data.PotionId == "recallpotionid"
+            && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path is string boatPath
+            && WildcardUtil.Match("boat-sailed-*", boatPath);
+
+        private string GetDrinkBlockReason(ItemSlot slot, EntityAgent byEntity, PotionData data)
+        {
+            if (!HasEnoughToDrink(slot))
+                return "alchemy:not-enough-potion";
+
+            if (byEntity.World.Side != EnumAppSide.Server)
+                return null;
+
+            if (IsReshapeReentry(byEntity, data))
+                return "alchemy:reshape-block";
+
+            if (IsRecallOnSailedBoat(byEntity, data))
+                return "alchemy:boat-block";
+
+            return null;
+        }
+
+        private static bool IsPotionAlreadyActive(EntityAgent byEntity, PotionData data)
+        {
+            if (byEntity is not EntityPlayer player)
+                return false;
+
+            return player.WatchedAttributes.GetLong(data.PotionId) != 0
+                || player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager.IsActive(data.PotionId)
+                    == true;
+        }
+
+        private static void DenyDrink(EntityAgent byEntity, string langKey)
+        {
+            byEntity.PlayEntitySound("smallhurt", (byEntity as EntityPlayer)?.Player);
+
+            if (langKey != null && byEntity is EntityPlayer { Player: IServerPlayer serverPlayer })
+                serverPlayer.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get(langKey),
+                    EnumChatType.Notification
+                );
+        }
+
         public override void OnHeldInteractStart(
             ItemSlot slot,
             EntityAgent byEntity,
@@ -138,55 +177,48 @@ namespace Alchemy
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
 
-            // For some reason when the gui for reshape opens the character continues drinking. This is used to prevent it. It's in both start again and stop because for whatever reason its already started when the GUI opens.
-            if (
-                data.PotionId == "reshapepotionid"
-                && byEntity.World.Side == EnumAppSide.Server
-                && byEntity.WatchedAttributes.GetBool("allowcharselonce")
-            )
-            {
-                handling = EnumHandHandling.PreventDefaultAction;
-                bhHandling = EnumHandling.PreventDefault;
-                if (byEntity is EntityPlayer { Player: IServerPlayer serverPlayer })
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:reshape-block"),
-                        EnumChatType.Notification
-                    );
-                return;
-            }
+            // This stops occasional double notification
+            if (byEntity.World.Side == EnumAppSide.Server)
+                drinkResolvedEntities.Remove(byEntity.EntityId);
 
-            // Recall potion can't be used while mounted on a sailed boat
-            if (
-                data.PotionId == "recallpotionid"
-                && byEntity.World.Side == EnumAppSide.Server
-                && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path is string boatPath
-                && WildcardUtil.Match("boat-sailed-*", boatPath)
-            )
-            {
-                if (byEntity is EntityPlayer { Player: IServerPlayer serverPlayer })
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:boat-block"),
-                        EnumChatType.Notification
-                    );
-                handling = EnumHandHandling.PreventDefaultAction;
-                bhHandling = EnumHandling.PreventDefault;
-                return;
-            }
+            byEntity.World.RegisterCallback(
+                dt =>
+                {
+                    if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
+                        byEntity.PlayEntitySound(sound, (byEntity as EntityPlayer)?.Player);
+                },
+                200
+            );
 
-            if (
-                !PotionConsumableLogic.HandleDrinkStart(
-                    byEntity,
-                    data.PotionId,
-                    animation,
-                    sound,
-                    ref handling,
-                    consumeTime
-                )
-            )
-                return;
+            // This is used to adapt animations to drink/eat time. I'm unsure if its necessary so for now I will leave it commented
+            // var animsByCode = byEntity.Properties?.Client?.AnimationsByMetaCode;
+            // if (
+            //     byEntity.AnimManager != null
+            //     && animsByCode != null
+            //     && animsByCode.TryGetValue(animation, out AnimationMetaData animdata)
+            // )
+            // {
+            //     float speed = 1.0f / consumeTime;
+            //     AnimationMetaData scaled = animdata.Clone();
+            //     scaled.AnimationSpeed = speed;
+            //     byEntity.AnimManager.ResetAnimation(animation);
+            //     byEntity.AnimManager.StartAnimation(scaled);
 
+            //     // The TP dispatch above starts the FP variant from AnimationsByMetaCode at its
+            //     // original speed. Override it with a scaled clone so FP and TP stay in sync.
+            //     if (animsByCode.TryGetValue(animation + "-fp", out AnimationMetaData fpAnimdata))
+            //     {
+            //         AnimationMetaData scaledFp = fpAnimdata.Clone();
+            //         scaledFp.AnimationSpeed = speed;
+            //         byEntity.AnimManager.StartAnimation(scaledFp);
+            //     }
+            // }
+            // else
+            // {
+            byEntity.AnimManager?.StartAnimation(animation);
+            // }
+
+            handling = EnumHandHandling.PreventDefault;
             bhHandling = EnumHandling.PreventDefault;
         }
 
@@ -210,13 +242,22 @@ namespace Alchemy
                 );
 
             handling = EnumHandling.PreventDefault;
-            return PotionConsumableLogic.HandleDrinkStep(
-                secondsUsed,
-                slot,
-                byEntity,
-                true,
-                consumeTime
-            );
+            if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
+            {
+                Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
+                pos.Y -= 0.4f;
+
+                byEntity.World.SpawnCubeParticles(
+                    pos,
+                    slot.Itemstack,
+                    0.3f,
+                    4,
+                    0.5f,
+                    (byEntity as EntityPlayer)?.Player
+                );
+            }
+
+            return secondsUsed <= consumeTime;
         }
 
         public override void OnHeldInteractStop(
@@ -230,25 +271,37 @@ namespace Alchemy
         {
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
-            // For some reason when the gui for reshape opens the character continues drinking. This is used to prevent it. It's in both start and stop because for whatever reason its already started again when the GUI opens.
-            if (
-                data.PotionId == "reshapepotionid"
-                && byEntity.World.Side == EnumAppSide.Server
-                && byEntity.WatchedAttributes.GetBool("allowcharselonce")
-            )
+
+            handling = EnumHandling.PreventDefault;
+
+
+            // These three if statements stops occasional double notification
+            if (byEntity.World.Side != EnumAppSide.Server)
+                return;
+
+            if (secondsUsed <= consumeTime - 0.05f)
+                return;
+
+            if (!drinkResolvedEntities.Add(byEntity.EntityId))
+                return;
+
+            string blockReason = GetDrinkBlockReason(slot, byEntity, data);
+            if (blockReason != null)
             {
-                handling = EnumHandling.PreventDefault;
+                DenyDrink(byEntity, blockReason);
                 return;
             }
-            handling = EnumHandling.PreventDefault;
-            PotionConsumableLogic.HandleDrinkStop(
-                secondsUsed,
-                byEntity,
-                data,
-                () => ConsumePotion(slot, byEntity),
-                byEntity.Api,
-                consumeTime
-            );
+
+            if (IsPotionAlreadyActive(byEntity, data))
+            {
+                DenyDrink(byEntity, "alchemy:potion-already-active");
+                return;
+            }
+
+            if (PotionConsumableLogic.TryProcessPotionEffects(byEntity, data, byEntity.Api))
+                ConsumePotion(slot, byEntity);
+            else
+                DenyDrink(byEntity, null);
         }
 
         public override void GetHeldItemInfo(

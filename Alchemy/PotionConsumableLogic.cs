@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
-using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
 namespace Alchemy
@@ -12,12 +11,35 @@ namespace Alchemy
     {
         private static readonly Dictionary<long, long> coatHoldStartMs = [];
         private static readonly HashSet<long> coatNotifiedEntities = [];
-        private static readonly HashSet<long> drinkNotifiedEntities = [];
         private static TagSet weaponMeleeTagSet;
         private static bool weaponMeleeTagSetCached;
 
         public const float CoatHoldDurationSec = 1.5f;
         public const float DefaultConsumeTime = 1.5f;
+
+        public static bool TryReadPotionInfo(
+            ItemStack stack,
+            out string potionId,
+            out string strength
+        )
+        {
+            potionId = null;
+            strength = "weak";
+
+            JsonObject potion = stack?.ItemAttributes?["potioninfo"];
+            potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
+
+            if (string.IsNullOrWhiteSpace(potionId))
+            {
+                potionId = null;
+                return false;
+            }
+
+            stack.Collectible?.Variant?.TryGetValue("strength", out strength);
+            strength ??= "weak";
+
+            return true;
+        }
 
         internal static bool IsCoatingAllowed(string potionId)
         {
@@ -547,131 +569,6 @@ namespace Alchemy
                 msg,
                 EnumChatType.Notification
             );
-        }
-
-        public static bool HandleDrinkStart(
-            EntityAgent byEntity,
-            string potionId,
-            string animation,
-            string sound,
-            ref EnumHandHandling handling,
-            float consumeTime = DefaultConsumeTime
-        )
-        {
-            if (string.IsNullOrWhiteSpace(potionId))
-                return false;
-
-            drinkNotifiedEntities.Remove(byEntity.EntityId);
-
-            byEntity.World.RegisterCallback(
-                dt =>
-                {
-                    if (byEntity.Controls.HandUse == EnumHandInteract.HeldItemInteract)
-                    {
-                        byEntity.PlayEntitySound(sound, (byEntity as EntityPlayer)?.Player);
-                    }
-                },
-                200
-            );
-
-            // This is used to adapt animations to drink/eat time. I'm unsure if its necessary so for now I will leave it commented
-            // var animsByCode = byEntity.Properties?.Client?.AnimationsByMetaCode;
-            // if (
-            //     byEntity.AnimManager != null
-            //     && animsByCode != null
-            //     && animsByCode.TryGetValue(animation, out AnimationMetaData animdata)
-            // )
-            // {
-            //     float speed = 1.0f / consumeTime;
-            //     AnimationMetaData scaled = animdata.Clone();
-            //     scaled.AnimationSpeed = speed;
-            //     byEntity.AnimManager.ResetAnimation(animation);
-            //     byEntity.AnimManager.StartAnimation(scaled);
-
-            //     // The TP dispatch above starts the FP variant from AnimationsByMetaCode at its
-            //     // original speed. Override it with a scaled clone so FP and TP stay in sync.
-            //     if (animsByCode.TryGetValue(animation + "-fp", out AnimationMetaData fpAnimdata))
-            //     {
-            //         AnimationMetaData scaledFp = fpAnimdata.Clone();
-            //         scaledFp.AnimationSpeed = speed;
-            //         byEntity.AnimManager.StartAnimation(scaledFp);
-            //     }
-            // }
-            // else
-            // {
-            byEntity.AnimManager?.StartAnimation(animation);
-            // }
-
-            handling = EnumHandHandling.PreventDefault;
-
-            return true;
-        }
-
-        public static bool HandleDrinkStep(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            bool spawnParticles,
-            float consumeTime = DefaultConsumeTime
-        )
-        {
-            if (spawnParticles && secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
-            {
-                Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ.Add(byEntity.LocalEyePos);
-
-                pos.Y -= 0.4f;
-
-                byEntity.World.SpawnCubeParticles(
-                    pos,
-                    slot.Itemstack,
-                    0.3f,
-                    4,
-                    0.5f,
-                    (byEntity as EntityPlayer)?.Player
-                );
-            }
-
-            return secondsUsed <= consumeTime;
-        }
-
-        public static bool HandleDrinkStop(
-            float secondsUsed,
-            EntityAgent byEntity,
-            PotionData data,
-            Func<bool> consumeAction,
-            ICoreAPI api,
-            float consumeTime = DefaultConsumeTime
-        )
-        {
-            if (secondsUsed <= consumeTime - 0.05f)
-                return false;
-
-            if (!TryProcessPotionEffects(byEntity, data, api))
-            {
-                if (
-                    byEntity.World.Side == EnumAppSide.Server
-                    && byEntity is EntityPlayer entityPlayer
-                    && entityPlayer
-                        .GetBehavior<EntityBehaviorPotionEffect>()
-                        ?.Manager.IsActive(data.PotionId) == true
-                    && drinkNotifiedEntities.Add(byEntity.EntityId)
-                    && entityPlayer.Player is IServerPlayer serverPlayer
-                )
-                {
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:potion-already-active"),
-                        EnumChatType.Notification
-                    );
-                    byEntity.PlayEntitySound("smallhurt", (byEntity as EntityPlayer)?.Player);
-                }
-                return false;
-            }
-
-            bool consumed = consumeAction();
-            if (consumed)
-                drinkNotifiedEntities.Add(byEntity.EntityId);
-            return consumed;
         }
 
         public static bool TryProcessPotionEffects(

@@ -71,54 +71,44 @@
   "attributes": { "handbook": { "groupBy": ["utilitypotionbase-{basetype}"] } },
   "attributesByType": {
     "utilitypotionbase-recall": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/temporalgear" },
+      "handbook": {}
     },
     "utilitypotionbase-glow": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/nugget/cinnabar" },
+      "handbook": {}
     },
     "utilitypotionbase-waterbreathe": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "handbook": {}
     },
     "utilitypotionbase-nutrition": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/fat" },
+      "handbook": {}
     },
     "utilitypotionbase-temporal": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/ungraded/sulfur" },
+      "handbook": {}
     },
     "utilitypotionbase-reshape": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/nugget/nativegold" },
+      "handbook": {}
     },
     "utilitypotionbase-grow": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:block/food/grain/sunflower" },
+      "handbook": {}
     },
     "utilitypotionbase-shrink": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:block/plant/crop/turnip/bulb" },
+      "handbook": {}
     },
     "utilitypotionbase-fall": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:item/resource/feather" },
+      "handbook": {}
     },
     "utilitypotionbase-climb": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "game:block/plant/wildvine/wildvine_1" },
+      "handbook": {}
     }
   },
   "maxstacksize": 64,

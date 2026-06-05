@@ -1,101 +1,74 @@
 {
   "code": "potionbase",
-	"storageFlags": 17,
+  "storageFlags": 17,
   "shape": { "base": "alchemy:item/potionbase" },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [
     {
       "code": "basetype",
-      "states": [
-        "archer",
-        "healingeffect",
-        "hungerenhance",
-        "hungersupress",
-        "hunter",
-        "looter",
-        "melee",
-        "mining",
-        "poison",
-        "predator",
-        "regen",
-        "scentmask",
-        "speed",
-        "vitality"
-      ]
+      "states": ["archer", "healingeffect", "hungerenhance", "hungersupress", "hunter", "looter", "melee", "mining", "poison", "predator", "regen", "scentmask", "speed", "vitality"]
     },
     { "code": "strength", "states": ["weak", "strong"] }
   ],
-  "attributes": { "handbook": { "groupBy": ["potionbase-{basetype}-*"] } },
+  "attributes": {
+    "handbook": { "groupBy": ["potionbase-{basetype}-*"] }
+  },
   "attributesByType": {
     "potionbase-archer-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-blue" },
+      "handbook": {}
     },
     "potionbase-healingeffect-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-orange" },
+      "handbook": {}
     },
     "potionbase-hungerenhance-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "handbook": {}
     },
     "potionbase-hungersupress-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-red" },
+      "handbook": {}
     },
     "potionbase-hunter-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/cornflower" },
+      "handbook": {}
     },
     "potionbase-looter-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/woad" },
+      "handbook": {}
     },
     "potionbase-melee-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-white" },
+      "handbook": {}
     },
     "potionbase-mining-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "handbook": {}
     },
     "potionbase-poison-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/heather" },
+      "handbook": {}
     },
     "potionbase-predator-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/horsetail" },
+      "handbook": {}
     },
     "potionbase-regen-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/lilyofthevalley" },
+      "handbook": {}
     },
     "potionbase-scentmask-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/forgetmenot" },
+      "handbook": {}
     },
     "potionbase-speed-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/westerngorse" },
+      "handbook": {}
     },
     "potionbase-vitality-*": {
-      "handbook": {
-
-      }
+      "inContainerTexture": { "base": "alchemy:item/potionbase/goldenpoppy" },
+      "handbook": {}
     }
   },
   "texturesByType": {
@@ -212,4 +185,3 @@
     "scale": 2
   }
 }
-

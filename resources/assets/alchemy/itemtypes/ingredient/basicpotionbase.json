@@ -8,6 +8,9 @@
     "mat3": { "base": "alchemy:item/potionbase/horsetail" },
     "mat4": { "base": "alchemy:item/potionbase/horsetail" }
   },
+  "attributes": {
+    "inContainerTexture": { "base": "game:block/plant/mushroom/flyagariccap" }
+  },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "maxstacksize": 64,
   "materialDensity": 620,

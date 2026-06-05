@@ -1,3 +1,4 @@
+using System.Linq;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
@@ -20,20 +21,43 @@ namespace Alchemy
                 ? liquidTexPos
                 : capi.BlockTextureAtlas.UnknownTexturePosition;
 
+        private class SingleTexSource(
+            ICoreClientAPI capi,
+            TextureAtlasPosition pos,
+            bool useItemAtlas
+        ) : ITexPositionSource
+        {
+            private readonly ICoreClientAPI capi = capi;
+            private readonly TextureAtlasPosition pos = pos;
+            private readonly bool useItemAtlas = useItemAtlas;
+
+            public Size2i AtlasSize =>
+                useItemAtlas ? capi.ItemTextureAtlas.Size : capi.BlockTextureAtlas.Size;
+            public TextureAtlasPosition this[string textureCode] =>
+                pos ?? capi.BlockTextureAtlas.UnknownTexturePosition;
+        }
+
         private readonly ICoreClientAPI capi;
         private readonly BlockPos pos;
         private readonly BlockEntityFirepit firepit;
         private MultiTextureMeshRef cauldronMeshRef;
         private MultiTextureMeshRef liquidMeshRef;
+        private MultiTextureMeshRef contentsMeshRef;
         private MultiTextureMeshRef stickMeshRef;
         private TextureAtlasPosition liquidTexPos;
         private bool usingItemAtlas;
         private string lastLiquidCode;
         private int lastLiquidAmount = -1;
+        private string lastSolidCode;
+        private int lastSolidAmount = -1;
         private float liquidSurfaceY;
         private readonly float capacityLitres;
         private const float LiquidMinY = 4f / 16f;
         private const float LiquidMaxY = 15f / 16f;
+
+        // The chunk liquid shader (renderPass 4) gives vanilla liquids their see-through look. For whatever reason though it doesn't work on InFirepitRenderer
+        private const float LiquidSurfaceAlpha = 0.8f;
+
         private readonly Matrixf ModelMat = new();
         private readonly float FirepitYOffset;
         private const float StirMinTemperature = 50f;
@@ -96,6 +120,7 @@ namespace Alchemy
             stickBaseAngle = stack.Attributes.GetInt("stirringSpoonFacing", 0) * GameMath.PIHALF;
 
             RebuildLiquidMesh();
+            RebuildContentsMesh();
         }
 
         private void RebuildLiquidMesh()
@@ -217,7 +242,110 @@ namespace Alchemy
                 }
             }
 
+            if (!(props?.IsOpaque ?? false))
+            {
+                byte[] meshRgba = liquidMesh.Rgba;
+                for (int i = 3; i < meshRgba.Length; i += 4)
+                    meshRgba[i] = (byte)(meshRgba[i] * LiquidSurfaceAlpha);
+            }
+
             liquidMeshRef = capi.Render.UploadMultiTextureMesh(liquidMesh);
+        }
+
+        private void RebuildContentsMesh()
+        {
+            contentsMeshRef?.Dispose();
+            contentsMeshRef = null;
+
+            if (firepit.Inventory is not InventorySmelting inv)
+                return;
+
+            ItemStack solidStack = null;
+            foreach (ItemSlot slot in inv.CookingSlots)
+            {
+                if (slot.Empty)
+                    continue;
+                if (
+                    slot.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
+                    == true
+                )
+                    continue;
+                solidStack = slot.Itemstack;
+                break;
+            }
+
+            if (solidStack == null)
+                return;
+
+            TextureAtlasPosition texPos;
+            bool useItemAtlas = false;
+
+            JsonObject attr = solidStack.ItemAttributes?["inContainerTexture"];
+            if (attr?.Exists == true)
+            {
+                texPos = GetAttrBlockTexPos(attr);
+            }
+            else
+            {
+                texPos = GetItemBlockTexPos(solidStack, out useItemAtlas);
+            }
+
+            if (texPos == null)
+                return;
+
+            Shape contentsShape = Shape.TryGet(capi, "alchemy:shapes/block/cauldron-contents.json");
+            if (contentsShape == null)
+                return;
+
+            capi.Tesselator.TesselateShape(
+                "cauldron-contents",
+                contentsShape,
+                out MeshData contentsMesh,
+                new SingleTexSource(capi, texPos, useItemAtlas)
+            );
+            contentsMesh.Translate(0, LiquidMinY, 0);
+
+            contentsMeshRef = capi.Render.UploadMultiTextureMesh(contentsMesh);
+        }
+
+        private TextureAtlasPosition GetAttrBlockTexPos(JsonObject attr)
+        {
+            CompositeTexture ct = attr.AsObject<CompositeTexture>();
+            ct.Bake(capi.Assets);
+            capi.BlockTextureAtlas.GetOrInsertTexture(
+                ct.Baked.BakedName,
+                out _,
+                out TextureAtlasPosition pos
+            );
+            return pos;
+        }
+
+        private TextureAtlasPosition GetItemBlockTexPos(ItemStack stack, out bool useItemAtlas)
+        {
+            useItemAtlas = false;
+
+            if (stack.Class == EnumItemClass.Item)
+            {
+                if (stack.Item?.Textures?.Count > 1)
+                    return null;
+                if (stack.Item?.FirstTexture?.Baked != null)
+                {
+                    useItemAtlas = true;
+                    return capi.ItemTextureAtlas.Positions[
+                        stack.Item.FirstTexture.Baked.TextureSubId
+                    ];
+                }
+            }
+            else if (stack.Class == EnumItemClass.Block)
+            {
+                if (stack.Block?.Textures?.Count > 1)
+                    return null;
+                CompositeTexture blockTex = stack.Block?.Textures?.FirstOrDefault().Value;
+                if (blockTex?.Baked != null)
+                    return capi.BlockTextureAtlas.Positions[blockTex.Baked.TextureSubId];
+            }
+
+            return null;
         }
 
 #pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
@@ -226,6 +354,7 @@ namespace Alchemy
         {
             cauldronMeshRef?.Dispose();
             liquidMeshRef?.Dispose();
+            contentsMeshRef?.Dispose();
             stickMeshRef?.Dispose();
 
             cookingSound?.Stop();
@@ -281,6 +410,19 @@ namespace Alchemy
                 prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
 
                 rpi.RenderMultiTextureMesh(liquidMeshRef, "tex");
+            }
+            else if (contentsMeshRef != null)
+            {
+                prog.ModelMatrix = ModelMat
+                    .Identity()
+                    .Translate(pos.X - camPos.X, pos.Y - camPos.Y, pos.Z - camPos.Z)
+                    .Translate(0f, FirepitYOffset, 0f)
+                    .Values;
+
+                prog.ViewMatrix = rpi.CameraMatrixOriginf;
+                prog.ProjectionMatrix = rpi.CurrentProjectionMatrix;
+
+                rpi.RenderMultiTextureMesh(contentsMeshRef, "tex");
             }
 
             if (stickMeshRef != null)
@@ -385,6 +527,28 @@ namespace Alchemy
                 lastLiquidCode = currentCode;
                 lastLiquidAmount = currentAmount;
                 RebuildLiquidMesh();
+            }
+
+            string solidCode = null;
+            int solidAmount = 0;
+            foreach (ItemSlot slot in inv.CookingSlots)
+            {
+                if (slot.Empty)
+                    continue;
+                if (
+                    slot.Itemstack?.Collectible?.Attributes?["waterTightContainerProps"].Exists
+                    == true
+                )
+                    continue;
+                solidCode ??= slot.Itemstack.Collectible.Code.ToString();
+                solidAmount += slot.Itemstack.StackSize;
+            }
+
+            if (solidCode != lastSolidCode || solidAmount != lastSolidAmount)
+            {
+                lastSolidCode = solidCode;
+                lastSolidAmount = solidAmount;
+                RebuildContentsMesh();
             }
         }
 

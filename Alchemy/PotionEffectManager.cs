@@ -78,23 +78,13 @@ namespace Alchemy
                 }
 
                 long handle;
-                bool ticking;
 
-                if (effect.Context.TickSec > 0)
-                {
-                    handle = entity.World.RegisterGameTickListener(
-                        dt => Tick(id),
-                        effect.Context.TickSec * 1000
-                    );
-                    ticking = true;
-                }
-                else if (effect.Context.Duration > 0)
+                if (effect.Context.Duration > 0)
                 {
                     handle = entity.World.RegisterCallback(
                         dt => RemoveEffect(id),
                         effect.Context.Duration * 1000
                     );
-                    ticking = false;
                 }
                 else
                 {
@@ -109,7 +99,7 @@ namespace Alchemy
                     return true;
                 }
 
-                active[id] = new ActiveEffect(effect, handle, ticking, name);
+                active[id] = new ActiveEffect(effect, handle, false, name);
                 entity.WatchedAttributes.SetLong(id, handle);
 
                 return true;
