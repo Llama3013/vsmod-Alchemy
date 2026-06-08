@@ -278,8 +278,26 @@ namespace Alchemy
             (invDialog as GuiDialogCauldronFirepit)?.RefreshOutputText();
         }
 
-        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator) =>
-            false;
+        public override bool OnTesselation(ITerrainMeshPool mesher, ITesselatorAPI tesselator)
+        {
+            if (Block == null || Block.Code.Path.Contains("construct"))
+                return false;
+
+            if (Block?.Variant["burnstate"] == "cold" && fuelSlot.Empty)
+            {
+                Block extinctBlock = Api.World.GetBlock(
+                    Block.CodeWithVariant("burnstate", "extinct")
+                );
+                if (extinctBlock != null)
+                {
+                    tesselator.TesselateBlock(extinctBlock, out MeshData mesh);
+                    mesher.AddMeshData(mesh);
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void DropStirringSpoon()
         {

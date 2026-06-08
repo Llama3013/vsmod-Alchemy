@@ -29,8 +29,10 @@ namespace Alchemy
             source = properties["source"].AsString("item");
             animation = properties["animation"].AsString("eat");
             sound = properties["sound"].AsString("alchemy:sounds/player/drink");
-            consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
-            drinkCheckLitres = properties["drinkCheckLitres"].AsFloat(0.24f);
+            consumeLitres = properties["consumeLitres"]
+                .AsFloat(AlchemyConfig.Loaded.PotionConsumeLitres);
+            drinkCheckLitres = properties["drinkCheckLitres"]
+                .AsFloat(AlchemyConfig.Loaded.PotionDrinkCheckLitres);
             float defaultConsumeTime =
                 source == "liquidcontent"
                     ? AlchemyConfig.Loaded.PotionDrinkTime
@@ -71,27 +73,13 @@ namespace Alchemy
             if (byEntity.World.Side != EnumAppSide.Server)
                 return false;
 
-            if (source == "liquidcontent")
-            {
-                if (collObj is not BlockLiquidContainerBase container)
-                    return false;
-
-                EntityPlayer player = byEntity as EntityPlayer;
-                int consumed = container.SplitStackAndPerformAction(
-                    player,
-                    slot,
-                    stack => container.TryTakeLiquid(stack, consumeLitres)?.StackSize ?? 0
-                );
-                slot.MarkDirty();
-                player?.Player?.InventoryManager?.BroadcastHotbarSlot();
-                return consumed > 0;
-            }
-            else
-            {
-                slot.TakeOut(1);
-                slot.MarkDirty();
-                return true;
-            }
+            return PotionConsumableLogic.ConsumeSource(
+                collObj,
+                source,
+                slot,
+                byEntity,
+                consumeLitres
+            );
         }
 
         public bool CanConsume(ItemSlot slot, EntityAgent byEntity)
@@ -103,13 +91,7 @@ namespace Alchemy
 
         private bool HasEnoughToDrink(ItemSlot slot)
         {
-            if (source != "liquidcontent")
-                return true;
-
-            if (collObj is not BlockLiquidContainerBase container)
-                return false;
-
-            return container.GetCurrentLitres(slot.Itemstack) >= drinkCheckLitres;
+            return PotionConsumableLogic.HasEnoughSource(collObj, source, slot, drinkCheckLitres);
         }
 
         private static bool IsReshapeReentry(EntityAgent byEntity, PotionData data) =>
@@ -146,6 +128,17 @@ namespace Alchemy
             return player.WatchedAttributes.GetLong(data.PotionId) != 0
                 || player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager.IsActive(data.PotionId)
                     == true;
+        }
+
+        private static bool IsAnyPotionActiveAndLimited(EntityAgent byEntity)
+        {
+            if (!AlchemyConfig.Loaded.OnlyOnePotionAtATime)
+                return false;
+
+            if (byEntity is not EntityPlayer player)
+                return false;
+
+            return player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager.HasAnyActive == true;
         }
 
         private static void DenyDrink(EntityAgent byEntity, string langKey)
@@ -274,7 +267,6 @@ namespace Alchemy
 
             handling = EnumHandling.PreventDefault;
 
-
             // These three if statements stops occasional double notification
             if (byEntity.World.Side != EnumAppSide.Server)
                 return;
@@ -295,6 +287,12 @@ namespace Alchemy
             if (IsPotionAlreadyActive(byEntity, data))
             {
                 DenyDrink(byEntity, "alchemy:potion-already-active");
+                return;
+            }
+
+            if (IsAnyPotionActiveAndLimited(byEntity))
+            {
+                DenyDrink(byEntity, "alchemy:potion-limit-active");
                 return;
             }
 
@@ -489,6 +487,8 @@ namespace Alchemy
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-fall"));
                 if (ctx.CanClimbAnywhere)
                     dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-climb"));
+                if (ctx.CanFly)
+                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-flight"));
 
                 if (dsc.Length == headerEnd)
                     dsc.Remove(headerStart, headerEnd - headerStart);

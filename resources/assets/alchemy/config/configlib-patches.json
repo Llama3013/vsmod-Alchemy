@@ -432,6 +432,50 @@
                     "max": 10.0
                 }
             },
+            "POTIONCONSUMELITRES": {
+                "name": "PotionConsumeLitres",
+                "ingui": "alchemy:PotionConsumeLitres",
+                "weight": 6.4,
+                "comment": "alchemy:PotionConsumeLitres-Comment",
+                "default": 0.25,
+                "range": {
+                    "min": 0.01,
+                    "max": 1.0
+                }
+            },
+            "POTIONDRINKCHECKLITRES": {
+                "name": "PotionDrinkCheckLitres",
+                "ingui": "alchemy:PotionDrinkCheckLitres",
+                "weight": 6.5,
+                "comment": "alchemy:PotionDrinkCheckLitres-Comment",
+                "default": 0.24,
+                "range": {
+                    "min": 0.01,
+                    "max": 1.0
+                }
+            },
+            "WEAPONCOATCONSUMELITRES": {
+                "name": "WeaponCoatConsumeLitres",
+                "ingui": "alchemy:WeaponCoatConsumeLitres",
+                "weight": 6.6,
+                "comment": "alchemy:WeaponCoatConsumeLitres-Comment",
+                "default": 0.25,
+                "range": {
+                    "min": 0.01,
+                    "max": 1.0
+                }
+            },
+            "WEAPONCOATCHECKLITRES": {
+                "name": "WeaponCoatCheckLitres",
+                "ingui": "alchemy:WeaponCoatCheckLitres",
+                "weight": 6.7,
+                "comment": "alchemy:WeaponCoatCheckLitres-Comment",
+                "default": 0.24,
+                "range": {
+                    "min": 0.01,
+                    "max": 1.0
+                }
+            },
             "ARCHERPOTIONWALKSPEED": { "name": "ArcherPotionWalkSpeed", "ingui": "alchemy:ArcherPotionWalkSpeed", "weight": 48.10, "comment": "alchemy:ArcherPotionWalkSpeed-Comment", "default": 0.0, "range": { "min": -5.0, "max": 10.0 } },
             "ARCHERPOTIONMELEEDAMAGE": { "name": "ArcherPotionMeleeDamage", "ingui": "alchemy:ArcherPotionMeleeDamage", "weight": 48.11, "comment": "alchemy:ArcherPotionMeleeDamage-Comment", "default": 0.0, "range": { "min": -5.0, "max": 10.0 } },
             "ARCHERPOTIONHEALINGEFFECTIVENESS": { "name": "ArcherPotionHealingEffectiveness", "ingui": "alchemy:ArcherPotionHealingEffectiveness", "weight": 48.12, "comment": "alchemy:ArcherPotionHealingEffectiveness-Comment", "default": 0.0, "range": { "min": -1.0, "max": 5.0 } },
@@ -743,6 +787,10 @@
             "CLIMBPOTIONDRINKINGINTOXICATION": { "name": "ClimbPotionDrinkingIntoxication", "ingui": "alchemy:ClimbPotionDrinkingIntoxication", "weight": 71.2, "comment": "alchemy:ClimbPotionDrinkingIntoxication-Comment", "default": 0.0, "range": { "min": 0.0, "max": 1.1 } },
             "CLIMBPOTIONDRINKINGPSYCHEDELIC": { "name": "ClimbPotionDrinkingPsychedelic", "ingui": "alchemy:ClimbPotionDrinkingPsychedelic", "weight": 71.3, "comment": "alchemy:ClimbPotionDrinkingPsychedelic-Comment", "default": 0.0, "range": { "min": 0.0, "max": 2.0 } },
             "CLIMBPOTIONDRINKINGSATURATIONLOSS": { "name": "ClimbPotionDrinkingSaturationLoss", "ingui": "alchemy:ClimbPotionDrinkingSaturationLoss", "weight": 71.4, "comment": "alchemy:ClimbPotionDrinkingSaturationLoss-Comment", "default": 0.0, "range": { "min": 0.0, "max": 1500.0 } },
+            "FLIGHTPOTIONDRINKINGDAMAGE": { "name": "FlightPotionDrinkingDamage", "ingui": "alchemy:FlightPotionDrinkingDamage", "weight": 72.1, "comment": "alchemy:FlightPotionDrinkingDamage-Comment", "default": 0.0, "range": { "min": 0.0, "max": 20.0 } },
+            "FLIGHTPOTIONDRINKINGINTOXICATION": { "name": "FlightPotionDrinkingIntoxication", "ingui": "alchemy:FlightPotionDrinkingIntoxication", "weight": 72.2, "comment": "alchemy:FlightPotionDrinkingIntoxication-Comment", "default": 0.0, "range": { "min": 0.0, "max": 1.1 } },
+            "FLIGHTPOTIONDRINKINGPSYCHEDELIC": { "name": "FlightPotionDrinkingPsychedelic", "ingui": "alchemy:FlightPotionDrinkingPsychedelic", "weight": 72.3, "comment": "alchemy:FlightPotionDrinkingPsychedelic-Comment", "default": 0.0, "range": { "min": 0.0, "max": 2.0 } },
+            "FLIGHTPOTIONDRINKINGSATURATIONLOSS": { "name": "FlightPotionDrinkingSaturationLoss", "ingui": "alchemy:FlightPotionDrinkingSaturationLoss", "weight": 72.4, "comment": "alchemy:FlightPotionDrinkingSaturationLoss-Comment", "default": 0.0, "range": { "min": 0.0, "max": 1500.0 } },
             "WEAPONCOATAPPLYTIME": {
                 "name": "WeaponCoatApplyTime",
                 "ingui": "alchemy:WeaponCoatApplyTime",
@@ -1020,6 +1068,17 @@
                     "min": 10,
                     "max": 5000
                 }
+            },
+            "FLIGHTPOTIONDURATION": {
+                "name": "FlightPotionDuration",
+                "ingui": "alchemy:FlightPotionDuration",
+                "weight": 46.2,
+                "comment": "alchemy:FlightPotionDuration-Comment",
+                "default": 300,
+                "range": {
+                    "min": 10,
+                    "max": 5000
+                }
             }
         },
         "string": {
@@ -1214,6 +1273,13 @@
                 "comment": "alchemy:AllowClimbPotion-Comment",
                 "default": true
             },
+            "ALLOWFLIGHTPOTION": {
+                "name": "AllowFlightPotion",
+                "ingui": "alchemy:AllowFlightPotion",
+                "weight": 1.30,
+                "comment": "alchemy:AllowFlightPotion-Comment",
+                "default": true
+            },
             "ALLOWSTRONGPOTIONS": {
                 "name": "AllowStrongPotions",
                 "ingui": "alchemy:AllowStrongPotions",
@@ -1303,6 +1369,12 @@
                 "ingui": "alchemy:AllowVanillaContainerDrinking",
                 "weight": 4.3,
                 "comment": "alchemy:AllowVanillaContainerDrinking-Comment",
+                "default": false
+            },
+            "ONLYONEPOTIONATATAIME": {
+                "name": "OnlyOnePotionAtATime",
+                "ingui": "alchemy:OnlyOnePotionAtATime",
+                "weight": 4.31,
                 "default": false
             },
             "ALLOWWEAPONCOATING": {
@@ -1478,6 +1550,13 @@
                 "ingui": "alchemy:AllowCoatingClimb",
                 "weight": 4.440,
                 "comment": "alchemy:AllowCoatingClimb-Comment",
+                "default": false
+            },
+            "ALLOWCOATINGFLIGHT": {
+                "name": "AllowCoatingFlight",
+                "ingui": "alchemy:AllowCoatingFlight",
+                "weight": 4.441,
+                "comment": "alchemy:AllowCoatingFlight-Comment",
                 "default": false
             },
             "ALLOWRESHAPEPOTIONRECIPE": {

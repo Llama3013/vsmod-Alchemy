@@ -234,6 +234,8 @@ namespace Alchemy
             api.World.Config.SetBool("AllowFallPotion", AlchemyConfig.Loaded.AllowFallPotion);
             api.World.Config.SetBool("AllowCoatingClimb", AlchemyConfig.Loaded.AllowCoatingClimb);
             api.World.Config.SetBool("AllowClimbPotion", AlchemyConfig.Loaded.AllowClimbPotion);
+            api.World.Config.SetBool("AllowCoatingFlight", AlchemyConfig.Loaded.AllowCoatingFlight);
+            api.World.Config.SetBool("AllowFlightPotion", AlchemyConfig.Loaded.AllowFlightPotion);
             api.World.Config.SetBool(
                 "AllowFallPotionRecipe",
                 AlchemyConfig.Loaded.AllowFallPotionRecipe
@@ -289,7 +291,7 @@ namespace Alchemy
         {
             api.Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
-                .RegisterMessageType<OpenCharSelPacket>()
+                // .RegisterMessageType<OpenCharSelPacket>()
                 .SetMessageHandler<SyncClientPacket>(packet =>
                 {
                     AlchemyConfig.Loaded.AllowArcherPotion = packet.AllowArcherPotion;
@@ -791,6 +793,14 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received AllowClimbPotion of {packet.AllowClimbPotion} from server"
                     );
+                    AlchemyConfig.Loaded.AllowCoatingFlight = packet.AllowCoatingFlight;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingFlight of {packet.AllowCoatingFlight} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowFlightPotion = packet.AllowFlightPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowFlightPotion of {packet.AllowFlightPotion} from server"
+                    );
                     AlchemyConfig.Loaded.AllowFallPotionRecipe = packet.AllowFallPotionRecipe;
                     Mod.Logger.Event(
                         $"Received AllowFallPotionRecipe of {packet.AllowFallPotionRecipe} from server"
@@ -799,25 +809,25 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received AllowClimbPotionRecipe of {packet.AllowClimbPotionRecipe} from server"
                     );
-                })
-                .SetMessageHandler<OpenCharSelPacket>(_ =>
-                {
-                    // Pretty much a replica of CharacterSystem.onCharSelCmd. I would just call it but its set to private
-                    bool allowcharselonce =
-                        api.World.Player.Entity.WatchedAttributes.GetBool("allowcharselonce")
-                        || api.World.Player.WorldData.CurrentGameMode == EnumGameMode.Creative;
+                    // })
+                    // .SetMessageHandler<OpenCharSelPacket>(_ =>
+                    // {
+                    //     // Pretty much a replica of CharacterSystem.onCharSelCmd. I would just call it but its set to private
+                    //     bool allowcharselonce =
+                    //         api.World.Player.Entity.WatchedAttributes.GetBool("allowcharselonce")
+                    //         || api.World.Player.WorldData.CurrentGameMode == EnumGameMode.Creative;
 
-                    if (createCharDlg == null && allowcharselonce)
-                    {
-                        CharacterSystem charSystem = api.ModLoader.GetModSystem<CharacterSystem>();
-                        createCharDlg = new GuiDialogCreateCharacter(api, charSystem);
-                        createCharDlg.PrepAndOpen();
-                    }
+                    //     if (createCharDlg == null && allowcharselonce)
+                    //     {
+                    //         CharacterSystem charSystem = api.ModLoader.GetModSystem<CharacterSystem>();
+                    //         createCharDlg = new GuiDialogCreateCharacter(api, charSystem);
+                    //         createCharDlg.PrepAndOpen();
+                    //     }
 
-                    if (!createCharDlg.IsOpened())
-                    {
-                        createCharDlg.TryOpen();
-                    }
+                    //     if (!createCharDlg.IsOpened())
+                    //     {
+                    //         createCharDlg.TryOpen();
+                    //     }
                 });
             api.Event.PlayerEntitySpawn += iPlayer =>
             {
@@ -853,7 +863,7 @@ namespace Alchemy
             serverChannel = api
                 .Network.RegisterChannel("alchemy")
                 .RegisterMessageType<SyncClientPacket>()
-                .RegisterMessageType<OpenCharSelPacket>()
+                // .RegisterMessageType<OpenCharSelPacket>()
                 .SetMessageHandler<SyncClientPacket>(
                     (player, packet) => {
                         /* do nothing. idk why this handler is even needed, but it is */
@@ -991,8 +1001,418 @@ namespace Alchemy
                     AllowFallPotion = AlchemyConfig.Loaded.AllowFallPotion,
                     AllowCoatingClimb = AlchemyConfig.Loaded.AllowCoatingClimb,
                     AllowClimbPotion = AlchemyConfig.Loaded.AllowClimbPotion,
+                    AllowCoatingFlight = AlchemyConfig.Loaded.AllowCoatingFlight,
+                    AllowFlightPotion = AlchemyConfig.Loaded.AllowFlightPotion,
                     AllowFallPotionRecipe = AlchemyConfig.Loaded.AllowFallPotionRecipe,
                     AllowClimbPotionRecipe = AlchemyConfig.Loaded.AllowClimbPotionRecipe,
+
+                    AllowWeaponCoating = AlchemyConfig.Loaded.AllowWeaponCoating,
+                    WeaponCoatCharges = AlchemyConfig.Loaded.WeaponCoatCharges,
+                    FallPotionDamageReduction = AlchemyConfig.Loaded.FallPotionDamageReduction,
+                    FallPotionDuration = AlchemyConfig.Loaded.FallPotionDuration,
+                    ClimbPotionDuration = AlchemyConfig.Loaded.ClimbPotionDuration,
+                    FlightPotionDuration = AlchemyConfig.Loaded.FlightPotionDuration,
+                    GrowPotionSizeChange = AlchemyConfig.Loaded.GrowPotionSizeChange,
+                    ShrinkPotionSizeChange = AlchemyConfig.Loaded.ShrinkPotionSizeChange,
+
+                    ArcherPotionWalkSpeed = AlchemyConfig.Loaded.ArcherPotionWalkSpeed,
+                    ArcherPotionMeleeDamage = AlchemyConfig.Loaded.ArcherPotionMeleeDamage,
+                    ArcherPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionHealingEffectiveness,
+                    ArcherPotionHungerRate = AlchemyConfig.Loaded.ArcherPotionHungerRate,
+                    ArcherPotionAnimalLootDrop = AlchemyConfig.Loaded.ArcherPotionAnimalLootDrop,
+                    ArcherPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionAnimalSeekingRange,
+                    ArcherPotionForageDrop = AlchemyConfig.Loaded.ArcherPotionForageDrop,
+                    ArcherPotionWildCropDrop = AlchemyConfig.Loaded.ArcherPotionWildCropDrop,
+                    ArcherPotionGearDrop = AlchemyConfig.Loaded.ArcherPotionGearDrop,
+                    ArcherPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionVesselContentsDrop,
+                    ArcherPotionMiningSpeed = AlchemyConfig.Loaded.ArcherPotionMiningSpeed,
+                    ArcherPotionOreDrop = AlchemyConfig.Loaded.ArcherPotionOreDrop,
+                    ArcherPotionMaxHealth = AlchemyConfig.Loaded.ArcherPotionMaxHealth,
+                    ArcherPotionHealth = AlchemyConfig.Loaded.ArcherPotionHealth,
+                    ArcherPotionHealthTickSec = AlchemyConfig.Loaded.ArcherPotionHealthTickSec,
+
+                    HealingEffectPotionWalkSpeed = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionWalkSpeed,
+                    HealingEffectPotionMeleeDamage = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionMeleeDamage,
+                    HealingEffectPotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionRangedAccuracy,
+                    HealingEffectPotionRangedDamage = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionRangedDamage,
+                    HealingEffectPotionRangedSpeed = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionRangedSpeed,
+                    HealingEffectPotionHungerRate = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionHungerRate,
+                    HealingEffectPotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionAnimalLootDrop,
+                    HealingEffectPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionAnimalSeekingRange,
+                    HealingEffectPotionForageDrop = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionForageDrop,
+                    HealingEffectPotionWildCropDrop = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionWildCropDrop,
+                    HealingEffectPotionGearDrop = AlchemyConfig.Loaded.HealingEffectPotionGearDrop,
+                    HealingEffectPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionVesselContentsDrop,
+                    HealingEffectPotionMiningSpeed = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionMiningSpeed,
+                    HealingEffectPotionOreDrop = AlchemyConfig.Loaded.HealingEffectPotionOreDrop,
+                    HealingEffectPotionMaxHealth = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionMaxHealth,
+                    HealingEffectPotionHealth = AlchemyConfig.Loaded.HealingEffectPotionHealth,
+                    HealingEffectPotionHealthTickSec = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionHealthTickSec,
+
+                    HungerEnhancePotionWalkSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionWalkSpeed,
+                    HungerEnhancePotionMeleeDamage = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionMeleeDamage,
+                    HungerEnhancePotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionRangedAccuracy,
+                    HungerEnhancePotionRangedDamage = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionRangedDamage,
+                    HungerEnhancePotionRangedSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionRangedSpeed,
+                    HungerEnhancePotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionHealingEffectiveness,
+                    HungerEnhancePotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionAnimalLootDrop,
+                    HungerEnhancePotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionAnimalSeekingRange,
+                    HungerEnhancePotionForageDrop = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionForageDrop,
+                    HungerEnhancePotionWildCropDrop = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionWildCropDrop,
+                    HungerEnhancePotionGearDrop = AlchemyConfig.Loaded.HungerEnhancePotionGearDrop,
+                    HungerEnhancePotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionVesselContentsDrop,
+                    HungerEnhancePotionMiningSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionMiningSpeed,
+                    HungerEnhancePotionOreDrop = AlchemyConfig.Loaded.HungerEnhancePotionOreDrop,
+                    HungerEnhancePotionMaxHealth = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionMaxHealth,
+                    HungerEnhancePotionHealth = AlchemyConfig.Loaded.HungerEnhancePotionHealth,
+                    HungerEnhancePotionHealthTickSec = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionHealthTickSec,
+
+                    HungerSupressPotionWalkSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionWalkSpeed,
+                    HungerSupressPotionMeleeDamage = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionMeleeDamage,
+                    HungerSupressPotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionRangedAccuracy,
+                    HungerSupressPotionRangedDamage = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionRangedDamage,
+                    HungerSupressPotionRangedSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionRangedSpeed,
+                    HungerSupressPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionHealingEffectiveness,
+                    HungerSupressPotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionAnimalLootDrop,
+                    HungerSupressPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionAnimalSeekingRange,
+                    HungerSupressPotionForageDrop = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionForageDrop,
+                    HungerSupressPotionWildCropDrop = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionWildCropDrop,
+                    HungerSupressPotionGearDrop = AlchemyConfig.Loaded.HungerSupressPotionGearDrop,
+                    HungerSupressPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionVesselContentsDrop,
+                    HungerSupressPotionMiningSpeed = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionMiningSpeed,
+                    HungerSupressPotionOreDrop = AlchemyConfig.Loaded.HungerSupressPotionOreDrop,
+                    HungerSupressPotionMaxHealth = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionMaxHealth,
+                    HungerSupressPotionHealth = AlchemyConfig.Loaded.HungerSupressPotionHealth,
+                    HungerSupressPotionHealthTickSec = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionHealthTickSec,
+
+                    HunterPotionWalkSpeed = AlchemyConfig.Loaded.HunterPotionWalkSpeed,
+                    HunterPotionMeleeDamage = AlchemyConfig.Loaded.HunterPotionMeleeDamage,
+                    HunterPotionRangedAccuracy = AlchemyConfig.Loaded.HunterPotionRangedAccuracy,
+                    HunterPotionRangedDamage = AlchemyConfig.Loaded.HunterPotionRangedDamage,
+                    HunterPotionRangedSpeed = AlchemyConfig.Loaded.HunterPotionRangedSpeed,
+                    HunterPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .HunterPotionHealingEffectiveness,
+                    HunterPotionHungerRate = AlchemyConfig.Loaded.HunterPotionHungerRate,
+                    HunterPotionGearDrop = AlchemyConfig.Loaded.HunterPotionGearDrop,
+                    HunterPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .HunterPotionVesselContentsDrop,
+                    HunterPotionMiningSpeed = AlchemyConfig.Loaded.HunterPotionMiningSpeed,
+                    HunterPotionOreDrop = AlchemyConfig.Loaded.HunterPotionOreDrop,
+                    HunterPotionMaxHealth = AlchemyConfig.Loaded.HunterPotionMaxHealth,
+                    HunterPotionHealth = AlchemyConfig.Loaded.HunterPotionHealth,
+                    HunterPotionHealthTickSec = AlchemyConfig.Loaded.HunterPotionHealthTickSec,
+
+                    LooterPotionWalkSpeed = AlchemyConfig.Loaded.LooterPotionWalkSpeed,
+                    LooterPotionMeleeDamage = AlchemyConfig.Loaded.LooterPotionMeleeDamage,
+                    LooterPotionRangedAccuracy = AlchemyConfig.Loaded.LooterPotionRangedAccuracy,
+                    LooterPotionRangedDamage = AlchemyConfig.Loaded.LooterPotionRangedDamage,
+                    LooterPotionRangedSpeed = AlchemyConfig.Loaded.LooterPotionRangedSpeed,
+                    LooterPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .LooterPotionHealingEffectiveness,
+                    LooterPotionHungerRate = AlchemyConfig.Loaded.LooterPotionHungerRate,
+                    LooterPotionAnimalLootDrop = AlchemyConfig.Loaded.LooterPotionAnimalLootDrop,
+                    LooterPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .LooterPotionAnimalSeekingRange,
+                    LooterPotionMiningSpeed = AlchemyConfig.Loaded.LooterPotionMiningSpeed,
+                    LooterPotionOreDrop = AlchemyConfig.Loaded.LooterPotionOreDrop,
+                    LooterPotionMaxHealth = AlchemyConfig.Loaded.LooterPotionMaxHealth,
+                    LooterPotionHealth = AlchemyConfig.Loaded.LooterPotionHealth,
+                    LooterPotionHealthTickSec = AlchemyConfig.Loaded.LooterPotionHealthTickSec,
+
+                    MeleePotionWalkSpeed = AlchemyConfig.Loaded.MeleePotionWalkSpeed,
+                    MeleePotionRangedAccuracy = AlchemyConfig.Loaded.MeleePotionRangedAccuracy,
+                    MeleePotionRangedDamage = AlchemyConfig.Loaded.MeleePotionRangedDamage,
+                    MeleePotionRangedSpeed = AlchemyConfig.Loaded.MeleePotionRangedSpeed,
+                    MeleePotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .MeleePotionHealingEffectiveness,
+                    MeleePotionHungerRate = AlchemyConfig.Loaded.MeleePotionHungerRate,
+                    MeleePotionAnimalLootDrop = AlchemyConfig.Loaded.MeleePotionAnimalLootDrop,
+                    MeleePotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .MeleePotionAnimalSeekingRange,
+                    MeleePotionForageDrop = AlchemyConfig.Loaded.MeleePotionForageDrop,
+                    MeleePotionWildCropDrop = AlchemyConfig.Loaded.MeleePotionWildCropDrop,
+                    MeleePotionGearDrop = AlchemyConfig.Loaded.MeleePotionGearDrop,
+                    MeleePotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .MeleePotionVesselContentsDrop,
+                    MeleePotionMiningSpeed = AlchemyConfig.Loaded.MeleePotionMiningSpeed,
+                    MeleePotionOreDrop = AlchemyConfig.Loaded.MeleePotionOreDrop,
+                    MeleePotionMaxHealth = AlchemyConfig.Loaded.MeleePotionMaxHealth,
+                    MeleePotionHealth = AlchemyConfig.Loaded.MeleePotionHealth,
+                    MeleePotionHealthTickSec = AlchemyConfig.Loaded.MeleePotionHealthTickSec,
+
+                    MiningPotionWalkSpeed = AlchemyConfig.Loaded.MiningPotionWalkSpeed,
+                    MiningPotionMeleeDamage = AlchemyConfig.Loaded.MiningPotionMeleeDamage,
+                    MiningPotionRangedAccuracy = AlchemyConfig.Loaded.MiningPotionRangedAccuracy,
+                    MiningPotionRangedDamage = AlchemyConfig.Loaded.MiningPotionRangedDamage,
+                    MiningPotionRangedSpeed = AlchemyConfig.Loaded.MiningPotionRangedSpeed,
+                    MiningPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .MiningPotionHealingEffectiveness,
+                    MiningPotionHungerRate = AlchemyConfig.Loaded.MiningPotionHungerRate,
+                    MiningPotionAnimalLootDrop = AlchemyConfig.Loaded.MiningPotionAnimalLootDrop,
+                    MiningPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .MiningPotionAnimalSeekingRange,
+                    MiningPotionForageDrop = AlchemyConfig.Loaded.MiningPotionForageDrop,
+                    MiningPotionWildCropDrop = AlchemyConfig.Loaded.MiningPotionWildCropDrop,
+                    MiningPotionGearDrop = AlchemyConfig.Loaded.MiningPotionGearDrop,
+                    MiningPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .MiningPotionVesselContentsDrop,
+                    MiningPotionMaxHealth = AlchemyConfig.Loaded.MiningPotionMaxHealth,
+                    MiningPotionHealthExtra = AlchemyConfig.Loaded.MiningPotionHealthExtra,
+                    MiningPotionHealthExtraTickSec = AlchemyConfig
+                        .Loaded
+                        .MiningPotionHealthExtraTickSec,
+
+                    PoisonPotionWalkSpeed = AlchemyConfig.Loaded.PoisonPotionWalkSpeed,
+                    PoisonPotionMeleeDamage = AlchemyConfig.Loaded.PoisonPotionMeleeDamage,
+                    PoisonPotionRangedAccuracy = AlchemyConfig.Loaded.PoisonPotionRangedAccuracy,
+                    PoisonPotionRangedDamage = AlchemyConfig.Loaded.PoisonPotionRangedDamage,
+                    PoisonPotionRangedSpeed = AlchemyConfig.Loaded.PoisonPotionRangedSpeed,
+                    PoisonPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionHealingEffectiveness,
+                    PoisonPotionHungerRate = AlchemyConfig.Loaded.PoisonPotionHungerRate,
+                    PoisonPotionAnimalLootDrop = AlchemyConfig.Loaded.PoisonPotionAnimalLootDrop,
+                    PoisonPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionAnimalSeekingRange,
+                    PoisonPotionForageDrop = AlchemyConfig.Loaded.PoisonPotionForageDrop,
+                    PoisonPotionWildCropDrop = AlchemyConfig.Loaded.PoisonPotionWildCropDrop,
+                    PoisonPotionGearDrop = AlchemyConfig.Loaded.PoisonPotionGearDrop,
+                    PoisonPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionVesselContentsDrop,
+                    PoisonPotionMiningSpeed = AlchemyConfig.Loaded.PoisonPotionMiningSpeed,
+                    PoisonPotionOreDrop = AlchemyConfig.Loaded.PoisonPotionOreDrop,
+                    PoisonPotionMaxHealth = AlchemyConfig.Loaded.PoisonPotionMaxHealth,
+
+                    PredatorPotionWalkSpeed = AlchemyConfig.Loaded.PredatorPotionWalkSpeed,
+                    PredatorPotionMeleeDamage = AlchemyConfig.Loaded.PredatorPotionMeleeDamage,
+                    PredatorPotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionRangedAccuracy,
+                    PredatorPotionRangedDamage = AlchemyConfig.Loaded.PredatorPotionRangedDamage,
+                    PredatorPotionRangedSpeed = AlchemyConfig.Loaded.PredatorPotionRangedSpeed,
+                    PredatorPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionHealingEffectiveness,
+                    PredatorPotionHungerRate = AlchemyConfig.Loaded.PredatorPotionHungerRate,
+                    PredatorPotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionAnimalLootDrop,
+                    PredatorPotionForageDrop = AlchemyConfig.Loaded.PredatorPotionForageDrop,
+                    PredatorPotionWildCropDrop = AlchemyConfig.Loaded.PredatorPotionWildCropDrop,
+                    PredatorPotionGearDrop = AlchemyConfig.Loaded.PredatorPotionGearDrop,
+                    PredatorPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionVesselContentsDrop,
+                    PredatorPotionMiningSpeed = AlchemyConfig.Loaded.PredatorPotionMiningSpeed,
+                    PredatorPotionOreDrop = AlchemyConfig.Loaded.PredatorPotionOreDrop,
+                    PredatorPotionMaxHealth = AlchemyConfig.Loaded.PredatorPotionMaxHealth,
+                    PredatorPotionHealth = AlchemyConfig.Loaded.PredatorPotionHealth,
+                    PredatorPotionHealthTickSec = AlchemyConfig.Loaded.PredatorPotionHealthTickSec,
+
+                    RegenPotionWalkSpeed = AlchemyConfig.Loaded.RegenPotionWalkSpeed,
+                    RegenPotionMeleeDamage = AlchemyConfig.Loaded.RegenPotionMeleeDamage,
+                    RegenPotionRangedAccuracy = AlchemyConfig.Loaded.RegenPotionRangedAccuracy,
+                    RegenPotionRangedDamage = AlchemyConfig.Loaded.RegenPotionRangedDamage,
+                    RegenPotionRangedSpeed = AlchemyConfig.Loaded.RegenPotionRangedSpeed,
+                    RegenPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .RegenPotionHealingEffectiveness,
+                    RegenPotionHungerRate = AlchemyConfig.Loaded.RegenPotionHungerRate,
+                    RegenPotionAnimalLootDrop = AlchemyConfig.Loaded.RegenPotionAnimalLootDrop,
+                    RegenPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .RegenPotionAnimalSeekingRange,
+                    RegenPotionForageDrop = AlchemyConfig.Loaded.RegenPotionForageDrop,
+                    RegenPotionWildCropDrop = AlchemyConfig.Loaded.RegenPotionWildCropDrop,
+                    RegenPotionGearDrop = AlchemyConfig.Loaded.RegenPotionGearDrop,
+                    RegenPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .RegenPotionVesselContentsDrop,
+                    RegenPotionMiningSpeed = AlchemyConfig.Loaded.RegenPotionMiningSpeed,
+                    RegenPotionOreDrop = AlchemyConfig.Loaded.RegenPotionOreDrop,
+                    RegenPotionMaxHealth = AlchemyConfig.Loaded.RegenPotionMaxHealth,
+
+                    ScentMaskPotionWalkSpeed = AlchemyConfig.Loaded.ScentMaskPotionWalkSpeed,
+                    ScentMaskPotionMeleeDamage = AlchemyConfig.Loaded.ScentMaskPotionMeleeDamage,
+                    ScentMaskPotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionRangedAccuracy,
+                    ScentMaskPotionRangedDamage = AlchemyConfig.Loaded.ScentMaskPotionRangedDamage,
+                    ScentMaskPotionRangedSpeed = AlchemyConfig.Loaded.ScentMaskPotionRangedSpeed,
+                    ScentMaskPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionHealingEffectiveness,
+                    ScentMaskPotionHungerRate = AlchemyConfig.Loaded.ScentMaskPotionHungerRate,
+                    ScentMaskPotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionAnimalLootDrop,
+                    ScentMaskPotionForageDrop = AlchemyConfig.Loaded.ScentMaskPotionForageDrop,
+                    ScentMaskPotionWildCropDrop = AlchemyConfig.Loaded.ScentMaskPotionWildCropDrop,
+                    ScentMaskPotionGearDrop = AlchemyConfig.Loaded.ScentMaskPotionGearDrop,
+                    ScentMaskPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionVesselContentsDrop,
+                    ScentMaskPotionMiningSpeed = AlchemyConfig.Loaded.ScentMaskPotionMiningSpeed,
+                    ScentMaskPotionOreDrop = AlchemyConfig.Loaded.ScentMaskPotionOreDrop,
+                    ScentMaskPotionMaxHealth = AlchemyConfig.Loaded.ScentMaskPotionMaxHealth,
+                    ScentMaskPotionHealth = AlchemyConfig.Loaded.ScentMaskPotionHealth,
+                    ScentMaskPotionHealthTickSec = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionHealthTickSec,
+
+                    SpeedPotionMeleeDamage = AlchemyConfig.Loaded.SpeedPotionMeleeDamage,
+                    SpeedPotionRangedAccuracy = AlchemyConfig.Loaded.SpeedPotionRangedAccuracy,
+                    SpeedPotionRangedDamage = AlchemyConfig.Loaded.SpeedPotionRangedDamage,
+                    SpeedPotionRangedSpeed = AlchemyConfig.Loaded.SpeedPotionRangedSpeed,
+                    SpeedPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionHealingEffectiveness,
+                    SpeedPotionHungerRate = AlchemyConfig.Loaded.SpeedPotionHungerRate,
+                    SpeedPotionAnimalLootDrop = AlchemyConfig.Loaded.SpeedPotionAnimalLootDrop,
+                    SpeedPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionAnimalSeekingRange,
+                    SpeedPotionForageDrop = AlchemyConfig.Loaded.SpeedPotionForageDrop,
+                    SpeedPotionWildCropDrop = AlchemyConfig.Loaded.SpeedPotionWildCropDrop,
+                    SpeedPotionGearDrop = AlchemyConfig.Loaded.SpeedPotionGearDrop,
+                    SpeedPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionVesselContentsDrop,
+                    SpeedPotionMiningSpeed = AlchemyConfig.Loaded.SpeedPotionMiningSpeed,
+                    SpeedPotionOreDrop = AlchemyConfig.Loaded.SpeedPotionOreDrop,
+                    SpeedPotionMaxHealth = AlchemyConfig.Loaded.SpeedPotionMaxHealth,
+                    SpeedPotionHealth = AlchemyConfig.Loaded.SpeedPotionHealth,
+                    SpeedPotionHealthTickSec = AlchemyConfig.Loaded.SpeedPotionHealthTickSec,
+
+                    VitalityPotionWalkSpeed = AlchemyConfig.Loaded.VitalityPotionWalkSpeed,
+                    VitalityPotionMeleeDamage = AlchemyConfig.Loaded.VitalityPotionMeleeDamage,
+                    VitalityPotionRangedAccuracy = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionRangedAccuracy,
+                    VitalityPotionRangedDamage = AlchemyConfig.Loaded.VitalityPotionRangedDamage,
+                    VitalityPotionRangedSpeed = AlchemyConfig.Loaded.VitalityPotionRangedSpeed,
+                    VitalityPotionHealingEffectiveness = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionHealingEffectiveness,
+                    VitalityPotionHungerRate = AlchemyConfig.Loaded.VitalityPotionHungerRate,
+                    VitalityPotionAnimalLootDrop = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionAnimalLootDrop,
+                    VitalityPotionAnimalSeekingRange = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionAnimalSeekingRange,
+                    VitalityPotionForageDrop = AlchemyConfig.Loaded.VitalityPotionForageDrop,
+                    VitalityPotionWildCropDrop = AlchemyConfig.Loaded.VitalityPotionWildCropDrop,
+                    VitalityPotionGearDrop = AlchemyConfig.Loaded.VitalityPotionGearDrop,
+                    VitalityPotionVesselContentsDrop = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionVesselContentsDrop,
+                    VitalityPotionMiningSpeed = AlchemyConfig.Loaded.VitalityPotionMiningSpeed,
+                    VitalityPotionOreDrop = AlchemyConfig.Loaded.VitalityPotionOreDrop,
+                    VitalityPotionHealth = AlchemyConfig.Loaded.VitalityPotionHealth,
+                    VitalityPotionHealthTickSec = AlchemyConfig.Loaded.VitalityPotionHealthTickSec,
                 },
                 player
             );

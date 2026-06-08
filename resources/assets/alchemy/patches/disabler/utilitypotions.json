@@ -1,6 +1,27 @@
 [
   // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
 
+  // Flight
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/10",
+   "condition": { "when": "AllowFlightPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-flight/handbook",
+   "value": { "exclude": true },
+   "condition": { "when": "AllowFlightPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/10",
+   "condition": { "when": "AllowFlightPotion", "isValue": "false" }
+  },
+
   // Climb
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",

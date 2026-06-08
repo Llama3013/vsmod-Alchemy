@@ -4,6 +4,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace Alchemy
 {
@@ -41,6 +42,51 @@ namespace Alchemy
             return true;
         }
 
+        public static bool HasEnoughSource(
+            CollectibleObject collObj,
+            string source,
+            ItemSlot slot,
+            float checkLitres
+        )
+        {
+            if (source != "liquidcontent")
+                return slot?.Itemstack?.StackSize >= 1;
+
+            if (collObj is not BlockLiquidContainerBase container)
+                return false;
+
+            return container.GetCurrentLitres(slot.Itemstack) >= checkLitres;
+        }
+
+        public static bool ConsumeSource(
+            CollectibleObject collObj,
+            string source,
+            ItemSlot slot,
+            EntityAgent byEntity,
+            float consumeLitres
+        )
+        {
+            if (source == "liquidcontent")
+            {
+                if (collObj is not BlockLiquidContainerBase container)
+                    return false;
+
+                EntityPlayer player = byEntity as EntityPlayer;
+                int consumed = container.SplitStackAndPerformAction(
+                    player,
+                    slot,
+                    stack => container.TryTakeLiquid(stack, consumeLitres)?.StackSize ?? 0
+                );
+                slot.MarkDirty();
+                player?.Player?.InventoryManager?.BroadcastHotbarSlot();
+                return consumed > 0;
+            }
+
+            ItemStack taken = slot.TakeOut(1);
+            slot.MarkDirty();
+            return taken?.StackSize > 0;
+        }
+
         internal static bool IsCoatingAllowed(string potionId)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
@@ -70,6 +116,7 @@ namespace Alchemy
                 "shrinkpotionid" => cfg.AllowCoatingShrink,
                 "fallpotionid" => cfg.AllowCoatingFall,
                 "climbpotionid" => cfg.AllowCoatingClimb,
+                "flightpotionid" => cfg.AllowCoatingFlight,
                 _ => false,
             };
         }
@@ -399,6 +446,12 @@ namespace Alchemy
                     cfg.ClimbPotionDrinkingIntoxication,
                     cfg.ClimbPotionDrinkingPsychedelic,
                     cfg.ClimbPotionDrinkingSaturationLoss
+                ),
+                "flightpotionid" => (
+                    cfg.FlightPotionDrinkingDamage,
+                    cfg.FlightPotionDrinkingIntoxication,
+                    cfg.FlightPotionDrinkingPsychedelic,
+                    cfg.FlightPotionDrinkingSaturationLoss
                 ),
                 _ => (0f, 0f, 0f, 0f),
             };

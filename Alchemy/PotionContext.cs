@@ -26,6 +26,7 @@ namespace Alchemy
         public float SizeChange { get; set; }
         public float FallDamageReduction { get; set; }
         public bool CanClimbAnywhere { get; set; }
+        public bool CanFly { get; set; }
 
         public void AddEffect(string key, float baseValue)
         {

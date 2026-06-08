@@ -56,6 +56,7 @@ namespace Alchemy
                 ["shrinkpotionid"] = ApplyShrinkPotion,
                 ["fallpotionid"] = ApplyFallPotion,
                 ["climbpotionid"] = ApplyClimbPotion,
+                ["flightpotionid"] = ApplyFlightPotion,
             };
         }
 
@@ -497,6 +498,12 @@ namespace Alchemy
         {
             ctx.CanClimbAnywhere = true;
             ctx.Duration = AlchemyConfig.Loaded.ClimbPotionDuration;
+        }
+
+        private static void ApplyFlightPotion(PotionContext ctx)
+        {
+            ctx.CanFly = true;
+            ctx.Duration = AlchemyConfig.Loaded.FlightPotionDuration;
         }
     }
 }

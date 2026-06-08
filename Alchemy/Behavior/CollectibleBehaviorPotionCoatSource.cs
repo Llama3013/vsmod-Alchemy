@@ -10,13 +10,17 @@ namespace Alchemy
     {
         private string source;
         private float consumeLitres;
+        private float checkLitres;
         private float consumeTime;
 
         public override void Initialize(JsonObject properties)
         {
             base.Initialize(properties);
             source = properties["source"].AsString("item");
-            consumeLitres = properties["consumeLitres"].AsFloat(0.25f);
+            consumeLitres = properties["consumeLitres"]
+                .AsFloat(AlchemyConfig.Loaded.WeaponCoatConsumeLitres);
+            checkLitres = properties["checkLitres"]
+                .AsFloat(AlchemyConfig.Loaded.WeaponCoatCheckLitres);
             consumeTime = properties["consumeTime"]
                 .AsFloat(AlchemyConfig.Loaded.WeaponCoatApplyTime);
         }
@@ -52,13 +56,15 @@ namespace Alchemy
                     GetLangKey(contentStack?.Collectible),
                     s =>
                     {
-                        int consumed = container.SplitStackAndPerformAction(
-                            byEntity as EntityPlayer,
+                        if (!PotionConsumableLogic.HasEnoughSource(collObj, source, s, checkLitres))
+                            return false;
+                        return PotionConsumableLogic.ConsumeSource(
+                            collObj,
+                            source,
                             s,
-                            stack => container.TryTakeLiquid(stack, consumeLitres)?.StackSize ?? 0
+                            byEntity,
+                            consumeLitres
                         );
-                        s.MarkDirty();
-                        return consumed > 0;
                     },
                     consumeTime
                 );
@@ -80,9 +86,15 @@ namespace Alchemy
                     GetLangKey(slot.Itemstack.Collectible),
                     s =>
                     {
-                        s.TakeOut(1);
-                        s.MarkDirty();
-                        return true;
+                        if (!PotionConsumableLogic.HasEnoughSource(collObj, source, s, checkLitres))
+                            return false;
+                        return PotionConsumableLogic.ConsumeSource(
+                            collObj,
+                            source,
+                            s,
+                            byEntity,
+                            consumeLitres
+                        );
                     },
                     consumeTime
                 );

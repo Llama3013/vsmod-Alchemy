@@ -61,6 +61,7 @@ namespace Alchemy
 
         public bool AllowWeaponCoating { get; set; } = true;
         public bool AllowVanillaContainerDrinking { get; set; } = false;
+        public bool OnlyOnePotionAtATime { get; set; } = false;
 
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;
@@ -86,6 +87,7 @@ namespace Alchemy
         public bool AllowCoatingShrink { get; set; } = false;
         public bool AllowCoatingFall { get; set; } = false;
         public bool AllowCoatingClimb { get; set; } = false;
+        public bool AllowCoatingFlight { get; set; } = false;
 
         public bool AllowFallPotion { get; set; } = true;
         public bool AllowFallPotionRecipe { get; set; } = true;
@@ -95,6 +97,9 @@ namespace Alchemy
         public bool AllowClimbPotion { get; set; } = true;
         public bool AllowClimbPotionRecipe { get; set; } = true;
         public int ClimbPotionDuration { get; set; } = 300;
+
+        public bool AllowFlightPotion { get; set; } = true;
+        public int FlightPotionDuration { get; set; } = 300;
 
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;
@@ -157,6 +162,11 @@ namespace Alchemy
         public float WeaponCoatApplyTime { get; set; } = 2f;
         public float PotionDrinkTime { get; set; } = 1.5f;
         public float PotionEatTime { get; set; } = 1.5f;
+
+        public float PotionConsumeLitres { get; set; } = 0.25f;
+        public float PotionDrinkCheckLitres { get; set; } = 0.24f;
+        public float WeaponCoatConsumeLitres { get; set; } = 0.25f;
+        public float WeaponCoatCheckLitres { get; set; } = 0.24f;
 
         public string CoatableWeaponTags { get; set; } = "weapon-melee";
         public string CoatableProjectilesCodes { get; set; } = "*arrow*";
@@ -565,5 +575,11 @@ namespace Alchemy
         public float ClimbPotionDrinkingIntoxication { get; set; } = 0f;
         public float ClimbPotionDrinkingPsychedelic { get; set; } = 0f;
         public float ClimbPotionDrinkingSaturationLoss { get; set; } = 0f;
+
+        // Flight
+        public float FlightPotionDrinkingDamage { get; set; } = 0f;
+        public float FlightPotionDrinkingIntoxication { get; set; } = 0f;
+        public float FlightPotionDrinkingPsychedelic { get; set; } = 0f;
+        public float FlightPotionDrinkingSaturationLoss { get; set; } = 0f;
     }
 }

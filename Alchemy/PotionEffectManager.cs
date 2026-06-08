@@ -15,8 +15,11 @@ namespace Alchemy
 
         private float originalFallDamageMultiplier = 1f;
         private bool originalCanClimbAnywhere;
+        private bool originalFreeMove;
 
         public bool IsActive(string id) => active.ContainsKey(id);
+
+        public bool HasAnyActive => active.Count > 0;
 
         public bool TryApplyPotion(string id, PotionContext ctx, string name)
         {
@@ -75,6 +78,17 @@ namespace Alchemy
                 {
                     originalCanClimbAnywhere = entity.Properties.CanClimbAnywhere;
                     entity.Properties.CanClimbAnywhere = true;
+                }
+
+                if (
+                    effect.Context.CanFly
+                    && AlchemyConfig.Loaded.AllowFlightPotion
+                    && entity.Player is IServerPlayer flyPlayer
+                )
+                {
+                    originalFreeMove = flyPlayer.WorldData.FreeMove;
+                    flyPlayer.WorldData.FreeMove = true;
+                    flyPlayer.BroadcastPlayerData();
                 }
 
                 long handle;
@@ -158,6 +172,16 @@ namespace Alchemy
             )
             {
                 entity.Properties.CanClimbAnywhere = originalCanClimbAnywhere;
+            }
+
+            if (
+                activeEffect.Effect.Context.CanFly
+                && AlchemyConfig.Loaded.AllowFlightPotion
+                && entity?.Player is IServerPlayer flyPlayer
+            )
+            {
+                flyPlayer.WorldData.FreeMove = originalFreeMove;
+                flyPlayer.BroadcastPlayerData();
             }
             activeEffect.Effect.Remove(entity);
 

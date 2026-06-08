@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "code": "utilitypotionportion",
-  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb"] }],
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight"] }],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },
@@ -121,6 +121,17 @@
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {}
+    },
+    "*-flight": {
+      "potioninfo": { "potionId": "flightpotionid" },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:item/resource/feather" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": { "exclude": true }
     }
   },
   "creativeinventoryStacks": [
@@ -164,7 +175,8 @@
     "*-grow": { "all": { "base": "game:block/soil/flooring/drypackeddirt1a" } },
     "*-shrink": { "all": { "base": "game:block/soil/rammed/light/plain1" } },
     "*-fall": { "all": { "base": "game:block/liquid/frost" } },
-    "*-climb": { "all": { "base": "game:block/creature/webbing" } }
+    "*-climb": { "all": { "base": "game:block/creature/webbing" } },
+    "*-flight": { "all": { "base": "game:item/resource/feather" } }
   },
   "guiTransform": {
     "translation": { "x": 0, "y": 1, "z": 0 },
