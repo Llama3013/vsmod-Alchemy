@@ -1,5 +1,5 @@
 [
-  {
+  // {
     // NEW REMAPS NOT WORKING NO IDEA WHY AT THIS POINT. Just gonna comment this out since this remap is years old and I don't think it even works
     // "file": "game:config/remaps.json",
     // "op": "add",
@@ -42,6 +42,6 @@
     //   "/bir remapq alchemy:potionflask-tube-pink alchemy:potionflask-tube-pink-raw force",
     //   "/bir remapq alchemy:potionflask-tube-pink alchemy:potionflask-tube-pink-burned force"
     // ]
-  }
+  // }
 ]
 
