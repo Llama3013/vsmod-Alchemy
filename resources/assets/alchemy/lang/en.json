@@ -4,6 +4,7 @@
   "effect-gain": "You feel the effects of the {0}",
   "reshape-gain": "You feel the effects of the {0}. It has enabled you to reshape your form and origins, by typing into chat .charsel",
   "boat-block": "You cannot recall when mounted on a boat",
+  "flight-mount-block": "You cannot mount while the flight flask is active",
   "not-enough-potion": "There is not enough potion left for a full dose",
   "potion-limit-active": "You already have a potion active",
   "reshape-block": "You cannot drink anymore reshape as you already have the ability to do so by typing into chat .charsel",
