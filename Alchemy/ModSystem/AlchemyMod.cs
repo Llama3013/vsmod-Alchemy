@@ -23,7 +23,7 @@ namespace Alchemy
     public class AlchemyMod : ModSystem
     {
         internal static IServerNetworkChannel serverChannel;
-        private static GuiDialogCreateCharacter createCharDlg;
+        // private static GuiDialogCreateCharacter createCharDlg;
         private ICoreAPI api;
 
         public static bool PlayerModelLibPresent { get; private set; }
