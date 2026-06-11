@@ -7,7 +7,7 @@ namespace Alchemy
 {
     public sealed class TempEffect(string effectId, PotionContext ctx)
     {
-        private const string modCode = "potionmod";
+        private string ModCode => "potionmod-" + EffectId;
 
         public readonly string EffectId = effectId;
         public readonly PotionContext Context = ctx;
@@ -28,11 +28,11 @@ namespace Alchemy
                     }
                     baseMax += entity.Stats.GetBlended("maxhealthExtraPoints") - 1;
                     float extraHealth = baseMax * stat.Value;
-                    entity.Stats.Set(stat.Key, modCode, extraHealth, false);
+                    entity.Stats.Set(stat.Key, ModCode, extraHealth, false);
                     ebh.MarkDirty();
                 }
                 else
-                    entity.Stats.Set(stat.Key, modCode, stat.Value, false);
+                    entity.Stats.Set(stat.Key, ModCode, stat.Value, false);
             }
             if (Context.TickSec > 0 && Math.Abs(Context.Health) > float.Epsilon)
             {
@@ -58,7 +58,7 @@ namespace Alchemy
         {
             foreach (string stat in Context.Effects.Keys)
             {
-                entity.Stats.Remove(stat, modCode);
+                entity.Stats.Remove(stat, ModCode);
                 if (stat == "maxhealthExtraPoints")
                     entity.GetBehavior<EntityBehaviorHealth>().MarkDirty();
             }

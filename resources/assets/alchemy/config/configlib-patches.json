@@ -3666,6 +3666,13 @@
         "weight": 4.31,
         "default": false
       },
+      "ALLOWPOTIONREFRESH": {
+        "name": "AllowPotionRefresh",
+        "ingui": "alchemy:AllowPotionRefresh",
+        "weight": 4.32,
+        "comment": "alchemy:AllowPotionRefresh-Comment",
+        "default": false
+      },
       "ALLOWWEAPONCOATING": {
         "name": "AllowWeaponCoating",
         "ingui": "alchemy:AllowWeaponCoating",

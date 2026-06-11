@@ -125,9 +125,13 @@ namespace Alchemy
             if (byEntity is not EntityPlayer player)
                 return false;
 
+            PotionEffectManager manager = player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager;
+
+            if (manager?.CanRefresh(data.PotionId) == true)
+                return false;
+
             return player.WatchedAttributes.GetLong(data.PotionId) != 0
-                || player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager.IsActive(data.PotionId)
-                    == true;
+                || manager?.IsActive(data.PotionId) == true;
         }
 
         private static bool IsAnyPotionActiveAndLimited(EntityAgent byEntity)
@@ -468,27 +472,27 @@ namespace Alchemy
                     dsc.AppendLine(Lang.Get("alchemy:potion-single-health-effect", healthValue));
 
                 if (ctx.Respawn)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-recall"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-recall-effect"));
                 if (ctx.GlowStrength > 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-glow"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-glow-effect"));
                 if (ctx.WaterBreathe)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-waterbreathe"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-waterbreathe-effect"));
                 if (ctx.TemporalStabilityGain > 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-temporal"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-temporal-effect"));
                 if (ctx.RetainedNutrition > 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-nutrition"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-nutrition-effect"));
                 if (ctx.Reshape)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-reshape"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-reshape-effect"));
                 if (ctx.SizeChange > 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-grow"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-grow-effect"));
                 if (ctx.SizeChange < 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-shrink"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-shrink-effect"));
                 if (ctx.FallDamageReduction > 0)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-fall"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-fall-effect"));
                 if (ctx.CanClimbAnywhere)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-climb"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-climb-effect"));
                 if (ctx.CanFly)
-                    dsc.AppendLine(Lang.Get("alchemy:itemdesc-utilitypotionportion-flight"));
+                    dsc.AppendLine(Lang.Get("alchemy:potion-flight-effect"));
 
                 if (dsc.Length == headerEnd)
                     dsc.Remove(headerStart, headerEnd - headerStart);

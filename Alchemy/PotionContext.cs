@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Alchemy
@@ -30,6 +31,8 @@ namespace Alchemy
 
         public void AddEffect(string key, float baseValue)
         {
+            if (Math.Abs(baseValue) <= float.Epsilon)
+                return;
             Effects.Add(key, baseValue * StrengthMul);
         }
 

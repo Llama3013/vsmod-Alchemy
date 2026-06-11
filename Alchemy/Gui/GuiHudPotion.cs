@@ -18,14 +18,17 @@ namespace Alchemy
         private long inactiveId = 0;
         private bool isActive;
 
-        private static readonly AssetLocation activeAlchemyHUDTexture =
-            new("alchemy:textures/hud/activealchemyhud.png");
-        private static readonly AssetLocation inactiveAlchemyHUDTexture =
-            new("alchemy:textures/hud/inactivealchemyhud.png");
+        private static readonly AssetLocation activeAlchemyHUDTexture = new(
+            "alchemy:textures/hud/activealchemyhud.png"
+        );
+        private static readonly AssetLocation inactiveAlchemyHUDTexture = new(
+            "alchemy:textures/hud/inactivealchemyhud.png"
+        );
         private GuiComposer activeComposer;
         private GuiComposer inactiveComposer;
 
-        public GuiHudPotion(ICoreClientAPI capi) : base(capi)
+        public GuiHudPotion(ICoreClientAPI capi)
+            : base(capi)
         {
             this.capi = capi;
             SetupDialog();
@@ -42,8 +45,8 @@ namespace Alchemy
             );
             CairoFont font = CairoFont.WhiteSmallText().WithLineHeightMultiplier(1.2);
 
-            inactiveComposer = capi.Gui
-                .CreateCompo("potionhud", hudBounds)
+            inactiveComposer = capi
+                .Gui.CreateCompo("potionhud", hudBounds)
                 .AddImage(hudBounds.ForkChild(), inactiveAlchemyHUDTexture)
                 .AddHoverText(
                     "shouldn't see this!",
@@ -52,8 +55,8 @@ namespace Alchemy
                     hudBounds.ForkChild(),
                     "potionstatus"
                 );
-            activeComposer = capi.Gui
-                .CreateCompo("potionhud", hudBounds)
+            activeComposer = capi
+                .Gui.CreateCompo("potionhud", hudBounds)
                 .AddImage(hudBounds.ForkChild(), activeAlchemyHUDTexture)
                 .AddHoverText(
                     "shouldn't see this!",
@@ -142,7 +145,11 @@ namespace Alchemy
         {
             capi.Logger.Debug("checking for effects active");
             EntityPlayer entity = capi.World.Player.Entity;
-            if (entity.Stats.Any(stat => stat.Value.ValuesByKey.ContainsKey("potionmod")))
+            if (
+                entity.Stats.Any(stat =>
+                    stat.Value.ValuesByKey.Keys.Any(key => key.StartsWith("potionmod"))
+                )
+            )
             {
                 ActivateReadEffects();
                 return true;
@@ -167,6 +174,21 @@ namespace Alchemy
                 ActivateReadEffects();
                 return true;
             }
+            if (entity.WatchedAttributes.HasAttribute("fallpotionid"))
+            {
+                ActivateReadEffects();
+                return true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("climbpotionid"))
+            {
+                ActivateReadEffects();
+                return true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("flightpotionid"))
+            {
+                ActivateReadEffects();
+                return true;
+            }
             return false;
         }
 
@@ -179,19 +201,26 @@ namespace Alchemy
             EntityPlayer entity = capi.World.Player.Entity;
             foreach (KeyValuePair<string, EntityFloatStats> stat in entity.Stats)
             {
-                if (!stat.Value.ValuesByKey.TryGetValue("potionmod", out EntityStat<float> value))
+                List<float> potionValues =
+                [
+                    .. stat
+                        .Value.ValuesByKey.Where(kv => kv.Key.StartsWith("potionmod"))
+                        .Select(kv => kv.Value.Value),
+                ];
+                if (potionValues.Count == 0)
                     continue;
+
+                float value = potionValues.Sum();
 
                 if (stat.Key == "maxhealthExtraPoints")
                 {
-                    float hp = (float)Math.Round(value.Value, MidpointRounding.AwayFromZero);
+                    float hp = (float)Math.Round(value, MidpointRounding.AwayFromZero);
 
                     stringBuilder.AppendLine($"{Lang.GetIfExists("alchemy:" + stat.Key)}: +{hp}");
                 }
                 else
                 {
-                    float percent = (float)
-                        Math.Round(value.Value * 100, MidpointRounding.AwayFromZero);
+                    float percent = (float)Math.Round(value * 100, MidpointRounding.AwayFromZero);
 
                     stringBuilder.AppendLine(
                         $"{Lang.GetIfExists("alchemy:" + stat.Key)}: {percent:+0;-0;0}%"
@@ -226,6 +255,27 @@ namespace Alchemy
             {
                 stringBuilder.AppendLine(
                     string.Format(Lang.GetIfExists("alchemy:poison") + ": {0}", true)
+                );
+                activePotion = true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("fallpotionid"))
+            {
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:fall") + ": {0}", true)
+                );
+                activePotion = true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("climbpotionid"))
+            {
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:climb") + ": {0}", true)
+                );
+                activePotion = true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("flightpotionid"))
+            {
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:flight") + ": {0}", true)
                 );
                 activePotion = true;
             }

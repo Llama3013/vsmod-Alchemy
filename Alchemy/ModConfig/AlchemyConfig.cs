@@ -62,6 +62,7 @@ namespace Alchemy
         public bool AllowWeaponCoating { get; set; } = true;
         public bool AllowVanillaContainerDrinking { get; set; } = false;
         public bool OnlyOnePotionAtATime { get; set; } = false;
+        public bool AllowPotionRefresh { get; set; } = false;
 
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;

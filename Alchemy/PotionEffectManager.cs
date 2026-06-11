@@ -21,17 +21,32 @@ namespace Alchemy
 
         public bool HasAnyActive => active.Count > 0;
 
+        public bool CanRefresh(string id) =>
+            AlchemyConfig.Loaded.AllowPotionRefresh
+            && active.TryGetValue(id, out ActiveEffect activeEffect)
+            && !(
+                activeEffect.Effect.Context.TickSec > 0
+                && Math.Abs(activeEffect.Effect.Context.Health) > float.Epsilon
+            );
+
         public bool TryApplyPotion(string id, PotionContext ctx, string name)
         {
             try
             {
                 if (IsActive(id) || entity.WatchedAttributes.GetLong(id) != 0)
                 {
-                    api.Logger.Debug(
-                        "Cannot apply potion for potionId {0}, it is currently already applied!",
-                        id
-                    );
-                    return false;
+                    if (CanRefresh(id))
+                    {
+                        RemoveEffect(id, false);
+                    }
+                    else
+                    {
+                        api.Logger.Debug(
+                            "Cannot apply potion for potionId {0}, it is currently already applied!",
+                            id
+                        );
+                        return false;
+                    }
                 }
 
                 TempEffect effect = new(id, ctx);
@@ -140,17 +155,20 @@ namespace Alchemy
                 RemoveEffect(id);
         }
 
-        public void RemoveEffect(string id)
+        public void RemoveEffect(string id, bool notify = true)
         {
             if (!active.TryGetValue(id, out ActiveEffect activeEffect))
                 return;
 
-            IServerPlayer serverPlayer = entity?.Player as IServerPlayer;
-            serverPlayer?.SendMessage(
-                GlobalConstants.InfoLogChatGroup,
-                Lang.Get("alchemy:effect-lose", activeEffect.PotionName),
-                EnumChatType.Notification
-            );
+            if (notify)
+            {
+                IServerPlayer serverPlayer = entity?.Player as IServerPlayer;
+                serverPlayer?.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get("alchemy:effect-lose", activeEffect.PotionName),
+                    EnumChatType.Notification
+                );
+            }
 
             if (activeEffect.IsTicking)
                 entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
