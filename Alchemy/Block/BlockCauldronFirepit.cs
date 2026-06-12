@@ -455,8 +455,10 @@ namespace Alchemy
                     {
                         if (world.Side == EnumAppSide.Server)
                         {
+                            ItemStack spoonStack = stack.Clone();
+                            spoonStack.StackSize = 1;
                             cauldronStack.Attributes["stirringSpoon"] = new ItemstackAttribute(
-                                stack.Clone()
+                                spoonStack
                             );
                             cauldronStack.Attributes.SetInt("stirringSpoonFacing", sideIndex);
                             byPlayer.InventoryManager.ActiveHotbarSlot.TakeOut(1);

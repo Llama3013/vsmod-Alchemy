@@ -611,6 +611,8 @@
   "fall": "Fall protection",
   "climb": "Climbing",
   "flight": "Flight",
+  "grow": "Growth",
+  "shrink": "Shrunk",
   "game:tabname-alchemy": "Alchemy",
   "alchemy:alchemyguide-title": "Alchemy: Making Potions",
   "alchemy:alchemyguide-text": "Alchemy allows you to brew potions that enhance your abilities, grant utility effects, and more. There are three tiers of potions, each requiring progressively more advanced equipment.\n\n<a href=\"handbook://alchemyguide-herbs\">Tier 1 - Edible Herbs</a>: The earliest form of alchemy. Only a mortar & pestle required.\n\n<a href=\"handbook://alchemyguide-medium\">Tier 2 - Medium Potions</a>: Liquid potions brewed in a cauldron firepit. Requires copper age, with a barrel, a cauldron and wooden stirring spoon.\n\n<a href=\"handbook://alchemyguide-strong\">Tier 3 - Strong Potions</a>: Can you handle my strongest potions? Requires herb racks, glassworking and aqua vitae.\n\n<a href=\"handbook://alchemyguide-coat\">Weapon Coating</a>: Apply potions to your weapons and arrows to deliver their effects on hit.\n\nThe Alchemy mod is highly configurable. I highly reccomend you use the mod ConfigLib if you want to change anything about this mod, the are hundreds of different config values for you to adjust.\nIf you have any suggestions or find any bugs, preferably let me know on the official Vintage Story discord in the alchemy mod thread, or just leave a comment on the mod page.",

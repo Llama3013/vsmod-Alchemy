@@ -189,6 +189,11 @@ namespace Alchemy
                 ActivateReadEffects();
                 return true;
             }
+            if (Math.Abs(entity.WatchedAttributes.GetFloat("potionSizeDelta")) > 0.001f)
+            {
+                ActivateReadEffects();
+                return true;
+            }
             return false;
         }
 
@@ -277,6 +282,13 @@ namespace Alchemy
                 stringBuilder.AppendLine(
                     string.Format(Lang.GetIfExists("alchemy:flight") + ": {0}", true)
                 );
+                activePotion = true;
+            }
+            float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta");
+            if (Math.Abs(sizeDelta) > 0.001f)
+            {
+                string sizeKey = sizeDelta > 0 ? "alchemy:grow" : "alchemy:shrink";
+                stringBuilder.AppendLine($"{Lang.GetIfExists(sizeKey)}: {sizeDelta:+0.0#;-0.0#}");
                 activePotion = true;
             }
             if (activePotion)
