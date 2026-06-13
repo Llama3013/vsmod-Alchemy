@@ -1457,12 +1457,10 @@ namespace Alchemy
 
         public override void Dispose()
         {
-            CombatOverhaulCompat.Shutdown();
-            // Only the instance that actually patched holds a harmony reference; the
-            // other side's is null. Unpatch so the guard re-patches on the next world.
+            // CombatOverhaulCompat.Shutdown();
             harmony?.UnpatchAll(HarmonyId);
             harmony = null;
-            // remove our player join listener so we dont create memory leaks
+            // remove our player join listener so we don't create memory leaks
             if (api is ICoreServerAPI sapi)
             {
                 sapi.Event.PlayerNowPlaying -= OnPlayerReady;
