@@ -1,0 +1,16 @@
+[
+    {
+        "file": "aculinaryartillery:blocktypes/bottles/glassbottle.json",
+        "op": "add",
+        "path": "/behaviors/-",
+        "value": {
+            "name": "PotionConsumable",
+            "properties": { "source": "liquidcontent", "animation": "eat" }
+        },
+        "dependsOn": [{ "modid": "aculinaryartillery" }],
+        "condition": {
+            "when": "AllowVanillaContainerDrinking",
+            "isValue": "true"
+        }
+    }
+]

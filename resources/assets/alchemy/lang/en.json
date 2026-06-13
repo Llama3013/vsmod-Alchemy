@@ -959,11 +959,11 @@
   "WeaponCoatCheckLitres-Comment": "The minimum litres that must be in a flask before a coating can be applied. Usually set slightly below the coat amount to avoid floating point issues",
   "CoatableWeaponTags": "Coatable weapon tags!!!",
   "CoatableWeaponTags-Comment": "Comma-separated VS item tags for weapons that can be coated with potions. \"weapon-melee\" is the default. This will mean every vanilla weapon and every modded weapon with that tag can be coated. If you want to only allow specific weapons with different tags to be coated. For example if you replace it with \"weapon-sword, tool-cleaver\" then only swords and the cleaver will be coatable. MAKE SURE TO HAVE VALID TAGS OR IT WON'T WORK!",
-  "AllowVanillaContainerDrinking": "Allow drinking from vanilla containers",
   "OnlyOnePotionAtATime": "Only allow one potion active at a time",
   "AllowPotionRefresh": "Allow refreshing potion durations",
   "AllowPotionRefresh-Comment": "Allow drinking a potion that is already active to restart its duration. The old effect is replaced by the new drink, so drinking a different strength of the same potion applies the new strength. Potions with health ticks (regen/poison) cannot be refreshed since their healing/damage over time cannot be cancelled early.",
-  "AllowVanillaContainerDrinking-Comment": "Allow potions to be drunk from vanilla bowls, buckets, and jugs. I assume its a little buggy to since the potion flasks handle some interactions differently to vanilla containers.",
+  "AllowVanillaContainerDrinking": "Allow drinking from other liquid containers",
+  "AllowVanillaContainerDrinking-Comment": "Allow potions to be drunk from vanilla bowls, buckets, and jugs, as well as Expanded Foods glass bottles when that mod (A Culinary Artillery) is installed. I assume its a little buggy to since the potion flasks handle some interactions differently to vanilla containers.",
   "heldhelp-coat-weapon": "Hold in off hand to coat weapon or arrows",
 
   "DrinkingSideEffects-Config": "Drinking side effects",
