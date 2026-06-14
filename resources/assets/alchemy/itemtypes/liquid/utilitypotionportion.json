@@ -1,7 +1,7 @@
 {
   "enabled": true,
   "code": "utilitypotionportion",
-  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight"] }],
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight", "coldresist"] }],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },
@@ -51,6 +51,17 @@
         "containable": true,
         "itemsPerLitre": 100,
         "texture": { "base": "game:block/fire-blue" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
+    },
+    "*-coldresist": {
+      "potioninfo": { "potionId": "coldresistpotionid", "duration": 1000 },
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:block/fire-red" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
@@ -170,6 +181,7 @@
     "*-nutrition": { "all": { "base": "game:block/hay/aged-side" } },
     "*-glow": { "all": { "base": "game:block/fire-yellow" } },
     "*-waterbreathe": { "all": { "base": "game:block/fire-blue" } },
+    "*-coldresist": { "all": { "base": "game:block/fire-red" } },
     "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } },
     "*-reshape": { "all": { "base": "game:item/resource/rot/rot-solids" } },
     "*-grow": { "all": { "base": "game:block/soil/flooring/drypackeddirt1a" } },

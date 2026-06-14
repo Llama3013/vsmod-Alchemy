@@ -12,6 +12,7 @@ namespace Alchemy
         public bool AllowRecallPotion;
         public bool AllowGlowPotion;
         public bool AllowWaterBreathePotion;
+        public bool AllowColdResistPotion;
         public bool AllowNutritionPotion;
         public bool AllowTemporalPotion;
 
@@ -61,6 +62,7 @@ namespace Alchemy
         // public bool AllowDecorativeRacks;
 
         public bool AllowWeaponCoating;
+        public bool SideEffectStrengthMultiplier;
 
         public bool AllowCoatingArcher;
         public bool AllowCoatingHealingEffect;
@@ -79,6 +81,7 @@ namespace Alchemy
         public bool AllowCoatingRecall;
         public bool AllowCoatingGlow;
         public bool AllowCoatingWaterBreathe;
+        public bool AllowCoatingColdResist;
         public bool AllowCoatingNutrition;
         public bool AllowCoatingTemporal;
         public bool AllowCoatingReshape;
@@ -385,6 +388,7 @@ namespace Alchemy
         public int GlowPotionDuration;
         public int GlowPotionStrength;
         public int WaterBreathePotionDuration;
+        public int ColdResistPotionDuration;
         public float NutritionPotionRetainedNutrition;
         public float StabilityPotionTemporalStabilityGain;
     }

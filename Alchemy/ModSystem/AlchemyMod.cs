@@ -23,6 +23,7 @@ namespace Alchemy
     public class AlchemyMod : ModSystem
     {
         internal static IServerNetworkChannel serverChannel;
+
         // private static GuiDialogCreateCharacter createCharDlg;
         private ICoreAPI api;
         private const string HarmonyId = "llama3013.Alchemy";
@@ -142,6 +143,10 @@ namespace Alchemy
                 "AllowWaterBreathePotion",
                 AlchemyConfig.Loaded.AllowWaterBreathePotion
             );
+            api.World.Config.SetBool(
+                "AllowColdResistPotion",
+                AlchemyConfig.Loaded.AllowColdResistPotion
+            );
 
             api.World.Config.SetBool("AllowReshapePotion", AlchemyConfig.Loaded.AllowReshapePotion);
             api.World.Config.SetBool("AllowGrowPotion", AlchemyConfig.Loaded.AllowGrowPotion);
@@ -221,6 +226,10 @@ namespace Alchemy
             api.World.Config.SetBool(
                 "AllowCoatingWaterBreathe",
                 AlchemyConfig.Loaded.AllowCoatingWaterBreathe
+            );
+            api.World.Config.SetBool(
+                "AllowCoatingColdResist",
+                AlchemyConfig.Loaded.AllowCoatingColdResist
             );
             api.World.Config.SetBool(
                 "AllowCoatingNutrition",
@@ -393,6 +402,11 @@ namespace Alchemy
                     AlchemyConfig.Loaded.AllowWaterBreathePotion = packet.AllowWaterBreathePotion;
                     Mod.Logger.Event(
                         $"Received AllowWaterBreathePotion of {packet.AllowWaterBreathePotion} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowColdResistPotion = packet.AllowColdResistPotion;
+                    Mod.Logger.Event(
+                        $"Received AllowColdResistPotion of {packet.AllowColdResistPotion} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowReshapePotion = packet.AllowReshapePotion;
@@ -677,6 +691,10 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received WaterBreathePotionDuration of {packet.WaterBreathePotionDuration} from server"
                     );
+                    AlchemyConfig.Loaded.ColdResistPotionDuration = packet.ColdResistPotionDuration;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionDuration of {packet.ColdResistPotionDuration} from server"
+                    );
                     AlchemyConfig.Loaded.NutritionPotionRetainedNutrition =
                         packet.NutritionPotionRetainedNutrition;
                     Mod.Logger.Event(
@@ -762,6 +780,10 @@ namespace Alchemy
                     AlchemyConfig.Loaded.AllowCoatingWaterBreathe = packet.AllowCoatingWaterBreathe;
                     Mod.Logger.Event(
                         $"Received AllowCoatingWaterBreathe of {packet.AllowCoatingWaterBreathe} from server"
+                    );
+                    AlchemyConfig.Loaded.AllowCoatingColdResist = packet.AllowCoatingColdResist;
+                    Mod.Logger.Event(
+                        $"Received AllowCoatingColdResist of {packet.AllowCoatingColdResist} from server"
                     );
                     AlchemyConfig.Loaded.AllowCoatingNutrition = packet.AllowCoatingNutrition;
                     Mod.Logger.Event(
@@ -904,6 +926,7 @@ namespace Alchemy
                     AllowTemporalPotion = AlchemyConfig.Loaded.AllowTemporalPotion,
                     AllowVitalityPotion = AlchemyConfig.Loaded.AllowVitalityPotion,
                     AllowWaterBreathePotion = AlchemyConfig.Loaded.AllowWaterBreathePotion,
+                    AllowColdResistPotion = AlchemyConfig.Loaded.AllowColdResistPotion,
                     AllowReshapePotion = AlchemyConfig.Loaded.AllowReshapePotion,
                     AllowGrowPotion = AlchemyConfig.Loaded.AllowGrowPotion,
                     AllowShrinkPotion = AlchemyConfig.Loaded.AllowShrinkPotion,
@@ -973,6 +996,7 @@ namespace Alchemy
                     VitalityPotionDuration = AlchemyConfig.Loaded.VitalityPotionDuration,
                     GlowPotionDuration = AlchemyConfig.Loaded.GlowPotionDuration,
                     WaterBreathePotionDuration = AlchemyConfig.Loaded.WaterBreathePotionDuration,
+                    ColdResistPotionDuration = AlchemyConfig.Loaded.ColdResistPotionDuration,
                     NutritionPotionRetainedNutrition = AlchemyConfig
                         .Loaded
                         .NutritionPotionRetainedNutrition,
@@ -998,6 +1022,7 @@ namespace Alchemy
                     AllowCoatingRecall = AlchemyConfig.Loaded.AllowCoatingRecall,
                     AllowCoatingGlow = AlchemyConfig.Loaded.AllowCoatingGlow,
                     AllowCoatingWaterBreathe = AlchemyConfig.Loaded.AllowCoatingWaterBreathe,
+                    AllowCoatingColdResist = AlchemyConfig.Loaded.AllowCoatingColdResist,
                     AllowCoatingNutrition = AlchemyConfig.Loaded.AllowCoatingNutrition,
                     AllowCoatingTemporal = AlchemyConfig.Loaded.AllowCoatingTemporal,
                     AllowCoatingReshape = AlchemyConfig.Loaded.AllowCoatingReshape,
@@ -1013,6 +1038,9 @@ namespace Alchemy
                     AllowClimbPotionRecipe = AlchemyConfig.Loaded.AllowClimbPotionRecipe,
 
                     AllowWeaponCoating = AlchemyConfig.Loaded.AllowWeaponCoating,
+                    SideEffectStrengthMultiplier = AlchemyConfig
+                        .Loaded
+                        .SideEffectStrengthMultiplier,
                     WeaponCoatCharges = AlchemyConfig.Loaded.WeaponCoatCharges,
                     FallPotionDamageReduction = AlchemyConfig.Loaded.FallPotionDamageReduction,
                     FallPotionDuration = AlchemyConfig.Loaded.FallPotionDuration,

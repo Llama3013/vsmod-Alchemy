@@ -2202,7 +2202,7 @@
         "weight": 48.25,
         "comment": "alchemy:ArcherPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "ARCHERPOTIONDRINKINGINTOXICATION": {
         "name": "ArcherPotionDrinkingIntoxication",
@@ -2210,7 +2210,7 @@
         "weight": 48.26,
         "comment": "alchemy:ArcherPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "ARCHERPOTIONDRINKINGPSYCHEDELIC": {
         "name": "ArcherPotionDrinkingPsychedelic",
@@ -2218,7 +2218,7 @@
         "weight": 48.27,
         "comment": "alchemy:ArcherPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "ARCHERPOTIONDRINKINGSATURATIONLOSS": {
         "name": "ArcherPotionDrinkingSaturationLoss",
@@ -2226,7 +2226,7 @@
         "weight": 48.28,
         "comment": "alchemy:ArcherPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "HEALINGEFFECTPOTIONDRINKINGDAMAGE": {
         "name": "HealingEffectPotionDrinkingDamage",
@@ -2234,7 +2234,7 @@
         "weight": 49.27,
         "comment": "alchemy:HealingEffectPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "HEALINGEFFECTPOTIONDRINKINGINTOXICATION": {
         "name": "HealingEffectPotionDrinkingIntoxication",
@@ -2242,7 +2242,7 @@
         "weight": 49.28,
         "comment": "alchemy:HealingEffectPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "HEALINGEFFECTPOTIONDRINKINGPSYCHEDELIC": {
         "name": "HealingEffectPotionDrinkingPsychedelic",
@@ -2250,7 +2250,7 @@
         "weight": 49.29,
         "comment": "alchemy:HealingEffectPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "HEALINGEFFECTPOTIONDRINKINGSATURATIONLOSS": {
         "name": "HealingEffectPotionDrinkingSaturationLoss",
@@ -2258,7 +2258,7 @@
         "weight": 49.3,
         "comment": "alchemy:HealingEffectPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "HUNGERENHANCEPOTIONDRINKINGDAMAGE": {
         "name": "HungerEnhancePotionDrinkingDamage",
@@ -2266,7 +2266,7 @@
         "weight": 50.27,
         "comment": "alchemy:HungerEnhancePotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "HUNGERENHANCEPOTIONDRINKINGINTOXICATION": {
         "name": "HungerEnhancePotionDrinkingIntoxication",
@@ -2274,7 +2274,7 @@
         "weight": 50.28,
         "comment": "alchemy:HungerEnhancePotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "HUNGERENHANCEPOTIONDRINKINGPSYCHEDELIC": {
         "name": "HungerEnhancePotionDrinkingPsychedelic",
@@ -2282,7 +2282,7 @@
         "weight": 50.29,
         "comment": "alchemy:HungerEnhancePotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "HUNGERENHANCEPOTIONDRINKINGSATURATIONLOSS": {
         "name": "HungerEnhancePotionDrinkingSaturationLoss",
@@ -2290,7 +2290,7 @@
         "weight": 50.3,
         "comment": "alchemy:HungerEnhancePotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "HUNGERSUPRESSPOTIONDRINKINGDAMAGE": {
         "name": "HungerSupressPotionDrinkingDamage",
@@ -2298,7 +2298,7 @@
         "weight": 51.27,
         "comment": "alchemy:HungerSupressPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "HUNGERSUPRESSPOTIONDRINKINGINTOXICATION": {
         "name": "HungerSupressPotionDrinkingIntoxication",
@@ -2306,7 +2306,7 @@
         "weight": 51.28,
         "comment": "alchemy:HungerSupressPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "HUNGERSUPRESSPOTIONDRINKINGPSYCHEDELIC": {
         "name": "HungerSupressPotionDrinkingPsychedelic",
@@ -2314,7 +2314,7 @@
         "weight": 51.29,
         "comment": "alchemy:HungerSupressPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "HUNGERSUPRESSPOTIONDRINKINGSATURATIONLOSS": {
         "name": "HungerSupressPotionDrinkingSaturationLoss",
@@ -2322,7 +2322,7 @@
         "weight": 51.3,
         "comment": "alchemy:HungerSupressPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "HUNTERPOTIONDRINKINGDAMAGE": {
         "name": "HunterPotionDrinkingDamage",
@@ -2330,7 +2330,7 @@
         "weight": 52.27,
         "comment": "alchemy:HunterPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "HUNTERPOTIONDRINKINGINTOXICATION": {
         "name": "HunterPotionDrinkingIntoxication",
@@ -2338,7 +2338,7 @@
         "weight": 52.28,
         "comment": "alchemy:HunterPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "HUNTERPOTIONDRINKINGPSYCHEDELIC": {
         "name": "HunterPotionDrinkingPsychedelic",
@@ -2346,7 +2346,7 @@
         "weight": 52.29,
         "comment": "alchemy:HunterPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "HUNTERPOTIONDRINKINGSATURATIONLOSS": {
         "name": "HunterPotionDrinkingSaturationLoss",
@@ -2354,7 +2354,7 @@
         "weight": 52.3,
         "comment": "alchemy:HunterPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "LOOTERPOTIONDRINKINGDAMAGE": {
         "name": "LooterPotionDrinkingDamage",
@@ -2362,7 +2362,7 @@
         "weight": 53.27,
         "comment": "alchemy:LooterPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "LOOTERPOTIONDRINKINGINTOXICATION": {
         "name": "LooterPotionDrinkingIntoxication",
@@ -2370,7 +2370,7 @@
         "weight": 53.28,
         "comment": "alchemy:LooterPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "LOOTERPOTIONDRINKINGPSYCHEDELIC": {
         "name": "LooterPotionDrinkingPsychedelic",
@@ -2378,7 +2378,7 @@
         "weight": 53.29,
         "comment": "alchemy:LooterPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "LOOTERPOTIONDRINKINGSATURATIONLOSS": {
         "name": "LooterPotionDrinkingSaturationLoss",
@@ -2386,7 +2386,7 @@
         "weight": 53.3,
         "comment": "alchemy:LooterPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "MELEEPOTIONDRINKINGDAMAGE": {
         "name": "MeleePotionDrinkingDamage",
@@ -2394,7 +2394,7 @@
         "weight": 54.27,
         "comment": "alchemy:MeleePotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "MELEEPOTIONDRINKINGINTOXICATION": {
         "name": "MeleePotionDrinkingIntoxication",
@@ -2402,7 +2402,7 @@
         "weight": 54.28,
         "comment": "alchemy:MeleePotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "MELEEPOTIONDRINKINGPSYCHEDELIC": {
         "name": "MeleePotionDrinkingPsychedelic",
@@ -2410,7 +2410,7 @@
         "weight": 54.29,
         "comment": "alchemy:MeleePotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "MELEEPOTIONDRINKINGSATURATIONLOSS": {
         "name": "MeleePotionDrinkingSaturationLoss",
@@ -2418,7 +2418,7 @@
         "weight": 54.3,
         "comment": "alchemy:MeleePotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "MININGPOTIONDRINKINGDAMAGE": {
         "name": "MiningPotionDrinkingDamage",
@@ -2426,7 +2426,7 @@
         "weight": 55.27,
         "comment": "alchemy:MiningPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "MININGPOTIONDRINKINGINTOXICATION": {
         "name": "MiningPotionDrinkingIntoxication",
@@ -2434,7 +2434,7 @@
         "weight": 55.28,
         "comment": "alchemy:MiningPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "MININGPOTIONDRINKINGPSYCHEDELIC": {
         "name": "MiningPotionDrinkingPsychedelic",
@@ -2442,7 +2442,7 @@
         "weight": 55.29,
         "comment": "alchemy:MiningPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "MININGPOTIONDRINKINGSATURATIONLOSS": {
         "name": "MiningPotionDrinkingSaturationLoss",
@@ -2450,7 +2450,7 @@
         "weight": 55.3,
         "comment": "alchemy:MiningPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "POISONPOTIONDRINKINGDAMAGE": {
         "name": "PoisonPotionDrinkingDamage",
@@ -2458,7 +2458,7 @@
         "weight": 56.27,
         "comment": "alchemy:PoisonPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "POISONPOTIONDRINKINGINTOXICATION": {
         "name": "PoisonPotionDrinkingIntoxication",
@@ -2466,7 +2466,7 @@
         "weight": 56.28,
         "comment": "alchemy:PoisonPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "POISONPOTIONDRINKINGPSYCHEDELIC": {
         "name": "PoisonPotionDrinkingPsychedelic",
@@ -2474,7 +2474,7 @@
         "weight": 56.29,
         "comment": "alchemy:PoisonPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "POISONPOTIONDRINKINGSATURATIONLOSS": {
         "name": "PoisonPotionDrinkingSaturationLoss",
@@ -2482,7 +2482,7 @@
         "weight": 56.3,
         "comment": "alchemy:PoisonPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "PREDATORPOTIONDRINKINGDAMAGE": {
         "name": "PredatorPotionDrinkingDamage",
@@ -2490,7 +2490,7 @@
         "weight": 57.27,
         "comment": "alchemy:PredatorPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "PREDATORPOTIONDRINKINGINTOXICATION": {
         "name": "PredatorPotionDrinkingIntoxication",
@@ -2498,7 +2498,7 @@
         "weight": 57.28,
         "comment": "alchemy:PredatorPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "PREDATORPOTIONDRINKINGPSYCHEDELIC": {
         "name": "PredatorPotionDrinkingPsychedelic",
@@ -2506,7 +2506,7 @@
         "weight": 57.29,
         "comment": "alchemy:PredatorPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "PREDATORPOTIONDRINKINGSATURATIONLOSS": {
         "name": "PredatorPotionDrinkingSaturationLoss",
@@ -2514,7 +2514,7 @@
         "weight": 57.3,
         "comment": "alchemy:PredatorPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "REGENPOTIONDRINKINGDAMAGE": {
         "name": "RegenPotionDrinkingDamage",
@@ -2522,7 +2522,7 @@
         "weight": 58.27,
         "comment": "alchemy:RegenPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "REGENPOTIONDRINKINGINTOXICATION": {
         "name": "RegenPotionDrinkingIntoxication",
@@ -2530,7 +2530,7 @@
         "weight": 58.28,
         "comment": "alchemy:RegenPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "REGENPOTIONDRINKINGPSYCHEDELIC": {
         "name": "RegenPotionDrinkingPsychedelic",
@@ -2538,7 +2538,7 @@
         "weight": 58.29,
         "comment": "alchemy:RegenPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "REGENPOTIONDRINKINGSATURATIONLOSS": {
         "name": "RegenPotionDrinkingSaturationLoss",
@@ -2546,7 +2546,7 @@
         "weight": 58.3,
         "comment": "alchemy:RegenPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "SCENTMASKPOTIONDRINKINGDAMAGE": {
         "name": "ScentMaskPotionDrinkingDamage",
@@ -2554,7 +2554,7 @@
         "weight": 59.27,
         "comment": "alchemy:ScentMaskPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "SCENTMASKPOTIONDRINKINGINTOXICATION": {
         "name": "ScentMaskPotionDrinkingIntoxication",
@@ -2562,7 +2562,7 @@
         "weight": 59.28,
         "comment": "alchemy:ScentMaskPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "SCENTMASKPOTIONDRINKINGPSYCHEDELIC": {
         "name": "ScentMaskPotionDrinkingPsychedelic",
@@ -2570,7 +2570,7 @@
         "weight": 59.29,
         "comment": "alchemy:ScentMaskPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "SCENTMASKPOTIONDRINKINGSATURATIONLOSS": {
         "name": "ScentMaskPotionDrinkingSaturationLoss",
@@ -2578,7 +2578,7 @@
         "weight": 59.3,
         "comment": "alchemy:ScentMaskPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "SPEEDPOTIONDRINKINGDAMAGE": {
         "name": "SpeedPotionDrinkingDamage",
@@ -2586,7 +2586,7 @@
         "weight": 60.27,
         "comment": "alchemy:SpeedPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "SPEEDPOTIONDRINKINGINTOXICATION": {
         "name": "SpeedPotionDrinkingIntoxication",
@@ -2594,7 +2594,7 @@
         "weight": 60.28,
         "comment": "alchemy:SpeedPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "SPEEDPOTIONDRINKINGPSYCHEDELIC": {
         "name": "SpeedPotionDrinkingPsychedelic",
@@ -2602,7 +2602,7 @@
         "weight": 60.29,
         "comment": "alchemy:SpeedPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "SPEEDPOTIONDRINKINGSATURATIONLOSS": {
         "name": "SpeedPotionDrinkingSaturationLoss",
@@ -2610,7 +2610,7 @@
         "weight": 60.3,
         "comment": "alchemy:SpeedPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "VITALITYPOTIONDRINKINGDAMAGE": {
         "name": "VitalityPotionDrinkingDamage",
@@ -2618,7 +2618,7 @@
         "weight": 61.27,
         "comment": "alchemy:VitalityPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "VITALITYPOTIONDRINKINGINTOXICATION": {
         "name": "VitalityPotionDrinkingIntoxication",
@@ -2626,7 +2626,7 @@
         "weight": 61.28,
         "comment": "alchemy:VitalityPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "VITALITYPOTIONDRINKINGPSYCHEDELIC": {
         "name": "VitalityPotionDrinkingPsychedelic",
@@ -2634,7 +2634,7 @@
         "weight": 61.29,
         "comment": "alchemy:VitalityPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "VITALITYPOTIONDRINKINGSATURATIONLOSS": {
         "name": "VitalityPotionDrinkingSaturationLoss",
@@ -2642,7 +2642,7 @@
         "weight": 61.3,
         "comment": "alchemy:VitalityPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "GLOWPOTIONDRINKINGDAMAGE": {
         "name": "GlowPotionDrinkingDamage",
@@ -2650,7 +2650,7 @@
         "weight": 62.1,
         "comment": "alchemy:GlowPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "GLOWPOTIONDRINKINGINTOXICATION": {
         "name": "GlowPotionDrinkingIntoxication",
@@ -2658,7 +2658,7 @@
         "weight": 62.2,
         "comment": "alchemy:GlowPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "GLOWPOTIONDRINKINGPSYCHEDELIC": {
         "name": "GlowPotionDrinkingPsychedelic",
@@ -2666,7 +2666,7 @@
         "weight": 62.3,
         "comment": "alchemy:GlowPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "GLOWPOTIONDRINKINGSATURATIONLOSS": {
         "name": "GlowPotionDrinkingSaturationLoss",
@@ -2674,7 +2674,7 @@
         "weight": 62.4,
         "comment": "alchemy:GlowPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "WATERBREATHEPOTIONDRINKINGDAMAGE": {
         "name": "WaterBreathePotionDrinkingDamage",
@@ -2682,7 +2682,7 @@
         "weight": 63.1,
         "comment": "alchemy:WaterBreathePotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "WATERBREATHEPOTIONDRINKINGINTOXICATION": {
         "name": "WaterBreathePotionDrinkingIntoxication",
@@ -2690,7 +2690,7 @@
         "weight": 63.2,
         "comment": "alchemy:WaterBreathePotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "WATERBREATHEPOTIONDRINKINGPSYCHEDELIC": {
         "name": "WaterBreathePotionDrinkingPsychedelic",
@@ -2698,7 +2698,7 @@
         "weight": 63.3,
         "comment": "alchemy:WaterBreathePotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "WATERBREATHEPOTIONDRINKINGSATURATIONLOSS": {
         "name": "WaterBreathePotionDrinkingSaturationLoss",
@@ -2706,7 +2706,39 @@
         "weight": 63.4,
         "comment": "alchemy:WaterBreathePotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
+      },
+      "COLDRESISTPOTIONDRINKINGDAMAGE": {
+        "name": "ColdResistPotionDrinkingDamage",
+        "ingui": "alchemy:ColdResistPotionDrinkingDamage",
+        "weight": 63.51,
+        "comment": "alchemy:ColdResistPotionDrinkingDamage-Comment",
+        "default": 0.0,
+        "range": { "min": -20.0, "max": 20.0 }
+      },
+      "COLDRESISTPOTIONDRINKINGINTOXICATION": {
+        "name": "ColdResistPotionDrinkingIntoxication",
+        "ingui": "alchemy:ColdResistPotionDrinkingIntoxication",
+        "weight": 63.52,
+        "comment": "alchemy:ColdResistPotionDrinkingIntoxication-Comment",
+        "default": 0.0,
+        "range": { "min": -1.1, "max": 1.1 }
+      },
+      "COLDRESISTPOTIONDRINKINGPSYCHEDELIC": {
+        "name": "ColdResistPotionDrinkingPsychedelic",
+        "ingui": "alchemy:ColdResistPotionDrinkingPsychedelic",
+        "weight": 63.53,
+        "comment": "alchemy:ColdResistPotionDrinkingPsychedelic-Comment",
+        "default": 0.0,
+        "range": { "min": -2.0, "max": 2.0 }
+      },
+      "COLDRESISTPOTIONDRINKINGSATURATIONLOSS": {
+        "name": "ColdResistPotionDrinkingSaturationLoss",
+        "ingui": "alchemy:ColdResistPotionDrinkingSaturationLoss",
+        "weight": 63.54,
+        "comment": "alchemy:ColdResistPotionDrinkingSaturationLoss-Comment",
+        "default": 0.0,
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "NUTRITIONPOTIONDRINKINGDAMAGE": {
         "name": "NutritionPotionDrinkingDamage",
@@ -2714,7 +2746,7 @@
         "weight": 64.1,
         "comment": "alchemy:NutritionPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "NUTRITIONPOTIONDRINKINGINTOXICATION": {
         "name": "NutritionPotionDrinkingIntoxication",
@@ -2722,7 +2754,7 @@
         "weight": 64.2,
         "comment": "alchemy:NutritionPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "NUTRITIONPOTIONDRINKINGPSYCHEDELIC": {
         "name": "NutritionPotionDrinkingPsychedelic",
@@ -2730,7 +2762,7 @@
         "weight": 64.3,
         "comment": "alchemy:NutritionPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "NUTRITIONPOTIONDRINKINGSATURATIONLOSS": {
         "name": "NutritionPotionDrinkingSaturationLoss",
@@ -2738,7 +2770,7 @@
         "weight": 64.4,
         "comment": "alchemy:NutritionPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "RECALLPOTIONDRINKINGDAMAGE": {
         "name": "RecallPotionDrinkingDamage",
@@ -2746,7 +2778,7 @@
         "weight": 65.1,
         "comment": "alchemy:RecallPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "RECALLPOTIONDRINKINGINTOXICATION": {
         "name": "RecallPotionDrinkingIntoxication",
@@ -2754,7 +2786,7 @@
         "weight": 65.2,
         "comment": "alchemy:RecallPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "RECALLPOTIONDRINKINGPSYCHEDELIC": {
         "name": "RecallPotionDrinkingPsychedelic",
@@ -2762,7 +2794,7 @@
         "weight": 65.3,
         "comment": "alchemy:RecallPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "RECALLPOTIONDRINKINGSATURATIONLOSS": {
         "name": "RecallPotionDrinkingSaturationLoss",
@@ -2770,7 +2802,7 @@
         "weight": 65.4,
         "comment": "alchemy:RecallPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "TEMPORALPOTIONDRINKINGDAMAGE": {
         "name": "TemporalPotionDrinkingDamage",
@@ -2778,7 +2810,7 @@
         "weight": 66.1,
         "comment": "alchemy:TemporalPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "TEMPORALPOTIONDRINKINGINTOXICATION": {
         "name": "TemporalPotionDrinkingIntoxication",
@@ -2786,7 +2818,7 @@
         "weight": 66.2,
         "comment": "alchemy:TemporalPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "TEMPORALPOTIONDRINKINGPSYCHEDELIC": {
         "name": "TemporalPotionDrinkingPsychedelic",
@@ -2794,7 +2826,7 @@
         "weight": 66.3,
         "comment": "alchemy:TemporalPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "TEMPORALPOTIONDRINKINGSATURATIONLOSS": {
         "name": "TemporalPotionDrinkingSaturationLoss",
@@ -2802,7 +2834,7 @@
         "weight": 66.4,
         "comment": "alchemy:TemporalPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "RESHAPEPOTIONDRINKINGDAMAGE": {
         "name": "ReshapePotionDrinkingDamage",
@@ -2810,7 +2842,7 @@
         "weight": 67.1,
         "comment": "alchemy:ReshapePotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "RESHAPEPOTIONDRINKINGINTOXICATION": {
         "name": "ReshapePotionDrinkingIntoxication",
@@ -2818,7 +2850,7 @@
         "weight": 67.2,
         "comment": "alchemy:ReshapePotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "RESHAPEPOTIONDRINKINGPSYCHEDELIC": {
         "name": "ReshapePotionDrinkingPsychedelic",
@@ -2826,7 +2858,7 @@
         "weight": 67.3,
         "comment": "alchemy:ReshapePotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "RESHAPEPOTIONDRINKINGSATURATIONLOSS": {
         "name": "ReshapePotionDrinkingSaturationLoss",
@@ -2834,7 +2866,7 @@
         "weight": 67.4,
         "comment": "alchemy:ReshapePotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "GROWPOTIONDRINKINGDAMAGE": {
         "name": "GrowPotionDrinkingDamage",
@@ -2842,7 +2874,7 @@
         "weight": 68.1,
         "comment": "alchemy:GrowPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "GROWPOTIONDRINKINGINTOXICATION": {
         "name": "GrowPotionDrinkingIntoxication",
@@ -2850,7 +2882,7 @@
         "weight": 68.2,
         "comment": "alchemy:GrowPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "GROWPOTIONDRINKINGPSYCHEDELIC": {
         "name": "GrowPotionDrinkingPsychedelic",
@@ -2858,7 +2890,7 @@
         "weight": 68.3,
         "comment": "alchemy:GrowPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "GROWPOTIONDRINKINGSATURATIONLOSS": {
         "name": "GrowPotionDrinkingSaturationLoss",
@@ -2866,7 +2898,7 @@
         "weight": 68.4,
         "comment": "alchemy:GrowPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "SHRINKPOTIONDRINKINGDAMAGE": {
         "name": "ShrinkPotionDrinkingDamage",
@@ -2874,7 +2906,7 @@
         "weight": 69.1,
         "comment": "alchemy:ShrinkPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "SHRINKPOTIONDRINKINGINTOXICATION": {
         "name": "ShrinkPotionDrinkingIntoxication",
@@ -2882,7 +2914,7 @@
         "weight": 69.2,
         "comment": "alchemy:ShrinkPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "SHRINKPOTIONDRINKINGPSYCHEDELIC": {
         "name": "ShrinkPotionDrinkingPsychedelic",
@@ -2890,7 +2922,7 @@
         "weight": 69.3,
         "comment": "alchemy:ShrinkPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "SHRINKPOTIONDRINKINGSATURATIONLOSS": {
         "name": "ShrinkPotionDrinkingSaturationLoss",
@@ -2898,7 +2930,7 @@
         "weight": 69.4,
         "comment": "alchemy:ShrinkPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "FALLPOTIONDRINKINGDAMAGE": {
         "name": "FallPotionDrinkingDamage",
@@ -2906,7 +2938,7 @@
         "weight": 70.1,
         "comment": "alchemy:FallPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "FALLPOTIONDRINKINGINTOXICATION": {
         "name": "FallPotionDrinkingIntoxication",
@@ -2914,7 +2946,7 @@
         "weight": 70.2,
         "comment": "alchemy:FallPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "FALLPOTIONDRINKINGPSYCHEDELIC": {
         "name": "FallPotionDrinkingPsychedelic",
@@ -2922,7 +2954,7 @@
         "weight": 70.3,
         "comment": "alchemy:FallPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "FALLPOTIONDRINKINGSATURATIONLOSS": {
         "name": "FallPotionDrinkingSaturationLoss",
@@ -2930,7 +2962,7 @@
         "weight": 70.4,
         "comment": "alchemy:FallPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "CLIMBPOTIONDRINKINGDAMAGE": {
         "name": "ClimbPotionDrinkingDamage",
@@ -2938,7 +2970,7 @@
         "weight": 71.1,
         "comment": "alchemy:ClimbPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "CLIMBPOTIONDRINKINGINTOXICATION": {
         "name": "ClimbPotionDrinkingIntoxication",
@@ -2946,7 +2978,7 @@
         "weight": 71.2,
         "comment": "alchemy:ClimbPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "CLIMBPOTIONDRINKINGPSYCHEDELIC": {
         "name": "ClimbPotionDrinkingPsychedelic",
@@ -2954,7 +2986,7 @@
         "weight": 71.3,
         "comment": "alchemy:ClimbPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "CLIMBPOTIONDRINKINGSATURATIONLOSS": {
         "name": "ClimbPotionDrinkingSaturationLoss",
@@ -2962,7 +2994,7 @@
         "weight": 71.4,
         "comment": "alchemy:ClimbPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "FLIGHTPOTIONDRINKINGDAMAGE": {
         "name": "FlightPotionDrinkingDamage",
@@ -2970,7 +3002,7 @@
         "weight": 72.1,
         "comment": "alchemy:FlightPotionDrinkingDamage-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 20.0 }
+        "range": { "min": -20.0, "max": 20.0 }
       },
       "FLIGHTPOTIONDRINKINGINTOXICATION": {
         "name": "FlightPotionDrinkingIntoxication",
@@ -2978,7 +3010,7 @@
         "weight": 72.2,
         "comment": "alchemy:FlightPotionDrinkingIntoxication-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1.1 }
+        "range": { "min": -1.1, "max": 1.1 }
       },
       "FLIGHTPOTIONDRINKINGPSYCHEDELIC": {
         "name": "FlightPotionDrinkingPsychedelic",
@@ -2986,7 +3018,7 @@
         "weight": 72.3,
         "comment": "alchemy:FlightPotionDrinkingPsychedelic-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 2.0 }
+        "range": { "min": -2.0, "max": 2.0 }
       },
       "FLIGHTPOTIONDRINKINGSATURATIONLOSS": {
         "name": "FlightPotionDrinkingSaturationLoss",
@@ -2994,7 +3026,7 @@
         "weight": 72.4,
         "comment": "alchemy:FlightPotionDrinkingSaturationLoss-Comment",
         "default": 0.0,
-        "range": { "min": 0.0, "max": 1500.0 }
+        "range": { "min": -1500.0, "max": 1500.0 }
       },
       "WEAPONCOATAPPLYTIME": {
         "name": "WeaponCoatApplyTime",
@@ -3240,6 +3272,17 @@
           "max": 10000
         }
       },
+      "COLDRESISTPOTIONDURATION": {
+        "name": "ColdResistPotionDuration",
+        "ingui": "alchemy:ColdResistPotionDuration",
+        "weight": 41.6,
+        "comment": "alchemy:ColdResistPotionDuration-Comment",
+        "default": 1000,
+        "range": {
+          "min": 10,
+          "max": 10000
+        }
+      },
       "FALLPOTIONDURATION": {
         "name": "FallPotionDuration",
         "ingui": "alchemy:FallPotionDuration",
@@ -3361,7 +3404,7 @@
       "FLIGHTPOTIONDURATION": {
         "name": "FlightPotionDuration",
         "ingui": "alchemy:FlightPotionDuration",
-        "weight": 46.2,
+        "weight": 46.51,
         "comment": "alchemy:FlightPotionDuration-Comment",
         "default": 300,
         "range": {
@@ -3511,6 +3554,13 @@
         "ingui": "alchemy:AllowWaterBreathePotion",
         "weight": 1.22,
         "comment": "alchemy:AllowWaterBreathePotion-Comment",
+        "default": true
+      },
+      "ALLOWCOLDRESISTPOTION": {
+        "name": "AllowColdResistPotion",
+        "ingui": "alchemy:AllowColdResistPotion",
+        "weight": 1.225,
+        "comment": "alchemy:AllowColdResistPotion-Comment",
         "default": true
       },
       "ALLOWNUTRITIONPOTION": {
@@ -3673,6 +3723,13 @@
         "comment": "alchemy:AllowPotionRefresh-Comment",
         "default": false
       },
+      "SIDEFFECTSTRENGTHMULTIPLIER": {
+        "name": "SideEffectStrengthMultiplier",
+        "ingui": "alchemy:SideEffectStrengthMultiplier",
+        "weight": 4.33,
+        "comment": "alchemy:SideEffectStrengthMultiplier-Comment",
+        "default": true
+      },
       "ALLOWWEAPONCOATING": {
         "name": "AllowWeaponCoating",
         "ingui": "alchemy:AllowWeaponCoating",
@@ -3797,6 +3854,13 @@
         "ingui": "alchemy:AllowCoatingWaterBreathe",
         "weight": 4.433,
         "comment": "alchemy:AllowCoatingWaterBreathe-Comment",
+        "default": false
+      },
+      "ALLOWCOATINGCOLDRESIST": {
+        "name": "AllowCoatingColdResist",
+        "ingui": "alchemy:AllowCoatingColdResist",
+        "weight": 4.4335,
+        "comment": "alchemy:AllowCoatingColdResist-Comment",
         "default": false
       },
       "ALLOWCOATINGNUTRITION": {
@@ -4019,6 +4083,11 @@
     },
     {
       "type": "separator",
+      "title": "alchemy:ColdResistValues-Config",
+      "weight": 41.5
+    },
+    {
+      "type": "separator",
       "title": "alchemy:NutritionValues-Config",
       "weight": 42
     },
@@ -4044,6 +4113,11 @@
     },
     {
       "type": "separator",
+      "title": "alchemy:FlightValues-Config",
+      "weight": 46.5
+    },
+    {
+      "type": "separator",
       "title": "alchemy:DrinkingSideEffects-Config",
       "weight": 47
     },
@@ -4063,6 +4137,7 @@
     { "type": "separator", "title": "alchemy:VitalityExtraEffects-Config", "weight": 61 },
     { "type": "separator", "title": "alchemy:GlowExtraEffects-Config", "weight": 62 },
     { "type": "separator", "title": "alchemy:WaterBreatheExtraEffects-Config", "weight": 63 },
+    { "type": "separator", "title": "alchemy:ColdResistExtraEffects-Config", "weight": 63.5 },
     { "type": "separator", "title": "alchemy:NutritionExtraEffects-Config", "weight": 64 },
     { "type": "separator", "title": "alchemy:RecallExtraEffects-Config", "weight": 65 },
     { "type": "separator", "title": "alchemy:TemporalExtraEffects-Config", "weight": 66 },
@@ -4070,6 +4145,7 @@
     { "type": "separator", "title": "alchemy:GrowExtraEffects-Config", "weight": 68 },
     { "type": "separator", "title": "alchemy:ShrinkExtraEffects-Config", "weight": 69 },
     { "type": "separator", "title": "alchemy:FallExtraEffects-Config", "weight": 70 },
-    { "type": "separator", "title": "alchemy:ClimbExtraEffects-Config", "weight": 71 }
+    { "type": "separator", "title": "alchemy:ClimbExtraEffects-Config", "weight": 71 },
+    { "type": "separator", "title": "alchemy:FlightExtraEffects-Config", "weight": 72 }
   ]
 }

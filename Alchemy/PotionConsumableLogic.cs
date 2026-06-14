@@ -109,6 +109,7 @@ namespace Alchemy
                 "recallpotionid" => cfg.AllowCoatingRecall,
                 "glowpotionid" => cfg.AllowCoatingGlow,
                 "waterbreathepotionid" => cfg.AllowCoatingWaterBreathe,
+                "coldresistpotionid" => cfg.AllowCoatingColdResist,
                 "nutritionpotionid" => cfg.AllowCoatingNutrition,
                 "temporalpotionid" => cfg.AllowCoatingTemporal,
                 "reshapepotionid" => cfg.AllowCoatingReshape,
@@ -399,6 +400,12 @@ namespace Alchemy
                     cfg.WaterBreathePotionDrinkingPsychedelic,
                     cfg.WaterBreathePotionDrinkingSaturationLoss
                 ),
+                "coldresistpotionid" => (
+                    cfg.ColdResistPotionDrinkingDamage,
+                    cfg.ColdResistPotionDrinkingIntoxication,
+                    cfg.ColdResistPotionDrinkingPsychedelic,
+                    cfg.ColdResistPotionDrinkingSaturationLoss
+                ),
                 "nutritionpotionid" => (
                     cfg.NutritionPotionDrinkingDamage,
                     cfg.NutritionPotionDrinkingIntoxication,
@@ -456,12 +463,20 @@ namespace Alchemy
                 _ => (0f, 0f, 0f, 0f),
             };
 
-            float totalIntox = cfg.DrinkingPotionIntoxicationAmount + intox * strengthMul;
-            float totalPsych = cfg.DrinkingPotionPsychedelicAmount + psych * strengthMul;
-            float totalSatLoss = cfg.DrinkingPotionSaturationLossAmount + satLoss * strengthMul;
-            float totalDamage = cfg.DrinkingPotionDamageAmount + damage * strengthMul;
+            float totalIntox =
+                cfg.DrinkingPotionIntoxicationAmount
+                + intox * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
+            float totalPsych =
+                cfg.DrinkingPotionPsychedelicAmount
+                + psych * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
+            float totalSatLoss =
+                cfg.DrinkingPotionSaturationLossAmount
+                + satLoss * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
+            float totalDamage =
+                cfg.DrinkingPotionDamageAmount
+                + damage * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
 
-            if (totalIntox > 0)
+            if (Math.Abs(totalIntox) > float.Epsilon)
             {
                 float current = playerEntity.WatchedAttributes.GetFloat("intoxication");
                 playerEntity.WatchedAttributes.SetFloat(
@@ -469,7 +484,7 @@ namespace Alchemy
                     Math.Min(1.1f, current + totalIntox)
                 );
             }
-            if (totalPsych > 0)
+            if (Math.Abs(totalPsych) > float.Epsilon)
             {
                 float current = playerEntity.WatchedAttributes.GetFloat("psychedelic");
                 playerEntity.WatchedAttributes.SetFloat(
@@ -477,9 +492,9 @@ namespace Alchemy
                     Math.Min(2.0f, current + totalPsych)
                 );
             }
-            if (totalSatLoss > 0)
-                playerEntity.ReceiveSaturation(-totalSatLoss);
-            if (totalDamage > 0)
+            if (Math.Abs(totalSatLoss) > float.Epsilon)
+                playerEntity.ReceiveSaturation(totalSatLoss);
+            if (Math.Abs(totalDamage) > float.Epsilon)
                 playerEntity.ReceiveDamage(
                     new DamageSource
                     {

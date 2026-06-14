@@ -1,6 +1,40 @@
 [
   // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
 
+  // Coldresist
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/11",
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/cooking/utilitypotionportion.json",
+   "op": "remove",
+   "path": "/10",
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/coldresistbase.json",
+   "op": "addmerge",
+   "path": "/enabled",
+   "value": false,
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
+   "op": "replace",
+   "path": "/attributesByType/*-coldresist/handbook",
+   "value": { "exclude": true },
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
+   "op": "remove",
+   "path": "/variantgroups/0/states/11",
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+
   // Flight
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",

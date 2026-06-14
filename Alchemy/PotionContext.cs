@@ -23,6 +23,7 @@ namespace Alchemy
         // These are not inside the config as they would just render potions useless
         public bool Respawn { get; set; }
         public bool WaterBreathe { get; set; }
+        public bool ColdResist { get; set; }
         public bool Reshape { get; set; }
         public float SizeChange { get; set; }
         public float FallDamageReduction { get; set; }

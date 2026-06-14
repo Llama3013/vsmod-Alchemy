@@ -164,6 +164,11 @@ namespace Alchemy
                 ActivateReadEffects();
                 return true;
             }
+            if (entity.WatchedAttributes.HasAttribute("coldresistpotionid"))
+            {
+                ActivateReadEffects();
+                return true;
+            }
             if (entity.WatchedAttributes.HasAttribute("regentickpotionid"))
             {
                 ActivateReadEffects();
@@ -246,6 +251,13 @@ namespace Alchemy
             {
                 stringBuilder.AppendLine(
                     string.Format(Lang.GetIfExists("alchemy:waterbreathe") + ": {0}", true)
+                );
+                activePotion = true;
+            }
+            if (entity.WatchedAttributes.HasAttribute("coldresistpotionid"))
+            {
+                stringBuilder.AppendLine(
+                    string.Format(Lang.GetIfExists("alchemy:coldresist") + ": {0}", true)
                 );
                 activePotion = true;
             }

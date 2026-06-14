@@ -477,6 +477,8 @@ namespace Alchemy
                     dsc.AppendLine(Lang.Get("alchemy:potion-glow-effect"));
                 if (ctx.WaterBreathe)
                     dsc.AppendLine(Lang.Get("alchemy:potion-waterbreathe-effect"));
+                if (ctx.ColdResist)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-coldresist-effect"));
                 if (ctx.TemporalStabilityGain > 0)
                     dsc.AppendLine(Lang.Get("alchemy:potion-temporal-effect"));
                 if (ctx.RetainedNutrition > 0)

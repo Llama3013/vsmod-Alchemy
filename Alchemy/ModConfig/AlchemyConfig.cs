@@ -12,6 +12,7 @@ namespace Alchemy
         public bool AllowRecallPotion { get; set; } = true;
         public bool AllowGlowPotion { get; set; } = true;
         public bool AllowWaterBreathePotion { get; set; } = true;
+        public bool AllowColdResistPotion { get; set; } = true;
         public bool AllowNutritionPotion { get; set; } = true;
         public bool AllowTemporalPotion { get; set; } = true;
         public bool AllowReshapePotion { get; set; } = true;
@@ -63,6 +64,7 @@ namespace Alchemy
         public bool AllowVanillaContainerDrinking { get; set; } = false;
         public bool OnlyOnePotionAtATime { get; set; } = false;
         public bool AllowPotionRefresh { get; set; } = false;
+        public bool SideEffectStrengthMultiplier { get; set; } = true;
 
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;
@@ -81,6 +83,7 @@ namespace Alchemy
         public bool AllowCoatingRecall { get; set; } = false;
         public bool AllowCoatingGlow { get; set; } = false;
         public bool AllowCoatingWaterBreathe { get; set; } = false;
+        public bool AllowCoatingColdResist { get; set; } = false;
         public bool AllowCoatingNutrition { get; set; } = false;
         public bool AllowCoatingTemporal { get; set; } = false;
         public bool AllowCoatingReshape { get; set; } = false;
@@ -149,6 +152,7 @@ namespace Alchemy
         public int VitalityPotionDuration { get; set; } = 300;
         public int GlowPotionDuration { get; set; } = 1000;
         public int WaterBreathePotionDuration { get; set; } = 1000;
+        public int ColdResistPotionDuration { get; set; } = 1000;
         public float NutritionPotionRetainedNutrition { get; set; } = 0.9f;
         public float StabilityPotionTemporalStabilityGain { get; set; } = 0.2f;
         public int GlowPotionStrength { get; set; } = 15;
@@ -528,6 +532,12 @@ namespace Alchemy
         public float WaterBreathePotionDrinkingIntoxication { get; set; } = 0f;
         public float WaterBreathePotionDrinkingPsychedelic { get; set; } = 0f;
         public float WaterBreathePotionDrinkingSaturationLoss { get; set; } = 0f;
+
+        // ColdResist
+        public float ColdResistPotionDrinkingDamage { get; set; } = 0f;
+        public float ColdResistPotionDrinkingIntoxication { get; set; } = 0f;
+        public float ColdResistPotionDrinkingPsychedelic { get; set; } = 0f;
+        public float ColdResistPotionDrinkingSaturationLoss { get; set; } = 0f;
 
         // Nutrition
         public float NutritionPotionDrinkingDamage { get; set; } = 0f;

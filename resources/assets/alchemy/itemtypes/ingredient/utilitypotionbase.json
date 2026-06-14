@@ -21,6 +21,12 @@
       "mat3": { "base": "alchemy:item/potionbase/westerngorse" },
       "mat4": { "base": "alchemy:item/potionbase/westerngorse" }
     },
+    "utilitypotionbase-coldresist": {
+      "mat1": { "base": "alchemy:item/potionbase/mugwort" },
+      "mat2": { "base": "alchemy:item/potionbase/mugwort" },
+      "mat3": { "base": "game:block/coal/coke" },
+      "mat4": { "base": "game:block/coal/coke" }
+    },
     "utilitypotionbase-nutrition": {
       "mat1": { "base": "game:item/resource/fat" },
       "mat2": { "base": "game:item/resource/fat" },
@@ -72,7 +78,7 @@
   },
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "variantgroups": [
-    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight"] }
+    { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight", "coldresist"] }
   ],
   "attributes": { "handbook": { "groupBy": ["utilitypotionbase-{basetype}"] } },
   "attributesByType": {
@@ -86,6 +92,10 @@
     },
     "utilitypotionbase-waterbreathe": {
       "inContainerTexture": { "base": "alchemy:item/potionbase/lupine-purple" },
+      "handbook": {}
+    },
+    "utilitypotionbase-coldresist": {
+      "inContainerTexture": { "base": "alchemy:item/potionbase/mugwort" },
       "handbook": {}
     },
     "utilitypotionbase-nutrition": {

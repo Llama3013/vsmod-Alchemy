@@ -48,6 +48,7 @@ namespace Alchemy
                 ["vitalitypotionid"] = ApplyVitalityPotion,
                 ["glowpotionid"] = ApplyGlowPotion,
                 ["waterbreathepotionid"] = ApplyWaterBreathePotion,
+                ["coldresistpotionid"] = ApplyColdResistPotion,
                 ["nutritionpotionid"] = ApplyNutritionPotion,
                 ["recallpotionid"] = ApplyRecallPotion,
                 ["temporalpotionid"] = ApplyTemporalPotion,
@@ -456,6 +457,12 @@ namespace Alchemy
         {
             ctx.WaterBreathe = true;
             ctx.Duration = AlchemyConfig.Loaded.WaterBreathePotionDuration;
+        }
+
+        private static void ApplyColdResistPotion(PotionContext ctx)
+        {
+            ctx.ColdResist = true;
+            ctx.Duration = AlchemyConfig.Loaded.ColdResistPotionDuration;
         }
 
         private static void ApplyNutritionPotion(PotionContext ctx)

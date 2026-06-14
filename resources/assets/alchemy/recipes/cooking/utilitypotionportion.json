@@ -158,5 +158,21 @@
       { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
     ],
     "cooksInto": { "type": "Item", "code": "alchemy:utilitypotionportion-climb", "quantity": 100 }
+  },
+  {
+    "code": "utilitypotionportion-coldresist",
+    "perishableProps": {
+      "type": "None",
+      "freshHours": { "avg": 48 },
+      "transitionHours": { "avg": 48 },
+      "transitionRatio": 1,
+      "transitionedStack": { "type": "item", "code": "alchemy:utilitypotionportion-coldresist" }
+    },
+    "shape": { "base": "block/food/meal/liquid" },
+    "ingredients": [
+      { "code": "utilitypotionbase", "validStacks": [{ "type": "item", "code": "alchemy:utilitypotionbase-coldresist" }], "minQuantity": 1, "maxQuantity": 1 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+    ],
+    "cooksInto": { "type": "Item", "code": "alchemy:utilitypotionportion-coldresist", "quantity": 100 }
   }
 ]
