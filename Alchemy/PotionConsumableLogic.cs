@@ -463,45 +463,45 @@ namespace Alchemy
                 _ => (0f, 0f, 0f, 0f),
             };
 
-            float totalIntox =
+            float totalIntoxChange =
                 cfg.DrinkingPotionIntoxicationAmount
                 + intox * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalPsych =
+            float totalPsychChange =
                 cfg.DrinkingPotionPsychedelicAmount
                 + psych * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalSatLoss =
+            float totalSatChange =
                 cfg.DrinkingPotionSaturationLossAmount
                 + satLoss * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalDamage =
+            float totalHealthChange =
                 cfg.DrinkingPotionDamageAmount
                 + damage * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
 
-            if (Math.Abs(totalIntox) > float.Epsilon)
+            if (Math.Abs(totalIntoxChange) > float.Epsilon)
             {
                 float current = playerEntity.WatchedAttributes.GetFloat("intoxication");
                 playerEntity.WatchedAttributes.SetFloat(
                     "intoxication",
-                    Math.Min(1.1f, current + totalIntox)
+                    Math.Clamp(current + totalIntoxChange, 0f, 1.1f)
                 );
             }
-            if (Math.Abs(totalPsych) > float.Epsilon)
+            if (Math.Abs(totalPsychChange) > float.Epsilon)
             {
                 float current = playerEntity.WatchedAttributes.GetFloat("psychedelic");
                 playerEntity.WatchedAttributes.SetFloat(
                     "psychedelic",
-                    Math.Min(2.0f, current + totalPsych)
+                    Math.Clamp(current + totalPsychChange, 0f, 2.0f)
                 );
             }
-            if (Math.Abs(totalSatLoss) > float.Epsilon)
-                playerEntity.ReceiveSaturation(totalSatLoss);
-            if (Math.Abs(totalDamage) > float.Epsilon)
+            if (Math.Abs(totalSatChange) > float.Epsilon)
+                playerEntity.ReceiveSaturation(totalSatChange);
+            if (Math.Abs(totalHealthChange) > float.Epsilon)
                 playerEntity.ReceiveDamage(
                     new DamageSource
                     {
                         Source = EnumDamageSource.Internal,
-                        Type = EnumDamageType.Poison,
+                        Type = totalHealthChange < 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
                     },
-                    totalDamage
+                    totalHealthChange
                 );
         }
 
