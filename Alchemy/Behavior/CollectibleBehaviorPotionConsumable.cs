@@ -20,8 +20,18 @@ namespace Alchemy
         private string sound;
         private float consumeLitres;
         private float drinkCheckLitres;
-        private float consumeTime;
         private static readonly HashSet<long> drinkResolvedEntities = [];
+
+        private ICoreAPI api;
+        private IProgressBar progressBarRender;
+
+        private float ConsumeTime =>
+            source == "liquidcontent"
+                ? AlchemyConfig.Loaded.PotionDrinkTime
+                : AlchemyConfig.Loaded.PotionEatTime;
+
+        private float MaxConsumeTime =>
+            ConsumeTime * AlchemyConfig.Loaded.PotionConsumeMaxTimeMultiplier;
 
         public override void Initialize(JsonObject properties)
         {
@@ -33,11 +43,30 @@ namespace Alchemy
                 .AsFloat(AlchemyConfig.Loaded.PotionConsumeLitres);
             drinkCheckLitres = properties["drinkCheckLitres"]
                 .AsFloat(AlchemyConfig.Loaded.PotionDrinkCheckLitres);
-            float defaultConsumeTime =
-                source == "liquidcontent"
-                    ? AlchemyConfig.Loaded.PotionDrinkTime
-                    : AlchemyConfig.Loaded.PotionEatTime;
-            consumeTime = properties["consumeTime"].AsFloat(defaultConsumeTime);
+        }
+
+        private float GetConsumeTime(EntityAgent byEntity)
+        {
+            float baseTime = ConsumeTime;
+            if (!AlchemyConfig.Loaded.ScalePotionTimeWithHealing)
+                return baseTime;
+
+            float healingEffectiveness = byEntity.Stats.GetBlended("healingeffectivness");
+            healingEffectiveness = Math.Clamp(healingEffectiveness, 0, 2) - 1;
+
+            if (healingEffectiveness < 0)
+                return baseTime + (baseTime - MaxConsumeTime) * healingEffectiveness;
+
+            if (healingEffectiveness > 0)
+                return baseTime * (1 - healingEffectiveness);
+
+            return baseTime;
+        }
+
+        public override void OnLoaded(ICoreAPI api)
+        {
+            base.OnLoaded(api);
+            this.api = api;
         }
 
         private bool TryGetPotionData(ItemSlot slot, out PotionData data)
@@ -215,6 +244,14 @@ namespace Alchemy
             byEntity.AnimManager?.StartAnimation(animation);
             // }
 
+            if (api?.Side == EnumAppSide.Client)
+            {
+                ModSystemProgressBar progressBarSystem =
+                    api.ModLoader.GetModSystem<ModSystemProgressBar>();
+                progressBarSystem.RemoveProgressbar(progressBarRender);
+                progressBarRender = progressBarSystem.AddProgressbar();
+            }
+
             handling = EnumHandHandling.PreventDefault;
             bhHandling = EnumHandling.PreventDefault;
         }
@@ -254,7 +291,35 @@ namespace Alchemy
                 );
             }
 
-            return secondsUsed <= consumeTime;
+            float currentConsumeTime = GetConsumeTime(byEntity);
+            if (progressBarRender != null)
+                progressBarRender.Progress =
+                    currentConsumeTime > 0 ? secondsUsed / currentConsumeTime : 1f;
+
+            return secondsUsed <= currentConsumeTime;
+        }
+
+        public override bool OnHeldInteractCancel(
+            float secondsUsed,
+            ItemSlot slot,
+            EntityAgent byEntity,
+            BlockSelection blockSel,
+            EntitySelection entitySel,
+            EnumItemUseCancelReason cancelReason,
+            ref EnumHandling handling
+        )
+        {
+            api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
+            progressBarRender = null;
+            return base.OnHeldInteractCancel(
+                secondsUsed,
+                slot,
+                byEntity,
+                blockSel,
+                entitySel,
+                cancelReason,
+                ref handling
+            );
         }
 
         public override void OnHeldInteractStop(
@@ -266,6 +331,9 @@ namespace Alchemy
             ref EnumHandling handling
         )
         {
+            api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
+            progressBarRender = null;
+
             if (!TryGetPotionData(slot, out PotionData data))
                 return;
 
@@ -275,7 +343,7 @@ namespace Alchemy
             if (byEntity.World.Side != EnumAppSide.Server)
                 return;
 
-            if (secondsUsed <= consumeTime - 0.05f)
+            if (secondsUsed <= GetConsumeTime(byEntity) - 0.05f)
                 return;
 
             if (!drinkResolvedEntities.Add(byEntity.EntityId))
@@ -506,6 +574,60 @@ namespace Alchemy
                 dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", ctx.TickSec));
             if (ctx.Duration != 0)
                 dsc.AppendLine(Lang.Get("alchemy:potion-duration", ctx.Duration));
+
+            (float sideDamage, float sideIntox, float sidePsych, float sideSatLoss) =
+                PotionConsumableLogic.GetDrinkingSideEffectTotals(data.PotionId, strengthMul);
+            if (
+                Math.Abs(sideDamage) > float.Epsilon
+                || Math.Abs(sideIntox) > float.Epsilon
+                || Math.Abs(sidePsych) > float.Epsilon
+                || Math.Abs(sideSatLoss) > float.Epsilon
+            )
+            {
+                dsc.AppendLine(Lang.Get("alchemy:potion-side-effects-header"));
+                if (Math.Abs(sideDamage) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideDamage < 0
+                                ? "alchemy:potion-side-heal-effect"
+                                : "alchemy:potion-side-damage-effect",
+                            Math.Round(Math.Abs(sideDamage), 2)
+                        )
+                    );
+                if (Math.Abs(sideIntox) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideIntox < 0
+                                ? "alchemy:potion-side-intoxication-reduce-effect"
+                                : "alchemy:potion-side-intoxication-effect",
+                            Math.Round(
+                                Math.Abs(sideIntox) / PotionConsumableLogic.IntoxicationMax * 100,
+                                0
+                            )
+                        )
+                    );
+                if (Math.Abs(sidePsych) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sidePsych < 0
+                                ? "alchemy:potion-side-psychedelic-reduce-effect"
+                                : "alchemy:potion-side-psychedelic-effect",
+                            Math.Round(
+                                Math.Abs(sidePsych) / PotionConsumableLogic.PsychedelicMax * 100,
+                                0
+                            )
+                        )
+                    );
+                if (Math.Abs(sideSatLoss) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideSatLoss < 0
+                                ? "alchemy:potion-side-saturation-loss-effect"
+                                : "alchemy:potion-side-saturation-gain-effect",
+                            Math.Round(Math.Abs(sideSatLoss), 0)
+                        )
+                    );
+            }
         }
     }
 }

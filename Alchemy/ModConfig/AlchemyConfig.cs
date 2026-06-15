@@ -167,6 +167,8 @@ namespace Alchemy
         public float WeaponCoatApplyTime { get; set; } = 2f;
         public float PotionDrinkTime { get; set; } = 1.5f;
         public float PotionEatTime { get; set; } = 1.5f;
+        public bool ScalePotionTimeWithHealing { get; set; } = false;
+        public float PotionConsumeMaxTimeMultiplier { get; set; } = 3.0f;
 
         public float PotionConsumeLitres { get; set; } = 0.25f;
         public float PotionDrinkCheckLitres { get; set; } = 0.24f;

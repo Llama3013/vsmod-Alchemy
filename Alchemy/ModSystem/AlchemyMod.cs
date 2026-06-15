@@ -837,6 +837,597 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received AllowClimbPotionRecipe of {packet.AllowClimbPotionRecipe} from server"
                     );
+                    AlchemyConfig.Loaded.AllowCauldronInVanillaFirepit =
+                        packet.AllowCauldronInVanillaFirepit;
+                    Mod.Logger.Event(
+                        $"Received AllowCauldronInVanillaFirepit of {packet.AllowCauldronInVanillaFirepit} from server"
+                    );
+                    AlchemyConfig.Loaded.WeaponCoatApplyTime = packet.WeaponCoatApplyTime;
+                    Mod.Logger.Event(
+                        $"Received WeaponCoatApplyTime of {packet.WeaponCoatApplyTime} from server"
+                    );
+                    AlchemyConfig.Loaded.PotionDrinkTime = packet.PotionDrinkTime;
+                    Mod.Logger.Event(
+                        $"Received PotionDrinkTime of {packet.PotionDrinkTime} from server"
+                    );
+                    AlchemyConfig.Loaded.PotionEatTime = packet.PotionEatTime;
+                    Mod.Logger.Event(
+                        $"Received PotionEatTime of {packet.PotionEatTime} from server"
+                    );
+                    AlchemyConfig.Loaded.ScalePotionTimeWithHealing =
+                        packet.ScalePotionTimeWithHealing;
+                    Mod.Logger.Event(
+                        $"Received ScalePotionTimeWithHealing of {packet.ScalePotionTimeWithHealing} from server"
+                    );
+                    AlchemyConfig.Loaded.PotionConsumeMaxTimeMultiplier =
+                        packet.PotionConsumeMaxTimeMultiplier;
+                    Mod.Logger.Event(
+                        $"Received PotionConsumeMaxTimeMultiplier of {packet.PotionConsumeMaxTimeMultiplier} from server"
+                    );
+                    AlchemyConfig.Loaded.DrinkingPotionIntoxicationAmount =
+                        packet.DrinkingPotionIntoxicationAmount;
+                    Mod.Logger.Event(
+                        $"Received DrinkingPotionIntoxicationAmount of {packet.DrinkingPotionIntoxicationAmount} from server"
+                    );
+                    AlchemyConfig.Loaded.DrinkingPotionPsychedelicAmount =
+                        packet.DrinkingPotionPsychedelicAmount;
+                    Mod.Logger.Event(
+                        $"Received DrinkingPotionPsychedelicAmount of {packet.DrinkingPotionPsychedelicAmount} from server"
+                    );
+                    AlchemyConfig.Loaded.DrinkingPotionSaturationLossAmount =
+                        packet.DrinkingPotionSaturationLossAmount;
+                    Mod.Logger.Event(
+                        $"Received DrinkingPotionSaturationLossAmount of {packet.DrinkingPotionSaturationLossAmount} from server"
+                    );
+                    AlchemyConfig.Loaded.DrinkingPotionDamageAmount =
+                        packet.DrinkingPotionDamageAmount;
+                    Mod.Logger.Event(
+                        $"Received DrinkingPotionDamageAmount of {packet.DrinkingPotionDamageAmount} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ArcherPotionDrinkingDamage =
+                        packet.ArcherPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ArcherPotionDrinkingDamage of {packet.ArcherPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ArcherPotionDrinkingIntoxication =
+                        packet.ArcherPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ArcherPotionDrinkingIntoxication of {packet.ArcherPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ArcherPotionDrinkingPsychedelic =
+                        packet.ArcherPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ArcherPotionDrinkingPsychedelic of {packet.ArcherPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ArcherPotionDrinkingSaturationLoss =
+                        packet.ArcherPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ArcherPotionDrinkingSaturationLoss of {packet.ArcherPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.HealingEffectPotionDrinkingDamage =
+                        packet.HealingEffectPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received HealingEffectPotionDrinkingDamage of {packet.HealingEffectPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.HealingEffectPotionDrinkingIntoxication =
+                        packet.HealingEffectPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received HealingEffectPotionDrinkingIntoxication of {packet.HealingEffectPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.HealingEffectPotionDrinkingPsychedelic =
+                        packet.HealingEffectPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received HealingEffectPotionDrinkingPsychedelic of {packet.HealingEffectPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.HealingEffectPotionDrinkingSaturationLoss =
+                        packet.HealingEffectPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received HealingEffectPotionDrinkingSaturationLoss of {packet.HealingEffectPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.HungerEnhancePotionDrinkingDamage =
+                        packet.HungerEnhancePotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received HungerEnhancePotionDrinkingDamage of {packet.HungerEnhancePotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerEnhancePotionDrinkingIntoxication =
+                        packet.HungerEnhancePotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received HungerEnhancePotionDrinkingIntoxication of {packet.HungerEnhancePotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerEnhancePotionDrinkingPsychedelic =
+                        packet.HungerEnhancePotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received HungerEnhancePotionDrinkingPsychedelic of {packet.HungerEnhancePotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerEnhancePotionDrinkingSaturationLoss =
+                        packet.HungerEnhancePotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received HungerEnhancePotionDrinkingSaturationLoss of {packet.HungerEnhancePotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.HungerSupressPotionDrinkingDamage =
+                        packet.HungerSupressPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received HungerSupressPotionDrinkingDamage of {packet.HungerSupressPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerSupressPotionDrinkingIntoxication =
+                        packet.HungerSupressPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received HungerSupressPotionDrinkingIntoxication of {packet.HungerSupressPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerSupressPotionDrinkingPsychedelic =
+                        packet.HungerSupressPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received HungerSupressPotionDrinkingPsychedelic of {packet.HungerSupressPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.HungerSupressPotionDrinkingSaturationLoss =
+                        packet.HungerSupressPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received HungerSupressPotionDrinkingSaturationLoss of {packet.HungerSupressPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.HunterPotionDrinkingDamage =
+                        packet.HunterPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received HunterPotionDrinkingDamage of {packet.HunterPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.HunterPotionDrinkingIntoxication =
+                        packet.HunterPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received HunterPotionDrinkingIntoxication of {packet.HunterPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.HunterPotionDrinkingPsychedelic =
+                        packet.HunterPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received HunterPotionDrinkingPsychedelic of {packet.HunterPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.HunterPotionDrinkingSaturationLoss =
+                        packet.HunterPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received HunterPotionDrinkingSaturationLoss of {packet.HunterPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.LooterPotionDrinkingDamage =
+                        packet.LooterPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received LooterPotionDrinkingDamage of {packet.LooterPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.LooterPotionDrinkingIntoxication =
+                        packet.LooterPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received LooterPotionDrinkingIntoxication of {packet.LooterPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.LooterPotionDrinkingPsychedelic =
+                        packet.LooterPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received LooterPotionDrinkingPsychedelic of {packet.LooterPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.LooterPotionDrinkingSaturationLoss =
+                        packet.LooterPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received LooterPotionDrinkingSaturationLoss of {packet.LooterPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.MeleePotionDrinkingDamage =
+                        packet.MeleePotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received MeleePotionDrinkingDamage of {packet.MeleePotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.MeleePotionDrinkingIntoxication =
+                        packet.MeleePotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received MeleePotionDrinkingIntoxication of {packet.MeleePotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.MeleePotionDrinkingPsychedelic =
+                        packet.MeleePotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received MeleePotionDrinkingPsychedelic of {packet.MeleePotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.MeleePotionDrinkingSaturationLoss =
+                        packet.MeleePotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received MeleePotionDrinkingSaturationLoss of {packet.MeleePotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.MiningPotionDrinkingDamage =
+                        packet.MiningPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received MiningPotionDrinkingDamage of {packet.MiningPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.MiningPotionDrinkingIntoxication =
+                        packet.MiningPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received MiningPotionDrinkingIntoxication of {packet.MiningPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.MiningPotionDrinkingPsychedelic =
+                        packet.MiningPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received MiningPotionDrinkingPsychedelic of {packet.MiningPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.MiningPotionDrinkingSaturationLoss =
+                        packet.MiningPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received MiningPotionDrinkingSaturationLoss of {packet.MiningPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.PoisonPotionDrinkingDamage =
+                        packet.PoisonPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received PoisonPotionDrinkingDamage of {packet.PoisonPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.PoisonPotionDrinkingIntoxication =
+                        packet.PoisonPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received PoisonPotionDrinkingIntoxication of {packet.PoisonPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.PoisonPotionDrinkingPsychedelic =
+                        packet.PoisonPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received PoisonPotionDrinkingPsychedelic of {packet.PoisonPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.PoisonPotionDrinkingSaturationLoss =
+                        packet.PoisonPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received PoisonPotionDrinkingSaturationLoss of {packet.PoisonPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.PredatorPotionDrinkingDamage =
+                        packet.PredatorPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received PredatorPotionDrinkingDamage of {packet.PredatorPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.PredatorPotionDrinkingIntoxication =
+                        packet.PredatorPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received PredatorPotionDrinkingIntoxication of {packet.PredatorPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.PredatorPotionDrinkingPsychedelic =
+                        packet.PredatorPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received PredatorPotionDrinkingPsychedelic of {packet.PredatorPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.PredatorPotionDrinkingSaturationLoss =
+                        packet.PredatorPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received PredatorPotionDrinkingSaturationLoss of {packet.PredatorPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.RegenPotionDrinkingDamage =
+                        packet.RegenPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received RegenPotionDrinkingDamage of {packet.RegenPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.RegenPotionDrinkingIntoxication =
+                        packet.RegenPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received RegenPotionDrinkingIntoxication of {packet.RegenPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.RegenPotionDrinkingPsychedelic =
+                        packet.RegenPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received RegenPotionDrinkingPsychedelic of {packet.RegenPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.RegenPotionDrinkingSaturationLoss =
+                        packet.RegenPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received RegenPotionDrinkingSaturationLoss of {packet.RegenPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ScentMaskPotionDrinkingDamage =
+                        packet.ScentMaskPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ScentMaskPotionDrinkingDamage of {packet.ScentMaskPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ScentMaskPotionDrinkingIntoxication =
+                        packet.ScentMaskPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ScentMaskPotionDrinkingIntoxication of {packet.ScentMaskPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ScentMaskPotionDrinkingPsychedelic =
+                        packet.ScentMaskPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ScentMaskPotionDrinkingPsychedelic of {packet.ScentMaskPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ScentMaskPotionDrinkingSaturationLoss =
+                        packet.ScentMaskPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ScentMaskPotionDrinkingSaturationLoss of {packet.ScentMaskPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.SpeedPotionDrinkingDamage =
+                        packet.SpeedPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received SpeedPotionDrinkingDamage of {packet.SpeedPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.SpeedPotionDrinkingIntoxication =
+                        packet.SpeedPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received SpeedPotionDrinkingIntoxication of {packet.SpeedPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.SpeedPotionDrinkingPsychedelic =
+                        packet.SpeedPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received SpeedPotionDrinkingPsychedelic of {packet.SpeedPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.SpeedPotionDrinkingSaturationLoss =
+                        packet.SpeedPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received SpeedPotionDrinkingSaturationLoss of {packet.SpeedPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.VitalityPotionDrinkingDamage =
+                        packet.VitalityPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received VitalityPotionDrinkingDamage of {packet.VitalityPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.VitalityPotionDrinkingIntoxication =
+                        packet.VitalityPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received VitalityPotionDrinkingIntoxication of {packet.VitalityPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.VitalityPotionDrinkingPsychedelic =
+                        packet.VitalityPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received VitalityPotionDrinkingPsychedelic of {packet.VitalityPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.VitalityPotionDrinkingSaturationLoss =
+                        packet.VitalityPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received VitalityPotionDrinkingSaturationLoss of {packet.VitalityPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.GlowPotionDrinkingDamage = packet.GlowPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionDrinkingDamage of {packet.GlowPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.GlowPotionDrinkingIntoxication =
+                        packet.GlowPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionDrinkingIntoxication of {packet.GlowPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.GlowPotionDrinkingPsychedelic =
+                        packet.GlowPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionDrinkingPsychedelic of {packet.GlowPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.GlowPotionDrinkingSaturationLoss =
+                        packet.GlowPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionDrinkingSaturationLoss of {packet.GlowPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.WaterBreathePotionDrinkingDamage =
+                        packet.WaterBreathePotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received WaterBreathePotionDrinkingDamage of {packet.WaterBreathePotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.WaterBreathePotionDrinkingIntoxication =
+                        packet.WaterBreathePotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received WaterBreathePotionDrinkingIntoxication of {packet.WaterBreathePotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.WaterBreathePotionDrinkingPsychedelic =
+                        packet.WaterBreathePotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received WaterBreathePotionDrinkingPsychedelic of {packet.WaterBreathePotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.WaterBreathePotionDrinkingSaturationLoss =
+                        packet.WaterBreathePotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received WaterBreathePotionDrinkingSaturationLoss of {packet.WaterBreathePotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ColdResistPotionDrinkingDamage =
+                        packet.ColdResistPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionDrinkingDamage of {packet.ColdResistPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ColdResistPotionDrinkingIntoxication =
+                        packet.ColdResistPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionDrinkingIntoxication of {packet.ColdResistPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ColdResistPotionDrinkingPsychedelic =
+                        packet.ColdResistPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionDrinkingPsychedelic of {packet.ColdResistPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ColdResistPotionDrinkingSaturationLoss =
+                        packet.ColdResistPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionDrinkingSaturationLoss of {packet.ColdResistPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.NutritionPotionDrinkingDamage =
+                        packet.NutritionPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionDrinkingDamage of {packet.NutritionPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.NutritionPotionDrinkingIntoxication =
+                        packet.NutritionPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionDrinkingIntoxication of {packet.NutritionPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.NutritionPotionDrinkingPsychedelic =
+                        packet.NutritionPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionDrinkingPsychedelic of {packet.NutritionPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.NutritionPotionDrinkingSaturationLoss =
+                        packet.NutritionPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionDrinkingSaturationLoss of {packet.NutritionPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.RecallPotionDrinkingDamage =
+                        packet.RecallPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received RecallPotionDrinkingDamage of {packet.RecallPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.RecallPotionDrinkingIntoxication =
+                        packet.RecallPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received RecallPotionDrinkingIntoxication of {packet.RecallPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.RecallPotionDrinkingPsychedelic =
+                        packet.RecallPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received RecallPotionDrinkingPsychedelic of {packet.RecallPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.RecallPotionDrinkingSaturationLoss =
+                        packet.RecallPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received RecallPotionDrinkingSaturationLoss of {packet.RecallPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.TemporalPotionDrinkingDamage =
+                        packet.TemporalPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received TemporalPotionDrinkingDamage of {packet.TemporalPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.TemporalPotionDrinkingIntoxication =
+                        packet.TemporalPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received TemporalPotionDrinkingIntoxication of {packet.TemporalPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.TemporalPotionDrinkingPsychedelic =
+                        packet.TemporalPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received TemporalPotionDrinkingPsychedelic of {packet.TemporalPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.TemporalPotionDrinkingSaturationLoss =
+                        packet.TemporalPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received TemporalPotionDrinkingSaturationLoss of {packet.TemporalPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ReshapePotionDrinkingDamage =
+                        packet.ReshapePotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ReshapePotionDrinkingDamage of {packet.ReshapePotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ReshapePotionDrinkingIntoxication =
+                        packet.ReshapePotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ReshapePotionDrinkingIntoxication of {packet.ReshapePotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ReshapePotionDrinkingPsychedelic =
+                        packet.ReshapePotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ReshapePotionDrinkingPsychedelic of {packet.ReshapePotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ReshapePotionDrinkingSaturationLoss =
+                        packet.ReshapePotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ReshapePotionDrinkingSaturationLoss of {packet.ReshapePotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.GrowPotionDrinkingDamage = packet.GrowPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received GrowPotionDrinkingDamage of {packet.GrowPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.GrowPotionDrinkingIntoxication =
+                        packet.GrowPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received GrowPotionDrinkingIntoxication of {packet.GrowPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.GrowPotionDrinkingPsychedelic =
+                        packet.GrowPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received GrowPotionDrinkingPsychedelic of {packet.GrowPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.GrowPotionDrinkingSaturationLoss =
+                        packet.GrowPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received GrowPotionDrinkingSaturationLoss of {packet.GrowPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ShrinkPotionDrinkingDamage =
+                        packet.ShrinkPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ShrinkPotionDrinkingDamage of {packet.ShrinkPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ShrinkPotionDrinkingIntoxication =
+                        packet.ShrinkPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ShrinkPotionDrinkingIntoxication of {packet.ShrinkPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ShrinkPotionDrinkingPsychedelic =
+                        packet.ShrinkPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ShrinkPotionDrinkingPsychedelic of {packet.ShrinkPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ShrinkPotionDrinkingSaturationLoss =
+                        packet.ShrinkPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ShrinkPotionDrinkingSaturationLoss of {packet.ShrinkPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.FallPotionDrinkingDamage = packet.FallPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received FallPotionDrinkingDamage of {packet.FallPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.FallPotionDrinkingIntoxication =
+                        packet.FallPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received FallPotionDrinkingIntoxication of {packet.FallPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.FallPotionDrinkingPsychedelic =
+                        packet.FallPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received FallPotionDrinkingPsychedelic of {packet.FallPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.FallPotionDrinkingSaturationLoss =
+                        packet.FallPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received FallPotionDrinkingSaturationLoss of {packet.FallPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.ClimbPotionDrinkingDamage =
+                        packet.ClimbPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received ClimbPotionDrinkingDamage of {packet.ClimbPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.ClimbPotionDrinkingIntoxication =
+                        packet.ClimbPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received ClimbPotionDrinkingIntoxication of {packet.ClimbPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.ClimbPotionDrinkingPsychedelic =
+                        packet.ClimbPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received ClimbPotionDrinkingPsychedelic of {packet.ClimbPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.ClimbPotionDrinkingSaturationLoss =
+                        packet.ClimbPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received ClimbPotionDrinkingSaturationLoss of {packet.ClimbPotionDrinkingSaturationLoss} from server"
+                    );
+
+                    AlchemyConfig.Loaded.FlightPotionDrinkingDamage =
+                        packet.FlightPotionDrinkingDamage;
+                    Mod.Logger.Event(
+                        $"Received FlightPotionDrinkingDamage of {packet.FlightPotionDrinkingDamage} from server"
+                    );
+                    AlchemyConfig.Loaded.FlightPotionDrinkingIntoxication =
+                        packet.FlightPotionDrinkingIntoxication;
+                    Mod.Logger.Event(
+                        $"Received FlightPotionDrinkingIntoxication of {packet.FlightPotionDrinkingIntoxication} from server"
+                    );
+                    AlchemyConfig.Loaded.FlightPotionDrinkingPsychedelic =
+                        packet.FlightPotionDrinkingPsychedelic;
+                    Mod.Logger.Event(
+                        $"Received FlightPotionDrinkingPsychedelic of {packet.FlightPotionDrinkingPsychedelic} from server"
+                    );
+                    AlchemyConfig.Loaded.FlightPotionDrinkingSaturationLoss =
+                        packet.FlightPotionDrinkingSaturationLoss;
+                    Mod.Logger.Event(
+                        $"Received FlightPotionDrinkingSaturationLoss of {packet.FlightPotionDrinkingSaturationLoss} from server"
+                    );
+
                     // })
                     // .SetMessageHandler<OpenCharSelPacket>(_ =>
                     // {
@@ -1038,10 +1629,20 @@ namespace Alchemy
                     AllowClimbPotionRecipe = AlchemyConfig.Loaded.AllowClimbPotionRecipe,
 
                     AllowWeaponCoating = AlchemyConfig.Loaded.AllowWeaponCoating,
+                    AllowCauldronInVanillaFirepit = AlchemyConfig
+                        .Loaded
+                        .AllowCauldronInVanillaFirepit,
                     SideEffectStrengthMultiplier = AlchemyConfig
                         .Loaded
                         .SideEffectStrengthMultiplier,
                     WeaponCoatCharges = AlchemyConfig.Loaded.WeaponCoatCharges,
+                    WeaponCoatApplyTime = AlchemyConfig.Loaded.WeaponCoatApplyTime,
+                    PotionDrinkTime = AlchemyConfig.Loaded.PotionDrinkTime,
+                    PotionEatTime = AlchemyConfig.Loaded.PotionEatTime,
+                    ScalePotionTimeWithHealing = AlchemyConfig.Loaded.ScalePotionTimeWithHealing,
+                    PotionConsumeMaxTimeMultiplier = AlchemyConfig
+                        .Loaded
+                        .PotionConsumeMaxTimeMultiplier,
                     FallPotionDamageReduction = AlchemyConfig.Loaded.FallPotionDamageReduction,
                     FallPotionDuration = AlchemyConfig.Loaded.FallPotionDuration,
                     ClimbPotionDuration = AlchemyConfig.Loaded.ClimbPotionDuration,
@@ -1447,6 +2048,323 @@ namespace Alchemy
                     VitalityPotionOreDrop = AlchemyConfig.Loaded.VitalityPotionOreDrop,
                     VitalityPotionHealth = AlchemyConfig.Loaded.VitalityPotionHealth,
                     VitalityPotionHealthTickSec = AlchemyConfig.Loaded.VitalityPotionHealthTickSec,
+
+                    DrinkingPotionIntoxicationAmount = AlchemyConfig
+                        .Loaded
+                        .DrinkingPotionIntoxicationAmount,
+                    DrinkingPotionPsychedelicAmount = AlchemyConfig
+                        .Loaded
+                        .DrinkingPotionPsychedelicAmount,
+                    DrinkingPotionSaturationLossAmount = AlchemyConfig
+                        .Loaded
+                        .DrinkingPotionSaturationLossAmount,
+                    DrinkingPotionDamageAmount = AlchemyConfig.Loaded.DrinkingPotionDamageAmount,
+
+                    ArcherPotionDrinkingDamage = AlchemyConfig.Loaded.ArcherPotionDrinkingDamage,
+                    ArcherPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionDrinkingIntoxication,
+                    ArcherPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionDrinkingPsychedelic,
+                    ArcherPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ArcherPotionDrinkingSaturationLoss,
+
+                    HealingEffectPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionDrinkingDamage,
+                    HealingEffectPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionDrinkingIntoxication,
+                    HealingEffectPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionDrinkingPsychedelic,
+                    HealingEffectPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .HealingEffectPotionDrinkingSaturationLoss,
+
+                    HungerEnhancePotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionDrinkingDamage,
+                    HungerEnhancePotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionDrinkingIntoxication,
+                    HungerEnhancePotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionDrinkingPsychedelic,
+                    HungerEnhancePotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .HungerEnhancePotionDrinkingSaturationLoss,
+
+                    HungerSupressPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionDrinkingDamage,
+                    HungerSupressPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionDrinkingIntoxication,
+                    HungerSupressPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionDrinkingPsychedelic,
+                    HungerSupressPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .HungerSupressPotionDrinkingSaturationLoss,
+
+                    HunterPotionDrinkingDamage = AlchemyConfig.Loaded.HunterPotionDrinkingDamage,
+                    HunterPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .HunterPotionDrinkingIntoxication,
+                    HunterPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .HunterPotionDrinkingPsychedelic,
+                    HunterPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .HunterPotionDrinkingSaturationLoss,
+
+                    LooterPotionDrinkingDamage = AlchemyConfig.Loaded.LooterPotionDrinkingDamage,
+                    LooterPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .LooterPotionDrinkingIntoxication,
+                    LooterPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .LooterPotionDrinkingPsychedelic,
+                    LooterPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .LooterPotionDrinkingSaturationLoss,
+
+                    MeleePotionDrinkingDamage = AlchemyConfig.Loaded.MeleePotionDrinkingDamage,
+                    MeleePotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .MeleePotionDrinkingIntoxication,
+                    MeleePotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .MeleePotionDrinkingPsychedelic,
+                    MeleePotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .MeleePotionDrinkingSaturationLoss,
+
+                    MiningPotionDrinkingDamage = AlchemyConfig.Loaded.MiningPotionDrinkingDamage,
+                    MiningPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .MiningPotionDrinkingIntoxication,
+                    MiningPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .MiningPotionDrinkingPsychedelic,
+                    MiningPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .MiningPotionDrinkingSaturationLoss,
+
+                    PoisonPotionDrinkingDamage = AlchemyConfig.Loaded.PoisonPotionDrinkingDamage,
+                    PoisonPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionDrinkingIntoxication,
+                    PoisonPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionDrinkingPsychedelic,
+                    PoisonPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .PoisonPotionDrinkingSaturationLoss,
+
+                    PredatorPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionDrinkingDamage,
+                    PredatorPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionDrinkingIntoxication,
+                    PredatorPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionDrinkingPsychedelic,
+                    PredatorPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .PredatorPotionDrinkingSaturationLoss,
+
+                    RegenPotionDrinkingDamage = AlchemyConfig.Loaded.RegenPotionDrinkingDamage,
+                    RegenPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .RegenPotionDrinkingIntoxication,
+                    RegenPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .RegenPotionDrinkingPsychedelic,
+                    RegenPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .RegenPotionDrinkingSaturationLoss,
+
+                    ScentMaskPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionDrinkingDamage,
+                    ScentMaskPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionDrinkingIntoxication,
+                    ScentMaskPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionDrinkingPsychedelic,
+                    ScentMaskPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ScentMaskPotionDrinkingSaturationLoss,
+
+                    SpeedPotionDrinkingDamage = AlchemyConfig.Loaded.SpeedPotionDrinkingDamage,
+                    SpeedPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionDrinkingIntoxication,
+                    SpeedPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionDrinkingPsychedelic,
+                    SpeedPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .SpeedPotionDrinkingSaturationLoss,
+
+                    VitalityPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionDrinkingDamage,
+                    VitalityPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionDrinkingIntoxication,
+                    VitalityPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionDrinkingPsychedelic,
+                    VitalityPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .VitalityPotionDrinkingSaturationLoss,
+
+                    GlowPotionDrinkingDamage = AlchemyConfig.Loaded.GlowPotionDrinkingDamage,
+                    GlowPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .GlowPotionDrinkingIntoxication,
+                    GlowPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .GlowPotionDrinkingPsychedelic,
+                    GlowPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .GlowPotionDrinkingSaturationLoss,
+
+                    WaterBreathePotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .WaterBreathePotionDrinkingDamage,
+                    WaterBreathePotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .WaterBreathePotionDrinkingIntoxication,
+                    WaterBreathePotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .WaterBreathePotionDrinkingPsychedelic,
+                    WaterBreathePotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .WaterBreathePotionDrinkingSaturationLoss,
+
+                    ColdResistPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .ColdResistPotionDrinkingDamage,
+                    ColdResistPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ColdResistPotionDrinkingIntoxication,
+                    ColdResistPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ColdResistPotionDrinkingPsychedelic,
+                    ColdResistPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ColdResistPotionDrinkingSaturationLoss,
+
+                    NutritionPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .NutritionPotionDrinkingDamage,
+                    NutritionPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .NutritionPotionDrinkingIntoxication,
+                    NutritionPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .NutritionPotionDrinkingPsychedelic,
+                    NutritionPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .NutritionPotionDrinkingSaturationLoss,
+
+                    RecallPotionDrinkingDamage = AlchemyConfig.Loaded.RecallPotionDrinkingDamage,
+                    RecallPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .RecallPotionDrinkingIntoxication,
+                    RecallPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .RecallPotionDrinkingPsychedelic,
+                    RecallPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .RecallPotionDrinkingSaturationLoss,
+
+                    TemporalPotionDrinkingDamage = AlchemyConfig
+                        .Loaded
+                        .TemporalPotionDrinkingDamage,
+                    TemporalPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .TemporalPotionDrinkingIntoxication,
+                    TemporalPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .TemporalPotionDrinkingPsychedelic,
+                    TemporalPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .TemporalPotionDrinkingSaturationLoss,
+
+                    ReshapePotionDrinkingDamage = AlchemyConfig.Loaded.ReshapePotionDrinkingDamage,
+                    ReshapePotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ReshapePotionDrinkingIntoxication,
+                    ReshapePotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ReshapePotionDrinkingPsychedelic,
+                    ReshapePotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ReshapePotionDrinkingSaturationLoss,
+
+                    GrowPotionDrinkingDamage = AlchemyConfig.Loaded.GrowPotionDrinkingDamage,
+                    GrowPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .GrowPotionDrinkingIntoxication,
+                    GrowPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .GrowPotionDrinkingPsychedelic,
+                    GrowPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .GrowPotionDrinkingSaturationLoss,
+
+                    ShrinkPotionDrinkingDamage = AlchemyConfig.Loaded.ShrinkPotionDrinkingDamage,
+                    ShrinkPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ShrinkPotionDrinkingIntoxication,
+                    ShrinkPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ShrinkPotionDrinkingPsychedelic,
+                    ShrinkPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ShrinkPotionDrinkingSaturationLoss,
+
+                    FallPotionDrinkingDamage = AlchemyConfig.Loaded.FallPotionDrinkingDamage,
+                    FallPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .FallPotionDrinkingIntoxication,
+                    FallPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .FallPotionDrinkingPsychedelic,
+                    FallPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .FallPotionDrinkingSaturationLoss,
+
+                    ClimbPotionDrinkingDamage = AlchemyConfig.Loaded.ClimbPotionDrinkingDamage,
+                    ClimbPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .ClimbPotionDrinkingIntoxication,
+                    ClimbPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .ClimbPotionDrinkingPsychedelic,
+                    ClimbPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .ClimbPotionDrinkingSaturationLoss,
+
+                    FlightPotionDrinkingDamage = AlchemyConfig.Loaded.FlightPotionDrinkingDamage,
+                    FlightPotionDrinkingIntoxication = AlchemyConfig
+                        .Loaded
+                        .FlightPotionDrinkingIntoxication,
+                    FlightPotionDrinkingPsychedelic = AlchemyConfig
+                        .Loaded
+                        .FlightPotionDrinkingPsychedelic,
+                    FlightPotionDrinkingSaturationLoss = AlchemyConfig
+                        .Loaded
+                        .FlightPotionDrinkingSaturationLoss,
                 },
                 player
             );

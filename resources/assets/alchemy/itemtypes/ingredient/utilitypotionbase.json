@@ -22,8 +22,8 @@
       "mat4": { "base": "alchemy:item/potionbase/westerngorse" }
     },
     "utilitypotionbase-coldresist": {
-      "mat1": { "base": "alchemy:item/potionbase/mugwort" },
-      "mat2": { "base": "alchemy:item/potionbase/mugwort" },
+      "mat1": { "base": "alchemy:item/potionbase/californiapoppy" },
+      "mat2": { "base": "alchemy:item/potionbase/californiapoppy" },
       "mat3": { "base": "game:block/coal/coke" },
       "mat4": { "base": "game:block/coal/coke" }
     },
@@ -95,7 +95,7 @@
       "handbook": {}
     },
     "utilitypotionbase-coldresist": {
-      "inContainerTexture": { "base": "alchemy:item/potionbase/mugwort" },
+      "inContainerTexture": { "base": "alchemy:item/potionbase/californiapoppy" },
       "handbook": {}
     },
     "utilitypotionbase-nutrition": {

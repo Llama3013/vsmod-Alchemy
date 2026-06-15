@@ -150,6 +150,8 @@ namespace Alchemy
             if (entity == null || !entity.Alive)
                 return;
 
+            PotionConsumableLogic.ApplySideEffects(entity, potionId, multiplier);
+
             if (entity is EntityPlayer playerEntity)
             {
                 EntityBehaviorPotionEffect behavior =

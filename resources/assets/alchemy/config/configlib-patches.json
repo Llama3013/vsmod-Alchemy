@@ -432,6 +432,17 @@
           "max": 10.0
         }
       },
+      "POTIONCONSUMEMAXTIMEMULTIPLIER": {
+        "name": "PotionConsumeMaxTimeMultiplier",
+        "ingui": "alchemy:PotionConsumeMaxTimeMultiplier",
+        "weight": 6.26,
+        "comment": "alchemy:PotionConsumeMaxTimeMultiplier-Comment",
+        "default": 3.0,
+        "range": {
+          "min": 1.0,
+          "max": 10.0
+        }
+      },
       "POTIONCONSUMELITRES": {
         "name": "PotionConsumeLitres",
         "ingui": "alchemy:PotionConsumeLitres",
@@ -3031,7 +3042,7 @@
       "WEAPONCOATAPPLYTIME": {
         "name": "WeaponCoatApplyTime",
         "ingui": "alchemy:WeaponCoatApplyTime",
-        "weight": 6.3,
+        "weight": 6.24,
         "comment": "alchemy:WeaponCoatApplyTime-Comment",
         "default": 2,
         "range": {
@@ -3967,7 +3978,14 @@
         "weight": 4.57,
         "comment": "alchemy:AllowPsychedelicMushrooms-Comment",
         "default": true
-      }
+      },
+      "SCALEPOTIONTIMEWITHHEALING": {
+        "name": "ScalePotionTimeWithHealing",
+        "ingui": "alchemy:ScalePotionTimeWithHealing",
+        "weight": 6.25,
+        "comment": "alchemy:ScalePotionTimeWithHealing-Comment",
+        "default": false
+      },
     }
   },
   "formatting": [

@@ -11,7 +11,7 @@ namespace Alchemy
         private string source;
         private float consumeLitres;
         private float checkLitres;
-        private float consumeTime;
+        private static float ConsumeTime => AlchemyConfig.Loaded.WeaponCoatApplyTime;
 
         public override void Initialize(JsonObject properties)
         {
@@ -21,8 +21,6 @@ namespace Alchemy
                 .AsFloat(AlchemyConfig.Loaded.WeaponCoatConsumeLitres);
             checkLitres = properties["checkLitres"]
                 .AsFloat(AlchemyConfig.Loaded.WeaponCoatCheckLitres);
-            consumeTime = properties["consumeTime"]
-                .AsFloat(AlchemyConfig.Loaded.WeaponCoatApplyTime);
         }
 
         private static string GetLangKey(CollectibleObject col)
@@ -66,7 +64,7 @@ namespace Alchemy
                             consumeLitres
                         );
                     },
-                    consumeTime
+                    ConsumeTime
                 );
             }
             else
@@ -96,7 +94,7 @@ namespace Alchemy
                             consumeLitres
                         );
                     },
-                    consumeTime
+                    ConsumeTime
                 );
             }
         }

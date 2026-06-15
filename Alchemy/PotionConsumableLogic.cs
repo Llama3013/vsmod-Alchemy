@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
@@ -17,6 +18,9 @@ namespace Alchemy
 
         public const float CoatHoldDurationSec = 1.5f;
         public const float DefaultConsumeTime = 1.5f;
+
+        public const float IntoxicationMax = 1.1f;
+        public const float PsychedelicMax = 2.0f;
 
         public static bool TryReadPotionInfo(
             ItemStack stack,
@@ -294,11 +298,12 @@ namespace Alchemy
             };
         }
 
-        private static void ApplyDrinkingSideEffects(
-            EntityPlayer playerEntity,
-            string potionId,
-            float strengthMul
-        )
+        public static (
+            float damage,
+            float intox,
+            float psych,
+            float satLoss
+        ) GetDrinkingSideEffectTotals(string potionId, float strengthMul)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
 
@@ -463,39 +468,48 @@ namespace Alchemy
                 _ => (0f, 0f, 0f, 0f),
             };
 
-            float totalIntoxChange =
-                cfg.DrinkingPotionIntoxicationAmount
-                + intox * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalPsychChange =
-                cfg.DrinkingPotionPsychedelicAmount
-                + psych * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalSatChange =
-                cfg.DrinkingPotionSaturationLossAmount
-                + satLoss * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
-            float totalHealthChange =
-                cfg.DrinkingPotionDamageAmount
-                + damage * (AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f);
+            float mul = AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f;
+            float totalIntoxChange = cfg.DrinkingPotionIntoxicationAmount + intox * mul;
+            float totalPsychChange = cfg.DrinkingPotionPsychedelicAmount + psych * mul;
+            float totalSatChange = cfg.DrinkingPotionSaturationLossAmount + satLoss * mul;
+            float totalHealthChange = cfg.DrinkingPotionDamageAmount + damage * mul;
 
-            if (Math.Abs(totalIntoxChange) > float.Epsilon)
+            return (totalHealthChange, totalIntoxChange, totalPsychChange, totalSatChange);
+        }
+
+        internal static void ApplySideEffects(Entity entity, string potionId, float strengthMul)
+        {
+            (
+                float totalHealthChange,
+                float totalIntoxChange,
+                float totalPsychChange,
+                float totalSatChange
+            ) = GetDrinkingSideEffectTotals(potionId, strengthMul);
+
+            if (entity is EntityPlayer playerEntity)
             {
-                float current = playerEntity.WatchedAttributes.GetFloat("intoxication");
-                playerEntity.WatchedAttributes.SetFloat(
-                    "intoxication",
-                    Math.Clamp(current + totalIntoxChange, 0f, 1.1f)
-                );
+                if (Math.Abs(totalIntoxChange) > float.Epsilon)
+                {
+                    float current = playerEntity.WatchedAttributes.GetFloat("intoxication");
+                    playerEntity.WatchedAttributes.SetFloat(
+                        "intoxication",
+                        Math.Clamp(current + totalIntoxChange, 0f, IntoxicationMax)
+                    );
+                }
+                if (Math.Abs(totalPsychChange) > float.Epsilon)
+                {
+                    float current = playerEntity.WatchedAttributes.GetFloat("psychedelic");
+                    playerEntity.WatchedAttributes.SetFloat(
+                        "psychedelic",
+                        Math.Clamp(current + totalPsychChange, 0f, PsychedelicMax)
+                    );
+                }
+                if (Math.Abs(totalSatChange) > float.Epsilon)
+                    playerEntity.ReceiveSaturation(totalSatChange);
             }
-            if (Math.Abs(totalPsychChange) > float.Epsilon)
-            {
-                float current = playerEntity.WatchedAttributes.GetFloat("psychedelic");
-                playerEntity.WatchedAttributes.SetFloat(
-                    "psychedelic",
-                    Math.Clamp(current + totalPsychChange, 0f, 2.0f)
-                );
-            }
-            if (Math.Abs(totalSatChange) > float.Epsilon)
-                playerEntity.ReceiveSaturation(totalSatChange);
+
             if (Math.Abs(totalHealthChange) > float.Epsilon)
-                playerEntity.ReceiveDamage(
+                entity.ReceiveDamage(
                     new DamageSource
                     {
                         Source = EnumDamageSource.Internal,
@@ -679,7 +693,7 @@ namespace Alchemy
                 return false;
             }
 
-            ApplyDrinkingSideEffects(playerEntity, data.PotionId, strengthMul);
+            ApplySideEffects(playerEntity, data.PotionId, strengthMul);
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,

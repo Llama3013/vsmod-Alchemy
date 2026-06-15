@@ -62,6 +62,7 @@ namespace Alchemy
         // public bool AllowDecorativeRacks;
 
         public bool AllowWeaponCoating;
+        public bool AllowCauldronInVanillaFirepit;
         public bool SideEffectStrengthMultiplier;
 
         public bool AllowCoatingArcher;
@@ -96,6 +97,11 @@ namespace Alchemy
         public float StrongPotionMultiplier;
 
         public int WeaponCoatCharges;
+        public float WeaponCoatApplyTime;
+        public float PotionDrinkTime;
+        public float PotionEatTime;
+        public bool ScalePotionTimeWithHealing;
+        public float PotionConsumeMaxTimeMultiplier;
         public float FallPotionDamageReduction;
         public int FallPotionDuration;
         public int ClimbPotionDuration;
@@ -391,5 +397,140 @@ namespace Alchemy
         public int ColdResistPotionDuration;
         public float NutritionPotionRetainedNutrition;
         public float StabilityPotionTemporalStabilityGain;
+
+        public float DrinkingPotionIntoxicationAmount;
+        public float DrinkingPotionPsychedelicAmount;
+        public float DrinkingPotionSaturationLossAmount;
+        public float DrinkingPotionDamageAmount;
+
+        public float ArcherPotionDrinkingDamage;
+        public float ArcherPotionDrinkingIntoxication;
+        public float ArcherPotionDrinkingPsychedelic;
+        public float ArcherPotionDrinkingSaturationLoss;
+
+        public float HealingEffectPotionDrinkingDamage;
+        public float HealingEffectPotionDrinkingIntoxication;
+        public float HealingEffectPotionDrinkingPsychedelic;
+        public float HealingEffectPotionDrinkingSaturationLoss;
+
+        public float HungerEnhancePotionDrinkingDamage;
+        public float HungerEnhancePotionDrinkingIntoxication;
+        public float HungerEnhancePotionDrinkingPsychedelic;
+        public float HungerEnhancePotionDrinkingSaturationLoss;
+
+        public float HungerSupressPotionDrinkingDamage;
+        public float HungerSupressPotionDrinkingIntoxication;
+        public float HungerSupressPotionDrinkingPsychedelic;
+        public float HungerSupressPotionDrinkingSaturationLoss;
+
+        public float HunterPotionDrinkingDamage;
+        public float HunterPotionDrinkingIntoxication;
+        public float HunterPotionDrinkingPsychedelic;
+        public float HunterPotionDrinkingSaturationLoss;
+
+        public float LooterPotionDrinkingDamage;
+        public float LooterPotionDrinkingIntoxication;
+        public float LooterPotionDrinkingPsychedelic;
+        public float LooterPotionDrinkingSaturationLoss;
+
+        public float MeleePotionDrinkingDamage;
+        public float MeleePotionDrinkingIntoxication;
+        public float MeleePotionDrinkingPsychedelic;
+        public float MeleePotionDrinkingSaturationLoss;
+
+        public float MiningPotionDrinkingDamage;
+        public float MiningPotionDrinkingIntoxication;
+        public float MiningPotionDrinkingPsychedelic;
+        public float MiningPotionDrinkingSaturationLoss;
+
+        public float PoisonPotionDrinkingDamage;
+        public float PoisonPotionDrinkingIntoxication;
+        public float PoisonPotionDrinkingPsychedelic;
+        public float PoisonPotionDrinkingSaturationLoss;
+
+        public float PredatorPotionDrinkingDamage;
+        public float PredatorPotionDrinkingIntoxication;
+        public float PredatorPotionDrinkingPsychedelic;
+        public float PredatorPotionDrinkingSaturationLoss;
+
+        public float RegenPotionDrinkingDamage;
+        public float RegenPotionDrinkingIntoxication;
+        public float RegenPotionDrinkingPsychedelic;
+        public float RegenPotionDrinkingSaturationLoss;
+
+        public float ScentMaskPotionDrinkingDamage;
+        public float ScentMaskPotionDrinkingIntoxication;
+        public float ScentMaskPotionDrinkingPsychedelic;
+        public float ScentMaskPotionDrinkingSaturationLoss;
+
+        public float SpeedPotionDrinkingDamage;
+        public float SpeedPotionDrinkingIntoxication;
+        public float SpeedPotionDrinkingPsychedelic;
+        public float SpeedPotionDrinkingSaturationLoss;
+
+        public float VitalityPotionDrinkingDamage;
+        public float VitalityPotionDrinkingIntoxication;
+        public float VitalityPotionDrinkingPsychedelic;
+        public float VitalityPotionDrinkingSaturationLoss;
+
+        public float GlowPotionDrinkingDamage;
+        public float GlowPotionDrinkingIntoxication;
+        public float GlowPotionDrinkingPsychedelic;
+        public float GlowPotionDrinkingSaturationLoss;
+
+        public float WaterBreathePotionDrinkingDamage;
+        public float WaterBreathePotionDrinkingIntoxication;
+        public float WaterBreathePotionDrinkingPsychedelic;
+        public float WaterBreathePotionDrinkingSaturationLoss;
+
+        public float ColdResistPotionDrinkingDamage;
+        public float ColdResistPotionDrinkingIntoxication;
+        public float ColdResistPotionDrinkingPsychedelic;
+        public float ColdResistPotionDrinkingSaturationLoss;
+
+        public float NutritionPotionDrinkingDamage;
+        public float NutritionPotionDrinkingIntoxication;
+        public float NutritionPotionDrinkingPsychedelic;
+        public float NutritionPotionDrinkingSaturationLoss;
+
+        public float RecallPotionDrinkingDamage;
+        public float RecallPotionDrinkingIntoxication;
+        public float RecallPotionDrinkingPsychedelic;
+        public float RecallPotionDrinkingSaturationLoss;
+
+        public float TemporalPotionDrinkingDamage;
+        public float TemporalPotionDrinkingIntoxication;
+        public float TemporalPotionDrinkingPsychedelic;
+        public float TemporalPotionDrinkingSaturationLoss;
+
+        public float ReshapePotionDrinkingDamage;
+        public float ReshapePotionDrinkingIntoxication;
+        public float ReshapePotionDrinkingPsychedelic;
+        public float ReshapePotionDrinkingSaturationLoss;
+
+        public float GrowPotionDrinkingDamage;
+        public float GrowPotionDrinkingIntoxication;
+        public float GrowPotionDrinkingPsychedelic;
+        public float GrowPotionDrinkingSaturationLoss;
+
+        public float ShrinkPotionDrinkingDamage;
+        public float ShrinkPotionDrinkingIntoxication;
+        public float ShrinkPotionDrinkingPsychedelic;
+        public float ShrinkPotionDrinkingSaturationLoss;
+
+        public float FallPotionDrinkingDamage;
+        public float FallPotionDrinkingIntoxication;
+        public float FallPotionDrinkingPsychedelic;
+        public float FallPotionDrinkingSaturationLoss;
+
+        public float ClimbPotionDrinkingDamage;
+        public float ClimbPotionDrinkingIntoxication;
+        public float ClimbPotionDrinkingPsychedelic;
+        public float ClimbPotionDrinkingSaturationLoss;
+
+        public float FlightPotionDrinkingDamage;
+        public float FlightPotionDrinkingIntoxication;
+        public float FlightPotionDrinkingPsychedelic;
+        public float FlightPotionDrinkingSaturationLoss;
     }
 }
