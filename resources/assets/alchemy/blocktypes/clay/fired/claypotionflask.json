@@ -73,10 +73,10 @@
   "lightAbsorption": 1,
   "maxStackSize": 16,
 	"sounds": {
-		"walk": "walk/stone",
-		"place": "block/ceramicplace",
-		"break": "block/ceramicbreak",
-		"hit": "block/ceramichit"
+		"walk": "game:walk/stone",
+		"place": "game:block/ceramicplace",
+		"break": "game:block/ceramicbreak",
+		"hit": "game:block/ceramichit"
 	},
   "sidesolid": { "all": false },
   "sideopaque": { "all": false },
@@ -84,7 +84,6 @@
   "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "guiTransform": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 1.75 },
-  "groundTransform": { "scale": 2 },
   "fpHandTransform": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1 },
   "tpHandTransform": {
     "translation": { "x": -0.7, "y": 0, "z": 0.15 },

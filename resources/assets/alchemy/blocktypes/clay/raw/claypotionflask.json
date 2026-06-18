@@ -90,9 +90,9 @@
       "smeltedStack": { "type": "block", "code": "claypotionflask-earthyorange-fired" }
     }
   },
-	"sounds": {
-		"walk": "walk/stone",
-	},
+  "sounds": {
+    "walk": "game:walk/stone"
+  },
   "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.275, "z2": 0.625 },
   "guiTransform": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 1.75 },

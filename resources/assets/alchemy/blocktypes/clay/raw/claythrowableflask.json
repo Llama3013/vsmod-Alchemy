@@ -1,0 +1,106 @@
+{
+  "code": "claythrowableflask",
+  "class": "Block",
+  "variantgroups": [
+    { "code": "color", "states": ["blue", "fire", "red"] },
+    { "code": "state", "states": ["raw"] }
+  ],
+  "shape": { "base": "alchemy:block/glass/throwable-roundflask-empty" },
+  "textures": { "glass": { "base": "game:block/clay/{color}clay" } },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": { "layout": "Quadrants", "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.4375, "z2": 1 } }
+    },
+    { "name": "Unplaceable" },
+    { "name": "RightClickPickup" }
+  ],
+  "attributes": {
+    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
+    "shelvable": true,
+    "displaycaseable": true,
+    "handbook": { "groupBy": ["claythrowableflask-*-{state}"] }
+  },
+  "attributesByType": {
+    "claythrowableflask-red-raw": {
+      "beehivekiln": {
+        "0": { "type": "block", "code": "alchemy:claythrowableflask-tan-fired" },
+        "1": { "type": "block", "code": "alchemy:claythrowableflask-orange-fired" },
+        "2": { "type": "block", "code": "alchemy:claythrowableflask-red-fired" },
+        "3": { "type": "block", "code": "alchemy:claythrowableflask-brown-fired" }
+      }
+    },
+    "claythrowableflask-blue-raw": {
+      "beehivekiln": {
+        "0": { "type": "block", "code": "alchemy:claythrowableflask-cream-fired" },
+        "1": { "type": "block", "code": "alchemy:claythrowableflask-gray-fired" },
+        "2": { "type": "block", "code": "alchemy:claythrowableflask-black-fired" },
+        "3": { "type": "block", "code": "alchemy:claythrowableflask-black-fired" }
+      }
+    },
+    "claythrowableflask-fire-raw": {
+      "beehivekiln": {
+        "0": { "type": "block", "code": "alchemy:claythrowableflask-fire-fired" },
+        "1": { "type": "block", "code": "alchemy:claythrowableflask-fire-fired" },
+        "2": { "type": "block", "code": "alchemy:claythrowableflask-fire-fired" },
+        "3": { "type": "block", "code": "alchemy:claythrowableflask-fire-fired" }
+      }
+    }
+  },
+  "doNotRenderAtLod2": true,
+  "creativeinventory": { "general": ["*-blue-raw"], "decorative": ["*"], "alchemy": ["*"] },
+  "blockmaterial": "Ceramic",
+  "replaceable": 900,
+  "resistance": 1.5,
+  "liquidSelectable": 1,
+  "lightAbsorption": 1,
+  "maxStackSize": 64,
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+  "emitsideao": { "all": false },
+  "combustiblePropsByType": {
+    "claythrowableflask-fire-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "alchemy:claythrowableflask-fire-fired" }
+    },
+    "claythrowableflask-blue-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "alchemy:claythrowableflask-blue-fired" }
+    },
+    "claythrowableflask-red-raw": {
+      "meltingPoint": 600,
+      "meltingDuration": 30,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "requiresContainer": false,
+      "smeltedStack": { "type": "block", "code": "alchemy:claythrowableflask-earthyorange-fired" }
+    }
+  },
+  "sounds": {
+    "walk": "walk/stone"
+  },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "groundTransform": { "scale": 2 },
+  "guiTransform": {
+    "translation": { "x": 3.8400612, "y": 8.821874, "z": 0 },
+    "rotation": { "x": 14, "y": 4, "z": -92 },
+    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "scale": 2.5
+  },
+  "fpHandTransform": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1.5 },
+  "tpHandTransform": {
+    "translation": { "x": -1.1982889, "y": -0.11793123, "z": -1.023327 },
+    "rotation": { "x": 0, "y": 0, "z": -90 },
+    "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
+    "scale": 0.5
+  }
+}

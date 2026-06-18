@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
@@ -49,6 +47,8 @@ namespace Alchemy
         public bool AllowSmallFlasks { get; set; } = true;
         public bool AllowMediumFlasks { get; set; } = true;
         public bool AllowLargeFlasks { get; set; } = true;
+        public bool AllowGlassThrowableFlasks { get; set; } = true;
+        public bool AllowClayThrowableFlasks { get; set; } = true;
 
         public bool AllowHerbRackMolds { get; set; } = true;
         public bool AllowHerbRacks { get; set; } = true;
@@ -177,6 +177,9 @@ namespace Alchemy
 
         public string CoatableWeaponTags { get; set; } = "weapon-melee";
         public string CoatableProjectilesCodes { get; set; } = "*arrow*";
+
+        public float ThrowableFlaskSplashRadius { get; set; } = 2.5f;
+        public float ThrowableFlaskEffectMultiplier { get; set; } = 0.5f;
 
         public float DrinkingPotionIntoxicationAmount { get; set; } = 0f;
         public float DrinkingPotionPsychedelicAmount { get; set; } = 0f;

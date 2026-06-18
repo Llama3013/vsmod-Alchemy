@@ -1,0 +1,13 @@
+{
+  "ingredient": { "type": "item", "code": "game:clay-*", "name": "color", "allowedVariants": ["blue", "fire", "red"] },
+  "pattern": [
+    ["___", "_#_", "___"],
+    ["___", "_#_", "___"],
+    ["_#_", "###", "_#_"],
+    ["###", "#_#", "###"],
+    ["###", "#_#", "###"],
+    ["###", "#_#", "###"]
+  ],
+  "name": "claythrowableflask",
+  "output": { "type": "block", "code": "claythrowableflask-{color}-raw" }
+}

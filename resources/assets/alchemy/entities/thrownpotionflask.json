@@ -1,0 +1,33 @@
+{
+  "code": "thrownpotionflask",
+  "class": "EntityThrownPotionFlask",
+  "tags": ["inanimate", "projectile"],
+  "attributes": {
+    "isProjectile": true,
+    "physics": {
+      "groundDragFactor": 1,
+      "airDragFactor": 0.45
+    }
+  },
+  "hitboxSize": { "x": 0.15, "y": 0.15 },
+  "deadHitboxSize": { "x": 0.15, "y": 0.15 },
+  "eyeHeight": 0.075,
+  "drops": [],
+  "client": {
+    "renderer": "Shape",
+    "shape": { "base": "alchemy:block/glass/throwable-roundflask-empty", "size": 0.75 },
+    "textures": {
+      "glass": { "base": "game:block/glass/plain" }
+    },
+    "behaviors": [
+      { "code": "passivephysics" },
+      { "code": "interpolateposition" }
+    ]
+  },
+  "server": {
+    "behaviors": [
+      { "code": "passivephysics" },
+      { "code": "despawn", "minSeconds": 60 }
+    ]
+  }
+}

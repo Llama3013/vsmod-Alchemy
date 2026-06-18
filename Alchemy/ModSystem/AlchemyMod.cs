@@ -70,6 +70,8 @@ namespace Alchemy
             // );
             api.RegisterItemClass("ItemStirringSpoon", typeof(ItemStirringSpoon));
             api.RegisterBlockClass("BlockCauldronFirepit", typeof(BlockCauldronFirepit));
+            api.RegisterBlockClass("BlockThrowablePotionFlask", typeof(BlockThrowablePotionFlask));
+            api.RegisterEntity("EntityThrownPotionFlask", typeof(EntityThrownPotionFlask));
             api.RegisterBlockEntityClass(
                 "BlockEntityCauldronFirepit",
                 typeof(BlockEntityCauldronFirepit)
@@ -181,6 +183,14 @@ namespace Alchemy
             api.World.Config.SetBool("AllowSmallFlasks", AlchemyConfig.Loaded.AllowSmallFlasks);
             api.World.Config.SetBool("AllowMediumFlasks", AlchemyConfig.Loaded.AllowMediumFlasks);
             api.World.Config.SetBool("AllowLargeFlasks", AlchemyConfig.Loaded.AllowLargeFlasks);
+            api.World.Config.SetBool(
+                "AllowGlassThrowableFlasks",
+                AlchemyConfig.Loaded.AllowGlassThrowableFlasks
+            );
+            api.World.Config.SetBool(
+                "AllowClayThrowableFlasks",
+                AlchemyConfig.Loaded.AllowClayThrowableFlasks
+            );
 
             api.World.Config.SetBool("AllowHerbRackMolds", AlchemyConfig.Loaded.AllowHerbRackMolds);
             api.World.Config.SetBool("AllowHerbRacks", AlchemyConfig.Loaded.AllowHerbRacks);
@@ -485,6 +495,17 @@ namespace Alchemy
                     AlchemyConfig.Loaded.AllowLargeFlasks = packet.AllowLargeFlasks;
                     Mod.Logger.Event(
                         $"Received AllowLargeFlasks of {packet.AllowLargeFlasks} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowGlassThrowableFlasks =
+                        packet.AllowGlassThrowableFlasks;
+                    Mod.Logger.Event(
+                        $"Received AllowGlassThrowableFlasks of {packet.AllowGlassThrowableFlasks} from server"
+                    );
+
+                    AlchemyConfig.Loaded.AllowClayThrowableFlasks = packet.AllowClayThrowableFlasks;
+                    Mod.Logger.Event(
+                        $"Received AllowClayThrowableFlasks of {packet.AllowClayThrowableFlasks} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowHerbRackMolds = packet.AllowHerbRackMolds;
@@ -1535,6 +1556,8 @@ namespace Alchemy
                     AllowSmallFlasks = AlchemyConfig.Loaded.AllowSmallFlasks,
                     AllowMediumFlasks = AlchemyConfig.Loaded.AllowMediumFlasks,
                     AllowLargeFlasks = AlchemyConfig.Loaded.AllowLargeFlasks,
+                    AllowGlassThrowableFlasks = AlchemyConfig.Loaded.AllowGlassThrowableFlasks,
+                    AllowClayThrowableFlasks = AlchemyConfig.Loaded.AllowClayThrowableFlasks,
                     AllowHerbRackMolds = AlchemyConfig.Loaded.AllowHerbRackMolds,
                     AllowHerbRacks = AlchemyConfig.Loaded.AllowHerbRacks,
                     // AllowDecorativeRacks = AlchemyConfig.Loaded.AllowDecorativeRacks,

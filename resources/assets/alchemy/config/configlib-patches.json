@@ -10,7 +10,7 @@
         "comment": "alchemy:WeakPotionMultiplier-Comment",
         "default": 1.0,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 10.0
         }
       },
@@ -21,7 +21,7 @@
         "comment": "alchemy:MediumPotionMultiplier-Comment",
         "default": 2.0,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 10.0
         }
       },
@@ -32,7 +32,7 @@
         "comment": "alchemy:StrongPotionMultiplier-Comment",
         "default": 3.0,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 10.0
         }
       },
@@ -76,7 +76,7 @@
         "comment": "alchemy:HealingEffectPotionValue-Comment",
         "default": 0.3,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 1
         }
       },
@@ -87,7 +87,7 @@
         "comment": "alchemy:HungerEnhancePotionValue-Comment",
         "default": 0.3,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 1
         }
       },
@@ -99,7 +99,7 @@
         "default": -0.3,
         "range": {
           "min": -1,
-          "max": -0.01
+          "max": -0.001
         }
       },
       "HUNTERPOTIONANIMALDROP": {
@@ -197,7 +197,7 @@
         "comment": "alchemy:MeleePotionDamage-Comment",
         "default": 0.3,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 5
         }
       },
@@ -241,7 +241,7 @@
         "comment": "alchemy:PredatorPotionAnimalSeek-Comment",
         "default": 0.4,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 2
         }
       },
@@ -252,7 +252,7 @@
         "comment": "alchemy:RegenPotionHealth-Comment",
         "default": 0.5,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 5
         }
       },
@@ -264,7 +264,7 @@
         "default": -0.2,
         "range": {
           "min": -0.99,
-          "max": -0.01
+          "max": -0.001
         }
       },
       "SPEEDPOTIONVALUE": {
@@ -274,7 +274,7 @@
         "comment": "alchemy:SpeedPotionValue-Comment",
         "default": 0.25,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 10
         }
       },
@@ -285,8 +285,41 @@
         "comment": "alchemy:VitalityPotionMaxHealth-Comment",
         "default": 0.25,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 10
+        }
+      },
+      "WEAPONCOATEFFECTMULTIPLIER": {
+        "name": "WeaponCoatEffectMultiplier",
+        "ingui": "alchemy:WeaponCoatEffectMultiplier",
+        "weight": 25.1,
+        "comment": "alchemy:WeaponCoatEffectMultiplier-Comment",
+        "default": 0.9,
+        "range": {
+          "min": 0.001,
+          "max": 5.0
+        }
+      },
+      "THROWABLEFLASKSPLASHRADIUS": {
+        "name": "ThrowableFlaskSplashRadius",
+        "ingui": "alchemy:ThrowableFlaskSplashRadius",
+        "weight": 25.5,
+        "comment": "alchemy:ThrowableFlaskSplashRadius-Comment",
+        "default": 2.5,
+        "range": {
+          "min": 0.5,
+          "max": 20.0
+        }
+      },
+      "THROWABLEFLASKEFFECTMULTIPLIER": {
+        "name": "ThrowableFlaskEffectMultiplier",
+        "ingui": "alchemy:ThrowableFlaskEffectMultiplier",
+        "weight": 25.6,
+        "comment": "alchemy:ThrowableFlaskEffectMultiplier-Comment",
+        "default": 0.5,
+        "range": {
+          "min": 0.001,
+          "max": 5.0
         }
       },
       "NUTRITIONPOTIONRETAINEDNUTRITION": {
@@ -296,7 +329,7 @@
         "comment": "alchemy:NutritionPotionRetainedNutrition-Comment",
         "default": 0.9,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 2
         }
       },
@@ -351,7 +384,7 @@
         "comment": "alchemy:StabilityPotionTemporalStabilityGain-Comment",
         "default": 0.2,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 1
         }
       },
@@ -362,7 +395,7 @@
         "comment": "alchemy:GrowPotionSizeChange-Comment",
         "default": 0.5,
         "range": {
-          "min": 0.1,
+          "min": 0.001,
           "max": 4.0
         }
       },
@@ -406,7 +439,7 @@
         "comment": "alchemy:FallPotionDamageReduction-Comment",
         "default": 0.75,
         "range": {
-          "min": 0.01,
+          "min": 0.001,
           "max": 1.0
         }
       },
@@ -417,7 +450,7 @@
         "comment": "alchemy:PotionDrinkTime-Comment",
         "default": 1.5,
         "range": {
-          "min": 0.1,
+          "min": 0.25,
           "max": 10.0
         }
       },
@@ -428,7 +461,7 @@
         "comment": "alchemy:PotionEatTime-Comment",
         "default": 1.5,
         "range": {
-          "min": 0.1,
+          "min": 0.25,
           "max": 10.0
         }
       },
@@ -3046,7 +3079,7 @@
         "comment": "alchemy:WeaponCoatApplyTime-Comment",
         "default": 2,
         "range": {
-          "min": 0.1,
+          "min": 0.25,
           "max": 10.0
         }
       }
@@ -3226,17 +3259,6 @@
         "range": {
           "min": 10,
           "max": 5000
-        }
-      },
-      "WEAPONCOATEFFECTMULTIPLIER": {
-        "name": "WeaponCoatEffectMultiplier",
-        "ingui": "alchemy:WeaponCoatEffectMultiplier",
-        "weight": 25.1,
-        "comment": "alchemy:WeaponCoatEffectMultiplier-Comment",
-        "default": 0.9,
-        "range": {
-          "min": 0.01,
-          "max": 5.0
         }
       },
       "WEAPONCOATCHARGES": {
@@ -3677,6 +3699,20 @@
         "ingui": "alchemy:AllowLargeFlasks",
         "weight": 3.4,
         "comment": "alchemy:AllowLargeFlasks-Comment",
+        "default": true
+      },
+      "ALLOWGLASSTHROWABLEFLASKS": {
+        "name": "AllowGlassThrowableFlasks",
+        "ingui": "alchemy:AllowGlassThrowableFlasks",
+        "weight": 3.5,
+        "comment": "alchemy:AllowGlassThrowableFlasks-Comment",
+        "default": true
+      },
+      "ALLOWCLAYTHROWABLEFLASKS": {
+        "name": "AllowClayThrowableFlasks",
+        "ingui": "alchemy:AllowClayThrowableFlasks",
+        "weight": 3.6,
+        "comment": "alchemy:AllowClayThrowableFlasks-Comment",
         "default": true
       },
       "ALLOWHERBRACKMOLDS": {

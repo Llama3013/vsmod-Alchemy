@@ -55,6 +55,8 @@ namespace Alchemy
         public bool AllowSmallFlasks;
         public bool AllowMediumFlasks;
         public bool AllowLargeFlasks;
+        public bool AllowGlassThrowableFlasks;
+        public bool AllowClayThrowableFlasks;
 
         public bool AllowHerbRackMolds;
         public bool AllowHerbRacks;

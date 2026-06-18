@@ -1,0 +1,69 @@
+{
+  "code": "throwableflask",
+  "class": "BlockThrowablePotionFlask",
+  "storageFlags": 273,
+  "variantgroups": [
+    {
+      "code": "colour",
+      "states": ["plain", "quartz", "green", "blue", "violet", "red", "yellow", "brown", "vintage", "smoky", "pink"]
+    }
+  ],
+  "behaviors": [
+    { "name": "Unplaceable" },
+    {
+      "name": "Throwable",
+      "properties": {
+        "thrownProjectileCode": "alchemy:thrownpotionflask",
+        "projectileSpeed": 0.33,
+        "accuracy": 0.75,
+        "windupTimeSec": 0.35,
+        "weight": 0.25,
+        "damage": 0.5,
+        "damageType": "BluntAttack",
+        "dropOnImpactChance": 0.0,
+        "damageStackOnImpact": false,
+        "collectible": false
+      }
+    }
+  ],
+  "attributes": {
+    "liquidContainerProps": {
+      "capacityLitres": 0.25,
+      "transferSizeLitres": 0.25,
+      "drinkPortionSize": 0.25,
+      "emptyShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-empty",
+      "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
+      "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
+    },
+    "shelvable": true,
+    "displaycaseable": true
+  },
+  "blockmaterial": "Glass",
+  "replaceable": 5000,
+  "creativeinventory": { "general": ["*-quartz"], "alchemy": ["*"] },
+  "materialDensity": 200,
+  "shape": { "base": "alchemy:block/glass/throwable-roundflask-empty" },
+  "textures": { "glass": { "base": "game:block/glass/{colour}" } },
+  "resistance": 0.75,
+  "maxStackSize": 16,
+  "sounds": { "break": "game:block/glass", "hit": "game:block/glass" },
+  "lightAbsorption": 0,
+  "sideopaque": { "all": false },
+  "sideao": { "all": false },
+  "sidesolid": { "all": false },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "guiTransform": {
+    "translation": { "x": 3.8400612, "y": 8.821874, "z": 0 },
+    "rotation": { "x": 14, "y": 4, "z": -92 },
+    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "scale": 2.5
+  },
+  "fpHandTransform": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1.5 },
+  "tpHandTransform": {
+    "translation": { "x": -1.1982889, "y": -0.11793123, "z": -1.023327 },
+    "rotation": { "x": 0, "y": 0, "z": -90 },
+    "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
+    "scale": 0.5
+  }
+}
