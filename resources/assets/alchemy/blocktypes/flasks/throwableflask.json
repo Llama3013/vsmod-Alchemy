@@ -36,7 +36,11 @@
       "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
     },
     "shelvable": true,
-    "displaycaseable": true
+    "displaycaseable": true,
+    "onshelfTransform": {
+      "translation": { "x": 0.1, "y": -0.125, "z": 0 },
+      "scale": 0.75
+    }
   },
   "blockmaterial": "Glass",
   "replaceable": 5000,
@@ -65,5 +69,8 @@
     "rotation": { "x": 0, "y": 0, "z": -90 },
     "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
     "scale": 0.5
+  },
+  "groundTransform": {
+    "scale": 2.5
   }
 }

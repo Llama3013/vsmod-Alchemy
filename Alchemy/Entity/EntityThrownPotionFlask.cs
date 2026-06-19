@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -13,7 +14,10 @@ namespace Alchemy
     public class EntityThrownPotionFlask : EntityProjectile
     {
         private bool splashApplied;
-        private bool particlesSpawned;
+        private bool inLiquid;
+        private float liquidRestAccum;
+
+        public override bool ApplyGravity => !Stuck && !inLiquid;
 
         public override void OnTesselation(ref Shape entityShape, string shapePathForLogging)
         {
@@ -42,34 +46,66 @@ namespace Alchemy
             }
         }
 
+        public override void OnGameTick(float dt)
+        {
+            base.OnGameTick(dt);
+            if (!inLiquid || ShouldDespawn)
+                return;
+
+            float drag = (float)Math.Pow(0.9, dt);
+            Pos.Motion.X *= drag;
+            Pos.Motion.Y *= drag;
+            Pos.Motion.Z *= drag;
+
+            Pos.Motion.Y -= dt * 0.008f;
+
+            if (World.Side != EnumAppSide.Server)
+                return;
+
+            if (Pos.Motion.LengthSq() < 0.015 * 0.015)
+            {
+                liquidRestAccum += dt;
+                if (liquidRestAccum > 3f)
+                {
+                    ProjectileStack?.ResolveBlockOrItem(World);
+                    if (ProjectileStack != null)
+                        World.SpawnItemEntity(ProjectileStack, Pos.XYZ);
+                    Die();
+                }
+            }
+            else
+            {
+                liquidRestAccum = 0f;
+            }
+        }
+
+        public override void OnCollideWithLiquid()
+        {
+            inLiquid = true;
+            Pos.Motion.X *= 0.5f;
+            Pos.Motion.Y *= 0.5f;
+            Pos.Motion.Z *= 0.5f;
+            base.OnCollideWithLiquid();
+        }
+
         protected override void ImpactOnEntity(Entity target)
         {
-            SpawnParticlesClientSide();
             base.ImpactOnEntity(target);
             ApplyPotionSplash();
         }
 
         public override void OnCollided()
         {
-            SpawnParticlesClientSide();
+            if (inLiquid && Math.Max(motionBeforeCollide.Length(), Pos.Motion.Length()) < 0.2)
+                return;
             ApplyPotionSplash();
-            base.OnCollided
         }
 
         protected override void IsColliding(EntityPos pos, double impactSpeed)
         {
             if (impactSpeed < 0.05)
                 return;
-            SpawnParticlesClientSide();
             ApplyPotionSplash();
-        }
-
-        private void SpawnParticlesClientSide()
-        {
-            if (World.Side != EnumAppSide.Client || particlesSpawned)
-                return;
-            particlesSpawned = true;
-            SpawnSplashParticles();
         }
 
         private void ApplyPotionSplash()
@@ -85,76 +121,55 @@ namespace Alchemy
                 (ProjectileStack?.Collectible as Block)?.Sounds?.Break.Location
                 ?? new AssetLocation("game:sounds/block/glass");
 
-            World.PlaySoundAt(breakSound, Pos.X, Pos.Y, Pos.Z, null, true, 16f, 1f);
+            World.PlaySoundAt(
+                breakSound,
+                Pos.X,
+                Pos.Y,
+                Pos.Z,
+                null,
+                true,
+                16f,
+                inLiquid ? 0.4f : 1f
+            );
 
-            ApplyContentsEffect();
+            if (!inLiquid)
+            {
+                ItemStack contentStack = GetContentStack();
+                if (contentStack == null)
+                {
+                    Die(EnumDespawnReason.Death);
+                    return;
+                }
+                SpawnSplashParticles(GetSplashColor(contentStack));
+                ApplyWetness();
+                ApplyContentsEffect(contentStack);
+            }
 
             Die(EnumDespawnReason.Death);
         }
 
-        private void ApplyContentsEffect()
+        private ItemStack GetContentStack()
         {
             if (ProjectileStack?.Collectible is not BlockLiquidContainerBase container)
-                return;
-
-            ItemStack contentStack = container.GetContent(ProjectileStack);
-            if (contentStack == null)
-                return;
-
-            if (
-                !PotionConsumableLogic.TryReadPotionInfo(
-                    contentStack,
-                    out string potionId,
-                    out string strength
-                )
-            )
-                return;
-
-            if (!PotionConsumableLogic.IsCoatingAllowed(potionId))
-                return;
-
-            float multiplier =
-                AlchemyConfig.Loaded.ThrowableFlaskEffectMultiplier
-                * PotionConsumableLogic.GetStrengthMultiplier(strength);
-            string displayName = ResolveDisplayName(contentStack);
-
-            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
-            Entity[] targets = World.GetEntitiesAround(
-                Pos.XYZ,
-                radius,
-                radius,
-                e => e is EntityAgent && e.Alive
-            );
-
-            foreach (Entity entity in targets)
-            {
-                WeaponCoatEffects.Apply(potionId, entity, multiplier, displayName);
-            }
+                return null;
+            return container.GetContent(ProjectileStack);
         }
 
-        private static string ResolveDisplayName(ItemStack contentStack)
+        private static int GetSplashColor(ItemStack contentStack)
         {
-            CollectibleObject col = contentStack?.Collectible;
-            if (col?.Code == null)
-                return "";
-            string typePrefix = col is Block ? "block" : "item";
-            return Lang.Get($"{col.Code.Domain}:{typePrefix}-{col.Code.Path}");
+            int fallback = ColorUtil.ToRgba(160, 230, 230, 230);
+            if (contentStack?.Collectible?.Attributes == null)
+                return fallback;
+
+            int[] rgb = contentStack.Collectible.Attributes["particleColor"].AsArray<int>();
+            if (rgb == null || rgb.Length < 3)
+                return fallback;
+
+            return ColorUtil.ToRgba(160, rgb[0], rgb[1], rgb[2]);
         }
 
-        public override void OnEntityDespawn(EntityDespawnData despawn)
+        private void SpawnSplashParticles(int color)
         {
-            SpawnParticlesClientSide();
-
-            base.OnEntityDespawn(despawn);
-        }
-
-        private void SpawnSplashParticles()
-        {
-            if (Api is not ICoreClientAPI capi)
-                return;
-
-            int color = GetLiquidColor(capi);
-
             SimpleParticleProperties particles = new(
                 40,
                 80,
@@ -176,41 +191,67 @@ namespace Alchemy
             World.SpawnParticles(particles);
         }
 
-        // Need to resolve the average colour of the potion liquid's texture so the splash matches what
-        // the flask was carrying. Only valid client-side. Seems to be wrong colour on certain potions
-        private int GetLiquidColor(ICoreClientAPI capi)
+        private void ApplyContentsEffect(ItemStack contentStack)
         {
-            int fallback = ColorUtil.ToRgba(160, 230, 230, 230);
+            if (contentStack == null)
+                return;
 
-            ItemStack flaskStack = ProjectileStack;
-            if (flaskStack == null)
-                return fallback;
+            if (
+                !PotionConsumableLogic.TryReadPotionInfo(
+                    contentStack,
+                    out string potionId,
+                    out string strength
+                )
+            )
+                return;
 
-            flaskStack.ResolveBlockOrItem(World);
-            if (flaskStack.Collectible is not BlockLiquidContainerBase container)
-                return fallback;
+            if (!PotionConsumableLogic.IsThrowableAllowed(potionId))
+                return;
 
-            ItemStack content = container.GetContent(flaskStack);
-            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(
-                content
+            float multiplier =
+                AlchemyConfig.Loaded.ThrowableFlaskEffectMultiplier
+                * PotionConsumableLogic.GetStrengthMultiplier(strength);
+            string displayName = ResolveDisplayName(contentStack);
+
+            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
+            Entity[] targets = World.GetEntitiesAround(
+                Pos.XYZ,
+                radius,
+                radius,
+                e => e is EntityAgent && e.Alive
             );
-            if (props?.Texture == null)
-                return fallback;
 
-            capi.BlockTextureAtlas.GetOrInsertTexture(
-                props.Texture,
-                out _,
-                out TextureAtlasPosition texPos
-            );
-            if (texPos == null)
-                return fallback;
+            foreach (Entity entity in targets)
+                WeaponCoatEffects.Apply(potionId, entity, multiplier, displayName);
+        }
 
-            return ColorUtil.ToRgba(
-                160,
-                ColorUtil.ColorR(texPos.AvgColor),
-                ColorUtil.ColorG(texPos.AvgColor),
-                ColorUtil.ColorB(texPos.AvgColor)
+        private void ApplyWetness()
+        {
+            if (World.Side != EnumAppSide.Server)
+                return;
+
+            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
+            Entity[] targets = World.GetEntitiesAround(
+                Pos.XYZ,
+                radius,
+                radius,
+                e => e is EntityAgent && e.Alive
             );
+
+            foreach (Entity entity in targets)
+            {
+                float current = entity.WatchedAttributes.GetFloat("wetness");
+                entity.WatchedAttributes.SetFloat("wetness", Math.Min(1f, current + 0.35f));
+            }
+        }
+
+        private static string ResolveDisplayName(ItemStack contentStack)
+        {
+            CollectibleObject col = contentStack?.Collectible;
+            if (col?.Code == null)
+                return "";
+            string typePrefix = col is Block ? "block" : "item";
+            return Lang.Get($"{col.Code.Domain}:{typePrefix}-{col.Code.Path}");
         }
     }
 }

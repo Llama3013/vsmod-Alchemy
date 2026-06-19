@@ -5,6 +5,7 @@
   "maxstacksize": 200,
   "matterState": "liquid",
   "attributes": {
+    "particleColor": [65, 100, 38],
     "waterTightContainerProps": {
       "containable": true,
       "itemsPerLitre": 100,

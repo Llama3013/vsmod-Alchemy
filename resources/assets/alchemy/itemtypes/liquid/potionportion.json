@@ -34,6 +34,7 @@
   "attributesByType": {
     "*-archer-*": {
       "potioninfo": { "potionId": "archerpotionid" },
+      "particleColor": [120, 120, 120],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -51,6 +52,7 @@
     },
     "*-healingeffect-*": {
       "potioninfo": { "potionId": "healingeffectpotionid" },
+      "particleColor": [210, 30, 30],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -67,6 +69,7 @@
     },
     "*-hungerenhance-*": {
       "potioninfo": { "potionId": "hungerenhancepotionid" },
+      "particleColor": [240, 120, 25],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -83,6 +86,7 @@
     },
     "*-hungersupress-*": {
       "potioninfo": { "potionId": "hungersupresspotionid" },
+      "particleColor": [250, 235, 20],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -99,6 +103,7 @@
     },
     "*-hunter-*": {
       "potioninfo": { "potionId": "hunterpotionid" },
+      "particleColor": [150, 95, 45],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -115,6 +120,7 @@
     },
     "*-looter-*": {
       "potioninfo": { "potionId": "looterpotionid" },
+      "particleColor": [65, 85, 205],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -131,6 +137,7 @@
     },
     "*-melee-*": {
       "potioninfo": { "potionId": "meleepotionid" },
+      "particleColor": [120, 10, 15],
       "effects": { "meleeWeaponsDamage": 0.3 },
       "waterTightContainerProps": {
         "containable": true,
@@ -148,6 +155,7 @@
     },
     "*-mining-*": {
       "potioninfo": { "potionId": "miningpotionid" },
+      "particleColor": [180, 105, 55],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -164,6 +172,7 @@
     },
     "*-poison-*": {
       "potioninfo": { "potionId": "poisontickpotionid" },
+      "particleColor": [170, 75, 180],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -180,6 +189,7 @@
     },
     "*-predator-*": {
       "potioninfo": { "potionId": "predatorpotionid" },
+      "particleColor": [250, 155, 180],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -196,6 +206,7 @@
     },
     "*-regen-*": {
       "potioninfo": { "potionId": "regentickpotionid" },
+      "particleColor": [70, 110, 30],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -212,6 +223,7 @@
     },
     "*-scentmask-*": {
       "potioninfo": { "potionId": "scentmaskpotionid" },
+      "particleColor": [190, 170, 220],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -228,6 +240,7 @@
     },
     "*-speed-*": {
       "potioninfo": { "potionId": "speedpotionid" },
+      "particleColor": [15, 170, 210],
       "effects": { "walkspeed": 0.25 },
       "waterTightContainerProps": {
         "containable": true,
@@ -245,6 +258,7 @@
     },
     "*-vitality-*": {
       "potioninfo": { "potionId": "vitalitypotionid" },
+      "particleColor": [20, 15, 30],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,

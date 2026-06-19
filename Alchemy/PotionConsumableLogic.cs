@@ -91,6 +91,8 @@ namespace Alchemy
             return taken?.StackSize > 0;
         }
 
+        internal static bool IsThrowableAllowed(string potionId) => IsCoatingAllowed(potionId);
+
         internal static bool IsCoatingAllowed(string potionId)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;

@@ -14,6 +14,7 @@
   "attributesByType": {
     "*-recall": {
       "potioninfo": { "potionId": "recallpotionid" },
+      "particleColor": [175, 145, 50],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -25,6 +26,7 @@
     },
     "*-nutrition": {
       "potioninfo": { "potionId": "nutritionpotionid" },
+      "particleColor": [185, 150, 55],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -36,6 +38,7 @@
     },
     "*-glow": {
       "potioninfo": { "potionId": "glowpotionid", "duration": 1000 },
+      "particleColor": [235, 195, 25],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -47,6 +50,7 @@
     },
     "*-waterbreathe": {
       "potioninfo": { "potionId": "waterbreathepotionid", "duration": 1000 },
+      "particleColor": [45, 115, 215],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -58,6 +62,7 @@
     },
     "*-coldresist": {
       "potioninfo": { "potionId": "coldresistpotionid", "duration": 1000 },
+      "particleColor": [215, 55, 25],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -69,6 +74,7 @@
     },
     "*-temporal": {
       "potioninfo": { "potionId": "temporalpotionid" },
+      "particleColor": [195, 185, 45],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -80,6 +86,7 @@
     },
     "*-reshape": {
       "potioninfo": { "potionId": "reshapepotionid" },
+      "particleColor": [55, 45, 25],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -91,6 +98,7 @@
     },
     "*-grow": {
       "potioninfo": { "potionId": "growpotionid" },
+      "particleColor": [125, 95, 65],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -102,6 +110,7 @@
     },
     "*-shrink": {
       "potioninfo": { "potionId": "shrinkpotionid" },
+      "particleColor": [155, 135, 105],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -113,6 +122,7 @@
     },
     "*-fall": {
       "potioninfo": { "potionId": "fallpotionid" },
+      "particleColor": [175, 205, 230],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -124,6 +134,7 @@
     },
     "*-climb": {
       "potioninfo": { "potionId": "climbpotionid" },
+      "particleColor": [195, 185, 170],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,
@@ -135,6 +146,7 @@
     },
     "*-flight": {
       "potioninfo": { "potionId": "flightpotionid" },
+      "particleColor": [225, 215, 200],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,

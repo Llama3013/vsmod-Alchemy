@@ -1,7 +1,7 @@
 {
   "code": "potionflask",
   "class": "BlockPotionFlask",
-	"storageFlags": 273,
+  "storageFlags": 273,
   "entityClass": "BlockEntityPotionFlask",
   "behaviors": [
     { "name": "RightClickPickup" },
@@ -107,19 +107,19 @@
   },
   "tpHandTransformByType": {
     "*-tube-*": {
-      "translation": { "x": -0.9, "y": 0, "z": -0.8 },
+      "translation": { "x": -1.1502792, "y": 0.005155392, "z": -1.0239975 },
       "rotation": { "x": 0, "y": 0, "z": -74 },
       "origin": { "x": 0.5, "y": 0, "z": 0.51 },
-      "scale": 0.66
+      "scale": 0.5
     },
     "*-round-*": {
-      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "translation": { "x": -0.9034582, "y": 0.026922278, "z": -0.80446714 },
       "rotation": { "x": 0, "y": 0, "z": -90 },
       "origin": { "x": 0.5, "y": 0, "z": 0.51 },
       "scale": 0.66
     },
     "*": {
-      "translation": { "x": -0.9, "y": -0.1, "z": -0.8 },
+      "translation": { "x": -0.94682574, "y": 0.0065376395, "z": -0.80731374 },
       "rotation": { "x": 0, "y": 0, "z": -90 },
       "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
       "scale": 0.66

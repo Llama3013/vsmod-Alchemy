@@ -99,6 +99,9 @@ namespace Alchemy
 
             MeshData containerMesh = origContainerMesh.Clone();
 
+            if (Code.Path.Contains("clay"))
+                return containerMesh;
+
             if (contentStack != null)
             {
                 WaterTightContainableProps props = GetContainableProps(contentStack);
@@ -158,6 +161,10 @@ namespace Alchemy
                             .Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
                             .ToObject<Shape>();
                     }
+                }
+                else if (Code.Path.Contains("throwableflask"))
+                {
+                    return containerMesh;
                 }
                 else
                 {

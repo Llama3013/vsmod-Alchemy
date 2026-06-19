@@ -9,7 +9,7 @@
     { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
     { "code": "state", "states": ["fired"] }
   ],
-  "shape": { "base": "alchemy:block/glass/throwable-roundflask-empty" },
+  "shape": { "base": "alchemy:block/clay/throwable-claythrowableflask" },
   "textures": { "glass": { "base": "game:block/clay/hardened/{color}" } },
   "behaviors": [
     { "name": "Unplaceable" },
@@ -38,13 +38,17 @@
         "capacityLitres": 0.25,
         "transferSizeLitres": 0.25,
         "drinkPortionSize": 0.25,
-        "emptyShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-empty",
+        "emptyShapeLoc": "alchemy:shapes/block/clay/throwable-claythrowableflask",
         "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
         "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
       }
     },
     "shelvable": true,
-    "displaycaseable": true
+    "displaycaseable": true,
+    "onshelfTransform": {
+      "translation": { "x": 0.1, "y": -0.125, "z": 0 },
+      "scale": 0.75
+    }
   },
   "materialDensity": 200,
   "doNotRenderAtLod2": true,
@@ -63,8 +67,8 @@
   "sidesolid": { "all": false },
   "sideopaque": { "all": false },
   "emitsideao": { "all": false },
-  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
-  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.4375, "z2": 0.625 },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.2375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.2375, "z2": 0.625 },
   "guiTransform": {
     "translation": { "x": 3.8400612, "y": 8.821874, "z": 0 },
     "rotation": { "x": 14, "y": 4, "z": -92 },
@@ -77,5 +81,8 @@
     "rotation": { "x": 0, "y": 0, "z": -90 },
     "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
     "scale": 0.5
+  },
+  "groundTransform": {
+    "scale": 2.5
   }
 }

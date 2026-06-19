@@ -1,44 +1,44 @@
 [
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:clearquartz" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-plain", "quantity": 1 }
   },
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:ore-quartz" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-quartz", "quantity": 1 }
   },
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:ore-olivine" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-green", "quantity": 1 }
   },
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:amethyst" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-violet", "quantity": 1 }
   },
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:rosequartz" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-pink", "quantity": 1 }
   },
   {
-    "ingredientPattern": "QQQ,Q_Q,_Q_",
+    "ingredientPattern": "Q_Q,_Q_",
     "ingredients": { "Q": { "type": "item", "code": "game:smokyquartz" } },
     "width": 3,
-    "height": 3,
+    "height": 2,
     "output": { "type": "block", "code": "alchemy:throwableflask-smoky", "quantity": 1 }
   }
 ]
