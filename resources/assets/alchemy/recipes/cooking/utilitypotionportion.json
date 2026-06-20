@@ -11,7 +11,8 @@
     "shape": { "base": "block/food/meal/liquid" },
     "ingredients": [
       { "code": "utilitypotionbase", "validStacks": [{ "type": "item", "code": "alchemy:utilitypotionbase-recall" }], "minQuantity": 1, "maxQuantity": 1 },
-      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+      { "code": "alcoholportion", "validStacks": [{ "type": "item", "code": "game:alcoholportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.25 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.75 }
     ],
     "cooksInto": { "type": "Item", "code": "alchemy:utilitypotionportion-recall", "quantity": 100 }
   },
@@ -75,7 +76,8 @@
     "shape": { "base": "block/food/meal/liquid" },
     "ingredients": [
       { "code": "utilitypotionbase", "validStacks": [{ "type": "item", "code": "alchemy:utilitypotionbase-temporal" }], "minQuantity": 1, "maxQuantity": 1 },
-      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+      { "code": "alcoholportion", "validStacks": [{ "type": "item", "code": "game:alcoholportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.25 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.75 }
     ],
     "cooksInto": { "type": "Item", "code": "alchemy:utilitypotionportion-temporal", "quantity": 100 }
   },
@@ -91,7 +93,8 @@
     "shape": { "base": "block/food/meal/liquid" },
     "ingredients": [
       { "code": "utilitypotionbase", "validStacks": [{ "type": "item", "code": "alchemy:utilitypotionbase-reshape" }], "minQuantity": 1, "maxQuantity": 1 },
-      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 1 }
+      { "code": "alcoholportion", "validStacks": [{ "type": "item", "code": "game:alcoholportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.25 },
+      { "code": "potionteaportion", "validStacks": [{ "type": "item", "code": "alchemy:potionteaportion" }], "minQuantity": 1, "maxQuantity": 1, "portionSizeLitres": 0.75 }
     ],
     "cooksInto": { "type": "Item", "code": "alchemy:utilitypotionportion-reshape", "quantity": 100 }
   },

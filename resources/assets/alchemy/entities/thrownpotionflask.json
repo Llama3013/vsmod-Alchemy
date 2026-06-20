@@ -4,6 +4,7 @@
   "tags": ["inanimate", "projectile"],
   "attributes": {
     "isProjectile": true,
+    "liquidShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-liquid.json",
     "physics": {
       "groundDragFactor": 1,
       "airDragFactor": 0.45

@@ -32,8 +32,8 @@
       "transferSizeLitres": 0.25,
       "drinkPortionSize": 0.25,
       "emptyShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-empty",
-      "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
-      "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
+      "opaqueContentShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-contents",
+      "liquidContentShapeLoc": "alchemy:shapes/block/glass/throwable-roundflask-liquidcontents"
     },
     "shelvable": true,
     "displaycaseable": true,

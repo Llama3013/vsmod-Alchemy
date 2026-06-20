@@ -14,7 +14,7 @@
   "attributesByType": {
     "*-recall": {
       "potioninfo": { "potionId": "recallpotionid" },
-      "particleColor": [175, 145, 50],
+      "particleColor": [42, 218, 169],
       "waterTightContainerProps": {
         "containable": true,
         "itemsPerLitre": 100,

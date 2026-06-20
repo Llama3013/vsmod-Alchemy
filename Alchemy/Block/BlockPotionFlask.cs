@@ -164,7 +164,11 @@ namespace Alchemy
                 }
                 else if (Code.Path.Contains("throwableflask"))
                 {
-                    return containerMesh;
+                    shape = capi
+                        .Assets.TryGet(
+                            "alchemy:shapes/block/glass/throwable-roundflask-liquid.json"
+                        )
+                        .ToObject<Shape>();
                 }
                 else
                 {
@@ -390,11 +394,13 @@ namespace Alchemy
         );
         private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(
             flask,
-            "topper"
+            "topper",
+            true
         );
         private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(
             flask,
-            "bracing"
+            "bracing",
+            true
         );
 
         private readonly CompositeTexture contentTexture =

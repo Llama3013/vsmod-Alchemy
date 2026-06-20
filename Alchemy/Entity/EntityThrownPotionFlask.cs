@@ -44,6 +44,48 @@ namespace Alchemy
                 );
                 ownTex.Baked.TextureSubId = textureSubid;
             }
+
+            UseLiquidShape(capi, ref entityShape, textures);
+        }
+
+        private void UseLiquidShape(
+            ICoreClientAPI capi,
+            ref Shape entityShape,
+            IDictionary<string, CompositeTexture> textures
+        )
+        {
+            if (ProjectileStack.Collectible is not BlockLiquidContainerBase container)
+                return;
+
+            ItemStack contentStack = container.GetContent(ProjectileStack);
+            if (contentStack == null || contentStack.StackSize <= 0)
+                return;
+
+            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(
+                contentStack
+            );
+            if (props?.Texture == null)
+                return;
+
+            string liquidShapeLoc = Properties.Attributes?["liquidShapeLoc"].AsString();
+            if (string.IsNullOrEmpty(liquidShapeLoc))
+                return;
+
+            Shape liquidShape = Shape.TryGet(capi, liquidShapeLoc);
+            if (liquidShape == null)
+                return;
+
+            entityShape = liquidShape;
+
+            CompositeTexture contentTex = props.Texture.Clone();
+            textures["content"] = contentTex;
+            contentTex.Bake(capi.Assets);
+            capi.EntityTextureAtlas.GetOrInsertTexture(
+                contentTex.Baked.TextureFilenames[0],
+                out int subId,
+                out _
+            );
+            contentTex.Baked.TextureSubId = subId;
         }
 
         public override void OnGameTick(float dt)
