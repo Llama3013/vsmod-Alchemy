@@ -49,6 +49,18 @@ namespace Alchemy
         public bool AllowMediumPotions;
         public bool AllowStrongPotions;
 
+        public bool RecallPotionStrongRecipe;
+        public bool GlowPotionStrongRecipe;
+        public bool WaterBreathePotionStrongRecipe;
+        public bool ColdResistPotionStrongRecipe;
+        public bool NutritionPotionStrongRecipe;
+        public bool TemporalPotionStrongRecipe;
+        public bool ReshapePotionStrongRecipe;
+        public bool GrowPotionStrongRecipe;
+        public bool ShrinkPotionStrongRecipe;
+        public bool FallPotionStrongRecipe;
+        public bool ClimbPotionStrongRecipe;
+
         // public bool AllowCuttings;
 
         public bool AllowClayFlasks;

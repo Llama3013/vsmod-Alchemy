@@ -37,6 +37,18 @@ namespace Alchemy
         public bool AllowToxicMushrooms { get; set; } = true;
         public bool AllowPsychedelicMushrooms { get; set; } = true;
 
+        public bool RecallPotionStrongRecipe { get; set; } = true;
+        public bool GlowPotionStrongRecipe { get; set; } = false;
+        public bool WaterBreathePotionStrongRecipe { get; set; } = false;
+        public bool ColdResistPotionStrongRecipe { get; set; } = false;
+        public bool NutritionPotionStrongRecipe { get; set; } = false;
+        public bool TemporalPotionStrongRecipe { get; set; } = true;
+        public bool ReshapePotionStrongRecipe { get; set; } = true;
+        public bool GrowPotionStrongRecipe { get; set; } = false;
+        public bool ShrinkPotionStrongRecipe { get; set; } = false;
+        public bool FallPotionStrongRecipe { get; set; } = false;
+        public bool ClimbPotionStrongRecipe { get; set; } = false;
+
         public bool AllowHerbballs { get; set; } = true;
         public bool AllowMediumPotions { get; set; } = true;
         public bool AllowStrongPotions { get; set; } = true;

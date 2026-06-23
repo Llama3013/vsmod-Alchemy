@@ -174,6 +174,51 @@ namespace Alchemy
                 AlchemyConfig.Loaded.AllowPsychedelicMushrooms
             );
 
+            api.World.Config.SetBool(
+                "RecallPotionStrongRecipe",
+                AlchemyConfig.Loaded.RecallPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "GlowPotionStrongRecipe",
+                AlchemyConfig.Loaded.GlowPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "WaterBreathePotionStrongRecipe",
+                AlchemyConfig.Loaded.WaterBreathePotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "ColdResistPotionStrongRecipe",
+                AlchemyConfig.Loaded.ColdResistPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "NutritionPotionStrongRecipe",
+                AlchemyConfig.Loaded.NutritionPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "TemporalPotionStrongRecipe",
+                AlchemyConfig.Loaded.TemporalPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "ReshapePotionStrongRecipe",
+                AlchemyConfig.Loaded.ReshapePotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "GrowPotionStrongRecipe",
+                AlchemyConfig.Loaded.GrowPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "ShrinkPotionStrongRecipe",
+                AlchemyConfig.Loaded.ShrinkPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "FallPotionStrongRecipe",
+                AlchemyConfig.Loaded.FallPotionStrongRecipe
+            );
+            api.World.Config.SetBool(
+                "ClimbPotionStrongRecipe",
+                AlchemyConfig.Loaded.ClimbPotionStrongRecipe
+            );
+
             api.World.Config.SetBool("AllowHerbballs", AlchemyConfig.Loaded.AllowHerbballs);
             api.World.Config.SetBool("AllowMediumPotions", AlchemyConfig.Loaded.AllowMediumPotions);
             api.World.Config.SetBool("AllowStrongPotions", AlchemyConfig.Loaded.AllowStrongPotions);
@@ -448,16 +493,64 @@ namespace Alchemy
                     Mod.Logger.Event(
                         $"Received AllowShrinkPotionRecipe of {packet.AllowShrinkPotionRecipe} from server"
                     );
-
                     AlchemyConfig.Loaded.AllowToxicMushrooms = packet.AllowToxicMushrooms;
                     Mod.Logger.Event(
                         $"Received AllowToxicMushrooms of {packet.AllowToxicMushrooms} from server"
                     );
-
                     AlchemyConfig.Loaded.AllowPsychedelicMushrooms =
                         packet.AllowPsychedelicMushrooms;
                     Mod.Logger.Event(
                         $"Received AllowPsychedelicMushrooms of {packet.AllowPsychedelicMushrooms} from server"
+                    );
+
+                    AlchemyConfig.Loaded.RecallPotionStrongRecipe = packet.RecallPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received RecallPotionStrongRecipe of {packet.RecallPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.GlowPotionStrongRecipe = packet.GlowPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received GlowPotionStrongRecipe of {packet.GlowPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.WaterBreathePotionStrongRecipe =
+                        packet.WaterBreathePotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received WaterBreathePotionStrongRecipe of {packet.WaterBreathePotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.ColdResistPotionStrongRecipe =
+                        packet.ColdResistPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received ColdResistPotionStrongRecipe of {packet.ColdResistPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.NutritionPotionStrongRecipe =
+                        packet.NutritionPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received NutritionPotionStrongRecipe of {packet.NutritionPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.TemporalPotionStrongRecipe =
+                        packet.TemporalPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received TemporalPotionStrongRecipe of {packet.TemporalPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.ReshapePotionStrongRecipe =
+                        packet.ReshapePotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received ReshapePotionStrongRecipe of {packet.ReshapePotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.GrowPotionStrongRecipe = packet.GrowPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received GrowPotionStrongRecipe of {packet.GrowPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.ShrinkPotionStrongRecipe = packet.ShrinkPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received ShrinkPotionStrongRecipe of {packet.ShrinkPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.FallPotionStrongRecipe = packet.FallPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received FallPotionStrongRecipe of {packet.FallPotionStrongRecipe} from server"
+                    );
+                    AlchemyConfig.Loaded.ClimbPotionStrongRecipe = packet.ClimbPotionStrongRecipe;
+                    Mod.Logger.Event(
+                        $"Received ClimbPotionStrongRecipe of {packet.ClimbPotionStrongRecipe} from server"
                     );
 
                     AlchemyConfig.Loaded.AllowHerbballs = packet.AllowHerbballs;

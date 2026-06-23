@@ -382,7 +382,7 @@
         "ingui": "alchemy:StabilityPotionTemporalStabilityGain",
         "weight": 43.1,
         "comment": "alchemy:StabilityPotionTemporalStabilityGain-Comment",
-        "default": 0.2,
+        "default": 0.25,
         "range": {
           "min": 0.001,
           "max": 1
@@ -4015,6 +4015,83 @@
         "comment": "alchemy:AllowPsychedelicMushrooms-Comment",
         "default": true
       },
+      "RECALLPOTIONSTRONGRECIPE": {
+        "name": "RecallPotionStrongRecipe",
+        "ingui": "alchemy:RecallPotionStrongRecipe",
+        "weight": 4.581,
+        "comment": "alchemy:RecallPotionStrongRecipe-Comment",
+        "default": true
+      },
+      "GLOWPOTIONSTRONGRECIPE": {
+        "name": "GlowPotionStrongRecipe",
+        "ingui": "alchemy:GlowPotionStrongRecipe",
+        "weight": 4.582,
+        "comment": "alchemy:GlowPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "WATERBREATHEPOTIONSTRONGRECIPE": {
+        "name": "WaterBreathePotionStrongRecipe",
+        "ingui": "alchemy:WaterBreathePotionStrongRecipe",
+        "weight": 4.583,
+        "comment": "alchemy:WaterBreathePotionStrongRecipe-Comment",
+        "default": false
+      },
+      "COLDRESISTPOTIONSTRONGRECIPE": {
+        "name": "ColdResistPotionStrongRecipe",
+        "ingui": "alchemy:ColdResistPotionStrongRecipe",
+        "weight": 4.584,
+        "comment": "alchemy:ColdResistPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "NUTRITIONPOTIONSTRONGRECIPE": {
+        "name": "NutritionPotionStrongRecipe",
+        "ingui": "alchemy:NutritionPotionStrongRecipe",
+        "weight": 4.585,
+        "comment": "alchemy:NutritionPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "TEMPORALPOTIONSTRONGRECIPE": {
+        "name": "TemporalPotionStrongRecipe",
+        "ingui": "alchemy:TemporalPotionStrongRecipe",
+        "weight": 4.586,
+        "comment": "alchemy:TemporalPotionStrongRecipe-Comment",
+        "default": true
+      },
+      "RESHAPEPOTIONSTRONGRECIPE": {
+        "name": "ReshapePotionStrongRecipe",
+        "ingui": "alchemy:ReshapePotionStrongRecipe",
+        "weight": 4.587,
+        "comment": "alchemy:ReshapePotionStrongRecipe-Comment",
+        "default": true
+      },
+      "GROWPOTIONSTRONGRECIPE": {
+        "name": "GrowPotionStrongRecipe",
+        "ingui": "alchemy:GrowPotionStrongRecipe",
+        "weight": 4.588,
+        "comment": "alchemy:GrowPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "SHRINKPOTIONSTRONGRECIPE": {
+        "name": "ShrinkPotionStrongRecipe",
+        "ingui": "alchemy:ShrinkPotionStrongRecipe",
+        "weight": 4.589,
+        "comment": "alchemy:ShrinkPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "FALLPOTIONSTRONGRECIPE": {
+        "name": "FallPotionStrongRecipe",
+        "ingui": "alchemy:FallPotionStrongRecipe",
+        "weight": 4.59,
+        "comment": "alchemy:FallPotionStrongRecipe-Comment",
+        "default": false
+      },
+      "CLIMBPOTIONSTRONGRECIPE": {
+        "name": "ClimbPotionStrongRecipe",
+        "ingui": "alchemy:ClimbPotionStrongRecipe",
+        "weight": 4.591,
+        "comment": "alchemy:ClimbPotionStrongRecipe-Comment",
+        "default": false
+      },
       "SCALEPOTIONTIMEWITHHEALING": {
         "name": "ScalePotionTimeWithHealing",
         "ingui": "alchemy:ScalePotionTimeWithHealing",
@@ -4039,6 +4116,11 @@
       "type": "separator",
       "title": "alchemy:RecipeAllow-Config",
       "weight": 4.5
+    },
+    {
+      "type": "separator",
+      "title": "alchemy:UtilityRecipeStrength-Config",
+      "weight": 4.58
     },
     {
       "type": "separator",
