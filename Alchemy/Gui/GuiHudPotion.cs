@@ -36,13 +36,12 @@ namespace Alchemy
 
         private void SetupDialog()
         {
-            ElementBounds hudBounds = ElementBounds.Fixed(
-                EnumDialogArea.RightBottom,
-                0,
-                0,
-                100,
-                100
-            );
+            EnumDialogArea hudPosition = (EnumDialogArea)capi.Settings.Int["alchemyHudPosition"];
+            if (hudPosition == EnumDialogArea.None)
+            {
+                hudPosition = EnumDialogArea.RightBottom;
+            }
+            ElementBounds hudBounds = ElementBounds.Fixed(hudPosition, 0, 0, 100, 100);
             CairoFont font = CairoFont.WhiteSmallText().WithLineHeightMultiplier(1.2);
 
             inactiveComposer = capi
@@ -66,6 +65,31 @@ namespace Alchemy
                     "potionstatus"
                 );
             SingleComposer = inactiveComposer.Compose();
+        }
+
+        public void CyclePosition()
+        {
+            EnumDialogArea newPosition = SingleComposer.Bounds.Alignment + 1;
+            switch (newPosition)
+            {
+                case EnumDialogArea.LeftFixed:
+                    newPosition = EnumDialogArea.RightTop;
+                    break;
+
+                case EnumDialogArea.RightFixed:
+                    newPosition = EnumDialogArea.LeftTop;
+                    break;
+
+                default:
+                    break;
+            }
+
+            capi.Settings.Int["alchemyHudPosition"] = (int)newPosition;
+
+            activeComposer.Bounds.Alignment = newPosition;
+            inactiveComposer.Bounds.Alignment = newPosition;
+            activeComposer.ReCompose();
+            inactiveComposer.ReCompose();
         }
 
         public override bool TryOpen()
@@ -335,6 +359,7 @@ namespace Alchemy
 
     public class ModSystemHud : ModSystem
     {
+        private ICoreClientAPI capi;
         private GuiHudPotion alchemyHUD;
 
         public override bool ShouldLoad(EnumAppSide forSide)
@@ -346,6 +371,7 @@ namespace Alchemy
         {
             base.StartClientSide(api);
 
+            capi = api;
             alchemyHUD = new GuiHudPotion(api);
 
             api.Input.RegisterHotKey(
@@ -362,6 +388,14 @@ namespace Alchemy
                 HotkeyType.GUIOrOtherControls
             );
             api.Input.SetHotKeyHandler("movepotionhud", MoveGui);
+
+            api.Event.LevelFinalize += () =>
+            {
+                if (capi.Settings.Bool["alchemyHudEnabled"])
+                {
+                    alchemyHUD.TryOpen();
+                }
+            };
         }
 
         private bool ToggleGui(KeyCombination comb)
@@ -369,10 +403,12 @@ namespace Alchemy
             if (alchemyHUD.IsOpened())
             {
                 alchemyHUD.TryClose();
+                capi.Settings.Bool["alchemyHudEnabled"] = false;
             }
             else
             {
                 alchemyHUD.TryOpen();
+                capi.Settings.Bool["alchemyHudEnabled"] = true;
             }
 
             return true;
@@ -382,21 +418,7 @@ namespace Alchemy
         {
             if (alchemyHUD.IsOpened() && alchemyHUD.SingleComposer.Composed)
             {
-                EnumDialogArea newPosition = alchemyHUD.SingleComposer.Bounds.Alignment + 1;
-                switch (newPosition)
-                {
-                    case EnumDialogArea.LeftFixed:
-                        newPosition = EnumDialogArea.RightTop;
-                        break;
-
-                    case EnumDialogArea.RightFixed:
-                        newPosition = EnumDialogArea.LeftTop;
-                        break;
-
-                    default:
-                        break;
-                }
-                alchemyHUD.SingleComposer.Bounds.Alignment = newPosition;
+                alchemyHUD.CyclePosition();
             }
             return true;
         }

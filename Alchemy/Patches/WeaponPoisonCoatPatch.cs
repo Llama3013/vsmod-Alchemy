@@ -133,6 +133,39 @@ namespace Alchemy
         }
     }
 
+    [HarmonyPatch(typeof(BlockEntityBarrel), "FindMatchingRecipe", typeof(IPlayer))]
+    public static class BarrelCoatPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(BlockEntityBarrel __instance)
+        {
+            if (
+                !AlchemyConfig.Loaded.AllowWeaponCoating || !AlchemyConfig.Loaded.AllowBarrelCoating
+            )
+                return;
+
+            ICoreAPI api = __instance.Api;
+            if (api == null || api.Side != EnumAppSide.Server)
+                return;
+
+            try
+            {
+                InventoryBase inv = __instance.Inventory;
+                if (inv == null || inv.Count < 2)
+                    return;
+
+                PotionConsumableLogic.TryCoatInBarrel(api, inv[0], inv[1]);
+            }
+            catch (Exception e)
+            {
+                api.Logger.Error(
+                    "[Alchemy] Barrel coating failed, if the error occurs a lot consider turning off the AllowBarrelCoating config option: {0}",
+                    e
+                );
+            }
+        }
+    }
+
     internal static class WeaponCoatEffects
     {
         internal static string ResolveDisplayName(string langKey, string fallback)

@@ -534,6 +534,183 @@ namespace Alchemy
             return col.Tags.Overlaps(weaponMeleeTagSet);
         }
 
+        private static bool barrelCoating;
+
+        private static string GetContentLangKey(CollectibleObject col)
+        {
+            if (col?.Code == null)
+                return "";
+            string typePrefix = col is Vintagestory.API.Common.Block ? "block" : "item";
+            return $"{col.Code.Domain}:{typePrefix}-{col.Code.Path}";
+        }
+
+        public static bool TryCoatInBarrel(ICoreAPI api, ItemSlot itemSlot, ItemSlot liquidSlot)
+        {
+            if (barrelCoating)
+                return false;
+            if (
+                !AlchemyConfig.Loaded.AllowWeaponCoating || !AlchemyConfig.Loaded.AllowBarrelCoating
+            )
+                return false;
+            if (itemSlot?.Itemstack == null || liquidSlot?.Itemstack == null)
+                return false;
+
+            if (!TryReadPotionInfo(liquidSlot.Itemstack, out string potionId, out string strength))
+                return false;
+            if (string.IsNullOrEmpty(potionId) || !IsCoatingAllowed(potionId))
+                return false;
+
+            CollectibleObject col = itemSlot.Itemstack.Collectible;
+            if (col?.Code == null)
+                return false;
+
+            bool isArrow = col.Code.Path.Contains("arrow");
+            if (!isArrow && !HasWeaponTag(api, col))
+                return false;
+
+            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(
+                liquidSlot.Itemstack
+            );
+            if (props == null || props.ItemsPerLitre <= 0)
+                return false;
+
+            float consumeLitres = AlchemyConfig.Loaded.WeaponCoatConsumeLitres;
+            float checkLitres = AlchemyConfig.Loaded.WeaponCoatCheckLitres;
+            if (consumeLitres <= 0)
+                return false;
+
+            float availableLitres = liquidSlot.Itemstack.StackSize / props.ItemsPerLitre;
+            float coatMultiplier =
+                AlchemyConfig.Loaded.WeaponCoatEffectMultiplier * GetStrengthMultiplier(strength);
+            string itemCode = GetContentLangKey(liquidSlot.Itemstack.Collectible);
+
+            barrelCoating = true;
+            try
+            {
+                if (isArrow)
+                    return CoatBarrelArrows(
+                        itemSlot,
+                        liquidSlot,
+                        props,
+                        availableLitres,
+                        consumeLitres,
+                        checkLitres,
+                        potionId,
+                        itemCode,
+                        coatMultiplier
+                    );
+
+                return CoatBarrelWeapon(
+                    itemSlot,
+                    liquidSlot,
+                    props,
+                    availableLitres,
+                    consumeLitres,
+                    checkLitres,
+                    potionId,
+                    itemCode,
+                    coatMultiplier
+                );
+            }
+            finally
+            {
+                barrelCoating = false;
+            }
+        }
+
+        private static bool CoatBarrelWeapon(
+            ItemSlot itemSlot,
+            ItemSlot liquidSlot,
+            WaterTightContainableProps props,
+            float availableLitres,
+            float consumeLitres,
+            float checkLitres,
+            string potionId,
+            string itemCode,
+            float coatMultiplier
+        )
+        {
+            ITreeAttribute attrs = itemSlot.Itemstack.Attributes;
+            string existingId = attrs.GetString("coatedPotionId");
+
+            if (
+                !string.IsNullOrEmpty(existingId)
+                && (
+                    existingId != potionId
+                    || Math.Abs(attrs.GetFloat("coatMultiplier") - coatMultiplier) > 0.001f
+                )
+            )
+                return false;
+
+            int charges = attrs.GetInt("coatCharges");
+            int maxCharges = AlchemyConfig.Loaded.WeaponCoatCharges;
+            if (charges >= maxCharges)
+                return false;
+
+            int chargesToAdd = 0;
+            float litres = availableLitres;
+            while (charges + chargesToAdd < maxCharges && litres >= checkLitres)
+            {
+                chargesToAdd++;
+                litres -= consumeLitres;
+            }
+
+            if (chargesToAdd <= 0)
+                return false;
+
+            ConsumeBarrelLitres(liquidSlot, props, consumeLitres * chargesToAdd);
+
+            attrs.SetString("coatedPotionId", potionId);
+            attrs.SetString("coatedItemCode", itemCode);
+            attrs.SetFloat("coatMultiplier", coatMultiplier);
+            attrs.SetInt("coatCharges", charges + chargesToAdd);
+            itemSlot.MarkDirty();
+            return true;
+        }
+
+        private static bool CoatBarrelArrows(
+            ItemSlot itemSlot,
+            ItemSlot liquidSlot,
+            WaterTightContainableProps props,
+            float availableLitres,
+            float consumeLitres,
+            float checkLitres,
+            string potionId,
+            string itemCode,
+            float coatMultiplier
+        )
+        {
+            ITreeAttribute attrs = itemSlot.Itemstack.Attributes;
+            if (!string.IsNullOrEmpty(attrs.GetString("coatedPotionId")))
+                return false;
+
+            int stackSize = itemSlot.Itemstack.StackSize;
+            if (availableLitres < checkLitres * stackSize)
+                return false;
+
+            ConsumeBarrelLitres(liquidSlot, props, consumeLitres * stackSize);
+
+            attrs.SetString("coatedPotionId", potionId);
+            attrs.SetString("coatedItemCode", itemCode);
+            attrs.SetFloat("coatMultiplier", coatMultiplier);
+            itemSlot.MarkDirty();
+            return true;
+        }
+
+        private static void ConsumeBarrelLitres(
+            ItemSlot liquidSlot,
+            WaterTightContainableProps props,
+            float litres
+        )
+        {
+            int itemsToRemove = (int)Math.Round(litres * props.ItemsPerLitre);
+            if (itemsToRemove < 1)
+                itemsToRemove = 1;
+
+            liquidSlot.TakeOut(itemsToRemove);
+            liquidSlot.MarkDirty();
+        }
+
         private static void ApplyCoating(
             ItemSlot coatSlot,
             ItemSlot mainHandSlot,

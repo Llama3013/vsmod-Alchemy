@@ -73,6 +73,7 @@ namespace Alchemy
         // public bool AllowDecorativeRacks { get; set; } = true;
 
         public bool AllowWeaponCoating { get; set; } = true;
+        public bool AllowBarrelCoating { get; set; } = true;
         public bool AllowVanillaContainerDrinking { get; set; } = false;
         public bool OnlyOnePotionAtATime { get; set; } = false;
         public bool AllowPotionRefresh { get; set; } = false;

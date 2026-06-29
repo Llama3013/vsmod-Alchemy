@@ -3784,6 +3784,13 @@
         "comment": "alchemy:AllowWeaponCoating-Comment",
         "default": true
       },
+      "ALLOWBARRELCOATING": {
+        "name": "AllowBarrelCoating",
+        "ingui": "alchemy:AllowBarrelCoating",
+        "weight": 4.351,
+        "comment": "alchemy:AllowBarrelCoating-Comment",
+        "default": true
+      },
       "ALLOWCOATINGPOISON": {
         "name": "AllowCoatingPoison",
         "ingui": "alchemy:AllowCoatingPoison",
