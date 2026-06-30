@@ -16,9 +16,6 @@ namespace Alchemy
             if (__instance is not EntityPlayer player)
                 return;
 
-            if (!AlchemyConfig.Loaded.AllowGrowPotion && !AlchemyConfig.Loaded.AllowShrinkPotion)
-                return;
-
             ApplySize(player);
             player.WatchedAttributes.RegisterModifiedListener(
                 "potionSizeDelta",
