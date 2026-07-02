@@ -368,6 +368,19 @@ namespace Alchemy
                 return;
             }
 
+            if (byEntity is EntityPlayer exclusivityPlayer)
+            {
+                string exclusivityBlock = PotionConsumableLogic.CheckPotionExclusivity(
+                    exclusivityPlayer,
+                    data.PotionId
+                );
+                if (exclusivityBlock != null)
+                {
+                    DenyDrink(byEntity, exclusivityBlock);
+                    return;
+                }
+            }
+
             if (PotionConsumableLogic.TryProcessPotionEffects(byEntity, data, byEntity.Api))
                 ConsumePotion(slot, byEntity);
             else

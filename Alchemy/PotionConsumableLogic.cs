@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
+using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace Alchemy
@@ -13,8 +15,8 @@ namespace Alchemy
     {
         private static readonly Dictionary<long, long> coatHoldStartMs = [];
         private static readonly HashSet<long> coatNotifiedEntities = [];
-        private static TagSet weaponMeleeTagSet;
-        private static bool weaponMeleeTagSetCached;
+        private static TagSet coatableWeaponTagSet;
+        private static bool coatableWeaponTagSetCached;
 
         public const float CoatHoldDurationSec = 1.5f;
         public const float DefaultConsumeTime = 1.5f;
@@ -128,6 +130,96 @@ namespace Alchemy
             };
         }
 
+        internal static string GetPotionGroup(string potionId)
+        {
+            AlchemyConfig cfg = AlchemyConfig.Loaded;
+            return potionId switch
+            {
+                "archerpotionid" => cfg.ArcherPotionGroup,
+                "healingeffectpotionid" => cfg.HealingEffectPotionGroup,
+                "hungerenhancepotionid" => cfg.HungerEnhancePotionGroup,
+                "hungersupresspotionid" => cfg.HungerSupressPotionGroup,
+                "hunterpotionid" => cfg.HunterPotionGroup,
+                "looterpotionid" => cfg.LooterPotionGroup,
+                "meleepotionid" => cfg.MeleePotionGroup,
+                "miningpotionid" => cfg.MiningPotionGroup,
+                "poisontickpotionid" => cfg.PoisonPotionGroup,
+                "predatorpotionid" => cfg.PredatorPotionGroup,
+                "regentickpotionid" => cfg.RegenPotionGroup,
+                "scentmaskpotionid" => cfg.ScentMaskPotionGroup,
+                "speedpotionid" => cfg.SpeedPotionGroup,
+                "vitalitypotionid" => cfg.VitalityPotionGroup,
+                "recallpotionid" => cfg.RecallPotionGroup,
+                "glowpotionid" => cfg.GlowPotionGroup,
+                "waterbreathepotionid" => cfg.WaterBreathePotionGroup,
+                "coldresistpotionid" => cfg.ColdResistPotionGroup,
+                "nutritionpotionid" => cfg.NutritionPotionGroup,
+                "temporalpotionid" => cfg.TemporalPotionGroup,
+                "reshapepotionid" => cfg.ReshapePotionGroup,
+                "growpotionid" => cfg.GrowPotionGroup,
+                "shrinkpotionid" => cfg.ShrinkPotionGroup,
+                "fallpotionid" => cfg.FallPotionGroup,
+                "climbpotionid" => cfg.ClimbPotionGroup,
+                "flightpotionid" => cfg.FlightPotionGroup,
+                _ => "none",
+            };
+        }
+
+        internal static HashSet<string> GetActivePotionIds(EntityPlayer player)
+        {
+            HashSet<string> result = new(StringComparer.OrdinalIgnoreCase);
+            if (player?.WatchedAttributes == null)
+                return result;
+
+            foreach (string key in player.WatchedAttributes.Keys)
+            {
+                if (
+                    key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase)
+                    && player.WatchedAttributes.GetLong(key) != 0
+                )
+                    result.Add(key);
+            }
+            return result;
+        }
+
+        internal static string CheckPotionExclusivity(EntityPlayer player, string incomingPotionId)
+        {
+            if (!AlchemyConfig.Loaded.AllowPotionExclusivity)
+                return null;
+
+            string incomingGroup = GetPotionGroup(incomingPotionId);
+            if (string.Equals(incomingGroup, "none", StringComparison.OrdinalIgnoreCase))
+                return null;
+
+            HashSet<string> active = GetActivePotionIds(player);
+            active.Remove(incomingPotionId);
+
+            // Only potions that participate in exclusivity (not "none") can conflict.
+            List<string> activeGroups =
+            [
+                .. active
+                    .Select(GetPotionGroup)
+                    .Where(g => !string.Equals(g, "none", StringComparison.OrdinalIgnoreCase)),
+            ];
+            if (activeGroups.Count == 0)
+                return null;
+
+            if (string.Equals(incomingGroup, "solo", StringComparison.OrdinalIgnoreCase))
+                return "alchemy:exclusivity-solo-incoming";
+
+            if (activeGroups.Any(g => string.Equals(g, "solo", StringComparison.OrdinalIgnoreCase)))
+                return "alchemy:exclusivity-solo-active";
+
+            if (
+                activeGroups.Any(g =>
+                    string.Equals(g, incomingGroup, StringComparison.OrdinalIgnoreCase)
+                )
+            )
+                return "alchemy:exclusivity-group-conflict";
+
+            return null;
+        }
+
         public static bool HandleWeaponCoatingIdle(
             ICoreAPI api,
             ItemSlot coatSlot,
@@ -188,7 +280,7 @@ namespace Alchemy
 
             CollectibleObject col = mainSlot.Itemstack.Collectible;
 
-            bool isArrow = col.Code.Path.Contains("arrow");
+            bool isArrow = IsCoatableProjectile(col);
 
             if (!isArrow && !HasWeaponTag(api, col))
                 return;
@@ -235,7 +327,7 @@ namespace Alchemy
 
             CollectibleObject col = mainHandSlot.Itemstack.Collectible;
 
-            bool isArrow = col.Code.Path.Contains("arrow");
+            bool isArrow = IsCoatableProjectile(col);
 
             if (!isArrow && !HasWeaponTag(api, col))
             {
@@ -523,15 +615,34 @@ namespace Alchemy
 
         private static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
         {
-            if (!weaponMeleeTagSetCached)
+            if (!coatableWeaponTagSetCached)
             {
-                api.CollectibleTagRegistry.TryCreateTagSet(
-                    out weaponMeleeTagSet,
-                    new List<string> { "weapon-melee" }
-                );
-                weaponMeleeTagSetCached = true;
+                List<string> tagList =
+                [
+                    .. AlchemyConfig
+                        .Loaded.CoatableWeaponTags.Split(',')
+                        .Select(t => t.Trim())
+                        .Where(t => t.Length > 0),
+                ];
+                api.CollectibleTagRegistry.TryCreateTagSet(out coatableWeaponTagSet, tagList);
+                coatableWeaponTagSetCached = true;
             }
-            return col.Tags.Overlaps(weaponMeleeTagSet);
+            return col.Tags.Overlaps(coatableWeaponTagSet);
+        }
+
+        public static bool IsCoatableProjectile(CollectibleObject col)
+        {
+            if (col?.Code == null)
+                return false;
+
+            string[] codes =
+            [
+                .. AlchemyConfig
+                    .Loaded.CoatableProjectilesCodes.Split(',')
+                    .Select(c => c.Trim())
+                    .Where(c => c.Length > 0),
+            ];
+            return WildcardUtil.Match(codes, col.Code.ToString());
         }
 
         private static bool barrelCoating;
@@ -564,7 +675,7 @@ namespace Alchemy
             if (col?.Code == null)
                 return false;
 
-            bool isArrow = col.Code.Path.Contains("arrow");
+            bool isArrow = IsCoatableProjectile(col);
             if (!isArrow && !HasWeaponTag(api, col))
                 return false;
 
@@ -724,7 +835,7 @@ namespace Alchemy
             if (byEntity is not EntityPlayer playerEntity)
                 return;
 
-            bool isArrow = mainHandSlot.Itemstack.Collectible.Code.Path.Contains("arrow");
+            bool isArrow = IsCoatableProjectile(mainHandSlot.Itemstack.Collectible);
             IServerPlayer serverPlayer = playerEntity.Player as IServerPlayer;
 
             if (

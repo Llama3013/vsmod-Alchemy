@@ -1,3 +1,7 @@
+using System.Linq;
+using System.Reflection;
+using Vintagestory.API.Datastructures;
+
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
@@ -5,6 +9,59 @@ namespace Alchemy
     public class AlchemyConfig
     {
         public static AlchemyConfig Loaded { get; set; } = new AlchemyConfig();
+
+        private static readonly PropertyInfo[] SyncProps =
+        [
+            .. typeof(AlchemyConfig)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.CanRead && p.CanWrite),
+        ];
+
+        public void WriteToWorldConfig(ITreeAttribute cfg)
+        {
+            foreach (PropertyInfo prop in SyncProps)
+            {
+                switch (prop.GetValue(this))
+                {
+                    case bool b:
+                        cfg.SetBool(prop.Name, b);
+                        break;
+                    case int i:
+                        cfg.SetInt(prop.Name, i);
+                        break;
+                    case float f:
+                        cfg.SetFloat(prop.Name, f);
+                        break;
+                    case string s:
+                        cfg.SetString(prop.Name, s);
+                        break;
+                }
+            }
+        }
+
+        // I have to make sure that the client reads the config at LevelFinalize or later otherwise the client will read client config instead of server config, I wish I learnt this way earlier
+        public void ReadFromWorldConfig(ITreeAttribute cfg)
+        {
+            foreach (PropertyInfo prop in SyncProps)
+            {
+                switch (prop.GetValue(this))
+                {
+                    case bool b:
+                        prop.SetValue(this, cfg.GetBool(prop.Name, b));
+                        break;
+                    case int i:
+                        prop.SetValue(this, cfg.GetInt(prop.Name, i));
+                        break;
+                    case float f:
+                        prop.SetValue(this, cfg.GetFloat(prop.Name, f));
+                        break;
+                    case string s:
+                        prop.SetValue(this, cfg.GetString(prop.Name, s));
+                        break;
+                }
+            }
+        }
+
         public string Comment { get; } =
             "Set any potions you want to Allow to true. This will remove them from the multiplayer/singleplayer server. Make sure to remove any potions/potion bases that are in your world before disabling otherwise the world will provide some errors that can probably be ignored. Changing this field won't do anything.";
         public bool AllowRecallPotion { get; set; } = true;
@@ -78,6 +135,40 @@ namespace Alchemy
         public bool OnlyOnePotionAtATime { get; set; } = false;
         public bool AllowPotionRefresh { get; set; } = false;
         public bool SideEffectStrengthMultiplier { get; set; } = true;
+
+        public bool AllowPotionExclusivity { get; set; } = false;
+
+        public string ArcherPotionGroup { get; set; } = "combat";
+        public string MeleePotionGroup { get; set; } = "combat";
+        public string VitalityPotionGroup { get; set; } = "combat";
+        public string SpeedPotionGroup { get; set; } = "combat";
+
+        public string HungerEnhancePotionGroup { get; set; } = "survival";
+        public string HungerSupressPotionGroup { get; set; } = "survival";
+        public string HealingEffectPotionGroup { get; set; } = "survival";
+        public string RegenPotionGroup { get; set; } = "survival";
+
+        public string HunterPotionGroup { get; set; } = "utility";
+        public string PredatorPotionGroup { get; set; } = "utility";
+        public string ScentMaskPotionGroup { get; set; } = "utility";
+        public string LooterPotionGroup { get; set; } = "utility";
+        public string MiningPotionGroup { get; set; } = "utility";
+
+        public string NutritionPotionGroup { get; set; } = "special";
+        public string GlowPotionGroup { get; set; } = "special";
+        public string WaterBreathePotionGroup { get; set; } = "special";
+        public string ColdResistPotionGroup { get; set; } = "special";
+        public string FallPotionGroup { get; set; } = "special";
+        public string ClimbPotionGroup { get; set; } = "special";
+        public string FlightPotionGroup { get; set; } = "special";
+
+        public string TemporalPotionGroup { get; set; } = "solo";
+        public string RecallPotionGroup { get; set; } = "solo";
+        public string ReshapePotionGroup { get; set; } = "solo";
+
+        public string PoisonPotionGroup { get; set; } = "none";
+        public string GrowPotionGroup { get; set; } = "none";
+        public string ShrinkPotionGroup { get; set; } = "none";
 
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;

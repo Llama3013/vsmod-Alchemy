@@ -3453,6 +3453,221 @@
         "weight": 25.4,
         "comment": "alchemy:CoatableWeaponTags-Comment",
         "default": "weapon-melee"
+      },
+      "COATABLEPROJECTILESCODES": {
+        "name": "CoatableProjectilesCodes",
+        "ingui": "alchemy:CoatableProjectilesCodes",
+        "weight": 25.41,
+        "comment": "alchemy:CoatableProjectilesCodes-Comment",
+        "default": "*arrow*"
+      },
+      "ARCHERPOTIONGROUP": {
+        "name": "ArcherPotionGroup",
+        "ingui": "alchemy:ArcherPotionGroup",
+        "weight": 47.01,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "combat",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "HUNTERPOTIONGROUP": {
+        "name": "HunterPotionGroup",
+        "ingui": "alchemy:HunterPotionGroup",
+        "weight": 47.02,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "utility",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "MELEEPOTIONGROUP": {
+        "name": "MeleePotionGroup",
+        "ingui": "alchemy:MeleePotionGroup",
+        "weight": 47.03,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "combat",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "PREDATORPOTIONGROUP": {
+        "name": "PredatorPotionGroup",
+        "ingui": "alchemy:PredatorPotionGroup",
+        "weight": 47.04,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "utility",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "VITALITYPOTIONGROUP": {
+        "name": "VitalityPotionGroup",
+        "ingui": "alchemy:VitalityPotionGroup",
+        "weight": 47.05,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "combat",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "SPEEDPOTIONGROUP": {
+        "name": "SpeedPotionGroup",
+        "ingui": "alchemy:SpeedPotionGroup",
+        "weight": 47.06,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "combat",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "HUNGERENHANCEPOTIONGROUP": {
+        "name": "HungerEnhancePotionGroup",
+        "ingui": "alchemy:HungerEnhancePotionGroup",
+        "weight": 47.07,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "survival",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "HUNGERSUPRESSPOTIONGROUP": {
+        "name": "HungerSupressPotionGroup",
+        "ingui": "alchemy:HungerSupressPotionGroup",
+        "weight": 47.08,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "survival",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "HEALINGEFFECTPOTIONGROUP": {
+        "name": "HealingEffectPotionGroup",
+        "ingui": "alchemy:HealingEffectPotionGroup",
+        "weight": 47.09,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "survival",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "REGENPOTIONGROUP": {
+        "name": "RegenPotionGroup",
+        "ingui": "alchemy:RegenPotionGroup",
+        "weight": 47.1,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "survival",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "SCENTMASKPOTIONGROUP": {
+        "name": "ScentMaskPotionGroup",
+        "ingui": "alchemy:ScentMaskPotionGroup",
+        "weight": 47.11,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "utility",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "LOOTERPOTIONGROUP": {
+        "name": "LooterPotionGroup",
+        "ingui": "alchemy:LooterPotionGroup",
+        "weight": 47.12,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "utility",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "MININGPOTIONGROUP": {
+        "name": "MiningPotionGroup",
+        "ingui": "alchemy:MiningPotionGroup",
+        "weight": 47.13,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "utility",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "RECALLPOTIONGROUP": {
+        "name": "RecallPotionGroup",
+        "ingui": "alchemy:RecallPotionGroup",
+        "weight": 47.14,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "solo",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "NUTRITIONPOTIONGROUP": {
+        "name": "NutritionPotionGroup",
+        "ingui": "alchemy:NutritionPotionGroup",
+        "weight": 47.15,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "GLOWPOTIONGROUP": {
+        "name": "GlowPotionGroup",
+        "ingui": "alchemy:GlowPotionGroup",
+        "weight": 47.16,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "WATERBREATHEPOTIONGROUP": {
+        "name": "WaterBreathePotionGroup",
+        "ingui": "alchemy:WaterBreathePotionGroup",
+        "weight": 47.17,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "RESHAPEPOTIONGROUP": {
+        "name": "ReshapePotionGroup",
+        "ingui": "alchemy:ReshapePotionGroup",
+        "weight": 47.18,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "solo",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "POISONPOTIONGROUP": {
+        "name": "PoisonPotionGroup",
+        "ingui": "alchemy:PoisonPotionGroup",
+        "weight": 47.19,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "none",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "TEMPORALPOTIONGROUP": {
+        "name": "TemporalPotionGroup",
+        "ingui": "alchemy:TemporalPotionGroup",
+        "weight": 47.2,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "solo",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "COLDRESISTPOTIONGROUP": {
+        "name": "ColdResistPotionGroup",
+        "ingui": "alchemy:ColdResistPotionGroup",
+        "weight": 47.21,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "GROWPOTIONGROUP": {
+        "name": "GrowPotionGroup",
+        "ingui": "alchemy:GrowPotionGroup",
+        "weight": 47.22,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "none",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "SHRINKPOTIONGROUP": {
+        "name": "ShrinkPotionGroup",
+        "ingui": "alchemy:ShrinkPotionGroup",
+        "weight": 47.23,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "none",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "FALLPOTIONGROUP": {
+        "name": "FallPotionGroup",
+        "ingui": "alchemy:FallPotionGroup",
+        "weight": 47.24,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "CLIMBPOTIONGROUP": {
+        "name": "ClimbPotionGroup",
+        "ingui": "alchemy:ClimbPotionGroup",
+        "weight": 47.25,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
+      },
+      "FLIGHTPOTIONGROUP": {
+        "name": "FlightPotionGroup",
+        "ingui": "alchemy:FlightPotionGroup",
+        "weight": 47.26,
+        "comment": "alchemy:PotionGroup-Comment",
+        "default": "special",
+        "mapping": { "none": "none", "combat": "combat", "survival": "survival", "utility": "utility", "special": "special", "solo": "solo" }
       }
     },
     "boolean": {
@@ -3743,13 +3958,6 @@
         "comment": "alchemy:AllowCauldronInVanillaFirepit-Comment",
         "default": false
       },
-      // "ALLOWPOTIONBREWINGCAULDRONMOLD": {
-      //     "name": "AllowPotionBrewingCauldronMold",
-      //     "ingui": "alchemy:AllowPotionBrewingCauldronMold",
-      //     "weight": 4.26,
-      //     "comment": "alchemy:AllowPotionBrewingCauldronMold-Comment",
-      //     "default": true
-      // },
       "ALLOWVANILLACONTAINERDRINKING": {
         "name": "AllowVanillaContainerDrinking",
         "ingui": "alchemy:AllowVanillaContainerDrinking",
@@ -3761,6 +3969,13 @@
         "name": "OnlyOnePotionAtATime",
         "ingui": "alchemy:OnlyOnePotionAtATime",
         "weight": 4.31,
+        "default": false
+      },
+      "ALLOWPOTIONEXCLUSIVITY": {
+        "name": "AllowPotionExclusivity",
+        "ingui": "alchemy:AllowPotionExclusivity",
+        "weight": 4.311,
+        "comment": "alchemy:AllowPotionExclusivity-Comment",
         "default": false
       },
       "ALLOWPOTIONREFRESH": {
@@ -4113,6 +4328,11 @@
       "type": "separator",
       "title": "alchemy:Allow-Config",
       "weight": 0.5
+    },
+    {
+      "type": "separator",
+      "title": "alchemy:PotionGroups-Config",
+      "weight": 47.005
     },
     {
       "type": "separator",

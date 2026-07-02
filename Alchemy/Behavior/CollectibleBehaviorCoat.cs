@@ -28,7 +28,7 @@ namespace Alchemy
             string potionName = !string.IsNullOrEmpty(coatedItemCode)
                 ? Lang.Get(coatedItemCode)
                 : potionId;
-            bool isArrow = inSlot.Itemstack.Collectible.Code.Path.Contains("arrow");
+            bool isArrow = PotionConsumableLogic.IsCoatableProjectile(inSlot.Itemstack.Collectible);
             dsc.Append(string.Format("<font color=\"{0}\">", "#b8bb00"));
             if (isArrow)
                 dsc.Append(Lang.Get("alchemy:arrow-coated", potionName));
