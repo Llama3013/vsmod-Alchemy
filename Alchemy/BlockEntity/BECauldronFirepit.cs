@@ -16,11 +16,15 @@ namespace Alchemy
     {
         public override string DialogTitle => Lang.Get("alchemy:block-potioncauldron");
 
+        public BlockEntityCauldronFirepit()
+        {
+            Inventory[2] = new ItemSlotWatertightOutput(Inventory, 50);
+        }
+
         public override void Initialize(ICoreAPI api)
         {
             base.Initialize(api);
             EnsureCauldronInSlot();
-            Inventory[2] = new ItemSlotWatertightOutput(Inventory, 50);
             Inventory.SlotModified += OnCauldronSlotModified;
             if (api.Side == EnumAppSide.Server)
                 RegisterGameTickListener(OnSpoonCheck, 200);
