@@ -42,7 +42,7 @@ namespace Alchemy
                 harmony = new Harmony(HarmonyId);
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
-            // CombatOverhaulCompat.Init(api);
+            CombatOverhaulCompat.Init(api);
             RegisterClasses(api);
         }
 
@@ -62,10 +62,6 @@ namespace Alchemy
                 "PotionCoatSource",
                 typeof(PotionCoatSourceBehavior)
             );
-            // api.RegisterBlockClass(
-            //     "BlockPotionBrewingCauldron",
-            //     typeof(BlockPotionBrewingCauldron)
-            // );
             api.RegisterItemClass("ItemStirringSpoon", typeof(ItemStirringSpoon));
             api.RegisterBlockClass("BlockCauldronFirepit", typeof(BlockCauldronFirepit));
             api.RegisterBlockClass("BlockThrowablePotionFlask", typeof(BlockThrowablePotionFlask));
@@ -143,11 +139,6 @@ namespace Alchemy
 
         public override void StartClientSide(ICoreClientAPI api)
         {
-            // world.Config isn't guaranteed to hold the server's synced values until the client
-            // has received the level finalize packet (matches base game precedent, e.g.
-            // ModSystemFarming.loadWorldConfigValues on LevelFinalize). Everything that reads
-            // AlchemyConfig.Loaded at use-time (potion effects, drinking side effects, coating
-            // permission checks, etc.) is safe from here on.
             api.Event.LevelFinalize += () =>
                 AlchemyConfig.Loaded.ReadFromWorldConfig(api.World.Config);
 
@@ -216,7 +207,7 @@ namespace Alchemy
 
         public override void Dispose()
         {
-            // CombatOverhaulCompat.Shutdown();
+            CombatOverhaulCompat.Shutdown();
             harmony?.UnpatchAll(HarmonyId);
             harmony = null;
             // remove our player join listener so we don't create memory leaks

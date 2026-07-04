@@ -285,10 +285,37 @@ namespace Alchemy
             if (!isArrow && !HasWeaponTag(api, col))
                 return;
 
-            bool coatable = isArrow
-                ? string.IsNullOrEmpty(mainSlot.Itemstack.Attributes.GetString("coatedPotionId"))
-                : mainSlot.Itemstack.Attributes.GetInt("coatCharges")
-                    < AlchemyConfig.Loaded.WeaponCoatCharges;
+            bool coatable;
+            if (isArrow)
+            {
+                coatable = CombatOverhaulCompat.ShouldUseProjectileBuffStorage(mainSlot.Itemstack)
+                    ? !CombatOverhaulCompat.TryGetCoating(
+                        mainSlot.Itemstack,
+                        out _,
+                        out _,
+                        out _,
+                        out _
+                    )
+                    : string.IsNullOrEmpty(
+                        mainSlot.Itemstack.Attributes.GetString("coatedPotionId")
+                    );
+            }
+            else
+            {
+                int charges = mainSlot.Itemstack.Attributes.GetInt("coatCharges");
+                if (
+                    CombatOverhaulCompat.ShouldUseBuffStorage(col)
+                    && CombatOverhaulCompat.TryGetCoating(
+                        mainSlot.Itemstack,
+                        out _,
+                        out _,
+                        out _,
+                        out int buffCharges
+                    )
+                )
+                    charges = buffCharges;
+                coatable = charges < AlchemyConfig.Loaded.WeaponCoatCharges;
+            }
 
             if (coatable)
             {
@@ -741,19 +768,25 @@ namespace Alchemy
             float coatMultiplier
         )
         {
-            ITreeAttribute attrs = itemSlot.Itemstack.Attributes;
-            string existingId = attrs.GetString("coatedPotionId");
+            bool useBuffStorage = CombatOverhaulCompat.ShouldUseBuffStorage(
+                itemSlot.Itemstack.Collectible
+            );
+            ReadWeaponCoat(
+                itemSlot.Itemstack,
+                useBuffStorage,
+                out string existingId,
+                out float existingMultiplier,
+                out int charges
+            );
 
             if (
                 !string.IsNullOrEmpty(existingId)
                 && (
-                    existingId != potionId
-                    || Math.Abs(attrs.GetFloat("coatMultiplier") - coatMultiplier) > 0.001f
+                    existingId != potionId || Math.Abs(existingMultiplier - coatMultiplier) > 0.001f
                 )
             )
                 return false;
 
-            int charges = attrs.GetInt("coatCharges");
             int maxCharges = AlchemyConfig.Loaded.WeaponCoatCharges;
             if (charges >= maxCharges)
                 return false;
@@ -771,11 +804,14 @@ namespace Alchemy
 
             ConsumeBarrelLitres(liquidSlot, props, consumeLitres * chargesToAdd);
 
-            attrs.SetString("coatedPotionId", potionId);
-            attrs.SetString("coatedItemCode", itemCode);
-            attrs.SetFloat("coatMultiplier", coatMultiplier);
-            attrs.SetInt("coatCharges", charges + chargesToAdd);
-            itemSlot.MarkDirty();
+            SetWeaponCoat(
+                itemSlot,
+                useBuffStorage,
+                potionId,
+                itemCode,
+                coatMultiplier,
+                charges + chargesToAdd
+            );
             return true;
         }
 
@@ -791,8 +827,11 @@ namespace Alchemy
             float coatMultiplier
         )
         {
-            ITreeAttribute attrs = itemSlot.Itemstack.Attributes;
-            if (!string.IsNullOrEmpty(attrs.GetString("coatedPotionId")))
+            bool useBuffStorage = CombatOverhaulCompat.ShouldUseProjectileBuffStorage(
+                itemSlot.Itemstack
+            );
+
+            if (HasArrowCoat(itemSlot.Itemstack, useBuffStorage))
                 return false;
 
             int stackSize = itemSlot.Itemstack.StackSize;
@@ -801,9 +840,7 @@ namespace Alchemy
 
             ConsumeBarrelLitres(liquidSlot, props, consumeLitres * stackSize);
 
-            attrs.SetString("coatedPotionId", potionId);
-            attrs.SetString("coatedItemCode", itemCode);
-            attrs.SetFloat("coatMultiplier", coatMultiplier);
+            SetArrowCoat(itemSlot.Itemstack, useBuffStorage, potionId, itemCode, coatMultiplier);
             itemSlot.MarkDirty();
             return true;
         }
@@ -822,6 +859,82 @@ namespace Alchemy
             liquidSlot.MarkDirty();
         }
 
+        private static void ReadWeaponCoat(
+            ItemStack stack,
+            bool useBuffStorage,
+            out string potionId,
+            out float multiplier,
+            out int charges
+        )
+        {
+            if (
+                useBuffStorage
+                && CombatOverhaulCompat.TryGetCoating(
+                    stack,
+                    out potionId,
+                    out _,
+                    out multiplier,
+                    out charges
+                )
+            )
+                return;
+
+            ITreeAttribute attrs = stack.Attributes;
+            potionId = attrs.GetString("coatedPotionId");
+            multiplier = attrs.GetFloat("coatMultiplier");
+            charges = attrs.GetInt("coatCharges");
+        }
+
+        private static void SetWeaponCoat(
+            ItemSlot slot,
+            bool useBuffStorage,
+            string potionId,
+            string itemCode,
+            float multiplier,
+            int charges
+        )
+        {
+            if (useBuffStorage)
+            {
+                CombatOverhaulCompat.SetCoating(slot, potionId, itemCode, multiplier, charges);
+                return;
+            }
+
+            ITreeAttribute attrs = slot.Itemstack.Attributes;
+            attrs.SetString("coatedPotionId", potionId);
+            attrs.SetString("coatedItemCode", itemCode);
+            attrs.SetFloat("coatMultiplier", multiplier);
+            attrs.SetInt("coatCharges", charges);
+            slot.MarkDirty();
+        }
+
+        private static bool HasArrowCoat(ItemStack stack, bool useBuffStorage)
+        {
+            return useBuffStorage
+                ? CombatOverhaulCompat.TryGetCoating(stack, out _, out _, out _, out _)
+                : !string.IsNullOrEmpty(stack.Attributes.GetString("coatedPotionId"));
+        }
+
+        private static void SetArrowCoat(
+            ItemStack stack,
+            bool useBuffStorage,
+            string potionId,
+            string itemCode,
+            float multiplier
+        )
+        {
+            if (useBuffStorage)
+            {
+                CombatOverhaulCompat.SetProjectileCoating(stack, potionId, itemCode, multiplier);
+                return;
+            }
+
+            ITreeAttribute attrs = stack.Attributes;
+            attrs.SetString("coatedPotionId", potionId);
+            attrs.SetString("coatedItemCode", itemCode);
+            attrs.SetFloat("coatMultiplier", multiplier);
+        }
+
         private static void ApplyCoating(
             ItemSlot coatSlot,
             ItemSlot mainHandSlot,
@@ -838,12 +951,11 @@ namespace Alchemy
             bool isArrow = IsCoatableProjectile(mainHandSlot.Itemstack.Collectible);
             IServerPlayer serverPlayer = playerEntity.Player as IServerPlayer;
 
-            if (
+            bool useArrowBuffStorage =
                 isArrow
-                && !string.IsNullOrEmpty(
-                    mainHandSlot.Itemstack.Attributes.GetString("coatedPotionId")
-                )
-            )
+                && CombatOverhaulCompat.ShouldUseProjectileBuffStorage(mainHandSlot.Itemstack);
+
+            if (isArrow && HasArrowCoat(mainHandSlot.Itemstack, useArrowBuffStorage))
             {
                 serverPlayer?.SendMessage(
                     GlobalConstants.InfoLogChatGroup,
@@ -853,17 +965,29 @@ namespace Alchemy
                 return;
             }
 
+            bool useBuffStorage =
+                !isArrow
+                && CombatOverhaulCompat.ShouldUseBuffStorage(mainHandSlot.Itemstack.Collectible);
+
+            string existingId = null;
+            float existingMultiplier = 0f;
+            int existingCharges = 0;
+            if (!isArrow)
+                ReadWeaponCoat(
+                    mainHandSlot.Itemstack,
+                    useBuffStorage,
+                    out existingId,
+                    out existingMultiplier,
+                    out existingCharges
+                );
+
             if (!isArrow)
             {
-                string existingId = mainHandSlot.Itemstack.Attributes.GetString("coatedPotionId");
                 if (
                     !string.IsNullOrEmpty(existingId)
                     && (
                         existingId != potionId
-                        || Math.Abs(
-                            mainHandSlot.Itemstack.Attributes.GetFloat("coatMultiplier")
-                                - coatMultiplier
-                        ) > 0.001f
+                        || Math.Abs(existingMultiplier - coatMultiplier) > 0.001f
                     )
                 )
                 {
@@ -874,20 +998,16 @@ namespace Alchemy
                     );
                     return;
                 }
-            }
 
-            if (
-                !isArrow
-                && mainHandSlot.Itemstack.Attributes.GetInt("coatCharges")
-                    >= AlchemyConfig.Loaded.WeaponCoatCharges
-            )
-            {
-                serverPlayer?.SendMessage(
-                    GlobalConstants.InfoLogChatGroup,
-                    Lang.Get("alchemy:coating-max-charges"),
-                    EnumChatType.Notification
-                );
-                return;
+                if (existingCharges >= AlchemyConfig.Loaded.WeaponCoatCharges)
+                {
+                    serverPlayer?.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get("alchemy:coating-max-charges"),
+                        EnumChatType.Notification
+                    );
+                    return;
+                }
             }
 
             string displayName = Lang.Get(itemCode);
@@ -909,9 +1029,7 @@ namespace Alchemy
             if (isArrow)
             {
                 ItemStack coatedArrow = mainHandSlot.TakeOut(1);
-                coatedArrow.Attributes.SetString("coatedPotionId", potionId);
-                coatedArrow.Attributes.SetString("coatedItemCode", itemCode);
-                coatedArrow.Attributes.SetFloat("coatMultiplier", coatMultiplier);
+                SetArrowCoat(coatedArrow, useArrowBuffStorage, potionId, itemCode, coatMultiplier);
                 mainHandSlot.MarkDirty();
 
                 if (!playerEntity.TryGiveItemStack(coatedArrow))
@@ -919,23 +1037,21 @@ namespace Alchemy
             }
             else
             {
-                ITreeAttribute attrs = mainHandSlot.Itemstack.Attributes;
-                attrs.SetString("coatedPotionId", potionId);
-                attrs.SetString("coatedItemCode", itemCode);
-                attrs.SetFloat("coatMultiplier", coatMultiplier);
-                attrs.SetInt("coatCharges", attrs.GetInt("coatCharges") + 1);
-                mainHandSlot.MarkDirty();
+                SetWeaponCoat(
+                    mainHandSlot,
+                    useBuffStorage,
+                    potionId,
+                    itemCode,
+                    coatMultiplier,
+                    existingCharges + 1
+                );
             }
 
             playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
 
             string msg = isArrow
                 ? Lang.Get("alchemy:arrow-coated", displayName)
-                : Lang.Get(
-                    "alchemy:weapon-coated",
-                    displayName,
-                    mainHandSlot.Itemstack?.Attributes.GetInt("coatCharges") ?? 0
-                );
+                : Lang.Get("alchemy:weapon-coated", displayName, existingCharges + 1);
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
                 msg,

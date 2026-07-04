@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="VintagestoryAPI">
+      <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSSurvivalMod">
+      <HintPath>$(VINTAGE_STORY)/Mods/VSSurvivalMod.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VSEssentials">
+      <HintPath>$(VINTAGE_STORY)/Mods/VSEssentials.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- Compile-time only soft dependency, never shipped with the mod (Private=False).
+         Build the Overhaullib-Legacy project once to produce this dll. -->
+    <Reference Include="OverhaullibLegacyCompat">
+      <HintPath>..\SoftDependency\OverhaullibLegacyCompat.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="EnsureOverhaullibDll" BeforeTargets="CoreCompile">
+    <Error Condition="!Exists('..\SoftDependency\OverhaullibLegacyCompat.dll')"
+           Text="..\SoftDependency\OverhaullibLegacyCompat.dll is missing. Build the Overhaullib-Legacy project once and copy OverhaullibLegacyCompat.dll into the SoftDependency folder." />
+  </Target>
+
+</Project>
