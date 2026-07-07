@@ -10,16 +10,42 @@ namespace Alchemy
 {
     internal static class UtilityEffects
     {
-        // This stuff is annoying to debug, gotta make sure to set a lot of this in the correct order. Still isn't perfect but good enough.
-        public static void ApplySizeChange(EntityPlayer entity, float delta)
+        private static float ResolveBaseHeight(EntityPlayer entity)
+        {
+            float stored = entity.WatchedAttributes.GetFloat("potionBaseHeight", 0f);
+            return stored >= 0.1f ? stored : entity.CollisionBox.Y2;
+        }
+
+        public static bool CanApplySizeChange(EntityPlayer entity, float delta)
         {
             if (!AlchemyConfig.Loaded.AllowGrowPotion && !AlchemyConfig.Loaded.AllowShrinkPotion)
-                return;
+                return false;
+            if (Math.Abs(delta) <= float.Epsilon)
+                return false;
+
+            float currentIntent = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
+            float baseHeight = ResolveBaseHeight(entity);
+            float currentHeight = GameMath.Clamp(
+                baseHeight + currentIntent,
+                AlchemyConfig.Loaded.GrowShrinkMinHeight,
+                AlchemyConfig.Loaded.GrowShrinkMaxHeight
+            );
+
+            return delta > 0
+                ? currentHeight < AlchemyConfig.Loaded.GrowShrinkMaxHeight - 0.001f
+                : currentHeight > AlchemyConfig.Loaded.GrowShrinkMinHeight + 0.001f;
+        }
+
+        // This stuff is annoying to debug, gotta make sure to set a lot of this in the correct order. Still isn't perfect but good enough.
+        public static bool ApplySizeChange(EntityPlayer entity, float delta)
+        {
+            if (!CanApplySizeChange(entity, delta))
+                return false;
 
             // On first application snapshot the player's actual current size as the base,
             // so race mods or other size-altering mods are respected.
-            float currentDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
-            if (Math.Abs(currentDelta) < 0.001f)
+            float currentIntent = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
+            if (entity.WatchedAttributes.GetFloat("potionBaseHeight", 0f) < 0.1f)
             {
                 float naturalHeight = entity.CollisionBox.Y2;
                 entity.WatchedAttributes.SetFloat("potionBaseHeight", naturalHeight);
@@ -49,21 +75,9 @@ namespace Alchemy
                 }
             }
 
-            float baseHeight = entity.WatchedAttributes.GetFloat(
-                "potionBaseHeight",
-                entity.CollisionBox.Y2
-            );
-            float newHeight = GameMath.Clamp(
-                baseHeight + currentDelta + delta,
-                AlchemyConfig.Loaded.GrowShrinkMinHeight,
-                AlchemyConfig.Loaded.GrowShrinkMaxHeight
-            );
-            float newDelta = newHeight - baseHeight;
-            if (Math.Abs(newDelta - currentDelta) < 0.001f)
-                return; // already at min/max limit — nothing would change
-
-            entity.WatchedAttributes.SetFloat("potionSizeDelta", newDelta);
+            entity.WatchedAttributes.SetFloat("potionSizeDelta", currentIntent + delta);
             entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
+            return true;
         }
 
         public static void ResetPlayerSize(EntityPlayer entity)
@@ -75,11 +89,6 @@ namespace Alchemy
             if (potionBaseHeight < 0.1f)
                 return;
 
-            // Zero the delta WITHOUT clearing potionBaseHeight first. ApplySize fires on both
-            // server and client via the listener: with delta=0 and baseHeight still valid it
-            // resets to baseHeight+0=baseHeight. Clearing potionBaseHeight before MarkPathDirty
-            // would make the client's ApplySize return early (baseHeight<0.1f) and leave the
-            // client's collision box at the modified size.
             entity.WatchedAttributes.SetFloat("potionSizeDelta", 0f);
             entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
 
@@ -94,7 +103,6 @@ namespace Alchemy
                     entity.WatchedAttributes.SetFloat("entitySize", baseEntitySize);
                     entity.WatchedAttributes.MarkPathDirty("entitySize");
                 }
-                entity.WatchedAttributes.SetFloat("potionBaseEntitySize", 0f);
             }
 
             // Direct server-side reset for immediate physics; the client resets via ApplySize.
@@ -113,10 +121,7 @@ namespace Alchemy
                 );
                 entity.Properties.Client.Size = baseClientSize > 0.01f ? baseClientSize : 1.0f;
             }
-            entity.WatchedAttributes.SetFloat("potionBaseClientSize", 0f);
-            entity.WatchedAttributes.SetFloat("potionBaseHeight", 0f);
-            entity.WatchedAttributes.SetFloat("potionBaseWidth", 0f);
-            entity.WatchedAttributes.SetFloat("potionBaseEyeHeight", 0f);
+            entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
         }
 
         public static void ApplyNutritionPotion(EntityAgent byEntity, float retainedNutrition)

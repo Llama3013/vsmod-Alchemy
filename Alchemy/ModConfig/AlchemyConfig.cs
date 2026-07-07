@@ -134,6 +134,7 @@ namespace Alchemy
         public bool AllowVanillaContainerDrinking { get; set; } = false;
         public bool OnlyOnePotionAtATime { get; set; } = false;
         public bool AllowPotionRefresh { get; set; } = false;
+        public bool RetainEffectsOnDisconnect { get; set; } = true;
         public bool SideEffectStrengthMultiplier { get; set; } = true;
 
         public bool AllowPotionExclusivity { get; set; } = false;
@@ -169,6 +170,33 @@ namespace Alchemy
         public string PoisonPotionGroup { get; set; } = "none";
         public string GrowPotionGroup { get; set; } = "none";
         public string ShrinkPotionGroup { get; set; } = "none";
+
+        public bool ArcherPotionResetsEffects { get; set; } = false;
+        public bool HealingEffectPotionResetsEffects { get; set; } = false;
+        public bool HungerEnhancePotionResetsEffects { get; set; } = true;
+        public bool HungerSupressPotionResetsEffects { get; set; } = false;
+        public bool HunterPotionResetsEffects { get; set; } = false;
+        public bool LooterPotionResetsEffects { get; set; } = false;
+        public bool MeleePotionResetsEffects { get; set; } = false;
+        public bool MiningPotionResetsEffects { get; set; } = false;
+        public bool PoisonPotionResetsEffects { get; set; } = false;
+        public bool PredatorPotionResetsEffects { get; set; } = false;
+        public bool RegenPotionResetsEffects { get; set; } = false;
+        public bool ScentMaskPotionResetsEffects { get; set; } = false;
+        public bool SpeedPotionResetsEffects { get; set; } = false;
+        public bool VitalityPotionResetsEffects { get; set; } = false;
+        public bool RecallPotionResetsEffects { get; set; } = false;
+        public bool GlowPotionResetsEffects { get; set; } = false;
+        public bool WaterBreathePotionResetsEffects { get; set; } = false;
+        public bool ColdResistPotionResetsEffects { get; set; } = false;
+        public bool NutritionPotionResetsEffects { get; set; } = false;
+        public bool TemporalPotionResetsEffects { get; set; } = false;
+        public bool ReshapePotionResetsEffects { get; set; } = false;
+        public bool GrowPotionResetsEffects { get; set; } = false;
+        public bool ShrinkPotionResetsEffects { get; set; } = false;
+        public bool FallPotionResetsEffects { get; set; } = false;
+        public bool ClimbPotionResetsEffects { get; set; } = false;
+        public bool FlightPotionResetsEffects { get; set; } = false;
 
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;

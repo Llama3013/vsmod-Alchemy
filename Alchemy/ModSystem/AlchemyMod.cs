@@ -140,7 +140,12 @@ namespace Alchemy
         public override void StartClientSide(ICoreClientAPI api)
         {
             api.Event.LevelFinalize += () =>
+            {
                 AlchemyConfig.Loaded.ReadFromWorldConfig(api.World.Config);
+
+                if (api.World.Player?.Entity is EntityPlayer sizedPlayer)
+                    EntityPlayerSizePatch.ApplySize(sizedPlayer);
+            };
 
             api.Event.PlayerEntitySpawn += iPlayer =>
             {
@@ -167,8 +172,7 @@ namespace Alchemy
         public override void StartServerSide(ICoreServerAPI api)
         {
             api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
-            api.Event.PlayerJoin += OnPlayerReset;
-            api.Event.PlayerDisconnect += OnPlayerReset;
+            api.Event.PlayerDisconnect += OnPlayerDisconnect;
             api.Event.PlayerDeath += OnPlayerDeath;
 
             PotionRegistry.Init();
@@ -178,31 +182,60 @@ namespace Alchemy
         private static void OnPlayerReady(IServerPlayer player)
         {
             EntityPlayer entity = player.Entity;
-            if (entity == null)
+            if (entity?.Properties == null)
                 return;
 
             if (!entity.HasBehavior<EntityBehaviorPotionEffect>())
             {
                 entity.AddBehavior(new EntityBehaviorPotionEffect(entity));
             }
-            entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+
+            if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
+            {
+                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RestoreEffects();
+
+                float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
+                if (sizeDelta is > 0.001f or < -0.001f)
+                {
+                    entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
+                }
+            }
+            else
+            {
+                UtilityEffects.ResetPlayerSize(entity);
+                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+            }
         }
 
-        private static void OnPlayerReset(IServerPlayer player)
+        private static void OnPlayerDisconnect(IServerPlayer player)
         {
             EntityPlayer entity = player.Entity;
-            if (entity == null)
+            if (entity?.Properties == null)
                 return;
 
-            if (player.Entity != null)
+            if (!entity.HasBehavior<EntityBehaviorPotionEffect>())
+                return;
+
+            if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
+            {
+                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.Suspend();
+            }
+            else
+            {
                 UtilityEffects.ResetPlayerSize(entity);
-            if (entity.HasBehavior<EntityBehaviorPotionEffect>())
                 entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+            }
         }
 
         private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)
         {
-            OnPlayerReset(player);
+            EntityPlayer entity = player.Entity;
+            if (entity?.Properties == null)
+                return;
+
+            UtilityEffects.ResetPlayerSize(entity);
+            if (entity.HasBehavior<EntityBehaviorPotionEffect>())
+                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
         }
 
         public override void Dispose()
@@ -214,8 +247,7 @@ namespace Alchemy
             if (api is ICoreServerAPI sapi)
             {
                 sapi.Event.PlayerNowPlaying -= OnPlayerReady;
-                sapi.Event.PlayerJoin -= OnPlayerReset;
-                sapi.Event.PlayerDisconnect -= OnPlayerReset;
+                sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
                 sapi.Event.PlayerDeath -= OnPlayerDeath;
             }
         }

@@ -64,6 +64,7 @@ namespace Alchemy
         private static void ApplyArcherPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.ArcherPotionResetsEffects;
             ctx.AddEffect("rangedWeaponsAcc", cfg.ArcherPotionAcc);
             ctx.AddEffect("rangedWeaponsDamage", cfg.ArcherPotionDamage);
             ctx.AddEffect("rangedWeaponsSpeed", cfg.ArcherPotionSpeed);
@@ -92,6 +93,7 @@ namespace Alchemy
         private static void ApplyHealingEffectPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.HealingEffectPotionResetsEffects;
             ctx.AddEffect("healingeffectivness", cfg.HealingEffectPotionValue);
             ctx.Duration = cfg.HealingEffectPotionDuration;
             ctx.AddEffect("walkspeed", cfg.HealingEffectPotionWalkSpeed);
@@ -120,6 +122,7 @@ namespace Alchemy
         private static void ApplyHungerEnhancePotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.HungerEnhancePotionResetsEffects;
             ctx.AddEffect("hungerrate", cfg.HungerEnhancePotionValue);
             ctx.Duration = cfg.HungerEnhancePotionDuration;
             ctx.AddEffect("walkspeed", cfg.HungerEnhancePotionWalkSpeed);
@@ -148,6 +151,7 @@ namespace Alchemy
         private static void ApplyHungerSupressPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.HungerSupressPotionResetsEffects;
             ctx.AddEffect("hungerrate", cfg.HungerSupressPotionValue);
             ctx.Duration = cfg.HungerSupressPotionDuration;
             ctx.AddEffect("walkspeed", cfg.HungerSupressPotionWalkSpeed);
@@ -176,6 +180,7 @@ namespace Alchemy
         private static void ApplyHunterPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.HunterPotionResetsEffects;
             ctx.AddEffect("animalLootDropRate", cfg.HunterPotionAnimalDrop);
             ctx.AddEffect("animalSeekingRange", cfg.HunterPotionAnimalSeek);
             ctx.AddEffect("forageDropRate", cfg.HunterPotionForageDrop);
@@ -204,6 +209,7 @@ namespace Alchemy
         private static void ApplyLooterPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.LooterPotionResetsEffects;
             ctx.AddEffect("forageDropRate", cfg.LooterPotionForageDrop);
             ctx.AddEffect("rustyGearDropRate", cfg.LooterPotionGearDrop);
             ctx.AddEffect("vesselContentsDropRate", cfg.LooterPotionVesselContentDrop);
@@ -232,6 +238,7 @@ namespace Alchemy
         private static void ApplyMeleePotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.MeleePotionResetsEffects;
             ctx.AddEffect("meleeWeaponsDamage", cfg.MeleePotionDamage);
             ctx.Duration = cfg.MeleePotionDuration;
             ctx.AddEffect("walkspeed", cfg.MeleePotionWalkSpeed);
@@ -260,6 +267,7 @@ namespace Alchemy
         private static void ApplyMiningPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.MiningPotionResetsEffects;
             ctx.AddEffect("miningSpeedMul", cfg.MiningPotionSpeed);
             ctx.AddEffect("oreDropRate", cfg.MiningPotionOreDrop);
             ctx.Duration = cfg.MiningPotionDuration;
@@ -288,6 +296,7 @@ namespace Alchemy
         private static void ApplyPoisonPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.PoisonPotionResetsEffects;
             ctx.SetHealth(cfg.PoisonPotionHealth);
             ctx.TickSec = cfg.PoisonPotionTickSec;
             ctx.IgnoreArmour = cfg.PoisonPotionIgnoreArmour;
@@ -313,6 +322,7 @@ namespace Alchemy
         private static void ApplyPredatorPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.PredatorPotionResetsEffects;
             ctx.AddEffect("animalSeekingRange", cfg.PredatorPotionAnimalSeek);
             ctx.Duration = cfg.PredatorPotionDuration;
             ctx.AddEffect("walkspeed", cfg.PredatorPotionWalkSpeed);
@@ -341,6 +351,7 @@ namespace Alchemy
         private static void ApplyRegenPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.RegenPotionResetsEffects;
             ctx.SetHealth(cfg.RegenPotionHealth);
             ctx.TickSec = cfg.RegenPotionTickSec;
             ctx.IgnoreArmour = cfg.RegenPotionIgnoreArmour;
@@ -366,6 +377,7 @@ namespace Alchemy
         private static void ApplyScentMaskPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.ScentMaskPotionResetsEffects;
             ctx.AddEffect("animalSeekingRange", cfg.ScentMaskPotionAnimalSeek);
             ctx.Duration = cfg.ScentMaskPotionDuration;
             ctx.AddEffect("walkspeed", cfg.ScentMaskPotionWalkSpeed);
@@ -394,6 +406,7 @@ namespace Alchemy
         private static void ApplySpeedPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.SpeedPotionResetsEffects;
             ctx.AddEffect("walkspeed", cfg.SpeedPotionValue);
             ctx.Duration = cfg.SpeedPotionDuration;
             ctx.AddEffect("meleeWeaponsDamage", cfg.SpeedPotionMeleeDamage);
@@ -422,6 +435,7 @@ namespace Alchemy
         private static void ApplyVitalityPotion(PotionContext ctx)
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
+            ctx.ResetsEffects = cfg.VitalityPotionResetsEffects;
             ctx.AddEffect("maxhealthExtraPoints", cfg.VitalityPotionMaxHealth);
             ctx.Duration = cfg.VitalityPotionDuration;
             ctx.AddEffect("walkspeed", cfg.VitalityPotionWalkSpeed);
@@ -449,66 +463,78 @@ namespace Alchemy
 
         private static void ApplyGlowPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.GlowPotionResetsEffects;
             ctx.Duration = AlchemyConfig.Loaded.GlowPotionDuration;
             ctx.GlowStrength = AlchemyConfig.Loaded.GlowPotionStrength;
         }
 
         private static void ApplyWaterBreathePotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.WaterBreathePotionResetsEffects;
             ctx.WaterBreathe = true;
             ctx.Duration = AlchemyConfig.Loaded.WaterBreathePotionDuration;
         }
 
         private static void ApplyColdResistPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.ColdResistPotionResetsEffects;
             ctx.ColdResist = true;
             ctx.Duration = AlchemyConfig.Loaded.ColdResistPotionDuration;
         }
 
         private static void ApplyNutritionPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.NutritionPotionResetsEffects;
             ctx.RetainedNutrition = AlchemyConfig.Loaded.NutritionPotionRetainedNutrition;
         }
 
         private static void ApplyRecallPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.RecallPotionResetsEffects;
             ctx.Respawn = true;
         }
 
         private static void ApplyTemporalPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.TemporalPotionResetsEffects;
             ctx.TemporalStabilityGain = AlchemyConfig.Loaded.StabilityPotionTemporalStabilityGain;
         }
 
         private static void ApplyReshapePotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.ReshapePotionResetsEffects;
             ctx.Reshape = true;
         }
 
         private static void ApplyGrowPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.GrowPotionResetsEffects;
             ctx.SizeChange = AlchemyConfig.Loaded.GrowPotionSizeChange;
         }
 
         private static void ApplyShrinkPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.ShrinkPotionResetsEffects;
             ctx.SizeChange = AlchemyConfig.Loaded.ShrinkPotionSizeChange;
         }
 
         private static void ApplyFallPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.FallPotionResetsEffects;
             ctx.FallDamageReduction = AlchemyConfig.Loaded.FallPotionDamageReduction;
             ctx.Duration = AlchemyConfig.Loaded.FallPotionDuration;
         }
 
         private static void ApplyClimbPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.ClimbPotionResetsEffects;
             ctx.CanClimbAnywhere = true;
             ctx.Duration = AlchemyConfig.Loaded.ClimbPotionDuration;
         }
 
         private static void ApplyFlightPotion(PotionContext ctx)
         {
+            ctx.ResetsEffects = AlchemyConfig.Loaded.FlightPotionResetsEffects;
             ctx.CanFly = true;
             ctx.Duration = AlchemyConfig.Loaded.FlightPotionDuration;
         }

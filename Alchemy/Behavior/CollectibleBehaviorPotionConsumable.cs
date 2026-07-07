@@ -309,7 +309,8 @@ namespace Alchemy
             ref EnumHandling handling
         )
         {
-            api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
+            api?.ModLoader.GetModSystem<ModSystemProgressBar>()
+                ?.RemoveProgressbar(progressBarRender);
             progressBarRender = null;
             return base.OnHeldInteractCancel(
                 secondsUsed,
@@ -331,7 +332,8 @@ namespace Alchemy
             ref EnumHandling handling
         )
         {
-            api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
+            api?.ModLoader.GetModSystem<ModSystemProgressBar>()
+                ?.RemoveProgressbar(progressBarRender);
             progressBarRender = null;
 
             if (!TryGetPotionData(slot, out PotionData data))
@@ -356,19 +358,23 @@ namespace Alchemy
                 return;
             }
 
-            if (IsPotionAlreadyActive(byEntity, data))
+            float strengthMul = PotionConsumableLogic.GetStrengthMultiplier(data.Strength);
+            PotionContext ctx = PotionRegistry.BuildPotionDef(data.PotionId, strengthMul);
+            bool resetsEffects = ctx != null && ctx.ResetsEffects;
+
+            if (!resetsEffects && IsPotionAlreadyActive(byEntity, data))
             {
                 DenyDrink(byEntity, "alchemy:potion-already-active");
                 return;
             }
 
-            if (IsAnyPotionActiveAndLimited(byEntity))
+            if (!resetsEffects && IsAnyPotionActiveAndLimited(byEntity))
             {
                 DenyDrink(byEntity, "alchemy:potion-limit-active");
                 return;
             }
 
-            if (byEntity is EntityPlayer exclusivityPlayer)
+            if (!resetsEffects && byEntity is EntityPlayer exclusivityPlayer)
             {
                 string exclusivityBlock = PotionConsumableLogic.CheckPotionExclusivity(
                     exclusivityPlayer,
@@ -576,6 +582,8 @@ namespace Alchemy
                     dsc.AppendLine(Lang.Get("alchemy:potion-climb-effect"));
                 if (ctx.CanFly)
                     dsc.AppendLine(Lang.Get("alchemy:potion-flight-effect"));
+                if (ctx.ResetsEffects)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-purge-effect"));
 
                 if (dsc.Length == headerEnd)
                     dsc.Remove(headerStart, headerEnd - headerStart);

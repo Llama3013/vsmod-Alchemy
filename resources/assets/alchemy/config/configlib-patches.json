@@ -3277,7 +3277,7 @@
         "ingui": "alchemy:GlowPotionDuration",
         "weight": 40.2,
         "comment": "alchemy:GlowPotionDuration-Comment",
-        "default": 1000,
+        "default": 900,
         "range": {
           "min": 10,
           "max": 10000
@@ -3299,7 +3299,7 @@
         "ingui": "alchemy:WaterBreathePotionDuration",
         "weight": 41.2,
         "comment": "alchemy:WaterBreathePotionDuration-Comment",
-        "default": 1000,
+        "default": 900,
         "range": {
           "min": 10,
           "max": 10000
@@ -3310,7 +3310,7 @@
         "ingui": "alchemy:ColdResistPotionDuration",
         "weight": 41.6,
         "comment": "alchemy:ColdResistPotionDuration-Comment",
-        "default": 1000,
+        "default": 900,
         "range": {
           "min": 10,
           "max": 10000
@@ -3983,6 +3983,195 @@
         "ingui": "alchemy:AllowPotionRefresh",
         "weight": 4.32,
         "comment": "alchemy:AllowPotionRefresh-Comment",
+        "default": false
+      },
+      "RETAINEFFECTSONDISCONNECT": {
+        "name": "RetainEffectsOnDisconnect",
+        "ingui": "alchemy:RetainEffectsOnDisconnect",
+        "weight": 4.325,
+        "comment": "alchemy:RetainEffectsOnDisconnect-Comment",
+        "default": true
+      },
+      "ARCHERPOTIONRESETSEFFECTS": {
+        "name": "ArcherPotionResetsEffects",
+        "ingui": "alchemy:ArcherPotionResetsEffects",
+        "weight": 48.245,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "HEALINGEFFECTPOTIONRESETSEFFECTS": {
+        "name": "HealingEffectPotionResetsEffects",
+        "ingui": "alchemy:HealingEffectPotionResetsEffects",
+        "weight": 49.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "HUNGERENHANCEPOTIONRESETSEFFECTS": {
+        "name": "HungerEnhancePotionResetsEffects",
+        "ingui": "alchemy:HungerEnhancePotionResetsEffects",
+        "weight": 50.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": true
+      },
+      "HUNGERSUPRESSPOTIONRESETSEFFECTS": {
+        "name": "HungerSupressPotionResetsEffects",
+        "ingui": "alchemy:HungerSupressPotionResetsEffects",
+        "weight": 51.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "HUNTERPOTIONRESETSEFFECTS": {
+        "name": "HunterPotionResetsEffects",
+        "ingui": "alchemy:HunterPotionResetsEffects",
+        "weight": 52.24,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "LOOTERPOTIONRESETSEFFECTS": {
+        "name": "LooterPotionResetsEffects",
+        "ingui": "alchemy:LooterPotionResetsEffects",
+        "weight": 53.24,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "MELEEPOTIONRESETSEFFECTS": {
+        "name": "MeleePotionResetsEffects",
+        "ingui": "alchemy:MeleePotionResetsEffects",
+        "weight": 54.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "MININGPOTIONRESETSEFFECTS": {
+        "name": "MiningPotionResetsEffects",
+        "ingui": "alchemy:MiningPotionResetsEffects",
+        "weight": 55.26,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "POISONPOTIONRESETSEFFECTS": {
+        "name": "PoisonPotionResetsEffects",
+        "ingui": "alchemy:PoisonPotionResetsEffects",
+        "weight": 56.26,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "PREDATORPOTIONRESETSEFFECTS": {
+        "name": "PredatorPotionResetsEffects",
+        "ingui": "alchemy:PredatorPotionResetsEffects",
+        "weight": 57.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "REGENPOTIONRESETSEFFECTS": {
+        "name": "RegenPotionResetsEffects",
+        "ingui": "alchemy:RegenPotionResetsEffects",
+        "weight": 58.26,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "SCENTMASKPOTIONRESETSEFFECTS": {
+        "name": "ScentMaskPotionResetsEffects",
+        "ingui": "alchemy:ScentMaskPotionResetsEffects",
+        "weight": 59.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "SPEEDPOTIONRESETSEFFECTS": {
+        "name": "SpeedPotionResetsEffects",
+        "ingui": "alchemy:SpeedPotionResetsEffects",
+        "weight": 60.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "VITALITYPOTIONRESETSEFFECTS": {
+        "name": "VitalityPotionResetsEffects",
+        "ingui": "alchemy:VitalityPotionResetsEffects",
+        "weight": 61.265,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "GLOWPOTIONRESETSEFFECTS": {
+        "name": "GlowPotionResetsEffects",
+        "ingui": "alchemy:GlowPotionResetsEffects",
+        "weight": 62.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "WATERBREATHEPOTIONRESETSEFFECTS": {
+        "name": "WaterBreathePotionResetsEffects",
+        "ingui": "alchemy:WaterBreathePotionResetsEffects",
+        "weight": 63.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "COLDRESISTPOTIONRESETSEFFECTS": {
+        "name": "ColdResistPotionResetsEffects",
+        "ingui": "alchemy:ColdResistPotionResetsEffects",
+        "weight": 63.505,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "NUTRITIONPOTIONRESETSEFFECTS": {
+        "name": "NutritionPotionResetsEffects",
+        "ingui": "alchemy:NutritionPotionResetsEffects",
+        "weight": 64.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "RECALLPOTIONRESETSEFFECTS": {
+        "name": "RecallPotionResetsEffects",
+        "ingui": "alchemy:RecallPotionResetsEffects",
+        "weight": 65.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "TEMPORALPOTIONRESETSEFFECTS": {
+        "name": "TemporalPotionResetsEffects",
+        "ingui": "alchemy:TemporalPotionResetsEffects",
+        "weight": 66.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "RESHAPEPOTIONRESETSEFFECTS": {
+        "name": "ReshapePotionResetsEffects",
+        "ingui": "alchemy:ReshapePotionResetsEffects",
+        "weight": 67.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "GROWPOTIONRESETSEFFECTS": {
+        "name": "GrowPotionResetsEffects",
+        "ingui": "alchemy:GrowPotionResetsEffects",
+        "weight": 68.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "SHRINKPOTIONRESETSEFFECTS": {
+        "name": "ShrinkPotionResetsEffects",
+        "ingui": "alchemy:ShrinkPotionResetsEffects",
+        "weight": 69.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "FALLPOTIONRESETSEFFECTS": {
+        "name": "FallPotionResetsEffects",
+        "ingui": "alchemy:FallPotionResetsEffects",
+        "weight": 70.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "CLIMBPOTIONRESETSEFFECTS": {
+        "name": "ClimbPotionResetsEffects",
+        "ingui": "alchemy:ClimbPotionResetsEffects",
+        "weight": 71.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "FLIGHTPOTIONRESETSEFFECTS": {
+        "name": "FlightPotionResetsEffects",
+        "ingui": "alchemy:FlightPotionResetsEffects",
+        "weight": 72.05,
+        "comment": "alchemy:PotionResetsEffects-Comment",
         "default": false
       },
       "SIDEFFECTSTRENGTHMULTIPLIER": {

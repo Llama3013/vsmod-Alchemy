@@ -9,6 +9,7 @@ namespace Alchemy
 
         public float StrengthMul { get; set; }
         public int Duration { get; set; }
+        public bool ResetsEffects { get; set; }
 
         // Healing specific
         public float Health { get; set; }

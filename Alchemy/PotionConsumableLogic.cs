@@ -1094,6 +1094,25 @@ namespace Alchemy
                 return false;
             }
 
+            if (ctx.ResetsEffects)
+            {
+                behavior.Manager.RemoveAll();
+                UtilityEffects.ResetPlayerSize(playerEntity);
+            }
+
+            if (
+                Math.Abs(ctx.SizeChange) > float.Epsilon
+                && !UtilityEffects.CanApplySizeChange(playerEntity, ctx.SizeChange)
+            )
+            {
+                serverPlayer.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    Lang.Get(ctx.SizeChange > 0 ? "alchemy:size-at-max" : "alchemy:size-at-min"),
+                    EnumChatType.Notification
+                );
+                return false;
+            }
+
             if (!behavior.Manager.TryApplyPotion(data.PotionId, ctx, data.DisplayName))
             {
                 return false;

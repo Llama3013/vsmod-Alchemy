@@ -12,7 +12,7 @@ namespace Alchemy
         public readonly string EffectId = effectId;
         public readonly PotionContext Context = ctx;
 
-        public void Apply(EntityPlayer entity)
+        public void Apply(EntityPlayer entity, bool resume = false)
         {
             foreach (KeyValuePair<string, float> stat in Context.Effects)
             {
@@ -34,6 +34,9 @@ namespace Alchemy
                 else
                     entity.Stats.Set(stat.Key, ModCode, stat.Value, false);
             }
+            // Health change is applied via vanilla health system which already continues after restart so it is skipped
+            if (resume)
+                return;
             if (Context.TickSec > 0 && Math.Abs(Context.Health) > float.Epsilon)
             {
                 int ticks = Context.Duration / Context.TickSec;

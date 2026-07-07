@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 
 namespace Alchemy
 {
     public sealed class PotionEffectManager(EntityPlayer entity)
     {
+        private const string PersistKey = "alchemyEffects";
+
         private readonly EntityPlayer entity = entity;
         private readonly ICoreAPI api = entity.Api;
         private readonly Dictionary<string, ActiveEffect> active = [];
@@ -29,7 +32,7 @@ namespace Alchemy
                 && Math.Abs(activeEffect.Effect.Context.Health) > float.Epsilon
             );
 
-        public bool TryApplyPotion(string id, PotionContext ctx, string name)
+        public bool TryApplyPotion(string id, PotionContext ctx, string name, bool resume = false)
         {
             try
             {
@@ -50,21 +53,21 @@ namespace Alchemy
                 }
 
                 TempEffect effect = new(id, ctx);
-                effect.Apply(entity);
+                effect.Apply(entity, resume);
 
-                if (effect.Context.Respawn)
+                if (!resume && effect.Context.Respawn)
                 {
                     UtilityEffects.ApplyRecallPotion(entity.Player as IServerPlayer, entity, api);
                 }
-                if (effect.Context.Reshape)
+                if (!resume && effect.Context.Reshape)
                 {
                     UtilityEffects.ApplyReshapePotion(entity.Player as IServerPlayer);
                 }
-                if (Math.Abs(effect.Context.RetainedNutrition) > float.Epsilon)
+                if (!resume && Math.Abs(effect.Context.RetainedNutrition) > float.Epsilon)
                 {
                     UtilityEffects.ApplyNutritionPotion(entity, effect.Context.RetainedNutrition);
                 }
-                if (Math.Abs(effect.Context.TemporalStabilityGain) > float.Epsilon)
+                if (!resume && Math.Abs(effect.Context.TemporalStabilityGain) > float.Epsilon)
                 {
                     UtilityEffects.ApplyTemporalPotion(
                         entity,
@@ -75,7 +78,7 @@ namespace Alchemy
                 {
                     entity.WatchedAttributes.SetInt("glowStrength", effect.Context.GlowStrength);
                 }
-                if (Math.Abs(effect.Context.SizeChange) > float.Epsilon)
+                if (!resume && Math.Abs(effect.Context.SizeChange) > float.Epsilon)
                 {
                     UtilityEffects.ApplySizeChange(entity, effect.Context.SizeChange);
                 }
@@ -101,7 +104,8 @@ namespace Alchemy
                     && entity.Player is IServerPlayer flyPlayer
                 )
                 {
-                    originalFreeMove = flyPlayer.WorldData.FreeMove;
+                    if (!resume)
+                        originalFreeMove = flyPlayer.WorldData.FreeMove;
                     flyPlayer.WorldData.FreeMove = true;
                     flyPlayer.BroadcastPlayerData();
                 }
@@ -128,8 +132,12 @@ namespace Alchemy
                     return true;
                 }
 
-                active[id] = new ActiveEffect(effect, handle, false, name);
+                active[id] = new ActiveEffect(effect, handle, false, name)
+                {
+                    ApplyMs = entity.World.ElapsedMilliseconds,
+                };
                 entity.WatchedAttributes.SetLong(id, handle);
+                SaveEffectRecord(id, ctx, name);
 
                 return true;
             }
@@ -205,6 +213,13 @@ namespace Alchemy
 
             active.Remove(id);
             entity.WatchedAttributes.RemoveAttribute(id);
+
+            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute(PersistKey);
+            if (tree != null)
+            {
+                tree.RemoveAttribute(id);
+                entity.WatchedAttributes.MarkPathDirty(PersistKey);
+            }
         }
 
         public void RemoveAll()
@@ -226,6 +241,110 @@ namespace Alchemy
             {
                 entity.WatchedAttributes.RemoveAttribute(attr);
             }
+
+            entity.WatchedAttributes.RemoveAttribute(PersistKey);
+        }
+
+        public void Suspend()
+        {
+            if (active.Count == 0)
+                return;
+
+            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute(PersistKey);
+            long nowMs = entity.World.ElapsedMilliseconds;
+
+            foreach (KeyValuePair<string, ActiveEffect> pair in active)
+            {
+                ActiveEffect activeEffect = pair.Value;
+
+                if (activeEffect.IsTicking)
+                    entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
+                else
+                    entity.World.UnregisterCallback(activeEffect.ListenerId);
+
+                int remainingSec =
+                    activeEffect.Effect.Context.Duration
+                    - (int)((nowMs - activeEffect.ApplyMs) / 1000);
+                tree?.GetTreeAttribute(pair.Key)?.SetInt("remainingSec", Math.Max(remainingSec, 1));
+            }
+
+            if (tree != null)
+                entity.WatchedAttributes.MarkPathDirty(PersistKey);
+
+            active.Clear();
+        }
+
+        public void RestoreEffects()
+        {
+            ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute(PersistKey);
+            if (tree != null)
+            {
+                foreach (string id in tree.Select(pair => pair.Key).ToList())
+                {
+                    ITreeAttribute record = tree.GetTreeAttribute(id);
+                    int remainingSec = record?.GetInt("remainingSec") ?? 0;
+                    PotionContext ctx =
+                        remainingSec > 0
+                            ? PotionRegistry.BuildPotionDef(id, record.GetFloat("strengthMul", 1f))
+                            : null;
+
+                    if (ctx == null || ctx.Duration <= 0)
+                    {
+                        tree.RemoveAttribute(id);
+                        continue;
+                    }
+
+                    ctx.Duration = Math.Min(remainingSec, ctx.Duration);
+
+                    entity.WatchedAttributes.RemoveAttribute(id);
+
+                    if (ctx.CanFly)
+                        originalFreeMove = record.GetBool("origFreeMove");
+
+                    if (!TryApplyPotion(id, ctx, record.GetString("name", ""), resume: true))
+                        tree.RemoveAttribute(id);
+                }
+
+                entity.WatchedAttributes.MarkPathDirty(PersistKey);
+            }
+
+            CleanStaleState();
+        }
+
+        private void CleanStaleState()
+        {
+            List<string> staleAttributes =
+            [
+                .. entity.WatchedAttributes.Keys.Where(key =>
+                    key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase)
+                    && !active.ContainsKey(key)
+                ),
+            ];
+
+            foreach (string attr in staleAttributes)
+            {
+                entity.WatchedAttributes.RemoveAttribute(attr);
+            }
+
+            if (!active.ContainsKey("glowpotionid"))
+                entity.WatchedAttributes.RemoveAttribute("glowStrength");
+
+            float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
+            if (Math.Abs(sizeDelta) < 0.001f)
+                UtilityEffects.ResetPlayerSize(entity);
+        }
+
+        private void SaveEffectRecord(string id, PotionContext ctx, string name)
+        {
+            ITreeAttribute tree = entity.WatchedAttributes.GetOrAddTreeAttribute(PersistKey);
+            ITreeAttribute record = tree.GetOrAddTreeAttribute(id);
+            record.SetString("name", name ?? "");
+            record.SetFloat("strengthMul", ctx.StrengthMul);
+            record.SetInt("remainingSec", ctx.Duration);
+            record.SetLong("appliedAt", entity.World.ElapsedMilliseconds);
+            if (ctx.CanFly)
+                record.SetBool("origFreeMove", originalFreeMove);
+            entity.WatchedAttributes.MarkPathDirty(PersistKey);
         }
     }
 
@@ -237,5 +356,6 @@ namespace Alchemy
     )
     {
         public int Elapsed;
+        public long ApplyMs;
     }
 }

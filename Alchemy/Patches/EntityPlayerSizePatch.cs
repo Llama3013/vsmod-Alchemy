@@ -1,6 +1,7 @@
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.MathTools;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
@@ -34,7 +35,12 @@ namespace Alchemy
                 "potionBaseEyeHeight",
                 baseHeight * 0.9054f
             );
-            float newHeight = baseHeight + delta;
+
+            float newHeight = GameMath.Clamp(
+                baseHeight + delta,
+                AlchemyConfig.Loaded.GrowShrinkMinHeight,
+                AlchemyConfig.Loaded.GrowShrinkMaxHeight
+            );
             float scale = newHeight / baseHeight;
 
             // Scale width proportionally from the snapshotted base width so both dimensions
