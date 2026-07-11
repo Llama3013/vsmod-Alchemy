@@ -1,0 +1,88 @@
+{
+  "code": "claythrowableflask",
+
+  "classByType": {
+    "*-fired": "BlockThrowablePotionFlask"
+  },
+  "storageFlags": 273,
+  "variantgroups": [
+    { "code": "color", "states": ["blue", "fire", "black", "brown", "cream", "earthyorange", "gray", "orange", "red", "tan"] },
+    { "code": "state", "states": ["fired"] }
+  ],
+  "shape": { "base": "alchemy:block/clay/throwable-claythrowableflask" },
+  "textures": { "glass": { "base": "game:block/clay/hardened/{color}" } },
+  "behaviors": [
+    { "name": "Unplaceable" },
+    {
+      "name": "Throwable",
+      "properties": {
+        "thrownProjectileCode": "alchemy:thrownpotionflask",
+        "projectileSpeed": 0.33,
+        "accuracy": 0.75,
+        "windupTimeSec": 0.35,
+        "weight": 0.25,
+        "damage": 0.5,
+        "damageType": "BluntAttack",
+        "dropOnImpactChance": 0.0,
+        "damageStackOnImpact": false,
+        "collectible": false
+      }
+    }
+  ],
+  "attributes": {
+    "handbook": {
+      "groupBy": ["claythrowableflask-*-{state}"]
+    },
+    "liquidContainerPropsByType": {
+      "*-fired": {
+        "capacityLitres": 0.25,
+        "transferSizeLitres": 0.25,
+        "drinkPortionSize": 0.25,
+        "emptyShapeLoc": "alchemy:shapes/block/clay/throwable-claythrowableflask",
+        "opaqueContentShapeLoc": "game:shapes/block/basic/nothing",
+        "liquidContentShapeLoc": "game:shapes/block/basic/nothing"
+      }
+    },
+    "shelvable": true,
+    "displaycaseable": true,
+    "onshelfTransform": {
+      "translation": { "x": 0.1, "y": -0.125, "z": 0 },
+      "scale": 0.75
+    }
+  },
+  "materialDensity": 200,
+  "doNotRenderAtLod2": true,
+  "creativeinventory": { "general": ["*-blue-fired"], "decorative": ["*"], "alchemy": ["*"] },
+  "blockmaterial": "Ceramic",
+  "replaceable": 900,
+  "resistance": 1.5,
+  "liquidSelectable": 1,
+  "lightAbsorption": 1,
+  "maxStackSize": 16,
+  "sounds": {
+    "walk": "game:walk/stone",
+    "break": "game:block/ceramicbreak",
+    "hit": "game:block/ceramichit"
+  },
+  "sidesolid": { "all": false },
+  "sideopaque": { "all": false },
+  "emitsideao": { "all": false },
+  "collisionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.2375, "z2": 0.625 },
+  "selectionbox": { "x1": 0.375, "y1": 0, "z1": 0.375, "x2": 0.625, "y2": 0.2375, "z2": 0.625 },
+  "guiTransform": {
+    "translation": { "x": 3.8400612, "y": 8.821874, "z": 0 },
+    "rotation": { "x": 14, "y": 4, "z": -92 },
+    "origin": { "x": 0.5, "y": 0.175, "z": 0.5 },
+    "scale": 2.5
+  },
+  "fpHandTransform": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1.5 },
+  "tpHandTransform": {
+    "translation": { "x": -1.1982889, "y": -0.11793123, "z": -1.023327 },
+    "rotation": { "x": 0, "y": 0, "z": -90 },
+    "origin": { "x": 0.5, "y": 0.05, "z": 0.51 },
+    "scale": 0.5
+  },
+  "groundTransform": {
+    "scale": 2.5
+  }
+}

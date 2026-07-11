@@ -1,3 +1,14 @@
 {
-    "dotnet.defaultSolution": "Alchemy.sln"
+    "dotnet.defaultSolution": "Alchemy.sln",
+    "cSpell.words": [
+        "Accum",
+        "blockhelp",
+        "Cuboidf",
+        "Datastructures",
+        "Firepit",
+        "Hotbar",
+        "Itemstack",
+        "Itemstacks",
+        "Vintagestory"
+    ]
 }

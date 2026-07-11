@@ -1,25 +1,18 @@
 using System;
 using System.Collections.Generic;
 using Vintagestory.API.Common;
-using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    public sealed class TempEffect
+    public sealed class TempEffect(string effectId, PotionContext ctx)
     {
-        private const string modCode = "potionmod";
+        private string ModCode => "potionmod-" + EffectId;
 
-        public readonly string EffectId;
-        public readonly PotionContext Context;
+        public readonly string EffectId = effectId;
+        public readonly PotionContext Context = ctx;
 
-        public TempEffect(string effectId, PotionContext ctx)
-        {
-            EffectId = effectId;
-            Context = ctx;
-        }
-
-        public void Apply(EntityPlayer entity)
+        public void Apply(EntityPlayer entity, bool resume = false)
         {
             foreach (KeyValuePair<string, float> stat in Context.Effects)
             {
@@ -35,64 +28,60 @@ namespace Alchemy
                     }
                     baseMax += entity.Stats.GetBlended("maxhealthExtraPoints") - 1;
                     float extraHealth = baseMax * stat.Value;
-                    entity.Stats.Set(stat.Key, modCode, extraHealth, false);
+                    entity.Stats.Set(stat.Key, ModCode, extraHealth, false);
                     ebh.MarkDirty();
                 }
                 else
-                    entity.Stats.Set(stat.Key, modCode, stat.Value, false);
+                    entity.Stats.Set(stat.Key, ModCode, stat.Value, false);
             }
-            // This will apply health at the start of a potion for ensure no tick health potions still function and will provide instant health from potion
-            ApplyHealth(entity);
+            // Health change is applied via vanilla health system which already continues after restart so it is skipped
+            if (resume)
+                return;
+            if (Context.TickSec > 0 && Math.Abs(Context.Health) > float.Epsilon)
+            {
+                int ticks = Context.Duration / Context.TickSec;
+                entity.ReceiveDamage(
+                    new DamageSource
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
+                        Duration = TimeSpan.FromSeconds(Context.Duration),
+                        TicksPerDuration = ticks,
+                    },
+                    Math.Abs(Context.Health * ticks)
+                );
+            }
+            else
+            {
+                ApplyHealth(entity);
+            }
         }
 
         public void Remove(EntityPlayer entity)
         {
             foreach (string stat in Context.Effects.Keys)
             {
-                entity.Stats.Remove(stat, modCode);
+                entity.Stats.Remove(stat, ModCode);
                 if (stat == "maxhealthExtraPoints")
                     entity.GetBehavior<EntityBehaviorHealth>().MarkDirty();
             }
         }
 
-        public void Tick(EntityPlayer entity)
-        {
-            if (Context.TickSec <= 0)
-                return;
-            ApplyHealth(entity);
-        }
+        public void Tick(EntityPlayer _) { }
 
         private void ApplyHealth(EntityPlayer entity)
         {
             if (Math.Abs(Context.Health) <= float.Epsilon)
                 return;
 
-            float wearableHealEffect = 0f;
-
-            if (Context.IgnoreArmour)
-            {
-                ITreeAttribute statsTree = entity.WatchedAttributes
-                    .GetTreeAttribute("stats")
-                    ?.GetTreeAttribute("healingeffectivness");
-
-                if (statsTree != null)
-                    wearableHealEffect = statsTree.GetFloat("wearablemod");
-
-                if (Math.Abs(wearableHealEffect) > float.Epsilon)
-                    entity.Stats.Set("healingeffectivness", "wearablemod", 0f, false);
-            }
-
             entity.ReceiveDamage(
                 new DamageSource
                 {
                     Source = EnumDamageSource.Internal,
-                    Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison
+                    Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
                 },
                 Math.Abs(Context.Health)
             );
-
-            if (Math.Abs(wearableHealEffect) > float.Epsilon)
-                entity.Stats.Set("healingeffectivness", "wearablemod", wearableHealEffect, false);
         }
     }
 }

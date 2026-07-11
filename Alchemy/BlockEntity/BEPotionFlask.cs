@@ -6,13 +6,15 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace Alchemy.BlockEntity
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class BlockEntityPotionFlask : BlockEntityLiquidContainer
     {
         public override string InventoryClassName => "potionflask";
 
-        private Block.BlockPotionFlask ownBlock;
+        private BlockPotionFlask ownBlock;
         private MeshData currentMesh;
 
         public BlockEntityPotionFlask()
@@ -24,7 +26,7 @@ namespace Alchemy.BlockEntity
         {
             base.Initialize(api);
 
-            ownBlock = Block as Block.BlockPotionFlask;
+            ownBlock = Block as BlockPotionFlask;
             if (Api.Side == EnumAppSide.Client)
             {
                 currentMesh = GenMesh();

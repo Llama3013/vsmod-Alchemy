@@ -1,0 +1,28 @@
+{
+	"editor": {
+		"allAngles": false,
+		"entityTextureMode": false
+	},
+	"textureWidth": 16,
+	"textureHeight": 16,
+	"textureSizes": {
+	},
+	"textures": {
+	},
+	"elements": [
+		{
+			"name": "Liquid",
+			"from": [ 3.0, 0.0, 3.0 ],
+			"to": [ 13.0, 0.0, 13.0 ],
+			"renderPass": 4,
+			"rotationOrigin": [ 8.0, 0.0, 8.0 ],
+			"faces": {
+				"north": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 0.5 ], "enabled": false },
+				"east": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 0.5 ], "enabled": false },
+				"south": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 0.5 ], "enabled": false },
+				"west": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 0.5 ], "enabled": false },
+				"up": { "texture": "#liquid", "uv": [ 0.0, 0.0, 10.0, 10.0 ] },
+				"down": { "texture": "#null", "uv": [ 0.0, 0.0, 10.0, 10.0 ], "enabled": false }
+			}
+		}
+	]}

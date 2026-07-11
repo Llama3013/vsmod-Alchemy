@@ -6,10 +6,7 @@
         "type": "item",
         "code": "game:plank-*",
         "name": "wood",
-        "skipVariants": [
-          "aged",
-          "veryaged"
-        ]
+        "skipVariants": [ "agedacacia", "agedebony", "rottenebony" ]
       },
       "H": {
         "type": "item",

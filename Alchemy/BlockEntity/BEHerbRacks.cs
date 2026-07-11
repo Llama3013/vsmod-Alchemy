@@ -7,7 +7,9 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
-namespace Alchemy.BlockEntity
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     public class BlockEntityHerbRacks : BlockEntityDisplay
     {

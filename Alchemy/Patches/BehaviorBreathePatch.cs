@@ -2,7 +2,9 @@ using HarmonyLib;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     //This harmony patch allows the water breathing potion to work
     [HarmonyPatch(typeof(EntityBehaviorBreathe), "Oxygen", MethodType.Getter)]
@@ -17,6 +19,10 @@ namespace Alchemy.Patches
             ITreeAttribute oxygenTree = __instance.entity.WatchedAttributes.GetTreeAttribute(
                 "oxygen"
             );
+            if (oxygenTree == null)
+            {
+                return;
+            }
             float currOxygen = oxygenTree.GetFloat("maxoxygen");
             __result = currOxygen;
         }

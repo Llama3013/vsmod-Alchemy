@@ -1,6 +1,9 @@
 {
   "code": "alchemy:potionteaportion",
-  "ingredients": [ { "type": "item", "code": "alchemy:potionbase-basic", "quantity": 1 }, { "type": "item", "code": "game:waterportion", "litres": 2 } ],
+  "sealHours": 24,
+  "ingredients": [
+    { "type": "item", "code": "alchemy:potionbase-basic", "quantity": 1 },
+    { "type": "item", "code": "game:waterportion", "litres": 2 }
+  ],
   "output": { "type": "item", "code": "alchemy:potionteaportion", "litres": 2 }
 }
-

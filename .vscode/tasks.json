@@ -14,6 +14,34 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build overhaullib dependency",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "E:/COOOOODDDDIIINNNGGG/vsmods/Overhaullib-Legacy/Overhaullib.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "update SoftDependency",
+            "type": "shell",
+            "command": "Copy-Item",
+            "args": [
+                "-Path",
+                "E:/COOOOODDDDIIINNNGGG/vsmods/Overhaullib-Legacy/bin/Release/Mods/overhaulliblegacycompat/OverhaullibLegacyCompat.dll",
+                "-Destination",
+                "${workspaceFolder}/SoftDependency/",
+                "-Force"
+            ],
+            "dependsOn": [
+                "build overhaullib dependency"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "package",
             "command": "dotnet",
             "type": "process",

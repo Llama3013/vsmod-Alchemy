@@ -1,23 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alchemy.Item;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
-using Vintagestory.API.Server;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace Alchemy.Block
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     //Add perish time to potions but potion flasks have low perish rates or do not perish
-    public class BlockPotionFlask : BlockLiquidContainerTopOpened
+    public class BlockPotionFlask : BlockLiquidContainerTopOpened, IContainedMeshSource
     {
-        private const string potionInfo = "potioninfo";
-
         #region Render
 
         public override void OnBeforeRender(
@@ -31,7 +26,11 @@ namespace Alchemy.Block
                 return;
 
             ItemStack contentStack = GetContent(itemstack);
-            if (contentStack == null || contentStack.StackSize <= 0 || contentStack?.Collectible?.Code == null)
+            if (
+                contentStack == null
+                || contentStack.StackSize <= 0
+                || contentStack?.Collectible?.Code == null
+            )
                 return;
 
             Dictionary<int, MultiTextureMeshRef> meshrefs;
@@ -42,8 +41,7 @@ namespace Alchemy.Block
             }
             else
             {
-                capi.ObjectCache[meshRefsCacheKey] = meshrefs =
-                    [];
+                capi.ObjectCache[meshRefsCacheKey] = meshrefs = [];
             }
 
             int hashcode = GetStackCacheHashCode(contentStack);
@@ -58,8 +56,17 @@ namespace Alchemy.Block
         }
 
         private MeshData origContainerMesh;
-        private Shape contentShape;
-        private Shape liquidContentShape;
+        private const float LiquidSurfaceAlpha = 0.8f;
+
+        // I need this for potion flasks to render the liquid contents while placed in ground storage otherwise it will use the base GenMesh which will look full.
+        public new MeshData GenMesh(
+            ItemSlot slot,
+            ITextureAtlasAPI targetAtlas,
+            BlockPos atBlockPos
+        )
+        {
+            return GenMesh(api as ICoreClientAPI, GetContent(slot.Itemstack), atBlockPos);
+        }
 
         public new MeshData GenMesh(
             ICoreClientAPI capi,
@@ -92,6 +99,9 @@ namespace Alchemy.Block
 
             MeshData containerMesh = origContainerMesh.Clone();
 
+            if (Code.Path.Contains("clay"))
+                return containerMesh;
+
             if (contentStack != null)
             {
                 WaterTightContainableProps props = GetContainableProps(contentStack);
@@ -107,160 +117,73 @@ namespace Alchemy.Block
                 if (props.Texture == null || this == null)
                     return containerMesh;
                 FlaskTextureSource contentSource = new(capi, contentStack, props.Texture, this);
-                Shape shape = props.IsOpaque ? contentShape : liquidContentShape;
-                AssetLocation loc = props.IsOpaque ? contentShapeLoc : liquidContentShapeLoc;
-                if (shape == null)
-                {
-                    shape = Vintagestory.API.Common.Shape.TryGet(
-                        capi,
-                        loc.WithPathAppendixOnce(".json").WithPathPrefixOnce("shapes/")
-                    );
 
-                    if (props.IsOpaque)
-                        contentShape = shape;
+                float level = contentStack.StackSize / props.ItemsPerLitre;
+                Shape shape;
+                if (Code.Path.Contains("flask-normal"))
+                {
+                    if (level > 0 && level <= 0.25)
+                    {
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
+                            .ToObject<Shape>();
+                    }
+                    else if (level <= 0.5)
+                    {
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
+                            .ToObject<Shape>();
+                    }
+                    else if (level < 1)
+                    {
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
+                            .ToObject<Shape>();
+                    }
                     else
-                        liquidContentShape = shape;
+                    {
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/flask-liquid.json")
+                            .ToObject<Shape>();
+                    }
                 }
-                //If a shape is found and a block position is set then use base game tesselation
-                if (shape != null && forBlockPos != null)
+                else if (Code.Path.Contains("flask-round"))
                 {
-                    capi.Tesselator.TesselateShape(
-                        GetType().Name,
-                        shape,
-                        out MeshData contentMesh,
-                        contentSource,
-                        new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ),
-                        props.GlowLevel
-                    );
-
-                    contentMesh.Translate(
-                        0,
-                        GameMath.Min(
-                            liquidMaxYTranslate,
-                            contentStack.StackSize / props.ItemsPerLitre * liquidYTranslatePerLitre
-                        ),
-                        0
-                    );
-
-                    if (props.ClimateColorMap != null)
+                    if (level < 1)
                     {
-                        int col;
-                        if (forBlockPos != null)
-                        {
-                            col = capi.World.ApplyColorMapOnRgba(
-                                props.ClimateColorMap,
-                                null,
-                                ColorUtil.WhiteArgb,
-                                forBlockPos.X,
-                                forBlockPos.Y,
-                                forBlockPos.Z,
-                                false
-                            );
-                        }
-                        else
-                        {
-                            col = capi.World.ApplyColorMapOnRgba(
-                                props.ClimateColorMap,
-                                null,
-                                ColorUtil.WhiteArgb,
-                                196,
-                                128,
-                                false
-                            );
-                        }
-
-                        byte[] rgba = ColorUtil.ToBGRABytes(col);
-
-                        for (int i = 0; i < contentMesh.Rgba.Length; i++)
-                        {
-                            contentMesh.Rgba[i] = (byte)((contentMesh.Rgba[i] * rgba[i % 4]) / 255);
-                        }
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid-1.json")
+                            .ToObject<Shape>();
                     }
-
-                    for (int i = 0; i < contentMesh.FlagsCount; i++)
+                    else
                     {
-                        contentMesh.Flags[i] = contentMesh.Flags[i] & ~(1 << 12); // Remove water waving flag
+                        shape = capi
+                            .Assets.TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
+                            .ToObject<Shape>();
                     }
-
-                    containerMesh.AddMeshData(contentMesh);
-
-                    // Water flags
-                    if (forBlockPos != null)
-                    {
-                        containerMesh.CustomInts = new(containerMesh.FlagsCount)
-                        {
-                            Count = containerMesh.FlagsCount
-                        };
-                        containerMesh.CustomInts.Values.Fill(0x4000000); // light foam only
-
-                        containerMesh.CustomFloats = new(containerMesh.FlagsCount * 2)
-                        {
-                            Count = containerMesh.FlagsCount * 2
-                        };
-                    }
-                    return containerMesh;
+                }
+                else if (Code.Path.Contains("throwableflask"))
+                {
+                    shape = capi
+                        .Assets.TryGet(
+                            "alchemy:shapes/block/glass/throwable-roundflask-liquid.json"
+                        )
+                        .ToObject<Shape>();
                 }
                 else
                 {
-                    //This is need to render flasks with liquid in inventory
-                    float level = contentStack.StackSize / props.ItemsPerLitre;
-                    if (Code.Path.Contains("flask-normal"))
-                    {
-                        if (level > 0 && level <= 0.25)
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-1.json")
-                                .ToObject<Shape>();
-                        }
-                        else if (level <= 0.5)
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-2.json")
-                                .ToObject<Shape>();
-                        }
-                        else if (level < 1)
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid-3.json")
-                                .ToObject<Shape>();
-                        }
-                        else
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/flask-liquid.json")
-                                .ToObject<Shape>();
-                        }
-                    }
-                    else if (Code.Path.Contains("flask-round"))
-                    {
-                        if (level < 1)
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/roundflask-liquid-1.json")
-                                .ToObject<Shape>();
-                        }
-                        else
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/roundflask-liquid.json")
-                                .ToObject<Shape>();
-                        }
-                    }
-                    else
-                    {
-                        if (level > 0)
-                        {
-                            shape = capi.Assets
-                                .TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
-                                .ToObject<Shape>();
-                        }
-                    }
+                    shape =
+                        level > 0
+                            ? capi
+                                .Assets.TryGet("alchemy:shapes/block/glass/tubeflask-liquid.json")
+                                .ToObject<Shape>()
+                            : null;
                 }
+
                 if (shape == null)
                 {
                     capi.World.Logger.Error(
-                        "Content shape {0} not found. Contents of liquid container {1} will be invisible.",
-                        loc,
+                        "Content shape not found. Contents of liquid container {0} will be invisible.",
                         Code
                     );
                     return containerMesh;
@@ -271,8 +194,33 @@ namespace Alchemy.Block
                     shape,
                     out containerMesh,
                     contentSource,
-                    new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ)
+                    new Vec3f(Shape.rotateX, Shape.rotateY, Shape.rotateZ),
+                    props.GlowLevel
                 );
+
+                if (forBlockPos == null && !props.IsOpaque)
+                {
+                    TextureAtlasPosition contentPos = contentSource["content"];
+                    if (contentPos != null)
+                    {
+                        float[] uv = containerMesh.Uv;
+                        byte[] rgba = containerMesh.Rgba;
+                        for (int i = 0; i < containerMesh.VerticesCount; i++)
+                        {
+                            float u = uv[i * 2];
+                            float v = uv[i * 2 + 1];
+                            if (
+                                u >= contentPos.x1
+                                && u <= contentPos.x2
+                                && v >= contentPos.y1
+                                && v <= contentPos.y2
+                            )
+                            {
+                                rgba[i * 4 + 3] = (byte)(rgba[i * 4 + 3] * LiquidSurfaceAlpha);
+                            }
+                        }
+                    }
+                }
             }
 
             return containerMesh;
@@ -311,73 +259,101 @@ namespace Alchemy.Block
                 }
             }
 
-            return baseInteractions;
-        }
+            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
+                return baseInteractions;
 
+            return
+            [
+                .. baseInteractions,
+                new WorldInteraction
+                {
+                    ActionLangCode = "alchemy:heldhelp-coat-weapon",
+                    MouseButton = EnumMouseButton.Right,
+                    HotKeyCodes = ["shift"],
+                },
+            ];
+        }
 
         #endregion Render
 
         #region Interaction
 
+        // This is needed as a workaround for now because there is no such OnHeldIdle override on behaviors and hopefully it will be implemented into VS eventually
+        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
+        {
+            base.OnHeldIdle(slot, byEntity);
+            foreach (CollectibleBehavior bh in CollectibleBehaviors)
+                if (bh is PotionCoatSourceBehavior coat)
+                {
+                    coat.CoatingIdle(slot, byEntity);
+                    return;
+                }
+        }
+
         public override void OnHeldInteractStart(
-            ItemSlot itemslot,
+            ItemSlot slot,
             EntityAgent byEntity,
             BlockSelection blockSel,
             EntitySelection entitySel,
             bool firstEvent,
-            ref EnumHandHandling handHandling
+            ref EnumHandHandling handling
         )
         {
             if (blockSel != null && byEntity.Controls.CtrlKey && byEntity.Controls.ShiftKey)
             {
                 byEntity.Controls.ShiftKey = false;
-                base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
+
+                base.OnHeldInteractStart(
+                    slot,
+                    byEntity,
+                    blockSel,
+                    entitySel,
+                    firstEvent,
+                    ref handling
+                );
+
                 return;
-            }
-            
-            ItemStack contentStack = GetContent(itemslot.Itemstack);
-            if (contentStack != null && !byEntity.Controls.ShiftKey)
-            {
-                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
-                if (potion?.Exists ?? false)
-                {
-                    string potionId = potion["potionId"].AsString();
-                    if (potionId == "recallpotionid" && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path != null && WildcardUtil.Match("boat-sailed-*", byEntity.MountedOn.MountSupplier.OnEntity.Code.Path) && byEntity.World.Side == EnumAppSide.Server)
-                    {
-                        EntityPlayer playerEntity = byEntity as EntityPlayer;
-                        IServerPlayer serverPlayer = playerEntity?.Player as IServerPlayer;
-                        serverPlayer.SendMessage(
-                            GlobalConstants.InfoLogChatGroup,
-                            Lang.Get("alchemy:boat-block"),
-                            EnumChatType.Notification
-                        );
-                        return;
-                    }
-                    /* This checks if the potion effect callback is on */
-                    if (
-                        !string.IsNullOrWhiteSpace(potionId)
-                        && byEntity.WatchedAttributes.GetLong(potionId) == 0
-                    )
-                    {
-                        byEntity.World.RegisterCallback(
-                            (dt) => playEatSound(byEntity, "drink", 1),
-                            500
-                        );
-                        byEntity.AnimManager?.StartAnimation("eat");
-                        handHandling = EnumHandHandling.PreventDefault;
-                        return;
-                    }
-                }
             }
 
             // Prevent accidental spilling unless CTRL + SHIFT are both held
             if (blockSel != null && byEntity.Controls.CtrlKey && !byEntity.Controls.ShiftKey)
             {
-                // We are sprinting but NOT sneaking → block spill
-                handHandling = EnumHandHandling.PreventDefaultAction;
+                handling = EnumHandHandling.PreventDefaultAction;
                 return;
             }
-            base.OnHeldInteractStart(itemslot, byEntity, blockSel, entitySel, firstEvent, ref handHandling);
+
+            // BlockLiquidContainerTopOpened intercepts blockSel interactions for liquid transfer
+            // and does not dispatch CollectibleBehaviors. Explicitly run the consumable behavior
+            // first so drinking takes priority over liquid transfer when the flask holds a potion.
+            if (blockSel != null && !byEntity.Controls.ShiftKey)
+            {
+                foreach (CollectibleBehavior bh in CollectibleBehaviors)
+                {
+                    if (bh is PotionConsumableBehavior)
+                    {
+                        EnumHandling bhHandling = EnumHandling.PassThrough;
+                        bh.OnHeldInteractStart(
+                            slot,
+                            byEntity,
+                            blockSel,
+                            entitySel,
+                            firstEvent,
+                            ref handling,
+                            ref bhHandling
+                        );
+                        if (bhHandling != EnumHandling.PassThrough)
+                            return;
+                        break;
+                    }
+                }
+            }
+
+            base.OnHeldInteractStart(slot, byEntity, blockSel, entitySel, firstEvent, ref handling);
+        }
+
+        public override string GetItemDescText()
+        {
+            return Lang.Get("alchemy:blockdesc-potionflask", CapacityLitres) + "\n";
         }
 
         public override void TryMergeStacks(ItemStackMergeOperation op)
@@ -395,158 +371,40 @@ namespace Alchemy.Block
             base.TryMergeStacks(op);
         }
 
-        public override bool OnHeldInteractStep(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            ItemStack contentStack = GetContent(slot.Itemstack);
-            if (contentStack != null && !byEntity.Controls.ShiftKey)
-            {
-                JsonObject potion = contentStack.ItemAttributes?[potionInfo];
-                if (potion?.Exists ?? false)
-                {
-                    Vec3d pos = byEntity.Pos.AheadCopy(0.4f).XYZ;
-                    pos.X += byEntity.LocalEyePos.X;
-                    pos.Y += byEntity.LocalEyePos.Y - 0.4f;
-                    pos.Z += byEntity.LocalEyePos.Z;
-
-                    if (secondsUsed > 0.5f && (int)(30 * secondsUsed) % 7 == 1)
-                    {
-                        byEntity.World.SpawnCubeParticles(
-                            pos,
-                            slot.Itemstack,
-                            0.3f,
-                            4,
-                            0.5f,
-                            (byEntity as EntityPlayer)?.Player
-                        );
-                    }
-
-                    if (byEntity.World is IClientWorldAccessor)
-                    {
-                        ModelTransform tf = new();
-                        tf.Origin.Set(1.1f, 0.5f, 0.5f);
-                        tf.EnsureDefaultValues();
-
-                        tf.Translation.X -= Math.Min(1.7f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Translation.Y += Math.Min(0.4f, secondsUsed * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Scale = 1 + Math.Min(0.5f, secondsUsed * 4 * 1.8f) / FpHandTransform.ScaleXYZ.X;
-                        tf.Rotation.X += Math.Min(40f, secondsUsed * 350 * 0.75f) / FpHandTransform.ScaleXYZ.X;
-
-                        if (secondsUsed > 0.5f)
-                        {
-                            tf.Translation.Y += GameMath.Sin(30 * secondsUsed) / 10 / FpHandTransform.ScaleXYZ.Y;
-                        }
-
-                        return secondsUsed <= 1.5f;
-                    }
-
-                    // Let the client decide when he is done eating
-                    return true;
-                }
-            }
-
-            return base.OnHeldInteractStep(secondsUsed, slot, byEntity, blockSel, entitySel);
-        }
-
-        public override void OnHeldInteractStop(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            if (
-                HandleCollectibleBehaviorsForDrink(secondsUsed, slot, byEntity, blockSel, entitySel)
-            )
-                return;
-
-            ItemStack contentStack = GetContent(slot.Itemstack);
-            if (
-                secondsUsed > 1.45f && contentStack.Item is ItemPotion potion && potion.TryProcessPotionEffects(byEntity, contentStack)) {
-                    EntityPlayer playerEntity = byEntity as EntityPlayer;
-                    SplitStackAndPerformAction(
-                        playerEntity,
-                        slot,
-                        stack => TryTakeLiquid(stack, 0.25f)?.StackSize ?? 0
-                    );
-                    slot.MarkDirty();
-                    playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
-            }
-
-            base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel);
-        }
-
-        private bool HandleCollectibleBehaviorsForDrink(
-            float secondsUsed,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            BlockSelection blockSel,
-            EntitySelection entitySel
-        )
-        {
-            bool preventDefault = false;
-
-            foreach (CollectibleBehavior behavior in CollectibleBehaviors)
-            {
-                EnumHandling handled = EnumHandling.PassThrough;
-
-                behavior.OnHeldInteractStop(
-                    secondsUsed,
-                    slot,
-                    byEntity,
-                    blockSel,
-                    entitySel,
-                    ref handled
-                );
-                if (handled != EnumHandling.PassThrough)
-                    preventDefault = true;
-
-                if (handled == EnumHandling.PreventSubsequent)
-                    return true;
-            }
-
-            return preventDefault;
-        }
-
         #endregion Interaction
-
-        public override void GetHeldItemInfo(
-            ItemSlot inSlot,
-            StringBuilder dsc,
-            IWorldAccessor world,
-            bool withDebugInfo
-        )
-        {
-            base.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-            ItemStack contentStack = GetContent(inSlot.Itemstack);
-            contentStack?.Collectible.GetHeldItemInfo(inSlot, dsc, world, withDebugInfo);
-        }
     }
 
     public class FlaskTextureSource(
         ICoreClientAPI capi,
         ItemStack forContents,
         CompositeTexture contentTexture,
-        Vintagestory.API.Common.Block flask
-        ) : ITexPositionSource
+        Block flask
+    ) : ITexPositionSource
     {
-        public ItemStack ForContents { get; set; } = forContents ?? throw new ArgumentNullException(nameof(forContents));
+        public ItemStack ForContents { get; set; } =
+            forContents ?? throw new ArgumentNullException(nameof(forContents));
 
-        private readonly ICoreClientAPI capi = capi ?? throw new ArgumentNullException(nameof(capi));
+        private readonly ICoreClientAPI capi =
+            capi ?? throw new ArgumentNullException(nameof(capi));
 
         private TextureAtlasPosition contentTextPos;
-        private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(flask, "glass");
-        private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(flask, "topper");
-        private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(flask, "bracing");
+        private readonly TextureAtlasPosition blockTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "glass"
+        );
+        private readonly TextureAtlasPosition corkTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "topper",
+            true
+        );
+        private readonly TextureAtlasPosition bracingTextPos = capi.BlockTextureAtlas.GetPosition(
+            flask,
+            "bracing",
+            true
+        );
 
         private readonly CompositeTexture contentTexture =
-                contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
+            contentTexture ?? throw new ArgumentNullException(nameof(contentTexture));
 
         public TextureAtlasPosition this[string textureCode]
         {
@@ -563,67 +421,16 @@ namespace Alchemy.Block
                 }
                 if (contentTextPos == null)
                 {
-                    int textureSubId = ObjectCacheUtil.GetOrCreate(
-                        capi,
-                        "contenttexture-" + contentTexture?.ToString() ?? "unknown",
-                        () =>
-                        {
-                            int id = -1;
+                    if (contentTexture.Baked == null)
+                        contentTexture.Bake(capi.Assets);
 
-                            BitmapRef bmp = capi.Assets
-                                .TryGet(
-                                    contentTexture?.Base
-                                        .Clone()
-                                        .WithPathPrefixOnce("textures/")
-                                        .WithPathAppendixOnce(".png")
-                                        ?? new AssetLocation(
-                                            "alchemy:textures/item/potion/black_potion.png"
-                                        )
-                                )
-                                ?.ToBitmap(capi);
-
-                            if (bmp != null)
-                            {
-                                try
-                                {
-                                    _ = capi.BlockTextureAtlas.InsertTexture(
-                                        bmp,
-                                        out id,
-                                        out TextureAtlasPosition _
-                                    );
-                                }
-                                catch (Exception ex)
-                                {
-                                    capi.World.Logger.Error(
-                                        $"Error inserting texture: {ex.Message}"
-                                    );
-                                    id = -1;
-                                }
-                                bmp.Dispose();
-                            }
-                            else
-                            {
-                                capi.World.Logger.Warning("Bitmap for content texture is null.");
-                            }
-
-                            return id;
-                        }
+                    capi.BlockTextureAtlas.GetOrInsertTexture(
+                        contentTexture.Baked.BakedName,
+                        out _,
+                        out contentTextPos
                     );
-
-                    // Check if the index is valid
-                    if (textureSubId >= 0 && textureSubId < capi.BlockTextureAtlas.Positions.Length)
-                    {
-                        contentTextPos = capi.BlockTextureAtlas.Positions[textureSubId];
-                    }
-                    else
-                    {
-                        capi.World.Logger.Error(
-                            $"Invalid textureSubId: {textureSubId}. Positions length: {capi.BlockTextureAtlas.Positions.Length}"
-                        );
-                        contentTextPos = null;
-                    }
                 }
-                return contentTextPos;
+                return contentTextPos ?? capi.BlockTextureAtlas.UnknownTexturePosition;
             }
         }
 

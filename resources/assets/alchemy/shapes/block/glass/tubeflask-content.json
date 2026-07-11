@@ -21,9 +21,8 @@
           "name": "Fluid",
           "from": [ 0.0, 1.0, 0.6 ],
           "to": [ 2.0, 4.0, 1.4 ],
-          "renderPass": 0,
+          "renderPass": 1,
           "rotationOrigin": [ 1.0, 1.0, 0.9 ],
-          "renderpass": 1,
           "faces": {
             "north": {
               "texture": "#content",
@@ -55,10 +54,9 @@
           "name": "Fluid1",
           "from": [ 0.0, 1.0, 0.6 ],
           "to": [ 2.0, 4.0, 1.4 ],
-          "renderPass": 0,
+          "renderPass": 1,
           "rotationOrigin": [ 1.0, 1.0, 1.0 ],
           "rotationY": -45.0,
-          "renderpass": 1,
           "faces": {
             "north": {
               "texture": "#content",
@@ -90,10 +88,9 @@
           "name": "Fluid2",
           "from": [ 0.0, 1.0, 0.6 ],
           "to": [ 2.0, 4.0, 1.4 ],
-          "renderPass": 0,
+          "renderPass": 1,
           "rotationOrigin": [ 1.0, 1.0, 1.0 ],
           "rotationY": -90.0,
-          "renderpass": 1,
           "faces": {
             "north": {
               "texture": "#content",
@@ -125,10 +122,9 @@
           "name": "Fluid3",
           "from": [ 0.0, 1.0, 0.6 ],
           "to": [ 2.0, 4.0, 1.4 ],
-          "renderPass": 0,
+          "renderPass": 1,
           "rotationOrigin": [ 1.0, 1.0, 1.0 ],
           "rotationY": -135.0,
-          "renderpass": 1,
           "faces": {
             "north": {
               "texture": "#content",

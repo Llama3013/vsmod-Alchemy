@@ -265,5 +265,107 @@
             "when": "AllowLargeFlasks",
             "isValue": "false"
         }
+    },
+
+    {
+        "file": "alchemy:blocktypes/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/2/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/3/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/4/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/flasks/throwableflask.json",
+        "op": "addmerge",
+        "path": "/5/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowGlassThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+
+    {
+        "file": "alchemy:blocktypes/clay/raw/claythrowableflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:blocktypes/clay/fired/claythrowableflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayThrowableFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/clayforming/claythrowableflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayThrowableFlasks",
+            "isValue": "false"
+        }
     }
 ]

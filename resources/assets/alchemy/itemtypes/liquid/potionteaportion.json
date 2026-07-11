@@ -5,9 +5,10 @@
   "maxstacksize": 200,
   "matterState": "liquid",
   "attributes": {
+    "particleColor": [65, 100, 38],
     "waterTightContainerProps": {
       "containable": true,
-      "itemsPerLitre": 4,
+      "itemsPerLitre": 100,
       "texture": { "base": "game:block/plant/moss" },
       "allowSpill": true,
       "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "potionteaportion" } }

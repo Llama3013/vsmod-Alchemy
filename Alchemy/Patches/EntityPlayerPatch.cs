@@ -1,7 +1,9 @@
 using HarmonyLib;
 using Vintagestory.API.Common;
 
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     //This harmony patch allows the glow potion to work
     [HarmonyPatch(typeof(EntityPlayer), "LightHsv", MethodType.Getter)]
@@ -13,7 +15,10 @@ namespace Alchemy.Patches
             {
                 return;
             }
-            int glowStrength = __instance.WatchedAttributes.GetInt("glowStrength", 31);
+            int glowStrength = __instance.WatchedAttributes.GetInt(
+                "glowStrength",
+                AlchemyConfig.Loaded.GlowPotionStrength
+            );
             __result = [0, 0, (byte)glowStrength];
         }
     }

@@ -1,26 +1,29 @@
 {
   "code": "herbrackmold",
   "class": "Block",
-  "behaviors": [
-    { "name": "GroundStorable", "properties": { "layout": "SingleCenter" } },
-    { "name": "Unplaceable" },
-    { "name": "RightClickPickup" }
-  ],
+  "behaviors": [{ "name": "GroundStorable", "properties": { "layout": "SingleCenter" } }, { "name": "Unplaceable" }, { "name": "RightClickPickup" }],
   "variantgroups": [
     { "code": "color", "states": ["blue", "red", "fire"] },
     { "code": "materialtype", "states": ["raw"] },
-    { "code": "tooltype", "states": ["herbracktop", "herbrackhook"] }
+    {
+      "code": "tooltype",
+      "states": [
+        "herbracktop",
+        "herbrackhook"
+        // "potioncauldron"
+      ]
+    }
   ],
   "shape": { "base": "alchemy:block/clay/mold/{tooltype}", "rotateY": 90 },
   "textures": { "all": { "base": "game:block/clay/{color}clay" } },
   "attributes": {
     "reinforcable": true,
-		"handbook": {
-			"groupBy": ["toolmold-*-{materialtype}-{tooltype}"]
-		},
-		"tongOpeningByType": {
-			"toolmold-*-raw-herbracktop": "medium"
-		},
+    "handbook": {
+      "groupBy": ["toolmold-*-{materialtype}-{tooltype}"]
+    },
+    "tongOpeningByType": {
+      "toolmold-*-raw-herbracktop": "medium"
+    },
     "onTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.74 },
     "onMetalTongTransform": { "translation": { "x": -0.9, "y": -1.5, "z": -0.6 }, "rotation": { "x": 117, "y": 0, "z": 0 }, "scale": 0.74 },
     "shelvable": false
@@ -60,22 +63,22 @@
       "smeltedStack": { "type": "block", "code": "herbrackmold-fire-fired-{tooltype}" },
       "requiresContainer": false
     },
-		"herbrackmold-blue-raw-*": {
-			"meltingPoint": 650,
-			"meltingDuration": 45,
-			"smeltedRatio": 1,
-			"smeltingType": "fire",
-			"smeltedStack": { "type": "block", "code": "herbrackmold-blue-fired-{tooltype}" },
-			"requiresContainer": false
-		},
-		"herbrackmold-red-raw-*": {
-			"meltingPoint": 650,
-			"meltingDuration": 45,
-			"smeltedRatio": 1,
-			"smeltingType": "fire",
-			"smeltedStack": { "type": "block", "code": "herbrackmold-earthyorange-fired-{tooltype}" },
-			"requiresContainer": false
-		}
+    "herbrackmold-blue-raw-*": {
+      "meltingPoint": 650,
+      "meltingDuration": 45,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": { "type": "block", "code": "herbrackmold-blue-fired-{tooltype}" },
+      "requiresContainer": false
+    },
+    "herbrackmold-red-raw-*": {
+      "meltingPoint": 650,
+      "meltingDuration": 45,
+      "smeltedRatio": 1,
+      "smeltingType": "fire",
+      "smeltedStack": { "type": "block", "code": "herbrackmold-earthyorange-fired-{tooltype}" },
+      "requiresContainer": false
+    }
   },
   "blockmaterial": "Ceramic",
   "creativeinventory": { "general": ["*-blue-raw"], "construction": ["*"], "alchemy": ["*"] },
@@ -86,10 +89,12 @@
   "sounds": { "walk": "game:walk/stone" },
   "collisionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*-potioncauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "selectionboxByType": {
     "*-herbracktop": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.5625, "z2": 0.9375 },
+    "*-potioncauldron": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.75, "z2": 0.9375 },
     "*": { "x1": 0.0625, "y1": 0, "z1": 0.0625, "x2": 0.9375, "y2": 0.125, "z2": 0.9375 }
   },
   "sideopaque": { "all": false },

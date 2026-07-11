@@ -46,6 +46,11 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AlchemyCombatOverhaulCompat\AlchemyCombatOverhaulCompat.csproj"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="EmbeddedResource" />
+  </ItemGroup>
 <ItemGroup>
     <Content Include="..\resources\**">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

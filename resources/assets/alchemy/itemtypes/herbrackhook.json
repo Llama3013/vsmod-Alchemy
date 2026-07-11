@@ -10,7 +10,11 @@
   "variantgroups": [{ "code": "metal", "loadFromProperties": "block/metal" }],
   "textures": { "hook": { "base": "game:block/metal/sheet/{metal}1" } },
   "attributes": {
-    "handbook": { "groupBy": ["herbrackhook-{metal}"] },
+    "handbook": {
+      "groupBy": ["herbrackhook-{metal}"],
+      "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",
+      "excludeByType": { "*-uranium": true, "*-stainlesssteel": true }
+    },
     "onTongTransform": { "translation": { "x": -0.14, "y": -0.19, "z": 0.6 }, "rotation": { "x": 0, "y": -9, "z": -10 }, "origin": { "x": 0, "y": 0, "z": 0 } },
     "onMetalTongTransform": { "translation": { "x": -0.02, "y": -0.08, "z": -0.1 }, "rotation": { "x": 0, "y": 0, "z": -8 }, "origin": { "x": 0, "y": 0, "z": 0.3 } }
   },

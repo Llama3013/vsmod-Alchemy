@@ -24,13 +24,20 @@
     { "code": "strength", "states": ["medium", "strong"] }
   ],
   "class": "ItemPotion",
+  "behaviors": [
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "item" }
+    }
+  ],
   "matterState": "liquid",
   "attributesByType": {
     "*-archer-*": {
       "potioninfo": { "potionId": "archerpotionid" },
+      "particleColor": [120, 120, 120],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/grey_potion" },
         "allowSpill": true,
         "whenSpilled": {
@@ -45,9 +52,10 @@
     },
     "*-healingeffect-*": {
       "potioninfo": { "potionId": "healingeffectpotionid" },
+      "particleColor": [210, 30, 30],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/red_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -61,9 +69,10 @@
     },
     "*-hungerenhance-*": {
       "potioninfo": { "potionId": "hungerenhancepotionid" },
+      "particleColor": [240, 120, 25],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/orange_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -77,9 +86,10 @@
     },
     "*-hungersupress-*": {
       "potioninfo": { "potionId": "hungersupresspotionid" },
+      "particleColor": [250, 235, 20],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/yellow_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -93,9 +103,10 @@
     },
     "*-hunter-*": {
       "potioninfo": { "potionId": "hunterpotionid" },
+      "particleColor": [150, 95, 45],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/wood/oak" },
         "whenSpilled": {
           "action": "DropContents",
@@ -109,9 +120,10 @@
     },
     "*-looter-*": {
       "potioninfo": { "potionId": "looterpotionid" },
+      "particleColor": [65, 85, 205],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/indigo_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -125,10 +137,11 @@
     },
     "*-melee-*": {
       "potioninfo": { "potionId": "meleepotionid" },
+      "particleColor": [120, 10, 15],
       "effects": { "meleeWeaponsDamage": 0.3 },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/darkred_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -142,9 +155,10 @@
     },
     "*-mining-*": {
       "potioninfo": { "potionId": "miningpotionid" },
+      "particleColor": [180, 105, 55],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/brown_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -158,9 +172,10 @@
     },
     "*-poison-*": {
       "potioninfo": { "potionId": "poisontickpotionid" },
+      "particleColor": [170, 75, 180],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/purple_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -174,9 +189,10 @@
     },
     "*-predator-*": {
       "potioninfo": { "potionId": "predatorpotionid" },
+      "particleColor": [250, 155, 180],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/rose_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -190,9 +206,10 @@
     },
     "*-regen-*": {
       "potioninfo": { "potionId": "regentickpotionid" },
+      "particleColor": [70, 110, 30],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/green_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -206,9 +223,10 @@
     },
     "*-scentmask-*": {
       "potioninfo": { "potionId": "scentmaskpotionid" },
+      "particleColor": [190, 170, 220],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/lavendar_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -222,10 +240,11 @@
     },
     "*-speed-*": {
       "potioninfo": { "potionId": "speedpotionid" },
+      "particleColor": [15, 170, 210],
       "effects": { "walkspeed": 0.25 },
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/turquoise_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -239,9 +258,10 @@
     },
     "*-vitality-*": {
       "potioninfo": { "potionId": "vitalitypotionid" },
+      "particleColor": [20, 15, 30],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "alchemy:item/potion/black_potion" },
         "whenSpilled": {
           "action": "DropContents",
@@ -254,7 +274,7 @@
       }
     },
     "*": {
-      "waterTightContainerProps": { "containable": true, "itemsPerLitre": 4, "texture": { "base": "game:block/liquid/waterportion" } },
+      "waterTightContainerProps": { "containable": true, "itemsPerLitre": 100, "texture": { "base": "game:block/liquid/waterportion" } },
       "handbook": {
         "ignoreCreativeInvStacks": true,
         // "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },

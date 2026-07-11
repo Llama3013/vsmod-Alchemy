@@ -1,9 +1,11 @@
-using Alchemy.ModConfig;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.MathTools;
 
-namespace Alchemy.Patches
+#pragma warning disable IDE0130 // Namespace does not match folder structure
+namespace Alchemy
+#pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     // Keeps the player's collision box, eye height, and visual scale in sync with potionSizeDelta.
     // Runs on both server and client via WatchedAttributes sync.
@@ -13,9 +15,6 @@ namespace Alchemy.Patches
         public static void Postfix(Entity __instance)
         {
             if (__instance is not EntityPlayer player)
-                return;
-
-            if (!AlchemyConfig.Loaded.AllowGrowPotion && !AlchemyConfig.Loaded.AllowShrinkPotion)
                 return;
 
             ApplySize(player);
@@ -36,7 +35,12 @@ namespace Alchemy.Patches
                 "potionBaseEyeHeight",
                 baseHeight * 0.9054f
             );
-            float newHeight = baseHeight + delta;
+
+            float newHeight = GameMath.Clamp(
+                baseHeight + delta,
+                AlchemyConfig.Loaded.GrowShrinkMinHeight,
+                AlchemyConfig.Loaded.GrowShrinkMaxHeight
+            );
             float scale = newHeight / baseHeight;
 
             // Scale width proportionally from the snapshotted base width so both dimensions

@@ -1,0 +1,42 @@
+[
+  {
+    "ingredientPattern": "O,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "G": { "type": "block", "code": "game:glass-*", "allowedVariants": [ "plain", "quartz" ] },
+      "O": { "type": "item", "code": "game:*quartz", "allowedVariants": [ "ore-", "clear" ] }
+    },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-quartz", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "O,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "G": { "type": "block", "code": "game:glass-violet" },
+      "O": { "type": "item", "code": "game:amethyst" }
+    },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-violet", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "O,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "G": { "type": "block", "code": "game:glass-smoky" },
+      "O": { "type": "item", "code": "game:smokyquartz" }
+    },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-smoky", "quantity": 1 }
+  },
+  {
+    "ingredientPattern": "O,G",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "G": { "type": "block", "code": "game:glass-pink" },
+      "O": { "type": "item", "code": "game:rosequartz" }
+    },
+    "output": { "type": "item", "code": "alchemy:stirringspoon-glass-pink", "quantity": 1 }
+  }
+]

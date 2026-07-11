@@ -1,0 +1,53 @@
+{
+  "code": "stirringspoon-glass",
+  "class": "ItemStirringSpoon",
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "WallHalves",
+        "ctrlKey": true,
+        "selectionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 1, "y2": 0.1, "z2": 1 },
+        "collisionBox": { "x1": 0, "y1": 0, "z1": 0, "x2": 0, "y2": 0, "z2": 0 }
+      }
+    }
+  ],
+  "variantgroups": [
+    {
+      "code": "color",
+      "states": ["quartz", "blue", "green", "red", "violet", "yellow", "brown", "pink", "smoky"]
+    }
+  ],
+  "attributes": {
+    "groundStorageTransform": {
+      "translation": { "x": 0, "y": 0.14, "z": -0.13 },
+      "rotation": { "x": 0, "y": 90, "z": -70 }
+    }
+  },
+  "maxStackSize": 16,
+  "shape": { "base": "alchemy:item/stirringspoon" },
+  "texturesByType": {
+    "*-quartz": { "material": { "base": "game:block/glass/quartz" } },
+    "*-blue": { "material": { "base": "game:block/glass/blue" } },
+    "*-green": { "material": { "base": "game:block/glass/green" } },
+    "*-red": { "material": { "base": "game:block/glass/red" } },
+    "*-violet": { "material": { "base": "game:block/glass/violet" } },
+    "*-yellow": { "material": { "base": "game:block/glass/yellow" } },
+    "*-brown": { "material": { "base": "game:block/glass/brown" } },
+    "*-pink": { "material": { "base": "game:block/glass/pink" } },
+    "*-smoky": { "material": { "base": "game:block/glass/smoky" } }
+  },
+  "renderPass": "Transparent",
+  "vertexFlags": { "shiny": true },
+  "creativeinventory": { "general": ["*"], "alchemy": ["*"] },
+  "guiTransform": {
+    "translation": { "x": -0.49548626, "y": 1.2387562, "z": 0 },
+    "rotation": { "x": 93.93076, "y": -46.226463, "z": 3.8064568 },
+    "scale": 2.0
+  },
+  "tpHandTransform": {
+    "translation": { "x": -0.8557833, "y": -0.06656431, "z": -0.6771974 },
+    "rotation": { "x": 177.37462, "y": 179.88461, "z": -164.41313 },
+    "scale": 0.8
+  }
+}

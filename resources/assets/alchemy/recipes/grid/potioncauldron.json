@@ -1,0 +1,35 @@
+[
+  {
+    "ingredientPattern": "P,C",
+    "width": 1,
+    "height": 2,
+    "ingredients": {
+      "P": { "type": "item", "code": "alchemy:potionbase-basic" },
+      "C": { "type": "block", "code": "game:clutter", "attributes": { "type": "cauldron-empty" } }
+    },
+    "output": {
+      "type": "block",
+      "code": "alchemy:potioncauldron-oldworld-construct0",
+      "quantity": 1
+    }
+  },
+  {
+    "ingredientPattern": "PHP,_P_",
+    "width": 3,
+    "height": 2,
+    "ingredients": {
+      "P": {
+        "type": "item",
+        "code": "game:metalplate-*",
+        "name": "metal",
+        "allowedVariants": ["copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "steel", "meteoriciron"]
+      },
+      "H": { "type": "item", "tags": ["tool-hammer"], "isTool": true, "toolDurabilityCost": 3 }
+    },
+    "output": {
+      "type": "block",
+      "code": "alchemy:potioncauldron-{metal}-construct0",
+      "quantity": 1
+    }
+  }
+]

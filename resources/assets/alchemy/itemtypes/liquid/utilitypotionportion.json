@@ -1,83 +1,95 @@
 {
   "enabled": true,
   "code": "utilitypotionportion",
-  "variantgroups": [
-    { "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink"] }
-  ],
+  "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight", "coldresist"] }],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },
+  "behaviors": [
+    {
+      "name": "PotionConsumable",
+      "properties": { "source": "item" }
+    }
+  ],
   "attributesByType": {
     "*-recall": {
       "potioninfo": { "potionId": "recallpotionid" },
+      "particleColor": [42, 218, 169],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/temporalgear" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
     },
     "*-nutrition": {
       "potioninfo": { "potionId": "nutritionpotionid" },
+      "particleColor": [185, 150, 55],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/hay/aged-side" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
     },
     "*-glow": {
       "potioninfo": { "potionId": "glowpotionid", "duration": 1000 },
+      "particleColor": [235, 195, 25],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/fire-yellow" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
     },
     "*-waterbreathe": {
       "potioninfo": { "potionId": "waterbreathepotionid", "duration": 1000 },
+      "particleColor": [45, 115, 215],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/fire-blue" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
+    },
+    "*-coldresist": {
+      "potioninfo": { "potionId": "coldresistpotionid", "duration": 1000 },
+      "particleColor": [215, 55, 25],
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:block/fire-red" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
     },
     "*-temporal": {
       "potioninfo": { "potionId": "temporalpotionid" },
+      "particleColor": [195, 185, 45],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/ungraded/sulfur" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
-      "handbook": {
-
-      }
+      "handbook": {}
     },
     "*-reshape": {
       "potioninfo": { "potionId": "reshapepotionid" },
+      "particleColor": [55, 45, 25],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:item/resource/rot/rot-solids" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -86,9 +98,10 @@
     },
     "*-grow": {
       "potioninfo": { "potionId": "growpotionid" },
+      "particleColor": [125, 95, 65],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/soil/flooring/drypackeddirt1a" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
@@ -97,14 +110,51 @@
     },
     "*-shrink": {
       "potioninfo": { "potionId": "shrinkpotionid" },
+      "particleColor": [155, 135, 105],
       "waterTightContainerProps": {
         "containable": true,
-        "itemsPerLitre": 4,
+        "itemsPerLitre": 100,
         "texture": { "base": "game:block/soil/rammed/light/plain1" },
         "allowSpill": true,
         "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
       },
       "handbook": {}
+    },
+    "*-fall": {
+      "potioninfo": { "potionId": "fallpotionid" },
+      "particleColor": [175, 205, 230],
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:block/liquid/frost" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
+    },
+    "*-climb": {
+      "potioninfo": { "potionId": "climbpotionid" },
+      "particleColor": [195, 185, 170],
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:block/creature/webbing" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": {}
+    },
+    "*-flight": {
+      "potioninfo": { "potionId": "flightpotionid" },
+      "particleColor": [225, 215, 200],
+      "waterTightContainerProps": {
+        "containable": true,
+        "itemsPerLitre": 100,
+        "texture": { "base": "game:item/resource/feather" },
+        "allowSpill": true,
+        "whenSpilled": { "action": "DropContents", "stack": { "type": "item", "code": "utilitypotionportion-{potiontype}" } }
+      },
+      "handbook": { "exclude": true }
     }
   },
   "creativeinventoryStacks": [
@@ -115,27 +165,21 @@
           "type": "block",
           "code": "alchemy:potionflask-normal-quartz",
           "attributes": {
-            "ucontents": [
-              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
-            ]
+            "ucontents": [{ "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }]
           }
         },
         {
           "type": "block",
           "code": "alchemy:potionflask-tube-quartz",
           "attributes": {
-            "ucontents": [
-              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
-            ]
+            "ucontents": [{ "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }]
           }
         },
         {
           "type": "block",
           "code": "game:woodbucket",
           "attributes": {
-            "ucontents": [
-              { "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }
-            ]
+            "ucontents": [{ "type": "item", "code": "alchemy:utilitypotionportion-{potiontype}", "makefull": true }]
           }
         }
       ]
@@ -149,10 +193,14 @@
     "*-nutrition": { "all": { "base": "game:block/hay/aged-side" } },
     "*-glow": { "all": { "base": "game:block/fire-yellow" } },
     "*-waterbreathe": { "all": { "base": "game:block/fire-blue" } },
+    "*-coldresist": { "all": { "base": "game:block/fire-red" } },
     "*-temporal": { "all": { "base": "game:item/resource/ungraded/sulfur" } },
     "*-reshape": { "all": { "base": "game:item/resource/rot/rot-solids" } },
     "*-grow": { "all": { "base": "game:block/soil/flooring/drypackeddirt1a" } },
-    "*-shrink": { "all": { "base": "game:block/soil/rammed/light/plain1" } }
+    "*-shrink": { "all": { "base": "game:block/soil/rammed/light/plain1" } },
+    "*-fall": { "all": { "base": "game:block/liquid/frost" } },
+    "*-climb": { "all": { "base": "game:block/creature/webbing" } },
+    "*-flight": { "all": { "base": "game:item/resource/feather" } }
   },
   "guiTransform": {
     "translation": { "x": 0, "y": 1, "z": 0 },

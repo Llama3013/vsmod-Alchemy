@@ -1,0 +1,12 @@
+{
+  "ingredientPattern": "F,M,T",
+  "ingredients": {
+    "F": { "type": "block", "code": "game:flower-croton-*" },
+    "M": { "type": "item", "code": "game:coke" },
+    "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+  },
+  "shapeless": true,
+  "width": 1,
+  "height": 3,
+  "output": { "type": "item", "code": "alchemy:utilitypotionbase-coldresist" }
+}

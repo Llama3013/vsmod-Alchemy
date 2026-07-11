@@ -3,12 +3,20 @@
   "class": "BlockHerbRacks",
   "entityClass": "HerbRacks",
   "variantgroups": [
-    { "code": "wood", "loadFromProperties": "block/wood" },
+    { "code": "wood", "states": ["aged", "veryaged", "agedacacia", "agedebony", "rottenebony"], "loadFromProperties": "block/wood" },
     { "code": "metal", "loadFromProperties": "block/metal" }
   ],
   "shape": { "base": "alchemy:block/dryingrack" },
   "textures": {
-    "wood": { "base": "game:block/wood/planks/{wood}1" },
+    "wood": {
+      "baseByType": {
+        "*-aged-*": "game:block/wood/planks/aged/aged1",
+        "*-veryaged-*": "game:block/wood/planks/aged/veryaged1",
+        "*-agedebony-*": "game:block/wood/planks/aged/ebony1",
+        "*-agedacacia-*": "game:block/wood/planks/aged/aged1",
+        "*": "game:block/wood/planks/{wood}1"
+      }
+    },
     "hook": { "base": "game:block/metal/sheet/{metal}1" },
     "top": { "base": "game:block/metal/sheet/{metal}1" }
   },
@@ -16,7 +24,7 @@
     "handbook": {
       "groupBy": ["herbrack-*"],
       "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",
-      "excludeByType": { "*-nickel": true, "*-copronickel": true, "*-electrum": true, "*-uranium": true, "*-stainlesssteel": true }
+      "excludeByType": { "*-uranium": true, "*-stainlesssteel": true, "*-agedacacia": true, "*-agedebony": true, "*-rottenebony": true }
     }
   },
   "heldTpIdleAnimation": "holdbothhands",
