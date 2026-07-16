@@ -37,7 +37,7 @@
       "handbook": {}
     },
     "*-glow": {
-      "potioninfo": { "potionId": "glowpotionid", "duration": 1000 },
+      "potioninfo": { "potionId": "glowpotionid" },
       "particleColor": [235, 195, 25],
       "waterTightContainerProps": {
         "containable": true,
@@ -49,7 +49,7 @@
       "handbook": {}
     },
     "*-waterbreathe": {
-      "potioninfo": { "potionId": "waterbreathepotionid", "duration": 1000 },
+      "potioninfo": { "potionId": "waterbreathepotionid" },
       "particleColor": [45, 115, 215],
       "waterTightContainerProps": {
         "containable": true,
@@ -61,7 +61,7 @@
       "handbook": {}
     },
     "*-coldresist": {
-      "potioninfo": { "potionId": "coldresistpotionid", "duration": 1000 },
+      "potioninfo": { "potionId": "coldresistpotionid" },
       "particleColor": [215, 55, 25],
       "waterTightContainerProps": {
         "containable": true,

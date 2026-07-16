@@ -299,7 +299,6 @@ namespace Alchemy
             ctx.ResetsEffects = cfg.PoisonPotionResetsEffects;
             ctx.SetHealth(cfg.PoisonPotionHealth);
             ctx.TickSec = cfg.PoisonPotionTickSec;
-            ctx.IgnoreArmour = cfg.PoisonPotionIgnoreArmour;
             ctx.Duration = cfg.PoisonPotionDuration;
             ctx.AddEffect("walkspeed", cfg.PoisonPotionWalkSpeed);
             ctx.AddEffect("meleeWeaponsDamage", cfg.PoisonPotionMeleeDamage);
@@ -354,7 +353,6 @@ namespace Alchemy
             ctx.ResetsEffects = cfg.RegenPotionResetsEffects;
             ctx.SetHealth(cfg.RegenPotionHealth);
             ctx.TickSec = cfg.RegenPotionTickSec;
-            ctx.IgnoreArmour = cfg.RegenPotionIgnoreArmour;
             ctx.Duration = cfg.RegenPotionDuration;
             ctx.AddEffect("walkspeed", cfg.RegenPotionWalkSpeed);
             ctx.AddEffect("meleeWeaponsDamage", cfg.RegenPotionMeleeDamage);

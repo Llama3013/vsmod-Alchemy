@@ -20,23 +20,21 @@ namespace Alchemy
 
         public override string PropertyName() => "alchemyPoisoned";
 
-        public void Setup(float dmgPerTick, int tickSec, int durationSec, bool ignoreArmour)
+        public void Setup(float dmgPerTick, int tickSec, int durationSec)
         {
             this.dmgPerTick = dmgPerTick;
             this.tickSec = tickSec;
             this.durationSec = durationSec;
-            this.ignoreArmour = ignoreArmour;
             tickAccum = 0f;
             durationAccum = 0f;
             done = false;
         }
 
-        public void Refresh(float dmgPerTick, int tickSec, int durationSec, bool ignoreArmour)
+        public void Refresh(float dmgPerTick, int tickSec, int durationSec)
         {
             this.dmgPerTick = dmgPerTick;
             this.tickSec = tickSec;
             this.durationSec = durationSec;
-            this.ignoreArmour = ignoreArmour;
             durationAccum = 0f;
             done = false;
         }

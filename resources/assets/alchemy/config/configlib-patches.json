@@ -3734,13 +3734,6 @@
         "comment": "alchemy:AllowPoisonPotion-Comment",
         "default": true
       },
-      "POISONPOTIONIGNOREARMOUR": {
-        "name": "PoisonPotionIgnoreArmour",
-        "ingui": "alchemy:PoisonPotionIgnoreArmour",
-        "weight": 18.5,
-        "comment": "alchemy:PoisonPotionIgnoreArmour-Comment",
-        "default": true
-      },
       "ALLOWPREDATORPOTION": {
         "name": "AllowPredatorPotion",
         "ingui": "alchemy:AllowPredatorPotion",
@@ -3753,13 +3746,6 @@
         "ingui": "alchemy:AllowRegenPotion",
         "weight": 1.11,
         "comment": "alchemy:AllowRegenPotion-Comment",
-        "default": true
-      },
-      "REGENPOTIONIGNOREARMOUR": {
-        "name": "RegenPotionIgnoreArmour",
-        "ingui": "alchemy:RegenPotionIgnoreArmour",
-        "weight": 20.5,
-        "comment": "alchemy:RegenPotionIgnoreArmour-Comment",
         "default": true
       },
       "ALLOWSCENTMASKPOTION": {
@@ -3974,21 +3960,21 @@
       "ALLOWPOTIONEXCLUSIVITY": {
         "name": "AllowPotionExclusivity",
         "ingui": "alchemy:AllowPotionExclusivity",
-        "weight": 4.311,
+        "weight": 4.337,
         "comment": "alchemy:AllowPotionExclusivity-Comment",
         "default": false
       },
       "ALLOWPOTIONREFRESH": {
         "name": "AllowPotionRefresh",
         "ingui": "alchemy:AllowPotionRefresh",
-        "weight": 4.32,
+        "weight": 4.338,
         "comment": "alchemy:AllowPotionRefresh-Comment",
         "default": false
       },
       "RETAINEFFECTSONDISCONNECT": {
         "name": "RetainEffectsOnDisconnect",
         "ingui": "alchemy:RetainEffectsOnDisconnect",
-        "weight": 4.325,
+        "weight": 4.339,
         "comment": "alchemy:RetainEffectsOnDisconnect-Comment",
         "default": true
       },
@@ -4177,7 +4163,7 @@
       "SIDEFFECTSTRENGTHMULTIPLIER": {
         "name": "SideEffectStrengthMultiplier",
         "ingui": "alchemy:SideEffectStrengthMultiplier",
-        "weight": 4.33,
+        "weight": 4.34,
         "comment": "alchemy:SideEffectStrengthMultiplier-Comment",
         "default": true
       },
@@ -4317,63 +4303,63 @@
       "ALLOWCOATINGCOLDRESIST": {
         "name": "AllowCoatingColdResist",
         "ingui": "alchemy:AllowCoatingColdResist",
-        "weight": 4.4335,
+        "weight": 4.434,
         "comment": "alchemy:AllowCoatingColdResist-Comment",
         "default": false
       },
       "ALLOWCOATINGNUTRITION": {
         "name": "AllowCoatingNutrition",
         "ingui": "alchemy:AllowCoatingNutrition",
-        "weight": 4.434,
+        "weight": 4.435,
         "comment": "alchemy:AllowCoatingNutrition-Comment",
         "default": false
       },
       "ALLOWCOATINGTEMPORAL": {
         "name": "AllowCoatingTemporal",
         "ingui": "alchemy:AllowCoatingTemporal",
-        "weight": 4.435,
+        "weight": 4.436,
         "comment": "alchemy:AllowCoatingTemporal-Comment",
         "default": false
       },
       "ALLOWCOATINGRESHAPE": {
         "name": "AllowCoatingReshape",
         "ingui": "alchemy:AllowCoatingReshape",
-        "weight": 4.436,
+        "weight": 4.437,
         "comment": "alchemy:AllowCoatingReshape-Comment",
         "default": false
       },
       "ALLOWCOATINGGROW": {
         "name": "AllowCoatingGrow",
         "ingui": "alchemy:AllowCoatingGrow",
-        "weight": 4.437,
+        "weight": 4.438,
         "comment": "alchemy:AllowCoatingGrow-Comment",
         "default": false
       },
       "ALLOWCOATINGSHRINK": {
         "name": "AllowCoatingShrink",
         "ingui": "alchemy:AllowCoatingShrink",
-        "weight": 4.438,
+        "weight": 4.439,
         "comment": "alchemy:AllowCoatingShrink-Comment",
         "default": false
       },
       "ALLOWCOATINGFALL": {
         "name": "AllowCoatingFall",
         "ingui": "alchemy:AllowCoatingFall",
-        "weight": 4.439,
+        "weight": 4.44,
         "comment": "alchemy:AllowCoatingFall-Comment",
         "default": false
       },
       "ALLOWCOATINGCLIMB": {
         "name": "AllowCoatingClimb",
         "ingui": "alchemy:AllowCoatingClimb",
-        "weight": 4.44,
+        "weight": 4.441,
         "comment": "alchemy:AllowCoatingClimb-Comment",
         "default": false
       },
       "ALLOWCOATINGFLIGHT": {
         "name": "AllowCoatingFlight",
         "ingui": "alchemy:AllowCoatingFlight",
-        "weight": 4.441,
+        "weight": 4.442,
         "comment": "alchemy:AllowCoatingFlight-Comment",
         "default": false
       },
@@ -4509,7 +4495,7 @@
         "weight": 6.25,
         "comment": "alchemy:ScalePotionTimeWithHealing-Comment",
         "default": false
-      },
+      }
     }
   },
   "formatting": [

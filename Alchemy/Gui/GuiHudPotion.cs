@@ -319,51 +319,42 @@ namespace Alchemy
                 }
             }
 
-            switch (effect.Id)
+            PotionContext ctx = PotionRegistry.BuildPotionDef(effect.Id, effect.StrengthMul);
+            if (ctx != null)
             {
-                case "glowpotionid":
+                string healthTick = FormatHealthTick(ctx);
+                if (healthTick != null)
+                    lines.Add(healthTick);
+
+                if (ctx.GlowStrength > 0)
                     lines.Add(Lang.GetIfExists("alchemy:glow"));
-                    break;
-                case "waterbreathepotionid":
+                if (ctx.WaterBreathe)
                     lines.Add(Lang.GetIfExists("alchemy:waterbreathe"));
-                    break;
-                case "coldresistpotionid":
+                if (ctx.ColdResist)
                     lines.Add(Lang.GetIfExists("alchemy:coldresist"));
-                    break;
-                case "regentickpotionid":
-                case "poisontickpotionid":
-                    lines.Add(FormatHealthTick(effect));
-                    break;
-                case "fallpotionid":
+                if (ctx.FallDamageReduction > 0)
                     lines.Add(Lang.GetIfExists("alchemy:fall"));
-                    break;
-                case "climbpotionid":
+                if (ctx.CanClimbAnywhere)
                     lines.Add(Lang.GetIfExists("alchemy:climb"));
-                    break;
-                case "flightpotionid":
+                if (ctx.CanFly)
                     lines.Add(Lang.GetIfExists("alchemy:flight"));
-                    break;
-                case "growpotionid":
-                case "shrinkpotionid":
-                    float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta");
-                    string sizeKey = sizeDelta > 0 ? "alchemy:grow" : "alchemy:shrink";
-                    lines.Add($"{Lang.GetIfExists(sizeKey)}: {sizeDelta:+0.0#;-0.0#}");
-                    break;
-                default:
-                    break;
+            }
+
+            if (Math.Abs(effect.SizeDelta) > 0.001f)
+            {
+                string sizeKey = effect.SizeDelta > 0 ? "alchemy:grow" : "alchemy:shrink";
+                lines.Add($"{Lang.GetIfExists(sizeKey)}: {effect.SizeDelta:+0.0#;-0.0#}");
             }
 
             effect.DetailLines = [.. lines];
         }
 
-        private static string FormatHealthTick(TrackedEffect effect)
+        private static string FormatHealthTick(PotionContext ctx)
         {
-            string label = Lang.GetIfExists(
-                effect.Id == "poisontickpotionid" ? "alchemy:poison" : "alchemy:regen"
-            );
-            PotionContext ctx = PotionRegistry.BuildPotionDef(effect.Id, effect.StrengthMul);
-            if (ctx == null || ctx.TickSec <= 0 || Math.Abs(ctx.Health) <= float.Epsilon)
-                return label;
+            if (ctx.TickSec <= 0 || Math.Abs(ctx.Health) <= float.Epsilon)
+                return null;
+
+            string label = Lang.GetIfExists(ctx.Health < 0 ? "alchemy:poison" : "alchemy:regen");
             return $"{label}: {ctx.Health:+0.#;-0.#} HP / {ctx.TickSec}s";
         }
 
@@ -398,7 +389,7 @@ namespace Alchemy
                 sb.Append(
                     effect.Endless
                         ? DisplayName(effect)
-                        : $"{DisplayName(effect)} — {FormatTime(RemainingSec(effect, now))}"
+                        : $"{DisplayName(effect)} - {FormatTime(RemainingSec(effect, now))}"
                 );
                 foreach (string line in effect.DetailLines ?? [])
                 {

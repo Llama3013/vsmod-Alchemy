@@ -269,13 +269,11 @@ namespace Alchemy
         public float PoisonPotionHealth { get; set; } = -0.5f;
         public int PoisonPotionTickSec { get; set; } = 3;
         public int PoisonPotionDuration { get; set; } = 30;
-        public bool PoisonPotionIgnoreArmour { get; set; } = true;
         public float PredatorPotionAnimalSeek { get; set; } = 0.4f;
         public int PredatorPotionDuration { get; set; } = 600;
         public float RegenPotionHealth { get; set; } = 0.5f;
         public int RegenPotionTickSec { get; set; } = 3;
         public int RegenPotionDuration { get; set; } = 30;
-        public bool RegenPotionIgnoreArmour { get; set; } = true;
         public float ScentMaskPotionAnimalSeek { get; set; } = -0.2f;
         public int ScentMaskPotionDuration { get; set; } = 600;
         public float SpeedPotionValue { get; set; } = 0.25f;
@@ -461,7 +459,7 @@ namespace Alchemy
         public float MiningPotionHealthExtra { get; set; } = 0f;
         public int MiningPotionHealthExtraTickSec { get; set; } = 0;
 
-        // Poison (health damage is primary — extra stats only)
+        // Poison
         public float PoisonPotionWalkSpeed { get; set; } = 0f;
         public float PoisonPotionMeleeDamage { get; set; } = 0f;
         public float PoisonPotionRangedAccuracy { get; set; } = 0f;
@@ -498,7 +496,7 @@ namespace Alchemy
         public float PredatorPotionHealth { get; set; } = 0f;
         public int PredatorPotionHealthTickSec { get; set; } = 0;
 
-        // Regen (health regen is primary — extra stats only)
+        // Regen
         public float RegenPotionWalkSpeed { get; set; } = 0f;
         public float RegenPotionMeleeDamage { get; set; } = 0f;
         public float RegenPotionRangedAccuracy { get; set; } = 0f;

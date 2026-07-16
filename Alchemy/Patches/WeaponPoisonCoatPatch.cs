@@ -192,7 +192,27 @@ namespace Alchemy
                 if (behavior?.Manager == null)
                     return;
                 PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, multiplier);
-                if (ctx != null && behavior.Manager.TryApplyPotion(potionId, ctx, displayName))
+                if (ctx == null)
+                    return;
+
+                if (!ctx.ResetsEffects)
+                {
+                    string exclusivityBlock = PotionConsumableLogic.CheckPotionExclusivity(
+                        playerEntity,
+                        potionId
+                    );
+                    if (exclusivityBlock != null)
+                    {
+                        (playerEntity.Player as IServerPlayer)?.SendMessage(
+                            GlobalConstants.InfoLogChatGroup,
+                            Lang.Get(exclusivityBlock),
+                            EnumChatType.Notification
+                        );
+                        return;
+                    }
+                }
+
+                if (behavior.Manager.TryApplyPotion(potionId, ctx, displayName))
                 {
                     (playerEntity.Player as IServerPlayer)?.SendMessage(
                         GlobalConstants.InfoLogChatGroup,
@@ -221,12 +241,12 @@ namespace Alchemy
                 if (agent.HasBehavior<EntityBehaviorCoatedPotionEffect>())
                     agent
                         .GetBehavior<EntityBehaviorCoatedPotionEffect>()
-                        .Refresh(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
+                        .Refresh(ctx.Health, ctx.TickSec, ctx.Duration);
                 else
                 {
                     EntityBehaviorCoatedPotionEffect b = new(agent);
                     agent.AddBehavior(b);
-                    b.Setup(ctx.Health, ctx.TickSec, ctx.Duration, ctx.IgnoreArmour);
+                    b.Setup(ctx.Health, ctx.TickSec, ctx.Duration);
                 }
             }
         }
