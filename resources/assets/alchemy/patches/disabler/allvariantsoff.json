@@ -1,0 +1,21 @@
+[
+  // Handling whenever for whenever a player turns off EVERY variant.
+
+  // All potions off
+  { "file": "alchemy:itemtypes/liquid/potionportion.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyPotionEnabled", "isValue": "false" } },
+  { "file": "alchemy:itemtypes/ingredient/potionbase.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyPotionEnabled", "isValue": "false" } },
+  { "file": "alchemy:itemtypes/herbball.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyPotionEnabled", "isValue": "false" } },
+
+  // The herbballs
+  { "file": "alchemy:recipes/grid/potion/herbball.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyPotionEnabled", "isValue": "false" } },
+
+  // All utility potions off
+  { "file": "alchemy:itemtypes/liquid/utilitypotionportion.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyUtilityPotionEnabled", "isValue": "false" } },
+  { "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyUtilityPotionEnabled", "isValue": "false" } },
+
+  // Both potion strengths off
+  { "file": "alchemy:itemtypes/liquid/potionportion.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyPotionStrengthEnabled", "isValue": "false" } },
+
+  // All three glass flask sizes off
+  { "file": "alchemy:blocktypes/flasks/potionflask.json", "op": "addmerge", "path": "/enabled", "value": false, "condition": { "when": "AnyFlaskSizeEnabled", "isValue": "false" } }
+]

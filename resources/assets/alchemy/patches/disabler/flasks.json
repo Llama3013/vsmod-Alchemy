@@ -19,6 +19,26 @@
             "isValue": "false"
         }
     },
+    {
+        "file": "alchemy:recipes/clayforming/claypotionflask.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayFlasks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/clayforming/claypotionflask4.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowClayFlasks",
+            "isValue": "false"
+        }
+    },
 
     {
         "file": "alchemy:blocktypes/flasks/potionflask.json",

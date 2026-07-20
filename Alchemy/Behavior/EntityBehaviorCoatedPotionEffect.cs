@@ -12,7 +12,6 @@ namespace Alchemy
     {
         private float dmgPerTick;
         private int tickSec;
-        private bool ignoreArmour;
         private bool done;
         private float tickAccum;
         private float durationAccum;
@@ -97,32 +96,7 @@ namespace Alchemy
                     Source = EnumDamageSource.Internal,
                     Type = dmgPerTick > float.Epsilon ? EnumDamageType.Heal : EnumDamageType.Poison,
                 };
-
-                if (ignoreArmour && entity is EntityPlayer ep)
-                {
-                    ITreeAttribute statsTree = ep
-                        .WatchedAttributes.GetTreeAttribute("stats")
-                        ?.GetTreeAttribute("healingeffectivness");
-
-                    float wearableHealEffect = statsTree?.GetFloat("wearablemod") ?? 0f;
-
-                    if (Math.Abs(wearableHealEffect) > float.Epsilon)
-                        ep.Stats.Set("healingeffectivness", "wearablemod", 0f, false);
-
-                    entity.ReceiveDamage(src, healthAmount);
-
-                    if (Math.Abs(wearableHealEffect) > float.Epsilon)
-                        ep.Stats.Set(
-                            "healingeffectivness",
-                            "wearablemod",
-                            wearableHealEffect,
-                            false
-                        );
-                }
-                else
-                {
-                    entity.ReceiveDamage(src, healthAmount);
-                }
+                entity.ReceiveDamage(src, healthAmount);
             }
         }
     }

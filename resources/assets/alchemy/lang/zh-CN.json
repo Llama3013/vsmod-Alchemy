@@ -677,6 +677,7 @@
   "block-potioncauldron-steel": "钢炼药釜",
   "block-potioncauldron-meteoriciron": "陨铁炼药釜",
   "block-potioncauldron-*": "炼药釜",
+  "block-potioncauldron": "炼药釜",
   "blockdesc-potioncauldron-*": "不适用于烹饪食物。专为炼制药剂而制。",
   "cauldron-warning-no-spoon": "炼制药剂需要搅拌勺",
   "cauldron-warning-glass-spoon": "炼制药效强的药剂需要玻璃搅拌勺",

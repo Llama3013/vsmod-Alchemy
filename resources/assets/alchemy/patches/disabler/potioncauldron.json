@@ -10,20 +10,22 @@
         }
     },
     {
-        "file": "alchemy:blocktypes/clay/fired/herbrackmold.json",
-        "op": "remove",
-        "path": "/variantgroups/2/states/2",
+        "file": "alchemy:recipes/grid/potioncauldron.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
         "condition": {
-            "when": "AllowPotionBrewingCauldronMold",
+            "when": "AllowPotionBrewingCauldron",
             "isValue": "false"
         }
     },
     {
-        "file": "alchemy:blocktypes/clay/raw/herbrackmold.json",
-        "op": "remove",
-        "path": "/variantgroups/2/states/2",
+        "file": "alchemy:recipes/grid/potioncauldron.json",
+        "op": "addmerge",
+        "path": "/1/enabled",
+        "value": false,
         "condition": {
-            "when": "AllowPotionBrewingCauldronMold",
+            "when": "AllowPotionBrewingCauldron",
             "isValue": "false"
         }
     }

@@ -1,6 +1,6 @@
 [
     {
-        "file": "alchemy:itemtypes/potionportion.json",
+        "file": "alchemy:itemtypes/liquid/potionportion.json",
         "op": "remove",
         "path": "/variantgroups/1/states/1",
         "value": false,
@@ -9,49 +9,8 @@
             "isValue": "false"
         }
     },
-    // {
-    //     "file": "alchemy:itemtypes/flowercutting.json",
-    //     "op": "addmerge",
-    //     "path": "/enabled",
-    //     "value": false,
-    //     "condition": {
-    //         "when": "AllowCuttings",
-    //         "isValue": "false"
-    //     }
-    // },
-    // {
-    //     "file": "alchemy:recipes/grid/ingredient/cuttings.json",
-    //     "op": "addmerge",
-    //     "path": "/0/enabled",
-    //     "value": false,
-    //     "condition": {
-    //         "when": "AllowCuttings",
-    //         "isValue": "false"
-    //     }
-    // },
-    // {
-    //     "file": "alchemy:recipes/grid/ingredient/archerbase.json",
-    //     "op": "addmerge",
-    //     "path": "/1/enabled",
-    //     "value": false,
-    //     "condition": {
-    //         "when": "AllowCuttings",
-    //         "isValue": "false"
-    //     }
-    // },
     {
-        "file": "alchemy:recipes/grid/ingredient/archerbase.json",
-        "op": "addmerge",
-        "path": "/1/enabled",
-        "value": false,
-        "condition": {
-            "when": "AllowCuttings",
-            "isValue": "false"
-        }
-    },
-
-    {
-        "file": "alchemy:itemtypes/potionportion.json",
+        "file": "alchemy:itemtypes/liquid/potionportion.json",
         "op": "remove",
         "path": "/variantgroups/1/states/0",
         "value": false,
@@ -63,6 +22,16 @@
 
     {
         "file": "alchemy:itemtypes/herbball.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbballs",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/grid/potion/herbball.json",
         "op": "addmerge",
         "path": "/enabled",
         "value": false,

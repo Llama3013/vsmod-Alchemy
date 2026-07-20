@@ -118,6 +118,46 @@
             "isValue": "false"
         }
     },
+    {
+        "file": "alchemy:recipes/grid/herbrack.json",
+        "op": "addmerge",
+        "path": "/0/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/smithing/herbracktop.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/smithing/4hooks.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/smithing/8hooks.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRacks",
+            "isValue": "false"
+        }
+    },
 
     {
         "file": "alchemy:blocktypes/clay/fired/herbrackmold.json",
@@ -131,6 +171,26 @@
     },
     {
         "file": "alchemy:blocktypes/clay/raw/herbrackmold.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRackMolds",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/clayforming/herbhookmold.json",
+        "op": "addmerge",
+        "path": "/enabled",
+        "value": false,
+        "condition": {
+            "when": "AllowHerbRackMolds",
+            "isValue": "false"
+        }
+    },
+    {
+        "file": "alchemy:recipes/clayforming/herbracktopmold.json",
         "op": "addmerge",
         "path": "/enabled",
         "value": false,

@@ -1,8 +1,6 @@
 {
   "code": "potionteaportion",
   "class": "ItemLiquidPortion",
-  "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
-  "maxstacksize": 200,
   "matterState": "liquid",
   "attributes": {
     "particleColor": [65, 100, 38],
@@ -15,11 +13,9 @@
     },
     "handbook": { "ignoreCreativeInvStacks": true }
   },
-  "texture": { "base": "game:block/plant/moss" },
-  "shape": { "base": "game:item/liquid" },
   "creativeinventoryStacks": [
     {
-      "tabs": ["general", "liquids"],
+      "tabs": ["general", "liquids", "alchemy"],
       "stacks": [
         {
           "type": "block",
@@ -33,7 +29,10 @@
       ]
     }
   ],
+  "maxstacksize": 200,
   "materialDensity": 200,
+  "shape": { "base": "game:item/liquid" },
+  "texture": { "base": "game:block/plant/moss" },
   "guiTransform": {
     "translation": { "x": 0, "y": 1, "z": 0 },
     "rotation": { "x": 123, "y": -33, "z": -13 },

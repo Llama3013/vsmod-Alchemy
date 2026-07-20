@@ -1,5 +1,34 @@
 [
   // Use these patch to remove certain potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/0/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/1/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/2/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/3/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/4/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/5/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/6/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/7/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/8/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/9/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/10/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/11/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/12/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/13/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
+
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/0/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/1/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/2/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/3/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/4/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/5/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/6/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/7/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/8/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/9/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/10/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/11/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/12/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
+  { "file": "alchemy:recipes/cooking/potionportion-medium.json", "op": "addmerge", "path": "/13/enabled", "value": false, "condition": { "when": "AllowMediumPotions", "isValue": "false" } },
 
   //Vitality
   {
@@ -61,6 +90,86 @@
     "file": "alchemy:recipes/grid/ingredient/vitalitybase.json",
     "op": "addmerge",
     "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowVitalityPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-vitalitybase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
     "value": false,
     "condition": {
       "when": "AllowVitalityPotion",
@@ -167,6 +276,166 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/11/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/12/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/13/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/14/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-speedbase.json",
+    "op": "addmerge",
+    "path": "/15/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowSpeedPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-speed-*/handbook",
@@ -266,6 +535,46 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-scentmaskbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowScentMaskPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-scentmaskbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowScentMaskPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-scentmaskbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowScentMaskPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-scentmaskbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowScentMaskPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-scentmask-*/handbook",
@@ -358,6 +667,126 @@
     "file": "alchemy:recipes/grid/ingredient/regenbase.json",
     "op": "addmerge",
     "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowRegenPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-regenbase.json",
+    "op": "addmerge",
+    "path": "/11/enabled",
     "value": false,
     "condition": {
       "when": "AllowRegenPotion",
@@ -484,6 +913,86 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-predatorbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPredatorPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-predator-*/handbook",
@@ -583,6 +1092,126 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-poisonbase.json",
+    "op": "addmerge",
+    "path": "/11/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowPoisonPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-poison-*/handbook",
@@ -675,6 +1304,86 @@
     "file": "alchemy:recipes/grid/ingredient/miningbase.json",
     "op": "addmerge",
     "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowMiningPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-miningbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
     "value": false,
     "condition": {
       "when": "AllowMiningPotion",
@@ -999,6 +1708,166 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/11/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/12/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/13/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/14/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hunterbase.json",
+    "op": "addmerge",
+    "path": "/15/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHunterPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-hunter-*/handbook",
@@ -1197,6 +2066,86 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-hungerenhancebase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHungerEnhancePotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-hungerenhance-*/handbook",
@@ -1296,6 +2245,86 @@
     }
   },
   {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-healingeffectbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowHealingEffectPotion",
+      "isValue": "false"
+    }
+  },
+  {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
     "op": "replace",
     "path": "/attributesByType/*-healingeffect-*/handbook",
@@ -1388,6 +2417,86 @@
     "file": "alchemy:recipes/grid/ingredient/archerbase.json",
     "op": "addmerge",
     "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
+    "condition": {
+      "when": "AllowArcherPotion",
+      "isValue": "false"
+    }
+  },
+  {
+    "file": "alchemy:recipes/grid/ingredient/compatibility/mn-archerbase.json",
+    "op": "addmerge",
+    "path": "/7/enabled",
     "value": false,
     "condition": {
       "when": "AllowArcherPotion",

@@ -277,7 +277,6 @@
       "waterTightContainerProps": { "containable": true, "itemsPerLitre": 100, "texture": { "base": "game:block/liquid/waterportion" } },
       "handbook": {
         "ignoreCreativeInvStacks": true,
-        // "groupByByType": { "*-medium": ["potionportion-{potiontype}-medium"], "*-strong": ["potionportion-{potiontype}-strong"] },
         "exclude": true
       }
     }

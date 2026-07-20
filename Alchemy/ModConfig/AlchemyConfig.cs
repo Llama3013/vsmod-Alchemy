@@ -37,6 +37,53 @@ namespace Alchemy
                         break;
                 }
             }
+
+            WriteDynamicWorldConfig(cfg);
+        }
+
+        // I just create dynamic config for patches to understand when batches of config are set
+        private void WriteDynamicWorldConfig(ITreeAttribute cfg)
+        {
+            cfg.SetBool(
+                "AnyPotionEnabled",
+                AllowArcherPotion
+                    || AllowHealingEffectPotion
+                    || AllowHungerEnhancePotion
+                    || AllowHungerSupressPotion
+                    || AllowHunterPotion
+                    || AllowLooterPotion
+                    || AllowMeleePotion
+                    || AllowMiningPotion
+                    || AllowPoisonPotion
+                    || AllowPredatorPotion
+                    || AllowRegenPotion
+                    || AllowScentMaskPotion
+                    || AllowSpeedPotion
+                    || AllowVitalityPotion
+            );
+
+            cfg.SetBool(
+                "AnyUtilityPotionEnabled",
+                AllowRecallPotion
+                    || AllowGlowPotion
+                    || AllowWaterBreathePotion
+                    || AllowNutritionPotion
+                    || AllowTemporalPotion
+                    || AllowReshapePotion
+                    || AllowGrowPotion
+                    || AllowShrinkPotion
+                    || AllowFallPotion
+                    || AllowClimbPotion
+                    || AllowFlightPotion
+                    || AllowColdResistPotion
+            );
+
+            cfg.SetBool("AnyPotionStrengthEnabled", AllowMediumPotions || AllowStrongPotions);
+
+            cfg.SetBool(
+                "AnyFlaskSizeEnabled",
+                AllowSmallFlasks || AllowMediumFlasks || AllowLargeFlasks
+            );
         }
 
         // I have to make sure that the client reads the config at LevelFinalize or later otherwise the client will read client config instead of server config, I wish I learnt this way earlier
