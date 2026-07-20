@@ -157,7 +157,7 @@
       "mat4": { "base": "alchemy:item/potionbase/lupine-purple" }
     }
   },
-  "maxstacksize": 64,
+  "maxstacksize": 50,
   "materialDensity": 620,
   "combustibleProps": { "burnTemperature": 400, "burnDuration": 6 },
   "guiTransform": {

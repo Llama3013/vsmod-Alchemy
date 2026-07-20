@@ -677,6 +677,7 @@
   "block-potioncauldron-steel": "Brewing Cauldron (Steel)",
   "block-potioncauldron-meteoriciron": "Brewing Cauldron (Meteoric iron)",
   "block-potioncauldron-*": "Brewing Cauldron",
+  "block-potioncauldron": "Brewing Cauldron",
   "blockdesc-potioncauldron-*": "Not designed for meal-making. Specially crafted for brewing potions.",
   "cauldron-warning-no-spoon": "A stirring spoon is required to brew potions",
   "cauldron-warning-glass-spoon": "A glass stirring spoon is required for strong potions",

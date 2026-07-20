@@ -131,7 +131,7 @@
       "handbook": { "exclude": true }
     }
   },
-  "maxstacksize": 64,
+  "maxstacksize": 50,
   "materialDensity": 620,
   "combustibleProps": { "burnTemperature": 400, "burnDuration": 6 },
   "guiTransform": {

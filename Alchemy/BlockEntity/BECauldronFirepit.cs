@@ -25,9 +25,17 @@ namespace Alchemy
         {
             base.Initialize(api);
             EnsureCauldronInSlot();
+            ResolveStirringSpoon();
             Inventory.SlotModified += OnCauldronSlotModified;
             if (api.Side == EnumAppSide.Server)
                 RegisterGameTickListener(OnSpoonCheck, 200);
+        }
+        private void ResolveStirringSpoon()
+        {
+            if (
+                Inventory[1]?.Itemstack?.Attributes["stirringSpoon"] is ItemstackAttribute { value: ItemStack spoonStack }
+            )
+                spoonStack.ResolveBlockOrItem(Api.World);
         }
 
         private void OnSpoonCheck(float dt)
@@ -158,6 +166,8 @@ namespace Alchemy
         )
         {
             base.FromTreeAttributes(tree, worldForResolving);
+            if (Api != null)
+                ResolveStirringSpoon();
             if (Api?.Side == EnumAppSide.Client && invDialog?.IsOpened() == true)
                 SetDialogValues(invDialog.Attributes);
         }
