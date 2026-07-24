@@ -10,7 +10,7 @@ namespace Alchemy
     {
         public static void Postfix(EntityBehaviorBodyTemperature __instance, ref float __result)
         {
-            if (__instance.entity.WatchedAttributes.GetLong("coldresistpotionid") == 0)
+            if (!__instance.entity.WatchedAttributes.GetBool(EffectAttr.ColdResist))
             {
                 return;
             }

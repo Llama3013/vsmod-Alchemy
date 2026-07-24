@@ -111,28 +111,20 @@ namespace Alchemy
             );
         }
 
-        public bool CanConsume(ItemSlot slot, EntityAgent byEntity)
-        {
-            if (!TryGetPotionData(slot, out PotionData data))
-                return false;
-            return byEntity.WatchedAttributes.GetLong(data.PotionId) == 0;
-        }
-
         private bool HasEnoughToDrink(ItemSlot slot)
         {
             return PotionConsumableLogic.HasEnoughSource(collObj, source, slot, drinkCheckLitres);
         }
 
-        private static bool IsReshapeReentry(EntityAgent byEntity, PotionData data) =>
-            data.PotionId == "reshapepotionid"
-            && byEntity.WatchedAttributes.GetBool("allowcharselonce");
+        private static bool IsReshapeReentry(EntityAgent byEntity, EffectContext ctx) =>
+            ctx?.Reshape == true && byEntity.WatchedAttributes.GetBool("allowcharselonce");
 
-        private static bool IsRecallOnSailedBoat(EntityAgent byEntity, PotionData data) =>
-            data.PotionId == "recallpotionid"
+        private static bool IsRecallOnSailedBoat(EntityAgent byEntity, EffectContext ctx) =>
+            ctx?.Respawn == true
             && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path is string boatPath
             && WildcardUtil.Match("boat-sailed-*", boatPath);
 
-        private string GetDrinkBlockReason(ItemSlot slot, EntityAgent byEntity, PotionData data)
+        private string GetDrinkBlockReason(ItemSlot slot, EntityAgent byEntity, EffectContext ctx)
         {
             if (!HasEnoughToDrink(slot))
                 return "alchemy:not-enough-potion";
@@ -140,10 +132,10 @@ namespace Alchemy
             if (byEntity.World.Side != EnumAppSide.Server)
                 return null;
 
-            if (IsReshapeReentry(byEntity, data))
+            if (IsReshapeReentry(byEntity, ctx))
                 return "alchemy:reshape-block";
 
-            if (IsRecallOnSailedBoat(byEntity, data))
+            if (IsRecallOnSailedBoat(byEntity, ctx))
                 return "alchemy:boat-block";
 
             return null;
@@ -154,7 +146,7 @@ namespace Alchemy
             if (byEntity is not EntityPlayer player)
                 return false;
 
-            PotionEffectManager manager = player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager;
+            EffectManager manager = player.GetBehavior<EntityBehaviorEffects>()?.Manager;
 
             if (manager?.CanRefresh(data.PotionId) == true)
                 return false;
@@ -171,7 +163,7 @@ namespace Alchemy
             if (byEntity is not EntityPlayer player)
                 return false;
 
-            return player.GetBehavior<EntityBehaviorPotionEffect>()?.Manager.HasAnyActive == true;
+            return player.GetBehavior<EntityBehaviorEffects>()?.Manager.HasAnyActive == true;
         }
 
         private static void DenyDrink(EntityAgent byEntity, string langKey)
@@ -351,16 +343,16 @@ namespace Alchemy
             if (!drinkResolvedEntities.Add(byEntity.EntityId))
                 return;
 
-            string blockReason = GetDrinkBlockReason(slot, byEntity, data);
+            float strengthMul = PotionConsumableLogic.GetStrengthMultiplier(data.Strength);
+            EffectContext ctx = EffectRegistry.Build(data.PotionId, strengthMul);
+            bool resetsEffects = ctx != null && ctx.ResetsEffects;
+
+            string blockReason = GetDrinkBlockReason(slot, byEntity, ctx);
             if (blockReason != null)
             {
                 DenyDrink(byEntity, blockReason);
                 return;
             }
-
-            float strengthMul = PotionConsumableLogic.GetStrengthMultiplier(data.Strength);
-            PotionContext ctx = PotionRegistry.BuildPotionDef(data.PotionId, strengthMul);
-            bool resetsEffects = ctx != null && ctx.ResetsEffects;
 
             if (!resetsEffects && IsPotionAlreadyActive(byEntity, data))
             {
@@ -404,16 +396,16 @@ namespace Alchemy
                 return;
 
             float strengthMul = PotionConsumableLogic.GetStrengthMultiplier(data.Strength);
-            PotionContext ctx = PotionRegistry.BuildPotionDef(data.PotionId, strengthMul);
+            EffectContext ctx = EffectRegistry.Build(data.PotionId, strengthMul);
             if (ctx == null)
                 return;
 
-            if (ctx.Effects != null)
+            if (ctx.StatModifiers != null)
             {
                 int headerStart = dsc.Length;
                 dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
                 int headerEnd = dsc.Length;
-                if (ctx.Effects.TryGetValue("rangedWeaponsAcc", out float rWvalue) && rWvalue != 0f)
+                if (ctx.StatModifiers.TryGetValue("rangedWeaponsAcc", out float rWvalue) && rWvalue != 0f)
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-archer-accuracy-effect",
@@ -421,14 +413,14 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("animalLootDropRate", out float aLValue)
+                    ctx.StatModifiers.TryGetValue("animalLootDropRate", out float aLValue)
                     && aLValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-loot-effect", Math.Round(aLValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("animalHarvestingTime", out float ahValue)
+                    ctx.StatModifiers.TryGetValue("animalHarvestingTime", out float ahValue)
                     && ahValue != 0f
                 )
                     dsc.AppendLine(
@@ -438,20 +430,20 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("animalSeekingRange", out float aSValue)
+                    ctx.StatModifiers.TryGetValue("animalSeekingRange", out float aSValue)
                     && aSValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-animal-seek-effect", Math.Round(aSValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("maxhealthExtraPoints", out float mHEValue)
+                    ctx.StatModifiers.TryGetValue("maxhealthExtraPoints", out float mHEValue)
                     && mHEValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-max-health-effect", Math.Round(mHEValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("forageDropRate", out float fDValue) && fDValue != 0f)
+                if (ctx.StatModifiers.TryGetValue("forageDropRate", out float fDValue) && fDValue != 0f)
                     dsc.AppendLine(
                         Lang.Get(
                             "alchemy:potion-forage-amount-effect",
@@ -459,7 +451,7 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("healingeffectivness", out float hEValue)
+                    ctx.StatModifiers.TryGetValue("healingeffectivness", out float hEValue)
                     && hEValue != 0f
                 )
                     dsc.AppendLine(
@@ -468,34 +460,34 @@ namespace Alchemy
                             Math.Round(hEValue * 100, 0)
                         )
                     );
-                if (ctx.Effects.TryGetValue("hungerrate", out float hRValue) && hRValue != 0f)
+                if (ctx.StatModifiers.TryGetValue("hungerrate", out float hRValue) && hRValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-hunger-rate-effect", Math.Round(hRValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("meleeWeaponsDamage", out float mWValue)
+                    ctx.StatModifiers.TryGetValue("meleeWeaponsDamage", out float mWValue)
                     && mWValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-melee-damage-effect", Math.Round(mWValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("mechanicalsDamage", out float mDValue)
+                    ctx.StatModifiers.TryGetValue("mechanicalsDamage", out float mDValue)
                     && mDValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mech-damage-effect", Math.Round(mDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("miningSpeedMul", out float mSValue) && mSValue != 0f)
+                if (ctx.StatModifiers.TryGetValue("miningSpeedMul", out float mSValue) && mSValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-mining-speed-effect", Math.Round(mSValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("oreDropRate", out float oDValue) && oDValue != 0f)
+                if (ctx.StatModifiers.TryGetValue("oreDropRate", out float oDValue) && oDValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-ore-amount-effect", Math.Round(oDValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("rangedWeaponsDamage", out float rWDValue)
+                    ctx.StatModifiers.TryGetValue("rangedWeaponsDamage", out float rWDValue)
                     && rWDValue != 0f
                 )
                     dsc.AppendLine(
@@ -505,7 +497,7 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("rangedWeaponsSpeed", out float rWSValue)
+                    ctx.StatModifiers.TryGetValue("rangedWeaponsSpeed", out float rWSValue)
                     && rWSValue != 0f
                 )
                     dsc.AppendLine(
@@ -515,18 +507,18 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("rustyGearDropRate", out float rGDValue)
+                    ctx.StatModifiers.TryGetValue("rustyGearDropRate", out float rGDValue)
                     && rGDValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-gear-amount-effect", Math.Round(rGDValue * 100, 0))
                     );
-                if (ctx.Effects.TryGetValue("walkspeed", out float wSValue) && wSValue != 0f)
+                if (ctx.StatModifiers.TryGetValue("walkspeed", out float wSValue) && wSValue != 0f)
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-walk-speed-effect", Math.Round(wSValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("vesselContentsDropRate", out float vCDValue)
+                    ctx.StatModifiers.TryGetValue("vesselContentsDropRate", out float vCDValue)
                     && vCDValue != 0f
                 )
                     dsc.AppendLine(
@@ -536,14 +528,14 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("wildCropDropRate", out float wCDValue)
+                    ctx.StatModifiers.TryGetValue("wildCropDropRate", out float wCDValue)
                     && wCDValue != 0f
                 )
                     dsc.AppendLine(
                         Lang.Get("alchemy:potion-wild-crop-effect", Math.Round(wCDValue * 100, 0))
                     );
                 if (
-                    ctx.Effects.TryGetValue("wholeVesselLootChance", out float wVLValue)
+                    ctx.StatModifiers.TryGetValue("wholeVesselLootChance", out float wVLValue)
                     && wVLValue != 0f
                 )
                     dsc.AppendLine(
@@ -553,7 +545,7 @@ namespace Alchemy
                         )
                     );
                 if (
-                    ctx.Effects.TryGetValue("health", out float healthValue)
+                    ctx.StatModifiers.TryGetValue("health", out float healthValue)
                     && healthValue is > 0.01f or < -0.01f
                 )
                     dsc.AppendLine(Lang.Get("alchemy:potion-single-health-effect", healthValue));

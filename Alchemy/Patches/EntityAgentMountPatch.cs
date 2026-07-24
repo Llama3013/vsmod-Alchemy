@@ -16,7 +16,7 @@ namespace Alchemy
         {
             if (
                 __instance is EntityPlayer player
-                && player.WatchedAttributes.GetLong("flightpotionid") != 0
+                && player.WatchedAttributes.GetBool(EffectAttr.CanFly)
             )
             {
                 if (player.Player is IServerPlayer serverPlayer)

@@ -8,7 +8,17 @@ using Vintagestory.API.Server;
 
 namespace Alchemy
 {
-    public sealed class PotionEffectManager(EntityPlayer entity)
+    // WatchedAttributes keys that RefreshEffectState writes and the Harmony patches read
+    public static class EffectAttr
+    {
+        public const string WaterBreathe = "effectlib:waterBreathe";
+        public const string ColdResist = "effectlib:coldResist";
+        public const string CanFly = "effectlib:canFly";
+        public const string CanClimb = "effectlib:canClimb";
+        public const string GlowStrength = "effectlib:glowStrength";
+    }
+
+    public sealed class EffectManager(EntityPlayer entity)
     {
         private const string PersistKey = "alchemyEffects";
 
@@ -16,9 +26,9 @@ namespace Alchemy
         private readonly ICoreAPI api = entity.Api;
         private readonly Dictionary<string, ActiveEffect> active = [];
 
-        private float originalFallDamageMultiplier = 1f;
-        private bool originalCanClimbAnywhere;
-        private bool originalFreeMove;
+        private float? baselineFallDamageMultiplier;
+        private bool? baselineCanClimbAnywhere;
+        private bool? baselineFreeMove;
 
         public bool IsActive(string id) => active.ContainsKey(id);
 
@@ -32,7 +42,7 @@ namespace Alchemy
                 && Math.Abs(activeEffect.Effect.Context.Health) > float.Epsilon
             );
 
-        public bool TryApplyPotion(string id, PotionContext ctx, string name, bool resume = false)
+        public bool TryApply(string id, EffectContext ctx, string name, bool resume = false)
         {
             try
             {
@@ -52,7 +62,7 @@ namespace Alchemy
                     }
                 }
 
-                TempEffect effect = new(id, ctx);
+                AppliedEffect effect = new(id, ctx);
                 effect.Apply(entity, resume);
 
                 if (!resume && effect.Context.Respawn)
@@ -74,40 +84,9 @@ namespace Alchemy
                         effect.Context.TemporalStabilityGain
                     );
                 }
-                if (effect.Context.GlowStrength > 0)
-                {
-                    entity.WatchedAttributes.SetInt("glowStrength", effect.Context.GlowStrength);
-                }
                 if (!resume && Math.Abs(effect.Context.SizeChange) > float.Epsilon)
                 {
                     UtilityEffects.ApplySizeChange(entity, effect.Context.SizeChange);
-                }
-                if (
-                    Math.Abs(effect.Context.FallDamageReduction) > float.Epsilon
-                    && AlchemyConfig.Loaded.AllowFallPotion
-                )
-                {
-                    originalFallDamageMultiplier = entity.Properties.FallDamageMultiplier;
-                    entity.Properties.FallDamageMultiplier =
-                        1f - Math.Min(effect.Context.FallDamageReduction, 1f);
-                }
-
-                if (effect.Context.CanClimbAnywhere && AlchemyConfig.Loaded.AllowClimbPotion)
-                {
-                    originalCanClimbAnywhere = entity.Properties.CanClimbAnywhere;
-                    entity.Properties.CanClimbAnywhere = true;
-                }
-
-                if (
-                    effect.Context.CanFly
-                    && AlchemyConfig.Loaded.AllowFlightPotion
-                    && entity.Player is IServerPlayer flyPlayer
-                )
-                {
-                    if (!resume)
-                        originalFreeMove = flyPlayer.WorldData.FreeMove;
-                    flyPlayer.WorldData.FreeMove = true;
-                    flyPlayer.BroadcastPlayerData();
                 }
 
                 long handle;
@@ -137,6 +116,7 @@ namespace Alchemy
                     ApplyMs = entity.World.ElapsedMilliseconds,
                 };
                 entity.WatchedAttributes.SetLong(id, handle);
+                RefreshEffectState();
                 SaveEffectRecord(id, ctx, name);
 
                 return true;
@@ -173,7 +153,7 @@ namespace Alchemy
                 IServerPlayer serverPlayer = entity?.Player as IServerPlayer;
                 serverPlayer?.SendMessage(
                     GlobalConstants.InfoLogChatGroup,
-                    Lang.Get("alchemy:effect-lose", activeEffect.PotionName),
+                    Lang.Get("alchemy:effect-lose", activeEffect.DisplayName),
                     EnumChatType.Notification
                 );
             }
@@ -183,32 +163,6 @@ namespace Alchemy
             else
                 entity.World.UnregisterCallback(activeEffect.ListenerId);
 
-            if (activeEffect.Effect.Context.GlowStrength > 0)
-            {
-                entity.WatchedAttributes.RemoveAttribute("glowStrength");
-            }
-            if (activeEffect.Effect.Context.FallDamageReduction > 0)
-            {
-                entity.Properties.FallDamageMultiplier = originalFallDamageMultiplier;
-            }
-
-            if (
-                activeEffect.Effect.Context.CanClimbAnywhere
-                && AlchemyConfig.Loaded.AllowClimbPotion
-            )
-            {
-                entity.Properties.CanClimbAnywhere = originalCanClimbAnywhere;
-            }
-
-            if (
-                activeEffect.Effect.Context.CanFly
-                && AlchemyConfig.Loaded.AllowFlightPotion
-                && entity?.Player is IServerPlayer flyPlayer
-            )
-            {
-                flyPlayer.WorldData.FreeMove = originalFreeMove;
-                flyPlayer.BroadcastPlayerData();
-            }
             activeEffect.Effect.Remove(entity);
 
             active.Remove(id);
@@ -220,6 +174,8 @@ namespace Alchemy
                 tree.RemoveAttribute(id);
                 entity.WatchedAttributes.MarkPathDirty(PersistKey);
             }
+
+            RefreshEffectState();
         }
 
         public void RemoveAll()
@@ -243,6 +199,8 @@ namespace Alchemy
             }
 
             entity.WatchedAttributes.RemoveAttribute(PersistKey);
+
+            RefreshEffectState();
         }
 
         public void Suspend()
@@ -272,6 +230,8 @@ namespace Alchemy
                 entity.WatchedAttributes.MarkPathDirty(PersistKey);
 
             active.Clear();
+
+            RefreshEffectState();
         }
 
         public void RestoreEffects()
@@ -283,9 +243,9 @@ namespace Alchemy
                 {
                     ITreeAttribute record = tree.GetTreeAttribute(id);
                     int remainingSec = record?.GetInt("remainingSec") ?? 0;
-                    PotionContext ctx =
+                    EffectContext ctx =
                         remainingSec > 0
-                            ? PotionRegistry.BuildPotionDef(id, record.GetFloat("strengthMul", 1f))
+                            ? EffectRegistry.Build(id, record.GetFloat("strengthMul", 1f))
                             : null;
 
                     if (ctx == null || ctx.Duration <= 0)
@@ -299,9 +259,9 @@ namespace Alchemy
                     entity.WatchedAttributes.RemoveAttribute(id);
 
                     if (ctx.CanFly)
-                        originalFreeMove = record.GetBool("origFreeMove");
+                        baselineFreeMove ??= record.GetBool("origFreeMove");
 
-                    if (!TryApplyPotion(id, ctx, record.GetString("name", ""), resume: true))
+                    if (!TryApply(id, ctx, record.GetString("name", ""), resume: true))
                         tree.RemoveAttribute(id);
                 }
 
@@ -326,33 +286,140 @@ namespace Alchemy
                 entity.WatchedAttributes.RemoveAttribute(attr);
             }
 
-            if (!active.ContainsKey("glowpotionid"))
-                entity.WatchedAttributes.RemoveAttribute("glowStrength");
+            entity.WatchedAttributes.RemoveAttribute(LegacyGlowStrength);
+
+            RefreshEffectState();
 
             float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
             if (Math.Abs(sizeDelta) < 0.001f)
                 UtilityEffects.ResetPlayerSize(entity);
         }
 
-        private void SaveEffectRecord(string id, PotionContext ctx, string name)
+        // Not sure if I will keep this but this is to stop old named glowStrength from being stuck in attributes
+        private const string LegacyGlowStrength = "glowStrength";
+
+        private void RefreshEffectState()
+        {
+            AlchemyConfig cfg = AlchemyConfig.Loaded;
+            bool waterBreathe = false;
+            bool coldResist = false;
+            bool canFly = false;
+            bool canClimb = false;
+            int glowStrength = 0;
+            float fallDamageReduction = 0f;
+
+            foreach (ActiveEffect activeEffect in active.Values)
+            {
+                EffectContext ctx = activeEffect.Effect.Context;
+                waterBreathe |= ctx.WaterBreathe;
+                coldResist |= ctx.ColdResist;
+                canFly |= ctx.CanFly && cfg.AllowFlightPotion;
+                canClimb |= ctx.CanClimbAnywhere && cfg.AllowClimbPotion;
+                if (ctx.GlowStrength > glowStrength)
+                    glowStrength = ctx.GlowStrength;
+                // Strongest wins rather than stacking, so two fall potions cannot overwrite baseline
+                if (cfg.AllowFallPotion && ctx.FallDamageReduction > fallDamageReduction)
+                    fallDamageReduction = ctx.FallDamageReduction;
+            }
+
+            SetOrRemoveBool(EffectAttr.WaterBreathe, waterBreathe);
+            SetOrRemoveBool(EffectAttr.ColdResist, coldResist);
+            SetOrRemoveBool(EffectAttr.CanFly, canFly);
+            SetOrRemoveBool(EffectAttr.CanClimb, canClimb);
+
+            if (glowStrength > 0)
+                entity.WatchedAttributes.SetInt(EffectAttr.GlowStrength, glowStrength);
+            else
+                entity.WatchedAttributes.RemoveAttribute(EffectAttr.GlowStrength);
+
+            SyncFallDamage(fallDamageReduction);
+            SyncClimbing(canClimb);
+            SyncFreeMove(canFly);
+        }
+
+        private void SyncFallDamage(float reduction)
+        {
+            if (reduction > 0f)
+            {
+                baselineFallDamageMultiplier ??= entity.Properties.FallDamageMultiplier;
+                entity.Properties.FallDamageMultiplier = 1f - Math.Min(reduction, 1f);
+            }
+            else if (baselineFallDamageMultiplier.HasValue)
+            {
+                entity.Properties.FallDamageMultiplier = baselineFallDamageMultiplier.Value;
+                baselineFallDamageMultiplier = null;
+            }
+        }
+
+        private void SyncClimbing(bool canClimb)
+        {
+            if (canClimb)
+            {
+                baselineCanClimbAnywhere ??= entity.Properties.CanClimbAnywhere;
+                entity.Properties.CanClimbAnywhere = true;
+            }
+            else if (baselineCanClimbAnywhere.HasValue)
+            {
+                entity.Properties.CanClimbAnywhere = baselineCanClimbAnywhere.Value;
+                baselineCanClimbAnywhere = null;
+            }
+        }
+
+        private void SyncFreeMove(bool canFly)
+        {
+            if (entity?.Player is not IServerPlayer flyPlayer)
+                return;
+
+            bool target;
+
+            if (canFly)
+            {
+                baselineFreeMove ??= flyPlayer.WorldData.FreeMove;
+                target = true;
+            }
+            else
+            {
+                if (!baselineFreeMove.HasValue)
+                    return;
+
+                target = baselineFreeMove.Value;
+                baselineFreeMove = null;
+            }
+
+            if (flyPlayer.WorldData.FreeMove == target)
+                return;
+
+            flyPlayer.WorldData.FreeMove = target;
+            flyPlayer.BroadcastPlayerData();
+        }
+
+        private void SetOrRemoveBool(string key, bool value)
+        {
+            if (value)
+                entity.WatchedAttributes.SetBool(key, true);
+            else
+                entity.WatchedAttributes.RemoveAttribute(key);
+        }
+
+        private void SaveEffectRecord(string id, EffectContext ctx, string name)
         {
             ITreeAttribute tree = entity.WatchedAttributes.GetOrAddTreeAttribute(PersistKey);
             ITreeAttribute record = tree.GetOrAddTreeAttribute(id);
             record.SetString("name", name ?? "");
-            record.SetFloat("strengthMul", ctx.StrengthMul);
+            record.SetFloat("strengthMul", ctx.PotencyMul);
             record.SetInt("remainingSec", ctx.Duration);
             record.SetLong("appliedAt", entity.World.ElapsedMilliseconds);
             if (ctx.CanFly)
-                record.SetBool("origFreeMove", originalFreeMove);
+                record.SetBool("origFreeMove", baselineFreeMove ?? false);
             entity.WatchedAttributes.MarkPathDirty(PersistKey);
         }
     }
 
     internal sealed record ActiveEffect(
-        TempEffect Effect,
+        AppliedEffect Effect,
         long ListenerId,
         bool IsTicking,
-        string PotionName
+        string DisplayName
     )
     {
         public int Elapsed;

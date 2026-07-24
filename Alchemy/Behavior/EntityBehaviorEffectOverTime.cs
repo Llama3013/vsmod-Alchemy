@@ -8,7 +8,7 @@ using Vintagestory.API.Datastructures;
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class EntityBehaviorCoatedPotionEffect(Entity entity) : EntityBehavior(entity)
+    public class EntityBehaviorEffectOverTime(Entity entity) : EntityBehavior(entity)
     {
         private float dmgPerTick;
         private int tickSec;
@@ -91,12 +91,14 @@ namespace Alchemy
             float healthAmount = Math.Abs(dmgPerTick);
             if (healthAmount > float.Epsilon)
             {
-                DamageSource src = new()
-                {
-                    Source = EnumDamageSource.Internal,
-                    Type = dmgPerTick > float.Epsilon ? EnumDamageType.Heal : EnumDamageType.Poison,
-                };
-                entity.ReceiveDamage(src, healthAmount);
+                entity.ReceiveDamage(
+                    new()
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type = dmgPerTick > float.Epsilon ? EnumDamageType.Heal : EnumDamageType.Poison,
+                        IgnoreInvFrames = true,
+                    }, healthAmount
+                );
             }
         }
     }

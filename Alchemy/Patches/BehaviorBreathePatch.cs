@@ -12,7 +12,7 @@ namespace Alchemy
     {
         public static void Postfix(EntityBehaviorBreathe __instance, ref float __result)
         {
-            if (__instance.entity.WatchedAttributes.GetLong("waterbreathepotionid") == 0)
+            if (!__instance.entity.WatchedAttributes.GetBool(EffectAttr.WaterBreathe))
             {
                 return;
             }

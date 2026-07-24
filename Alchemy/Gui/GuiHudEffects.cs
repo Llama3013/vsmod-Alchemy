@@ -11,7 +11,7 @@ using Vintagestory.API.MathTools;
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    public class GuiHudPotion : HudElement
+    public class GuiHudEffects : HudElement
     {
         private sealed class TrackedEffect
         {
@@ -19,7 +19,7 @@ namespace Alchemy
             public string Name;
             public long AppliedToken;
             public long ExpiryMs;
-            public float StrengthMul;
+            public float PotencyMul;
             public float SizeDelta;
             public string[] DetailLines;
             public bool Endless;
@@ -52,7 +52,7 @@ namespace Alchemy
         private long ClientNowMs => capi.InWorldEllapsedMilliseconds;
         private bool CompactStyle => capi.Settings.Int["alchemyHudStyle"] == 1;
 
-        public GuiHudPotion(ICoreClientAPI capi)
+        public GuiHudEffects(ICoreClientAPI capi)
             : base(capi)
         {
             this.capi = capi;
@@ -101,7 +101,7 @@ namespace Alchemy
                         Name = record.GetString("name", ""),
                         AppliedToken = token,
                         ExpiryMs = ClientNowMs + remainingSec * 1000L,
-                        StrengthMul = record.GetFloat("strengthMul", 1f),
+                        PotencyMul = record.GetFloat("strengthMul", 1f),
                     };
                     changed = true;
                 }
@@ -319,7 +319,7 @@ namespace Alchemy
                 }
             }
 
-            PotionContext ctx = PotionRegistry.BuildPotionDef(effect.Id, effect.StrengthMul);
+            EffectContext ctx = EffectRegistry.Build(effect.Id, effect.PotencyMul);
             if (ctx != null)
             {
                 string healthTick = FormatHealthTick(ctx);
@@ -349,7 +349,7 @@ namespace Alchemy
             effect.DetailLines = [.. lines];
         }
 
-        private static string FormatHealthTick(PotionContext ctx)
+        private static string FormatHealthTick(EffectContext ctx)
         {
             if (ctx.TickSec <= 0 || Math.Abs(ctx.Health) <= float.Epsilon)
                 return null;
@@ -587,7 +587,7 @@ namespace Alchemy
     public class ModSystemHud : ModSystem
     {
         private ICoreClientAPI capi;
-        private GuiHudPotion alchemyHUD;
+        private GuiHudEffects alchemyHUD;
 
         public override bool ShouldLoad(EnumAppSide forSide)
         {
@@ -599,7 +599,7 @@ namespace Alchemy
             base.StartClientSide(api);
 
             capi = api;
-            alchemyHUD = new GuiHudPotion(api);
+            alchemyHUD = new GuiHudEffects(api);
 
             api.Input.RegisterHotKey(
                 "togglepotionhud",

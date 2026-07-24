@@ -4363,6 +4363,188 @@
         "comment": "alchemy:AllowCoatingFlight-Comment",
         "default": false
       },
+      "ALLOWTHROWPOISON": {
+        "name": "AllowThrowPoison",
+        "ingui": "alchemy:AllowThrowPoison",
+        "weight": 4.451,
+        "comment": "alchemy:AllowThrowPoison-Comment",
+        "default": true
+      },
+      "ALLOWTHROWREGEN": {
+        "name": "AllowThrowRegen",
+        "ingui": "alchemy:AllowThrowRegen",
+        "weight": 4.452,
+        "comment": "alchemy:AllowThrowRegen-Comment",
+        "default": true
+      },
+      "ALLOWTHROWARCHER": {
+        "name": "AllowThrowArcher",
+        "ingui": "alchemy:AllowThrowArcher",
+        "weight": 4.453,
+        "comment": "alchemy:AllowThrowArcher-Comment",
+        "default": false
+      },
+      "ALLOWTHROWHEALINGEFFECT": {
+        "name": "AllowThrowHealingEffect",
+        "ingui": "alchemy:AllowThrowHealingEffect",
+        "weight": 4.454,
+        "comment": "alchemy:AllowThrowHealingEffect-Comment",
+        "default": false
+      },
+      "ALLOWTHROWHUNGERENHANCE": {
+        "name": "AllowThrowHungerEnhance",
+        "ingui": "alchemy:AllowThrowHungerEnhance",
+        "weight": 4.455,
+        "comment": "alchemy:AllowThrowHungerEnhance-Comment",
+        "default": false
+      },
+      "ALLOWTHROWHUNGERSUPRESS": {
+        "name": "AllowThrowHungerSupress",
+        "ingui": "alchemy:AllowThrowHungerSupress",
+        "weight": 4.456,
+        "comment": "alchemy:AllowThrowHungerSupress-Comment",
+        "default": false
+      },
+      "ALLOWTHROWHUNTER": {
+        "name": "AllowThrowHunter",
+        "ingui": "alchemy:AllowThrowHunter",
+        "weight": 4.457,
+        "comment": "alchemy:AllowThrowHunter-Comment",
+        "default": false
+      },
+      "ALLOWTHROWLOOTER": {
+        "name": "AllowThrowLooter",
+        "ingui": "alchemy:AllowThrowLooter",
+        "weight": 4.458,
+        "comment": "alchemy:AllowThrowLooter-Comment",
+        "default": false
+      },
+      "ALLOWTHROWMELEE": {
+        "name": "AllowThrowMelee",
+        "ingui": "alchemy:AllowThrowMelee",
+        "weight": 4.459,
+        "comment": "alchemy:AllowThrowMelee-Comment",
+        "default": false
+      },
+      "ALLOWTHROWMINING": {
+        "name": "AllowThrowMining",
+        "ingui": "alchemy:AllowThrowMining",
+        "weight": 4.46,
+        "comment": "alchemy:AllowThrowMining-Comment",
+        "default": false
+      },
+      "ALLOWTHROWPREDATOR": {
+        "name": "AllowThrowPredator",
+        "ingui": "alchemy:AllowThrowPredator",
+        "weight": 4.461,
+        "comment": "alchemy:AllowThrowPredator-Comment",
+        "default": false
+      },
+      "ALLOWTHROWSCENTMASK": {
+        "name": "AllowThrowScentMask",
+        "ingui": "alchemy:AllowThrowScentMask",
+        "weight": 4.462,
+        "comment": "alchemy:AllowThrowScentMask-Comment",
+        "default": false
+      },
+      "ALLOWTHROWSPEED": {
+        "name": "AllowThrowSpeed",
+        "ingui": "alchemy:AllowThrowSpeed",
+        "weight": 4.463,
+        "comment": "alchemy:AllowThrowSpeed-Comment",
+        "default": false
+      },
+      "ALLOWTHROWVITALITY": {
+        "name": "AllowThrowVitality",
+        "ingui": "alchemy:AllowThrowVitality",
+        "weight": 4.464,
+        "comment": "alchemy:AllowThrowVitality-Comment",
+        "default": false
+      },
+      "ALLOWTHROWRECALL": {
+        "name": "AllowThrowRecall",
+        "ingui": "alchemy:AllowThrowRecall",
+        "weight": 4.465,
+        "comment": "alchemy:AllowThrowRecall-Comment",
+        "default": false
+      },
+      "ALLOWTHROWGLOW": {
+        "name": "AllowThrowGlow",
+        "ingui": "alchemy:AllowThrowGlow",
+        "weight": 4.466,
+        "comment": "alchemy:AllowThrowGlow-Comment",
+        "default": false
+      },
+      "ALLOWTHROWWATERBREATHE": {
+        "name": "AllowThrowWaterBreathe",
+        "ingui": "alchemy:AllowThrowWaterBreathe",
+        "weight": 4.467,
+        "comment": "alchemy:AllowThrowWaterBreathe-Comment",
+        "default": false
+      },
+      "ALLOWTHROWCOLDRESIST": {
+        "name": "AllowThrowColdResist",
+        "ingui": "alchemy:AllowThrowColdResist",
+        "weight": 4.468,
+        "comment": "alchemy:AllowThrowColdResist-Comment",
+        "default": false
+      },
+      "ALLOWTHROWNUTRITION": {
+        "name": "AllowThrowNutrition",
+        "ingui": "alchemy:AllowThrowNutrition",
+        "weight": 4.469,
+        "comment": "alchemy:AllowThrowNutrition-Comment",
+        "default": false
+      },
+      "ALLOWTHROWTEMPORAL": {
+        "name": "AllowThrowTemporal",
+        "ingui": "alchemy:AllowThrowTemporal",
+        "weight": 4.47,
+        "comment": "alchemy:AllowThrowTemporal-Comment",
+        "default": false
+      },
+      "ALLOWTHROWRESHAPE": {
+        "name": "AllowThrowReshape",
+        "ingui": "alchemy:AllowThrowReshape",
+        "weight": 4.471,
+        "comment": "alchemy:AllowThrowReshape-Comment",
+        "default": false
+      },
+      "ALLOWTHROWGROW": {
+        "name": "AllowThrowGrow",
+        "ingui": "alchemy:AllowThrowGrow",
+        "weight": 4.472,
+        "comment": "alchemy:AllowThrowGrow-Comment",
+        "default": false
+      },
+      "ALLOWTHROWSHRINK": {
+        "name": "AllowThrowShrink",
+        "ingui": "alchemy:AllowThrowShrink",
+        "weight": 4.473,
+        "comment": "alchemy:AllowThrowShrink-Comment",
+        "default": false
+      },
+      "ALLOWTHROWFALL": {
+        "name": "AllowThrowFall",
+        "ingui": "alchemy:AllowThrowFall",
+        "weight": 4.474,
+        "comment": "alchemy:AllowThrowFall-Comment",
+        "default": false
+      },
+      "ALLOWTHROWCLIMB": {
+        "name": "AllowThrowClimb",
+        "ingui": "alchemy:AllowThrowClimb",
+        "weight": 4.475,
+        "comment": "alchemy:AllowThrowClimb-Comment",
+        "default": false
+      },
+      "ALLOWTHROWFLIGHT": {
+        "name": "AllowThrowFlight",
+        "ingui": "alchemy:AllowThrowFlight",
+        "weight": 4.476,
+        "comment": "alchemy:AllowThrowFlight-Comment",
+        "default": false
+      },
       "ALLOWRESHAPEPOTIONRECIPE": {
         "name": "AllowReshapePotionRecipe",
         "ingui": "alchemy:AllowReshapePotionRecipe",
@@ -4513,6 +4695,11 @@
       "type": "separator",
       "title": "alchemy:Allow-WeaponCoating-Config",
       "weight": 4.4
+    },
+    {
+      "type": "separator",
+      "title": "alchemy:Allow-Throwing-Config",
+      "weight": 4.45
     },
     {
       "type": "separator",

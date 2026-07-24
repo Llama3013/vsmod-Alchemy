@@ -1,6 +1,7 @@
 using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -17,6 +18,42 @@ namespace Alchemy
             throwable = GetCollectibleBehavior<CollectibleBehaviorThrowable>(true);
         }
 
+        private void WarnBeforeThrow(ItemSlot slot, EntityAgent byEntity)
+        {
+            if (api.Side != EnumAppSide.Server)
+                return;
+
+            ItemStack flaskStack = slot?.Itemstack;
+            if (flaskStack == null)
+                return;
+
+            if ((byEntity as EntityPlayer)?.Player is not IServerPlayer serverPlayer)
+                return;
+
+            if (
+                !PotionConsumableLogic.TryReadPotionInfo(
+                    GetContent(flaskStack),
+                    out string potionId,
+                    out _
+                )
+            )
+                return;
+
+            string warning = !PotionConsumableLogic.IsThrowableAllowed(potionId)
+                ? "alchemy:throwableflask-notthrowable"
+                : !IsFull(flaskStack) ? "alchemy:throwableflask-notfull"
+                : null;
+
+            if (warning == null)
+                return;
+
+            serverPlayer.SendMessage(
+                GlobalConstants.InfoLogChatGroup,
+                Lang.Get(warning),
+                EnumChatType.Notification
+            );
+        }
+
         public override void OnHeldInteractStart(
             ItemSlot slot,
             EntityAgent byEntity,
@@ -28,6 +65,9 @@ namespace Alchemy
         {
             if (throwable == null)
                 return;
+
+            if (firstEvent && !byEntity.Controls.ShiftKey)
+                WarnBeforeThrow(slot, byEntity);
 
             EnumHandHandling handHandling = EnumHandHandling.NotHandled;
             EnumHandling behaviorHandling = EnumHandling.PassThrough;

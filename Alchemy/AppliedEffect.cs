@@ -5,16 +5,16 @@ using Vintagestory.GameContent;
 
 namespace Alchemy
 {
-    public sealed class TempEffect(string effectId, PotionContext ctx)
+    public sealed class AppliedEffect(string effectId, EffectContext ctx)
     {
         private string ModCode => "potionmod-" + EffectId;
 
         public readonly string EffectId = effectId;
-        public readonly PotionContext Context = ctx;
+        public readonly EffectContext Context = ctx;
 
         public void Apply(EntityPlayer entity, bool resume = false)
         {
-            foreach (KeyValuePair<string, float> stat in Context.Effects)
+            foreach (KeyValuePair<string, float> stat in Context.StatModifiers)
             {
                 if (stat.Key == "maxhealthExtraPoints")
                 {
@@ -39,14 +39,15 @@ namespace Alchemy
                 return;
             if (Context.TickSec > 0 && Math.Abs(Context.Health) > float.Epsilon)
             {
-                int ticks = Context.Duration / Context.TickSec;
+                int ticks = Math.Max(1, Context.Duration / Context.TickSec);
                 entity.ReceiveDamage(
-                    new DamageSource
+                    new()
                     {
                         Source = EnumDamageSource.Internal,
                         Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
                         Duration = TimeSpan.FromSeconds(Context.Duration),
                         TicksPerDuration = ticks,
+                        IgnoreInvFrames = true,
                     },
                     Math.Abs(Context.Health * ticks)
                 );
@@ -59,7 +60,7 @@ namespace Alchemy
 
         public void Remove(EntityPlayer entity)
         {
-            foreach (string stat in Context.Effects.Keys)
+            foreach (string stat in Context.StatModifiers.Keys)
             {
                 entity.Stats.Remove(stat, ModCode);
                 if (stat == "maxhealthExtraPoints")
@@ -79,6 +80,7 @@ namespace Alchemy
                 {
                     Source = EnumDamageSource.Internal,
                     Type = Context.Health > 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
+                    IgnoreInvFrames = true,
                 },
                 Math.Abs(Context.Health)
             );

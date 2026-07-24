@@ -187,11 +187,11 @@ namespace Alchemy
 
             if (entity is EntityPlayer playerEntity)
             {
-                EntityBehaviorPotionEffect behavior =
-                    playerEntity.GetBehavior<EntityBehaviorPotionEffect>();
+                EntityBehaviorEffects behavior =
+                    playerEntity.GetBehavior<EntityBehaviorEffects>();
                 if (behavior?.Manager == null)
                     return;
-                PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, multiplier);
+                EffectContext ctx = EffectRegistry.Build(potionId, multiplier);
                 if (ctx == null)
                     return;
 
@@ -212,7 +212,7 @@ namespace Alchemy
                     }
                 }
 
-                if (behavior.Manager.TryApplyPotion(potionId, ctx, displayName))
+                if (behavior.Manager.TryApply(potionId, ctx, displayName))
                 {
                     (playerEntity.Player as IServerPlayer)?.SendMessage(
                         GlobalConstants.InfoLogChatGroup,
@@ -223,42 +223,42 @@ namespace Alchemy
             }
             else if (entity is EntityAgent agent)
             {
-                PotionContext ctx = PotionRegistry.BuildPotionDef(potionId, multiplier);
+                EffectContext ctx = EffectRegistry.Build(potionId, multiplier);
                 if (ctx == null)
                     return;
 
                 if (ctx.TickSec > 0 && Math.Abs(ctx.Health) > float.Epsilon)
                     ApplyTickEffect(agent, ctx);
-                else if (ctx.Effects.Count > 0 && ctx.Duration > 0)
+                else if (ctx.StatModifiers.Count > 0 && ctx.Duration > 0)
                     ApplyStatEffect(agent, ctx);
             }
         }
 
-        private static void ApplyTickEffect(EntityAgent agent, PotionContext ctx)
+        private static void ApplyTickEffect(EntityAgent agent, EffectContext ctx)
         {
             if (Math.Abs(ctx.Health) > float.Epsilon)
             {
-                if (agent.HasBehavior<EntityBehaviorCoatedPotionEffect>())
+                if (agent.HasBehavior<EntityBehaviorEffectOverTime>())
                     agent
-                        .GetBehavior<EntityBehaviorCoatedPotionEffect>()
+                        .GetBehavior<EntityBehaviorEffectOverTime>()
                         .Refresh(ctx.Health, ctx.TickSec, ctx.Duration);
                 else
                 {
-                    EntityBehaviorCoatedPotionEffect b = new(agent);
+                    EntityBehaviorEffectOverTime b = new(agent);
                     agent.AddBehavior(b);
                     b.Setup(ctx.Health, ctx.TickSec, ctx.Duration);
                 }
             }
         }
 
-        private static void ApplyStatEffect(EntityAgent agent, PotionContext ctx)
+        private static void ApplyStatEffect(EntityAgent agent, EffectContext ctx)
         {
             const string subkey = "weaponcoat";
-            foreach (KeyValuePair<string, float> stat in ctx.Effects)
+            foreach (KeyValuePair<string, float> stat in ctx.StatModifiers)
                 agent.Stats.Set(stat.Key, subkey, stat.Value, false);
 
             long agentId = agent.EntityId;
-            List<string> effectKeys = [.. ctx.Effects.Keys];
+            List<string> effectKeys = [.. ctx.StatModifiers.Keys];
             agent.World.RegisterCallback(
                 _ =>
                 {

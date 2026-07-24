@@ -11,14 +11,11 @@ namespace Alchemy
     {
         public static void Postfix(EntityPlayer __instance, ref byte[] __result)
         {
-            if (__instance.WatchedAttributes.GetLong("glowpotionid") == 0)
+            int glowStrength = __instance.WatchedAttributes.GetInt(EffectAttr.GlowStrength);
+            if (glowStrength <= 0)
             {
                 return;
             }
-            int glowStrength = __instance.WatchedAttributes.GetInt(
-                "glowStrength",
-                AlchemyConfig.Loaded.GlowPotionStrength
-            );
             __result = [0, 0, (byte)glowStrength];
         }
     }

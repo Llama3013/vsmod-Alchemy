@@ -44,6 +44,23 @@ namespace Alchemy
             }
             CombatOverhaulCompat.Init(api);
             RegisterClasses(api);
+            RegisterEffectsOnce(api.Logger);
+        }
+
+        private static readonly object effectRegistrationLock = new();
+        private static bool effectsRegistered;
+
+        private static void RegisterEffectsOnce(ILogger logger)
+        {
+            lock (effectRegistrationLock)
+            {
+                if (effectsRegistered)
+                    return;
+
+                PotionEffects.RegisterAll();
+                PotionDefinitions.Validate(logger);
+                effectsRegistered = true;
+            }
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -151,21 +168,21 @@ namespace Alchemy
             {
                 if (iPlayer.Entity is not EntityPlayer player)
                     return;
-                bool originalCanClimbAnywhere = player.Properties.CanClimbAnywhere;
-                if (player.WatchedAttributes.GetLong("climbpotionid") != 0)
-                    player.Properties.CanClimbAnywhere = true;
+
+                bool baselineCanClimbAnywhere = player.Properties.CanClimbAnywhere;
+
+                void SyncClimb() =>
+                    player.Properties.CanClimbAnywhere =
+                        player.WatchedAttributes.GetBool(EffectAttr.CanClimb)
+                        || baselineCanClimbAnywhere;
+
+                SyncClimb();
                 player.WatchedAttributes.RegisterModifiedListener(
-                    "climbpotionid",
-                    () =>
-                    {
-                        player.Properties.CanClimbAnywhere =
-                            player.WatchedAttributes.GetLong("climbpotionid") != 0
-                            || originalCanClimbAnywhere;
-                    }
+                    EffectAttr.CanClimb,
+                    SyncClimb
                 );
             };
 
-            PotionRegistry.Init();
         }
 
         /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
@@ -175,7 +192,6 @@ namespace Alchemy
             api.Event.PlayerDisconnect += OnPlayerDisconnect;
             api.Event.PlayerDeath += OnPlayerDeath;
 
-            PotionRegistry.Init();
             base.StartServerSide(api);
         }
 
@@ -185,14 +201,14 @@ namespace Alchemy
             if (entity?.Properties == null)
                 return;
 
-            if (!entity.HasBehavior<EntityBehaviorPotionEffect>())
+            if (!entity.HasBehavior<EntityBehaviorEffects>())
             {
-                entity.AddBehavior(new EntityBehaviorPotionEffect(entity));
+                entity.AddBehavior(new EntityBehaviorEffects(entity));
             }
 
             if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
             {
-                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RestoreEffects();
+                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RestoreEffects();
 
                 float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
                 if (sizeDelta is > 0.001f or < -0.001f)
@@ -203,7 +219,7 @@ namespace Alchemy
             else
             {
                 UtilityEffects.ResetPlayerSize(entity);
-                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
             }
         }
 
@@ -213,17 +229,17 @@ namespace Alchemy
             if (entity?.Properties == null)
                 return;
 
-            if (!entity.HasBehavior<EntityBehaviorPotionEffect>())
+            if (!entity.HasBehavior<EntityBehaviorEffects>())
                 return;
 
             if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
             {
-                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.Suspend();
+                entity.GetBehavior<EntityBehaviorEffects>().Manager?.Suspend();
             }
             else
             {
                 UtilityEffects.ResetPlayerSize(entity);
-                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
             }
         }
 
@@ -234,8 +250,8 @@ namespace Alchemy
                 return;
 
             UtilityEffects.ResetPlayerSize(entity);
-            if (entity.HasBehavior<EntityBehaviorPotionEffect>())
-                entity.GetBehavior<EntityBehaviorPotionEffect>().Manager?.RemoveAll();
+            if (entity.HasBehavior<EntityBehaviorEffects>())
+                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
         }
 
         public override void Dispose()

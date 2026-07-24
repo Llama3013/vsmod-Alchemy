@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vintagestory.API.Common;
@@ -93,77 +93,14 @@ namespace Alchemy
             return taken?.StackSize > 0;
         }
 
-        internal static bool IsThrowableAllowed(string potionId) => IsCoatingAllowed(potionId);
+        internal static bool IsThrowableAllowed(string potionId) =>
+            PotionDefinitions.AllowsThrowing(potionId);
 
-        internal static bool IsCoatingAllowed(string potionId)
-        {
-            AlchemyConfig cfg = AlchemyConfig.Loaded;
-            return potionId switch
-            {
-                "archerpotionid" => cfg.AllowCoatingArcher,
-                "healingeffectpotionid" => cfg.AllowCoatingHealingEffect,
-                "hungerenhancepotionid" => cfg.AllowCoatingHungerEnhance,
-                "hungersupresspotionid" => cfg.AllowCoatingHungerSupress,
-                "hunterpotionid" => cfg.AllowCoatingHunter,
-                "looterpotionid" => cfg.AllowCoatingLooter,
-                "meleepotionid" => cfg.AllowCoatingMelee,
-                "miningpotionid" => cfg.AllowCoatingMining,
-                "poisontickpotionid" => cfg.AllowCoatingPoison,
-                "predatorpotionid" => cfg.AllowCoatingPredator,
-                "regentickpotionid" => cfg.AllowCoatingRegen,
-                "scentmaskpotionid" => cfg.AllowCoatingScentMask,
-                "speedpotionid" => cfg.AllowCoatingSpeed,
-                "vitalitypotionid" => cfg.AllowCoatingVitality,
-                "recallpotionid" => cfg.AllowCoatingRecall,
-                "glowpotionid" => cfg.AllowCoatingGlow,
-                "waterbreathepotionid" => cfg.AllowCoatingWaterBreathe,
-                "coldresistpotionid" => cfg.AllowCoatingColdResist,
-                "nutritionpotionid" => cfg.AllowCoatingNutrition,
-                "temporalpotionid" => cfg.AllowCoatingTemporal,
-                "reshapepotionid" => cfg.AllowCoatingReshape,
-                "growpotionid" => cfg.AllowCoatingGrow,
-                "shrinkpotionid" => cfg.AllowCoatingShrink,
-                "fallpotionid" => cfg.AllowCoatingFall,
-                "climbpotionid" => cfg.AllowCoatingClimb,
-                "flightpotionid" => cfg.AllowCoatingFlight,
-                _ => false,
-            };
-        }
+        internal static bool IsCoatingAllowed(string potionId) =>
+            PotionDefinitions.AllowsCoating(potionId);
 
-        internal static string GetPotionGroup(string potionId)
-        {
-            AlchemyConfig cfg = AlchemyConfig.Loaded;
-            return potionId switch
-            {
-                "archerpotionid" => cfg.ArcherPotionGroup,
-                "healingeffectpotionid" => cfg.HealingEffectPotionGroup,
-                "hungerenhancepotionid" => cfg.HungerEnhancePotionGroup,
-                "hungersupresspotionid" => cfg.HungerSupressPotionGroup,
-                "hunterpotionid" => cfg.HunterPotionGroup,
-                "looterpotionid" => cfg.LooterPotionGroup,
-                "meleepotionid" => cfg.MeleePotionGroup,
-                "miningpotionid" => cfg.MiningPotionGroup,
-                "poisontickpotionid" => cfg.PoisonPotionGroup,
-                "predatorpotionid" => cfg.PredatorPotionGroup,
-                "regentickpotionid" => cfg.RegenPotionGroup,
-                "scentmaskpotionid" => cfg.ScentMaskPotionGroup,
-                "speedpotionid" => cfg.SpeedPotionGroup,
-                "vitalitypotionid" => cfg.VitalityPotionGroup,
-                "recallpotionid" => cfg.RecallPotionGroup,
-                "glowpotionid" => cfg.GlowPotionGroup,
-                "waterbreathepotionid" => cfg.WaterBreathePotionGroup,
-                "coldresistpotionid" => cfg.ColdResistPotionGroup,
-                "nutritionpotionid" => cfg.NutritionPotionGroup,
-                "temporalpotionid" => cfg.TemporalPotionGroup,
-                "reshapepotionid" => cfg.ReshapePotionGroup,
-                "growpotionid" => cfg.GrowPotionGroup,
-                "shrinkpotionid" => cfg.ShrinkPotionGroup,
-                "fallpotionid" => cfg.FallPotionGroup,
-                "climbpotionid" => cfg.ClimbPotionGroup,
-                "flightpotionid" => cfg.FlightPotionGroup,
-                _ => "none",
-            };
-        }
+        internal static string GetPotionGroup(string potionId) =>
+            PotionDefinitions.GroupOf(potionId);
 
         internal static HashSet<string> GetActivePotionIds(EntityPlayer player)
         {
@@ -428,166 +365,8 @@ namespace Alchemy
         {
             AlchemyConfig cfg = AlchemyConfig.Loaded;
 
-            (float damage, float intox, float psych, float satLoss) = potionId switch
-            {
-                "archerpotionid" => (
-                    cfg.ArcherPotionDrinkingDamage,
-                    cfg.ArcherPotionDrinkingIntoxication,
-                    cfg.ArcherPotionDrinkingPsychedelic,
-                    cfg.ArcherPotionDrinkingSaturationLoss
-                ),
-                "healingeffectpotionid" => (
-                    cfg.HealingEffectPotionDrinkingDamage,
-                    cfg.HealingEffectPotionDrinkingIntoxication,
-                    cfg.HealingEffectPotionDrinkingPsychedelic,
-                    cfg.HealingEffectPotionDrinkingSaturationLoss
-                ),
-                "hungerenhancepotionid" => (
-                    cfg.HungerEnhancePotionDrinkingDamage,
-                    cfg.HungerEnhancePotionDrinkingIntoxication,
-                    cfg.HungerEnhancePotionDrinkingPsychedelic,
-                    cfg.HungerEnhancePotionDrinkingSaturationLoss
-                ),
-                "hungersupresspotionid" => (
-                    cfg.HungerSupressPotionDrinkingDamage,
-                    cfg.HungerSupressPotionDrinkingIntoxication,
-                    cfg.HungerSupressPotionDrinkingPsychedelic,
-                    cfg.HungerSupressPotionDrinkingSaturationLoss
-                ),
-                "hunterpotionid" => (
-                    cfg.HunterPotionDrinkingDamage,
-                    cfg.HunterPotionDrinkingIntoxication,
-                    cfg.HunterPotionDrinkingPsychedelic,
-                    cfg.HunterPotionDrinkingSaturationLoss
-                ),
-                "looterpotionid" => (
-                    cfg.LooterPotionDrinkingDamage,
-                    cfg.LooterPotionDrinkingIntoxication,
-                    cfg.LooterPotionDrinkingPsychedelic,
-                    cfg.LooterPotionDrinkingSaturationLoss
-                ),
-                "meleepotionid" => (
-                    cfg.MeleePotionDrinkingDamage,
-                    cfg.MeleePotionDrinkingIntoxication,
-                    cfg.MeleePotionDrinkingPsychedelic,
-                    cfg.MeleePotionDrinkingSaturationLoss
-                ),
-                "miningpotionid" => (
-                    cfg.MiningPotionDrinkingDamage,
-                    cfg.MiningPotionDrinkingIntoxication,
-                    cfg.MiningPotionDrinkingPsychedelic,
-                    cfg.MiningPotionDrinkingSaturationLoss
-                ),
-                "poisontickpotionid" => (
-                    cfg.PoisonPotionDrinkingDamage,
-                    cfg.PoisonPotionDrinkingIntoxication,
-                    cfg.PoisonPotionDrinkingPsychedelic,
-                    cfg.PoisonPotionDrinkingSaturationLoss
-                ),
-                "predatorpotionid" => (
-                    cfg.PredatorPotionDrinkingDamage,
-                    cfg.PredatorPotionDrinkingIntoxication,
-                    cfg.PredatorPotionDrinkingPsychedelic,
-                    cfg.PredatorPotionDrinkingSaturationLoss
-                ),
-                "regentickpotionid" => (
-                    cfg.RegenPotionDrinkingDamage,
-                    cfg.RegenPotionDrinkingIntoxication,
-                    cfg.RegenPotionDrinkingPsychedelic,
-                    cfg.RegenPotionDrinkingSaturationLoss
-                ),
-                "scentmaskpotionid" => (
-                    cfg.ScentMaskPotionDrinkingDamage,
-                    cfg.ScentMaskPotionDrinkingIntoxication,
-                    cfg.ScentMaskPotionDrinkingPsychedelic,
-                    cfg.ScentMaskPotionDrinkingSaturationLoss
-                ),
-                "speedpotionid" => (
-                    cfg.SpeedPotionDrinkingDamage,
-                    cfg.SpeedPotionDrinkingIntoxication,
-                    cfg.SpeedPotionDrinkingPsychedelic,
-                    cfg.SpeedPotionDrinkingSaturationLoss
-                ),
-                "vitalitypotionid" => (
-                    cfg.VitalityPotionDrinkingDamage,
-                    cfg.VitalityPotionDrinkingIntoxication,
-                    cfg.VitalityPotionDrinkingPsychedelic,
-                    cfg.VitalityPotionDrinkingSaturationLoss
-                ),
-                "glowpotionid" => (
-                    cfg.GlowPotionDrinkingDamage,
-                    cfg.GlowPotionDrinkingIntoxication,
-                    cfg.GlowPotionDrinkingPsychedelic,
-                    cfg.GlowPotionDrinkingSaturationLoss
-                ),
-                "waterbreathepotionid" => (
-                    cfg.WaterBreathePotionDrinkingDamage,
-                    cfg.WaterBreathePotionDrinkingIntoxication,
-                    cfg.WaterBreathePotionDrinkingPsychedelic,
-                    cfg.WaterBreathePotionDrinkingSaturationLoss
-                ),
-                "coldresistpotionid" => (
-                    cfg.ColdResistPotionDrinkingDamage,
-                    cfg.ColdResistPotionDrinkingIntoxication,
-                    cfg.ColdResistPotionDrinkingPsychedelic,
-                    cfg.ColdResistPotionDrinkingSaturationLoss
-                ),
-                "nutritionpotionid" => (
-                    cfg.NutritionPotionDrinkingDamage,
-                    cfg.NutritionPotionDrinkingIntoxication,
-                    cfg.NutritionPotionDrinkingPsychedelic,
-                    cfg.NutritionPotionDrinkingSaturationLoss
-                ),
-                "recallpotionid" => (
-                    cfg.RecallPotionDrinkingDamage,
-                    cfg.RecallPotionDrinkingIntoxication,
-                    cfg.RecallPotionDrinkingPsychedelic,
-                    cfg.RecallPotionDrinkingSaturationLoss
-                ),
-                "temporalpotionid" => (
-                    cfg.TemporalPotionDrinkingDamage,
-                    cfg.TemporalPotionDrinkingIntoxication,
-                    cfg.TemporalPotionDrinkingPsychedelic,
-                    cfg.TemporalPotionDrinkingSaturationLoss
-                ),
-                "reshapepotionid" => (
-                    cfg.ReshapePotionDrinkingDamage,
-                    cfg.ReshapePotionDrinkingIntoxication,
-                    cfg.ReshapePotionDrinkingPsychedelic,
-                    cfg.ReshapePotionDrinkingSaturationLoss
-                ),
-                "growpotionid" => (
-                    cfg.GrowPotionDrinkingDamage,
-                    cfg.GrowPotionDrinkingIntoxication,
-                    cfg.GrowPotionDrinkingPsychedelic,
-                    cfg.GrowPotionDrinkingSaturationLoss
-                ),
-                "shrinkpotionid" => (
-                    cfg.ShrinkPotionDrinkingDamage,
-                    cfg.ShrinkPotionDrinkingIntoxication,
-                    cfg.ShrinkPotionDrinkingPsychedelic,
-                    cfg.ShrinkPotionDrinkingSaturationLoss
-                ),
-                "fallpotionid" => (
-                    cfg.FallPotionDrinkingDamage,
-                    cfg.FallPotionDrinkingIntoxication,
-                    cfg.FallPotionDrinkingPsychedelic,
-                    cfg.FallPotionDrinkingSaturationLoss
-                ),
-                "climbpotionid" => (
-                    cfg.ClimbPotionDrinkingDamage,
-                    cfg.ClimbPotionDrinkingIntoxication,
-                    cfg.ClimbPotionDrinkingPsychedelic,
-                    cfg.ClimbPotionDrinkingSaturationLoss
-                ),
-                "flightpotionid" => (
-                    cfg.FlightPotionDrinkingDamage,
-                    cfg.FlightPotionDrinkingIntoxication,
-                    cfg.FlightPotionDrinkingPsychedelic,
-                    cfg.FlightPotionDrinkingSaturationLoss
-                ),
-                _ => (0f, 0f, 0f, 0f),
-            };
+            (float damage, float intox, float psych, float satLoss) =
+                PotionDefinitions.DrinkingSideEffects(potionId);
 
             float mul = AlchemyConfig.Loaded.SideEffectStrengthMultiplier ? strengthMul : 1f;
             float totalIntoxChange = cfg.DrinkingPotionIntoxicationAmount + intox * mul;
@@ -631,12 +410,13 @@ namespace Alchemy
 
             if (Math.Abs(totalHealthChange) > float.Epsilon)
                 entity.ReceiveDamage(
-                    new DamageSource
+                    new()
                     {
                         Source = EnumDamageSource.Internal,
-                        Type = totalHealthChange < 0 ? EnumDamageType.Heal : EnumDamageType.Poison,
+                        Type = totalHealthChange < float.Epsilon ? EnumDamageType.Heal : EnumDamageType.Poison,
+                        IgnoreInvFrames = true,
                     },
-                    totalHealthChange
+                    Math.Abs(totalHealthChange)
                 );
         }
 
@@ -1077,15 +857,15 @@ namespace Alchemy
             if (string.IsNullOrWhiteSpace(data.PotionId))
                 return false;
 
-            EntityBehaviorPotionEffect behavior =
-                playerEntity.GetBehavior<EntityBehaviorPotionEffect>();
+            EntityBehaviorEffects behavior =
+                playerEntity.GetBehavior<EntityBehaviorEffects>();
 
             if (behavior == null)
                 return false;
 
             float strengthMul = GetStrengthMultiplier(data.Strength);
 
-            PotionContext ctx = PotionRegistry.BuildPotionDef(data.PotionId, strengthMul);
+            EffectContext ctx = EffectRegistry.Build(data.PotionId, strengthMul);
 
             if (ctx == null)
             {
@@ -1113,7 +893,7 @@ namespace Alchemy
                 return false;
             }
 
-            if (!behavior.Manager.TryApplyPotion(data.PotionId, ctx, data.DisplayName))
+            if (!behavior.Manager.TryApply(data.PotionId, ctx, data.DisplayName))
             {
                 return false;
             }
@@ -1123,9 +903,7 @@ namespace Alchemy
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
                 Lang.Get(
-                    data.PotionId == "reshapepotionid"
-                        ? "alchemy:reshape-gain"
-                        : "alchemy:effect-gain",
+                    ctx.Reshape ? "alchemy:reshape-gain" : "alchemy:effect-gain",
                     data.DisplayName
                 ),
                 EnumChatType.Notification

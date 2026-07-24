@@ -46,36 +46,16 @@ namespace Alchemy
         {
             cfg.SetBool(
                 "AnyPotionEnabled",
-                AllowArcherPotion
-                    || AllowHealingEffectPotion
-                    || AllowHungerEnhancePotion
-                    || AllowHungerSupressPotion
-                    || AllowHunterPotion
-                    || AllowLooterPotion
-                    || AllowMeleePotion
-                    || AllowMiningPotion
-                    || AllowPoisonPotion
-                    || AllowPredatorPotion
-                    || AllowRegenPotion
-                    || AllowScentMaskPotion
-                    || AllowSpeedPotion
-                    || AllowVitalityPotion
+                PotionDefinitions.All.Any(def =>
+                    !def.Utility && PotionDefinitions.IsEnabled(this, def)
+                )
             );
 
             cfg.SetBool(
                 "AnyUtilityPotionEnabled",
-                AllowRecallPotion
-                    || AllowGlowPotion
-                    || AllowWaterBreathePotion
-                    || AllowNutritionPotion
-                    || AllowTemporalPotion
-                    || AllowReshapePotion
-                    || AllowGrowPotion
-                    || AllowShrinkPotion
-                    || AllowFallPotion
-                    || AllowClimbPotion
-                    || AllowFlightPotion
-                    || AllowColdResistPotion
+                PotionDefinitions.All.Any(def =>
+                    def.Utility && PotionDefinitions.IsEnabled(this, def)
+                )
             );
 
             cfg.SetBool("AnyPotionStrengthEnabled", AllowMediumPotions || AllowStrongPotions);
@@ -271,6 +251,33 @@ namespace Alchemy
         public bool AllowCoatingFall { get; set; } = false;
         public bool AllowCoatingClimb { get; set; } = false;
         public bool AllowCoatingFlight { get; set; } = false;
+
+        public bool AllowThrowArcher { get; set; } = false;
+        public bool AllowThrowHealingEffect { get; set; } = false;
+        public bool AllowThrowHungerEnhance { get; set; } = false;
+        public bool AllowThrowHungerSupress { get; set; } = false;
+        public bool AllowThrowHunter { get; set; } = false;
+        public bool AllowThrowLooter { get; set; } = false;
+        public bool AllowThrowMelee { get; set; } = false;
+        public bool AllowThrowMining { get; set; } = false;
+        public bool AllowThrowPoison { get; set; } = true;
+        public bool AllowThrowPredator { get; set; } = false;
+        public bool AllowThrowRegen { get; set; } = true;
+        public bool AllowThrowScentMask { get; set; } = false;
+        public bool AllowThrowSpeed { get; set; } = false;
+        public bool AllowThrowVitality { get; set; } = false;
+        public bool AllowThrowRecall { get; set; } = false;
+        public bool AllowThrowGlow { get; set; } = false;
+        public bool AllowThrowWaterBreathe { get; set; } = false;
+        public bool AllowThrowColdResist { get; set; } = false;
+        public bool AllowThrowNutrition { get; set; } = false;
+        public bool AllowThrowTemporal { get; set; } = false;
+        public bool AllowThrowReshape { get; set; } = false;
+        public bool AllowThrowGrow { get; set; } = false;
+        public bool AllowThrowShrink { get; set; } = false;
+        public bool AllowThrowFall { get; set; } = false;
+        public bool AllowThrowClimb { get; set; } = false;
+        public bool AllowThrowFlight { get; set; } = false;
 
         public bool AllowFallPotion { get; set; } = true;
         public bool AllowFallPotionRecipe { get; set; } = true;

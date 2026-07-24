@@ -285,7 +285,7 @@ namespace Alchemy
             )
             {
                 entity.ReceiveDamage(
-                    new DamageSource()
+                    new()
                     {
                         Source = EnumDamageSource.Block,
                         SourceBlock = this,

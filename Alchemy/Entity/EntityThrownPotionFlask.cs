@@ -5,6 +5,7 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
+using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -233,6 +234,17 @@ namespace Alchemy
             World.SpawnParticles(particles);
         }
 
+        private static void NotifySplashed(Entity[] targets, string langKey)
+        {
+            foreach (Entity entity in targets)
+                if (entity is EntityPlayer { Player: IServerPlayer splashedPlayer })
+                    splashedPlayer.SendMessage(
+                        GlobalConstants.InfoLogChatGroup,
+                        Lang.Get(langKey),
+                        EnumChatType.Notification
+                    );
+        }
+
         private void ApplyContentsEffect(ItemStack contentStack)
         {
             if (contentStack == null)
@@ -247,24 +259,43 @@ namespace Alchemy
             )
                 return;
 
+            Entity[] targets = GetSplashTargets();
             if (!PotionConsumableLogic.IsThrowableAllowed(potionId))
+            {
+                NotifySplashed(targets, "alchemy:throwableflask-splash-notthrowable");
                 return;
+            }
+
+            if (
+                ProjectileStack?.Collectible is not BlockLiquidContainerBase container
+                || !container.IsFull(ProjectileStack)
+            )
+            {
+                NotifySplashed(targets, "alchemy:throwableflask-splash-notfull");
+                return;
+            }
 
             float multiplier =
                 AlchemyConfig.Loaded.ThrowableFlaskEffectMultiplier
                 * PotionConsumableLogic.GetStrengthMultiplier(strength);
             string displayName = ResolveDisplayName(contentStack);
 
-            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
-            Entity[] targets = World.GetEntitiesAround(
-                Pos.XYZ,
-                radius,
-                radius,
-                e => e is EntityAgent && e.Alive
-            );
-
             foreach (Entity entity in targets)
                 WeaponCoatEffects.Apply(potionId, entity, multiplier, displayName);
+        }
+
+        private Entity[] GetSplashTargets()
+        {
+            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
+            Vec3d impactPos = Pos.XYZ;
+            double radiusSq = radius * radius;
+
+            return World.GetEntitiesAround(
+                impactPos,
+                radius,
+                radius,
+                e => e is EntityAgent && e.Alive && e.Pos.SquareDistanceTo(impactPos) <= radiusSq
+            );
         }
 
         private void ApplyWetness()
@@ -272,15 +303,7 @@ namespace Alchemy
             if (World.Side != EnumAppSide.Server)
                 return;
 
-            float radius = AlchemyConfig.Loaded.ThrowableFlaskSplashRadius;
-            Entity[] targets = World.GetEntitiesAround(
-                Pos.XYZ,
-                radius,
-                radius,
-                e => e is EntityAgent && e.Alive
-            );
-
-            foreach (Entity entity in targets)
+            foreach (Entity entity in GetSplashTargets())
             {
                 float current = entity.WatchedAttributes.GetFloat("wetness");
                 entity.WatchedAttributes.SetFloat("wetness", Math.Min(1f, current + 0.35f));

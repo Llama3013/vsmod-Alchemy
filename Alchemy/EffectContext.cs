@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Alchemy
 {
-    public sealed class PotionContext
+    public sealed class EffectContext
     {
-        public Dictionary<string, float> Effects { get; } = [];
+        public Dictionary<string, float> StatModifiers { get; } = [];
 
-        public float StrengthMul { get; set; }
+        public float PotencyMul { get; set; }
         public int Duration { get; set; }
         public bool ResetsEffects { get; set; }
 
@@ -20,8 +20,6 @@ namespace Alchemy
         public float RetainedNutrition { get; set; }
         public float TemporalStabilityGain { get; set; }
         public int GlowStrength { get; set; }
-
-        // These are not inside the config as they would just render potions useless
         public bool Respawn { get; set; }
         public bool WaterBreathe { get; set; }
         public bool ColdResist { get; set; }
@@ -31,16 +29,16 @@ namespace Alchemy
         public bool CanClimbAnywhere { get; set; }
         public bool CanFly { get; set; }
 
-        public void AddEffect(string key, float baseValue)
+        public void AddStat(string key, float baseValue)
         {
             if (Math.Abs(baseValue) <= float.Epsilon)
                 return;
-            Effects.Add(key, baseValue * StrengthMul);
+            StatModifiers.Add(key, baseValue * PotencyMul);
         }
 
         public void SetHealth(float healthWithoutMul)
         {
-            Health = healthWithoutMul * StrengthMul;
+            Health = healthWithoutMul * PotencyMul;
         }
     }
 }
