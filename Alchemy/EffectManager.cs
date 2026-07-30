@@ -103,10 +103,7 @@ namespace Alchemy
                     // Instant potion: set a brief WatchedAttributes lock so the
                     // OnHeldInteractStop guard (GetLong != 0) should stop double consume potion
                     // Might need better fix but works for now and doesn't cause any issues that I know of
-                    long tempHandle = entity.World.RegisterCallback(
-                        dt => entity.WatchedAttributes.RemoveAttribute(id),
-                        500
-                    );
+                    long tempHandle = entity.World.RegisterCallback(dt => ClearHandle(id), 500);
                     entity.WatchedAttributes.SetLong(id, tempHandle);
                     return true;
                 }
@@ -166,7 +163,7 @@ namespace Alchemy
             activeEffect.Effect.Remove(entity);
 
             active.Remove(id);
-            entity.WatchedAttributes.RemoveAttribute(id);
+            ClearHandle(id);
 
             ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute(PersistKey);
             if (tree != null)
@@ -198,7 +195,7 @@ namespace Alchemy
                 entity.WatchedAttributes.RemoveAttribute(attr);
             }
 
-            entity.WatchedAttributes.RemoveAttribute(PersistKey);
+            RemoveIfPresent(PersistKey);
 
             RefreshEffectState();
         }
@@ -256,7 +253,7 @@ namespace Alchemy
 
                     ctx.Duration = Math.Min(remainingSec, ctx.Duration);
 
-                    entity.WatchedAttributes.RemoveAttribute(id);
+                    ClearHandle(id);
 
                     if (ctx.CanFly)
                         baselineFreeMove ??= record.GetBool("origFreeMove");
@@ -286,7 +283,7 @@ namespace Alchemy
                 entity.WatchedAttributes.RemoveAttribute(attr);
             }
 
-            entity.WatchedAttributes.RemoveAttribute(LegacyGlowStrength);
+            RemoveIfPresent(LegacyGlowStrength);
 
             RefreshEffectState();
 
@@ -322,15 +319,11 @@ namespace Alchemy
                     fallDamageReduction = ctx.FallDamageReduction;
             }
 
-            SetOrRemoveBool(EffectAttr.WaterBreathe, waterBreathe);
-            SetOrRemoveBool(EffectAttr.ColdResist, coldResist);
-            SetOrRemoveBool(EffectAttr.CanFly, canFly);
-            SetOrRemoveBool(EffectAttr.CanClimb, canClimb);
-
-            if (glowStrength > 0)
-                entity.WatchedAttributes.SetInt(EffectAttr.GlowStrength, glowStrength);
-            else
-                entity.WatchedAttributes.RemoveAttribute(EffectAttr.GlowStrength);
+            SetEffectBool(EffectAttr.WaterBreathe, waterBreathe);
+            SetEffectBool(EffectAttr.ColdResist, coldResist);
+            SetEffectBool(EffectAttr.CanFly, canFly);
+            SetEffectBool(EffectAttr.CanClimb, canClimb);
+            SetEffectInt(EffectAttr.GlowStrength, glowStrength);
 
             SyncFallDamage(fallDamageReduction);
             SyncClimbing(canClimb);
@@ -393,11 +386,31 @@ namespace Alchemy
             flyPlayer.BroadcastPlayerData();
         }
 
-        private void SetOrRemoveBool(string key, bool value)
+        private void SetEffectBool(string key, bool value)
         {
-            if (value)
-                entity.WatchedAttributes.SetBool(key, true);
-            else
+            if (!value && !entity.WatchedAttributes.HasAttribute(key))
+                return;
+            if (entity.WatchedAttributes.GetBool(key) != value)
+                entity.WatchedAttributes.SetBool(key, value);
+        }
+
+        private void SetEffectInt(string key, int value)
+        {
+            if (value == 0 && !entity.WatchedAttributes.HasAttribute(key))
+                return;
+            if (entity.WatchedAttributes.GetInt(key) != value)
+                entity.WatchedAttributes.SetInt(key, value);
+        }
+
+        private void ClearHandle(string id)
+        {
+            if (entity.WatchedAttributes.GetLong(id) != 0)
+                entity.WatchedAttributes.SetLong(id, 0);
+        }
+
+        private void RemoveIfPresent(string key)
+        {
+            if (entity.WatchedAttributes.HasAttribute(key))
                 entity.WatchedAttributes.RemoveAttribute(key);
         }
 
