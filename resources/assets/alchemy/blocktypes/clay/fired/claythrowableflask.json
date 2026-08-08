@@ -46,9 +46,11 @@
     "shelvable": true,
     "displaycaseable": true,
     "onshelfTransform": {
-      "translation": { "x": 0.1, "y": -0.125, "z": 0 },
-      "scale": 0.75
-    }
+      "translation": { "x": 0.1, "y": 0, "z": 0 },
+      "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+      "scale": 0.525
+    },
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 }
   },
   "materialDensity": 200,
   "doNotRenderAtLod2": true,
@@ -83,6 +85,6 @@
     "scale": 0.5
   },
   "groundTransform": {
-    "scale": 2.5
+    "scale": 1.75
   }
 }

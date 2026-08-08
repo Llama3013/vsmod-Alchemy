@@ -37,6 +37,8 @@
   "attributes": {
     "shelvable": true,
     "displaycaseable": true,
+    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 },
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 },
     "handbook": {
       "groupBy": ["potionflask-{flask}-*"],
       "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",
@@ -53,7 +55,7 @@
         "opaqueContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-content",
         "liquidContentShapeLoc": "alchemy:shapes/block/glass/tubeflask-liquidcontents"
       },
-      "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.85 }
+      "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.6 }
     },
     "potionflask-round-*": {
       "liquidContainerProps": {
@@ -100,7 +102,7 @@
     "*-tube-*": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.2, "z": 0.5 }, "scale": 2 },
     "*": { "translation": { "x": 0, "y": 3, "z": 0 }, "origin": { "x": 0.5, "y": 0.175, "z": 0.5 }, "scale": 2.75 }
   },
-  "groundTransformByType": { "*-tube-*": { "scale": 2 }, "*": { "scale": 2.5 } },
+  "groundTransformByType": { "*-tube-*": { "scale": 1.4 }, "*": { "scale": 1.75 } },
   "fpHandTransformByType": {
     "*-tube-*": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 1.5 },
     "*": { "translation": { "x": 0, "y": 0.4, "z": 0 }, "rotation": { "x": 0, "y": -14, "z": 0 }, "scale": 2 }

@@ -50,8 +50,8 @@
     },
     "shelvable": true,
     "displaycaseable": true,
-    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
-    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.75 },
+    "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.525 },
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.525 },
     "onTongTransform": {
       "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
       "rotation": { "x": -108, "y": 71, "z": -83 },
@@ -90,5 +90,8 @@
     "rotation": { "x": 0, "y": 0, "z": -90 },
     "origin": { "x": 0.2, "y": 0.1, "z": 0.1 },
     "scale": 0.4
+  },
+  "groundTransform": {
+    "scale": 1.05
   }
 }
