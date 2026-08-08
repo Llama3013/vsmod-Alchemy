@@ -1,9 +1,9 @@
 ﻿{
   "effect-lose": "You feel the effects of the {0} dissipate",
-  // "effect-lose-all": "You feel the effects of all potions dissipate",
   "effect-gain": "You feel the effects of the {0}",
+  "disabled": "Disabled by server admin config!",
   "reshape-gain": "You feel the effects of the {0}. It has enabled you to reshape your form and origins, by typing into chat .charsel",
-  "boat-block": "You cannot recall when mounted on a boat",
+  "boat-block": "You cannot recall when mounted on a vessel",
   "flight-mount-block": "You cannot mount while the flight flask is active",
   "not-enough-potion": "There is not enough potion left for a full dose",
   "potion-limit-active": "You already have a potion active",
@@ -656,22 +656,6 @@
   "block-herbrackmold-*-fired-herbrackhook": "Ceramic herb rack hook mold",
   "block-herbrackmold-*-raw-herbracktop": "Raw herb rack top mold",
   "block-herbrackmold-*-fired-herbracktop": "Ceramic herb rack top mold",
-  // Currently unused, but may be used in the future if I add brewing cauldron molds
-  // "block-herbrackmold-blue-raw-potioncauldron": "Raw blue brewing cauldron mold",
-  // "block-herbrackmold-fire-raw-potioncauldron": "Raw fire brewing cauldron mold",
-  // "block-herbrackmold-red-raw-potioncauldron": "Raw red brewing cauldron mold",
-  // "block-herbrackmold-blue-fired-potioncauldron": "Dark brown ceramic brewing cauldron mold",
-  // "block-herbrackmold-black-fired-potioncauldron": "Black ceramic brewing cauldron mold",
-  // "block-herbrackmold-brown-fired-potioncauldron": "Brown ceramic brewing cauldron mold",
-  // "block-herbrackmold-cream-fired-potioncauldron": "Cream ceramic brewing cauldron mold",
-  // "block-herbrackmold-fire-fired-potioncauldron": "Fire clay ceramic brewing cauldron mold",
-  // "block-herbrackmold-gray-fired-potioncauldron": "Gray ceramic brewing cauldron mold",
-  // "block-herbrackmold-orange-fired-potioncauldron": "Orange ceramic brewing cauldron mold",
-  // "block-herbrackmold-red-fired-potioncauldron": "Red ceramic brewing cauldron mold",
-  // "block-herbrackmold-tan-fired-potioncauldron": "Tan ceramic brewing cauldron mold",
-  // "block-herbrackmold-earthyorange-fired-potioncauldron": "Earthy orange ceramic brewing cauldron mold",
-  // "block-herbrackmold-*-raw-potioncauldron": "Raw brewing cauldron mold",
-  // "block-herbrackmold-*-fired-potioncauldron": "Ceramic brewing cauldron mold",
   "block-potioncauldron-oldworld": "Brewing Cauldron (Old World)",
   "block-potioncauldron-copper": "Brewing Cauldron (Copper)",
   "block-potioncauldron-tinbronze": "Brewing Cauldron (Tin bronze)",
@@ -758,7 +742,7 @@
   "alchemy:alchemyguide-z-effects-title": "Alchemy: Potion Effects Glossary",
   "alchemy:alchemyguide-z-effects-text": "A glossary of every effect a potion that can be applied and what each one does.\n\nMany effects come in three strengths, shown on the flask as weak, medium and strong. A higher strength only increases the size of the effect, not how long it lasts.\n\nRanged accuracy: steadies your aim with bows and slings.\nRanged damage: increases damage from arrows and sling rocks.\nRanged speed: speeds up drawing and loading ranged weapons.\nMelee damage: increases damage with melee weapons.\nWalk speed: increases movement speed on foot.\nHunger rate: changes how fast your food bar drains; a higher rate hungers you faster, a lower rate slower.\nHealing effectiveness: affects bandages apply time (config can be used to effect potions drink/eat time as well). It for some reason doesn't change your natural regeneration or the amount healed last checked on v1.22.3 of Vintage story.\nMax health: raises your maximum health for the duration.\nRestore health: heals you over time.\nPoison: damages you over time and ignores armour.\nMining speed: breaks stones and ores faster. Doesn't affect dirt.\nOre amount: increases ore from mined ore blocks.\nAnimal loot: increases drops from harvesting carcasses. Doesn't apply to rust creatures.\nForage amount: increases drops from foraged berries, mushrooms and ground forage.\nWild crop: increases drops from harvesting wild plants.\nGears from metal pile: increases rusty gears recovered from metal piles.\nVessel contents: increases loot from broken storage vessels.\nAnimal seek range: changes how far creatures notice you; lowering it hides you, raising it draws them toward you.\n\nUtility effects come in only weak strength and last for the duration shown on the flask:\nGlow: you emit light.\nWater breathing: your oxygen stays full underwater.\nWarmth: your body temperature will not fall below normal.\nTemporal stability: a one-time boost to your temporal stability.\nNutrition: evens out your nutrition across all food groups. Usually with a cost of overall nutrition loss.\nRecall: teleports you to your spawn point.\nReshape: lets you re-open character selection once with the .charsel command.\nGrowth: increases your size until death or drink purging brew (or disconnect if RetainEffectsOnDisconnect is off).\nShrinking: decreases your size until death or drink purging brew (or disconnect if RetainEffectsOnDisconnect is off).\nFeatherfall: reduces fall damage.\nSpider: lets you climb any surface.\nFlight: lets you fly freely. You cannot mount anything when the effect is active.\n\nSide effects when drank (a cost paid only when applied):\nDamage taken / health restored: a brew may hurt or heal you.\nIntoxication: a drunkenness effect, shown as a percentage of maximum.\nPsychedelic: a hallucinogenic effect, shown as a percentage of maximum.\nSaturation: a change to your food bar level.\n\nOther mods may change how these effects behave and this list may fall out of date.",
 
-  // Configlib translations below
+  "configlib": "The configlib translations are below. This value is just a comment and isn't used.",
 
   "Allow-Config": "List of allowed blocks/items",
   "RecipeAllow-Config": "List of allowed recipes",
@@ -1996,7 +1980,6 @@
   "FlightPotionDrinkingSaturationLoss": "Flight Flask saturation change on drink",
   "FlightPotionDrinkingSaturationLoss-Comment": "Flight flask side effect of saturation change on drink. This value is added on top of the global amount and are not scaled with potion strength as they are utility potions. This is an actual value and not a percentage. Positive values increase saturation, negative values decrease saturation. (0 = disabled)",
 
-  "disabled": "Disabled by server admin config!",
   "ThrowableFlaskSplashRadius": "Throwable flask splash radius",
   "ThrowableFlaskSplashRadius-Comment": "Radius in blocks that a thrown potion flask applies its effect to on impact",
   "ThrowableFlaskEffectMultiplier": "Throwable flask strength",

@@ -119,10 +119,9 @@ namespace Alchemy
         private static bool IsReshapeReentry(EntityAgent byEntity, EffectContext ctx) =>
             ctx?.Reshape == true && byEntity.WatchedAttributes.GetBool("allowcharselonce");
 
-        private static bool IsRecallOnSailedBoat(EntityAgent byEntity, EffectContext ctx) =>
+        private static bool IsRecallOnVessel(EntityAgent byEntity, EffectContext ctx) =>
             ctx?.Respawn == true
-            && byEntity.MountedOn?.MountSupplier?.OnEntity?.Code?.Path is string boatPath
-            && WildcardUtil.Match("boat-sailed-*", boatPath);
+            && byEntity.MountedOn?.MountSupplier?.OnEntity?.HasBehavior("seatable") == true;
 
         private string GetDrinkBlockReason(ItemSlot slot, EntityAgent byEntity, EffectContext ctx)
         {
@@ -135,7 +134,7 @@ namespace Alchemy
             if (IsReshapeReentry(byEntity, ctx))
                 return "alchemy:reshape-block";
 
-            if (IsRecallOnSailedBoat(byEntity, ctx))
+            if (IsRecallOnVessel(byEntity, ctx))
                 return "alchemy:boat-block";
 
             return null;

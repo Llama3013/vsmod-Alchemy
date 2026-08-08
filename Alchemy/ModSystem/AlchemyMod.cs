@@ -1,3 +1,4 @@
+// Maybe change recipe for archer flask to not require orange mallow since its semi rare for normal climate worlds
 /*json block glow
 vertexFlags: {
     glowLevel: 255
@@ -14,7 +15,6 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
-using Vintagestory.GameContent;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
