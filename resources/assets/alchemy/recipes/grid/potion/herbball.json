@@ -20,7 +20,8 @@
         "scentmask",
         "speed",
         "vitality"
-      ]
+      ],
+      "skipVariants": []
     },
     "B": { "type": "item", "code": "alchemy:potionbase-basic" }
   },

@@ -2,6 +2,7 @@
   "enabled": true,
   "code": "utilitypotionportion",
   "variantgroups": [{ "code": "potiontype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight", "coldresist"] }],
+  "skipVariants": [],
   "class": "ItemPotion",
   "matterState": "liquid",
   "attributes": { "handbook": { "ignoreCreativeInvStacks": true, "groupBy": ["utilitypotionportion-{potiontype}"] } },

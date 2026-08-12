@@ -80,6 +80,7 @@
   "variantgroups": [
     { "code": "basetype", "states": ["recall", "glow", "waterbreathe", "nutrition", "temporal", "reshape", "grow", "shrink", "fall", "climb", "flight", "coldresist"] }
   ],
+  "skipVariants": [],
   "attributes": { "handbook": { "groupBy": ["utilitypotionbase-{basetype}"] } },
   "attributesByType": {
     "utilitypotionbase-recall": {

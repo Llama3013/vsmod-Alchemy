@@ -1,17 +1,20 @@
 [
-  // Use this patch to remove certain utility potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
+  // Use this patch to remove certain utility potions.
+  // Turning every potion off is handled by allvariantsoff.json via AnyUtilityPotionEnabled.
 
   // Coldresist
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/11",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-coldresist"],
    "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/10",
+   "op": "addmerge",
+   "path": "/10/enabled",
+   "value": false,
    "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
   },
   {
@@ -30,16 +33,18 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/11",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-coldresist"],
    "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
   },
 
   // Flight
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/10",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-flight"],
    "condition": { "when": "AllowFlightPotion", "isValue": "false" }
   },
   {
@@ -51,22 +56,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/10",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-flight"],
    "condition": { "when": "AllowFlightPotion", "isValue": "false" }
   },
 
   // Climb
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/9",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-climb"],
    "condition": { "when": "AllowClimbPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/9",
+   "op": "addmerge",
+   "path": "/9/enabled",
+   "value": false,
    "condition": { "when": "AllowClimbPotion", "isValue": "false" }
   },
   {
@@ -85,22 +93,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/9",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-climb"],
    "condition": { "when": "AllowClimbPotion", "isValue": "false" }
   },
 
   // Fall
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/8",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-fall"],
    "condition": { "when": "AllowFallPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/8",
+   "op": "addmerge",
+   "path": "/8/enabled",
+   "value": false,
    "condition": { "when": "AllowFallPotion", "isValue": "false" }
   },
   {
@@ -119,22 +130,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/8",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-fall"],
    "condition": { "when": "AllowFallPotion", "isValue": "false" }
   },
 
   // Shrink
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/7",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-shrink"],
    "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/7",
+   "op": "addmerge",
+   "path": "/7/enabled",
+   "value": false,
    "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
   },
   {
@@ -153,22 +167,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/7",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-shrink"],
    "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
   },
 
   // Grow
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/6",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-grow"],
    "condition": { "when": "AllowGrowPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/6",
+   "op": "addmerge",
+   "path": "/6/enabled",
+   "value": false,
    "condition": { "when": "AllowGrowPotion", "isValue": "false" }
   },
   {
@@ -187,22 +204,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/6",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-grow"],
    "condition": { "when": "AllowGrowPotion", "isValue": "false" }
   },
 
   // Reshape
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/5",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-reshape"],
    "condition": { "when": "AllowReshapePotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/5",
+   "op": "addmerge",
+   "path": "/5/enabled",
+   "value": false,
    "condition": { "when": "AllowReshapePotion", "isValue": "false" }
   },
   {
@@ -221,8 +241,9 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/5",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-reshape"],
    "condition": { "when": "AllowReshapePotion", "isValue": "false" }
   },
 
@@ -344,14 +365,16 @@
   // Temporal
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/4",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-temporal"],
    "condition": { "when": "AllowTemporalPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/4",
+   "op": "addmerge",
+   "path": "/4/enabled",
+   "value": false,
    "condition": { "when": "AllowTemporalPotion", "isValue": "false" }
   },
   {
@@ -370,22 +393,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/4",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-temporal"],
    "condition": { "when": "AllowTemporalPotion", "isValue": "false" }
   },
 
   // Nutrition
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/3",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-nutrition"],
    "condition": { "when": "AllowNutritionPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/3",
+   "op": "addmerge",
+   "path": "/3/enabled",
+   "value": false,
    "condition": { "when": "AllowNutritionPotion", "isValue": "false" }
   },
   {
@@ -404,22 +430,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/3",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-nutrition"],
    "condition": { "when": "AllowNutritionPotion", "isValue": "false" }
   },
 
   // Waterbreathe
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/2",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-waterbreathe"],
    "condition": { "when": "AllowWaterBreathePotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/2",
+   "op": "addmerge",
+   "path": "/2/enabled",
+   "value": false,
    "condition": { "when": "AllowWaterBreathePotion", "isValue": "false" }
   },
   {
@@ -438,22 +467,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/2",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-waterbreathe"],
    "condition": { "when": "AllowWaterBreathePotion", "isValue": "false" }
   },
 
   // Glow
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/1",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-glow"],
    "condition": { "when": "AllowGlowPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/1",
+   "op": "addmerge",
+   "path": "/1/enabled",
+   "value": false,
    "condition": { "when": "AllowGlowPotion", "isValue": "false" }
   },
   {
@@ -479,22 +511,25 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/1",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-glow"],
    "condition": { "when": "AllowGlowPotion", "isValue": "false" }
   },
 
   // Recall
   {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/0",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionportion-recall"],
    "condition": { "when": "AllowRecallPotion", "isValue": "false" }
   },
   {
    "file": "alchemy:recipes/cooking/utilitypotionportion.json",
-   "op": "remove",
-   "path": "/0",
+   "op": "addmerge",
+   "path": "/0/enabled",
+   "value": false,
    "condition": { "when": "AllowRecallPotion", "isValue": "false" }
   },
   {
@@ -513,8 +548,9 @@
   },
   {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
-   "op": "remove",
-   "path": "/variantgroups/0/states/0",
+   "op": "addmerge",
+   "path": "/skipVariants",
+   "value": ["utilitypotionbase-recall"],
    "condition": { "when": "AllowRecallPotion", "isValue": "false" }
   }
 ]

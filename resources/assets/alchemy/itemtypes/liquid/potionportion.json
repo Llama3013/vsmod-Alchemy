@@ -23,6 +23,7 @@
     },
     { "code": "strength", "states": ["medium", "strong"] }
   ],
+  "skipVariants": [],
   "class": "ItemPotion",
   "behaviors": [
     {

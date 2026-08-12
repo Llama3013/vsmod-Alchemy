@@ -10,6 +10,7 @@
     },
     { "code": "strength", "states": ["weak", "strong"] }
   ],
+  "skipVariants": [],
   "attributes": {
     "handbook": { "groupBy": ["potionbase-{basetype}-*"] }
   },

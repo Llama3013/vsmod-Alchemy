@@ -1,9 +1,9 @@
 [
     {
         "file": "alchemy:itemtypes/liquid/potionportion.json",
-        "op": "remove",
-        "path": "/variantgroups/1/states/1",
-        "value": false,
+        "op": "addmerge",
+        "path": "/skipVariants",
+        "value": ["potionportion-*-strong"],
         "condition": {
             "when": "AllowStrongPotions",
             "isValue": "false"
@@ -11,9 +11,9 @@
     },
     {
         "file": "alchemy:itemtypes/liquid/potionportion.json",
-        "op": "remove",
-        "path": "/variantgroups/1/states/0",
-        "value": false,
+        "op": "addmerge",
+        "path": "/skipVariants",
+        "value": ["potionportion-*-medium"],
         "condition": {
             "when": "AllowMediumPotions",
             "isValue": "false"

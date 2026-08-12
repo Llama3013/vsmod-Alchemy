@@ -1,6 +1,7 @@
 {
   "code": "herbball",
 	"storageFlags": 273,
+  "skipVariants": [],
   "variantgroups": [
     {
       "code": "potiontype",

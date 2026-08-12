@@ -1,5 +1,6 @@
 [
-  // Use these patch to remove certain potions. DO NOT CHANGE THE ORDER OF THE PATCHES AND DO NOT REMOVE ALL OF THEM
+  // Use these patches to disable certain potions.
+  // Turning every potion off is handled by allvariantsoff.json via AnyPotionEnabled.
   { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/0/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
   { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/1/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
   { "file": "alchemy:recipes/cooking/potionportion-strong.json", "op": "addmerge", "path": "/2/enabled", "value": false, "condition": { "when": "AllowStrongPotions", "isValue": "false" } },
@@ -33,8 +34,9 @@
   //Vitality
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/13",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-vitality-*"],
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -42,8 +44,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/13",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-vitality"],
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -51,8 +54,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/13",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["vitality"],
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -60,8 +64,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/13",
+    "op": "addmerge",
+    "path": "/13/enabled",
+    "value": false,
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -69,8 +74,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/13",
+    "op": "addmerge",
+    "path": "/13/enabled",
+    "value": false,
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -190,8 +196,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/13",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-vitality-*"],
     "condition": {
       "when": "AllowVitalityPotion",
       "isValue": "false"
@@ -212,8 +219,9 @@
   // Speed
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/12",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-speed-*"],
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -221,8 +229,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/12",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-speed"],
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -230,8 +239,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/12",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["speed"],
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -239,8 +249,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/12",
+    "op": "addmerge",
+    "path": "/12/enabled",
+    "value": false,
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -248,8 +259,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/12",
+    "op": "addmerge",
+    "path": "/12/enabled",
+    "value": false,
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -449,8 +461,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/12",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-speed-*"],
     "condition": {
       "when": "AllowSpeedPotion",
       "isValue": "false"
@@ -471,8 +484,9 @@
   // Scentmask
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/11",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-scentmask-*"],
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -480,8 +494,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/11",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-scentmask"],
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -489,8 +504,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/11",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["scentmask"],
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -498,8 +514,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/11",
+    "op": "addmerge",
+    "path": "/11/enabled",
+    "value": false,
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -507,8 +524,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/11",
+    "op": "addmerge",
+    "path": "/11/enabled",
+    "value": false,
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -588,8 +606,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/11",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-scentmask-*"],
     "condition": {
       "when": "AllowScentMaskPotion",
       "isValue": "false"
@@ -610,8 +629,9 @@
   // Regen
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/10",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-regen-*"],
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -619,8 +639,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/10",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-regen"],
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -628,8 +649,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/10",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["regen"],
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -637,8 +659,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/10",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -646,8 +669,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/10",
+    "op": "addmerge",
+    "path": "/10/enabled",
+    "value": false,
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -807,8 +831,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/10",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-regen-*"],
     "condition": {
       "when": "AllowRegenPotion",
       "isValue": "false"
@@ -829,8 +854,9 @@
   // Predator
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/9",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-predator-*"],
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -838,8 +864,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/9",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-predator"],
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -847,8 +874,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/9",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["predator"],
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -856,8 +884,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/9",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -865,8 +894,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/9",
+    "op": "addmerge",
+    "path": "/9/enabled",
+    "value": false,
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -1006,8 +1036,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/9",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-predator-*"],
     "condition": {
       "when": "AllowPredatorPotion",
       "isValue": "false"
@@ -1028,8 +1059,9 @@
   // Poison
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/8",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-poison-*"],
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1037,8 +1069,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/8",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-poison"],
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1046,8 +1079,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/8",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["poison"],
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1055,8 +1089,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/8",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1064,8 +1099,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/8",
+    "op": "addmerge",
+    "path": "/8/enabled",
+    "value": false,
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1225,8 +1261,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/8",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-poison-*"],
     "condition": {
       "when": "AllowPoisonPotion",
       "isValue": "false"
@@ -1247,8 +1284,9 @@
   //Mining
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/7",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-mining-*"],
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1256,8 +1294,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/7",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-mining"],
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1265,8 +1304,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/7",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["mining"],
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1274,8 +1314,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/7",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1283,8 +1324,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/7",
+    "op": "addmerge",
+    "path": "/7/enabled",
+    "value": false,
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1404,8 +1446,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/7",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-mining-*"],
     "condition": {
       "when": "AllowMiningPotion",
       "isValue": "false"
@@ -1426,8 +1469,9 @@
   // Melee
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/6",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-melee-*"],
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1435,8 +1479,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/6",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-melee"],
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1444,8 +1489,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/6",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["melee"],
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1453,8 +1499,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/6",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1462,8 +1509,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/6",
+    "op": "addmerge",
+    "path": "/6/enabled",
+    "value": false,
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1503,8 +1551,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/6",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-melee-*"],
     "condition": {
       "when": "AllowMeleePotion",
       "isValue": "false"
@@ -1525,8 +1574,9 @@
   // Looter
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/5",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-looter-*"],
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1534,8 +1584,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/5",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-looter"],
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1543,8 +1594,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/5",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["looter"],
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1552,8 +1604,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/5",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1561,8 +1614,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/5",
+    "op": "addmerge",
+    "path": "/5/enabled",
+    "value": false,
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1622,8 +1676,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/5",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-looter-*"],
     "condition": {
       "when": "AllowLooterPotion",
       "isValue": "false"
@@ -1644,8 +1699,9 @@
   // Hunter
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/4",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-hunter-*"],
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1653,8 +1709,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/4",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-hunter"],
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1662,8 +1719,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/4",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["hunter"],
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1671,8 +1729,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/4",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1680,8 +1739,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/4",
+    "op": "addmerge",
+    "path": "/4/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1881,8 +1941,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/4",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-hunter-*"],
     "condition": {
       "when": "AllowHunterPotion",
       "isValue": "false"
@@ -1903,8 +1964,9 @@
   // Hunger supress
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/3",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-hungersupress-*"],
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1912,8 +1974,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/3",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-hungersupress"],
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1921,8 +1984,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/3",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["hungersupress"],
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1930,8 +1994,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/3",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1939,8 +2004,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/3",
+    "op": "addmerge",
+    "path": "/3/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -1980,8 +2046,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/3",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-hungersupress-*"],
     "condition": {
       "when": "AllowHungerSupressPotion",
       "isValue": "false"
@@ -2002,8 +2069,9 @@
   // Hunger enhance
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/2",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-hungerenhance-*"],
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2011,8 +2079,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/2",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-hungerenhance"],
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2020,8 +2089,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/2",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["hungerenhance"],
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2029,8 +2099,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/2",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2038,8 +2109,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/2",
+    "op": "addmerge",
+    "path": "/2/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2159,8 +2231,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/2",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-hungerenhance-*"],
     "condition": {
       "when": "AllowHungerEnhancePotion",
       "isValue": "false"
@@ -2181,8 +2254,9 @@
   // Healing effect
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/1",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-healingeffect-*"],
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2190,8 +2264,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/1",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-healingeffect"],
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2199,8 +2274,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/1",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["healingeffect"],
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2208,8 +2284,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/1",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2217,8 +2294,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/1",
+    "op": "addmerge",
+    "path": "/1/enabled",
+    "value": false,
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2338,8 +2416,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/1",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-healingeffect-*"],
     "condition": {
       "when": "AllowHealingEffectPotion",
       "isValue": "false"
@@ -2360,8 +2439,9 @@
   // Archer
   {
     "file": "alchemy:itemtypes/liquid/potionportion.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/0",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionportion-archer-*"],
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
@@ -2369,8 +2449,9 @@
   },
   {
     "file": "alchemy:itemtypes/herbball.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/0",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["herbball-archer"],
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
@@ -2378,8 +2459,9 @@
   },
   {
     "file": "alchemy:recipes/grid/potion/herbball.json",
-    "op": "remove",
-    "path": "/ingredients/P/allowedVariants/0",
+    "op": "addmerge",
+    "path": "/ingredients/P/skipVariants",
+    "value": ["archer"],
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
@@ -2387,8 +2469,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-medium.json",
-    "op": "remove",
-    "path": "/0",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
@@ -2396,8 +2479,9 @@
   },
   {
     "file": "alchemy:recipes/cooking/potionportion-strong.json",
-    "op": "remove",
-    "path": "/0",
+    "op": "addmerge",
+    "path": "/0/enabled",
+    "value": false,
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
@@ -2517,8 +2601,9 @@
   },
   {
     "file": "alchemy:itemtypes/ingredient/potionbase.json",
-    "op": "remove",
-    "path": "/variantgroups/0/states/0",
+    "op": "addmerge",
+    "path": "/skipVariants",
+    "value": ["potionbase-archer-*"],
     "condition": {
       "when": "AllowArcherPotion",
       "isValue": "false"
