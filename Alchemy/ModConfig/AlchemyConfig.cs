@@ -66,26 +66,42 @@ namespace Alchemy
             );
         }
 
-        // I have to make sure that the client reads the config at LevelFinalize or later otherwise the client will read client config instead of server config, I wish I learnt this way earlier
-        public void ReadFromWorldConfig(ITreeAttribute cfg)
+        public AlchemyConfigSyncPacket ToSyncPacket()
         {
+            AlchemyConfigSyncPacket packet = new();
             foreach (PropertyInfo prop in SyncProps)
             {
                 switch (prop.GetValue(this))
                 {
                     case bool b:
-                        prop.SetValue(this, cfg.GetBool(prop.Name, b));
+                        packet.Bools[prop.Name] = b;
                         break;
                     case int i:
-                        prop.SetValue(this, cfg.GetInt(prop.Name, i));
+                        packet.Ints[prop.Name] = i;
                         break;
                     case float f:
-                        prop.SetValue(this, cfg.GetFloat(prop.Name, f));
+                        packet.Floats[prop.Name] = f;
                         break;
                     case string s:
-                        prop.SetValue(this, cfg.GetString(prop.Name, s));
+                        packet.Strings[prop.Name] = s;
                         break;
                 }
+            }
+            return packet;
+        }
+
+        public void ApplySyncPacket(AlchemyConfigSyncPacket packet)
+        {
+            foreach (PropertyInfo prop in SyncProps)
+            {
+                if (prop.PropertyType == typeof(bool) && packet.Bools.TryGetValue(prop.Name, out bool b))
+                    prop.SetValue(this, b);
+                else if (prop.PropertyType == typeof(int) && packet.Ints.TryGetValue(prop.Name, out int i))
+                    prop.SetValue(this, i);
+                else if (prop.PropertyType == typeof(float) && packet.Floats.TryGetValue(prop.Name, out float f))
+                    prop.SetValue(this, f);
+                else if (prop.PropertyType == typeof(string) && packet.Strings.TryGetValue(prop.Name, out string s))
+                    prop.SetValue(this, s);
             }
         }
 

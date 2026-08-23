@@ -25,6 +25,7 @@ namespace Alchemy
         // private static GuiDialogCreateCharacter createCharDlg;
         private ICoreAPI api;
         private const string HarmonyId = "llama3013.Alchemy";
+        private const string ConfigSyncChannelName = "alchemyconfigsync";
         private Harmony harmony;
 
         public static bool PlayerModelLibPresent { get; private set; }
@@ -45,6 +46,10 @@ namespace Alchemy
             CombatOverhaulCompat.Init(api);
             RegisterClasses(api);
             RegisterEffectsOnce(api.Logger);
+
+            api.Network
+                .RegisterChannel(ConfigSyncChannelName)
+                .RegisterMessageType<AlchemyConfigSyncPacket>();
         }
 
         private static readonly object effectRegistrationLock = new();
@@ -158,11 +163,15 @@ namespace Alchemy
         {
             api.Event.LevelFinalize += () =>
             {
-                AlchemyConfig.Loaded.ReadFromWorldConfig(api.World.Config);
-
                 if (api.World.Player?.Entity is EntityPlayer sizedPlayer)
                     EntityPlayerSizePatch.ApplySize(sizedPlayer);
             };
+
+            api.Network
+                .GetChannel(ConfigSyncChannelName)
+                .SetMessageHandler<AlchemyConfigSyncPacket>(packet =>
+                    AlchemyConfig.Loaded.ApplySyncPacket(packet)
+                );
 
             api.Event.PlayerEntitySpawn += iPlayer =>
             {
@@ -189,10 +198,18 @@ namespace Alchemy
         public override void StartServerSide(ICoreServerAPI api)
         {
             api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
+            api.Event.PlayerJoin += SendConfigSync;
             api.Event.PlayerDisconnect += OnPlayerDisconnect;
             api.Event.PlayerDeath += OnPlayerDeath;
 
             base.StartServerSide(api);
+        }
+
+        private void SendConfigSync(IServerPlayer player)
+        {
+            ((ICoreServerAPI)api).Network
+                .GetChannel(ConfigSyncChannelName)
+                .SendPacket(AlchemyConfig.Loaded.ToSyncPacket(), player);
         }
 
         private static void OnPlayerReady(IServerPlayer player)
@@ -263,6 +280,7 @@ namespace Alchemy
             if (api is ICoreServerAPI sapi)
             {
                 sapi.Event.PlayerNowPlaying -= OnPlayerReady;
+                sapi.Event.PlayerJoin -= SendConfigSync;
                 sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
                 sapi.Event.PlayerDeath -= OnPlayerDeath;
             }
