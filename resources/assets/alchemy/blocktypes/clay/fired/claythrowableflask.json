@@ -50,7 +50,17 @@
       "origin": { "x": 0.5, "y": 0, "z": 0.5 },
       "scale": 0.525
     },
-    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 }
+    "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 },
+    "displayable": {
+      "shelf": {
+        "size": { "width": 3.75, "height": 3.5, "length": 3.5 },
+        "transform": {
+          "translation": { "x": 0.075, "y": 0, "z": 0 },
+          "origin": { "x": 0.5, "y": 0, "z": 0.5 },
+          "scale": 0.7
+        }
+      }
+    }
   },
   "materialDensity": 200,
   "doNotRenderAtLod2": true,

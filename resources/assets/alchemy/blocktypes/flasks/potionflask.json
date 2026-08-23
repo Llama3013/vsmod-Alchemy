@@ -39,6 +39,12 @@
     "displaycaseable": true,
     "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 },
     "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.7 },
+    "displayable": {
+      "shelf": {
+        "size": { "width": 3.5, "height": 4.5, "length": 3.5 },
+        "transform": { "origin": { "x": 0.5, "y": 0, "z": 0.3 }, "scale": 0.7 }
+      }
+    },
     "handbook": {
       "groupBy": ["potionflask-{flask}-*"],
       "__comment": "These are excluded since you cannot craft them but you can access them in creative mode",

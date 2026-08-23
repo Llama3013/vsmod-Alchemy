@@ -52,6 +52,12 @@
     "displaycaseable": true,
     "groundStorageTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.525 },
     "onDisplayTransform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.525 },
+    "displayable": {
+      "shelf": {
+        "size": { "width": 3, "height": 3.75, "length": 3 },
+        "transform": { "origin": { "x": 0.5, "y": 0, "z": 0.5 }, "scale": 0.525 }
+      }
+    },
     "onTongTransform": {
       "translation": { "x": -1.61, "y": -0.87, "z": -1.11 },
       "rotation": { "x": -108, "y": 71, "z": -83 },
