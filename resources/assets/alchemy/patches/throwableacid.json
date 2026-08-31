@@ -1,0 +1,50 @@
+[
+  {
+    "__comment": "This patch adds potion effects for throwable acid items and to test the extension of potions back to a purely json-based system. Let me know if you find any problems with this.",
+    "file": "game:itemtypes/liquid/acid.json",
+    "op": "addmerge",
+    "path": "/attributesByType",
+    "value": {
+      "*-sulfuric": {
+        "effectinfo": {
+          "effectId": "acidsulfuricpotionid",
+          "exclusivityGroup": "acid",
+          "channels": ["throw"],
+          "health": -2,
+          "tickSec": 0.5,
+          "duration": 3,
+          "damageType": "Acid"
+        },
+        "particleColor": [225, 195, 40]
+      },
+      "*-nitric": {
+        "effectinfo": {
+          "effectId": "acidnitricpotionid",
+          "exclusivityGroup": "acid",
+          "channels": ["throw"],
+          "health": -1.5,
+          "tickSec": 0.5,
+          "duration": 3,
+          "damageType": "Acid"
+        },
+        "particleColor": [225, 225, 225]
+      },
+      "*-hydrochloric": {
+        "effectinfo": {
+          "effectId": "acidhydrochloricpotionid",
+          "exclusivityGroup": "acid",
+          "channels": ["throw"],
+          "health": -1,
+          "tickSec": 0.5,
+          "duration": 3,
+          "damageType": "Acid"
+        },
+        "particleColor": [80, 200, 90]
+      }
+    },
+    "condition": {
+      "when": "AllowAcidAsPotion",
+      "isValue": "true"
+    }
+  }
+]

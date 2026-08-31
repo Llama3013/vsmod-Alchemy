@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alchemy", "Alchemy\Alchemy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlchemyCombatOverhaulCompat", "AlchemyCombatOverhaulCompat\AlchemyCombatOverhaulCompat.csproj", "{7E1B58D0-93A4-4F6C-8B2E-5D0C6A9F41B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EffectLib", "EffectLib\EffectLib.csproj", "{3F9A21C7-6D48-4B15-9C0E-24A7F5B8E0D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{7E1B58D0-93A4-4F6C-8B2E-5D0C6A9F41B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1B58D0-93A4-4F6C-8B2E-5D0C6A9F41B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1B58D0-93A4-4F6C-8B2E-5D0C6A9F41B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F9A21C7-6D48-4B15-9C0E-24A7F5B8E0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F9A21C7-6D48-4B15-9C0E-24A7F5B8E0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F9A21C7-6D48-4B15-9C0E-24A7F5B8E0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F9A21C7-6D48-4B15-9C0E-24A7F5B8E0D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

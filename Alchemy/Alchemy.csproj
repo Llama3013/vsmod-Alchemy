@@ -50,6 +50,9 @@
     <ProjectReference Include="..\AlchemyCombatOverhaulCompat\AlchemyCombatOverhaulCompat.csproj"
                       ReferenceOutputAssembly="false"
                       OutputItemType="EmbeddedResource" />
+    <!-- EffectLib ships as its own mod, so compile against it but never copy it into
+         Alchemy's output - the game loads effectlib.dll from the effectlib mod zip. -->
+    <ProjectReference Include="..\EffectLib\EffectLib.csproj" Private="false" />
   </ItemGroup>
 <ItemGroup>
     <Content Include="..\resources\**">

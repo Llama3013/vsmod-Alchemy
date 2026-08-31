@@ -31,7 +31,7 @@ namespace Alchemy
                 return;
 
             if (
-                !PotionConsumableLogic.TryReadPotionInfo(
+                !PotionConsumableLogic.TryResolvePotion(
                     GetContent(flaskStack),
                     out string potionId,
                     out _

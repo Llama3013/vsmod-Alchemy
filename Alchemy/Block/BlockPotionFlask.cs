@@ -283,7 +283,7 @@ namespace Alchemy
         {
             base.OnHeldIdle(slot, byEntity);
             foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                if (bh is PotionCoatSourceBehavior coat)
+                if (bh is EffectLib.CollectibleBehaviorCoatSource coat)
                 {
                     coat.CoatingIdle(slot, byEntity);
                     return;
@@ -329,7 +329,7 @@ namespace Alchemy
             {
                 foreach (CollectibleBehavior bh in CollectibleBehaviors)
                 {
-                    if (bh is PotionConsumableBehavior)
+                    if (bh is PotionConsumableLiquidBehavior)
                     {
                         EnumHandling bhHandling = EnumHandling.PassThrough;
                         bh.OnHeldInteractStart(

@@ -1,0 +1,10 @@
+{
+  "type": "code",
+  "name": "EffectLib",
+  "modid": "effectlib",
+  "version": "1.0.0",
+  "description": "A library for applying, tracking and persisting timed entity effects. Provides a registry for code-defined effects, a JSON attribute format for content-only effects, and a shared active-effect HUD.",
+  "website": "https://github.com/llama3013/vsmod-Alchemy",
+  "authors": ["Llama3013"],
+  "dependencies": { "game": "1.22.0" }
+}

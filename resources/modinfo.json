@@ -7,5 +7,5 @@
   "website": "https://github.com/llama3013/vsmod-Alchemy",
   "authors": ["Llama3013"],
   "iconpath": "modicon.png",
-  "dependencies": { "game": "1.22.0" }
+  "dependencies": { "game": "1.22.0", "effectlib": "1.0.0" }
 }

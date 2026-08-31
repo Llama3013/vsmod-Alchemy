@@ -19,12 +19,11 @@
       "properties": { "attachmentArea": { "x1": 5, "y1": 0, "z1": 5, "x2": 10, "y2": 0, "z2": 10 } }
     },
     {
-      "name": "PotionConsumable",
-      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "drink" }
+      "name": "PotionConsumableLiquid",
+      "properties": { "animation": "eat", "sound": "drink" }
     },
     {
-      "name": "PotionCoatSource",
-      "properties": { "source": "liquidcontent" }
+      "name": "PotionCoatSourceLiquid"
     }
   ],
   "variantgroups": [

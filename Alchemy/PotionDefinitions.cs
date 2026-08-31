@@ -53,16 +53,24 @@ namespace Alchemy
         public static bool IsEnabled(AlchemyConfig cfg, PotionDefinition def) =>
             Read(cfg, "Allow" + def.Name + "Potion", true);
 
-        public static bool AllowsCoating(string potionId)
+        // Each delivery method is configured per potion and independently of the others:
+        // Allow{Drinking,Throwing,Coating}<Name>. Drinking defaults on, the rest default off.
+        public static bool AllowsDrinking(string potionId)
         {
             PotionDefinition def = Get(potionId);
-            return def != null && Read(AlchemyConfig.Loaded, "AllowCoating" + def.Name, false);
+            return def == null || Read(AlchemyConfig.Loaded, "AllowDrinking" + def.Name, true);
         }
 
         public static bool AllowsThrowing(string potionId)
         {
             PotionDefinition def = Get(potionId);
-            return def != null && Read(AlchemyConfig.Loaded, "AllowThrow" + def.Name, false);
+            return def != null && Read(AlchemyConfig.Loaded, "AllowThrowing" + def.Name, false);
+        }
+
+        public static bool AllowsCoating(string potionId)
+        {
+            PotionDefinition def = Get(potionId);
+            return def != null && Read(AlchemyConfig.Loaded, "AllowCoating" + def.Name, false);
         }
 
         public static string GroupOf(string potionId)
@@ -126,8 +134,9 @@ namespace Alchemy
         private static IEnumerable<string> PropertyNamesFor(PotionDefinition def)
         {
             yield return "Allow" + def.Name + "Potion";
+            yield return "AllowDrinking" + def.Name;
+            yield return "AllowThrowing" + def.Name;
             yield return "AllowCoating" + def.Name;
-            yield return "AllowThrow" + def.Name;
             yield return def.Name + "PotionGroup";
             yield return def.Name + "PotionDrinkingDamage";
             yield return def.Name + "PotionDrinkingIntoxication";

@@ -9,6 +9,7 @@ using Cake.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Vintagestory.API.Common;
 
@@ -22,22 +23,48 @@ public static class Program
     }
 }
 
-public class BuildContext : FrostingContext
+/// <summary>One mod produced by this repo: a csproj plus the resources folder it ships.</summary>
+public sealed class ModProject
 {
-    public const string ProjectName = "Alchemy";
-    public string BuildConfiguration { get; set; }
+    public ModProject(ICakeContext context, string projectName, string resourcesDir)
+    {
+        ProjectName = projectName;
+        ResourcesDir = resourcesDir;
+
+        var modInfo = context.DeserializeJsonFromFile<ModInfo>($"../{resourcesDir}/modinfo.json");
+        Version = modInfo.Version;
+        Name = modInfo.ModID;
+    }
+
+    public string ProjectName { get; }
+    public string ResourcesDir { get; }
     public string Version { get; }
     public string Name { get; }
+
+    public string ProjectPath => $"../{ProjectName}/{ProjectName}.csproj";
+}
+
+public class BuildContext : FrostingContext
+{
+    public string BuildConfiguration { get; set; }
     public bool SkipJsonValidation { get; set; }
+
+    /// <summary>
+    /// Packed in order, so EffectLib is built before the mod that depends on it.
+    /// </summary>
+    public IReadOnlyList<ModProject> Mods { get; }
 
     public BuildContext(ICakeContext context)
         : base(context)
     {
         BuildConfiguration = context.Argument("configuration", "Release");
         SkipJsonValidation = context.Argument("skipJsonValidation", false);
-        var modInfo = context.DeserializeJsonFromFile<ModInfo>($"../resources/modinfo.json");
-        Version = modInfo.Version;
-        Name = modInfo.ModID;
+
+        Mods =
+        [
+            new ModProject(context, "EffectLib", "resources-effectlib"),
+            new ModProject(context, "Alchemy", "resources"),
+        ];
     }
 }
 
@@ -50,17 +77,21 @@ public sealed class ValidateJsonTask : FrostingTask<BuildContext>
         {
             return;
         }
-        var jsonFiles = context.GetFiles($"../resources/**/*.json");
-        foreach (var file in jsonFiles)
+
+        foreach (var mod in context.Mods)
         {
-            try
+            var jsonFiles = context.GetFiles($"../{mod.ResourcesDir}/**/*.json");
+            foreach (var file in jsonFiles)
             {
-                var json = File.ReadAllText(file.FullPath);
-                JToken.Parse(json);
-            }
-            catch (JsonException ex)
-            {
-                throw new Exception($"Validation failed for JSON file: {file.FullPath}{Environment.NewLine}{ex.Message}", ex);
+                try
+                {
+                    var json = File.ReadAllText(file.FullPath);
+                    JToken.Parse(json);
+                }
+                catch (JsonException ex)
+                {
+                    throw new Exception($"Validation failed for JSON file: {file.FullPath}{Environment.NewLine}{ex.Message}", ex);
+                }
             }
         }
     }
@@ -72,17 +103,23 @@ public sealed class BuildTask : FrostingTask<BuildContext>
 {
     public override void Run(BuildContext context)
     {
-        context.DotNetClean($"../{BuildContext.ProjectName}/{BuildContext.ProjectName}.csproj",
-            new DotNetCleanSettings
-            {
-                Configuration = context.BuildConfiguration
-            });
+        foreach (var mod in context.Mods)
+        {
+            context.DotNetClean(mod.ProjectPath,
+                new DotNetCleanSettings
+                {
+                    Configuration = context.BuildConfiguration
+                });
+        }
 
-        context.DotNetPublish($"../{BuildContext.ProjectName}/{BuildContext.ProjectName}.csproj",
-            new DotNetPublishSettings
-            {
-                Configuration = context.BuildConfiguration
-            });
+        foreach (var mod in context.Mods)
+        {
+            context.DotNetPublish(mod.ProjectPath,
+                new DotNetPublishSettings
+                {
+                    Configuration = context.BuildConfiguration
+                });
+        }
     }
 }
 
@@ -94,10 +131,14 @@ public sealed class PackageTask : FrostingTask<BuildContext>
     {
         context.EnsureDirectoryExists("../Releases");
         context.CleanDirectory("../Releases");
-        context.EnsureDirectoryExists($"../Releases/{context.Name}");
-        context.CopyFiles($"../{BuildContext.ProjectName}/bin/{context.BuildConfiguration}/Mods/mod/publish/*", $"../Releases/{context.Name}");
-        context.CopyDirectory($"../resources", $"../Releases/{context.Name}/");
-        context.Zip($"../Releases/{context.Name}", $"../Releases/{context.Name}_{context.Version}.zip");
+
+        foreach (var mod in context.Mods)
+        {
+            context.EnsureDirectoryExists($"../Releases/{mod.Name}");
+            context.CopyFiles($"../{mod.ProjectName}/bin/{context.BuildConfiguration}/Mods/mod/publish/*", $"../Releases/{mod.Name}");
+            context.CopyDirectory($"../{mod.ResourcesDir}", $"../Releases/{mod.Name}/");
+            context.Zip($"../Releases/{mod.Name}", $"../Releases/{mod.Name}_{mod.Version}.zip");
+        }
     }
 }
 

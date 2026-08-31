@@ -4,8 +4,8 @@
         "op": "add",
         "path": "/behaviors/-",
         "value": {
-            "name": "PotionConsumable",
-            "properties": { "source": "liquidcontent", "animation": "eat" }
+            "name": "PotionConsumableLiquid",
+            "properties": { "animation": "eat" }
         },
         "dependsOn": [{ "modid": "aculinaryartillery" }],
         "condition": {

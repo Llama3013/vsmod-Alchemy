@@ -251,10 +251,10 @@ namespace Alchemy
                 return;
 
             if (
-                !PotionConsumableLogic.TryReadPotionInfo(
+                !PotionConsumableLogic.TryResolvePotion(
                     contentStack,
                     out string potionId,
-                    out string strength
+                    out float potencyMul
                 )
             )
                 return;
@@ -275,13 +275,11 @@ namespace Alchemy
                 return;
             }
 
-            float multiplier =
-                AlchemyConfig.Loaded.ThrowableFlaskEffectMultiplier
-                * PotionConsumableLogic.GetStrengthMultiplier(strength);
+            float multiplier = AlchemyConfig.Loaded.ThrowableFlaskEffectMultiplier * potencyMul;
             string displayName = ResolveDisplayName(contentStack);
 
             foreach (Entity entity in targets)
-                WeaponCoatEffects.Apply(potionId, entity, multiplier, displayName);
+                EffectLib.CoatedEffects.Apply(potionId, entity, multiplier, displayName);
         }
 
         private Entity[] GetSplashTargets()

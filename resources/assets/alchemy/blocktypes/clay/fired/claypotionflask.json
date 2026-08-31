@@ -20,12 +20,11 @@
     },
     { "name": "SneakPlacing" },
     {
-      "name": "PotionConsumable",
-      "properties": { "source": "liquidcontent", "animation": "eat", "sound": "drink" }
+      "name": "PotionConsumableLiquid",
+      "properties": { "animation": "eat", "sound": "drink" }
     },
     {
-      "name": "PotionCoatSource",
-      "properties": { "source": "liquidcontent" }
+      "name": "PotionCoatSourceLiquid"
     }
   ],
   "variantgroups": [

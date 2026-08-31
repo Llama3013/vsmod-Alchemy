@@ -245,8 +245,8 @@ namespace Alchemy
                         (System.Func<string, bool>)PotionConsumableLogic.IsCoatingAllowed,
                         (() => AlchemyConfig.Loaded.AllowWeaponCoating),
                         (() => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier),
-                        (System.Func<string, string, string>)WeaponCoatEffects.ResolveDisplayName,
-                        (Action<string, Entity, float, string>)WeaponCoatEffects.Apply,
+                        (System.Func<string, string, string>)EffectLib.CoatedEffects.ResolveDisplayName,
+                        (Action<string, Entity, float, string>)EffectLib.CoatedEffects.Apply,
                     ]
                 );
         }

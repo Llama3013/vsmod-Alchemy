@@ -27,14 +27,13 @@
   "class": "ItemPotion",
   "behaviors": [
     {
-      "name": "PotionConsumable",
-      "properties": { "source": "item" }
+      "name": "PotionConsumable"
     }
   ],
   "matterState": "liquid",
   "attributesByType": {
     "*-archer-*": {
-      "potioninfo": { "potionId": "archerpotionid" },
+      "effectinfo": { "effectId": "archerpotionid" },
       "particleColor": [120, 120, 120],
       "waterTightContainerProps": {
         "containable": true,
@@ -52,7 +51,7 @@
       }
     },
     "*-healingeffect-*": {
-      "potioninfo": { "potionId": "healingeffectpotionid" },
+      "effectinfo": { "effectId": "healingeffectpotionid" },
       "particleColor": [210, 30, 30],
       "waterTightContainerProps": {
         "containable": true,
@@ -69,7 +68,7 @@
       }
     },
     "*-hungerenhance-*": {
-      "potioninfo": { "potionId": "hungerenhancepotionid" },
+      "effectinfo": { "effectId": "hungerenhancepotionid" },
       "particleColor": [240, 120, 25],
       "waterTightContainerProps": {
         "containable": true,
@@ -86,7 +85,7 @@
       }
     },
     "*-hungersupress-*": {
-      "potioninfo": { "potionId": "hungersupresspotionid" },
+      "effectinfo": { "effectId": "hungersupresspotionid" },
       "particleColor": [250, 235, 20],
       "waterTightContainerProps": {
         "containable": true,
@@ -103,7 +102,7 @@
       }
     },
     "*-hunter-*": {
-      "potioninfo": { "potionId": "hunterpotionid" },
+      "effectinfo": { "effectId": "hunterpotionid" },
       "particleColor": [150, 95, 45],
       "waterTightContainerProps": {
         "containable": true,
@@ -120,7 +119,7 @@
       }
     },
     "*-looter-*": {
-      "potioninfo": { "potionId": "looterpotionid" },
+      "effectinfo": { "effectId": "looterpotionid" },
       "particleColor": [65, 85, 205],
       "waterTightContainerProps": {
         "containable": true,
@@ -137,7 +136,7 @@
       }
     },
     "*-melee-*": {
-      "potioninfo": { "potionId": "meleepotionid" },
+      "effectinfo": { "effectId": "meleepotionid" },
       "particleColor": [120, 10, 15],
       "effects": { "meleeWeaponsDamage": 0.3 },
       "waterTightContainerProps": {
@@ -155,7 +154,7 @@
       }
     },
     "*-mining-*": {
-      "potioninfo": { "potionId": "miningpotionid" },
+      "effectinfo": { "effectId": "miningpotionid" },
       "particleColor": [180, 105, 55],
       "waterTightContainerProps": {
         "containable": true,
@@ -172,7 +171,7 @@
       }
     },
     "*-poison-*": {
-      "potioninfo": { "potionId": "poisontickpotionid" },
+      "effectinfo": { "effectId": "poisontickpotionid" },
       "particleColor": [170, 75, 180],
       "waterTightContainerProps": {
         "containable": true,
@@ -189,7 +188,7 @@
       }
     },
     "*-predator-*": {
-      "potioninfo": { "potionId": "predatorpotionid" },
+      "effectinfo": { "effectId": "predatorpotionid" },
       "particleColor": [250, 155, 180],
       "waterTightContainerProps": {
         "containable": true,
@@ -206,7 +205,7 @@
       }
     },
     "*-regen-*": {
-      "potioninfo": { "potionId": "regentickpotionid" },
+      "effectinfo": { "effectId": "regentickpotionid" },
       "particleColor": [70, 110, 30],
       "waterTightContainerProps": {
         "containable": true,
@@ -223,7 +222,7 @@
       }
     },
     "*-scentmask-*": {
-      "potioninfo": { "potionId": "scentmaskpotionid" },
+      "effectinfo": { "effectId": "scentmaskpotionid" },
       "particleColor": [190, 170, 220],
       "waterTightContainerProps": {
         "containable": true,
@@ -240,7 +239,7 @@
       }
     },
     "*-speed-*": {
-      "potioninfo": { "potionId": "speedpotionid" },
+      "effectinfo": { "effectId": "speedpotionid" },
       "particleColor": [15, 170, 210],
       "effects": { "walkspeed": 0.25 },
       "waterTightContainerProps": {
@@ -258,7 +257,7 @@
       }
     },
     "*-vitality-*": {
-      "potioninfo": { "potionId": "vitalitypotionid" },
+      "effectinfo": { "effectId": "vitalitypotionid" },
       "particleColor": [20, 15, 30],
       "waterTightContainerProps": {
         "containable": true,

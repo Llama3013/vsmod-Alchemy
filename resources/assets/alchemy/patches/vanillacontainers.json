@@ -4,8 +4,8 @@
         "op": "add",
         "path": "/behaviors/-",
         "value": {
-            "name": "PotionConsumable",
-            "properties": { "source": "liquidcontent", "animation": "eat" }
+            "name": "PotionConsumableLiquid",
+            "properties": { "animation": "eat" }
         },
         "condition": {
             "when": "AllowVanillaContainerDrinking",
@@ -17,8 +17,8 @@
         "op": "add",
         "path": "/behaviors/-",
         "value": {
-            "name": "PotionConsumable",
-            "properties": { "source": "liquidcontent", "animation": "eat" }
+            "name": "PotionConsumableLiquid",
+            "properties": { "animation": "eat" }
         },
         "condition": {
             "when": "AllowVanillaContainerDrinking",
@@ -30,8 +30,8 @@
         "op": "add",
         "path": "/behaviors/-",
         "value": {
-            "name": "PotionConsumable",
-            "properties": { "source": "liquidcontent", "animation": "eat" }
+            "name": "PotionConsumableLiquid",
+            "properties": { "animation": "eat" }
         },
         "condition": {
             "when": "AllowVanillaContainerDrinking",

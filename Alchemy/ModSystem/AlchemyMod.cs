@@ -10,6 +10,7 @@ vertexFlags: {
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using EffectLib;
 using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -28,15 +29,11 @@ namespace Alchemy
         private const string ConfigSyncChannelName = "alchemyconfigsync";
         private Harmony harmony;
 
-        public static bool PlayerModelLibPresent { get; private set; }
-
         public override void Start(ICoreAPI api)
         {
             this.api = api;
             base.Start(api);
             api.Logger.Debug("[Potion] Start");
-
-            PlayerModelLibPresent = api.ModLoader.IsModEnabled("playermodellib");
 
             if (!Harmony.HasAnyPatches(HarmonyId))
             {
@@ -46,7 +43,10 @@ namespace Alchemy
             CombatOverhaulCompat.Init(api);
             RegisterClasses(api);
             RegisterEffectsOnce(api.Logger);
+            RegisterWithEffectLib(api);
 
+            // World config isn't a reliable sync channel for runtime values a client needs to
+            // read back (tooltips, behavior calculations) - PlayerJoin below sends this instead.
             api.Network
                 .RegisterChannel(ConfigSyncChannelName)
                 .RegisterMessageType<AlchemyConfigSyncPacket>();
@@ -64,8 +64,82 @@ namespace Alchemy
 
                 PotionEffects.RegisterAll();
                 PotionDefinitions.Validate(logger);
+
+                // Claims the ~25 built-in potion ids so a JSON-defined effect (scanned by a
+                // behavior's own OnLoaded, or a content patch like throwableacid.json) can never
+                // silently take one over - see PotionConsumableLogic.IsCodeOwned.
+                EffectRegistry.Reserve(PotionDefinitions.All.Select(def => def.Id));
+
                 effectsRegistered = true;
             }
+        }
+
+        // Runs on every Start rather than once. The game creates a ModSystem per side and can
+        // recreate them on a world reload, so a one-shot guard here would leave EffectLib
+        // pointed at a stale gate or HUD provider for the rest of the process. Both calls
+        // below are idempotent.
+        private static void RegisterWithEffectLib(ICoreAPI api)
+        {
+            // EffectLib ships no config of its own, so point its capability gate at ours.
+            EffectPolicy.SetGate(capability =>
+                capability switch
+                {
+                    EffectCapability.Fly => AlchemyConfig.Loaded.AllowFlightPotion,
+                    EffectCapability.Climb => AlchemyConfig.Loaded.AllowClimbPotion,
+                    EffectCapability.Fall => AlchemyConfig.Loaded.AllowFallPotion,
+                    EffectCapability.Refresh => AlchemyConfig.Loaded.AllowPotionRefresh,
+                    EffectCapability.RetainOnDisconnect =>
+                        AlchemyConfig.Loaded.RetainEffectsOnDisconnect,
+                    EffectCapability.Resize =>
+                        AlchemyConfig.Loaded.AllowGrowPotion || AlchemyConfig.Loaded.AllowShrinkPotion,
+                    _ => true,
+                }
+            );
+
+            // Recall, reshape, nutrition, temporal and resizing are carried out by EffectLib's
+            // own built-in handler now - nothing to register here for them.
+
+            // Feeds the shared HUD Alchemy's grow/shrink row and potion icons.
+            EffectHud.Register(AlchemyHudProvider.Instance);
+
+            RegisterCoatingWithEffectLib(api);
+        }
+
+        // Same idempotency note as RegisterWithEffectLib above.
+        private static void RegisterCoatingWithEffectLib(ICoreAPI api)
+        {
+            CoatingPolicy.AllowCoating = () => AlchemyConfig.Loaded.AllowWeaponCoating;
+            CoatingPolicy.MaxCharges = () => AlchemyConfig.Loaded.WeaponCoatCharges;
+            CoatingPolicy.EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier;
+            CoatingPolicy.IsCoatableWeapon = col => PotionConsumableLogic.HasWeaponTag(api, col);
+            CoatingPolicy.IsCoatableProjectile = PotionConsumableLogic.IsCoatableProjectile;
+            CoatingPolicy.IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed;
+            CoatingPolicy.ResolveLiquidEffect = stack =>
+                PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul)
+                    ? (id, mul)
+                    : null;
+
+            // Drinking-style side effects and exclusivity groups apply to a coated hit too.
+            CoatingPolicy.ApplySideEffects = (potionId, entity, mul) =>
+                PotionConsumableLogic.ApplySideEffects(entity, potionId, mul);
+            CoatingPolicy.GetBlockReason = (potionId, player, ctx) =>
+                PotionConsumableLogic.GetCoatingBlockReason(player, potionId, ctx);
+
+            BarrelCoatingConfig.AllowBarrelCoating = () => AlchemyConfig.Loaded.AllowBarrelCoating;
+            BarrelCoatingConfig.ConsumeLitres = () => AlchemyConfig.Loaded.WeaponCoatConsumeLitres;
+            BarrelCoatingConfig.CheckLitres = () => AlchemyConfig.Loaded.WeaponCoatCheckLitres;
+
+            // Combat Overhaul-managed weapons/arrows keep their coating in its own weapon-buff
+            // storage instead, so its own on-hit logic (not EffectLib's) delivers the effect.
+            CoatingPolicy.UsesAlternateWeaponStorage = CombatOverhaulCompat.ShouldUseBuffStorage;
+            CoatingPolicy.UsesAlternateProjectileStorage =
+                CombatOverhaulCompat.ShouldUseProjectileBuffStorage;
+            CoatingPolicy.TryReadAlternateWeapon = stack =>
+                CombatOverhaulCompat.TryGetCoating(stack, out string id, out string code, out float mul, out int charges)
+                    ? (id, code, mul, charges)
+                    : null;
+            CoatingPolicy.WriteAlternateWeapon = CombatOverhaulCompat.SetCoating;
+            CoatingPolicy.WriteAlternateProjectile = CombatOverhaulCompat.SetProjectileCoating;
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -79,10 +153,21 @@ namespace Alchemy
                 "PotionConsumable",
                 typeof(PotionConsumableBehavior)
             );
-            api.RegisterCollectibleBehaviorClass("PotionCoat", typeof(CollectibleBehaviorCoat));
+            api.RegisterCollectibleBehaviorClass(
+                "PotionConsumableLiquid",
+                typeof(PotionConsumableLiquidBehavior)
+            );
+            api.RegisterCollectibleBehaviorClass(
+                "PotionCoat",
+                typeof(EffectLib.CollectibleBehaviorCoatable)
+            );
             api.RegisterCollectibleBehaviorClass(
                 "PotionCoatSource",
                 typeof(PotionCoatSourceBehavior)
+            );
+            api.RegisterCollectibleBehaviorClass(
+                "PotionCoatSourceLiquid",
+                typeof(PotionCoatSourceLiquidBehavior)
             );
             api.RegisterItemClass("ItemStirringSpoon", typeof(ItemStirringSpoon));
             api.RegisterBlockClass("BlockCauldronFirepit", typeof(BlockCauldronFirepit));
@@ -154,53 +239,29 @@ namespace Alchemy
                 obj.CollectibleBehaviors =
                 [
                     .. obj.CollectibleBehaviors,
-                    new CollectibleBehaviorCoat(obj),
+                    new EffectLib.CollectibleBehaviorCoatable(obj),
                 ];
             }
         }
 
         public override void StartClientSide(ICoreClientAPI api)
         {
-            api.Event.LevelFinalize += () =>
-            {
-                if (api.World.Player?.Entity is EntityPlayer sizedPlayer)
-                    EntityPlayerSizePatch.ApplySize(sizedPlayer);
-            };
-
+            // Size resync and the CanClimbAnywhere mirror are EffectLib's own concern now -
+            // handled by EffectLibMod.StartClientSide for every mod built on it, not just this one.
+            // JSON-defined potions register themselves too, via PotionConsumableBehavior's own
+            // OnLoaded (EffectLib's generic self-registration) - nothing to scan here either.
             api.Network
                 .GetChannel(ConfigSyncChannelName)
                 .SetMessageHandler<AlchemyConfigSyncPacket>(packet =>
                     AlchemyConfig.Loaded.ApplySyncPacket(packet)
                 );
-
-            api.Event.PlayerEntitySpawn += iPlayer =>
-            {
-                if (iPlayer.Entity is not EntityPlayer player)
-                    return;
-
-                bool baselineCanClimbAnywhere = player.Properties.CanClimbAnywhere;
-
-                void SyncClimb() =>
-                    player.Properties.CanClimbAnywhere =
-                        player.WatchedAttributes.GetBool(EffectAttr.CanClimb)
-                        || baselineCanClimbAnywhere;
-
-                SyncClimb();
-                player.WatchedAttributes.RegisterModifiedListener(
-                    EffectAttr.CanClimb,
-                    SyncClimb
-                );
-            };
-
         }
 
-        /* This override is to add the PotionFixBehavior to the player and to reset all of the potion stats to default */
         public override void StartServerSide(ICoreServerAPI api)
         {
-            api.Event.PlayerNowPlaying += OnPlayerReady; // add method so we can remove it in dispose to prevent memory leaks
+            // Attaching the effect behavior, resuming on login, suspending on disconnect and
+            // clearing on death are all handled by EffectLib's own ModSystem.
             api.Event.PlayerJoin += SendConfigSync;
-            api.Event.PlayerDisconnect += OnPlayerDisconnect;
-            api.Event.PlayerDeath += OnPlayerDeath;
 
             base.StartServerSide(api);
         }
@@ -212,78 +273,19 @@ namespace Alchemy
                 .SendPacket(AlchemyConfig.Loaded.ToSyncPacket(), player);
         }
 
-        private static void OnPlayerReady(IServerPlayer player)
-        {
-            EntityPlayer entity = player.Entity;
-            if (entity?.Properties == null)
-                return;
-
-            if (!entity.HasBehavior<EntityBehaviorEffects>())
-            {
-                entity.AddBehavior(new EntityBehaviorEffects(entity));
-            }
-
-            if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
-            {
-                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RestoreEffects();
-
-                float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
-                if (sizeDelta is > 0.001f or < -0.001f)
-                {
-                    entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
-                }
-            }
-            else
-            {
-                UtilityEffects.ResetPlayerSize(entity);
-                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
-            }
-        }
-
-        private static void OnPlayerDisconnect(IServerPlayer player)
-        {
-            EntityPlayer entity = player.Entity;
-            if (entity?.Properties == null)
-                return;
-
-            if (!entity.HasBehavior<EntityBehaviorEffects>())
-                return;
-
-            if (AlchemyConfig.Loaded.RetainEffectsOnDisconnect)
-            {
-                entity.GetBehavior<EntityBehaviorEffects>().Manager?.Suspend();
-            }
-            else
-            {
-                UtilityEffects.ResetPlayerSize(entity);
-                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
-            }
-        }
-
-        private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)
-        {
-            EntityPlayer entity = player.Entity;
-            if (entity?.Properties == null)
-                return;
-
-            UtilityEffects.ResetPlayerSize(entity);
-            if (entity.HasBehavior<EntityBehaviorEffects>())
-                entity.GetBehavior<EntityBehaviorEffects>().Manager?.RemoveAll();
-        }
-
         public override void Dispose()
         {
             CombatOverhaulCompat.Shutdown();
             harmony?.UnpatchAll(HarmonyId);
             harmony = null;
+
             // remove our player join listener so we don't create memory leaks
             if (api is ICoreServerAPI sapi)
-            {
-                sapi.Event.PlayerNowPlaying -= OnPlayerReady;
                 sapi.Event.PlayerJoin -= SendConfigSync;
-                sapi.Event.PlayerDisconnect -= OnPlayerDisconnect;
-                sapi.Event.PlayerDeath -= OnPlayerDeath;
-            }
+
+            // Deliberately not unregistering from EffectLib: both are process-wide statics that
+            // Start re-establishes, and dropping them here would disable every handler-driven
+            // potion for any world loaded later in the same session.
         }
     }
 }

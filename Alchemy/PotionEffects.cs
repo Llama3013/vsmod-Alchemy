@@ -1,35 +1,46 @@
+using EffectLib;
+
 namespace Alchemy
 {
     public static class PotionEffects
     {
+        /// <summary>
+        /// Mod domain these effects are registered under, so EffectLib resolves their lang
+        /// keys and HUD icons from Alchemy's assets rather than its own.
+        /// </summary>
+        public const string Domain = "alchemy";
+
+        private static void Register(string potionId, EffectBuilder builder) =>
+            EffectRegistry.Register(potionId, builder, Domain);
+
         public static void RegisterAll()
         {
-            EffectRegistry.Register("archerpotionid", ApplyArcherPotion);
-            EffectRegistry.Register("healingeffectpotionid", ApplyHealingEffectPotion);
-            EffectRegistry.Register("hungerenhancepotionid", ApplyHungerEnhancePotion);
-            EffectRegistry.Register("hungersupresspotionid", ApplyHungerSupressPotion);
-            EffectRegistry.Register("hunterpotionid", ApplyHunterPotion);
-            EffectRegistry.Register("looterpotionid", ApplyLooterPotion);
-            EffectRegistry.Register("meleepotionid", ApplyMeleePotion);
-            EffectRegistry.Register("miningpotionid", ApplyMiningPotion);
-            EffectRegistry.Register("poisontickpotionid", ApplyPoisonPotion);
-            EffectRegistry.Register("predatorpotionid", ApplyPredatorPotion);
-            EffectRegistry.Register("regentickpotionid", ApplyRegenPotion);
-            EffectRegistry.Register("scentmaskpotionid", ApplyScentMaskPotion);
-            EffectRegistry.Register("speedpotionid", ApplySpeedPotion);
-            EffectRegistry.Register("vitalitypotionid", ApplyVitalityPotion);
-            EffectRegistry.Register("glowpotionid", ApplyGlowPotion);
-            EffectRegistry.Register("waterbreathepotionid", ApplyWaterBreathePotion);
-            EffectRegistry.Register("coldresistpotionid", ApplyColdResistPotion);
-            EffectRegistry.Register("nutritionpotionid", ApplyNutritionPotion);
-            EffectRegistry.Register("recallpotionid", ApplyRecallPotion);
-            EffectRegistry.Register("temporalpotionid", ApplyTemporalPotion);
-            EffectRegistry.Register("reshapepotionid", ApplyReshapePotion);
-            EffectRegistry.Register("growpotionid", ApplyGrowPotion);
-            EffectRegistry.Register("shrinkpotionid", ApplyShrinkPotion);
-            EffectRegistry.Register("fallpotionid", ApplyFallPotion);
-            EffectRegistry.Register("climbpotionid", ApplyClimbPotion);
-            EffectRegistry.Register("flightpotionid", ApplyFlightPotion);
+            Register("archerpotionid", ApplyArcherPotion);
+            Register("healingeffectpotionid", ApplyHealingEffectPotion);
+            Register("hungerenhancepotionid", ApplyHungerEnhancePotion);
+            Register("hungersupresspotionid", ApplyHungerSupressPotion);
+            Register("hunterpotionid", ApplyHunterPotion);
+            Register("looterpotionid", ApplyLooterPotion);
+            Register("meleepotionid", ApplyMeleePotion);
+            Register("miningpotionid", ApplyMiningPotion);
+            Register("poisontickpotionid", ApplyPoisonPotion);
+            Register("predatorpotionid", ApplyPredatorPotion);
+            Register("regentickpotionid", ApplyRegenPotion);
+            Register("scentmaskpotionid", ApplyScentMaskPotion);
+            Register("speedpotionid", ApplySpeedPotion);
+            Register("vitalitypotionid", ApplyVitalityPotion);
+            Register("glowpotionid", ApplyGlowPotion);
+            Register("waterbreathepotionid", ApplyWaterBreathePotion);
+            Register("coldresistpotionid", ApplyColdResistPotion);
+            Register("nutritionpotionid", ApplyNutritionPotion);
+            Register("recallpotionid", ApplyRecallPotion);
+            Register("temporalpotionid", ApplyTemporalPotion);
+            Register("reshapepotionid", ApplyReshapePotion);
+            Register("growpotionid", ApplyGrowPotion);
+            Register("shrinkpotionid", ApplyShrinkPotion);
+            Register("fallpotionid", ApplyFallPotion);
+            Register("climbpotionid", ApplyClimbPotion);
+            Register("flightpotionid", ApplyFlightPotion);
         }
 
         private static void ApplyArcherPotion(EffectContext ctx)
@@ -479,12 +490,16 @@ namespace Alchemy
         {
             ctx.ResetsEffects = AlchemyConfig.Loaded.GrowPotionResetsEffects;
             ctx.SizeChange = AlchemyConfig.Loaded.GrowPotionSizeChange;
+            ctx.SizeMinHeight = AlchemyConfig.Loaded.GrowShrinkMinHeight;
+            ctx.SizeMaxHeight = AlchemyConfig.Loaded.GrowShrinkMaxHeight;
         }
 
         private static void ApplyShrinkPotion(EffectContext ctx)
         {
             ctx.ResetsEffects = AlchemyConfig.Loaded.ShrinkPotionResetsEffects;
             ctx.SizeChange = AlchemyConfig.Loaded.ShrinkPotionSizeChange;
+            ctx.SizeMinHeight = AlchemyConfig.Loaded.GrowShrinkMinHeight;
+            ctx.SizeMaxHeight = AlchemyConfig.Loaded.GrowShrinkMaxHeight;
         }
 
         private static void ApplyFallPotion(EffectContext ctx)

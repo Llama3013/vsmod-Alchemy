@@ -20,7 +20,7 @@ namespace Alchemy
         {
             base.OnHeldIdle(slot, byEntity);
             foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                if (bh is PotionCoatSourceBehavior coat)
+                if (bh is EffectLib.CollectibleBehaviorCoatSource coat)
                 {
                     coat.CoatingIdle(slot, byEntity);
                     return;
@@ -79,8 +79,8 @@ namespace Alchemy
         public override void OnLoaded(ICoreAPI api)
         {
             base.OnLoaded(api);
-            JsonObject potion = Attributes?["potioninfo"];
-            string potionId = potion?["potionId"].AsString();
+            JsonObject potion = Attributes?["effectinfo"];
+            string potionId = potion?["effectId"].AsString();
             if (string.IsNullOrWhiteSpace(potionId))
             {
                 api.Logger.Debug(

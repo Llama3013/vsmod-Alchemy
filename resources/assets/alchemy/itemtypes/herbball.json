@@ -12,42 +12,41 @@
   "behaviors": [
     {
       "name": "PotionConsumable",
-      "properties": { "source": "item", "animation": "eat", "sound": "eat" }
+      "properties": { "animation": "eat", "sound": "eat" }
     },
     {
-      "name": "PotionCoatSource",
-      "properties": { "source": "item" }
+      "name": "PotionCoatSource"
     }
   ],
   "attributesByType": {
     "*-archer": {
-      "potioninfo": { "potionId": "archerpotionid" }
+      "effectinfo": { "effectId": "archerpotionid" }
     },
     "*-healingeffect": {
-      "potioninfo": { "potionId": "healingeffectpotionid" }
+      "effectinfo": { "effectId": "healingeffectpotionid" }
     },
-    "*-hungerenhance": { "potioninfo": { "potionId": "hungerenhancepotionid" } },
-    "*-hungersupress": { "potioninfo": { "potionId": "hungersupresspotionid" } },
+    "*-hungerenhance": { "effectinfo": { "effectId": "hungerenhancepotionid" } },
+    "*-hungersupress": { "effectinfo": { "effectId": "hungersupresspotionid" } },
     "*-hunter": {
-      "potioninfo": { "potionId": "hunterpotionid" }
+      "effectinfo": { "effectId": "hunterpotionid" }
     },
     "*-looter": {
-      "potioninfo": { "potionId": "looterpotionid" }
+      "effectinfo": { "effectId": "looterpotionid" }
     },
-    "*-melee": { "potioninfo": { "potionId": "meleepotionid" } },
+    "*-melee": { "effectinfo": { "effectId": "meleepotionid" } },
     "*-mining": {
-      "potioninfo": { "potionId": "miningpotionid" }
+      "effectinfo": { "effectId": "miningpotionid" }
     },
     "*-poison": {
-      "potioninfo": { "potionId": "poisontickpotionid" }
+      "effectinfo": { "effectId": "poisontickpotionid" }
     },
-    "*-predator": { "potioninfo": { "potionId": "predatorpotionid" } },
+    "*-predator": { "effectinfo": { "effectId": "predatorpotionid" } },
     "*-regen": {
-      "potioninfo": { "potionId": "regentickpotionid" }
+      "effectinfo": { "effectId": "regentickpotionid" }
     },
-    "*-scentmask": { "potioninfo": { "potionId": "scentmaskpotionid" } },
-    "*-speed": { "potioninfo": { "potionId": "speedpotionid" } },
-    "*-vitality": { "potioninfo": { "potionId": "vitalitypotionid" } },
+    "*-scentmask": { "effectinfo": { "effectId": "scentmaskpotionid" } },
+    "*-speed": { "effectinfo": { "effectId": "speedpotionid" } },
+    "*-vitality": { "effectinfo": { "effectId": "vitalitypotionid" } },
     "*": { "handbook": { "exclude": true } }
   },
   "shape": { "base": "alchemy:item/herbball" },

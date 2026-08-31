@@ -3,6 +3,124 @@
   "file": "alchemy.json",
   "settings": {
     "float": {
+      "POISONPOTIONTICKSEC": {
+        "name": "PoisonPotionTickSec",
+        "ingui": "alchemy:PoisonPotionTickSec",
+        "weight": 18.3,
+        "comment": "alchemy:PoisonPotionTickSec-Comment",
+        "default": 3.0,
+        "range": {
+          "min": 0.1,
+          "max": 29.0
+        }
+      },
+      "REGENPOTIONTICKSEC": {
+        "name": "RegenPotionTickSec",
+        "ingui": "alchemy:RegenPotionTickSec",
+        "weight": 20.3,
+        "comment": "alchemy:RegenPotionTickSec-Comment",
+        "default": 3.0,
+        "range": {
+          "min": 0.1,
+          "max": 29.0
+        }
+      },
+      "ARCHERPOTIONHEALTHTICKSEC": {
+        "name": "ArcherPotionHealthTickSec",
+        "ingui": "alchemy:ArcherPotionHealthTickSec",
+        "weight": 48.24,
+        "comment": "alchemy:ArcherPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "HEALINGEFFECTPOTIONHEALTHTICKSEC": {
+        "name": "HealingEffectPotionHealthTickSec",
+        "ingui": "alchemy:HealingEffectPotionHealthTickSec",
+        "weight": 49.26,
+        "comment": "alchemy:HealingEffectPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "HUNGERENHANCEPOTIONHEALTHTICKSEC": {
+        "name": "HungerEnhancePotionHealthTickSec",
+        "ingui": "alchemy:HungerEnhancePotionHealthTickSec",
+        "weight": 50.26,
+        "comment": "alchemy:HungerEnhancePotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "HUNGERSUPRESSPOTIONHEALTHTICKSEC": {
+        "name": "HungerSupressPotionHealthTickSec",
+        "ingui": "alchemy:HungerSupressPotionHealthTickSec",
+        "weight": 51.26,
+        "comment": "alchemy:HungerSupressPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "HUNTERPOTIONHEALTHTICKSEC": {
+        "name": "HunterPotionHealthTickSec",
+        "ingui": "alchemy:HunterPotionHealthTickSec",
+        "weight": 52.23,
+        "comment": "alchemy:HunterPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "LOOTERPOTIONHEALTHTICKSEC": {
+        "name": "LooterPotionHealthTickSec",
+        "ingui": "alchemy:LooterPotionHealthTickSec",
+        "weight": 53.23,
+        "comment": "alchemy:LooterPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "MELEEPOTIONHEALTHTICKSEC": {
+        "name": "MeleePotionHealthTickSec",
+        "ingui": "alchemy:MeleePotionHealthTickSec",
+        "weight": 54.26,
+        "comment": "alchemy:MeleePotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "MININGPOTIONHEALTHEXTRATICKSEC": {
+        "name": "MiningPotionHealthExtraTickSec",
+        "ingui": "alchemy:MiningPotionHealthExtraTickSec",
+        "weight": 55.25,
+        "comment": "alchemy:MiningPotionHealthExtraTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "PREDATORPOTIONHEALTHTICKSEC": {
+        "name": "PredatorPotionHealthTickSec",
+        "ingui": "alchemy:PredatorPotionHealthTickSec",
+        "weight": 57.26,
+        "comment": "alchemy:PredatorPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "SCENTMASKPOTIONHEALTHTICKSEC": {
+        "name": "ScentMaskPotionHealthTickSec",
+        "ingui": "alchemy:ScentMaskPotionHealthTickSec",
+        "weight": 59.26,
+        "comment": "alchemy:ScentMaskPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "SPEEDPOTIONHEALTHTICKSEC": {
+        "name": "SpeedPotionHealthTickSec",
+        "ingui": "alchemy:SpeedPotionHealthTickSec",
+        "weight": 60.26,
+        "comment": "alchemy:SpeedPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
+      "VITALITYPOTIONHEALTHTICKSEC": {
+        "name": "VitalityPotionHealthTickSec",
+        "ingui": "alchemy:VitalityPotionHealthTickSec",
+        "weight": 61.26,
+        "comment": "alchemy:VitalityPotionHealthTickSec-Comment",
+        "default": 0.0,
+        "range": { "min": 0.0, "max": 300.0 }
+      },
       "WEAKPOTIONMULTIPLIER": {
         "name": "WeakPotionMultiplier",
         "ingui": "alchemy:WeakPotionMultiplier",
@@ -3184,17 +3302,6 @@
           "max": 5000
         }
       },
-      "POISONPOTIONTICKSEC": {
-        "name": "PoisonPotionTickSec",
-        "ingui": "alchemy:PoisonPotionTickSec",
-        "weight": 18.3,
-        "comment": "alchemy:PoisonPotionTickSec-Comment",
-        "default": 3,
-        "range": {
-          "min": 1,
-          "max": 29
-        }
-      },
       "PREDATORPOTIONDURATION": {
         "name": "PredatorPotionDuration",
         "ingui": "alchemy:PredatorPotionDuration",
@@ -3215,17 +3322,6 @@
         "range": {
           "min": 10,
           "max": 5000
-        }
-      },
-      "REGENPOTIONTICKSEC": {
-        "name": "RegenPotionTickSec",
-        "ingui": "alchemy:RegenPotionTickSec",
-        "weight": 20.3,
-        "comment": "alchemy:RegenPotionTickSec-Comment",
-        "default": 3,
-        "range": {
-          "min": 1,
-          "max": 29
         }
       },
       "SCENTMASKPOTIONDURATION": {
@@ -3326,102 +3422,6 @@
           "min": 10,
           "max": 5000
         }
-      },
-      "ARCHERPOTIONHEALTHTICKSEC": {
-        "name": "ArcherPotionHealthTickSec",
-        "ingui": "alchemy:ArcherPotionHealthTickSec",
-        "weight": 48.24,
-        "comment": "alchemy:ArcherPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "HEALINGEFFECTPOTIONHEALTHTICKSEC": {
-        "name": "HealingEffectPotionHealthTickSec",
-        "ingui": "alchemy:HealingEffectPotionHealthTickSec",
-        "weight": 49.26,
-        "comment": "alchemy:HealingEffectPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "HUNGERENHANCEPOTIONHEALTHTICKSEC": {
-        "name": "HungerEnhancePotionHealthTickSec",
-        "ingui": "alchemy:HungerEnhancePotionHealthTickSec",
-        "weight": 50.26,
-        "comment": "alchemy:HungerEnhancePotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "HUNGERSUPRESSPOTIONHEALTHTICKSEC": {
-        "name": "HungerSupressPotionHealthTickSec",
-        "ingui": "alchemy:HungerSupressPotionHealthTickSec",
-        "weight": 51.26,
-        "comment": "alchemy:HungerSupressPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "HUNTERPOTIONHEALTHTICKSEC": {
-        "name": "HunterPotionHealthTickSec",
-        "ingui": "alchemy:HunterPotionHealthTickSec",
-        "weight": 52.23,
-        "comment": "alchemy:HunterPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "LOOTERPOTIONHEALTHTICKSEC": {
-        "name": "LooterPotionHealthTickSec",
-        "ingui": "alchemy:LooterPotionHealthTickSec",
-        "weight": 53.23,
-        "comment": "alchemy:LooterPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "MELEEPOTIONHEALTHTICKSEC": {
-        "name": "MeleePotionHealthTickSec",
-        "ingui": "alchemy:MeleePotionHealthTickSec",
-        "weight": 54.26,
-        "comment": "alchemy:MeleePotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "MININGPOTIONHEALTHEXTRATICKSEC": {
-        "name": "MiningPotionHealthExtraTickSec",
-        "ingui": "alchemy:MiningPotionHealthExtraTickSec",
-        "weight": 55.25,
-        "comment": "alchemy:MiningPotionHealthExtraTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "PREDATORPOTIONHEALTHTICKSEC": {
-        "name": "PredatorPotionHealthTickSec",
-        "ingui": "alchemy:PredatorPotionHealthTickSec",
-        "weight": 57.26,
-        "comment": "alchemy:PredatorPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "SCENTMASKPOTIONHEALTHTICKSEC": {
-        "name": "ScentMaskPotionHealthTickSec",
-        "ingui": "alchemy:ScentMaskPotionHealthTickSec",
-        "weight": 59.26,
-        "comment": "alchemy:ScentMaskPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "SPEEDPOTIONHEALTHTICKSEC": {
-        "name": "SpeedPotionHealthTickSec",
-        "ingui": "alchemy:SpeedPotionHealthTickSec",
-        "weight": 60.26,
-        "comment": "alchemy:SpeedPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
-      },
-      "VITALITYPOTIONHEALTHTICKSEC": {
-        "name": "VitalityPotionHealthTickSec",
-        "ingui": "alchemy:VitalityPotionHealthTickSec",
-        "weight": 61.26,
-        "comment": "alchemy:VitalityPotionHealthTickSec-Comment",
-        "default": 0,
-        "range": { "min": 0, "max": 300 }
       },
       "CLIMBPOTIONDURATION": {
         "name": "ClimbPotionDuration",
@@ -3916,6 +3916,13 @@
         "comment": "alchemy:AllowClayThrowableFlasks-Comment",
         "default": true
       },
+      "ALLOWACIDPOTIONEFFECTS": {
+        "name": "AllowAcidAsPotion",
+        "ingui": "alchemy:AllowAcidAsPotion",
+        "weight": 3.7,
+        "comment": "alchemy:AllowAcidAsPotion-Comment",
+        "default": true
+      },
       "ALLOWHERBRACKMOLDS": {
         "name": "AllowHerbRackMolds",
         "ingui": "alchemy:AllowHerbRackMolds",
@@ -4167,6 +4174,188 @@
         "comment": "alchemy:SideEffectStrengthMultiplier-Comment",
         "default": true
       },
+      "ALLOWDRINKINGPOISON": {
+        "name": "AllowDrinkingPoison",
+        "ingui": "alchemy:AllowDrinkingPoison",
+        "weight": 4.311,
+        "comment": "alchemy:AllowDrinkingPoison-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGREGEN": {
+        "name": "AllowDrinkingRegen",
+        "ingui": "alchemy:AllowDrinkingRegen",
+        "weight": 4.312,
+        "comment": "alchemy:AllowDrinkingRegen-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGARCHER": {
+        "name": "AllowDrinkingArcher",
+        "ingui": "alchemy:AllowDrinkingArcher",
+        "weight": 4.313,
+        "comment": "alchemy:AllowDrinkingArcher-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGHEALINGEFFECT": {
+        "name": "AllowDrinkingHealingEffect",
+        "ingui": "alchemy:AllowDrinkingHealingEffect",
+        "weight": 4.314,
+        "comment": "alchemy:AllowDrinkingHealingEffect-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGHUNGERENHANCE": {
+        "name": "AllowDrinkingHungerEnhance",
+        "ingui": "alchemy:AllowDrinkingHungerEnhance",
+        "weight": 4.315,
+        "comment": "alchemy:AllowDrinkingHungerEnhance-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGHUNGERSUPRESS": {
+        "name": "AllowDrinkingHungerSupress",
+        "ingui": "alchemy:AllowDrinkingHungerSupress",
+        "weight": 4.316,
+        "comment": "alchemy:AllowDrinkingHungerSupress-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGHUNTER": {
+        "name": "AllowDrinkingHunter",
+        "ingui": "alchemy:AllowDrinkingHunter",
+        "weight": 4.317,
+        "comment": "alchemy:AllowDrinkingHunter-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGLOOTER": {
+        "name": "AllowDrinkingLooter",
+        "ingui": "alchemy:AllowDrinkingLooter",
+        "weight": 4.318,
+        "comment": "alchemy:AllowDrinkingLooter-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGMELEE": {
+        "name": "AllowDrinkingMelee",
+        "ingui": "alchemy:AllowDrinkingMelee",
+        "weight": 4.319,
+        "comment": "alchemy:AllowDrinkingMelee-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGMINING": {
+        "name": "AllowDrinkingMining",
+        "ingui": "alchemy:AllowDrinkingMining",
+        "weight": 4.32,
+        "comment": "alchemy:AllowDrinkingMining-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGPREDATOR": {
+        "name": "AllowDrinkingPredator",
+        "ingui": "alchemy:AllowDrinkingPredator",
+        "weight": 4.321,
+        "comment": "alchemy:AllowDrinkingPredator-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGSCENTMASK": {
+        "name": "AllowDrinkingScentMask",
+        "ingui": "alchemy:AllowDrinkingScentMask",
+        "weight": 4.322,
+        "comment": "alchemy:AllowDrinkingScentMask-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGSPEED": {
+        "name": "AllowDrinkingSpeed",
+        "ingui": "alchemy:AllowDrinkingSpeed",
+        "weight": 4.323,
+        "comment": "alchemy:AllowDrinkingSpeed-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGVITALITY": {
+        "name": "AllowDrinkingVitality",
+        "ingui": "alchemy:AllowDrinkingVitality",
+        "weight": 4.324,
+        "comment": "alchemy:AllowDrinkingVitality-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGRECALL": {
+        "name": "AllowDrinkingRecall",
+        "ingui": "alchemy:AllowDrinkingRecall",
+        "weight": 4.325,
+        "comment": "alchemy:AllowDrinkingRecall-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGGLOW": {
+        "name": "AllowDrinkingGlow",
+        "ingui": "alchemy:AllowDrinkingGlow",
+        "weight": 4.326,
+        "comment": "alchemy:AllowDrinkingGlow-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGWATERBREATHE": {
+        "name": "AllowDrinkingWaterBreathe",
+        "ingui": "alchemy:AllowDrinkingWaterBreathe",
+        "weight": 4.327,
+        "comment": "alchemy:AllowDrinkingWaterBreathe-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGCOLDRESIST": {
+        "name": "AllowDrinkingColdResist",
+        "ingui": "alchemy:AllowDrinkingColdResist",
+        "weight": 4.328,
+        "comment": "alchemy:AllowDrinkingColdResist-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGNUTRITION": {
+        "name": "AllowDrinkingNutrition",
+        "ingui": "alchemy:AllowDrinkingNutrition",
+        "weight": 4.329,
+        "comment": "alchemy:AllowDrinkingNutrition-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGTEMPORAL": {
+        "name": "AllowDrinkingTemporal",
+        "ingui": "alchemy:AllowDrinkingTemporal",
+        "weight": 4.33,
+        "comment": "alchemy:AllowDrinkingTemporal-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGRESHAPE": {
+        "name": "AllowDrinkingReshape",
+        "ingui": "alchemy:AllowDrinkingReshape",
+        "weight": 4.331,
+        "comment": "alchemy:AllowDrinkingReshape-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGGROW": {
+        "name": "AllowDrinkingGrow",
+        "ingui": "alchemy:AllowDrinkingGrow",
+        "weight": 4.332,
+        "comment": "alchemy:AllowDrinkingGrow-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGSHRINK": {
+        "name": "AllowDrinkingShrink",
+        "ingui": "alchemy:AllowDrinkingShrink",
+        "weight": 4.333,
+        "comment": "alchemy:AllowDrinkingShrink-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGFALL": {
+        "name": "AllowDrinkingFall",
+        "ingui": "alchemy:AllowDrinkingFall",
+        "weight": 4.334,
+        "comment": "alchemy:AllowDrinkingFall-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGCLIMB": {
+        "name": "AllowDrinkingClimb",
+        "ingui": "alchemy:AllowDrinkingClimb",
+        "weight": 4.335,
+        "comment": "alchemy:AllowDrinkingClimb-Comment",
+        "default": true
+      },
+      "ALLOWDRINKINGFLIGHT": {
+        "name": "AllowDrinkingFlight",
+        "ingui": "alchemy:AllowDrinkingFlight",
+        "weight": 4.336,
+        "comment": "alchemy:AllowDrinkingFlight-Comment",
+        "default": true
+      },
       "ALLOWWEAPONCOATING": {
         "name": "AllowWeaponCoating",
         "ingui": "alchemy:AllowWeaponCoating",
@@ -4363,186 +4552,186 @@
         "comment": "alchemy:AllowCoatingFlight-Comment",
         "default": false
       },
-      "ALLOWTHROWPOISON": {
-        "name": "AllowThrowPoison",
-        "ingui": "alchemy:AllowThrowPoison",
+      "ALLOWTHROWINGPOISON": {
+        "name": "AllowThrowingPoison",
+        "ingui": "alchemy:AllowThrowingPoison",
         "weight": 4.451,
-        "comment": "alchemy:AllowThrowPoison-Comment",
+        "comment": "alchemy:AllowThrowingPoison-Comment",
         "default": true
       },
-      "ALLOWTHROWREGEN": {
-        "name": "AllowThrowRegen",
-        "ingui": "alchemy:AllowThrowRegen",
+      "ALLOWTHROWINGREGEN": {
+        "name": "AllowThrowingRegen",
+        "ingui": "alchemy:AllowThrowingRegen",
         "weight": 4.452,
-        "comment": "alchemy:AllowThrowRegen-Comment",
+        "comment": "alchemy:AllowThrowingRegen-Comment",
         "default": true
       },
-      "ALLOWTHROWARCHER": {
-        "name": "AllowThrowArcher",
-        "ingui": "alchemy:AllowThrowArcher",
+      "ALLOWTHROWINGARCHER": {
+        "name": "AllowThrowingArcher",
+        "ingui": "alchemy:AllowThrowingArcher",
         "weight": 4.453,
-        "comment": "alchemy:AllowThrowArcher-Comment",
+        "comment": "alchemy:AllowThrowingArcher-Comment",
         "default": false
       },
-      "ALLOWTHROWHEALINGEFFECT": {
-        "name": "AllowThrowHealingEffect",
-        "ingui": "alchemy:AllowThrowHealingEffect",
+      "ALLOWTHROWINGHEALINGEFFECT": {
+        "name": "AllowThrowingHealingEffect",
+        "ingui": "alchemy:AllowThrowingHealingEffect",
         "weight": 4.454,
-        "comment": "alchemy:AllowThrowHealingEffect-Comment",
+        "comment": "alchemy:AllowThrowingHealingEffect-Comment",
         "default": false
       },
-      "ALLOWTHROWHUNGERENHANCE": {
-        "name": "AllowThrowHungerEnhance",
-        "ingui": "alchemy:AllowThrowHungerEnhance",
+      "ALLOWTHROWINGHUNGERENHANCE": {
+        "name": "AllowThrowingHungerEnhance",
+        "ingui": "alchemy:AllowThrowingHungerEnhance",
         "weight": 4.455,
-        "comment": "alchemy:AllowThrowHungerEnhance-Comment",
+        "comment": "alchemy:AllowThrowingHungerEnhance-Comment",
         "default": false
       },
-      "ALLOWTHROWHUNGERSUPRESS": {
-        "name": "AllowThrowHungerSupress",
-        "ingui": "alchemy:AllowThrowHungerSupress",
+      "ALLOWTHROWINGHUNGERSUPRESS": {
+        "name": "AllowThrowingHungerSupress",
+        "ingui": "alchemy:AllowThrowingHungerSupress",
         "weight": 4.456,
-        "comment": "alchemy:AllowThrowHungerSupress-Comment",
+        "comment": "alchemy:AllowThrowingHungerSupress-Comment",
         "default": false
       },
-      "ALLOWTHROWHUNTER": {
-        "name": "AllowThrowHunter",
-        "ingui": "alchemy:AllowThrowHunter",
+      "ALLOWTHROWINGHUNTER": {
+        "name": "AllowThrowingHunter",
+        "ingui": "alchemy:AllowThrowingHunter",
         "weight": 4.457,
-        "comment": "alchemy:AllowThrowHunter-Comment",
+        "comment": "alchemy:AllowThrowingHunter-Comment",
         "default": false
       },
-      "ALLOWTHROWLOOTER": {
-        "name": "AllowThrowLooter",
-        "ingui": "alchemy:AllowThrowLooter",
+      "ALLOWTHROWINGLOOTER": {
+        "name": "AllowThrowingLooter",
+        "ingui": "alchemy:AllowThrowingLooter",
         "weight": 4.458,
-        "comment": "alchemy:AllowThrowLooter-Comment",
+        "comment": "alchemy:AllowThrowingLooter-Comment",
         "default": false
       },
-      "ALLOWTHROWMELEE": {
-        "name": "AllowThrowMelee",
-        "ingui": "alchemy:AllowThrowMelee",
+      "ALLOWTHROWINGMELEE": {
+        "name": "AllowThrowingMelee",
+        "ingui": "alchemy:AllowThrowingMelee",
         "weight": 4.459,
-        "comment": "alchemy:AllowThrowMelee-Comment",
+        "comment": "alchemy:AllowThrowingMelee-Comment",
         "default": false
       },
-      "ALLOWTHROWMINING": {
-        "name": "AllowThrowMining",
-        "ingui": "alchemy:AllowThrowMining",
+      "ALLOWTHROWINGMINING": {
+        "name": "AllowThrowingMining",
+        "ingui": "alchemy:AllowThrowingMining",
         "weight": 4.46,
-        "comment": "alchemy:AllowThrowMining-Comment",
+        "comment": "alchemy:AllowThrowingMining-Comment",
         "default": false
       },
-      "ALLOWTHROWPREDATOR": {
-        "name": "AllowThrowPredator",
-        "ingui": "alchemy:AllowThrowPredator",
+      "ALLOWTHROWINGPREDATOR": {
+        "name": "AllowThrowingPredator",
+        "ingui": "alchemy:AllowThrowingPredator",
         "weight": 4.461,
-        "comment": "alchemy:AllowThrowPredator-Comment",
+        "comment": "alchemy:AllowThrowingPredator-Comment",
         "default": false
       },
-      "ALLOWTHROWSCENTMASK": {
-        "name": "AllowThrowScentMask",
-        "ingui": "alchemy:AllowThrowScentMask",
+      "ALLOWTHROWINGSCENTMASK": {
+        "name": "AllowThrowingScentMask",
+        "ingui": "alchemy:AllowThrowingScentMask",
         "weight": 4.462,
-        "comment": "alchemy:AllowThrowScentMask-Comment",
+        "comment": "alchemy:AllowThrowingScentMask-Comment",
         "default": false
       },
-      "ALLOWTHROWSPEED": {
-        "name": "AllowThrowSpeed",
-        "ingui": "alchemy:AllowThrowSpeed",
+      "ALLOWTHROWINGSPEED": {
+        "name": "AllowThrowingSpeed",
+        "ingui": "alchemy:AllowThrowingSpeed",
         "weight": 4.463,
-        "comment": "alchemy:AllowThrowSpeed-Comment",
+        "comment": "alchemy:AllowThrowingSpeed-Comment",
         "default": false
       },
-      "ALLOWTHROWVITALITY": {
-        "name": "AllowThrowVitality",
-        "ingui": "alchemy:AllowThrowVitality",
+      "ALLOWTHROWINGVITALITY": {
+        "name": "AllowThrowingVitality",
+        "ingui": "alchemy:AllowThrowingVitality",
         "weight": 4.464,
-        "comment": "alchemy:AllowThrowVitality-Comment",
+        "comment": "alchemy:AllowThrowingVitality-Comment",
         "default": false
       },
-      "ALLOWTHROWRECALL": {
-        "name": "AllowThrowRecall",
-        "ingui": "alchemy:AllowThrowRecall",
+      "ALLOWTHROWINGRECALL": {
+        "name": "AllowThrowingRecall",
+        "ingui": "alchemy:AllowThrowingRecall",
         "weight": 4.465,
-        "comment": "alchemy:AllowThrowRecall-Comment",
+        "comment": "alchemy:AllowThrowingRecall-Comment",
         "default": false
       },
-      "ALLOWTHROWGLOW": {
-        "name": "AllowThrowGlow",
-        "ingui": "alchemy:AllowThrowGlow",
+      "ALLOWTHROWINGGLOW": {
+        "name": "AllowThrowingGlow",
+        "ingui": "alchemy:AllowThrowingGlow",
         "weight": 4.466,
-        "comment": "alchemy:AllowThrowGlow-Comment",
+        "comment": "alchemy:AllowThrowingGlow-Comment",
         "default": false
       },
-      "ALLOWTHROWWATERBREATHE": {
-        "name": "AllowThrowWaterBreathe",
-        "ingui": "alchemy:AllowThrowWaterBreathe",
+      "ALLOWTHROWINGWATERBREATHE": {
+        "name": "AllowThrowingWaterBreathe",
+        "ingui": "alchemy:AllowThrowingWaterBreathe",
         "weight": 4.467,
-        "comment": "alchemy:AllowThrowWaterBreathe-Comment",
+        "comment": "alchemy:AllowThrowingWaterBreathe-Comment",
         "default": false
       },
-      "ALLOWTHROWCOLDRESIST": {
-        "name": "AllowThrowColdResist",
-        "ingui": "alchemy:AllowThrowColdResist",
+      "ALLOWTHROWINGCOLDRESIST": {
+        "name": "AllowThrowingColdResist",
+        "ingui": "alchemy:AllowThrowingColdResist",
         "weight": 4.468,
-        "comment": "alchemy:AllowThrowColdResist-Comment",
+        "comment": "alchemy:AllowThrowingColdResist-Comment",
         "default": false
       },
-      "ALLOWTHROWNUTRITION": {
-        "name": "AllowThrowNutrition",
-        "ingui": "alchemy:AllowThrowNutrition",
+      "ALLOWTHROWINGNUTRITION": {
+        "name": "AllowThrowingNutrition",
+        "ingui": "alchemy:AllowThrowingNutrition",
         "weight": 4.469,
-        "comment": "alchemy:AllowThrowNutrition-Comment",
+        "comment": "alchemy:AllowThrowingNutrition-Comment",
         "default": false
       },
-      "ALLOWTHROWTEMPORAL": {
-        "name": "AllowThrowTemporal",
-        "ingui": "alchemy:AllowThrowTemporal",
+      "ALLOWTHROWINGTEMPORAL": {
+        "name": "AllowThrowingTemporal",
+        "ingui": "alchemy:AllowThrowingTemporal",
         "weight": 4.47,
-        "comment": "alchemy:AllowThrowTemporal-Comment",
+        "comment": "alchemy:AllowThrowingTemporal-Comment",
         "default": false
       },
-      "ALLOWTHROWRESHAPE": {
-        "name": "AllowThrowReshape",
-        "ingui": "alchemy:AllowThrowReshape",
+      "ALLOWTHROWINGRESHAPE": {
+        "name": "AllowThrowingReshape",
+        "ingui": "alchemy:AllowThrowingReshape",
         "weight": 4.471,
-        "comment": "alchemy:AllowThrowReshape-Comment",
+        "comment": "alchemy:AllowThrowingReshape-Comment",
         "default": false
       },
-      "ALLOWTHROWGROW": {
-        "name": "AllowThrowGrow",
-        "ingui": "alchemy:AllowThrowGrow",
+      "ALLOWTHROWINGGROW": {
+        "name": "AllowThrowingGrow",
+        "ingui": "alchemy:AllowThrowingGrow",
         "weight": 4.472,
-        "comment": "alchemy:AllowThrowGrow-Comment",
+        "comment": "alchemy:AllowThrowingGrow-Comment",
         "default": false
       },
-      "ALLOWTHROWSHRINK": {
-        "name": "AllowThrowShrink",
-        "ingui": "alchemy:AllowThrowShrink",
+      "ALLOWTHROWINGSHRINK": {
+        "name": "AllowThrowingShrink",
+        "ingui": "alchemy:AllowThrowingShrink",
         "weight": 4.473,
-        "comment": "alchemy:AllowThrowShrink-Comment",
+        "comment": "alchemy:AllowThrowingShrink-Comment",
         "default": false
       },
-      "ALLOWTHROWFALL": {
-        "name": "AllowThrowFall",
-        "ingui": "alchemy:AllowThrowFall",
+      "ALLOWTHROWINGFALL": {
+        "name": "AllowThrowingFall",
+        "ingui": "alchemy:AllowThrowingFall",
         "weight": 4.474,
-        "comment": "alchemy:AllowThrowFall-Comment",
+        "comment": "alchemy:AllowThrowingFall-Comment",
         "default": false
       },
-      "ALLOWTHROWCLIMB": {
-        "name": "AllowThrowClimb",
-        "ingui": "alchemy:AllowThrowClimb",
+      "ALLOWTHROWINGCLIMB": {
+        "name": "AllowThrowingClimb",
+        "ingui": "alchemy:AllowThrowingClimb",
         "weight": 4.475,
-        "comment": "alchemy:AllowThrowClimb-Comment",
+        "comment": "alchemy:AllowThrowingClimb-Comment",
         "default": false
       },
-      "ALLOWTHROWFLIGHT": {
-        "name": "AllowThrowFlight",
-        "ingui": "alchemy:AllowThrowFlight",
+      "ALLOWTHROWINGFLIGHT": {
+        "name": "AllowThrowingFlight",
+        "ingui": "alchemy:AllowThrowingFlight",
         "weight": 4.476,
-        "comment": "alchemy:AllowThrowFlight-Comment",
+        "comment": "alchemy:AllowThrowingFlight-Comment",
         "default": false
       },
       "ALLOWRESHAPEPOTIONRECIPE": {

@@ -1,6 +1,8 @@
-﻿using System;
+﻿﻿using EffectLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
@@ -13,16 +15,27 @@ namespace Alchemy
 {
     public static class PotionConsumableLogic
     {
-        private static readonly Dictionary<long, long> coatHoldStartMs = [];
-        private static readonly HashSet<long> coatNotifiedEntities = [];
         private static TagSet coatableWeaponTagSet;
         private static bool coatableWeaponTagSetCached;
 
-        public const float CoatHoldDurationSec = 1.5f;
-        public const float DefaultConsumeTime = 1.5f;
+        public const string AttributeKey = "effectinfo";
 
         public const float IntoxicationMax = 1.1f;
         public const float PsychedelicMax = 2.0f;
+
+        public static bool TryReadPotionId(CollectibleObject collectible, out string potionId)
+        {
+            JsonObject potion = collectible?.Attributes?[AttributeKey];
+            potionId = potion?.Exists == true ? potion["effectId"].AsString()?.ToLowerInvariant() : null;
+
+            if (string.IsNullOrWhiteSpace(potionId))
+            {
+                potionId = null;
+                return false;
+            }
+
+            return true;
+        }
 
         public static bool TryReadPotionInfo(
             ItemStack stack,
@@ -30,13 +43,9 @@ namespace Alchemy
             out string strength
         )
         {
-            potionId = null;
             strength = "weak";
 
-            JsonObject potion = stack?.ItemAttributes?["potioninfo"];
-            potionId = potion?.Exists == true ? potion["potionId"].AsString() : null;
-
-            if (string.IsNullOrWhiteSpace(potionId))
+            if (!TryReadPotionId(stack?.Collectible, out potionId))
             {
                 potionId = null;
                 return false;
@@ -48,75 +57,44 @@ namespace Alchemy
             return true;
         }
 
-        public static bool HasEnoughSource(
-            CollectibleObject collObj,
-            string source,
-            ItemSlot slot,
-            float checkLitres
-        )
-        {
-            if (source != "liquidcontent")
-                return slot?.Itemstack?.StackSize >= 1;
+        // The ~25 built-in potions are reserved in EffectRegistry at startup (see
+        // AlchemyMod.RegisterEffectsOnce), so this is exactly "is this one of them, with
+        // delivery driven by the Allow{Drinking,Throwing,Coating}<Name> config" vs. "everything
+        // else, JSON-defined or not, with delivery driven by EffectRegistry's generic channels".
+        private static bool IsCodeOwned(string potionId) => EffectRegistry.IsReserved(potionId);
 
-            if (collObj is not BlockLiquidContainerBase container)
-                return false;
-
-            return container.GetCurrentLitres(slot.Itemstack) >= checkLitres;
-        }
-
-        public static bool ConsumeSource(
-            CollectibleObject collObj,
-            string source,
-            ItemSlot slot,
-            EntityAgent byEntity,
-            float consumeLitres
-        )
-        {
-            if (source == "liquidcontent")
-            {
-                if (collObj is not BlockLiquidContainerBase container)
-                    return false;
-
-                EntityPlayer player = byEntity as EntityPlayer;
-                int consumed = container.SplitStackAndPerformAction(
-                    player,
-                    slot,
-                    stack => container.TryTakeLiquid(stack, consumeLitres)?.StackSize ?? 0
-                );
-                slot.MarkDirty();
-                player?.Player?.InventoryManager?.BroadcastHotbarSlot();
-                return consumed > 0;
-            }
-
-            ItemStack taken = slot.TakeOut(1);
-            slot.MarkDirty();
-            return taken?.StackSize > 0;
-        }
+        // Drinking and throwing default to allowed (an effect that declares no channels allows
+        // all of them); coating does not, since most potions never opt into it - see
+        // EffectRegistry.HasExplicitChannels.
+        internal static bool IsDrinkingAllowed(string potionId) =>
+            IsCodeOwned(potionId)
+                ? PotionDefinitions.AllowsDrinking(potionId)
+                : EffectRegistry.AllowsChannel(potionId, "drink");
 
         internal static bool IsThrowableAllowed(string potionId) =>
-            PotionDefinitions.AllowsThrowing(potionId);
+            IsCodeOwned(potionId)
+                ? PotionDefinitions.AllowsThrowing(potionId)
+                : EffectRegistry.AllowsChannel(potionId, "throw");
 
         internal static bool IsCoatingAllowed(string potionId) =>
-            PotionDefinitions.AllowsCoating(potionId);
+            IsCodeOwned(potionId)
+                ? PotionDefinitions.AllowsCoating(potionId)
+                : EffectRegistry.HasExplicitChannels(potionId)
+                    && EffectRegistry.AllowsChannel(potionId, "coat");
 
         internal static string GetPotionGroup(string potionId) =>
-            PotionDefinitions.GroupOf(potionId);
+            IsCodeOwned(potionId)
+                ? PotionDefinitions.GroupOf(potionId)
+                : EffectRegistry.GroupOf(potionId) ?? "none";
 
+        // The effect manager is the only record of what is running, so ask it rather than
+        // scanning attribute names.
         internal static HashSet<string> GetActivePotionIds(EntityPlayer player)
         {
-            HashSet<string> result = new(StringComparer.OrdinalIgnoreCase);
-            if (player?.WatchedAttributes == null)
-                return result;
-
-            foreach (string key in player.WatchedAttributes.Keys)
-            {
-                if (
-                    key.EndsWith("potionid", StringComparison.OrdinalIgnoreCase)
-                    && player.WatchedAttributes.GetLong(key) != 0
-                )
-                    result.Add(key);
-            }
-            return result;
+            EffectManager manager = player?.GetBehavior<EntityBehaviorEffects>()?.Manager;
+            return manager == null
+                ? new(StringComparer.OrdinalIgnoreCase)
+                : new(manager.ActiveIds, StringComparer.OrdinalIgnoreCase);
         }
 
         internal static string CheckPotionExclusivity(EntityPlayer player, string incomingPotionId)
@@ -155,195 +133,6 @@ namespace Alchemy
                 return "alchemy:exclusivity-group-conflict";
 
             return null;
-        }
-
-        public static bool HandleWeaponCoatingIdle(
-            ICoreAPI api,
-            ItemSlot coatSlot,
-            EntityAgent byEntity,
-            string potionId,
-            string strength,
-            string itemCode,
-            System.Func<ItemSlot, bool> consumeCoating,
-            float consumeTime = CoatHoldDurationSec
-        )
-        {
-            if (!AlchemyConfig.Loaded.AllowWeaponCoating)
-                return false;
-
-            bool eligible =
-                byEntity.LeftHandItemSlot == coatSlot
-                && byEntity.Controls.RightMouseDown
-                && byEntity.Controls.ShiftKey
-                && byEntity.Controls.HandUse == EnumHandInteract.None;
-
-            if (byEntity.World.Side == EnumAppSide.Client)
-            {
-                HandleClientAnimation(api, byEntity, potionId, eligible);
-                return false;
-            }
-
-            return HandleServerCoating(
-                api,
-                coatSlot,
-                byEntity,
-                potionId,
-                strength,
-                eligible,
-                itemCode,
-                consumeCoating,
-                consumeTime
-            );
-        }
-
-        private static void HandleClientAnimation(
-            ICoreAPI api,
-            EntityAgent byEntity,
-            string potionId,
-            bool eligible
-        )
-        {
-            if (!eligible)
-                return;
-
-            ItemSlot mainSlot = byEntity.RightHandItemSlot;
-
-            if (
-                mainSlot?.Itemstack == null
-                || string.IsNullOrEmpty(potionId)
-                || !IsCoatingAllowed(potionId)
-            )
-                return;
-
-            CollectibleObject col = mainSlot.Itemstack.Collectible;
-
-            bool isArrow = IsCoatableProjectile(col);
-
-            if (!isArrow && !HasWeaponTag(api, col))
-                return;
-
-            bool coatable;
-            if (isArrow)
-            {
-                coatable = CombatOverhaulCompat.ShouldUseProjectileBuffStorage(mainSlot.Itemstack)
-                    ? !CombatOverhaulCompat.TryGetCoating(
-                        mainSlot.Itemstack,
-                        out _,
-                        out _,
-                        out _,
-                        out _
-                    )
-                    : string.IsNullOrEmpty(
-                        mainSlot.Itemstack.Attributes.GetString("coatedPotionId")
-                    );
-            }
-            else
-            {
-                int charges = mainSlot.Itemstack.Attributes.GetInt("coatCharges");
-                if (
-                    CombatOverhaulCompat.ShouldUseBuffStorage(col)
-                    && CombatOverhaulCompat.TryGetCoating(
-                        mainSlot.Itemstack,
-                        out _,
-                        out _,
-                        out _,
-                        out int buffCharges
-                    )
-                )
-                    charges = buffCharges;
-                coatable = charges < AlchemyConfig.Loaded.WeaponCoatCharges;
-            }
-
-            if (coatable)
-            {
-                byEntity.AnimManager?.StartAnimation("eat");
-            }
-        }
-
-        private static bool HandleServerCoating(
-            ICoreAPI api,
-            ItemSlot coatSlot,
-            EntityAgent byEntity,
-            string potionId,
-            string strength,
-            bool eligible,
-            string itemCode,
-            System.Func<ItemSlot, bool> consumeCoating,
-            float consumeTime
-        )
-        {
-            long entityId = byEntity.EntityId;
-
-            if (!eligible)
-            {
-                coatHoldStartMs.Remove(entityId);
-                coatNotifiedEntities.Remove(entityId);
-                return false;
-            }
-
-            ItemSlot mainHandSlot = byEntity.RightHandItemSlot;
-
-            if (mainHandSlot?.Itemstack == null)
-            {
-                coatHoldStartMs.Remove(entityId);
-                return false;
-            }
-
-            CollectibleObject col = mainHandSlot.Itemstack.Collectible;
-
-            bool isArrow = IsCoatableProjectile(col);
-
-            if (!isArrow && !HasWeaponTag(api, col))
-            {
-                coatHoldStartMs.Remove(entityId);
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(potionId) || !IsCoatingAllowed(potionId))
-            {
-                if (
-                    coatNotifiedEntities.Add(entityId)
-                    && byEntity is EntityPlayer { Player: IServerPlayer serverPlayer }
-                )
-                    serverPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:coating-not-allowed"),
-                        EnumChatType.Notification
-                    );
-                coatHoldStartMs.Remove(entityId);
-                return false;
-            }
-
-            if (!coatHoldStartMs.TryGetValue(entityId, out long startMs))
-            {
-                coatHoldStartMs[entityId] = Environment.TickCount64;
-                return false;
-            }
-
-            // I couldn't find a better way to handle the timing of the coating action while
-            // using OnHeldIdle and couldn't derive an action on the offhand for
-            // OnHeldInteract, so this is a bit jank but it works. Basically I check if the
-            // player has been holding the coating for long enough, and if so I apply the coating
-            // and consume the potion. If they stop holding before the time is up then nothing
-            // happens and they can try again.
-            if ((Environment.TickCount64 - startMs) / 1000f < consumeTime)
-                return false;
-
-            coatHoldStartMs.Remove(entityId);
-
-            float strengthMul = GetStrengthMultiplier(strength);
-
-            ApplyCoating(
-                coatSlot,
-                mainHandSlot,
-                byEntity,
-                potionId,
-                AlchemyConfig.Loaded.WeaponCoatEffectMultiplier * strengthMul,
-                itemCode,
-                consumeCoating
-            );
-
-            return true;
         }
 
         public static float GetStrengthMultiplier(string strength)
@@ -420,7 +209,7 @@ namespace Alchemy
                 );
         }
 
-        private static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
+        internal static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
         {
             if (!coatableWeaponTagSetCached)
             {
@@ -452,432 +241,166 @@ namespace Alchemy
             return WildcardUtil.Match(codes, col.Code.ToString());
         }
 
-        private static bool barrelCoating;
-
-        private static string GetContentLangKey(CollectibleObject col)
-        {
-            if (col?.Code == null)
-                return "";
-            string typePrefix = col is Vintagestory.API.Common.Block ? "block" : "item";
-            return $"{col.Code.Domain}:{typePrefix}-{col.Code.Path}";
-        }
-
-        public static bool TryCoatInBarrel(ICoreAPI api, ItemSlot itemSlot, ItemSlot liquidSlot)
-        {
-            if (barrelCoating)
-                return false;
-            if (
-                !AlchemyConfig.Loaded.AllowWeaponCoating || !AlchemyConfig.Loaded.AllowBarrelCoating
-            )
-                return false;
-            if (itemSlot?.Itemstack == null || liquidSlot?.Itemstack == null)
-                return false;
-
-            if (!TryReadPotionInfo(liquidSlot.Itemstack, out string potionId, out string strength))
-                return false;
-            if (string.IsNullOrEmpty(potionId) || !IsCoatingAllowed(potionId))
-                return false;
-
-            CollectibleObject col = itemSlot.Itemstack.Collectible;
-            if (col?.Code == null)
-                return false;
-
-            bool isArrow = IsCoatableProjectile(col);
-            if (!isArrow && !HasWeaponTag(api, col))
-                return false;
-
-            WaterTightContainableProps props = BlockLiquidContainerBase.GetContainableProps(
-                liquidSlot.Itemstack
-            );
-            if (props == null || props.ItemsPerLitre <= 0)
-                return false;
-
-            float consumeLitres = AlchemyConfig.Loaded.WeaponCoatConsumeLitres;
-            float checkLitres = AlchemyConfig.Loaded.WeaponCoatCheckLitres;
-            if (consumeLitres <= 0)
-                return false;
-
-            float availableLitres = liquidSlot.Itemstack.StackSize / props.ItemsPerLitre;
-            float coatMultiplier =
-                AlchemyConfig.Loaded.WeaponCoatEffectMultiplier * GetStrengthMultiplier(strength);
-            string itemCode = GetContentLangKey(liquidSlot.Itemstack.Collectible);
-
-            barrelCoating = true;
-            try
-            {
-                if (isArrow)
-                    return CoatBarrelArrows(
-                        itemSlot,
-                        liquidSlot,
-                        props,
-                        availableLitres,
-                        consumeLitres,
-                        checkLitres,
-                        potionId,
-                        itemCode,
-                        coatMultiplier
-                    );
-
-                return CoatBarrelWeapon(
-                    itemSlot,
-                    liquidSlot,
-                    props,
-                    availableLitres,
-                    consumeLitres,
-                    checkLitres,
-                    potionId,
-                    itemCode,
-                    coatMultiplier
-                );
-            }
-            finally
-            {
-                barrelCoating = false;
-            }
-        }
-
-        private static bool CoatBarrelWeapon(
-            ItemSlot itemSlot,
-            ItemSlot liquidSlot,
-            WaterTightContainableProps props,
-            float availableLitres,
-            float consumeLitres,
-            float checkLitres,
-            string potionId,
-            string itemCode,
-            float coatMultiplier
-        )
-        {
-            bool useBuffStorage = CombatOverhaulCompat.ShouldUseBuffStorage(
-                itemSlot.Itemstack.Collectible
-            );
-            ReadWeaponCoat(
-                itemSlot.Itemstack,
-                useBuffStorage,
-                out string existingId,
-                out float existingMultiplier,
-                out int charges
-            );
-
-            if (
-                !string.IsNullOrEmpty(existingId)
-                && (
-                    existingId != potionId || Math.Abs(existingMultiplier - coatMultiplier) > 0.001f
-                )
-            )
-                return false;
-
-            int maxCharges = AlchemyConfig.Loaded.WeaponCoatCharges;
-            if (charges >= maxCharges)
-                return false;
-
-            int chargesToAdd = 0;
-            float litres = availableLitres;
-            while (charges + chargesToAdd < maxCharges && litres >= checkLitres)
-            {
-                chargesToAdd++;
-                litres -= consumeLitres;
-            }
-
-            if (chargesToAdd <= 0)
-                return false;
-
-            ConsumeBarrelLitres(liquidSlot, props, consumeLitres * chargesToAdd);
-
-            SetWeaponCoat(
-                itemSlot,
-                useBuffStorage,
-                potionId,
-                itemCode,
-                coatMultiplier,
-                charges + chargesToAdd
-            );
-            return true;
-        }
-
-        private static bool CoatBarrelArrows(
-            ItemSlot itemSlot,
-            ItemSlot liquidSlot,
-            WaterTightContainableProps props,
-            float availableLitres,
-            float consumeLitres,
-            float checkLitres,
-            string potionId,
-            string itemCode,
-            float coatMultiplier
-        )
-        {
-            bool useBuffStorage = CombatOverhaulCompat.ShouldUseProjectileBuffStorage(
-                itemSlot.Itemstack
-            );
-
-            if (HasArrowCoat(itemSlot.Itemstack, useBuffStorage))
-                return false;
-
-            int stackSize = itemSlot.Itemstack.StackSize;
-            if (availableLitres < checkLitres * stackSize)
-                return false;
-
-            ConsumeBarrelLitres(liquidSlot, props, consumeLitres * stackSize);
-
-            SetArrowCoat(itemSlot.Itemstack, useBuffStorage, potionId, itemCode, coatMultiplier);
-            itemSlot.MarkDirty();
-            return true;
-        }
-
-        private static void ConsumeBarrelLitres(
-            ItemSlot liquidSlot,
-            WaterTightContainableProps props,
-            float litres
-        )
-        {
-            int itemsToRemove = (int)Math.Round(litres * props.ItemsPerLitre);
-            if (itemsToRemove < 1)
-                itemsToRemove = 1;
-
-            liquidSlot.TakeOut(itemsToRemove);
-            liquidSlot.MarkDirty();
-        }
-
-        private static void ReadWeaponCoat(
+        // Combines TryReadPotionInfo, IsDrinkingAllowed and GetStrengthMultiplier for a
+        // resolved stack - the item/liquid consumable behaviors differ only in how they get to
+        // that stack in the first place, so everything past that point is shared here.
+        // Resolves what a stack is - not whether the caller's delivery method may use it; that
+        // is a separate per-channel question (IsDrinkingAllowed/IsThrowableAllowed/IsCoatingAllowed)
+        // each behavior checks for itself, since the same potion can be coat-only, throw-only,
+        // or any combination. A JSON-only potion (not code-owned) registers itself here the first
+        // time anything resolves it, the same way EffectLib's own generic behaviors self-register
+        // from an "effectinfo" attribute - this is what lets a coat-only, non-drinkable potion
+        // like throwableacid.json's still work without ever going through a drink interaction.
+        internal static bool TryResolvePotion(
             ItemStack stack,
-            bool useBuffStorage,
             out string potionId,
-            out float multiplier,
-            out int charges
+            out float potencyMul
         )
         {
-            if (
-                useBuffStorage
-                && CombatOverhaulCompat.TryGetCoating(
-                    stack,
-                    out potionId,
-                    out _,
-                    out multiplier,
-                    out charges
-                )
-            )
-                return;
+            potencyMul = 1f;
 
-            ITreeAttribute attrs = stack.Attributes;
-            potionId = attrs.GetString("coatedPotionId");
-            multiplier = attrs.GetFloat("coatMultiplier");
-            charges = attrs.GetInt("coatCharges");
-        }
-
-        private static void SetWeaponCoat(
-            ItemSlot slot,
-            bool useBuffStorage,
-            string potionId,
-            string itemCode,
-            float multiplier,
-            int charges
-        )
-        {
-            if (useBuffStorage)
+            if (!TryReadPotionInfo(stack, out potionId, out string strength))
             {
-                CombatOverhaulCompat.SetCoating(slot, potionId, itemCode, multiplier, charges);
-                return;
+                potionId = null;
+                return false;
             }
 
-            ITreeAttribute attrs = slot.Itemstack.Attributes;
-            attrs.SetString("coatedPotionId", potionId);
-            attrs.SetString("coatedItemCode", itemCode);
-            attrs.SetFloat("coatMultiplier", multiplier);
-            attrs.SetInt("coatCharges", charges);
-            slot.MarkDirty();
-        }
+            potencyMul = GetStrengthMultiplier(strength);
 
-        private static bool HasArrowCoat(ItemStack stack, bool useBuffStorage)
-        {
-            return useBuffStorage
-                ? CombatOverhaulCompat.TryGetCoating(stack, out _, out _, out _, out _)
-                : !string.IsNullOrEmpty(stack.Attributes.GetString("coatedPotionId"));
-        }
-
-        private static void SetArrowCoat(
-            ItemStack stack,
-            bool useBuffStorage,
-            string potionId,
-            string itemCode,
-            float multiplier
-        )
-        {
-            if (useBuffStorage)
+            if (!EffectRegistry.IsRegistered(potionId))
             {
-                CombatOverhaulCompat.SetProjectileCoating(stack, potionId, itemCode, multiplier);
-                return;
+                JsonObject def = stack.Collectible?.Attributes?[AttributeKey];
+                if (def?.Exists == true)
+                    JsonEffectDefinition.RegisterFrom(
+                        potionId,
+                        PotionEffects.Domain,
+                        def,
+                        stack.Collectible.Code
+                    );
             }
 
-            ITreeAttribute attrs = stack.Attributes;
-            attrs.SetString("coatedPotionId", potionId);
-            attrs.SetString("coatedItemCode", itemCode);
-            attrs.SetFloat("coatMultiplier", multiplier);
+            return true;
         }
 
-        private static void ApplyCoating(
-            ItemSlot coatSlot,
-            ItemSlot mainHandSlot,
+        // Consume-time scaling by healing effectiveness is identical for drinking and eating -
+        // only the base time (config-driven, per source) differs.
+        internal static float ScaleConsumeTime(float baseTime, EntityAgent byEntity)
+        {
+            if (!AlchemyConfig.Loaded.ScalePotionTimeWithHealing)
+                return baseTime;
+
+            float maxTime = baseTime * AlchemyConfig.Loaded.PotionConsumeMaxTimeMultiplier;
+            float healingEffectiveness = byEntity.Stats.GetBlended("healingeffectivness");
+            healingEffectiveness = Math.Clamp(healingEffectiveness, 0, 2) - 1;
+
+            if (healingEffectiveness < 0)
+                return baseTime + (baseTime - maxTime) * healingEffectiveness;
+            if (healingEffectiveness > 0)
+                return baseTime * (1 - healingEffectiveness);
+            return baseTime;
+        }
+
+        private static bool IsReshapeReentry(EntityAgent byEntity, EffectContext ctx) =>
+            ctx?.Reshape == true && byEntity.WatchedAttributes.GetBool("allowcharselonce");
+
+        private static bool IsRecallOnVessel(EntityAgent byEntity, EffectContext ctx) =>
+            ctx?.Respawn == true
+            && byEntity.MountedOn?.MountSupplier?.OnEntity?.HasBehavior("seatable") == true;
+
+        private static bool IsPotionAlreadyActive(EntityAgent byEntity, string potionId)
+        {
+            if (byEntity is not EntityPlayer player)
+                return false;
+
+            EffectManager manager = player.GetBehavior<EntityBehaviorEffects>()?.Manager;
+
+            if (manager?.CanRefresh(potionId) == true)
+                return false;
+
+            return manager?.IsActive(potionId) == true;
+        }
+
+        private static bool IsAnyPotionActiveAndLimited(EntityAgent byEntity)
+        {
+            if (!AlchemyConfig.Loaded.OnlyOnePotionAtATime)
+                return false;
+
+            if (byEntity is not EntityPlayer player)
+                return false;
+
+            return player.GetBehavior<EntityBehaviorEffects>()?.Manager.HasAnyActive == true;
+        }
+
+        // A lang key naming why this potion should be refused, or null to allow it. Shared by
+        // both consumable behaviors - neither the reshape/vessel edge cases nor the
+        // already-active/limit/exclusivity checks depend on where the potion came from.
+        internal static string GetPotionBlockReason(
             EntityAgent byEntity,
             string potionId,
-            float coatMultiplier,
-            string itemCode,
-            System.Func<ItemSlot, bool> consumeCoating
-        )
-        {
-            if (byEntity is not EntityPlayer playerEntity)
-                return;
-
-            bool isArrow = IsCoatableProjectile(mainHandSlot.Itemstack.Collectible);
-            IServerPlayer serverPlayer = playerEntity.Player as IServerPlayer;
-
-            bool useArrowBuffStorage =
-                isArrow
-                && CombatOverhaulCompat.ShouldUseProjectileBuffStorage(mainHandSlot.Itemstack);
-
-            if (isArrow && HasArrowCoat(mainHandSlot.Itemstack, useArrowBuffStorage))
-            {
-                serverPlayer?.SendMessage(
-                    GlobalConstants.InfoLogChatGroup,
-                    Lang.Get("alchemy:arrow-already-coated"),
-                    EnumChatType.Notification
-                );
-                return;
-            }
-
-            bool useBuffStorage =
-                !isArrow
-                && CombatOverhaulCompat.ShouldUseBuffStorage(mainHandSlot.Itemstack.Collectible);
-
-            string existingId = null;
-            float existingMultiplier = 0f;
-            int existingCharges = 0;
-            if (!isArrow)
-                ReadWeaponCoat(
-                    mainHandSlot.Itemstack,
-                    useBuffStorage,
-                    out existingId,
-                    out existingMultiplier,
-                    out existingCharges
-                );
-
-            if (!isArrow)
-            {
-                if (
-                    !string.IsNullOrEmpty(existingId)
-                    && (
-                        existingId != potionId
-                        || Math.Abs(existingMultiplier - coatMultiplier) > 0.001f
-                    )
-                )
-                {
-                    serverPlayer?.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:coating-conflict"),
-                        EnumChatType.Notification
-                    );
-                    return;
-                }
-
-                if (existingCharges >= AlchemyConfig.Loaded.WeaponCoatCharges)
-                {
-                    serverPlayer?.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get("alchemy:coating-max-charges"),
-                        EnumChatType.Notification
-                    );
-                    return;
-                }
-            }
-
-            string displayName = Lang.Get(itemCode);
-
-            int consumed = consumeCoating(coatSlot) ? 1 : 0;
-
-            if (consumed == 0)
-                return;
-
-            coatSlot.MarkDirty();
-            byEntity.World.PlaySoundAt(
-                new AssetLocation("game:sounds/effect/squish1"),
-                byEntity,
-                null,
-                true,
-                18f
-            );
-
-            if (isArrow)
-            {
-                ItemStack coatedArrow = mainHandSlot.TakeOut(1);
-                SetArrowCoat(coatedArrow, useArrowBuffStorage, potionId, itemCode, coatMultiplier);
-                mainHandSlot.MarkDirty();
-
-                if (!playerEntity.TryGiveItemStack(coatedArrow))
-                    byEntity.World.SpawnItemEntity(coatedArrow, byEntity.Pos.XYZ);
-            }
-            else
-            {
-                SetWeaponCoat(
-                    mainHandSlot,
-                    useBuffStorage,
-                    potionId,
-                    itemCode,
-                    coatMultiplier,
-                    existingCharges + 1
-                );
-            }
-
-            playerEntity.Player.InventoryManager.BroadcastHotbarSlot();
-
-            string msg = isArrow
-                ? Lang.Get("alchemy:arrow-coated", displayName)
-                : Lang.Get("alchemy:weapon-coated", displayName, existingCharges + 1);
-            serverPlayer.SendMessage(
-                GlobalConstants.InfoLogChatGroup,
-                msg,
-                EnumChatType.Notification
-            );
-        }
-
-        public static bool TryProcessPotionEffects(
-            EntityAgent byEntity,
-            PotionData data,
-            ICoreAPI api
+            EffectContext ctx
         )
         {
             if (byEntity.World.Side != EnumAppSide.Server)
+                return null;
+
+            if (IsReshapeReentry(byEntity, ctx))
+                return "alchemy:reshape-block";
+            if (IsRecallOnVessel(byEntity, ctx))
+                return "alchemy:boat-block";
+
+            // A purging potion always goes through - refusing it over an effect it is about to
+            // clear anyway would be surprising.
+            if (ctx.ResetsEffects)
+                return null;
+
+            if (IsPotionAlreadyActive(byEntity, potionId))
+                return "alchemy:potion-already-active";
+            if (IsAnyPotionActiveAndLimited(byEntity))
+                return "alchemy:potion-limit-active";
+
+            if (byEntity is EntityPlayer exclusivityPlayer)
+            {
+                string exclusivityBlock = CheckPotionExclusivity(exclusivityPlayer, potionId);
+                if (exclusivityBlock != null)
+                    return exclusivityBlock;
+            }
+
+            return null;
+        }
+
+        // A coated hit only ever checks exclusivity, not the reshape/vessel/already-active/limit
+        // cases GetPotionBlockReason also covers - none of those make sense for a repeatable
+        // weapon hit (a poisoned blade should be able to re-poison the same target).
+        internal static string GetCoatingBlockReason(
+            EntityPlayer player,
+            string potionId,
+            EffectContext ctx
+        ) => ctx.ResetsEffects ? null : CheckPotionExclusivity(player, potionId);
+
+        // Purges, gates on a size change, applies the effect, then the drinking side effects
+        // and the gain message. Shared by both consumable behaviors.
+        internal static bool ApplyPotionEffect(
+            EntityAgent byEntity,
+            string potionId,
+            EffectContext ctx,
+            string displayName
+        )
+        {
+            if (
+                byEntity is not EntityPlayer playerEntity
+                || playerEntity.Player is not IServerPlayer serverPlayer
+            )
                 return false;
 
-            if (byEntity is not EntityPlayer playerEntity)
-                return false;
-
-            if (playerEntity.Player is not IServerPlayer serverPlayer)
-                return false;
-
-            if (string.IsNullOrWhiteSpace(data.PotionId))
-                return false;
-
-            EntityBehaviorEffects behavior =
-                playerEntity.GetBehavior<EntityBehaviorEffects>();
-
+            EntityBehaviorEffects behavior = playerEntity.GetBehavior<EntityBehaviorEffects>();
             if (behavior == null)
                 return false;
 
-            float strengthMul = GetStrengthMultiplier(data.Strength);
-
-            EffectContext ctx = EffectRegistry.Build(data.PotionId, strengthMul);
-
-            if (ctx == null)
-            {
-                api.Logger.Error("No potion definition for potionId of: {0}", data.PotionId);
-
-                return false;
-            }
-
             if (ctx.ResetsEffects)
             {
-                behavior.Manager.RemoveAll();
-                UtilityEffects.ResetPlayerSize(playerEntity);
+                // Scoped to Alchemy's own effects unless the potion names other domains, so a
+                // purging brew never wipes effects belonging to another mod.
+                behavior.Manager.PurgeFor(potionId, ctx);
             }
 
             if (
@@ -893,23 +416,293 @@ namespace Alchemy
                 return false;
             }
 
-            if (!behavior.Manager.TryApply(data.PotionId, ctx, data.DisplayName))
-            {
+            if (!behavior.Manager.TryApply(potionId, ctx, displayName))
                 return false;
-            }
 
-            ApplySideEffects(playerEntity, data.PotionId, strengthMul);
+            ApplySideEffects(playerEntity, potionId, ctx.PotencyMul);
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
-                Lang.Get(
-                    ctx.Reshape ? "alchemy:reshape-gain" : "alchemy:effect-gain",
-                    data.DisplayName
-                ),
+                Lang.Get(ctx.Reshape ? "alchemy:reshape-gain" : "alchemy:effect-gain", displayName),
                 EnumChatType.Notification
             );
 
             return true;
+        }
+
+        // The full tooltip for a resolved potion. Shared by both consumable behaviors, which
+        // differ only in how they resolve (potionId, potencyMul) in the first place.
+        internal static void AppendPotionTooltip(StringBuilder dsc, string potionId, float potencyMul)
+        {
+            EffectContext ctx = EffectRegistry.Build(potionId, potencyMul);
+            if (ctx == null)
+                return;
+
+            if (ctx.StatModifiers != null)
+            {
+                int headerStart = dsc.Length;
+                dsc.AppendLine(Lang.Get("alchemy:potion-when-used"));
+                int headerEnd = dsc.Length;
+                if (ctx.StatModifiers.TryGetValue("rangedWeaponsAcc", out float rWvalue) && rWvalue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-archer-accuracy-effect",
+                            Math.Round(rWvalue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("animalLootDropRate", out float aLValue)
+                    && aLValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-animal-loot-effect", Math.Round(aLValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("animalHarvestingTime", out float ahValue)
+                    && ahValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-animal-harvest-effect",
+                            Math.Round(ahValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("animalSeekingRange", out float aSValue)
+                    && aSValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-animal-seek-effect", Math.Round(aSValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("maxhealthExtraPoints", out float mHEValue)
+                    && mHEValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-max-health-effect", Math.Round(mHEValue * 100, 0))
+                    );
+                if (ctx.StatModifiers.TryGetValue("forageDropRate", out float fDValue) && fDValue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-forage-amount-effect",
+                            Math.Round(fDValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("healingeffectivness", out float hEValue)
+                    && hEValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-heal-effectiveness-effect",
+                            Math.Round(hEValue * 100, 0)
+                        )
+                    );
+                if (ctx.StatModifiers.TryGetValue("hungerrate", out float hRValue) && hRValue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-hunger-rate-effect", Math.Round(hRValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("meleeWeaponsDamage", out float mWValue)
+                    && mWValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-melee-damage-effect", Math.Round(mWValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("mechanicalsDamage", out float mDValue)
+                    && mDValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-mech-damage-effect", Math.Round(mDValue * 100, 0))
+                    );
+                if (ctx.StatModifiers.TryGetValue("miningSpeedMul", out float mSValue) && mSValue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-mining-speed-effect", Math.Round(mSValue * 100, 0))
+                    );
+                if (ctx.StatModifiers.TryGetValue("oreDropRate", out float oDValue) && oDValue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-ore-amount-effect", Math.Round(oDValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("rangedWeaponsDamage", out float rWDValue)
+                    && rWDValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-archer-damage-effect",
+                            Math.Round(rWDValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("rangedWeaponsSpeed", out float rWSValue)
+                    && rWSValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-archer-speed-effect",
+                            Math.Round(rWSValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("rustyGearDropRate", out float rGDValue)
+                    && rGDValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-gear-amount-effect", Math.Round(rGDValue * 100, 0))
+                    );
+                if (ctx.StatModifiers.TryGetValue("walkspeed", out float wSValue) && wSValue != 0f)
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-walk-speed-effect", Math.Round(wSValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("vesselContentsDropRate", out float vCDValue)
+                    && vCDValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-vessel-amount-effect",
+                            Math.Round(vCDValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("wildCropDropRate", out float wCDValue)
+                    && wCDValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-wild-crop-effect", Math.Round(wCDValue * 100, 0))
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("wholeVesselLootChance", out float wVLValue)
+                    && wVLValue != 0f
+                )
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-whole-vessel-effect",
+                            Math.Round(wVLValue * 100, 0)
+                        )
+                    );
+                if (
+                    ctx.StatModifiers.TryGetValue("health", out float healthValue)
+                    && healthValue is > 0.01f or < -0.01f
+                )
+                    dsc.AppendLine(Lang.Get("alchemy:potion-single-health-effect", healthValue));
+
+                if (ctx.Respawn)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-recall-effect"));
+                if (ctx.GlowStrength > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-glow-effect"));
+                if (ctx.WaterBreathe)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-waterbreathe-effect"));
+                if (ctx.ColdResist)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-coldresist-effect"));
+                if (ctx.TemporalStabilityGain > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-temporal-effect"));
+                if (ctx.RetainedNutrition > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-nutrition-effect"));
+                if (ctx.Reshape)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-reshape-effect"));
+                if (ctx.SizeChange > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-grow-effect"));
+                if (ctx.SizeChange < 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-shrink-effect"));
+                if (ctx.FallDamageReduction > 0)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-fall-effect"));
+                if (ctx.CanClimbAnywhere)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-climb-effect"));
+                if (ctx.CanFly)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-flight-effect"));
+                if (ctx.NoGravity)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-nogravity-effect"));
+                if (Math.Abs(ctx.KnockbackResistance) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-knockback-resist-effect",
+                            $"{ctx.KnockbackResistance * 100:+0;-0;0}"
+                        )
+                    );
+                if (ctx.NoFallDamage)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-no-fall-damage-effect"));
+                if (ctx.DisableClimbing)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-no-climb-effect"));
+                if (Math.Abs(ctx.ClimbTouchDistance) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            "alchemy:potion-climb-reach-effect",
+                            $"{ctx.ClimbTouchDistance:+0.##;-0.##;0}"
+                        )
+                    );
+                if (Math.Abs(ctx.Weight) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get("alchemy:potion-weight-effect", $"{ctx.Weight:+0.#;-0.#;0}")
+                    );
+                if (ctx.ResetsEffects)
+                    dsc.AppendLine(Lang.Get("alchemy:potion-purge-effect"));
+
+                if (dsc.Length == headerEnd)
+                    dsc.Remove(headerStart, headerEnd - headerStart);
+            }
+
+            if (ctx.Health is > 0.01f or < -0.01f)
+                dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", Math.Round(ctx.Health, 2)));
+            if (ctx.TickSec != 0)
+                dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", ctx.TickSec));
+            if (ctx.Duration != 0)
+                dsc.AppendLine(Lang.Get("alchemy:potion-duration", ctx.Duration));
+
+            (float sideDamage, float sideIntox, float sidePsych, float sideSatLoss) =
+                GetDrinkingSideEffectTotals(potionId, potencyMul);
+            if (
+                Math.Abs(sideDamage) > float.Epsilon
+                || Math.Abs(sideIntox) > float.Epsilon
+                || Math.Abs(sidePsych) > float.Epsilon
+                || Math.Abs(sideSatLoss) > float.Epsilon
+            )
+            {
+                dsc.AppendLine(Lang.Get("alchemy:potion-side-effects-header"));
+                if (Math.Abs(sideDamage) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideDamage < 0
+                                ? "alchemy:potion-side-heal-effect"
+                                : "alchemy:potion-side-damage-effect",
+                            Math.Round(Math.Abs(sideDamage), 2)
+                        )
+                    );
+                if (Math.Abs(sideIntox) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideIntox < 0
+                                ? "alchemy:potion-side-intoxication-reduce-effect"
+                                : "alchemy:potion-side-intoxication-effect",
+                            Math.Round(
+                                Math.Abs(sideIntox) / IntoxicationMax * 100,
+                                0
+                            )
+                        )
+                    );
+                if (Math.Abs(sidePsych) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sidePsych < 0
+                                ? "alchemy:potion-side-psychedelic-reduce-effect"
+                                : "alchemy:potion-side-psychedelic-effect",
+                            Math.Round(
+                                Math.Abs(sidePsych) / PsychedelicMax * 100,
+                                0
+                            )
+                        )
+                    );
+                if (Math.Abs(sideSatLoss) > float.Epsilon)
+                    dsc.AppendLine(
+                        Lang.Get(
+                            sideSatLoss < 0
+                                ? "alchemy:potion-side-saturation-loss-effect"
+                                : "alchemy:potion-side-saturation-gain-effect",
+                            Math.Round(Math.Abs(sideSatLoss), 0)
+                        )
+                    );
+            }
         }
     }
 }

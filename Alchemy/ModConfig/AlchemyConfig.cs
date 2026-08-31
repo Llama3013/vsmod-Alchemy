@@ -161,6 +161,7 @@ namespace Alchemy
         public bool AllowLargeFlasks { get; set; } = true;
         public bool AllowGlassThrowableFlasks { get; set; } = true;
         public bool AllowClayThrowableFlasks { get; set; } = true;
+        public bool AllowAcidAsPotion { get; set; } = true;
 
         public bool AllowHerbRackMolds { get; set; } = true;
         public bool AllowHerbRacks { get; set; } = true;
@@ -241,6 +242,60 @@ namespace Alchemy
         public bool ClimbPotionResetsEffects { get; set; } = false;
         public bool FlightPotionResetsEffects { get; set; } = false;
 
+        public bool AllowDrinkingArcher { get; set; } = true;
+        public bool AllowDrinkingHealingEffect { get; set; } = true;
+        public bool AllowDrinkingHungerEnhance { get; set; } = true;
+        public bool AllowDrinkingHungerSupress { get; set; } = true;
+        public bool AllowDrinkingHunter { get; set; } = true;
+        public bool AllowDrinkingLooter { get; set; } = true;
+        public bool AllowDrinkingMelee { get; set; } = true;
+        public bool AllowDrinkingMining { get; set; } = true;
+        public bool AllowDrinkingPoison { get; set; } = true;
+        public bool AllowDrinkingPredator { get; set; } = true;
+        public bool AllowDrinkingRegen { get; set; } = true;
+        public bool AllowDrinkingScentMask { get; set; } = true;
+        public bool AllowDrinkingSpeed { get; set; } = true;
+        public bool AllowDrinkingVitality { get; set; } = true;
+        public bool AllowDrinkingRecall { get; set; } = true;
+        public bool AllowDrinkingGlow { get; set; } = true;
+        public bool AllowDrinkingWaterBreathe { get; set; } = true;
+        public bool AllowDrinkingColdResist { get; set; } = true;
+        public bool AllowDrinkingNutrition { get; set; } = true;
+        public bool AllowDrinkingTemporal { get; set; } = true;
+        public bool AllowDrinkingReshape { get; set; } = true;
+        public bool AllowDrinkingGrow { get; set; } = true;
+        public bool AllowDrinkingShrink { get; set; } = true;
+        public bool AllowDrinkingFall { get; set; } = true;
+        public bool AllowDrinkingClimb { get; set; } = true;
+        public bool AllowDrinkingFlight { get; set; } = true;
+
+        public bool AllowThrowingArcher { get; set; } = false;
+        public bool AllowThrowingHealingEffect { get; set; } = false;
+        public bool AllowThrowingHungerEnhance { get; set; } = false;
+        public bool AllowThrowingHungerSupress { get; set; } = false;
+        public bool AllowThrowingHunter { get; set; } = false;
+        public bool AllowThrowingLooter { get; set; } = false;
+        public bool AllowThrowingMelee { get; set; } = false;
+        public bool AllowThrowingMining { get; set; } = false;
+        public bool AllowThrowingPoison { get; set; } = true;
+        public bool AllowThrowingPredator { get; set; } = false;
+        public bool AllowThrowingRegen { get; set; } = true;
+        public bool AllowThrowingScentMask { get; set; } = false;
+        public bool AllowThrowingSpeed { get; set; } = false;
+        public bool AllowThrowingVitality { get; set; } = false;
+        public bool AllowThrowingRecall { get; set; } = false;
+        public bool AllowThrowingGlow { get; set; } = false;
+        public bool AllowThrowingWaterBreathe { get; set; } = false;
+        public bool AllowThrowingColdResist { get; set; } = false;
+        public bool AllowThrowingNutrition { get; set; } = false;
+        public bool AllowThrowingTemporal { get; set; } = false;
+        public bool AllowThrowingReshape { get; set; } = false;
+        public bool AllowThrowingGrow { get; set; } = false;
+        public bool AllowThrowingShrink { get; set; } = false;
+        public bool AllowThrowingFall { get; set; } = false;
+        public bool AllowThrowingClimb { get; set; } = false;
+        public bool AllowThrowingFlight { get; set; } = false;
+
         public bool AllowCoatingArcher { get; set; } = false;
         public bool AllowCoatingHealingEffect { get; set; } = false;
         public bool AllowCoatingHungerEnhance { get; set; } = false;
@@ -268,32 +323,6 @@ namespace Alchemy
         public bool AllowCoatingClimb { get; set; } = false;
         public bool AllowCoatingFlight { get; set; } = false;
 
-        public bool AllowThrowArcher { get; set; } = false;
-        public bool AllowThrowHealingEffect { get; set; } = false;
-        public bool AllowThrowHungerEnhance { get; set; } = false;
-        public bool AllowThrowHungerSupress { get; set; } = false;
-        public bool AllowThrowHunter { get; set; } = false;
-        public bool AllowThrowLooter { get; set; } = false;
-        public bool AllowThrowMelee { get; set; } = false;
-        public bool AllowThrowMining { get; set; } = false;
-        public bool AllowThrowPoison { get; set; } = true;
-        public bool AllowThrowPredator { get; set; } = false;
-        public bool AllowThrowRegen { get; set; } = true;
-        public bool AllowThrowScentMask { get; set; } = false;
-        public bool AllowThrowSpeed { get; set; } = false;
-        public bool AllowThrowVitality { get; set; } = false;
-        public bool AllowThrowRecall { get; set; } = false;
-        public bool AllowThrowGlow { get; set; } = false;
-        public bool AllowThrowWaterBreathe { get; set; } = false;
-        public bool AllowThrowColdResist { get; set; } = false;
-        public bool AllowThrowNutrition { get; set; } = false;
-        public bool AllowThrowTemporal { get; set; } = false;
-        public bool AllowThrowReshape { get; set; } = false;
-        public bool AllowThrowGrow { get; set; } = false;
-        public bool AllowThrowShrink { get; set; } = false;
-        public bool AllowThrowFall { get; set; } = false;
-        public bool AllowThrowClimb { get; set; } = false;
-        public bool AllowThrowFlight { get; set; } = false;
 
         public bool AllowFallPotion { get; set; } = true;
         public bool AllowFallPotionRecipe { get; set; } = true;
@@ -337,12 +366,12 @@ namespace Alchemy
         public float MiningPotionOreDrop { get; set; } = 0.15f;
         public int MiningPotionDuration { get; set; } = 600;
         public float PoisonPotionHealth { get; set; } = -0.5f;
-        public int PoisonPotionTickSec { get; set; } = 3;
+        public float PoisonPotionTickSec { get; set; } = 3f;
         public int PoisonPotionDuration { get; set; } = 30;
         public float PredatorPotionAnimalSeek { get; set; } = 0.4f;
         public int PredatorPotionDuration { get; set; } = 600;
         public float RegenPotionHealth { get; set; } = 0.5f;
-        public int RegenPotionTickSec { get; set; } = 3;
+        public float RegenPotionTickSec { get; set; } = 3f;
         public int RegenPotionDuration { get; set; } = 30;
         public float ScentMaskPotionAnimalSeek { get; set; } = -0.2f;
         public int ScentMaskPotionDuration { get; set; } = 600;
@@ -401,7 +430,7 @@ namespace Alchemy
         public float ArcherPotionOreDrop { get; set; } = 0f;
         public float ArcherPotionMaxHealth { get; set; } = 0f;
         public float ArcherPotionHealth { get; set; } = 0f;
-        public int ArcherPotionHealthTickSec { get; set; } = 0;
+        public float ArcherPotionHealthTickSec { get; set; } = 0f;
 
         // HealingEffect
         public float HealingEffectPotionWalkSpeed { get; set; } = 0f;
@@ -420,7 +449,7 @@ namespace Alchemy
         public float HealingEffectPotionOreDrop { get; set; } = 0f;
         public float HealingEffectPotionMaxHealth { get; set; } = 0f;
         public float HealingEffectPotionHealth { get; set; } = 0f;
-        public int HealingEffectPotionHealthTickSec { get; set; } = 0;
+        public float HealingEffectPotionHealthTickSec { get; set; } = 0f;
 
         // HungerEnhance
         public float HungerEnhancePotionWalkSpeed { get; set; } = 0f;
@@ -439,7 +468,7 @@ namespace Alchemy
         public float HungerEnhancePotionOreDrop { get; set; } = 0f;
         public float HungerEnhancePotionMaxHealth { get; set; } = 0f;
         public float HungerEnhancePotionHealth { get; set; } = 0f;
-        public int HungerEnhancePotionHealthTickSec { get; set; } = 0;
+        public float HungerEnhancePotionHealthTickSec { get; set; } = 0f;
 
         // HungerSupress
         public float HungerSupressPotionWalkSpeed { get; set; } = 0f;
@@ -458,7 +487,7 @@ namespace Alchemy
         public float HungerSupressPotionOreDrop { get; set; } = 0f;
         public float HungerSupressPotionMaxHealth { get; set; } = 0f;
         public float HungerSupressPotionHealth { get; set; } = 0f;
-        public int HungerSupressPotionHealthTickSec { get; set; } = 0;
+        public float HungerSupressPotionHealthTickSec { get; set; } = 0f;
 
         // Hunter
         public float HunterPotionWalkSpeed { get; set; } = 0f;
@@ -474,7 +503,7 @@ namespace Alchemy
         public float HunterPotionOreDrop { get; set; } = 0f;
         public float HunterPotionMaxHealth { get; set; } = 0f;
         public float HunterPotionHealth { get; set; } = 0f;
-        public int HunterPotionHealthTickSec { get; set; } = 0;
+        public float HunterPotionHealthTickSec { get; set; } = 0f;
 
         // Looter
         public float LooterPotionWalkSpeed { get; set; } = 0f;
@@ -490,7 +519,7 @@ namespace Alchemy
         public float LooterPotionOreDrop { get; set; } = 0f;
         public float LooterPotionMaxHealth { get; set; } = 0f;
         public float LooterPotionHealth { get; set; } = 0f;
-        public int LooterPotionHealthTickSec { get; set; } = 0;
+        public float LooterPotionHealthTickSec { get; set; } = 0f;
 
         // Melee
         public float MeleePotionWalkSpeed { get; set; } = 0f;
@@ -509,7 +538,7 @@ namespace Alchemy
         public float MeleePotionOreDrop { get; set; } = 0f;
         public float MeleePotionMaxHealth { get; set; } = 0f;
         public float MeleePotionHealth { get; set; } = 0f;
-        public int MeleePotionHealthTickSec { get; set; } = 0;
+        public float MeleePotionHealthTickSec { get; set; } = 0f;
 
         // Mining
         public float MiningPotionWalkSpeed { get; set; } = 0f;
@@ -527,7 +556,7 @@ namespace Alchemy
         public float MiningPotionVesselContentsDrop { get; set; } = 0f;
         public float MiningPotionMaxHealth { get; set; } = 0f;
         public float MiningPotionHealthExtra { get; set; } = 0f;
-        public int MiningPotionHealthExtraTickSec { get; set; } = 0;
+        public float MiningPotionHealthExtraTickSec { get; set; } = 0f;
 
         // Poison
         public float PoisonPotionWalkSpeed { get; set; } = 0f;
@@ -564,7 +593,7 @@ namespace Alchemy
         public float PredatorPotionOreDrop { get; set; } = 0f;
         public float PredatorPotionMaxHealth { get; set; } = 0f;
         public float PredatorPotionHealth { get; set; } = 0f;
-        public int PredatorPotionHealthTickSec { get; set; } = 0;
+        public float PredatorPotionHealthTickSec { get; set; } = 0f;
 
         // Regen
         public float RegenPotionWalkSpeed { get; set; } = 0f;
@@ -601,7 +630,7 @@ namespace Alchemy
         public float ScentMaskPotionOreDrop { get; set; } = 0f;
         public float ScentMaskPotionMaxHealth { get; set; } = 0f;
         public float ScentMaskPotionHealth { get; set; } = 0f;
-        public int ScentMaskPotionHealthTickSec { get; set; } = 0;
+        public float ScentMaskPotionHealthTickSec { get; set; } = 0f;
 
         // Speed
         public float SpeedPotionMeleeDamage { get; set; } = 0f;
@@ -620,7 +649,7 @@ namespace Alchemy
         public float SpeedPotionOreDrop { get; set; } = 0f;
         public float SpeedPotionMaxHealth { get; set; } = 0f;
         public float SpeedPotionHealth { get; set; } = 0f;
-        public int SpeedPotionHealthTickSec { get; set; } = 0;
+        public float SpeedPotionHealthTickSec { get; set; } = 0f;
 
         // Vitality
         public float VitalityPotionWalkSpeed { get; set; } = 0f;
@@ -639,7 +668,7 @@ namespace Alchemy
         public float VitalityPotionMiningSpeed { get; set; } = 0f;
         public float VitalityPotionOreDrop { get; set; } = 0f;
         public float VitalityPotionHealth { get; set; } = 0f;
-        public int VitalityPotionHealthTickSec { get; set; } = 0;
+        public float VitalityPotionHealthTickSec { get; set; } = 0f;
 
         // Per-potion drinking side effects (additive with global blanket, scaled by strength)
         // Archer
