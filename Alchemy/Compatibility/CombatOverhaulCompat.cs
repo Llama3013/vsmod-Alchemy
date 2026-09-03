@@ -44,8 +44,8 @@ namespace Alchemy
             {
                 api.Logger.Notification(
                     "[Alchemy] Combat Overhaul weapon buff system not found; weapon coatings "
-                        + "will use legacy behaviour only. (Is the buff-system mod installed and "
-                        + "is the type name correct for your version?)"
+                        + "use the built-in on-stack path only. (Is the buff-system mod installed "
+                        + "and is the type name correct for your version?)"
                 );
                 return;
             }

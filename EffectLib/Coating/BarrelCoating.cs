@@ -27,7 +27,7 @@ namespace EffectLib
         {
             if (coating)
                 return false;
-            if (!CoatingPolicy.AllowCoating() || !BarrelCoatingConfig.AllowBarrelCoating())
+            if (!CoatingPolicy.AllowCoating() || !CoatingPolicy.AllowBarrelCoating())
                 return false;
             if (itemSlot?.Itemstack == null || liquidSlot?.Itemstack == null)
                 return false;
@@ -55,8 +55,8 @@ namespace EffectLib
             if (props == null || props.ItemsPerLitre <= 0)
                 return false;
 
-            float consumeLitres = BarrelCoatingConfig.ConsumeLitres();
-            float checkLitres = BarrelCoatingConfig.CheckLitres();
+            float consumeLitres = CoatingPolicy.BarrelConsumeLitres();
+            float checkLitres = CoatingPolicy.BarrelCheckLitres();
             if (consumeLitres <= 0)
                 return false;
 
@@ -150,12 +150,4 @@ namespace EffectLib
         }
     }
 
-    /// <summary>Litre knobs for <see cref="BarrelCoating"/>, separate from <see cref="CoatingPolicy"/>
-    /// since a mod without barrel coating at all need not touch these.</summary>
-    public static class BarrelCoatingConfig
-    {
-        public static Func<bool> AllowBarrelCoating = () => true;
-        public static Func<float> ConsumeLitres = () => 0.25f;
-        public static Func<float> CheckLitres = () => 0.24f;
-    }
 }

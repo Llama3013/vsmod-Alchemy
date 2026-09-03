@@ -29,11 +29,8 @@ namespace EffectLib
         {
             base.Start(api);
             // Both sides: the client rebuilds contexts too, for HUD tooltips.
-            AtomicEffects.RegisterAll();
+            EffectPrimitives.RegisterAll();
 
-            // Utility effects (respawn, reshape, nutrition, temporal stability, size) are
-            // EffectLib's own, so no dependent mod needs to register a handler for them.
-            EffectHandlers.Register(UtilityEffectHandler.Instance);
             UtilityEffects.PlayerModelLibPresent = api.ModLoader.IsModEnabled("playermodellib");
 
             // Lets a JSON-only mod grant an effect with zero code: add this behavior and an
@@ -71,6 +68,12 @@ namespace EffectLib
         public override void StartServerSide(ICoreServerAPI api)
         {
             sapi = api;
+
+            // Effect handlers only ever fire server-side (from EffectManager), so this is the
+            // only side that registers them. Utility effects - respawn, reshape, nutrition,
+            // temporal stability, size - are EffectLib's own; no dependent mod registers them.
+            EffectHandlers.Register(UtilityEffectHandler.Instance);
+
             api.Event.PlayerNowPlaying += OnPlayerReady;
             api.Event.PlayerDisconnect += OnPlayerDisconnect;
             api.Event.PlayerDeath += OnPlayerDeath;
@@ -114,7 +117,7 @@ namespace EffectLib
 
         private static void OnPlayerReady(IServerPlayer player)
         {
-            EffectManager manager = EntityBehaviorEffects.ManagerFor(player?.Entity);
+            EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(player?.Entity);
             if (manager == null)
                 return;
 
@@ -127,10 +130,10 @@ namespace EffectLib
         private static void OnPlayerDisconnect(IServerPlayer player)
         {
             EntityPlayer entity = player?.Entity;
-            if (entity?.Properties == null || !entity.HasBehavior<EntityBehaviorEffects>())
+            if (entity?.Properties == null || !entity.HasBehavior<EntityBehaviorPlayerEffects>())
                 return;
 
-            EffectManager manager = entity.GetBehavior<EntityBehaviorEffects>()?.Manager;
+            EffectManager manager = entity.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager;
             if (manager == null)
                 return;
 
@@ -143,10 +146,10 @@ namespace EffectLib
         private static void OnPlayerDeath(IServerPlayer player, DamageSource damageSource)
         {
             EntityPlayer entity = player?.Entity;
-            if (entity?.Properties == null || !entity.HasBehavior<EntityBehaviorEffects>())
+            if (entity?.Properties == null || !entity.HasBehavior<EntityBehaviorPlayerEffects>())
                 return;
 
-            entity.GetBehavior<EntityBehaviorEffects>()?.Manager?.ResetAll();
+            entity.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager?.ResetAll();
         }
 
         public override void Dispose()

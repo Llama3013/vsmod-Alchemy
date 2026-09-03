@@ -43,7 +43,7 @@ namespace EffectLib
 
         public void OnRestored(EntityPlayer entity)
         {
-            float sizeDelta = entity.WatchedAttributes.GetFloat("potionSizeDelta", 0f);
+            float sizeDelta = entity.WatchedAttributes.GetFloat(UtilityEffects.SizeDeltaAttr, 0f);
 
             if (Math.Abs(sizeDelta) < 0.001f)
             {
@@ -53,7 +53,7 @@ namespace EffectLib
             else
             {
                 // Re-broadcast so the client re-applies the stored size after a login.
-                entity.WatchedAttributes.MarkPathDirty("potionSizeDelta");
+                entity.WatchedAttributes.MarkPathDirty(UtilityEffects.SizeDeltaAttr);
             }
         }
     }

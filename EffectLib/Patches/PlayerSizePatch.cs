@@ -6,7 +6,7 @@ using Vintagestory.API.Common.Entities;
 namespace EffectLib
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    // Keeps the player's collision box, eye height, and visual scale in sync with the size
+    // Keeps the player's collision box, eye height and visual scale in sync with the size
     // WatchedAttributes UtilityEffects writes. Runs on both server and client via
     // WatchedAttributes sync.
     [HarmonyPatch(typeof(Entity), "Initialize")]
@@ -19,7 +19,7 @@ namespace EffectLib
 
             UtilityEffects.ApplySizeToEntity(player);
             player.WatchedAttributes.RegisterModifiedListener(
-                "potionSizeDelta",
+                UtilityEffects.SizeDeltaAttr,
                 () => UtilityEffects.ApplySizeToEntity(player)
             );
         }

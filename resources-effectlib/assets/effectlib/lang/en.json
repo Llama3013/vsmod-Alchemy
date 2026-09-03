@@ -41,8 +41,11 @@
   "temporalstability": "Temporal stability",
   "grow": "Grows the player",
   "shrink": "Shrinks the player",
+  "grown": "Grown",
+  "shrunk": "Shrunk",
   "purge": "Clears other effects",
   "duration": "Duration: {0}s",
+  "duration-endless": "Duration: until death",
 
   "maxhealthExtraPoints": "Extra health points",
   "walkspeed": "Walk speed",

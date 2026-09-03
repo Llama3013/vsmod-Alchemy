@@ -39,7 +39,8 @@ namespace EffectLib
             return $"{col.Code.Domain}:{typePrefix}-{col.Code.Path}";
         }
 
-        // ----- Storage used while applying a coating (aware of alternate/buff storage) -----
+        // ----- Read/write a coating: Combat Overhaul's buff store when it owns the weapon,
+        // otherwise the item stack's attributes. -----
 
         public static void ReadWeaponCoat(
             ItemStack stack,
@@ -49,8 +50,8 @@ namespace EffectLib
         )
         {
             if (
-                CoatingPolicy.UsesAlternateWeaponStorage(stack.Collectible)
-                && CoatingPolicy.TryReadAlternateWeapon(stack) is { } alt
+                CoatingPolicy.CombatOverhaulManagesWeapon(stack.Collectible)
+                && CoatingPolicy.ReadCombatOverhaulCoat(stack) is { } alt
             )
             {
                 (effectId, _, multiplier, charges) = alt;
@@ -71,9 +72,9 @@ namespace EffectLib
             int charges
         )
         {
-            if (CoatingPolicy.UsesAlternateWeaponStorage(slot.Itemstack.Collectible))
+            if (CoatingPolicy.CombatOverhaulManagesWeapon(slot.Itemstack.Collectible))
             {
-                CoatingPolicy.WriteAlternateWeapon(slot, effectId, itemCode, multiplier, charges);
+                CoatingPolicy.WriteCombatOverhaulWeaponCoat(slot, effectId, itemCode, multiplier, charges);
                 return;
             }
 
@@ -87,8 +88,8 @@ namespace EffectLib
 
         public static bool HasProjectileCoat(ItemStack stack)
         {
-            return CoatingPolicy.UsesAlternateProjectileStorage(stack)
-                ? CoatingPolicy.TryReadAlternateWeapon(stack) != null
+            return CoatingPolicy.CombatOverhaulManagesProjectile(stack)
+                ? CoatingPolicy.ReadCombatOverhaulCoat(stack) != null
                 : !string.IsNullOrEmpty(stack.Attributes.GetString(KeyEffectId));
         }
 
@@ -99,9 +100,9 @@ namespace EffectLib
             float multiplier
         )
         {
-            if (CoatingPolicy.UsesAlternateProjectileStorage(stack))
+            if (CoatingPolicy.CombatOverhaulManagesProjectile(stack))
             {
-                CoatingPolicy.WriteAlternateProjectile(stack, effectId, itemCode, multiplier);
+                CoatingPolicy.WriteCombatOverhaulProjectileCoat(stack, effectId, itemCode, multiplier);
                 return;
             }
 
@@ -111,12 +112,10 @@ namespace EffectLib
             attrs.SetFloat(KeyMultiplier, multiplier);
         }
 
-        // ----- Storage used on hit - deliberately NOT alternate-storage-aware. A mod with its
-        // own buff-style storage (see CoatingPolicy) delivers the effect through its own on-hit
-        // logic entirely, bypassing EffectLib's Harmony patches; reading alternate storage here
-        // too would apply the same coating twice. -----
+        // ----- On-hit consumption of a stack-stored coating. Combat Overhaul coatings are not
+        // touched here - it delivers those from its own on-hit code. -----
 
-        internal static void ClearLegacyCoat(ITreeAttribute attrs)
+        internal static void ClearStackCoat(ITreeAttribute attrs)
         {
             attrs.RemoveAttribute(KeyEffectId);
             attrs.RemoveAttribute(KeyItemCode);
@@ -125,8 +124,8 @@ namespace EffectLib
         }
 
         /// <summary>
-        /// Consumes one charge of a legacy (non-alternate-storage) weapon coating on hit, if
-        /// any is present. Returns what to apply, or null if there was nothing to consume.
+        /// Consumes one charge of a stack-stored weapon coating on hit, if any is present.
+        /// Returns what to apply, or null if there was nothing to consume.
         /// </summary>
         internal static (string EffectId, float Multiplier, string ItemCode)? TryConsumeWeaponCharge(
             ItemSlot slot
@@ -140,7 +139,7 @@ namespace EffectLib
             int charges = attrs.GetInt(KeyCharges);
             if (charges <= 0)
             {
-                ClearLegacyCoat(attrs);
+                ClearStackCoat(attrs);
                 slot.MarkDirty();
                 return null;
             }
@@ -155,7 +154,7 @@ namespace EffectLib
 
             charges--;
             if (charges <= 0)
-                ClearLegacyCoat(attrs);
+                ClearStackCoat(attrs);
             else
                 attrs.SetInt(KeyCharges, charges);
             slot.MarkDirty();
@@ -163,7 +162,7 @@ namespace EffectLib
             return (effectId, multiplier, itemCode);
         }
 
-        /// <summary>Consumes a legacy projectile coating on impact, if any is present.</summary>
+        /// <summary>Consumes a stack-stored projectile coating on impact, if any is present.</summary>
         internal static (string EffectId, float Multiplier, string ItemCode)? TryConsumeProjectileCoat(
             ItemStack projectileStack
         )
@@ -179,7 +178,7 @@ namespace EffectLib
 
             float multiplier = attrs.GetFloat(KeyMultiplier);
             string itemCode = attrs.GetString(KeyItemCode);
-            ClearLegacyCoat(attrs);
+            ClearStackCoat(attrs);
 
             return (effectId, multiplier, itemCode);
         }
@@ -201,7 +200,7 @@ namespace EffectLib
 
             if (entity is EntityPlayer playerEntity)
             {
-                EffectManager manager = EntityBehaviorEffects.ManagerFor(playerEntity);
+                EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(playerEntity);
                 EffectContext ctx = manager == null ? null : EffectRegistry.Build(effectId, multiplier);
                 if (ctx == null)
                     return;
@@ -260,12 +259,12 @@ namespace EffectLib
             if (Math.Abs(ctx.Health) <= float.Epsilon)
                 return;
 
-            if (agent.HasBehavior<EntityBehaviorEffectOverTime>())
-                agent.GetBehavior<EntityBehaviorEffectOverTime>()
+            if (agent.HasBehavior<EntityBehaviorHealthOverTime>())
+                agent.GetBehavior<EntityBehaviorHealthOverTime>()
                     .Refresh(ctx.Health, ctx.TickSec, ctx.Duration, ctx.ResolveDamageType());
             else
             {
-                EntityBehaviorEffectOverTime b = new(agent);
+                EntityBehaviorHealthOverTime b = new(agent);
                 agent.AddBehavior(b);
                 b.Setup(ctx.Health, ctx.TickSec, ctx.Duration, ctx.ResolveDamageType());
             }

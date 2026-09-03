@@ -21,7 +21,7 @@ namespace EffectLib
         protected string attributeKey;
         protected string idField;
         private float consumeTime;
-        private string defaultEffectId;
+        private string ownEffectId;
 
         /// <summary>The API captured in <see cref="OnLoaded"/>, available to subclasses.</summary>
         protected ICoreAPI Api { get; private set; }
@@ -52,14 +52,23 @@ namespace EffectLib
             if (def?.Exists != true)
                 return; // a coat source without an effect of its own is not a misconfiguration
 
-            defaultEffectId = def[idField].AsString()?.ToLowerInvariant();
-            if (string.IsNullOrWhiteSpace(defaultEffectId))
+            ownEffectId = def[idField].AsString()?.ToLowerInvariant();
+            if (string.IsNullOrWhiteSpace(ownEffectId))
             {
-                defaultEffectId = null;
+                // Attribute present but no id: unlike the case above, this is a mistake.
+                Api.Logger.Warning(
+                    "[EffectLib] {0}'s '{1}' attribute has no '{2}' - give it one, e.g. "
+                        + "\"{1}\": {{ \"{2}\": \"{3}:youreffectid\", ... }}. This item will not coat anything.",
+                    collObj.Code,
+                    attributeKey,
+                    idField,
+                    collObj.Code.Domain
+                );
+                ownEffectId = null;
                 return;
             }
 
-            JsonEffectDefinition.RegisterFrom(defaultEffectId, collObj.Code.Domain, def, collObj.Code);
+            JsonEffectDefinition.RegisterFrom(ownEffectId, collObj.Code.Domain, def, collObj.Code);
         }
 
         /// <summary>Seconds to hold shift+right-click before the coating is applied.</summary>
@@ -69,8 +78,9 @@ namespace EffectLib
         protected virtual ItemStack GetSourceStack(ItemSlot slot) => slot.Itemstack;
 
         /// <summary>
-        /// Resolves what to coat with and at what potency. Default is the id captured by
-        /// <see cref="RegisterOwnEffect"/> at potency 1.
+        /// Resolves what to coat with and at what potency. The base implementation returns the
+        /// id this item declared on its own attribute (see <see cref="RegisterOwnEffect"/>) at
+        /// potency 1.
         /// </summary>
         protected virtual bool TryResolveEffect(
             ItemStack sourceStack,
@@ -78,7 +88,7 @@ namespace EffectLib
             out float potencyMul
         )
         {
-            effectId = defaultEffectId;
+            effectId = ownEffectId;
             potencyMul = 1f;
             return effectId != null;
         }

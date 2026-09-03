@@ -36,49 +36,25 @@ namespace EffectLib
         void OnRestored(EntityPlayer entity);
     }
 
-    /// <summary>Registry of <see cref="IEffectHandler"/>s. Handlers are called in registration order.</summary>
+    /// <summary>
+    /// Registry of <see cref="IEffectHandler"/>s, called in registration order. Server side
+    /// only - handlers fire from <see cref="EffectManager"/>, which does not exist on the
+    /// client, so registration happens once from <c>EffectLibMod.StartServerSide</c>.
+    /// </summary>
     public static class EffectHandlers
     {
         private static readonly List<IEffectHandler> handlers = [];
-        private static readonly object sync = new();
-
-        /// <summary>
-        /// How many handlers are registered, including EffectLib's own built-in
-        /// <see cref="UtilityEffectHandler"/>. Never zero once <c>ModSystem.EffectLibMod</c> has
-        /// started.
-        /// </summary>
-        public static int Count
-        {
-            get
-            {
-                lock (sync)
-                {
-                    return handlers.Count;
-                }
-            }
-        }
 
         public static void Register(IEffectHandler handler)
         {
-            if (handler == null)
-                return;
-
-            lock (sync)
-            {
-                if (!handlers.Contains(handler))
-                    handlers.Add(handler);
-            }
+            if (handler != null && !handlers.Contains(handler))
+                handlers.Add(handler);
         }
 
         public static void Unregister(IEffectHandler handler)
         {
-            if (handler == null)
-                return;
-
-            lock (sync)
-            {
+            if (handler != null)
                 handlers.Remove(handler);
-            }
         }
 
         internal static void Applied(
@@ -104,15 +80,7 @@ namespace EffectLib
         // One failing handler must not stop the others, nor abort the effect itself.
         private static void Dispatch(Action<IEffectHandler> call, ILogger logger)
         {
-            IEffectHandler[] snapshot;
-            lock (sync)
-            {
-                if (handlers.Count == 0)
-                    return;
-                snapshot = [.. handlers];
-            }
-
-            foreach (IEffectHandler handler in snapshot)
+            foreach (IEffectHandler handler in handlers)
             {
                 try
                 {

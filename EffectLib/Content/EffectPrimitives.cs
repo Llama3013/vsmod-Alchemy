@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Vintagestory.API.Common;
 
 namespace EffectLib
 {
-    /// <summary>What an atomic effect's magnitude argument means.</summary>
+    /// <summary>What a primitive's magnitude argument means.</summary>
     public enum EffectValueKind
     {
         /// <summary>On or off. The magnitude is ignored.</summary>
@@ -35,7 +34,7 @@ namespace EffectLib
     /// Sets the single field this primitive owns. <see cref="EffectContext.PotencyMul"/> is
     /// already set to the requested magnitude.
     /// </param>
-    public sealed record AtomicEffect(
+    public sealed record EffectPrimitive(
         string Name,
         EffectValueKind Kind,
         bool Instant,
@@ -45,26 +44,28 @@ namespace EffectLib
     );
 
     /// <summary>
-    /// The individual effects EffectLib can apply, as opposed to a whole registered effect that
-    /// bundles several of them. Each is registered as an effect id of its own so it can be
-    /// granted, tracked, persisted and resumed like any other.
+    /// The individual effects EffectLib can apply on their own - one field of
+    /// <see cref="EffectContext"/> at a time - as opposed to a whole registered effect that
+    /// bundles several. Each is registered under an <c>efflib:&lt;name&gt;</c> id so it can be
+    /// granted, tracked, persisted and resumed like any other. The admin commands drive these.
     /// </summary>
-    public static class AtomicEffects
+    public static class EffectPrimitives
     {
-        /// <summary>Prefix for every atomic effect id.</summary>
+        /// <summary>Prefix for every primitive effect id.</summary>
         public const string IdPrefix = "efflib:";
 
         /// <summary>Prefix for an arbitrary entity stat, e.g. <c>efflib:stat:walkspeed</c>.</summary>
         public const string StatIdPrefix = IdPrefix + "stat:";
 
         /// <summary>
-        /// Nominal duration baked into every timed atomic effect. Resuming a saved effect
-        /// clamps the remaining time to the registered duration, so this has to be comfortably
-        /// longer than anything an admin would hand out or the timer would be cut short on login.
+        /// Duration a primitive is built with when nothing overrides it. The commands always set
+        /// their own, and a resumed primitive takes its length from the save record, so this
+        /// only applies if code calls <see cref="EffectRegistry.Build"/> for a primitive and
+        /// applies it without a duration of its own.
         /// </summary>
-        public const int NominalDurationSec = 86400;
+        public const int DefaultDurationSec = 600;
 
-        private static readonly AtomicEffect[] all =
+        private static readonly EffectPrimitive[] all =
         [
             new("waterbreathe", EffectValueKind.Flag, false, "Breathe underwater", null,
                 ctx => ctx.WaterBreathe = true),
@@ -112,104 +113,64 @@ namespace EffectLib
                 ctx => ctx.Reshape = true),
         ];
 
-        private static readonly Dictionary<string, AtomicEffect> byName = all.ToDictionary(
+        private static readonly Dictionary<string, EffectPrimitive> byName = all.ToDictionary(
             e => e.Name,
             StringComparer.OrdinalIgnoreCase
         );
 
-        /// <summary>Every built-in atomic effect, excluding the open-ended stat family.</summary>
-        public static IReadOnlyList<AtomicEffect> All => all;
+        /// <summary>Every built-in primitive, excluding the open-ended <c>stat:</c> family.</summary>
+        public static IReadOnlyList<EffectPrimitive> All => all;
 
-        public static AtomicEffect Get(string name) =>
-            name != null && byName.TryGetValue(name, out AtomicEffect e) ? e : null;
+        public static EffectPrimitive Get(string name) =>
+            name != null && byName.TryGetValue(name, out EffectPrimitive e) ? e : null;
 
-        /// <summary>The effect id for an atomic effect name, or for a stat via <c>stat:name</c>.</summary>
+        /// <summary>The effect id for a primitive name, or for a stat via <c>stat:name</c>.</summary>
         public static string IdFor(string name) => IdPrefix + name.ToLowerInvariant();
 
-        /// <summary>
-        /// Id for a repeating form of an atomic effect: it fires every <paramref name="intervalSec"/>
-        /// for its duration. For <c>health</c> this is a damage- or heal-over-time, driven by the
-        /// engine's own ticking; everything else re-runs its one-shot each interval.
-        /// The interval lives in the id so the effect can be rebuilt after a restart.
-        /// </summary>
-        public static string RepeatingIdFor(string name, float intervalSec, EnumDamageType? damageType = null)
-        {
-            string id = $"{IdFor(name)}:{intervalSec.ToString(CultureInfo.InvariantCulture)}";
-            return damageType.HasValue ? $"{id}:{damageType.Value}".ToLowerInvariant() : id;
-        }
-
-        /// <summary>True for ids this class owns.</summary>
-        public static bool IsAtomicId(string effectId) =>
+        /// <summary>True for ids this class owns - every <c>efflib:</c> id.</summary>
+        public static bool IsPrimitiveId(string effectId) =>
             effectId != null && effectId.StartsWith(IdPrefix, StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Turns a freshly built primitive context into a repeating one: a health primitive
+        /// becomes a damage/heal-over-time driven by the engine's ticking, anything else re-runs
+        /// its one-shot every <paramref name="intervalSec"/>. The commands call this; a resumed
+        /// primitive reads the resulting <see cref="EffectContext.TickSec"/>/<see cref="EffectContext.RepeatSec"/>
+        /// straight back from its save record.
+        /// </summary>
+        public static void MakeRepeating(
+            EffectContext ctx,
+            float intervalSec,
+            EnumDamageType? damageType = null
+        )
+        {
+            if (ctx == null || intervalSec <= 0f)
+                return;
+
+            if (Math.Abs(ctx.Health) > float.Epsilon)
+            {
+                ctx.TickSec = intervalSec;
+                if (damageType.HasValue)
+                    ctx.DamageType = damageType;
+            }
+            else
+            {
+                ctx.RepeatSec = intervalSec;
+            }
+        }
 
         internal static void RegisterAll()
         {
-            foreach (AtomicEffect effect in all)
+            foreach (EffectPrimitive effect in all)
             {
-                AtomicEffect captured = effect;
+                EffectPrimitive captured = effect;
                 EffectRegistry.Register(IdFor(captured.Name), ctx => Build(ctx, captured));
             }
 
             // Stat names are open-ended, so they cannot be enumerated up front. Resolving them
             // on demand also means a saved stat effect still rebuilds after a server restart.
             EffectRegistry.AddResolver(statResolver);
-            EffectRegistry.AddResolver(repeatingResolver);
         }
-
-        // Recognises "efflib:<name>:<interval>[:<damagetype>]" - the repeating form of an
-        // atomic effect. Held as one instance so repeated registration does not stack resolvers.
-        private static readonly System.Func<string, EffectRegistration> repeatingResolver = effectId =>
-        {
-            if (!IsAtomicId(effectId))
-                return null;
-
-            string[] parts = effectId[IdPrefix.Length..].Split(':');
-            if (parts.Length is < 2 or > 3)
-                return null;
-
-            AtomicEffect effect = Get(parts[0]);
-            if (effect == null)
-                return null;
-
-            if (
-                !float.TryParse(
-                    parts[1],
-                    NumberStyles.Float,
-                    CultureInfo.InvariantCulture,
-                    out float intervalSec
-                )
-                || intervalSec <= 0f
-            )
-                return null;
-
-            EnumDamageType? damageType =
-                parts.Length == 3 && Enum.TryParse(parts[2], true, out EnumDamageType parsed)
-                    ? parsed
-                    : null;
-
-            return new EffectRegistration(
-                effectId,
-                EffectRegistry.DefaultDomain,
-                ctx =>
-                {
-                    ctx.Duration = NominalDurationSec;
-                    effect.Apply(ctx);
-
-                    if (Math.Abs(ctx.Health) > float.Epsilon)
-                    {
-                        // Health repeats through the engine's ticking damage source.
-                        ctx.TickSec = intervalSec;
-                        if (damageType.HasValue)
-                            ctx.DamageType = damageType;
-                    }
-                    else
-                    {
-                        // Everything else re-runs its one-shot on our own timer.
-                        ctx.RepeatSec = intervalSec;
-                    }
-                }
-            );
-        };
 
         // Held as one instance so re-running RegisterAll (once per side, and again on a world
         // reload) does not stack up duplicate resolvers.
@@ -227,16 +188,16 @@ namespace EffectLib
                 EffectRegistry.DefaultDomain,
                 ctx =>
                 {
-                    ctx.Duration = NominalDurationSec;
+                    ctx.Duration = DefaultDurationSec;
                     // Unit magnitude; AddStat scales it by PotencyMul.
                     ctx.AddStat(statName, 1f);
                 }
             );
         };
 
-        private static void Build(EffectContext ctx, AtomicEffect effect)
+        private static void Build(EffectContext ctx, EffectPrimitive effect)
         {
-            ctx.Duration = effect.Instant ? 0 : NominalDurationSec;
+            ctx.Duration = effect.Instant ? 0 : DefaultDurationSec;
             effect.Apply(ctx);
         }
     }

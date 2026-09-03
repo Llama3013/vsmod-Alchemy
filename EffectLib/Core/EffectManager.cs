@@ -25,7 +25,7 @@ namespace EffectLib
     /// <summary>
     /// Tracks the effects running on one player: applies them, expires them, persists them
     /// across disconnects and keeps the derived entity properties in sync.
-    /// Server side only - obtained via <see cref="EntityBehaviorEffects.Manager"/>.
+    /// Server side only - obtained via <see cref="EntityBehaviorPlayerEffects.Manager"/>.
     /// </summary>
     public sealed class EffectManager(EntityPlayer entity)
     {
@@ -71,12 +71,15 @@ namespace EffectLib
                 .. active.Select(pair => new ActiveEffectInfo(
                     pair.Key,
                     pair.Value.DisplayName,
-                    Math.Max(
-                        0,
-                        pair.Value.Effect.Context.Duration
-                            - (int)((nowMs - pair.Value.ApplyMs) / 1000)
-                    ),
-                    pair.Value.Effect.Context.PotencyMul
+                    pair.Value.Effect.Context.IsEndless
+                        ? 0
+                        : Math.Max(
+                            0,
+                            pair.Value.Effect.Context.Duration
+                                - (int)((nowMs - pair.Value.ApplyMs) / 1000)
+                        ),
+                    pair.Value.Effect.Context.PotencyMul,
+                    pair.Value.Effect.Context.IsEndless
                 )),
             ];
         }
@@ -128,7 +131,7 @@ namespace EffectLib
                 // are not applied here - RefreshEffectState below recomputes them from every
                 // active effect at once, which keeps stacking and removal symmetric.
 
-                if (effect.Context.Duration <= 0)
+                if (effect.Context.Duration == 0)
                 {
                     // Instant effect: hold a brief lock so a single use cannot be consumed twice.
                     pendingInstant.Add(id);
@@ -136,24 +139,42 @@ namespace EffectLib
                     return true;
                 }
 
-                long handle;
-                bool ticking = effect.Context.RepeatSec > 0;
+                bool endless = effect.Context.IsEndless;
+                bool tickingHealth =
+                    effect.Context.TickSec > 0 && Math.Abs(effect.Context.Health) > float.Epsilon;
 
-                if (ticking)
+                long handle = 0;
+                bool ticking = false;
+
+                if (endless && tickingHealth)
                 {
-                    // Repeating one-shots need a listener that both re-fires and expires.
+                    // An endless damage/heal over time: the engine's ticking damage source needs
+                    // a finite window, so drive it ourselves, one health tick per interval.
+                    ticking = true;
+                    handle = entity.World.RegisterGameTickListener(
+                        _ => effect.ApplyHealthTick(entity),
+                        (int)Math.Max(1, effect.Context.TickSec * 1000)
+                    );
+                }
+                else if (effect.Context.RepeatSec > 0)
+                {
+                    // Repeating one-shots need a listener that re-fires and, unless endless, expires.
+                    ticking = true;
                     handle = entity.World.RegisterGameTickListener(
                         _ => RepeatTick(id),
                         (int)Math.Max(1, effect.Context.RepeatSec * 1000)
                     );
                 }
-                else
+                else if (!endless)
                 {
                     handle = entity.World.RegisterCallback(
                         dt => RemoveEffect(id),
                         effect.Context.Duration * 1000
                     );
                 }
+                // An endless continuous effect (fly, glow, a stat) needs no listener at all -
+                // it is reconciled by RefreshEffectState and only ever leaves on death, logout
+                // without retention, or an explicit removal.
 
                 active[id] = new ActiveEffect(effect, handle, ticking, name)
                 {
@@ -188,10 +209,13 @@ namespace EffectLib
                 );
             }
 
-            if (activeEffect.IsTicking)
-                entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
-            else
-                entity.World.UnregisterCallback(activeEffect.ListenerId);
+            if (activeEffect.ListenerId != 0)
+            {
+                if (activeEffect.IsTicking)
+                    entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
+                else
+                    entity.World.UnregisterCallback(activeEffect.ListenerId);
+            }
 
             activeEffect.Effect.Remove(entity);
 
@@ -217,14 +241,20 @@ namespace EffectLib
             if (!active.TryGetValue(id, out ActiveEffect activeEffect))
                 return;
 
-            int elapsedSec = (int)((entity.World.ElapsedMilliseconds - activeEffect.ApplyMs) / 1000);
-            if (elapsedSec >= activeEffect.Effect.Context.Duration)
+            EffectContext ctx = activeEffect.Effect.Context;
+            if (!ctx.IsEndless)
             {
-                RemoveEffect(id);
-                return;
+                int elapsedSec = (int)(
+                    (entity.World.ElapsedMilliseconds - activeEffect.ApplyMs) / 1000
+                );
+                if (elapsedSec >= ctx.Duration)
+                {
+                    RemoveEffect(id);
+                    return;
+                }
             }
 
-            EffectHandlers.Applied(entity, id, activeEffect.Effect.Context, api.Logger);
+            EffectHandlers.Applied(entity, id, ctx, api.Logger);
         }
 
         /// <summary>
@@ -287,15 +317,24 @@ namespace EffectLib
             {
                 ActiveEffect activeEffect = pair.Value;
 
-                if (activeEffect.IsTicking)
-                    entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
-                else
-                    entity.World.UnregisterCallback(activeEffect.ListenerId);
+                if (activeEffect.ListenerId != 0)
+                {
+                    if (activeEffect.IsTicking)
+                        entity.World.UnregisterGameTickListener(activeEffect.ListenerId);
+                    else
+                        entity.World.UnregisterCallback(activeEffect.ListenerId);
+                }
 
-                int remainingSec =
-                    activeEffect.Effect.Context.Duration
-                    - (int)((nowMs - activeEffect.ApplyMs) / 1000);
-                tree?.GetTreeAttribute(pair.Key)?.SetInt("remainingSec", Math.Max(remainingSec, 1));
+                // An endless effect is stored as such so it resumes endless, not clamped to a
+                // remaining time it never had.
+                int remainingSec = activeEffect.Effect.Context.IsEndless
+                    ? EffectContext.EndlessDuration
+                    : Math.Max(
+                        activeEffect.Effect.Context.Duration
+                            - (int)((nowMs - activeEffect.ApplyMs) / 1000),
+                        1
+                    );
+                tree?.GetTreeAttribute(pair.Key)?.SetInt("remainingSec", remainingSec);
             }
 
             if (tree != null)
@@ -316,18 +355,47 @@ namespace EffectLib
                 {
                     ITreeAttribute record = tree.GetTreeAttribute(id);
                     int remainingSec = record?.GetInt("remainingSec") ?? 0;
+                    bool endless = remainingSec == EffectContext.EndlessDuration;
                     EffectContext ctx =
-                        remainingSec > 0
+                        remainingSec > 0 || endless
                             ? EffectRegistry.Build(id, record.GetFloat("strengthMul", 1f))
                             : null;
 
-                    if (ctx == null || ctx.Duration <= 0)
+                    if (ctx == null)
                     {
                         tree.RemoveAttribute(id);
                         continue;
                     }
 
-                    ctx.Duration = Math.Min(remainingSec, ctx.Duration);
+                    bool primitive = EffectPrimitives.IsPrimitiveId(id);
+
+                    if (endless || ctx.IsEndless)
+                    {
+                        ctx.Duration = EffectContext.EndlessDuration;
+                    }
+                    else if (primitive)
+                    {
+                        // A primitive carries nothing but id + potency through the registry, so
+                        // its length is whatever the save says - the builder's default is not it.
+                        ctx.Duration = remainingSec;
+                    }
+                    else if (ctx.Duration <= 0)
+                    {
+                        // A registered effect that no longer defines a duration for itself.
+                        tree.RemoveAttribute(id);
+                        continue;
+                    }
+                    else
+                    {
+                        // Resume with the lesser of the saved remaining time and the duration the
+                        // effect currently defines, so a shortened config takes effect on resume.
+                        ctx.Duration = Math.Min(remainingSec, ctx.Duration);
+                    }
+
+                    // The repeat shape of a primitive (a DoT's interval and damage type) is not
+                    // reconstructible from its id, so it comes back from the record.
+                    if (primitive)
+                        RestoreRepeatShape(ctx, record);
 
                     if (ctx.CanFly)
                         baselineFreeMove ??= record.GetBool("origFreeMove");
@@ -616,7 +684,39 @@ namespace EffectLib
             record.SetLong("appliedAt", entity.World.ElapsedMilliseconds);
             if (ctx.CanFly)
                 record.SetBool("origFreeMove", baselineFreeMove ?? false);
+
+            // A registered effect rebuilds its own repeat shape from its builder on resume; a
+            // primitive has no builder state, so its repeat shape is persisted here.
+            if (EffectPrimitives.IsPrimitiveId(id))
+            {
+                if (ctx.RepeatSec > 0f)
+                    record.SetFloat("repeatSec", ctx.RepeatSec);
+                if (ctx.TickSec > 0f)
+                    record.SetFloat("tickSec", ctx.TickSec);
+                if (ctx.DamageType.HasValue)
+                    record.SetString("damageType", ctx.DamageType.Value.ToString());
+            }
+
             entity.WatchedAttributes.MarkPathDirty(PersistKey);
+        }
+
+        // Reapplies the interval/damage-type a repeating primitive was given, from its save
+        // record - the id alone cannot reconstruct it.
+        private static void RestoreRepeatShape(EffectContext ctx, ITreeAttribute record)
+        {
+            float repeatSec = record.GetFloat("repeatSec");
+            if (repeatSec > 0f)
+                ctx.RepeatSec = repeatSec;
+
+            float tickSec = record.GetFloat("tickSec");
+            if (tickSec > 0f)
+                ctx.TickSec = tickSec;
+
+            if (
+                record.HasAttribute("damageType")
+                && Enum.TryParse(record.GetString("damageType"), true, out EnumDamageType dt)
+            )
+                ctx.DamageType = dt;
         }
     }
 
@@ -625,7 +725,8 @@ namespace EffectLib
         string Id,
         string DisplayName,
         int RemainingSec,
-        float PotencyMul
+        float PotencyMul,
+        bool Endless = false
     );
 
     internal sealed record ActiveEffect(

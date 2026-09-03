@@ -32,20 +32,21 @@ Register a builder per effect id. It runs on every application, so it may read l
 ```csharp
 EffectRegistry.Register("mymod:haste", ctx =>
 {
-    ctx.Duration = 600;                  // seconds
+    ctx.Duration = 600;                  // seconds; 0 is a one-shot,
+                                         // EffectContext.EndlessDuration runs until death
     ctx.AddStat("walkspeed", 0.2f);      // scaled by ctx.PotencyMul
     ctx.GlowStrength = 8;
 }, domain: "mymod");
 ```
 
 `domain` decides where EffectLib looks for the effect's lang keys
-(`mymod:waterbreathe`, falling back to `effectlib:waterbreathe`) and its HUD icon
-(`mymod:textures/hud/effects/haste.png`).
+(`mymod:waterbreathe`, falling back to `effectlib:waterbreathe`). Pass `iconTexture:` for an
+explicit HUD icon, or leave it and the HUD shows the item the effect came from.
 
 Apply it to a player:
 
 ```csharp
-EffectManager manager = EntityBehaviorEffects.ManagerFor(entityPlayer);
+EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(entityPlayer);
 EffectContext ctx = EffectRegistry.Build("mymod:haste", potencyMul: 1f);
 manager.TryApply("mymod:haste", ctx, Lang.Get("mymod:haste"));
 ```
@@ -81,9 +82,13 @@ domain the moment it loads, so nothing else needs to call anything. A tooltip is
 automatically from the same `EffectContext`, using `effectlib:<key>` lang keys as a
 fallback so an item needs no lang keys of its own to show something readable. The effect's
 own name comes from its id used as a lang key, so `"mymod:healingflask": "Healing"` in the
-mod's `en.json` is all the HUD and the gain/lose messages need. Its HUD icon needs nothing at
-all: with no `<domain>:textures/hud/effects/<id>.png` shipped, the HUD draws the item that
-registered the effect - the flask, wand or herb the player used.
+mod's `en.json` is all the HUD and the gain/lose messages need. Its HUD icon needs nothing
+either - with no `hudIcon` set the HUD draws the item that registered the effect (the flask,
+wand or herb the player used); add `"hudIcon": "mymod:textures/hud/foo.png"` to the
+`effectinfo` to override that.
+
+`"duration"` is seconds; `0` (or an absent key) is a one-shot that fires once, and `-1`
+runs the effect until the player dies, logs out without retention, or it is cleared.
 
 The behavior takes its own JSON properties, all optional:
 
@@ -189,24 +194,32 @@ Hold the coating source in your off hand, the weapon in your main hand, and shif
 item/block's `OnHeldIdle` if it does not already route through a `CollectibleBehavior`, the
 same workaround Alchemy's `ItemPotion`/`BlockPotionFlask` use). A barrel of the same liquid
 coats everything sitting in it at once instead, with no interaction needed - see
-`BarrelCoating`/`BarrelCoatingConfig`.
+`BarrelCoating`.
 
-Coating is entirely config-free like everything else, through `CoatingPolicy`:
-`AllowCoating`, `MaxCharges`, `EffectMultiplier` (a dampening factor - a coated hit is
-typically weaker than drinking the same effect), `IsCoatableWeapon`/`IsCoatableProjectile`
-(what can be coated at all), `IsEffectCoatable` (which registered effects are currently
-allowed to be delivered this way), and `ApplySideEffects`/`GetBlockReason` for anything
-extra a mod layers onto a hit (Alchemy uses these for its drinking-style side effects and
-exclusivity groups).
+Coating carries no config of its own. A mod installs its rules once, the same way
+`EffectPolicy.SetGate` is installed - build a `CoatingConfig` and pass it to
+`CoatingPolicy.Configure(...)`. Every hook is optional and falls back to a permissive or
+no-op default:
 
-A combat mod with its own weapon-buff system for delivering the actual hit can keep a
-coating in its own storage instead of the item stack's attributes - set
-`CoatingPolicy.UsesAlternateWeaponStorage`/`UsesAlternateProjectileStorage` and the matching
-`TryReadAlternateWeapon`/`WriteAlternateWeapon`/`WriteAlternateProjectile` hooks, and hand
-`CoatedEffects.Apply`/`ResolveDisplayName` to that system as its own on-hit callback, the
-way `Alchemy.CombatOverhaulCompat` does for Combat Overhaul's `WeaponBuffSystem`.
-EffectLib's own on-hit Harmony patches never consult alternate storage, so the two paths
-never both fire for the same coating.
+```csharp
+CoatingPolicy.Configure(new CoatingConfig
+{
+    AllowCoating     = () => MyConfig.AllowCoating,
+    MaxCharges       = () => MyConfig.CoatCharges,
+    EffectMultiplier = () => MyConfig.CoatDampening,   // a coated hit is weaker than drinking
+    IsCoatableWeapon     = col => col.Tags.Contains("blade"),
+    IsCoatableProjectile = col => col.Code.Path.Contains("arrow"),
+    IsEffectCoatable = id => MyConfig.CoatableEffects.Contains(id),  // per-effect, not the master switch
+    AllowBarrelCoating  = () => MyConfig.AllowBarrelCoating,   // plus BarrelConsumeLitres / BarrelCheckLitres
+    ApplySideEffects = (id, target, mul) => { /* extra per-hit work */ },
+    GetBlockReason   = (id, player, ctx) => null,             // a lang key to refuse the hit, or null
+});
+```
+
+The `CombatOverhaul*` hooks on `CoatingConfig` exist for one thing: Combat Overhaul's weapons
+never reach EffectLib's on-hit patches, so `Alchemy.CombatOverhaulCompat` routes their
+coatings into CO's own `WeaponBuffSystem` (which calls back into `CoatedEffects.Apply`).
+Leave them unset and every coating lives on the item stack.
 
 ## Purging other effects
 
@@ -252,7 +265,7 @@ ctx.SizeMaxHeight = 3.0f;
 
 These are one-shots: they fire once on application, same as `health` without a `tickSec`.
 They are distinct from the simple per-tick entity-property effects above and from the stat
-modifiers in `AtomicEffects` - see `EffectLib.UtilityEffects` and its built-in
+modifiers in `EffectPrimitives` - see `EffectLib.UtilityEffects` and its built-in
 `IEffectHandler`, `UtilityEffectHandler`, which every EffectLib mod registers automatically.
 
 Sizing is gated by `EffectCapability.Resize` and is scoped by the domain that applied it, the
@@ -265,7 +278,8 @@ The same fields exist in JSON as `respawn`, `reshape`, `retainedNutrition`,
 ## Extension points
 
 `EffectContext` and the built-in utility effects above cover what EffectLib applies itself.
-Anything further a mod-specific effect needs to do belongs in a handler:
+Anything further a mod-specific effect needs to do belongs in a handler, registered from
+your `StartServerSide` (handlers only ever fire server-side):
 
 ```csharp
 EffectHandlers.Register(new MyHandler());   // IEffectHandler
@@ -296,26 +310,33 @@ everyone online. Both effect names and registered ids tab-complete.
 Individual effects — the primitives of `EffectContext`, given one at a time:
 
 ```
-/efflib list [filter]                                            what can be given
-/efflib give <player> <effect> [magnitude] [seconds] [interval]  give bob fly, give bob glow 200
-/efflib dot <player> <amount> <interval> [seconds] [damagetype]  dot bob -2 0.5 60
+/efflib list [filter]                                             what can be given
+/efflib give <player> <effect> [magnitude] [duration] [interval]  give bob fly, give bob glow 200
+/efflib dot <player> <amount> <interval> [duration] [damagetype]  dot bob -2 0.5 60
 ```
 
 `<effect>` is a name from `list`, or `stat:<name>` for any entity stat
 (`give bob stat:walkspeed 0.5 300`). Magnitude is the amount and is ignored for on/off
-effects; duration defaults to 600s and is ignored for one-shot effects such as `health`,
-`size` and `respawn` - unless you pass an `interval`, which repeats the one-shot every that
-many seconds for the duration.
+effects, but still holds its argument slot - pass any number for it (`give bob fly 1 endless`).
+`duration` is a number of seconds (default 600) or `endless` for one that lasts until the
+player dies, logs out without retention, or is cleared. Duration is ignored for one-shot
+effects such as `health`, `size` and `respawn` unless you pass an `interval`, which repeats
+the one-shot every that many seconds for the duration (an endless interval repeats forever -
+`give bob size 0.2 endless 5`).
 
-`dot` is the health case of that, spelled for convenience: it drives the engine's own ticking
-damage source rather than a repeat timer, so it behaves like any other damage over time.
+`dot` is the health case of that, spelled for convenience: with a finite duration it drives
+the engine's own ticking damage source so it behaves like any other damage over time; an
+endless `dot` is driven by a repeat timer instead. A positive amount heals.
 
 Whole effects registered by a mod — a potion and everything it bundles:
 
 ```
-/efflib registered [filter]                            registered effect ids, with their domain
-/efflib apply <player> <effectid> [potency] [seconds]  potency scales stats and health
+/efflib registered [filter]                             registered effect ids, with their domain
+/efflib apply <player> <effectid> [potency] [duration]  potency scales stats and health
 ```
+
+`apply`'s `duration` is seconds, or `endless`, or omitted to keep whatever duration the
+effect defines for itself.
 
 Shared:
 
@@ -329,27 +350,32 @@ refresh policy. `clear` without an effect id does a full reset, so handlers undo
 state too. Giving an effect whose capability the server has gated off is refused with an
 explanation rather than silently doing nothing.
 
-Individual effects are ordinary registered effects under an `efflib:` id, so they persist and
-resume like any other. Stat effects are resolved on demand via `EffectRegistry.AddResolver`,
-which is also how they survive a restart.
+Individual effects are ordinary registered effects under an `efflib:<name>` id, so they
+persist and resume like any other; a repeating one also stores its interval and damage type
+in its save record, since those are not part of the id. Stat effects (`efflib:stat:<name>`)
+are open-ended, so they are resolved on demand via `EffectRegistry.AddResolver` rather than
+registered up front - which is also how a saved one rebuilds after a restart.
 
 ## HUD
 
-The HUD is driven by the persisted effect tree. To add rows it cannot see - state your
-mod tracks itself - or to supply fallback icons, register an `IHudEffectProvider` with
-`EffectHud.Register`. Every member has a default, so implement only what you need.
+The HUD is entirely EffectLib's - a dependent mod adds no HUD code. It shows every effect in
+the persisted tree with a countdown, plus one built-in endless row while a grow or shrink is
+in effect (that is a size *state*, not a tracked effect).
 
-A row's icon is resolved in order: a provider's `GetIconTexture`, then
-`<domain>:textures/hud/effects/<effect id, ':' as '-'>.png`, then a provider's `GetIconStack`,
-and finally the collectible that registered the effect (`EffectRegistration.IconSource`, set
-automatically for every JSON-declared effect). So an icon is only ever worth shipping to
-override the item's own.
+A row's icon is resolved in two steps:
 
-## Save compatibility
+1. **An explicit texture** - the effect's `hudIcon` field (`"effectinfo": { "effectId": "...",
+   "hudIcon": "mymod:textures/hud/foo.png" }`), or the `iconTexture:` argument to
+   `EffectRegistry.Register`.
+2. **The item the effect came from** - `EffectRegistration.IconSource` (set to the collectible
+   for every behavior/JSON-registered effect), then, failing that, a scan for whatever loaded
+   collectible carries this id in its `effectinfo` attribute. So a code-registered effect
+   still shows the flask/wand/herb it belongs to, with nothing shipped.
 
-The persisted tree key (`alchemyEffects`) and the stat modifier subkey (`potionmod-<id>`)
-are inherited from Alchemy 2.x and deliberately unchanged, so existing worlds keep their
-active effects across the split. The grow/shrink WatchedAttributes keys (`potionSizeDelta`,
-`potionBaseHeight`, ...) are likewise unchanged; a player already resized before this mod
-existed is assumed to have been resized by the `alchemy` domain, since no other mod could
-have done it at the time.
+The grow/shrink row looks for `effectlib:textures/hud/effects/grown.png` / `shrunk.png`.
+
+## Save keys
+
+Effects persist under `alchemyEffects` on the player, with stat modifiers keyed
+`potionmod-<id>` - both inherited from Alchemy 2.x. The size state lives in
+`effectlib:sizeDelta` (and `effectlib:base*`).

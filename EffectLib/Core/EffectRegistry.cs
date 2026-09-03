@@ -21,9 +21,13 @@ namespace EffectLib
     /// lang keys over its own.
     /// </param>
     /// <param name="IconSource">
-    /// Code of the collectible this effect came from, used as the HUD's last-resort icon when
-    /// no texture and no provider supplies one - so a JSON-only mod shows the wand, flask or
-    /// herb the player actually used. Null when nothing item-shaped registered the effect.
+    /// Code of the collectible this effect came from, used as the HUD icon when no explicit
+    /// <paramref name="IconTexture"/> is set - so a JSON-only mod shows the wand, flask or herb
+    /// the player actually used. Null when nothing item-shaped registered the effect.
+    /// </param>
+    /// <param name="IconTexture">
+    /// An explicit HUD icon texture, from the effect's <c>hudIcon</c> JSON field or the
+    /// <c>iconTexture</c> register argument. Takes precedence over <paramref name="IconSource"/>.
     /// </param>
     /// <param name="Channels">
     /// Named delivery methods this effect may be granted through (a mod's own vocabulary -
@@ -43,7 +47,8 @@ namespace EffectLib
         EffectBuilder Builder,
         AssetLocation IconSource = null,
         IReadOnlyCollection<string> Channels = null,
-        string ExclusivityGroup = null
+        string ExclusivityGroup = null,
+        AssetLocation IconTexture = null
     );
 
     public static class EffectRegistry
@@ -91,7 +96,8 @@ namespace EffectLib
             string domain = DefaultDomain,
             AssetLocation iconSource = null,
             IEnumerable<string> channels = null,
-            string exclusivityGroup = null
+            string exclusivityGroup = null,
+            AssetLocation iconTexture = null
         )
         {
             if (string.IsNullOrWhiteSpace(effectId) || builder == null)
@@ -109,13 +115,15 @@ namespace EffectLib
                 builder,
                 iconSource,
                 channelSet is { Count: > 0 } ? channelSet : null,
-                string.IsNullOrWhiteSpace(exclusivityGroup) ? null : exclusivityGroup
+                string.IsNullOrWhiteSpace(exclusivityGroup) ? null : exclusivityGroup,
+                iconTexture
             );
         }
 
         // Consulted when an id is not in the table, so families of effects whose ids are not
         // known ahead of time (an arbitrary entity stat, say) can still be rebuilt after a
-        // restart when a saved player brings the id back.
+        // restart when a saved player brings the id back. Added once at startup, before
+        // anything builds - the entries dictionary above absorbs the resolved results.
         private static readonly List<System.Func<string, EffectRegistration>> resolvers = [];
 
         /// <summary>
@@ -124,14 +132,8 @@ namespace EffectLib
         /// </summary>
         public static void AddResolver(System.Func<string, EffectRegistration> resolver)
         {
-            if (resolver == null)
-                return;
-
-            lock (resolvers)
-            {
-                if (!resolvers.Contains(resolver))
-                    resolvers.Add(resolver);
-            }
+            if (resolver != null && !resolvers.Contains(resolver))
+                resolvers.Add(resolver);
         }
 
         private static EffectRegistration Resolve(string effectId)
@@ -142,15 +144,7 @@ namespace EffectLib
             if (entries.TryGetValue(effectId, out EffectRegistration entry))
                 return entry;
 
-            System.Func<string, EffectRegistration>[] snapshot;
-            lock (resolvers)
-            {
-                if (resolvers.Count == 0)
-                    return null;
-                snapshot = [.. resolvers];
-            }
-
-            foreach (System.Func<string, EffectRegistration> resolver in snapshot)
+            foreach (System.Func<string, EffectRegistration> resolver in resolvers)
             {
                 EffectRegistration resolved = resolver(effectId);
                 if (resolved?.Builder != null)
@@ -170,9 +164,12 @@ namespace EffectLib
 
         /// <summary>
         /// Code of the collectible that registered <paramref name="effectId"/>, or null. The HUD
-        /// draws it when nothing else supplies an icon.
+        /// draws it as the icon when no <see cref="IconTextureOf"/> is set.
         /// </summary>
         public static AssetLocation IconSourceOf(string effectId) => Resolve(effectId)?.IconSource;
+
+        /// <summary>The explicit HUD icon texture set for <paramref name="effectId"/>, or null.</summary>
+        public static AssetLocation IconTextureOf(string effectId) => Resolve(effectId)?.IconTexture;
 
         /// <summary>
         /// Whether <paramref name="effectId"/> may be granted through the named

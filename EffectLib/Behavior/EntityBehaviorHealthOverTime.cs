@@ -12,7 +12,7 @@ namespace EffectLib
     /// Repeating health change on a non-player entity, used where the vanilla ticking
     /// DamageSource is not available. Removes itself once the duration is up.
     /// </summary>
-    public class EntityBehaviorEffectOverTime(Entity entity) : EntityBehavior(entity)
+    public class EntityBehaviorHealthOverTime(Entity entity) : EntityBehavior(entity)
     {
         private float dmgPerTick;
         private float tickSec;
@@ -22,7 +22,7 @@ namespace EffectLib
         private float durationAccum;
         private float durationSec;
 
-        public override string PropertyName() => "effectlibOverTime";
+        public override string PropertyName() => "effectlibHealthOverTime";
 
         public void Setup(
             float dmgPerTick,

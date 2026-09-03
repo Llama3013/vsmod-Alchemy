@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Vintagestory.API.Common;
@@ -48,14 +49,15 @@ namespace EffectLib
                 .WithDescription(
                     "Give one individual effect. Use a name from 'list', or 'stat:name' for any "
                         + "entity stat. Magnitude is the amount (ignored for on/off effects), "
-                        + "duration is in seconds, and a non-zero interval repeats the effect "
-                        + "every that many seconds. Use 'all' as the player to affect everyone online."
+                        + "duration is in seconds or 'endless' for one that lasts until death, and "
+                        + "a non-zero interval repeats the effect every that many seconds. Use "
+                        + "'all' as the player to affect everyone online."
                 )
                 .WithArgs(
                     api.ChatCommands.Parsers.Word("player"),
-                    api.ChatCommands.Parsers.Word("effect", AtomicSuggestions()),
+                    api.ChatCommands.Parsers.Word("effect", PrimitiveSuggestions()),
                     api.ChatCommands.Parsers.OptionalFloat("magnitude", 1f),
-                    api.ChatCommands.Parsers.OptionalInt("duration", -1),
+                    api.ChatCommands.Parsers.OptionalWord("duration"),
                     api.ChatCommands.Parsers.OptionalFloat("interval", 0f)
                 )
                 .HandleWith(OnGive)
@@ -64,14 +66,14 @@ namespace EffectLib
             cmd.BeginSubCommand("dot")
                 .WithDescription(
                     "Damage or heal over time. Amount is per tick, negative to damage; interval "
-                        + "is seconds between ticks. Damage type defaults to Poison, or Heal for "
-                        + "a positive amount."
+                        + "is seconds between ticks. Duration is in seconds or 'endless'. Damage "
+                        + "type defaults to Poison, or Heal for a positive amount."
                 )
                 .WithArgs(
                     api.ChatCommands.Parsers.Word("player"),
                     api.ChatCommands.Parsers.Float("amount"),
                     api.ChatCommands.Parsers.Float("interval"),
-                    api.ChatCommands.Parsers.OptionalInt("duration", DefaultDurationSec),
+                    api.ChatCommands.Parsers.OptionalWord("duration"),
                     api.ChatCommands.Parsers.OptionalWord("damagetype")
                 )
                 .HandleWith(OnDot)
@@ -88,13 +90,14 @@ namespace EffectLib
             cmd.BeginSubCommand("apply")
                 .WithDescription(
                     "Apply a whole registered effect by its id, as if the player had used it. "
-                        + "Potency scales it; duration in seconds overrides its own."
+                        + "Potency scales it; duration in seconds (or 'endless') overrides its own, "
+                        + "otherwise the effect keeps whatever duration it defines."
                 )
                 .WithArgs(
                     api.ChatCommands.Parsers.Word("player"),
                     api.ChatCommands.Parsers.Word("effectid", RegisteredSuggestions()),
                     api.ChatCommands.Parsers.OptionalFloat("potency", 1f),
-                    api.ChatCommands.Parsers.OptionalInt("duration", -1)
+                    api.ChatCommands.Parsers.OptionalWord("duration")
                 )
                 .HandleWith(OnApply)
                 .EndSubCommand();
@@ -120,15 +123,15 @@ namespace EffectLib
             base.StartServerSide(api);
         }
 
-        private static string[] AtomicSuggestions() =>
-            [.. AtomicEffects.All.Select(e => e.Name).OrderBy(n => n, StringComparer.Ordinal)];
+        private static string[] PrimitiveSuggestions() =>
+            [.. EffectPrimitives.All.Select(p => p.Name).OrderBy(n => n, StringComparer.Ordinal)];
 
         // Snapshotted for tab-completion. Effects registered later still work, they just are
         // not suggested.
         private static string[] RegisteredSuggestions() =>
             [
                 .. EffectRegistry
-                    .Registrations.Keys.Where(id => !AtomicEffects.IsAtomicId(id))
+                    .Registrations.Keys.Where(id => !EffectPrimitives.IsPrimitiveId(id))
                     .OrderBy(id => id, StringComparer.Ordinal),
             ];
 
@@ -136,9 +139,9 @@ namespace EffectLib
         {
             string filter = args[0] as string;
 
-            List<AtomicEffect> matches =
+            List<EffectPrimitive> matches =
             [
-                .. AtomicEffects
+                .. EffectPrimitives
                     .All.Where(e =>
                         string.IsNullOrEmpty(filter)
                         || e.Name.Contains(filter, StringComparison.OrdinalIgnoreCase)
@@ -153,7 +156,7 @@ namespace EffectLib
 
             StringBuilder sb = new();
             sb.Append(matches.Count).Append(" individual effect(s):");
-            foreach (AtomicEffect e in matches)
+            foreach (EffectPrimitive e in matches)
             {
                 sb.AppendLine()
                     .Append("  ")
@@ -187,7 +190,7 @@ namespace EffectLib
             [
                 .. EffectRegistry
                     .Registrations.Values.Where(reg =>
-                        !AtomicEffects.IsAtomicId(reg.Id)
+                        !EffectPrimitives.IsPrimitiveId(reg.Id)
                         && (
                             string.IsNullOrEmpty(filter)
                             || reg.Id.Contains(filter, StringComparison.OrdinalIgnoreCase)
@@ -220,16 +223,18 @@ namespace EffectLib
             string playerArg = args[0] as string;
             string name = (args[1] as string)?.Trim();
             float magnitude = (float)args[2];
-            int duration = (int)args[3];
             float interval = (float)args[4];
+
+            if (!TryParseDuration(args[3] as string, out int? duration))
+                return TextCommandResult.Error(DurationParseError);
 
             if (string.IsNullOrEmpty(name))
                 return TextCommandResult.Error("Name an effect. Use /efflib list to see them.");
 
             bool isStat = name.StartsWith("stat:", StringComparison.OrdinalIgnoreCase);
-            AtomicEffect atomic = isStat ? null : AtomicEffects.Get(name);
+            EffectPrimitive primitive = isStat ? null : EffectPrimitives.Get(name);
 
-            if (!isStat && atomic == null)
+            if (!isStat && primitive == null)
                 return TextCommandResult.Error(
                     $"No individual effect named '{name}'. Use /efflib list, or 'stat:name' "
                         + "for an entity stat. For a whole potion-style effect use /efflib apply."
@@ -238,7 +243,7 @@ namespace EffectLib
             if (isStat && name.Length <= "stat:".Length)
                 return TextCommandResult.Error("Name the stat, e.g. stat:walkspeed.");
 
-            bool ignoresMagnitude = atomic?.Kind == EffectValueKind.Flag;
+            bool ignoresMagnitude = primitive?.Kind == EffectValueKind.Flag;
             if (!ignoresMagnitude && Math.Abs(magnitude) <= float.Epsilon)
                 return TextCommandResult.Error(
                     "Magnitude must not be zero - the effect would do nothing."
@@ -249,32 +254,29 @@ namespace EffectLib
                     "A stat effect is held for its whole duration, so an interval means nothing here."
                 );
 
-            string effectId;
-            if (isStat)
-                effectId = AtomicEffects.StatIdPrefix + name["stat:".Length..].ToLowerInvariant();
-            else if (interval > 0f)
-                effectId = AtomicEffects.RepeatingIdFor(atomic.Name, interval);
-            else
-                effectId = AtomicEffects.IdFor(atomic.Name);
+            string effectId = isStat
+                ? EffectPrimitives.StatIdPrefix + name["stat:".Length..].ToLowerInvariant()
+                : EffectPrimitives.IdFor(primitive.Name);
 
             // A capability the server has switched off applies as a no-op, which looks like the
             // command failed. Say so rather than reporting a success that did nothing.
-            if (atomic?.Capability != null && !EffectPolicy.IsAllowed(atomic.Capability))
+            if (primitive?.Capability != null && !EffectPolicy.IsAllowed(primitive.Capability))
                 return TextCommandResult.Error(
-                    $"'{atomic.Name}' needs the '{atomic.Capability}' capability, which this "
+                    $"'{primitive.Name}' needs the '{primitive.Capability}' capability, which this "
                         + "server has disabled in its config, so it would have no effect."
                 );
 
             // A repeating one-shot is no longer instant: it needs a duration to repeat within.
-            bool instant = atomic?.Instant == true && interval <= 0f;
+            bool instant = primitive?.Instant == true && interval <= 0f;
 
             return ApplyToTargets(
                 args,
                 playerArg,
                 effectId,
                 magnitude,
-                instant ? 0 : (duration >= 0 ? duration : DefaultDurationSec),
-                interval > 0f ? $"{name} every {interval:0.##}s" : name
+                instant ? 0 : (duration ?? DefaultDurationSec),
+                interval > 0f ? $"{name} every {interval:0.##}s" : name,
+                repeatSec: interval
             );
         }
 
@@ -283,8 +285,11 @@ namespace EffectLib
             string playerArg = args[0] as string;
             float amount = (float)args[1];
             float interval = (float)args[2];
-            int duration = (int)args[3];
             string damageTypeArg = args[4] as string;
+
+            if (!TryParseDuration(args[3] as string, out int? durationArg))
+                return TextCommandResult.Error(DurationParseError);
+            int duration = durationArg ?? DefaultDurationSec;
 
             if (Math.Abs(amount) <= float.Epsilon)
                 return TextCommandResult.Error("Amount must not be zero.");
@@ -292,8 +297,10 @@ namespace EffectLib
             if (interval <= 0f)
                 return TextCommandResult.Error("Interval must be greater than 0 seconds.");
 
-            if (duration <= 0)
-                return TextCommandResult.Error("Duration must be greater than 0 seconds.");
+            if (duration == 0)
+                return TextCommandResult.Error(
+                    "Duration must be greater than 0 seconds, or 'endless'."
+                );
 
             EnumDamageType? damageType = null;
             if (!string.IsNullOrWhiteSpace(damageTypeArg))
@@ -305,10 +312,19 @@ namespace EffectLib
                 damageType = parsed;
             }
 
-            string effectId = AtomicEffects.RepeatingIdFor("health", interval, damageType);
+            string effectId = EffectPrimitives.IdFor("health");
             string label = $"{amount:+0.##;-0.##} HP every {interval:0.##}s";
 
-            return ApplyToTargets(args, playerArg, effectId, amount, duration, label);
+            return ApplyToTargets(
+                args,
+                playerArg,
+                effectId,
+                amount,
+                duration,
+                label,
+                repeatSec: interval,
+                damageType: damageType
+            );
         }
 
         private TextCommandResult OnApply(TextCommandCallingArgs args)
@@ -316,7 +332,9 @@ namespace EffectLib
             string playerArg = args[0] as string;
             string effectId = (args[1] as string)?.ToLowerInvariant();
             float potency = (float)args[2];
-            int duration = (int)args[3];
+
+            if (!TryParseDuration(args[3] as string, out int? duration))
+                return TextCommandResult.Error(DurationParseError);
 
             if (!EffectRegistry.IsRegistered(effectId))
                 return TextCommandResult.Error(
@@ -329,14 +347,57 @@ namespace EffectLib
             return ApplyToTargets(args, playerArg, effectId, potency, duration, effectId);
         }
 
-        // durationSec < 0 keeps whatever duration the effect defines for itself.
+        private const string DurationParseError =
+            "Duration must be a whole number of seconds, or 'endless' for one that lasts until death.";
+
+        // Parses the optional duration argument shared by give/dot/apply:
+        //   not supplied                       -> null  (caller applies its own default)
+        //   endless / permanent / forever / -1 -> EffectContext.EndlessDuration
+        //   a whole number of seconds >= 0     -> that value
+        //   anything else                      -> returns false
+        private static bool TryParseDuration(string arg, out int? seconds)
+        {
+            seconds = null;
+            if (string.IsNullOrWhiteSpace(arg))
+                return true;
+
+            switch (arg.Trim().ToLowerInvariant())
+            {
+                case "endless":
+                case "permanent":
+                case "forever":
+                case "infinite":
+                case "inf":
+                case "-1":
+                    seconds = EffectContext.EndlessDuration;
+                    return true;
+            }
+
+            if (
+                int.TryParse(arg, NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsed)
+                && parsed >= 0
+            )
+            {
+                seconds = parsed;
+                return true;
+            }
+
+            return false;
+        }
+
+        // durationOverride null keeps whatever duration the effect defines for itself;
+        // EffectContext.EndlessDuration makes it last until death; 0 is a one-shot.
+        // repeatSec > 0 turns a primitive into a repeating effect (a DoT, or a one-shot re-run
+        // on a timer); damageType only applies to a repeating health primitive.
         private TextCommandResult ApplyToTargets(
             TextCommandCallingArgs args,
             string playerArg,
             string effectId,
             float potency,
-            int durationSec,
-            string label
+            int? durationOverride,
+            string label,
+            float repeatSec = 0f,
+            EnumDamageType? damageType = null
         )
         {
             if (
@@ -354,7 +415,7 @@ namespace EffectLib
 
             foreach (IServerPlayer target in targets)
             {
-                EffectManager manager = EntityBehaviorEffects.ManagerFor(target.Entity);
+                EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(target.Entity);
                 EffectContext ctx = manager == null
                     ? null
                     : EffectRegistry.Build(effectId, potency);
@@ -365,8 +426,11 @@ namespace EffectLib
                     continue;
                 }
 
-                if (durationSec >= 0)
-                    ctx.Duration = durationSec;
+                if (durationOverride.HasValue)
+                    ctx.Duration = durationOverride.Value;
+
+                if (repeatSec > 0f)
+                    EffectPrimitives.MakeRepeating(ctx, repeatSec, damageType);
 
                 // An admin asking for an effect should always get it, so clear any running
                 // instance first rather than letting the refresh policy reject it.
@@ -379,7 +443,11 @@ namespace EffectLib
                     failed.Add(target.PlayerName);
             }
 
-            string summary = $"Gave {label} to {applied} player(s).";
+            string durationNote =
+                durationOverride == EffectContext.EndlessDuration ? " (endless)"
+                : durationOverride.GetValueOrDefault() > 0 ? $" for {durationOverride.Value}s"
+                : "";
+            string summary = $"Gave {label}{durationNote} to {applied} player(s).";
             if (failed.Count > 0)
                 summary += $" Failed for: {string.Join(", ", failed)}.";
 
@@ -395,7 +463,7 @@ namespace EffectLib
             if (!TryResolveSingle(args, name, out IServerPlayer target, out TextCommandResult error))
                 return error;
 
-            EffectManager manager = EntityBehaviorEffects.ManagerFor(target.Entity);
+            EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(target.Entity);
             if (manager == null)
                 return TextCommandResult.Error($"{target.PlayerName} has no effect manager yet.");
 
@@ -405,14 +473,17 @@ namespace EffectLib
 
             StringBuilder sb = new();
             sb.Append(target.PlayerName).Append(" has ").Append(running.Count).Append(" effect(s):");
-            foreach (ActiveEffectInfo info in running.OrderBy(i => i.RemainingSec))
+            foreach (
+                ActiveEffectInfo info in running
+                    .OrderBy(i => i.Endless)
+                    .ThenBy(i => i.RemainingSec)
+            )
             {
                 sb.AppendLine()
                     .Append("  ")
                     .Append(info.Id)
                     .Append("  ")
-                    .Append(FormatTime(info.RemainingSec))
-                    .Append(" left");
+                    .Append(info.Endless ? "endless" : FormatTime(info.RemainingSec) + " left");
                 if (Math.Abs(info.PotencyMul - 1f) > 0.001f)
                     sb.Append("  x").Append(info.PotencyMul.ToString("0.##"));
             }
@@ -437,17 +508,17 @@ namespace EffectLib
 
             // Accept either a full effect id or a bare individual-effect name.
             string effectId = effect;
-            if (!string.IsNullOrEmpty(effect) && AtomicEffects.Get(effect) != null)
-                effectId = AtomicEffects.IdFor(effect);
+            if (!string.IsNullOrEmpty(effect) && EffectPrimitives.Get(effect) != null)
+                effectId = EffectPrimitives.IdFor(effect);
             else if (effect?.StartsWith("stat:", StringComparison.OrdinalIgnoreCase) == true)
-                effectId = AtomicEffects.StatIdPrefix + effect["stat:".Length..];
+                effectId = EffectPrimitives.StatIdPrefix + effect["stat:".Length..];
             effectId = effectId?.ToLowerInvariant();
 
             int cleared = 0;
 
             foreach (IServerPlayer target in targets)
             {
-                EffectManager manager = EntityBehaviorEffects.ManagerFor(target.Entity);
+                EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(target.Entity);
                 if (manager == null)
                     continue;
 

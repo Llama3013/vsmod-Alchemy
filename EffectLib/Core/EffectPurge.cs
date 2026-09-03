@@ -9,19 +9,13 @@ namespace EffectLib
     /// that triggered it, so one mod's "clears all effects" item cannot wipe another mod's
     /// effects unless it deliberately asks to.
     /// </summary>
-    public sealed class EffectPurge
+    public sealed class EffectPurge(IEnumerable<string> domains = null, IEnumerable<string> effectIds = null)
     {
         /// <summary>Wildcard usable in <see cref="Domains"/> to mean every domain.</summary>
         public const string AnyDomain = "*";
 
-        private readonly HashSet<string> domains;
-        private readonly HashSet<string> effectIds;
-
-        public EffectPurge(IEnumerable<string> domains = null, IEnumerable<string> effectIds = null)
-        {
-            this.domains = new(domains ?? [], StringComparer.OrdinalIgnoreCase);
-            this.effectIds = new(effectIds ?? [], StringComparer.OrdinalIgnoreCase);
-        }
+        private readonly HashSet<string> domains = new(domains ?? [], StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> effectIds = new(effectIds ?? [], StringComparer.OrdinalIgnoreCase);
 
         /// <summary>Domains whose effects are cleared. May contain <see cref="AnyDomain"/>.</summary>
         public IReadOnlyCollection<string> Domains => domains;

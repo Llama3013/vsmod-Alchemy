@@ -13,8 +13,8 @@ namespace EffectLib
 {
     /// <summary>
     /// Shows every running effect as an icon row with countdowns, or as a single compact
-    /// badge with a tooltip. Driven by the persisted effect tree plus any
-    /// <see cref="IHudEffectProvider"/> rows.
+    /// badge with a tooltip. Driven by the persisted effect tree, plus a built-in row for an
+    /// active grow/shrink (which is a size state, not a tracked effect).
     /// </summary>
     public class GuiHudEffects : HudElement
     {
@@ -25,9 +25,9 @@ namespace EffectLib
             public long AppliedToken;
             public long ExpiryMs;
             public float PotencyMul;
-            public string[] ProvidedLines;
-            public float ProvidedToken;
-            public bool FromProvider;
+            public string[] ExtraLines;
+            public float ChangeToken;
+            public bool Synthetic;
             public string[] DetailLines;
             public bool Endless;
             public bool IconResolved;
@@ -49,6 +49,9 @@ namespace EffectLib
         public const string SettingEnabled = "alchemyHudEnabled";
         public const string SettingAutoEnabled = "alchemyHudAutoEnabled";
 
+        // Icons (a hudIcon texture, or grown/shrunk below) are blitted into this many px, which
+        // GUI scale can roughly double or triple. Author them square, transparent, 128x128
+        // (anything >= 64 is fine); pixel-art item-texture sizes like 32 will look soft.
         private const int IconSize = 40;
         private const int IconPad = 4;
         private const int TimerHeight = 20;
@@ -58,8 +61,14 @@ namespace EffectLib
             "effectlib:textures/hud/activeeffecthud.png"
         );
 
+        // Synthetic row ids for an active grow/shrink - not real effect ids, never in the tree.
+        // Icons: effectlib:textures/hud/effects/grown.png / shrunk.png.
+        private const string GrownRowId = "effectlib:grown";
+        private const string ShrunkRowId = "effectlib:shrunk";
+
         private readonly Dictionary<string, TrackedEffect> tracked = [];
         private readonly List<TrackedEffect> ordered = [];
+        private Dictionary<string, ItemStack> iconStacks;
         private GuiComposer current;
         private long timerListenerId;
         private EntityPlayer listeningEntity;
@@ -85,14 +94,10 @@ namespace EffectLib
                 EffectManager.PersistKey,
                 OnEffectsChanged
             );
-
-            foreach (IHudEffectProvider provider in EffectHud.Providers)
-            {
-                foreach (string key in provider.WatchedKeys)
-                {
-                    entity.WatchedAttributes.RegisterModifiedListener(key, OnEffectsChanged);
-                }
-            }
+            entity.WatchedAttributes.RegisterModifiedListener(
+                UtilityEffects.SizeDeltaAttr,
+                OnEffectsChanged
+            );
 
             OnEffectsChanged();
         }
@@ -123,27 +128,29 @@ namespace EffectLib
                         continue;
 
                     int remainingSec = record.GetInt("remainingSec");
+                    bool endless = remainingSec < 0;
                     tracked[pair.Key] = new TrackedEffect
                     {
                         Id = pair.Key,
                         Name = record.GetString("name", ""),
                         AppliedToken = token,
-                        ExpiryMs = ClientNowMs + remainingSec * 1000L,
+                        Endless = endless,
+                        ExpiryMs = endless ? long.MaxValue : ClientNowMs + remainingSec * 1000L,
                         PotencyMul = record.GetFloat("strengthMul", 1f),
                     };
                     changed = true;
                 }
             }
 
-            HashSet<string> providedIds = CollectProvidedRows(entity, ref changed);
+            SyncSizeRow(entity, ref changed);
 
             List<string> removed = null;
             foreach (KeyValuePair<string, TrackedEffect> pair in tracked)
             {
-                bool stale = pair.Value.FromProvider
-                    ? !providedIds.Contains(pair.Key)
-                    : tree?.HasAttribute(pair.Key) != true;
-                if (stale)
+                // Synthetic rows are added and removed by SyncSizeRow itself.
+                if (pair.Value.Synthetic)
+                    continue;
+                if (tree?.HasAttribute(pair.Key) != true)
                     (removed ??= []).Add(pair.Key);
             }
             if (removed != null)
@@ -158,61 +165,45 @@ namespace EffectLib
             UpdateTimerListener();
         }
 
-        private HashSet<string> CollectProvidedRows(EntityPlayer entity, ref bool changed)
+        // Adds, updates or removes the built-in grow/shrink row from the player's size delta.
+        private void SyncSizeRow(EntityPlayer entity, ref bool changed)
         {
-            HashSet<string> providedIds = [];
+            float sizeDelta = entity.WatchedAttributes.GetFloat(UtilityEffects.SizeDeltaAttr, 0f);
+            bool active = Math.Abs(sizeDelta) > 0.001f;
 
-            foreach (IHudEffectProvider provider in EffectHud.Providers)
+            string wantId = sizeDelta > 0 ? GrownRowId : ShrunkRowId;
+            string dropId = sizeDelta > 0 ? ShrunkRowId : GrownRowId;
+
+            if (tracked.Remove(dropId))
+                changed = true;
+            if (!active)
             {
-                IEnumerable<HudEffectRow> rows;
-                try
-                {
-                    rows = provider.GetRows(entity);
-                }
-                catch (Exception err)
-                {
-                    capi.Logger.Error(
-                        "[EffectLib] HUD provider {0} threw while building rows.",
-                        provider.GetType().FullName
-                    );
-                    capi.Logger.Error(err);
-                    continue;
-                }
-
-                if (rows == null)
-                    continue;
-
-                foreach (HudEffectRow row in rows)
-                {
-                    if (string.IsNullOrEmpty(row?.Id))
-                        continue;
-
-                    providedIds.Add(row.Id);
-
-                    if (
-                        tracked.TryGetValue(row.Id, out TrackedEffect existing)
-                        && existing.FromProvider
-                        && existing.ProvidedToken == row.ChangeToken
-                    )
-                        continue;
-
-                    tracked[row.Id] = new TrackedEffect
-                    {
-                        Id = row.Id,
-                        Name = row.Name,
-                        FromProvider = true,
-                        ProvidedToken = row.ChangeToken,
-                        ProvidedLines = row.ExtraLines,
-                        Endless = row.Endless,
-                        ExpiryMs = row.Endless
-                            ? long.MaxValue
-                            : ClientNowMs + row.RemainingSec * 1000L,
-                    };
+                if (tracked.Remove(wantId))
                     changed = true;
-                }
+                return;
             }
 
-            return providedIds;
+            if (
+                tracked.TryGetValue(wantId, out TrackedEffect existing)
+                && Math.Abs(existing.ChangeToken - sizeDelta) < 0.0001f
+            )
+                return;
+
+            string label = EffectLang.GetForDomain(
+                EffectRegistry.DefaultDomain,
+                sizeDelta > 0 ? "grown" : "shrunk"
+            );
+            tracked[wantId] = new TrackedEffect
+            {
+                Id = wantId,
+                Name = label,
+                Synthetic = true,
+                Endless = true,
+                ExpiryMs = long.MaxValue,
+                ChangeToken = sizeDelta,
+                ExtraLines = [$"{sizeDelta:+0.0#;-0.0#} blocks"],
+            };
+            changed = true;
         }
 
         private void RebuildComposer()
@@ -318,42 +309,27 @@ namespace EffectLib
                 return;
             effect.IconResolved = true;
 
-            foreach (IHudEffectProvider provider in EffectHud.Providers)
-            {
-                AssetLocation custom = provider.GetIconTexture(effect.Id);
-                if (custom != null && capi.Assets.TryGet(custom) != null)
-                {
-                    effect.IconTextureId = capi.Render.GetOrLoadTexture(custom);
-                    return;
-                }
-            }
+            // 1. The grow/shrink row uses EffectLib's own icons, if shipped.
+            // 2. An explicit texture the effect declared (JSON hudIcon / Register iconTexture).
+            AssetLocation texLoc = effect.Synthetic
+                ? new AssetLocation(
+                    EffectRegistry.DefaultDomain,
+                    "textures/hud/effects/" + (effect.Id == GrownRowId ? "grown" : "shrunk") + ".png"
+                )
+                : EffectRegistry.IconTextureOf(effect.Id);
 
-            // Effect ids may be namespaced with colons, which are not legal in an asset path.
-            AssetLocation texLoc = new(
-                EffectRegistry.DomainOf(effect.Id),
-                "textures/hud/effects/" + effect.Id.Replace(':', '-') + ".png"
-            );
-            if (capi.Assets.TryGet(texLoc) != null)
+            if (texLoc != null && capi.Assets.TryGet(texLoc) != null)
             {
                 effect.IconTextureId = capi.Render.GetOrLoadTexture(texLoc);
                 return;
             }
 
-            foreach (IHudEffectProvider provider in EffectHud.Providers)
-            {
-                ItemStack stack = provider.GetIconStack(capi, effect.Id);
-                if (stack != null)
-                {
-                    effect.IconSlot = new DummySlot(stack);
-                    return;
-                }
-            }
-
-            // Last resort: whatever registered the effect. A JSON-only mod shipping no icon
-            // still gets a recognisable row - the wand, flask or herb the player just used.
-            ItemStack sourceStack = StackFor(EffectRegistry.IconSourceOf(effect.Id));
-            if (sourceStack != null)
-                effect.IconSlot = new DummySlot(sourceStack);
+            // 3. The collectible the effect was registered from, then a scan for whatever item
+            //    carries this effect id - so a code-registered effect still shows its item.
+            ItemStack stack =
+                StackFor(EffectRegistry.IconSourceOf(effect.Id)) ?? StackForEffectItem(effect.Id);
+            if (stack != null)
+                effect.IconSlot = new DummySlot(stack);
         }
 
         private ItemStack StackFor(AssetLocation code)
@@ -367,6 +343,34 @@ namespace EffectLib
 
             Block block = capi.World.GetBlock(code);
             return block == null ? null : new ItemStack(block);
+        }
+
+        // The first collectible whose "effectinfo" attribute names this effect id - the flask,
+        // wand or herb it comes from. Built once, since collectibles do not change in a session.
+        private ItemStack StackForEffectItem(string effectId)
+        {
+            if (iconStacks == null)
+            {
+                iconStacks = [];
+                foreach (CollectibleObject coll in EnumerateCollectibles())
+                {
+                    JsonObject def = coll?.Attributes?["effectinfo"];
+                    if (def?.Exists != true)
+                        continue;
+                    string id = def["effectId"].AsString()?.ToLowerInvariant();
+                    if (!string.IsNullOrEmpty(id))
+                        iconStacks.TryAdd(id, new ItemStack(coll));
+                }
+            }
+            return iconStacks.GetValueOrDefault(effectId);
+        }
+
+        private IEnumerable<CollectibleObject> EnumerateCollectibles()
+        {
+            foreach (Item item in capi.World.Items)
+                yield return item;
+            foreach (Block block in capi.World.Blocks)
+                yield return block;
         }
 
         private void BuildDetails(TrackedEffect effect)
@@ -436,8 +440,8 @@ namespace EffectLib
                     lines.Add($"{Label(effect.Id, "weight")}: {ctx.Weight:+0.#;-0.#;0}kg");
             }
 
-            if (effect.ProvidedLines != null)
-                lines.AddRange(effect.ProvidedLines);
+            if (effect.ExtraLines != null)
+                lines.AddRange(effect.ExtraLines);
 
             effect.DetailLines = [.. lines];
         }

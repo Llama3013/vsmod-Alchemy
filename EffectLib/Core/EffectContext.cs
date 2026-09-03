@@ -11,10 +11,26 @@ namespace EffectLib
     /// </summary>
     public sealed class EffectContext
     {
+        /// <summary>
+        /// <see cref="Duration"/> sentinel for an effect that never expires on its own: it runs
+        /// until the player dies, logs out without retention, or it is removed explicitly.
+        /// Distinct from <c>0</c>, which is a one-shot that fires once and is not tracked.
+        /// </summary>
+        public const int EndlessDuration = -1;
+
         public Dictionary<string, float> StatModifiers { get; } = [];
 
         public float PotencyMul { get; set; }
+
+        /// <summary>
+        /// Seconds the effect runs for. <c>0</c> is a one-shot (fired once, not tracked);
+        /// <see cref="EndlessDuration"/> runs with no timer until death or removal; any positive
+        /// value expires after that many seconds.
+        /// </summary>
         public int Duration { get; set; }
+
+        /// <summary>True when <see cref="Duration"/> is <see cref="EndlessDuration"/>.</summary>
+        public bool IsEndless => Duration == EndlessDuration;
 
         /// <summary>Clears other running effects when this one is applied.</summary>
         public bool ResetsEffects { get; set; }
@@ -49,7 +65,7 @@ namespace EffectLib
 
         // Utility effects - world-interacting side effects carried out by EffectLib's own
         // built-in handler (see UtilityEffects/UtilityEffectHandler), as opposed to the simple
-        // per-tick entity-property effects above and the stat modifiers on AtomicEffects.
+        // per-tick entity-property effects above and the stat modifiers on EffectPrimitives.
         public float RetainedNutrition { get; set; }
         public float TemporalStabilityGain { get; set; }
         public bool Respawn { get; set; }

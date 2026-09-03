@@ -11,7 +11,7 @@ namespace EffectLib
     /// <summary>
     /// Built-in "utility" effects: world-interacting side effects (teleport to spawn, character
     /// reshape, nutrition retention, temporal stability, grow/shrink) as opposed to the simple
-    /// per-tick entity-property effects and stat modifiers in <see cref="AtomicEffects"/>. These
+    /// per-tick entity-property effects and stat modifiers in <see cref="EffectPrimitives"/>. These
     /// always work, with no dependent mod needing to register anything - see
     /// <see cref="UtilityEffectHandler"/>, EffectLib's own built-in <see cref="IEffectHandler"/>.
     /// </summary>
@@ -28,22 +28,24 @@ namespace EffectLib
         public const float DefaultMinHeight = 0.2f;
         public const float DefaultMaxHeight = 10f;
 
-        // WatchedAttributes keys. potionSizeDelta/potionBase* are kept for save compatibility
-        // with Alchemy 2.x, which wrote them before EffectLib existed. potionSizeDomain and the
-        // min/max bounds are new: absent on old saves, so they default to Alchemy's own domain
-        // and to the constants above, matching pre-migration behaviour exactly.
-        private const string KeySizeDelta = "potionSizeDelta";
-        private const string KeyBaseHeight = "potionBaseHeight";
-        private const string KeyBaseWidth = "potionBaseWidth";
-        private const string KeyBaseEyeHeight = "potionBaseEyeHeight";
-        private const string KeyBaseClientSize = "potionBaseClientSize";
-        private const string KeyBaseEntitySize = "potionBaseEntitySize";
-        private const string KeySizeDomain = "potionSizeDomain";
-        private const string KeySizeMinHeight = "potionSizeMinHeight";
-        private const string KeySizeMaxHeight = "potionSizeMaxHeight";
+        // WatchedAttributes keys the size effect writes on the player.
 
-        // No saved size effect predates EffectLib other than Alchemy's, so an absent domain
-        // stamp (pre-migration save) is assumed to be Alchemy's.
+        /// <summary>
+        /// The signed height change currently applied to a player, in blocks; zero when
+        /// unaffected. The HUD watches this to show its grow/shrink row.
+        /// </summary>
+        public const string SizeDeltaAttr = "effectlib:sizeDelta";
+
+        private const string KeyBaseHeight = "effectlib:baseHeight";
+        private const string KeyBaseWidth = "effectlib:baseWidth";
+        private const string KeyBaseEyeHeight = "effectlib:baseEyeHeight";
+        private const string KeyBaseClientSize = "effectlib:baseClientSize";
+        private const string KeyBaseEntitySize = "effectlib:baseEntitySize";
+        private const string KeySizeDomain = "effectlib:sizeDomain";
+        private const string KeySizeMinHeight = "effectlib:sizeMinHeight";
+        private const string KeySizeMaxHeight = "effectlib:sizeMaxHeight";
+
+        // The domain assumed to own a size change whose owner was not recorded.
         private const string LegacyDomain = "alchemy";
 
         private static float ResolveBaseHeight(EntityPlayer entity)
@@ -62,19 +64,19 @@ namespace EffectLib
             );
         }
 
-        public static bool CanApplySizeChange(EntityPlayer entity, float delta)
+        public static bool CanApplySizeChange(EntityPlayer entity, float sizeDelta)
         {
             if (!EffectPolicy.IsAllowed(EffectCapability.Resize))
                 return false;
-            if (Math.Abs(delta) <= float.Epsilon)
+            if (Math.Abs(sizeDelta) <= float.Epsilon)
                 return false;
 
-            float currentIntent = entity.WatchedAttributes.GetFloat(KeySizeDelta, 0f);
+            float currentIntent = entity.WatchedAttributes.GetFloat(SizeDeltaAttr, 0f);
             float baseHeight = ResolveBaseHeight(entity);
             (float min, float max) = StoredSizeBounds(entity);
             float currentHeight = GameMath.Clamp(baseHeight + currentIntent, min, max);
 
-            return delta > 0 ? currentHeight < max - 0.001f : currentHeight > min + 0.001f;
+            return sizeDelta > 0 ? currentHeight < max - 0.001f : currentHeight > min + 0.001f;
         }
 
         /// <summary>
@@ -85,14 +87,14 @@ namespace EffectLib
         /// </summary>
         public static bool ApplySizeChange(EntityPlayer entity, EffectContext ctx, string domain)
         {
-            float delta = ctx.SizeChange;
-            if (!CanApplySizeChange(entity, delta))
+            float sizeDelta = ctx.SizeChange;
+            if (!CanApplySizeChange(entity, sizeDelta))
                 return false;
 
             // On first application snapshot the player's actual current size, bounds and owning
             // domain, so race mods or other size-altering mods are respected and a later config
             // change does not retroactively affect a player already mid-effect.
-            float currentIntent = entity.WatchedAttributes.GetFloat(KeySizeDelta, 0f);
+            float currentIntent = entity.WatchedAttributes.GetFloat(SizeDeltaAttr, 0f);
             if (entity.WatchedAttributes.GetFloat(KeyBaseHeight, 0f) < 0.1f)
             {
                 float naturalHeight = entity.CollisionBox.Y2;
@@ -133,8 +135,8 @@ namespace EffectLib
                 );
             }
 
-            entity.WatchedAttributes.SetFloat(KeySizeDelta, currentIntent + delta);
-            entity.WatchedAttributes.MarkPathDirty(KeySizeDelta);
+            entity.WatchedAttributes.SetFloat(SizeDeltaAttr, currentIntent + sizeDelta);
+            entity.WatchedAttributes.MarkPathDirty(SizeDeltaAttr);
             return true;
         }
 
@@ -148,12 +150,12 @@ namespace EffectLib
 
         public static void ResetPlayerSize(EntityPlayer entity)
         {
-            float potionBaseHeight = entity.WatchedAttributes.GetFloat(KeyBaseHeight, 0f);
-            if (potionBaseHeight < 0.1f)
+            float baseHeight = entity.WatchedAttributes.GetFloat(KeyBaseHeight, 0f);
+            if (baseHeight < 0.1f)
                 return;
 
-            entity.WatchedAttributes.SetFloat(KeySizeDelta, 0f);
-            entity.WatchedAttributes.MarkPathDirty(KeySizeDelta);
+            entity.WatchedAttributes.SetFloat(SizeDeltaAttr, 0f);
+            entity.WatchedAttributes.MarkPathDirty(SizeDeltaAttr);
 
             if (PlayerModelLibPresent)
             {
@@ -166,11 +168,11 @@ namespace EffectLib
             }
 
             // Direct server-side reset for immediate physics; the client resets via ApplySizeToEntity.
-            entity.CollisionBox.Y2 = potionBaseHeight;
-            entity.SelectionBox.Y2 = potionBaseHeight;
+            entity.CollisionBox.Y2 = baseHeight;
+            entity.SelectionBox.Y2 = baseHeight;
             float baseEyeHeight = entity.WatchedAttributes.GetFloat(
                 KeyBaseEyeHeight,
-                potionBaseHeight * 0.9054f
+                baseHeight * 0.9054f
             );
             entity.Properties.EyeHeight = baseEyeHeight;
             if (entity.Properties.Client != null)
@@ -178,11 +180,11 @@ namespace EffectLib
                 float baseClientSize = entity.WatchedAttributes.GetFloat(KeyBaseClientSize, 1.0f);
                 entity.Properties.Client.Size = baseClientSize > 0.01f ? baseClientSize : 1.0f;
             }
-            entity.WatchedAttributes.MarkPathDirty(KeySizeDelta);
+            entity.WatchedAttributes.MarkPathDirty(SizeDeltaAttr);
         }
 
         /// <summary>
-        /// Zeroes potion size WatchedAttributes without touching the collision box. Use when the
+        /// Zeroes the size WatchedAttributes without touching the collision box. Use when the
         /// model changes externally (e.g. char select) so the new model keeps control of
         /// collision box dimensions.
         /// </summary>
@@ -190,10 +192,10 @@ namespace EffectLib
         {
             entity.WatchedAttributes.SetFloat(KeyBaseHeight, 0f);
             entity.WatchedAttributes.SetFloat(KeyBaseWidth, 0f);
-            entity.WatchedAttributes.SetFloat(KeySizeDelta, 0f);
+            entity.WatchedAttributes.SetFloat(SizeDeltaAttr, 0f);
             entity.WatchedAttributes.SetFloat(KeyBaseEntitySize, 0f);
             entity.WatchedAttributes.SetFloat(KeyBaseClientSize, 0f);
-            entity.WatchedAttributes.MarkPathDirty(KeySizeDelta);
+            entity.WatchedAttributes.MarkPathDirty(SizeDeltaAttr);
         }
 
         /// <summary>
@@ -208,14 +210,14 @@ namespace EffectLib
             if (baseHeight < 0.1f)
                 return;
 
-            float delta = entity.WatchedAttributes.GetFloat(KeySizeDelta, 0f);
+            float sizeDelta = entity.WatchedAttributes.GetFloat(SizeDeltaAttr, 0f);
             float baseEyeHeight = entity.WatchedAttributes.GetFloat(
                 KeyBaseEyeHeight,
                 baseHeight * 0.9054f
             );
 
             (float min, float max) = StoredSizeBounds(entity);
-            float newHeight = GameMath.Clamp(baseHeight + delta, min, max);
+            float newHeight = GameMath.Clamp(baseHeight + sizeDelta, min, max);
             float scale = newHeight / baseHeight;
 
             // Scale width proportionally from the snapshotted base width so both dimensions

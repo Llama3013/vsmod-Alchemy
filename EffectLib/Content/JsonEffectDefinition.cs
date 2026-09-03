@@ -47,10 +47,10 @@ namespace EffectLib
     {
         /// <summary>
         /// Every field a definition may set. Most are read by <see cref="Apply"/> into an
-        /// <see cref="EffectContext"/>; <c>channels</c> and <c>exclusivityGroup</c> are the two
-        /// exceptions - they describe the *registration*, not one application, so
-        /// <see cref="RegisterFrom"/> reads them directly into <see cref="EffectRegistry"/>
-        /// instead.
+        /// <see cref="EffectContext"/>; <c>channels</c>, <c>exclusivityGroup</c> and
+        /// <c>hudIcon</c> (an explicit HUD icon asset path) describe the *registration*, not one
+        /// application, so <see cref="RegisterFrom"/> reads them directly into
+        /// <see cref="EffectRegistry"/> instead.
         /// </summary>
         public static readonly string[] Fields =
         [
@@ -110,7 +110,11 @@ namespace EffectLib
                 return;
 
             ctx.ResetsEffects = def["resetsEffects"].AsBool();
+            // A negative duration (by convention -1) means "endless" - runs until the player
+            // dies or it is removed. 0, or an absent key, is a one-shot.
             ctx.Duration = def["duration"].AsInt();
+            if (ctx.Duration < 0)
+                ctx.Duration = EffectContext.EndlessDuration;
             ctx.RepeatSec = def["repeatSec"].AsFloat();
 
             string[] resetDomains = def["resetDomains"].AsArray<string>(null);
@@ -187,13 +191,19 @@ namespace EffectLib
             string[] channels = def["channels"].AsArray<string>(null);
             string exclusivityGroup = def["exclusivityGroup"].AsString();
 
+            string hudIcon = def["hudIcon"].AsString();
+            AssetLocation iconTexture = string.IsNullOrWhiteSpace(hudIcon)
+                ? null
+                : AssetLocation.Create(hudIcon, string.IsNullOrWhiteSpace(domain) ? EffectRegistry.DefaultDomain : domain);
+
             EffectRegistry.Register(
                 effectId,
                 ctx => Apply(ctx, definition),
                 domain,
                 iconSource,
                 channels,
-                exclusivityGroup
+                exclusivityGroup,
+                iconTexture
             );
         }
 

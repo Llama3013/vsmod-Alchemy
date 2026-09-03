@@ -15,7 +15,7 @@ namespace EffectLib
         [HarmonyPostfix]
         public static void Postfix(BlockEntityBarrel __instance)
         {
-            if (!CoatingPolicy.AllowCoating() || !BarrelCoatingConfig.AllowBarrelCoating())
+            if (!CoatingPolicy.AllowCoating() || !CoatingPolicy.AllowBarrelCoating())
                 return;
 
             ICoreAPI api = __instance.Api;

@@ -8,8 +8,8 @@ using Vintagestory.GameContent;
 namespace EffectLib
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
-    // Delivers a coated projectile's effect on impact - see CoatedEffects for why this
-    // deliberately only ever finds something for a legacy-stored coating.
+    // Delivers a coated projectile's effect on impact. Stack-stored coatings only; Combat
+    // Overhaul projectiles deliver their own.
     [HarmonyPatch(typeof(EntityProjectileBase), "ImpactOnEntity")]
     internal static class ProjectileImpactCoatPatch
     {
@@ -54,7 +54,7 @@ namespace EffectLib
 
             ITreeAttribute attrs = __instance.ProjectileStack?.Attributes;
             if (attrs != null)
-                CoatedEffects.ClearLegacyCoat(attrs);
+                CoatedEffects.ClearStackCoat(attrs);
         }
     }
 }

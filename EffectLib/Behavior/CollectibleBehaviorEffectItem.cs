@@ -41,7 +41,7 @@ namespace EffectLib
         protected string sound;
         private float consumeTime;
 
-        private string defaultEffectId;
+        private string ownEffectId;
         private IProgressBar progressBarRender;
 
         /// <summary>The API captured in <see cref="OnLoaded"/>, available to subclasses.</summary>
@@ -92,20 +92,22 @@ namespace EffectLib
                 return;
             }
 
-            defaultEffectId = def[idField].AsString()?.ToLowerInvariant();
-            if (string.IsNullOrWhiteSpace(defaultEffectId))
+            ownEffectId = def[idField].AsString()?.ToLowerInvariant();
+            if (string.IsNullOrWhiteSpace(ownEffectId))
             {
                 Api.Logger.Warning(
-                    "[EffectLib] {0}'s '{1}' has no {2}, so it will do nothing.",
+                    "[EffectLib] {0}'s '{1}' attribute has no '{2}' - give it one, e.g. "
+                        + "\"{1}\": {{ \"{2}\": \"{3}:youreffectid\", ... }}. This item will do nothing.",
                     collObj.Code,
                     attributeKey,
-                    idField
+                    idField,
+                    collObj.Code.Domain
                 );
-                defaultEffectId = null;
+                ownEffectId = null;
                 return;
             }
 
-            JsonEffectDefinition.RegisterFrom(defaultEffectId, collObj.Code.Domain, def, collObj.Code);
+            JsonEffectDefinition.RegisterFrom(ownEffectId, collObj.Code.Domain, def, collObj.Code);
         }
 
         // ----- Extension points - override these, not the interact handlers below -----
@@ -122,8 +124,9 @@ namespace EffectLib
         ) => true;
 
         /// <summary>
-        /// Resolves what to grant and at what potency for one use. Default is the id captured
-        /// by <see cref="RegisterOwnEffect"/> at potency 1. Override to read a different source
+        /// Resolves what to grant and at what potency for one use. The base implementation
+        /// returns the id this item declared on its own attribute (see
+        /// <see cref="RegisterOwnEffect"/>) at potency 1. Override to read a different source
         /// (a liquid container's content, a strength tier read off the item).
         /// <paramref name="byEntity"/> is null when resolving for a tooltip - the game does not
         /// give <see cref="GetHeldItemInfo"/> an entity - so do not dereference it unconditionally.
@@ -135,7 +138,7 @@ namespace EffectLib
             out float potencyMul
         )
         {
-            effectId = defaultEffectId;
+            effectId = ownEffectId;
             potencyMul = 1f;
             return effectId != null;
         }
@@ -174,7 +177,7 @@ namespace EffectLib
             if (byEntity is not EntityPlayer player)
                 return false;
 
-            EffectManager manager = EntityBehaviorEffects.ManagerFor(player);
+            EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(player);
             return manager != null
                 && manager.TryApply(effectId, ctx, EffectLang.Name(effectId));
         }
@@ -463,7 +466,9 @@ namespace EffectLib
             if (ctx.ResetsEffects)
                 dsc.AppendLine(Lang.Get("effectlib:purge"));
 
-            if (ctx.Duration > 0)
+            if (ctx.IsEndless)
+                dsc.AppendLine(Lang.Get("effectlib:duration-endless"));
+            else if (ctx.Duration > 0)
                 dsc.AppendLine(Lang.Get("effectlib:duration", ctx.Duration));
         }
     }

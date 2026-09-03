@@ -76,8 +76,7 @@ namespace Alchemy
 
         // Runs on every Start rather than once. The game creates a ModSystem per side and can
         // recreate them on a world reload, so a one-shot guard here would leave EffectLib
-        // pointed at a stale gate or HUD provider for the rest of the process. Both calls
-        // below are idempotent.
+        // pointed at a stale gate for the rest of the process. Both calls below are idempotent.
         private static void RegisterWithEffectLib(ICoreAPI api)
         {
             // EffectLib ships no config of its own, so point its capability gate at ours.
@@ -97,10 +96,8 @@ namespace Alchemy
             );
 
             // Recall, reshape, nutrition, temporal and resizing are carried out by EffectLib's
-            // own built-in handler now - nothing to register here for them.
-
-            // Feeds the shared HUD Alchemy's grow/shrink row and potion icons.
-            EffectHud.Register(AlchemyHudProvider.Instance);
+            // own built-in handler now - nothing to register here for them. The HUD provider is
+            // client-only, registered from StartClientSide instead.
 
             RegisterCoatingWithEffectLib(api);
         }
@@ -108,38 +105,47 @@ namespace Alchemy
         // Same idempotency note as RegisterWithEffectLib above.
         private static void RegisterCoatingWithEffectLib(ICoreAPI api)
         {
-            CoatingPolicy.AllowCoating = () => AlchemyConfig.Loaded.AllowWeaponCoating;
-            CoatingPolicy.MaxCharges = () => AlchemyConfig.Loaded.WeaponCoatCharges;
-            CoatingPolicy.EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier;
-            CoatingPolicy.IsCoatableWeapon = col => PotionConsumableLogic.HasWeaponTag(api, col);
-            CoatingPolicy.IsCoatableProjectile = PotionConsumableLogic.IsCoatableProjectile;
-            CoatingPolicy.IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed;
-            CoatingPolicy.ResolveLiquidEffect = stack =>
-                PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul)
-                    ? (id, mul)
-                    : null;
+            CoatingPolicy.Configure(
+                new CoatingConfig
+                {
+                    AllowCoating = () => AlchemyConfig.Loaded.AllowWeaponCoating,
+                    MaxCharges = () => AlchemyConfig.Loaded.WeaponCoatCharges,
+                    EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier,
+                    IsCoatableWeapon = col => PotionConsumableLogic.HasWeaponTag(api, col),
+                    IsCoatableProjectile = PotionConsumableLogic.IsCoatableProjectile,
+                    IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed,
+                    ResolveLiquidEffect = stack =>
+                        PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul)
+                            ? (id, mul)
+                            : null,
 
-            // Drinking-style side effects and exclusivity groups apply to a coated hit too.
-            CoatingPolicy.ApplySideEffects = (potionId, entity, mul) =>
-                PotionConsumableLogic.ApplySideEffects(entity, potionId, mul);
-            CoatingPolicy.GetBlockReason = (potionId, player, ctx) =>
-                PotionConsumableLogic.GetCoatingBlockReason(player, potionId, ctx);
+                    // Drinking-style side effects and exclusivity groups apply to a coated hit too.
+                    ApplySideEffects = (potionId, entity, mul) =>
+                        PotionConsumableLogic.ApplySideEffects(entity, potionId, mul),
+                    GetBlockReason = (potionId, player, ctx) =>
+                        PotionConsumableLogic.GetCoatingBlockReason(player, potionId, ctx),
 
-            BarrelCoatingConfig.AllowBarrelCoating = () => AlchemyConfig.Loaded.AllowBarrelCoating;
-            BarrelCoatingConfig.ConsumeLitres = () => AlchemyConfig.Loaded.WeaponCoatConsumeLitres;
-            BarrelCoatingConfig.CheckLitres = () => AlchemyConfig.Loaded.WeaponCoatCheckLitres;
+                    AllowBarrelCoating = () => AlchemyConfig.Loaded.AllowBarrelCoating,
+                    BarrelConsumeLitres = () => AlchemyConfig.Loaded.WeaponCoatConsumeLitres,
+                    BarrelCheckLitres = () => AlchemyConfig.Loaded.WeaponCoatCheckLitres,
 
-            // Combat Overhaul-managed weapons/arrows keep their coating in its own weapon-buff
-            // storage instead, so its own on-hit logic (not EffectLib's) delivers the effect.
-            CoatingPolicy.UsesAlternateWeaponStorage = CombatOverhaulCompat.ShouldUseBuffStorage;
-            CoatingPolicy.UsesAlternateProjectileStorage =
-                CombatOverhaulCompat.ShouldUseProjectileBuffStorage;
-            CoatingPolicy.TryReadAlternateWeapon = stack =>
-                CombatOverhaulCompat.TryGetCoating(stack, out string id, out string code, out float mul, out int charges)
-                    ? (id, code, mul, charges)
-                    : null;
-            CoatingPolicy.WriteAlternateWeapon = CombatOverhaulCompat.SetCoating;
-            CoatingPolicy.WriteAlternateProjectile = CombatOverhaulCompat.SetProjectileCoating;
+                    CombatOverhaulManagesWeapon = CombatOverhaulCompat.ShouldUseBuffStorage,
+                    CombatOverhaulManagesProjectile =
+                        CombatOverhaulCompat.ShouldUseProjectileBuffStorage,
+                    ReadCombatOverhaulCoat = stack =>
+                        CombatOverhaulCompat.TryGetCoating(
+                            stack,
+                            out string id,
+                            out string code,
+                            out float mul,
+                            out int charges
+                        )
+                            ? (id, code, mul, charges)
+                            : null,
+                    WriteCombatOverhaulWeaponCoat = CombatOverhaulCompat.SetCoating,
+                    WriteCombatOverhaulProjectileCoat = CombatOverhaulCompat.SetProjectileCoating,
+                }
+            );
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -246,10 +252,10 @@ namespace Alchemy
 
         public override void StartClientSide(ICoreClientAPI api)
         {
-            // Size resync and the CanClimbAnywhere mirror are EffectLib's own concern now -
-            // handled by EffectLibMod.StartClientSide for every mod built on it, not just this one.
-            // JSON-defined potions register themselves too, via PotionConsumableBehavior's own
-            // OnLoaded (EffectLib's generic self-registration) - nothing to scan here either.
+            // The effect HUD (grow/shrink row and potion icons included) is entirely EffectLib's
+            // now - nothing to register. Size resync and the CanClimbAnywhere mirror are handled
+            // by EffectLibMod.StartClientSide. JSON-defined potions register themselves via
+            // PotionConsumableBehavior's OnLoaded - nothing to scan here either.
             api.Network
                 .GetChannel(ConfigSyncChannelName)
                 .SetMessageHandler<AlchemyConfigSyncPacket>(packet =>

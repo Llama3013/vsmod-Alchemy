@@ -10,8 +10,8 @@ namespace EffectLib
     /// <summary>
     /// Tooltip for a weapon or arrow currently carrying a coating - add
     /// <c>{ "name": "Coatable" }</c> to a collectible's <c>behaviors</c> to show it. Reads the
-    /// same legacy storage the on-hit patches do; a coating kept in an alternate (e.g. buff
-    /// system) store shows its own tooltip through that system instead.
+    /// coating off the stack, like the on-hit patches; a coating kept in a combat mod's own
+    /// buff store shows its tooltip through that mod instead.
     /// </summary>
     public class CollectibleBehaviorCoatable(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {

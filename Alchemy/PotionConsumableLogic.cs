@@ -91,7 +91,7 @@ namespace Alchemy
         // scanning attribute names.
         internal static HashSet<string> GetActivePotionIds(EntityPlayer player)
         {
-            EffectManager manager = player?.GetBehavior<EntityBehaviorEffects>()?.Manager;
+            EffectManager manager = player?.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager;
             return manager == null
                 ? new(StringComparer.OrdinalIgnoreCase)
                 : new(manager.ActiveIds, StringComparer.OrdinalIgnoreCase);
@@ -312,7 +312,7 @@ namespace Alchemy
             if (byEntity is not EntityPlayer player)
                 return false;
 
-            EffectManager manager = player.GetBehavior<EntityBehaviorEffects>()?.Manager;
+            EffectManager manager = player.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager;
 
             if (manager?.CanRefresh(potionId) == true)
                 return false;
@@ -328,7 +328,7 @@ namespace Alchemy
             if (byEntity is not EntityPlayer player)
                 return false;
 
-            return player.GetBehavior<EntityBehaviorEffects>()?.Manager.HasAnyActive == true;
+            return player.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager.HasAnyActive == true;
         }
 
         // A lang key naming why this potion should be refused, or null to allow it. Shared by
@@ -392,7 +392,7 @@ namespace Alchemy
             )
                 return false;
 
-            EntityBehaviorEffects behavior = playerEntity.GetBehavior<EntityBehaviorEffects>();
+            EntityBehaviorPlayerEffects behavior = playerEntity.GetBehavior<EntityBehaviorPlayerEffects>();
             if (behavior == null)
                 return false;
 
@@ -647,7 +647,9 @@ namespace Alchemy
                 dsc.AppendLine(Lang.Get("alchemy:potion-health-effect", Math.Round(ctx.Health, 2)));
             if (ctx.TickSec != 0)
                 dsc.AppendLine(Lang.Get("alchemy:potion-tick-duration", ctx.TickSec));
-            if (ctx.Duration != 0)
+            if (ctx.IsEndless)
+                dsc.AppendLine(Lang.Get("effectlib:duration-endless"));
+            else if (ctx.Duration != 0)
                 dsc.AppendLine(Lang.Get("alchemy:potion-duration", ctx.Duration));
 
             (float sideDamage, float sideIntox, float sidePsych, float sideSatLoss) =

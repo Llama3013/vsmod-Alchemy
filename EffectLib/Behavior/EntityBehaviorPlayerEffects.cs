@@ -9,9 +9,9 @@ namespace EffectLib
     /// Hosts the <see cref="EffectManager"/> for a player. Added programmatically once the
     /// player is ready, not through entity JSON.
     /// </summary>
-    public class EntityBehaviorEffects : EntityBehavior
+    public class EntityBehaviorPlayerEffects : EntityBehavior
     {
-        public EntityBehaviorEffects(Entity entity)
+        public EntityBehaviorPlayerEffects(Entity entity)
             : base(entity)
         {
             if (entity is EntityPlayer ep && entity.World.Side == EnumAppSide.Server)
@@ -23,7 +23,7 @@ namespace EffectLib
         /// <summary>The player's effect manager, or null on the client.</summary>
         public EffectManager Manager { get; private set; }
 
-        public override string PropertyName() => "effectlibEffects";
+        public override string PropertyName() => "effectlibPlayerEffects";
 
         /// <summary>
         /// Returns the manager for <paramref name="entity"/>, adding the behavior if it is not
@@ -34,10 +34,10 @@ namespace EffectLib
             if (entity?.Properties == null)
                 return null;
 
-            if (!entity.HasBehavior<EntityBehaviorEffects>())
-                entity.AddBehavior(new EntityBehaviorEffects(entity));
+            if (!entity.HasBehavior<EntityBehaviorPlayerEffects>())
+                entity.AddBehavior(new EntityBehaviorPlayerEffects(entity));
 
-            return entity.GetBehavior<EntityBehaviorEffects>()?.Manager;
+            return entity.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager;
         }
     }
 }
