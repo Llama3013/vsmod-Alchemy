@@ -7,30 +7,20 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Storage for a coating carried on an item stack, and the dispatch that applies it to
-    /// whatever gets hit. See <see cref="CoatingPolicy"/> for how a mod configures this, and
-    /// <see cref="CoatingInteraction"/>/<see cref="BarrelCoating"/> for how a coating gets onto
-    /// the item stack in the first place.
-    /// </summary>
     public static class CoatedEffects
     {
-        // Kept as the Alchemy 2.x names for save compatibility - these live on the item stack's
-        // own attributes, not a player's, so they persist in inventories across the split.
         public const string KeyEffectId = "coatedPotionId";
         public const string KeyItemCode = "coatedItemCode";
         public const string KeyMultiplier = "coatMultiplier";
         public const string KeyCharges = "coatCharges";
 
-        /// <summary>A lang key or literal name for a coating's source item, for tooltips and messages.</summary>
         public static string ResolveDisplayName(string itemCodeOrLangKey, string fallback) =>
             string.IsNullOrEmpty(itemCodeOrLangKey) ? fallback : Lang.Get(itemCodeOrLangKey);
 
-        /// <summary>The generic "domain:item-path" / "domain:block-path" convention Vintage Story itself uses for names.</summary>
         public static string DefaultItemCode(CollectibleObject col)
         {
             if (col?.Code == null)
@@ -38,9 +28,6 @@ namespace EffectLib
             string typePrefix = col is Block ? "block" : "item";
             return $"{col.Code.Domain}:{typePrefix}-{col.Code.Path}";
         }
-
-        // ----- Read/write a coating: Combat Overhaul's buff store when it owns the weapon,
-        // otherwise the item stack's attributes. -----
 
         public static void ReadWeaponCoat(
             ItemStack stack,
@@ -112,9 +99,6 @@ namespace EffectLib
             attrs.SetFloat(KeyMultiplier, multiplier);
         }
 
-        // ----- On-hit consumption of a stack-stored coating. Combat Overhaul coatings are not
-        // touched here - it delivers those from its own on-hit code. -----
-
         internal static void ClearStackCoat(ITreeAttribute attrs)
         {
             attrs.RemoveAttribute(KeyEffectId);
@@ -123,10 +107,6 @@ namespace EffectLib
             attrs.RemoveAttribute(KeyCharges);
         }
 
-        /// <summary>
-        /// Consumes one charge of a stack-stored weapon coating on hit, if any is present.
-        /// Returns what to apply, or null if there was nothing to consume.
-        /// </summary>
         internal static (string EffectId, float Multiplier, string ItemCode)? TryConsumeWeaponCharge(
             ItemSlot slot
         )
@@ -144,8 +124,6 @@ namespace EffectLib
                 return null;
             }
 
-            // Left untouched (not decremented, not cleared) when the effect is currently
-            // disallowed, so re-enabling it later leaves the charge available again.
             if (!CoatingPolicy.IsEffectCoatable(effectId))
                 return null;
 
@@ -162,7 +140,6 @@ namespace EffectLib
             return (effectId, multiplier, itemCode);
         }
 
-        /// <summary>Consumes a stack-stored projectile coating on impact, if any is present.</summary>
         internal static (string EffectId, float Multiplier, string ItemCode)? TryConsumeProjectileCoat(
             ItemStack projectileStack
         )
@@ -172,7 +149,6 @@ namespace EffectLib
             if (string.IsNullOrEmpty(effectId))
                 return null;
 
-            // Left untouched when the effect is currently disallowed, matching TryConsumeWeaponCharge.
             if (!CoatingPolicy.IsEffectCoatable(effectId))
                 return null;
 
@@ -183,14 +159,6 @@ namespace EffectLib
             return (effectId, multiplier, itemCode);
         }
 
-        // ----- Applying a coating's effect to whatever got hit -----
-
-        /// <summary>
-        /// Applies a coated effect to <paramref name="entity"/>. Players go through the same
-        /// <see cref="EffectManager"/> a consumed potion would; other entities get the closest
-        /// generic approximation (instant/ticking health, timed stat modifiers), since they have
-        /// no effect manager of their own.
-        /// </summary>
         public static void Apply(string effectId, Entity entity, float multiplier, string displayName)
         {
             if (entity == null || !entity.Alive)

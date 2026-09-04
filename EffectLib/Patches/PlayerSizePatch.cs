@@ -2,13 +2,10 @@ using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Keeps the player's collision box, eye height and visual scale in sync with the size
-    // WatchedAttributes UtilityEffects writes. Runs on both server and client via
-    // WatchedAttributes sync.
     [HarmonyPatch(typeof(Entity), "Initialize")]
     internal static class PlayerSizePatch
     {

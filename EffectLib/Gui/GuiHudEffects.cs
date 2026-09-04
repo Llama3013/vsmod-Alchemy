@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Vintagestory.API.Client;
@@ -7,15 +7,10 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Shows every running effect as an icon row with countdowns, or as a single compact
-    /// badge with a tooltip. Driven by the persisted effect tree, plus a built-in row for an
-    /// active grow/shrink (which is a size state, not a tracked effect).
-    /// </summary>
     public class GuiHudEffects : HudElement
     {
         private sealed class TrackedEffect
@@ -39,8 +34,6 @@ namespace EffectLib
         public override string ToggleKeyCombinationCode => HotkeyToggle;
         public override bool Focusable => false;
 
-        // Hotkey codes and client setting keys predate EffectLib and are kept verbatim so
-        // players upgrading from Alchemy 2.x keep their keybinds and HUD placement.
         public const string HotkeyToggle = "togglepotionhud";
         public const string HotkeyMove = "movepotionhud";
         public const string HotkeyStyle = "stylepotionhud";
@@ -49,9 +42,6 @@ namespace EffectLib
         public const string SettingEnabled = "alchemyHudEnabled";
         public const string SettingAutoEnabled = "alchemyHudAutoEnabled";
 
-        // Icons (a hudIcon texture, or grown/shrunk below) are blitted into this many px, which
-        // GUI scale can roughly double or triple. Author them square, transparent, 128x128
-        // (anything >= 64 is fine); pixel-art item-texture sizes like 32 will look soft.
         private const int IconSize = 40;
         private const int IconPad = 4;
         private const int TimerHeight = 20;
@@ -61,8 +51,6 @@ namespace EffectLib
             "effectlib:textures/hud/activeeffecthud.png"
         );
 
-        // Synthetic row ids for an active grow/shrink - not real effect ids, never in the tree.
-        // Icons: effectlib:textures/hud/effects/grown.png / shrunk.png.
         private const string GrownRowId = "effectlib:grown";
         private const string ShrunkRowId = "effectlib:shrunk";
 
@@ -147,7 +135,6 @@ namespace EffectLib
             List<string> removed = null;
             foreach (KeyValuePair<string, TrackedEffect> pair in tracked)
             {
-                // Synthetic rows are added and removed by SyncSizeRow itself.
                 if (pair.Value.Synthetic)
                     continue;
                 if (tree?.HasAttribute(pair.Key) != true)
@@ -165,7 +152,6 @@ namespace EffectLib
             UpdateTimerListener();
         }
 
-        // Adds, updates or removes the built-in grow/shrink row from the player's size delta.
         private void SyncSizeRow(EntityPlayer entity, ref bool changed)
         {
             float sizeDelta = entity.WatchedAttributes.GetFloat(UtilityEffects.SizeDeltaAttr, 0f);
@@ -309,8 +295,6 @@ namespace EffectLib
                 return;
             effect.IconResolved = true;
 
-            // 1. The grow/shrink row uses EffectLib's own icons, if shipped.
-            // 2. An explicit texture the effect declared (JSON hudIcon / Register iconTexture).
             AssetLocation texLoc = effect.Synthetic
                 ? new AssetLocation(
                     EffectRegistry.DefaultDomain,
@@ -324,8 +308,6 @@ namespace EffectLib
                 return;
             }
 
-            // 3. The collectible the effect was registered from, then a scan for whatever item
-            //    carries this effect id - so a code-registered effect still shows its item.
             ItemStack stack =
                 StackFor(EffectRegistry.IconSourceOf(effect.Id)) ?? StackForEffectItem(effect.Id);
             if (stack != null)
@@ -345,8 +327,6 @@ namespace EffectLib
             return block == null ? null : new ItemStack(block);
         }
 
-        // The first collectible whose "effectinfo" attribute names this effect id - the flask,
-        // wand or herb it comes from. Built once, since collectibles do not change in a session.
         private ItemStack StackForEffectItem(string effectId)
         {
             if (iconStacks == null)
@@ -477,7 +457,6 @@ namespace EffectLib
         {
             long now = ClientNowMs;
             StringBuilder sb = new();
-            // Header uses the first row's domain so a single-mod HUD keeps that mod's wording.
             string headerDomain =
                 ordered.Count > 0
                     ? EffectRegistry.DomainOf(ordered[0].Id)
@@ -666,10 +645,10 @@ namespace EffectLib
             RebuildComposer();
         }
 
-#pragma warning disable CA1816 // Dispose methods should call SuppressFinalize
+#pragma warning disable CA1816
 
         public override void Dispose()
-#pragma warning restore CA1816 // Dispose methods should call SuppressFinalize
+#pragma warning restore CA1816
 
         {
             if (timerListenerId != 0)

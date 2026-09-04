@@ -1,19 +1,11 @@
-﻿using Vintagestory.API.Common;
+using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Liquid-container sibling of <see cref="CollectibleBehaviorEffectItem"/>: reads and
-    /// applies the effect declared on whatever a <see cref="BlockLiquidContainerBase"/>
-    /// currently holds, instead of a fixed attribute on this item itself. Everything else -
-    /// the hold flow, progress bar, tooltip and effect application - is inherited unchanged.
-    /// Add <c>{ "name": "EffectLiquid" }</c> to a liquid container's <c>behaviors</c> and its
-    /// content items carry the <c>effectinfo</c> attribute instead of the container.
-    /// </summary>
     public class CollectibleBehaviorEffectLiquid(CollectibleObject collObj)
         : CollectibleBehaviorEffectItem(collObj)
     {
@@ -27,9 +19,6 @@ namespace EffectLib
             checkLitres = properties["checkLitres"].AsFloat(0.25f);
         }
 
-        // What this container holds varies per use, so there is nothing fixed to register once
-        // at load - TryResolveEffect below resolves (and registers, the first time it sees each
-        // content item) on demand instead.
         protected override void RegisterOwnEffect() { }
 
         protected override bool TryResolveEffect(

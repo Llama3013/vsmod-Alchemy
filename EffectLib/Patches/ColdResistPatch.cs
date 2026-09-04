@@ -1,12 +1,10 @@
 using HarmonyLib;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Makes EffectContext.ColdResist (EffectAttr.ColdResist) actually stop the player getting
-    // cold, by clamping their body temperature reading to normal.
     [HarmonyPatch(typeof(EntityBehaviorBodyTemperature), "CurBodyTemperature", MethodType.Getter)]
     internal static class ColdResistPatch
     {

@@ -4,12 +4,10 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Delivers a coated projectile's effect on impact. Stack-stored coatings only; Combat
-    // Overhaul projectiles deliver their own.
     [HarmonyPatch(typeof(EntityProjectileBase), "ImpactOnEntity")]
     internal static class ProjectileImpactCoatPatch
     {
@@ -39,8 +37,6 @@ namespace EffectLib
         }
     }
 
-    // A coated projectile that misses and lands in terrain loses its coating rather than
-    // keeping it indefinitely.
     [HarmonyPatch(typeof(EntityProjectile), "OnCollided")]
     internal static class ProjectileTerrainCoatPatch
     {

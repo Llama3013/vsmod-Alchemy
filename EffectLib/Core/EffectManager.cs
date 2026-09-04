@@ -8,10 +8,6 @@ using Vintagestory.API.Server;
 
 namespace EffectLib
 {
-    /// <summary>
-    /// WatchedAttributes keys that <see cref="EffectManager"/> writes. Harmony patches and
-    /// client-side code in any mod may read these to react to an active capability.
-    /// </summary>
     public static class EffectAttr
     {
         public const string WaterBreathe = "effectlib:waterBreathe";
@@ -22,28 +18,16 @@ namespace EffectLib
         public const string NoGravity = "effectlib:noGravity";
     }
 
-    /// <summary>
-    /// Tracks the effects running on one player: applies them, expires them, persists them
-    /// across disconnects and keeps the derived entity properties in sync.
-    /// Server side only - obtained via <see cref="EntityBehaviorPlayerEffects.Manager"/>.
-    /// </summary>
     public sealed class EffectManager(EntityPlayer entity)
     {
-        // Persisted under this key on the player. Kept as "alchemyEffects" for save
-        // compatibility with Alchemy 2.x, which stored effects here before EffectLib existed.
         public const string PersistKey = "alchemyEffects";
 
         private readonly EntityPlayer entity = entity;
         private readonly ICoreAPI api = entity.Api;
         private readonly Dictionary<string, ActiveEffect> active = [];
 
-        // Instant effects never enter 'active' or the saved tree, so a short in-memory lock is
-        // what stops a single use being consumed twice. Server side only, never persisted.
         private readonly HashSet<string> pendingInstant = [];
 
-        // Every entity-property capability is restored from a baseline captured the first time
-        // it is touched, so RefreshEffectState can be re-run at any point (apply, remove, resume)
-        // without drifting. Never mutate these properties outside a Sync* method.
         private float? baselineFallDamageMultiplier;
         private bool? baselineFallDamage;
         private bool? baselineCanClimbAnywhere;
@@ -58,10 +42,8 @@ namespace EffectLib
 
         public bool HasAnyActive => active.Count > 0;
 
-        /// <summary>Ids of every effect currently running, for callers that want to inspect state.</summary>
         public IReadOnlyCollection<string> ActiveIds => active.Keys;
 
-        /// <summary>Snapshot of what is running, for commands and other read-only inspection.</summary>
         public List<ActiveEffectInfo> GetActiveEffects()
         {
             long nowMs = entity.World.ElapsedMilliseconds;
@@ -84,11 +66,6 @@ namespace EffectLib
             ];
         }
 
-        /// <summary>
-        /// Whether re-applying <paramref name="id"/> should restart it. Ticking health effects
-        /// are never refreshed, because the vanilla health system owns their remaining ticks
-        /// and restarting would stack a second damage-over-time on top.
-        /// </summary>
         public bool CanRefresh(string id) =>
             EffectPolicy.IsAllowed(EffectCapability.Refresh)
             && active.TryGetValue(id, out ActiveEffect activeEffect)
@@ -120,20 +97,13 @@ namespace EffectLib
                 AppliedEffect effect = new(id, ctx);
                 effect.Apply(entity, resume);
 
-                // One-shot side effects belong to the owning mod, and must not fire again when
-                // an effect is resumed from a save.
                 if (!resume)
                 {
                     EffectHandlers.Applied(entity, id, ctx, api.Logger);
                 }
 
-                // Continuous capabilities (fly, climb, fall, knockback, weight, gravity, glow...)
-                // are not applied here - RefreshEffectState below recomputes them from every
-                // active effect at once, which keeps stacking and removal symmetric.
-
                 if (effect.Context.Duration == 0)
                 {
-                    // Instant effect: hold a brief lock so a single use cannot be consumed twice.
                     pendingInstant.Add(id);
                     entity.World.RegisterCallback(dt => pendingInstant.Remove(id), 500);
                     return true;
@@ -148,8 +118,6 @@ namespace EffectLib
 
                 if (endless && tickingHealth)
                 {
-                    // An endless damage/heal over time: the engine's ticking damage source needs
-                    // a finite window, so drive it ourselves, one health tick per interval.
                     ticking = true;
                     handle = entity.World.RegisterGameTickListener(
                         _ => effect.ApplyHealthTick(entity),
@@ -158,7 +126,6 @@ namespace EffectLib
                 }
                 else if (effect.Context.RepeatSec > 0)
                 {
-                    // Repeating one-shots need a listener that re-fires and, unless endless, expires.
                     ticking = true;
                     handle = entity.World.RegisterGameTickListener(
                         _ => RepeatTick(id),
@@ -172,9 +139,6 @@ namespace EffectLib
                         effect.Context.Duration * 1000
                     );
                 }
-                // An endless continuous effect (fly, glow, a stat) needs no listener at all -
-                // it is reconciled by RefreshEffectState and only ever leaves on death, logout
-                // without retention, or an explicit removal.
 
                 active[id] = new ActiveEffect(effect, handle, ticking, name)
                 {
@@ -187,7 +151,6 @@ namespace EffectLib
             }
             catch (Exception err)
             {
-                // Probably don't need a try catch but will leave this here just in case
                 api.Logger.Error("Effect {0} could not be applied. An error occurred", id);
                 api.Logger.Error(err);
                 return false;
@@ -234,8 +197,6 @@ namespace EffectLib
             RefreshEffectState();
         }
 
-        // Fires the one-shot parts again for a repeating effect, and expires it once its
-        // duration is up. Only used when EffectContext.RepeatSec is set.
         private void RepeatTick(string id)
         {
             if (!active.TryGetValue(id, out ActiveEffect activeEffect))
@@ -257,11 +218,6 @@ namespace EffectLib
             EffectHandlers.Applied(entity, id, ctx, api.Logger);
         }
 
-        /// <summary>
-        /// Clears the effects <paramref name="scope"/> covers and tells handlers, so they can
-        /// undo lasting state for those domains too. Effects outside the scope keep running,
-        /// which is what stops one mod's purge from wiping another mod's effects.
-        /// </summary>
         public void Purge(EffectPurge scope)
         {
             scope ??= EffectPurge.Everything;
@@ -273,7 +229,6 @@ namespace EffectLib
 
             if (scope.IsEverything)
             {
-                // Nothing can be left behind, so drop the whole tree rather than record by record.
                 RemoveIfPresent(PersistKey);
                 pendingInstant.Clear();
             }
@@ -282,15 +237,8 @@ namespace EffectLib
             EffectHandlers.Cleared(entity, scope, api.Logger);
         }
 
-        /// <summary>Clears every effect from every mod. Used on death and on login/disconnect
-        /// when effects are not retained.</summary>
         public void ResetAll() => Purge(EffectPurge.Everything);
 
-        /// <summary>
-        /// Clears effects the way <paramref name="ctx"/> asks. Defaults to the domain that owns
-        /// <paramref name="effectId"/>, so a purging item only clears its own mod's effects
-        /// unless it names others.
-        /// </summary>
         public void PurgeFor(string effectId, EffectContext ctx)
         {
             IEnumerable<string> domains =
@@ -301,10 +249,6 @@ namespace EffectLib
             Purge(new EffectPurge(domains, ctx.ResetEffectIds));
         }
 
-        /// <summary>
-        /// Stops the running timers but keeps the persisted records, recording how much time
-        /// each effect has left. Used on disconnect so effects survive to the next login.
-        /// </summary>
         public void Suspend()
         {
             if (active.Count == 0)
@@ -325,8 +269,6 @@ namespace EffectLib
                         entity.World.UnregisterCallback(activeEffect.ListenerId);
                 }
 
-                // An endless effect is stored as such so it resumes endless, not clamped to a
-                // remaining time it never had.
                 int remainingSec = activeEffect.Effect.Context.IsEndless
                     ? EffectContext.EndlessDuration
                     : Math.Max(
@@ -345,7 +287,6 @@ namespace EffectLib
             RefreshEffectState();
         }
 
-        /// <summary>Restarts effects saved by <see cref="Suspend"/> (or left behind by a crash).</summary>
         public void RestoreEffects()
         {
             ITreeAttribute tree = entity.WatchedAttributes.GetTreeAttribute(PersistKey);
@@ -375,25 +316,18 @@ namespace EffectLib
                     }
                     else if (primitive)
                     {
-                        // A primitive carries nothing but id + potency through the registry, so
-                        // its length is whatever the save says - the builder's default is not it.
                         ctx.Duration = remainingSec;
                     }
                     else if (ctx.Duration <= 0)
                     {
-                        // A registered effect that no longer defines a duration for itself.
                         tree.RemoveAttribute(id);
                         continue;
                     }
                     else
                     {
-                        // Resume with the lesser of the saved remaining time and the duration the
-                        // effect currently defines, so a shortened config takes effect on resume.
                         ctx.Duration = Math.Min(remainingSec, ctx.Duration);
                     }
 
-                    // The repeat shape of a primitive (a DoT's interval and damage type) is not
-                    // reconstructible from its id, so it comes back from the record.
                     if (primitive)
                         RestoreRepeatShape(ctx, record);
 
@@ -412,8 +346,6 @@ namespace EffectLib
 
         private void CleanStaleState()
         {
-            // The saved tree is the only record of what is running, so anything in it that did
-            // not restart above is already gone by this point. Nothing else to reconcile.
             RemoveIfPresent(LegacyGlowStrength);
             CleanLegacyHandleKeys();
 
@@ -421,12 +353,6 @@ namespace EffectLib
             EffectHandlers.Restored(entity, api.Logger);
         }
 
-        /// <summary>
-        /// Deletes the flat per-effect keys Alchemy 2.x wrote alongside the effects tree. They
-        /// are no longer written, so this only ever finds something on the first login after
-        /// upgrading, and removing them is skipped entirely when there are none - a top-level
-        /// removal forces a full attribute resync on the client.
-        /// </summary>
         private void CleanLegacyHandleKeys()
         {
             List<string> legacy =
@@ -450,15 +376,8 @@ namespace EffectLib
                 );
         }
 
-        // Alchemy 2.x wrote the glow level to a bare "glowStrength" key. Clear it on login so
-        // an upgraded save does not leave players permanently glowing.
         private const string LegacyGlowStrength = "glowStrength";
 
-        /// <summary>
-        /// Recomputes every continuous capability from all active effects and writes the
-        /// result. Safe to call at any time - it is the only thing allowed to touch the
-        /// entity properties it owns.
-        /// </summary>
         private void RefreshEffectState()
         {
             bool allowFly = EffectPolicy.IsAllowed(EffectCapability.Fly);
@@ -490,10 +409,8 @@ namespace EffectLib
                 noGravity |= ctx.NoGravity && allowFly;
                 if (ctx.GlowStrength > glowStrength)
                     glowStrength = ctx.GlowStrength;
-                // Strongest wins rather than stacking, so two fall effects cannot overwrite baseline
                 if (allowFall && ctx.FallDamageReduction > fallDamageReduction)
                     fallDamageReduction = ctx.FallDamageReduction;
-                // These are offsets from the entity's baseline, so they do stack
                 knockbackResistance += ctx.KnockbackResistance;
                 if (allowClimb)
                     climbTouchDistance += ctx.ClimbTouchDistance;
@@ -533,8 +450,6 @@ namespace EffectLib
             );
         }
 
-        // Applies an additive offset on top of a baseline captured on first use, so repeated
-        // refreshes are idempotent and the baseline is restored once nothing requests an offset.
         private static void SyncOffset(
             ref float? baseline,
             float total,
@@ -685,8 +600,6 @@ namespace EffectLib
             if (ctx.CanFly)
                 record.SetBool("origFreeMove", baselineFreeMove ?? false);
 
-            // A registered effect rebuilds its own repeat shape from its builder on resume; a
-            // primitive has no builder state, so its repeat shape is persisted here.
             if (EffectPrimitives.IsPrimitiveId(id))
             {
                 if (ctx.RepeatSec > 0f)
@@ -700,8 +613,6 @@ namespace EffectLib
             entity.WatchedAttributes.MarkPathDirty(PersistKey);
         }
 
-        // Reapplies the interval/damage-type a repeating primitive was given, from its save
-        // record - the id alone cannot reconstruct it.
         private static void RestoreRepeatShape(EffectContext ctx, ITreeAttribute record)
         {
             float repeatSec = record.GetFloat("repeatSec");
@@ -720,7 +631,6 @@ namespace EffectLib
         }
     }
 
-    /// <summary>A running effect as seen from outside <see cref="EffectManager"/>.</summary>
     public sealed record ActiveEffectInfo(
         string Id,
         string DisplayName,

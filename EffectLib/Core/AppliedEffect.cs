@@ -5,11 +5,8 @@ using Vintagestory.GameContent;
 
 namespace EffectLib
 {
-    /// <summary>One running instance of an effect on one player.</summary>
     public sealed class AppliedEffect(string effectId, EffectContext ctx)
     {
-        // Stat modifier subkey. Kept as "potionmod-" for save compatibility with Alchemy 2.x -
-        // renaming it would orphan every stat modifier already stored on existing players.
         private string ModCode => "potionmod-" + EffectId;
 
         public readonly string EffectId = effectId;
@@ -37,7 +34,6 @@ namespace EffectLib
                 else
                     entity.Stats.Set(stat.Key, ModCode, stat.Value, false);
             }
-            // Health change is applied via vanilla health system which already continues after restart so it is skipped
             if (resume)
                 return;
 
@@ -45,9 +41,6 @@ namespace EffectLib
 
             if (tickingHealth && Context.IsEndless)
             {
-                // The engine's ticking damage source needs a finite duration to spread ticks
-                // across, so an endless damage/heal over time is driven by EffectManager calling
-                // ApplyHealthTick on a repeat listener instead. Nothing to apply here.
             }
             else if (tickingHealth)
             {
@@ -70,11 +63,6 @@ namespace EffectLib
             }
         }
 
-        /// <summary>
-        /// Applies one interval's worth of the health change. Used by <see cref="EffectManager"/>
-        /// to drive an endless damage- or heal-over-time, where the engine's finite ticking
-        /// damage source cannot be used.
-        /// </summary>
         public void ApplyHealthTick(EntityPlayer entity) => ApplyHealth(entity);
 
         public void Remove(EntityPlayer entity)

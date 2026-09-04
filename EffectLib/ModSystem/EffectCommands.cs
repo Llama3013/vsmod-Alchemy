@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -6,22 +6,16 @@ using System.Text;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Admin commands for inspecting and handing out effects. Covers both the individual
-    /// effects EffectLib understands and whole effects registered by any mod.
-    /// </summary>
     public class EffectCommands : ModSystem
     {
         private const int DefaultDurationSec = 600;
 
         private ICoreServerAPI sapi;
 
-        // After EffectLibMod and after content mods have registered their effects, so the
-        // suggestion lists are populated when the command is built.
         public override double ExecuteOrder() => 0.3;
 
         public override bool ShouldLoad(EnumAppSide side) => side == EnumAppSide.Server;
@@ -126,8 +120,6 @@ namespace EffectLib
         private static string[] PrimitiveSuggestions() =>
             [.. EffectPrimitives.All.Select(p => p.Name).OrderBy(n => n, StringComparer.Ordinal)];
 
-        // Snapshotted for tab-completion. Effects registered later still work, they just are
-        // not suggested.
         private static string[] RegisteredSuggestions() =>
             [
                 .. EffectRegistry
@@ -258,15 +250,12 @@ namespace EffectLib
                 ? EffectPrimitives.StatIdPrefix + name["stat:".Length..].ToLowerInvariant()
                 : EffectPrimitives.IdFor(primitive.Name);
 
-            // A capability the server has switched off applies as a no-op, which looks like the
-            // command failed. Say so rather than reporting a success that did nothing.
             if (primitive?.Capability != null && !EffectPolicy.IsAllowed(primitive.Capability))
                 return TextCommandResult.Error(
                     $"'{primitive.Name}' needs the '{primitive.Capability}' capability, which this "
                         + "server has disabled in its config, so it would have no effect."
                 );
 
-            // A repeating one-shot is no longer instant: it needs a duration to repeat within.
             bool instant = primitive?.Instant == true && interval <= 0f;
 
             return ApplyToTargets(
@@ -350,11 +339,6 @@ namespace EffectLib
         private const string DurationParseError =
             "Duration must be a whole number of seconds, or 'endless' for one that lasts until death.";
 
-        // Parses the optional duration argument shared by give/dot/apply:
-        //   not supplied                       -> null  (caller applies its own default)
-        //   endless / permanent / forever / -1 -> EffectContext.EndlessDuration
-        //   a whole number of seconds >= 0     -> that value
-        //   anything else                      -> returns false
         private static bool TryParseDuration(string arg, out int? seconds)
         {
             seconds = null;
@@ -385,10 +369,6 @@ namespace EffectLib
             return false;
         }
 
-        // durationOverride null keeps whatever duration the effect defines for itself;
-        // EffectContext.EndlessDuration makes it last until death; 0 is a one-shot.
-        // repeatSec > 0 turns a primitive into a repeating effect (a DoT, or a one-shot re-run
-        // on a timer); damageType only applies to a repeating health primitive.
         private TextCommandResult ApplyToTargets(
             TextCommandCallingArgs args,
             string playerArg,
@@ -432,8 +412,6 @@ namespace EffectLib
                 if (repeatSec > 0f)
                     EffectPrimitives.MakeRepeating(ctx, repeatSec, damageType);
 
-                // An admin asking for an effect should always get it, so clear any running
-                // instance first rather than letting the refresh policy reject it.
                 if (manager.IsActive(effectId))
                     manager.RemoveEffect(effectId, false);
 
@@ -506,7 +484,6 @@ namespace EffectLib
             )
                 return error;
 
-            // Accept either a full effect id or a bare individual-effect name.
             string effectId = effect;
             if (!string.IsNullOrEmpty(effect) && EffectPrimitives.Get(effect) != null)
                 effectId = EffectPrimitives.IdFor(effect);
@@ -524,7 +501,6 @@ namespace EffectLib
 
                 if (string.IsNullOrEmpty(effectId))
                 {
-                    // Full reset, so handlers also undo lasting state such as a size change.
                     if (manager.HasAnyActive)
                         cleared++;
                     manager.ResetAll();
@@ -543,7 +519,6 @@ namespace EffectLib
             );
         }
 
-        // "all" targets everyone online; anything else is a player name.
         private bool TryResolveTargets(
             TextCommandCallingArgs args,
             string playerArg,
@@ -599,8 +574,6 @@ namespace EffectLib
             return target != null;
         }
 
-        // Best effort: a mod can ship a lang key named after the effect id for a nicer label,
-        // otherwise the name the admin typed is shown.
         private static string DisplayName(string effectId, string fallback) =>
             EffectLang.NameIfExists(effectId) ?? fallback;
 

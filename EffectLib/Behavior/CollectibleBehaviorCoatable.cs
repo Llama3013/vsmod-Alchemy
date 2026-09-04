@@ -3,16 +3,10 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Tooltip for a weapon or arrow currently carrying a coating - add
-    /// <c>{ "name": "Coatable" }</c> to a collectible's <c>behaviors</c> to show it. Reads the
-    /// coating off the stack, like the on-hit patches; a coating kept in a combat mod's own
-    /// buff store shows its tooltip through that mod instead.
-    /// </summary>
     public class CollectibleBehaviorCoatable(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {
         public override void GetHeldItemInfo(

@@ -2,12 +2,10 @@ using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Delivers a coated melee weapon's effect on hit, one charge at a time. Stack-stored
-    // coatings only; Combat Overhaul weapons never reach this patch and deliver their own.
     [HarmonyPatch(typeof(CollectibleObject), "OnAttackingWith")]
     internal static class WeaponCoatPatch
     {

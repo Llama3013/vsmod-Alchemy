@@ -3,12 +3,10 @@ using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Coats everything in a barrel's item slot from its liquid slot whenever the barrel's
-    // contents change - see BarrelCoating.
     [HarmonyPatch(typeof(BlockEntityBarrel), "FindMatchingRecipe", typeof(IPlayer))]
     internal static class BarrelCoatPatch
     {

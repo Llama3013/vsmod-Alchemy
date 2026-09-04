@@ -4,26 +4,15 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// The "hold a coating source in your off hand, shift+right-click, wait" interaction that
-    /// applies a coating to whatever's in the main hand. Driven from a collectible's
-    /// <c>OnHeldIdle</c> - see <see cref="CollectibleBehaviorCoatSource"/> - since there is no
-    /// held-interact equivalent for an off-hand item.
-    /// </summary>
     public static class CoatingInteraction
     {
         private static readonly Dictionary<long, long> holdStartMs = [];
         private static readonly HashSet<long> notifiedEntities = [];
 
-        /// <summary>
-        /// Call every tick the coating source item is idle in hand. Resolves and applies the
-        /// coating once the hold completes; <paramref name="consumeSource"/> is called exactly
-        /// once, at that point, to consume whatever backs the coating.
-        /// </summary>
         public static void HandleIdle(
             ICoreAPI api,
             ItemSlot coatSlot,
@@ -137,9 +126,6 @@ namespace EffectLib
                 return;
             }
 
-            // Times the hold outside of any interact-hold API, since there is none for an
-            // off-hand item. If they let go before the time is up, nothing happens and they can
-            // try again.
             if ((Environment.TickCount64 - startMs) / 1000f < consumeTime)
                 return;
 
@@ -156,11 +142,6 @@ namespace EffectLib
             );
         }
 
-        /// <summary>
-        /// Finishes a coating application: consumes the source, and writes the coating onto
-        /// whatever's in the main hand (a single arrow split off the stack, or an added charge
-        /// on a weapon).
-        /// </summary>
         public static void ApplyCoating(
             ItemSlot coatSlot,
             ItemSlot mainHandSlot,

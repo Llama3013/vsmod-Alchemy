@@ -4,14 +4,10 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Repeating health change on a non-player entity, used where the vanilla ticking
-    /// DamageSource is not available. Removes itself once the duration is up.
-    /// </summary>
     public class EntityBehaviorHealthOverTime(Entity entity) : EntityBehavior(entity)
     {
         private float dmgPerTick;

@@ -5,15 +5,10 @@ using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Owns the per-player effect lifecycle: attaching the effect behavior, resuming saved
-    /// effects on login, suspending them on disconnect and clearing them on death.
-    /// Mods built on EffectLib do not need to wire any of this up themselves.
-    /// </summary>
     public class EffectLibMod : ModSystem
     {
         private const string HarmonyId = "llama3013.EffectLib";
@@ -21,33 +16,25 @@ namespace EffectLib
         private ICoreServerAPI sapi;
         private Harmony harmony;
 
-        // Run after the default 0.1, so mods have registered their effects, policy gate and
-        // handlers by the time this starts listening for player events.
         public override double ExecuteOrder() => 0.2;
 
         public override void Start(ICoreAPI api)
         {
             base.Start(api);
-            // Both sides: the client rebuilds contexts too, for HUD tooltips.
             EffectPrimitives.RegisterAll();
 
             UtilityEffects.PlayerModelLibPresent = api.ModLoader.IsModEnabled("playermodellib");
 
-            // Lets a JSON-only mod grant an effect with zero code: add this behavior and an
-            // "effectinfo" attribute to an item and it works.
             api.RegisterCollectibleBehaviorClass(
                 "EffectItem",
                 typeof(CollectibleBehaviorEffectItem)
             );
 
-            // Same, for a liquid container - the effect is declared on whatever it currently
-            // holds rather than on the container itself.
             api.RegisterCollectibleBehaviorClass(
                 "EffectLiquid",
                 typeof(CollectibleBehaviorEffectLiquid)
             );
 
-            // Weapon/arrow coating: apply an effect to a weapon now, deliver it on a later hit.
             api.RegisterCollectibleBehaviorClass("Coatable", typeof(CollectibleBehaviorCoatable));
             api.RegisterCollectibleBehaviorClass(
                 "CoatSource",
@@ -69,9 +56,6 @@ namespace EffectLib
         {
             sapi = api;
 
-            // Effect handlers only ever fire server-side (from EffectManager), so this is the
-            // only side that registers them. Utility effects - respawn, reshape, nutrition,
-            // temporal stability, size - are EffectLib's own; no dependent mod registers them.
             EffectHandlers.Register(UtilityEffectHandler.Instance);
 
             api.Event.PlayerNowPlaying += OnPlayerReady;
@@ -85,19 +69,12 @@ namespace EffectLib
         {
             base.StartClientSide(api);
 
-            // A size change applied before the client is fully loaded (e.g. resumed on login)
-            // can be missed by PlayerSizePatch's WatchedAttributes listener, since sync order
-            // isn't guaranteed relative to Entity.Initialize. Force one resync once loading is
-            // definitely done.
             api.Event.LevelFinalize += () =>
             {
                 if (api.World.Player?.Entity is EntityPlayer sizedPlayer)
                     UtilityEffects.ApplySizeToEntity(sizedPlayer);
             };
 
-            // CanClimbAnywhere is set directly on the server's own EntityProperties by
-            // EffectManager, which never reaches the client - properties are not synced,
-            // only WatchedAttributes are. Mirror it client-side from EffectAttr.CanClimb instead.
             api.Event.PlayerEntitySpawn += iPlayer =>
             {
                 if (iPlayer.Entity is not EntityPlayer player)
@@ -165,14 +142,10 @@ namespace EffectLib
             harmony?.UnpatchAll(HarmonyId);
             harmony = null;
 
-            // Deliberately not unregistering from EffectHandlers: it is a process-wide static
-            // that Start re-establishes, and dropping it here would disable every utility effect
-            // for any world loaded later in the same session.
             base.Dispose();
         }
     }
 
-    /// <summary>Registers and drives the shared effect HUD. Client side only.</summary>
     public class EffectLibHudMod : ModSystem
     {
         private ICoreClientAPI capi;
@@ -215,7 +188,6 @@ namespace EffectLib
             {
                 hud.HookPlayer();
 
-                // Turn the HUD on once for players upgrading from a version that shipped it off.
                 if (!capi.Settings.Bool.Exists(GuiHudEffects.SettingAutoEnabled))
                 {
                     if (!capi.Settings.Bool[GuiHudEffects.SettingEnabled])

@@ -5,35 +5,15 @@ using Vintagestory.API.Common;
 
 namespace EffectLib
 {
-    /// <summary>What a primitive's magnitude argument means.</summary>
     public enum EffectValueKind
     {
-        /// <summary>On or off. The magnitude is ignored.</summary>
         Flag,
 
-        /// <summary>A multiplier or offset, usually a fraction such as 0.2 for +20%.</summary>
         Number,
 
-        /// <summary>A whole number, rounded from the magnitude.</summary>
         Whole,
     }
 
-    /// <summary>One primitive of <see cref="EffectContext"/>, addressable on its own.</summary>
-    /// <param name="Name">Command-facing name, always lower case.</param>
-    /// <param name="Kind">How the magnitude argument is read.</param>
-    /// <param name="Instant">
-    /// True for one-shot effects that fire once and hold no duration (a teleport, a health
-    /// change). False for effects that stay applied until they expire.
-    /// </param>
-    /// <param name="Description">One line shown by the list command.</param>
-    /// <param name="Capability">
-    /// <see cref="EffectCapability"/> this primitive falls under, or null if it is never gated.
-    /// A server owner can switch the capability off, in which case applying it does nothing.
-    /// </param>
-    /// <param name="Apply">
-    /// Sets the single field this primitive owns. <see cref="EffectContext.PotencyMul"/> is
-    /// already set to the requested magnitude.
-    /// </param>
     public sealed record EffectPrimitive(
         string Name,
         EffectValueKind Kind,
@@ -43,26 +23,12 @@ namespace EffectLib
         Action<EffectContext> Apply
     );
 
-    /// <summary>
-    /// The individual effects EffectLib can apply on their own - one field of
-    /// <see cref="EffectContext"/> at a time - as opposed to a whole registered effect that
-    /// bundles several. Each is registered under an <c>efflib:&lt;name&gt;</c> id so it can be
-    /// granted, tracked, persisted and resumed like any other. The admin commands drive these.
-    /// </summary>
     public static class EffectPrimitives
     {
-        /// <summary>Prefix for every primitive effect id.</summary>
         public const string IdPrefix = "efflib:";
 
-        /// <summary>Prefix for an arbitrary entity stat, e.g. <c>efflib:stat:walkspeed</c>.</summary>
         public const string StatIdPrefix = IdPrefix + "stat:";
 
-        /// <summary>
-        /// Duration a primitive is built with when nothing overrides it. The commands always set
-        /// their own, and a resumed primitive takes its length from the save record, so this
-        /// only applies if code calls <see cref="EffectRegistry.Build"/> for a primitive and
-        /// applies it without a duration of its own.
-        /// </summary>
         public const int DefaultDurationSec = 600;
 
         private static readonly EffectPrimitive[] all =
@@ -95,7 +61,6 @@ namespace EffectLib
             new("weight", EffectValueKind.Number, false, "Body weight, offset in kg", null,
                 ctx => ctx.Weight = ctx.PotencyMul),
 
-            // One-shot: carried out once on application and then done with.
             new("health", EffectValueKind.Number, true,
                 "Change health once, negative to damage", null,
                 ctx => ctx.SetHealth(1f)),
@@ -118,26 +83,16 @@ namespace EffectLib
             StringComparer.OrdinalIgnoreCase
         );
 
-        /// <summary>Every built-in primitive, excluding the open-ended <c>stat:</c> family.</summary>
         public static IReadOnlyList<EffectPrimitive> All => all;
 
         public static EffectPrimitive Get(string name) =>
             name != null && byName.TryGetValue(name, out EffectPrimitive e) ? e : null;
 
-        /// <summary>The effect id for a primitive name, or for a stat via <c>stat:name</c>.</summary>
         public static string IdFor(string name) => IdPrefix + name.ToLowerInvariant();
 
-        /// <summary>True for ids this class owns - every <c>efflib:</c> id.</summary>
         public static bool IsPrimitiveId(string effectId) =>
             effectId != null && effectId.StartsWith(IdPrefix, StringComparison.OrdinalIgnoreCase);
 
-        /// <summary>
-        /// Turns a freshly built primitive context into a repeating one: a health primitive
-        /// becomes a damage/heal-over-time driven by the engine's ticking, anything else re-runs
-        /// its one-shot every <paramref name="intervalSec"/>. The commands call this; a resumed
-        /// primitive reads the resulting <see cref="EffectContext.TickSec"/>/<see cref="EffectContext.RepeatSec"/>
-        /// straight back from its save record.
-        /// </summary>
         public static void MakeRepeating(
             EffectContext ctx,
             float intervalSec,
@@ -167,13 +122,9 @@ namespace EffectLib
                 EffectRegistry.Register(IdFor(captured.Name), ctx => Build(ctx, captured));
             }
 
-            // Stat names are open-ended, so they cannot be enumerated up front. Resolving them
-            // on demand also means a saved stat effect still rebuilds after a server restart.
             EffectRegistry.AddResolver(statResolver);
         }
 
-        // Held as one instance so re-running RegisterAll (once per side, and again on a world
-        // reload) does not stack up duplicate resolvers.
         private static readonly System.Func<string, EffectRegistration> statResolver = effectId =>
         {
             if (!effectId.StartsWith(StatIdPrefix, StringComparison.OrdinalIgnoreCase))
@@ -189,7 +140,6 @@ namespace EffectLib
                 ctx =>
                 {
                     ctx.Duration = DefaultDurationSec;
-                    // Unit magnitude; AddStat scales it by PotencyMul.
                     ctx.AddStat(statName, 1f);
                 }
             );

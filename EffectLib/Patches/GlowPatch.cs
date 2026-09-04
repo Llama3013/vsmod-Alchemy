@@ -1,11 +1,10 @@
 using HarmonyLib;
 using Vintagestory.API.Common;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Makes EffectContext.GlowStrength (EffectAttr.GlowStrength) actually make the player glow.
     [HarmonyPatch(typeof(EntityPlayer), "LightHsv", MethodType.Getter)]
     internal static class GlowPatch
     {

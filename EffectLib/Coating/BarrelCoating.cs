@@ -2,27 +2,14 @@ using System;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    /// <summary>
-    /// Coats every weapon/arrow stack in a barrel at once from the liquid also in the barrel -
-    /// an alternative to the one-at-a-time <see cref="CoatingInteraction"/> flow. Driven from a
-    /// Harmony patch on <c>BlockEntityBarrel.FindMatchingRecipe</c> (fires whenever the barrel's
-    /// contents change), not from any behavior.
-    /// </summary>
     public static class BarrelCoating
     {
-        // Re-entrancy guard: filling itemSlot/liquidSlot below marks them dirty, which can
-        // re-trigger FindMatchingRecipe before this call has returned.
         private static bool coating;
 
-        /// <summary>
-        /// Attempts to coat everything in <paramref name="itemSlot"/> from
-        /// <paramref name="liquidSlot"/>, resolving the liquid via
-        /// <see cref="CoatingPolicy.ResolveLiquidEffect"/>.
-        /// </summary>
         public static bool TryCoatInBarrel(ItemSlot itemSlot, ItemSlot liquidSlot)
         {
             if (coating)

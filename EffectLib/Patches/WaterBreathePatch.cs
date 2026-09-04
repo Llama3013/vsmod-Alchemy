@@ -2,12 +2,10 @@ using HarmonyLib;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-#pragma warning disable IDE0130 // Namespace does not match folder structure
+#pragma warning disable IDE0130
 namespace EffectLib
-#pragma warning restore IDE0130 // Namespace does not match folder structure
+#pragma warning restore IDE0130
 {
-    // Makes EffectContext.WaterBreathe (EffectAttr.WaterBreathe) actually stop the player
-    // drowning, by reporting full oxygen for as long as the effect is active.
     [HarmonyPatch(typeof(EntityBehaviorBreathe), "Oxygen", MethodType.Getter)]
     internal static class WaterBreathePatch
     {
