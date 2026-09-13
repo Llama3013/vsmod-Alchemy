@@ -49,9 +49,6 @@ public class BuildContext : FrostingContext
     public string BuildConfiguration { get; set; }
     public bool SkipJsonValidation { get; set; }
 
-    /// <summary>
-    /// Packed in order, so EffectLib is built before the mod that depends on it.
-    /// </summary>
     public IReadOnlyList<ModProject> Mods { get; }
 
     public BuildContext(ICakeContext context)
@@ -62,7 +59,6 @@ public class BuildContext : FrostingContext
 
         Mods =
         [
-            new ModProject(context, "EffectLib", "resources-effectlib"),
             new ModProject(context, "Alchemy", "resources"),
         ];
     }

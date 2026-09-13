@@ -42,6 +42,34 @@
             "problemMatcher": []
         },
         {
+            "label": "build effectlib dependency",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "E:/COOOOODDDDIIINNNGGG/vs-effectlib/EffectLib/EffectLib.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "update Dependencies",
+            "type": "shell",
+            "command": "Copy-Item",
+            "args": [
+                "-Path",
+                "E:/COOOOODDDDIIINNNGGG/vs-effectlib/EffectLib/bin/Release/Mods/mod/effectlib.dll",
+                "-Destination",
+                "${workspaceFolder}/Dependencies/",
+                "-Force"
+            ],
+            "dependsOn": [
+                "build effectlib dependency"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "package",
             "command": "dotnet",
             "type": "process",
