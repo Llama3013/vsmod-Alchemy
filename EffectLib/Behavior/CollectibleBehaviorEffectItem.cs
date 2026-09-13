@@ -109,7 +109,21 @@ namespace EffectLib
             EntityAgent byEntity,
             string effectId,
             EffectContext ctx
-        ) => HasEnoughSource(slot) ? null : "effectlib:not-enough-source";
+        )
+        {
+            if (!HasEnoughSource(slot))
+                return "effectlib:not-enough-source";
+
+            if (
+                byEntity is EntityPlayer player
+                && EntityBehaviorPlayerEffects.ManagerFor(player) is { } manager
+                && manager.IsActive(effectId)
+                && !manager.CanRefresh(effectId)
+            )
+                return "effectlib:effect-already-active";
+
+            return null;
+        }
 
         protected virtual bool ApplyEffect(
             ItemSlot slot,
@@ -122,8 +136,21 @@ namespace EffectLib
                 return false;
 
             EffectManager manager = EntityBehaviorPlayerEffects.ManagerFor(player);
-            return manager != null
-                && manager.TryApply(effectId, ctx, EffectLang.Name(effectId));
+            if (manager == null)
+                return false;
+
+            string name = EffectLang.Name(effectId);
+            if (!manager.TryApply(effectId, ctx, name))
+                return false;
+
+            if (player.Player is IServerPlayer serverPlayer)
+                serverPlayer.SendMessage(
+                    GlobalConstants.InfoLogChatGroup,
+                    EffectLang.Get(effectId, "effect-gain", name),
+                    EnumChatType.Notification
+                );
+
+            return true;
         }
 
         protected virtual void OnConsumed(ItemSlot slot, EntityAgent byEntity)

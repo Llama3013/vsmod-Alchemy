@@ -65,6 +65,8 @@ namespace EffectLib
                 typeof(CollectibleBehaviorCoatSourceLiquid)
             );
 
+            api.RegisterEntity("EntityThrownEffectItem", typeof(EntityThrownEffectItem));
+
             if (!Harmony.HasAnyPatches(HarmonyId))
             {
                 harmony = new Harmony(HarmonyId);

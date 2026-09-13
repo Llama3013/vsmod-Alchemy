@@ -1,0 +1,29 @@
+{
+  "code": "throwneffectitem",
+  "class": "EntityThrownEffectItem",
+  "tags": ["inanimate", "projectile"],
+  "attributes": {
+    "isProjectile": true,
+    "physics": {
+      "groundDragFactor": 1,
+      "airDragFactor": 0.25
+    }
+  },
+  "hitboxSize": { "x": 0.125, "y": 0.125 },
+  "deadHitboxSize": { "x": 0.125, "y": 0.125 },
+  "drops": [],
+  "client": {
+    "renderer": "Shape",
+    "shape": { "base": "game:item/stone" },
+    "behaviors": [
+      { "code": "passivephysics" },
+      { "code": "interpolateposition" }
+    ]
+  },
+  "server": {
+    "behaviors": [
+      { "code": "passivephysics" },
+      { "code": "despawn", "minSeconds": 60 }
+    ]
+  }
+}

@@ -47,7 +47,7 @@ namespace EffectLib
                 ctx => ctx.DisableClimbing = true),
             new("nofalldamage", EffectValueKind.Flag, false, "Takes no fall damage", EffectCapability.Fall,
                 ctx => ctx.NoFallDamage = true),
-            new("glow", EffectValueKind.Whole, false, "Emit light, 0-255", null,
+            new("glow", EffectValueKind.Whole, false, "Emit light, 0-31", null,
                 ctx => ctx.GlowStrength = (int)Math.Round(ctx.PotencyMul)),
             new("falldamagereduction", EffectValueKind.Number, false,
                 "Cut fall damage by a fraction, 0-1", EffectCapability.Fall,

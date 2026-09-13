@@ -47,7 +47,12 @@ namespace EffectLib
         public float SizeMinHeight { get; set; }
         public float SizeMaxHeight { get; set; }
 
-        public int GlowStrength { get; set; }
+        private int glowStrength;
+        public int GlowStrength
+        {
+            get => glowStrength;
+            set => glowStrength = Math.Clamp(value, 0, GlowPatch.MaxGlowStrength);
+        }
         public bool WaterBreathe { get; set; }
         public bool ColdResist { get; set; }
         public float FallDamageReduction { get; set; }
