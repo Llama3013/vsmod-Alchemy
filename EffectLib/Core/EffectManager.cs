@@ -66,13 +66,20 @@ namespace EffectLib
             ];
         }
 
-        public bool CanRefresh(string id) =>
-            EffectPolicy.IsAllowed(EffectCapability.Refresh)
-            && active.TryGetValue(id, out ActiveEffect activeEffect)
-            && !(
-                activeEffect.Effect.Context.TickSec > 0
-                && Math.Abs(activeEffect.Effect.Context.Health) > float.Epsilon
-            );
+        public bool CanRefresh(string id)
+        {
+            if (!active.TryGetValue(id, out ActiveEffect activeEffect))
+                return false;
+
+            if (activeEffect.Effect.Context.ReplaceIfActive)
+                return true;
+
+            return EffectPolicy.IsAllowed(EffectCapability.Refresh)
+                && !(
+                    activeEffect.Effect.Context.TickSec > 0
+                    && Math.Abs(activeEffect.Effect.Context.Health) > float.Epsilon
+                );
+        }
 
         public bool TryApply(string id, EffectContext ctx, string name, bool resume = false)
         {

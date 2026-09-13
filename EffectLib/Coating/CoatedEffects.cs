@@ -173,7 +173,9 @@ namespace EffectLib
                 if (ctx == null)
                     return;
 
-                string blockReason = CoatingPolicy.GetBlockReason(effectId, playerEntity, ctx);
+                string blockReason =
+                    UtilityEffects.GetBlockReason(playerEntity, ctx)
+                    ?? CoatingPolicy.GetBlockReason(effectId, playerEntity, ctx);
                 if (blockReason != null)
                 {
                     (playerEntity.Player as IServerPlayer)?.SendMessage(
@@ -183,6 +185,9 @@ namespace EffectLib
                     );
                     return;
                 }
+
+                if (ctx.ResetsEffects)
+                    manager.PurgeFor(effectId, ctx);
 
                 if (manager.TryApply(effectId, ctx, displayName))
                 {
@@ -198,6 +203,9 @@ namespace EffectLib
                 EffectContext ctx = EffectRegistry.Build(effectId, multiplier);
                 if (ctx == null)
                     return;
+
+                if (ctx.ResetsEffects && agent.GetBehavior<EntityBehaviorHealthOverTime>() is { } hot)
+                    agent.RemoveBehavior(hot);
 
                 if (ctx.TickSec > 0 && Math.Abs(ctx.Health) > float.Epsilon)
                     ApplyTickEffect(agent, ctx);

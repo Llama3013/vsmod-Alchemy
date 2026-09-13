@@ -23,8 +23,6 @@ namespace EffectLib
         private const string KeyBaseClientSize = "effectlib:baseClientSize";
         private const string KeyBaseEntitySize = "effectlib:baseEntitySize";
         private const string KeySizeDomain = "effectlib:sizeDomain";
-        private const string KeySizeMinHeight = "effectlib:sizeMinHeight";
-        private const string KeySizeMaxHeight = "effectlib:sizeMaxHeight";
 
         private const string LegacyDomain = "alchemy";
 
@@ -34,35 +32,35 @@ namespace EffectLib
             return stored >= 0.1f ? stored : entity.CollisionBox.Y2;
         }
 
-        private static (float min, float max) StoredSizeBounds(EntityPlayer entity)
+        // The effect's own bounds narrow the range, but can never widen past the server's hard
+        // MinPlayerHeight/MaxPlayerHeight - computed fresh per effect.
+        private static (float min, float max) EffectiveSizeBounds(EffectContext ctx)
         {
-            float min = entity.WatchedAttributes.GetFloat(KeySizeMinHeight, 0f);
-            float max = entity.WatchedAttributes.GetFloat(KeySizeMaxHeight, 0f);
-            return (
-                min >= 0.05f ? min : DefaultMinHeight,
-                max >= 0.05f ? max : DefaultMaxHeight
-            );
+            float hardMin = EffectLibConfig.Loaded.MinPlayerHeight;
+            float hardMax = EffectLibConfig.Loaded.MaxPlayerHeight;
+            float itemMin = ctx.SizeMinHeight > 0.05f ? ctx.SizeMinHeight : hardMin;
+            float itemMax = ctx.SizeMaxHeight > 0.05f ? ctx.SizeMaxHeight : hardMax;
+            return (GameMath.Clamp(itemMin, hardMin, hardMax), GameMath.Clamp(itemMax, hardMin, hardMax));
         }
 
-        public static bool CanApplySizeChange(EntityPlayer entity, float sizeDelta)
+        public static bool CanApplySizeChange(EntityPlayer entity, EffectContext ctx)
         {
             if (!EffectPolicy.IsAllowed(EffectCapability.Resize))
                 return false;
-            if (Math.Abs(sizeDelta) <= float.Epsilon)
+            if (Math.Abs(ctx.SizeChange) <= float.Epsilon)
                 return false;
 
             float currentIntent = entity.WatchedAttributes.GetFloat(SizeDeltaAttr, 0f);
             float baseHeight = ResolveBaseHeight(entity);
-            (float min, float max) = StoredSizeBounds(entity);
+            (float min, float max) = EffectiveSizeBounds(ctx);
             float currentHeight = GameMath.Clamp(baseHeight + currentIntent, min, max);
 
-            return sizeDelta > 0 ? currentHeight < max - 0.001f : currentHeight > min + 0.001f;
+            return ctx.SizeChange > 0 ? currentHeight < max - 0.001f : currentHeight > min + 0.001f;
         }
 
         public static bool ApplySizeChange(EntityPlayer entity, EffectContext ctx, string domain)
         {
-            float sizeDelta = ctx.SizeChange;
-            if (!CanApplySizeChange(entity, sizeDelta))
+            if (!CanApplySizeChange(entity, ctx))
                 return false;
 
             float currentIntent = entity.WatchedAttributes.GetFloat(SizeDeltaAttr, 0f);
@@ -92,17 +90,9 @@ namespace EffectLib
                 }
 
                 entity.WatchedAttributes.SetString(KeySizeDomain, domain ?? LegacyDomain);
-                entity.WatchedAttributes.SetFloat(
-                    KeySizeMinHeight,
-                    ctx.SizeMinHeight > 0.05f ? ctx.SizeMinHeight : DefaultMinHeight
-                );
-                entity.WatchedAttributes.SetFloat(
-                    KeySizeMaxHeight,
-                    ctx.SizeMaxHeight > 0.05f ? ctx.SizeMaxHeight : DefaultMaxHeight
-                );
             }
 
-            entity.WatchedAttributes.SetFloat(SizeDeltaAttr, currentIntent + sizeDelta);
+            entity.WatchedAttributes.SetFloat(SizeDeltaAttr, currentIntent + ctx.SizeChange);
             entity.WatchedAttributes.MarkPathDirty(SizeDeltaAttr);
             return true;
         }
@@ -170,8 +160,13 @@ namespace EffectLib
                 baseHeight * 0.9054f
             );
 
-            (float min, float max) = StoredSizeBounds(entity);
-            float newHeight = GameMath.Clamp(baseHeight + sizeDelta, min, max);
+            // Just re-rendering an already-accumulated delta here, no effect in scope - the hard
+            // limits are the only bound that still applies.
+            float newHeight = GameMath.Clamp(
+                baseHeight + sizeDelta,
+                EffectLibConfig.Loaded.MinPlayerHeight,
+                EffectLibConfig.Loaded.MaxPlayerHeight
+            );
             float scale = newHeight / baseHeight;
 
             float baseWidth = entity.WatchedAttributes.GetFloat(KeyBaseWidth, 0f);
@@ -247,6 +242,60 @@ namespace EffectLib
             if (entity.Player is not IServerPlayer)
                 return;
             entity.WatchedAttributes.SetBool("allowcharselonce", true);
+        }
+
+        // Blocks re-triggering reshape before .charsel is used.
+        public static bool IsReshapeReentry(EntityAgent byEntity, EffectContext ctx) =>
+            ctx.Reshape
+            && ctx.BlockReshapeReentry
+            && byEntity.WatchedAttributes.GetBool("allowcharselonce");
+
+        // Blocks recall while mounted on a vessel (would strand the vessel).
+        public static bool IsRecallOnVessel(EntityAgent byEntity, EffectContext ctx) =>
+            ctx.Respawn
+            && ctx.BlockRecallOnVessel
+            && byEntity.MountedOn?.MountSupplier?.OnEntity?.HasBehavior("seatable") == true;
+
+        // Blocks recall while mounted on a ridden animal - off by default, opt in per effect.
+        public static bool IsRecallOnMount(EntityAgent byEntity, EffectContext ctx) =>
+            ctx.Respawn
+            && ctx.BlockRecallOnMount
+            && byEntity.MountedOn?.MountSupplier?.OnEntity?.HasBehavior("mountable") == true;
+
+        // Blocks a grow/shrink effect once the player is already at that size limit.
+        public static bool IsSizeAtLimit(EntityAgent byEntity, EffectContext ctx) =>
+            Math.Abs(ctx.SizeChange) > float.Epsilon
+            && byEntity is EntityPlayer player
+            && !CanApplySizeChange(player, ctx);
+
+        // True if the limit hit is this effect's own (narrower) bound rather than the server's
+        // hard MinPlayerHeight/MaxPlayerHeight.
+        private static bool IsEffectOwnSizeLimit(EffectContext ctx, bool growing)
+        {
+            (float min, float max) = EffectiveSizeBounds(ctx);
+            return growing
+                ? max < EffectLibConfig.Loaded.MaxPlayerHeight - 0.001f
+                : min > EffectLibConfig.Loaded.MinPlayerHeight + 0.001f;
+        }
+
+        // Shared reshape/recall/size block check - lang key or null. Used by direct consume and coating.
+        public static string GetBlockReason(EntityAgent byEntity, EffectContext ctx)
+        {
+            if (IsReshapeReentry(byEntity, ctx))
+                return "effectlib:reshape-block";
+            if (IsRecallOnVessel(byEntity, ctx))
+                return "effectlib:boat-block";
+            if (IsRecallOnMount(byEntity, ctx))
+                return "effectlib:mount-block";
+            if (IsSizeAtLimit(byEntity, ctx))
+            {
+                bool growing = ctx.SizeChange > 0;
+                bool ownLimit = IsEffectOwnSizeLimit(ctx, growing);
+                return growing
+                    ? (ownLimit ? "effectlib:effect-size-at-max" : "effectlib:size-at-max")
+                    : (ownLimit ? "effectlib:effect-size-at-min" : "effectlib:size-at-min");
+            }
+            return null;
         }
     }
 }

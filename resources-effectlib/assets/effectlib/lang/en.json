@@ -4,6 +4,18 @@
   "effect-already-active": "That effect is already active.",
   "not-enough-source": "Not enough left to use.",
   "flight-mount-block": "You cannot mount while flying",
+  "boat-block": "You cannot recall while mounted on a vessel",
+  "mount-block": "You cannot recall while mounted on an animal",
+  "reshape-block": "You already have the ability to reopen character customisation by typing .charsel",
+  "size-at-max": "You cannot grow any further",
+  "size-at-min": "You cannot shrink any further",
+  "effect-size-at-max": "You cannot grow any further with this effect",
+  "effect-size-at-min": "You cannot shrink any further with this effect",
+
+  "MinPlayerHeight": "Minimum player height",
+  "MinPlayerHeight-Comment": "Hard floor for any effect that shrinks a player, in blocks. No effect can shrink a player below this, even if its own settings ask for less.",
+  "MaxPlayerHeight": "Maximum player height",
+  "MaxPlayerHeight-Comment": "Hard ceiling for any effect that grows a player, in blocks. No effect can grow a player past this, even if its own settings ask for more.",
   "effect-gain": "You feel the effects of the {0}",
 
   "weapon-coated": "Weapon coated with {0} ({1} charges remaining)",

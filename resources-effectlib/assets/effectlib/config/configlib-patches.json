@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "file": "effectlib.json",
+  "settings": {
+    "float": {
+      "MINPLAYERHEIGHT": {
+        "name": "MinPlayerHeight",
+        "ingui": "effectlib:MinPlayerHeight",
+        "weight": 1.1,
+        "comment": "effectlib:MinPlayerHeight-Comment",
+        "default": 0.2,
+        "range": {
+          "min": 0.05,
+          "max": 10.0
+        }
+      },
+      "MAXPLAYERHEIGHT": {
+        "name": "MaxPlayerHeight",
+        "ingui": "effectlib:MaxPlayerHeight",
+        "weight": 1.2,
+        "comment": "effectlib:MaxPlayerHeight-Comment",
+        "default": 10.0,
+        "range": {
+          "min": 0.5,
+          "max": 50.0
+        }
+      }
+    }
+  }
+}

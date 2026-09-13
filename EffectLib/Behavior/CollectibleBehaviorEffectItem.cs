@@ -318,12 +318,17 @@ namespace EffectLib
             if (ctx == null)
                 return;
 
-            string blockReason = GetBlockReason(slot, byEntity, effectId, ctx);
+            // Runs before the virtual GetBlockReason so overrides can't skip it.
+            string blockReason =
+                UtilityEffects.GetBlockReason(byEntity, ctx) ?? GetBlockReason(slot, byEntity, effectId, ctx);
             if (blockReason != null)
             {
                 DenyUse(byEntity, blockReason);
                 return;
             }
+
+            if (ctx.ResetsEffects && byEntity is EntityPlayer purgePlayer)
+                EntityBehaviorPlayerEffects.ManagerFor(purgePlayer)?.PurgeFor(effectId, ctx);
 
             if (ApplyEffect(slot, byEntity, effectId, ctx))
                 OnConsumed(slot, byEntity);

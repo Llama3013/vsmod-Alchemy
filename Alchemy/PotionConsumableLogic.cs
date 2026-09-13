@@ -57,15 +57,8 @@ namespace Alchemy
             return true;
         }
 
-        // The ~25 built-in potions are reserved in EffectRegistry at startup (see
-        // AlchemyMod.RegisterEffectsOnce), so this is exactly "is this one of them, with
-        // delivery driven by the Allow{Drinking,Throwing,Coating}<Name> config" vs. "everything
-        // else, JSON-defined or not, with delivery driven by EffectRegistry's generic channels".
         private static bool IsCodeOwned(string potionId) => EffectRegistry.IsReserved(potionId);
 
-        // Drinking and throwing default to allowed (an effect that declares no channels allows
-        // all of them); coating does not, since most potions never opt into it - see
-        // EffectRegistry.HasExplicitChannels.
         internal static bool IsDrinkingAllowed(string potionId) =>
             IsCodeOwned(potionId)
                 ? PotionDefinitions.AllowsDrinking(potionId)
@@ -87,8 +80,6 @@ namespace Alchemy
                 ? PotionDefinitions.GroupOf(potionId)
                 : EffectRegistry.GroupOf(potionId) ?? "none";
 
-        // The effect manager is the only record of what is running, so ask it rather than
-        // scanning attribute names.
         internal static HashSet<string> GetActivePotionIds(EntityPlayer player)
         {
             EffectManager manager = player?.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager;
@@ -241,16 +232,7 @@ namespace Alchemy
             return WildcardUtil.Match(codes, col.Code.ToString());
         }
 
-        // Combines TryReadPotionInfo, IsDrinkingAllowed and GetStrengthMultiplier for a
-        // resolved stack - the item/liquid consumable behaviors differ only in how they get to
-        // that stack in the first place, so everything past that point is shared here.
-        // Resolves what a stack is - not whether the caller's delivery method may use it; that
-        // is a separate per-channel question (IsDrinkingAllowed/IsThrowableAllowed/IsCoatingAllowed)
-        // each behavior checks for itself, since the same potion can be coat-only, throw-only,
-        // or any combination. A JSON-only potion (not code-owned) registers itself here the first
-        // time anything resolves it, the same way EffectLib's own generic behaviors self-register
-        // from an "effectinfo" attribute - this is what lets a coat-only, non-drinkable potion
-        // like throwableacid.json's still work without ever going through a drink interaction.
+        // Get potion info, potency, and lazy JSON-only potion reg.
         internal static bool TryResolvePotion(
             ItemStack stack,
             out string potionId,
@@ -300,13 +282,6 @@ namespace Alchemy
             return baseTime;
         }
 
-        private static bool IsReshapeReentry(EntityAgent byEntity, EffectContext ctx) =>
-            ctx?.Reshape == true && byEntity.WatchedAttributes.GetBool("allowcharselonce");
-
-        private static bool IsRecallOnVessel(EntityAgent byEntity, EffectContext ctx) =>
-            ctx?.Respawn == true
-            && byEntity.MountedOn?.MountSupplier?.OnEntity?.HasBehavior("seatable") == true;
-
         private static bool IsPotionAlreadyActive(EntityAgent byEntity, string potionId)
         {
             if (byEntity is not EntityPlayer player)
@@ -331,9 +306,7 @@ namespace Alchemy
             return player.GetBehavior<EntityBehaviorPlayerEffects>()?.Manager.HasAnyActive == true;
         }
 
-        // A lang key naming why this potion should be refused, or null to allow it. Shared by
-        // both consumable behaviors - neither the reshape/vessel edge cases nor the
-        // already-active/limit/exclusivity checks depend on where the potion came from.
+        // Block reason lang key, or null to allow. Reshape/vessel blocks live in EffectLib now.
         internal static string GetPotionBlockReason(
             EntityAgent byEntity,
             string potionId,
@@ -343,13 +316,7 @@ namespace Alchemy
             if (byEntity.World.Side != EnumAppSide.Server)
                 return null;
 
-            if (IsReshapeReentry(byEntity, ctx))
-                return "alchemy:reshape-block";
-            if (IsRecallOnVessel(byEntity, ctx))
-                return "alchemy:boat-block";
-
-            // A purging potion always goes through - refusing it over an effect it is about to
-            // clear anyway would be surprising.
+            // The previous effects are removed anyway
             if (ctx.ResetsEffects)
                 return null;
 
@@ -368,17 +335,17 @@ namespace Alchemy
             return null;
         }
 
-        // A coated hit only ever checks exclusivity, not the reshape/vessel/already-active/limit
-        // cases GetPotionBlockReason also covers - none of those make sense for a repeatable
-        // weapon hit (a poisoned blade should be able to re-poison the same target).
+        // Coated hits skip the already-active/limit checks (repeatable weapon hit). Reshape/vessel
+        // and purge are handled generically by EffectLib ahead of this call.
         internal static string GetCoatingBlockReason(
             EntityPlayer player,
             string potionId,
             EffectContext ctx
         ) => ctx.ResetsEffects ? null : CheckPotionExclusivity(player, potionId);
 
-        // Purges, gates on a size change, applies the effect, then the drinking side effects
-        // and the gain message. Shared by both consumable behaviors.
+        // Applies the effect, then the drinking side effects and gain message. Size gate, purge on
+        // ResetsEffects, and reshape/recall blocks are all handled by EffectLib. Shared by both
+        // behaviors.
         internal static bool ApplyPotionEffect(
             EntityAgent byEntity,
             string potionId,
@@ -396,26 +363,6 @@ namespace Alchemy
             if (behavior == null)
                 return false;
 
-            if (ctx.ResetsEffects)
-            {
-                // Scoped to Alchemy's own effects unless the potion names other domains, so a
-                // purging brew never wipes effects belonging to another mod.
-                behavior.Manager.PurgeFor(potionId, ctx);
-            }
-
-            if (
-                Math.Abs(ctx.SizeChange) > float.Epsilon
-                && !UtilityEffects.CanApplySizeChange(playerEntity, ctx.SizeChange)
-            )
-            {
-                serverPlayer.SendMessage(
-                    GlobalConstants.InfoLogChatGroup,
-                    Lang.Get(ctx.SizeChange > 0 ? "alchemy:size-at-max" : "alchemy:size-at-min"),
-                    EnumChatType.Notification
-                );
-                return false;
-            }
-
             if (!behavior.Manager.TryApply(potionId, ctx, displayName))
                 return false;
 
@@ -423,7 +370,9 @@ namespace Alchemy
 
             serverPlayer.SendMessage(
                 GlobalConstants.InfoLogChatGroup,
-                Lang.Get(ctx.Reshape ? "alchemy:reshape-gain" : "alchemy:effect-gain", displayName),
+                ctx.Reshape
+                    ? Lang.Get("alchemy:reshape-gain", displayName)
+                    : EffectLang.Get(potionId, "effect-gain", displayName),
                 EnumChatType.Notification
             );
 

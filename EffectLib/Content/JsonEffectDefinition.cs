@@ -14,6 +14,7 @@ namespace EffectLib
                 return;
 
             ctx.ResetsEffects = def["resetsEffects"].AsBool();
+            ctx.ReplaceIfActive = def["replaceIfActive"].AsBool();
             ctx.Duration = def["duration"].AsInt();
             if (ctx.Duration < 0)
                 ctx.Duration = EffectContext.EndlessDuration;
@@ -65,6 +66,9 @@ namespace EffectLib
             ctx.CanFly = def["canFly"].AsBool();
             ctx.Respawn = def["respawn"].AsBool();
             ctx.Reshape = def["reshape"].AsBool();
+            ctx.BlockRecallOnVessel = def["blockRecallOnVessel"].AsBool(true);
+            ctx.BlockRecallOnMount = def["blockRecallOnMount"].AsBool();
+            ctx.BlockReshapeReentry = def["blockReshapeReentry"].AsBool(true);
 
             ctx.KnockbackResistance = def["knockbackResistance"].AsFloat();
             ctx.NoFallDamage = def["noFallDamage"].AsBool();

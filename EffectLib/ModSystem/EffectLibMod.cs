@@ -18,6 +18,26 @@ namespace EffectLib
 
         public override double ExecuteOrder() => 0.2;
 
+        public override void StartPre(ICoreAPI api)
+        {
+            base.StartPre(api);
+
+            const string cfgFileName = "effectlib.json";
+            try
+            {
+                EffectLibConfig fromDisk = api.LoadModConfig<EffectLibConfig>(cfgFileName);
+                if (fromDisk == null)
+                    api.StoreModConfig(EffectLibConfig.Loaded, cfgFileName);
+                else
+                    EffectLibConfig.Loaded = fromDisk;
+            }
+            catch
+            {
+                api.Logger.Error("[EffectLib] Failed to load mod config. Reverting to default settings.");
+                api.StoreModConfig(EffectLibConfig.Loaded, cfgFileName);
+            }
+        }
+
         public override void Start(ICoreAPI api)
         {
             base.Start(api);

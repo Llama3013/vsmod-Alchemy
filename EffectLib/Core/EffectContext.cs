@@ -18,6 +18,8 @@ namespace EffectLib
 
         public bool ResetsEffects { get; set; }
 
+        public bool ReplaceIfActive { get; set; }
+
         public List<string> ResetDomains { get; } = [];
 
         public List<string> ResetEffectIds { get; } = [];
@@ -37,6 +39,9 @@ namespace EffectLib
         public float TemporalStabilityGain { get; set; }
         public bool Respawn { get; set; }
         public bool Reshape { get; set; }
+        public bool BlockRecallOnVessel { get; set; } = true;
+        public bool BlockRecallOnMount { get; set; }
+        public bool BlockReshapeReentry { get; set; } = true;
         public float SizeChange { get; set; }
 
         public float SizeMinHeight { get; set; }
