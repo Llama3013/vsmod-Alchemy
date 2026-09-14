@@ -3447,20 +3447,6 @@
       }
     },
     "string": {
-      "COATABLEWEAPONTAGS": {
-        "name": "CoatableWeaponTags",
-        "ingui": "alchemy:CoatableWeaponTags",
-        "weight": 25.4,
-        "comment": "alchemy:CoatableWeaponTags-Comment",
-        "default": "weapon-melee"
-      },
-      "COATABLEPROJECTILESCODES": {
-        "name": "CoatableProjectilesCodes",
-        "ingui": "alchemy:CoatableProjectilesCodes",
-        "weight": 25.41,
-        "comment": "alchemy:CoatableProjectilesCodes-Comment",
-        "default": "*arrow*"
-      },
       "ARCHERPOTIONGROUP": {
         "name": "ArcherPotionGroup",
         "ingui": "alchemy:ArcherPotionGroup",
@@ -3971,20 +3957,6 @@
         "comment": "alchemy:AllowPotionExclusivity-Comment",
         "default": false
       },
-      "ALLOWPOTIONREFRESH": {
-        "name": "AllowPotionRefresh",
-        "ingui": "alchemy:AllowPotionRefresh",
-        "weight": 4.338,
-        "comment": "alchemy:AllowPotionRefresh-Comment",
-        "default": false
-      },
-      "RETAINEFFECTSONDISCONNECT": {
-        "name": "RetainEffectsOnDisconnect",
-        "ingui": "alchemy:RetainEffectsOnDisconnect",
-        "weight": 4.339,
-        "comment": "alchemy:RetainEffectsOnDisconnect-Comment",
-        "default": true
-      },
       "ARCHERPOTIONRESETSEFFECTS": {
         "name": "ArcherPotionResetsEffects",
         "ingui": "alchemy:ArcherPotionResetsEffects",
@@ -4165,6 +4137,188 @@
         "ingui": "alchemy:FlightPotionResetsEffects",
         "weight": 72.05,
         "comment": "alchemy:PotionResetsEffects-Comment",
+        "default": false
+      },
+      "ARCHERPOTIONREPLACEIFACTIVE": {
+        "name": "ArcherPotionReplaceIfActive",
+        "ingui": "alchemy:ArcherPotionReplaceIfActive",
+        "weight": 73.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "HEALINGEFFECTPOTIONREPLACEIFACTIVE": {
+        "name": "HealingEffectPotionReplaceIfActive",
+        "ingui": "alchemy:HealingEffectPotionReplaceIfActive",
+        "weight": 74.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "HUNGERENHANCEPOTIONREPLACEIFACTIVE": {
+        "name": "HungerEnhancePotionReplaceIfActive",
+        "ingui": "alchemy:HungerEnhancePotionReplaceIfActive",
+        "weight": 75.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "HUNGERSUPRESSPOTIONREPLACEIFACTIVE": {
+        "name": "HungerSupressPotionReplaceIfActive",
+        "ingui": "alchemy:HungerSupressPotionReplaceIfActive",
+        "weight": 76.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "HUNTERPOTIONREPLACEIFACTIVE": {
+        "name": "HunterPotionReplaceIfActive",
+        "ingui": "alchemy:HunterPotionReplaceIfActive",
+        "weight": 77.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "LOOTERPOTIONREPLACEIFACTIVE": {
+        "name": "LooterPotionReplaceIfActive",
+        "ingui": "alchemy:LooterPotionReplaceIfActive",
+        "weight": 78.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "MELEEPOTIONREPLACEIFACTIVE": {
+        "name": "MeleePotionReplaceIfActive",
+        "ingui": "alchemy:MeleePotionReplaceIfActive",
+        "weight": 79.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "MININGPOTIONREPLACEIFACTIVE": {
+        "name": "MiningPotionReplaceIfActive",
+        "ingui": "alchemy:MiningPotionReplaceIfActive",
+        "weight": 80.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "POISONPOTIONREPLACEIFACTIVE": {
+        "name": "PoisonPotionReplaceIfActive",
+        "ingui": "alchemy:PoisonPotionReplaceIfActive",
+        "weight": 81.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "PREDATORPOTIONREPLACEIFACTIVE": {
+        "name": "PredatorPotionReplaceIfActive",
+        "ingui": "alchemy:PredatorPotionReplaceIfActive",
+        "weight": 82.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "REGENPOTIONREPLACEIFACTIVE": {
+        "name": "RegenPotionReplaceIfActive",
+        "ingui": "alchemy:RegenPotionReplaceIfActive",
+        "weight": 83.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "SCENTMASKPOTIONREPLACEIFACTIVE": {
+        "name": "ScentMaskPotionReplaceIfActive",
+        "ingui": "alchemy:ScentMaskPotionReplaceIfActive",
+        "weight": 84.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "SPEEDPOTIONREPLACEIFACTIVE": {
+        "name": "SpeedPotionReplaceIfActive",
+        "ingui": "alchemy:SpeedPotionReplaceIfActive",
+        "weight": 85.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "VITALITYPOTIONREPLACEIFACTIVE": {
+        "name": "VitalityPotionReplaceIfActive",
+        "ingui": "alchemy:VitalityPotionReplaceIfActive",
+        "weight": 86.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "GLOWPOTIONREPLACEIFACTIVE": {
+        "name": "GlowPotionReplaceIfActive",
+        "ingui": "alchemy:GlowPotionReplaceIfActive",
+        "weight": 87.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "WATERBREATHEPOTIONREPLACEIFACTIVE": {
+        "name": "WaterBreathePotionReplaceIfActive",
+        "ingui": "alchemy:WaterBreathePotionReplaceIfActive",
+        "weight": 88.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "COLDRESISTPOTIONREPLACEIFACTIVE": {
+        "name": "ColdResistPotionReplaceIfActive",
+        "ingui": "alchemy:ColdResistPotionReplaceIfActive",
+        "weight": 89.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "NUTRITIONPOTIONREPLACEIFACTIVE": {
+        "name": "NutritionPotionReplaceIfActive",
+        "ingui": "alchemy:NutritionPotionReplaceIfActive",
+        "weight": 90.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "RECALLPOTIONREPLACEIFACTIVE": {
+        "name": "RecallPotionReplaceIfActive",
+        "ingui": "alchemy:RecallPotionReplaceIfActive",
+        "weight": 91.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "TEMPORALPOTIONREPLACEIFACTIVE": {
+        "name": "TemporalPotionReplaceIfActive",
+        "ingui": "alchemy:TemporalPotionReplaceIfActive",
+        "weight": 92.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "RESHAPEPOTIONREPLACEIFACTIVE": {
+        "name": "ReshapePotionReplaceIfActive",
+        "ingui": "alchemy:ReshapePotionReplaceIfActive",
+        "weight": 93.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "GROWPOTIONREPLACEIFACTIVE": {
+        "name": "GrowPotionReplaceIfActive",
+        "ingui": "alchemy:GrowPotionReplaceIfActive",
+        "weight": 94.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "SHRINKPOTIONREPLACEIFACTIVE": {
+        "name": "ShrinkPotionReplaceIfActive",
+        "ingui": "alchemy:ShrinkPotionReplaceIfActive",
+        "weight": 95.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "FALLPOTIONREPLACEIFACTIVE": {
+        "name": "FallPotionReplaceIfActive",
+        "ingui": "alchemy:FallPotionReplaceIfActive",
+        "weight": 96.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "CLIMBPOTIONREPLACEIFACTIVE": {
+        "name": "ClimbPotionReplaceIfActive",
+        "ingui": "alchemy:ClimbPotionReplaceIfActive",
+        "weight": 97.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
+        "default": false
+      },
+      "FLIGHTPOTIONREPLACEIFACTIVE": {
+        "name": "FlightPotionReplaceIfActive",
+        "ingui": "alchemy:FlightPotionReplaceIfActive",
+        "weight": 98.05,
+        "comment": "alchemy:PotionReplaceIfActive-Comment",
         "default": false
       },
       "SIDEFFECTSTRENGTHMULTIPLIER": {

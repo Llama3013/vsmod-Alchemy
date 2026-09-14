@@ -8,16 +8,12 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
-using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
 namespace Alchemy
 {
     public static class PotionConsumableLogic
     {
-        private static TagSet coatableWeaponTagSet;
-        private static bool coatableWeaponTagSetCached;
-
         public const string AttributeKey = "effectinfo";
 
         public const float IntoxicationMax = 1.1f;
@@ -198,38 +194,6 @@ namespace Alchemy
                     },
                     Math.Abs(totalHealthChange)
                 );
-        }
-
-        internal static bool HasWeaponTag(ICoreAPI api, CollectibleObject col)
-        {
-            if (!coatableWeaponTagSetCached)
-            {
-                List<string> tagList =
-                [
-                    .. AlchemyConfig
-                        .Loaded.CoatableWeaponTags.Split(',')
-                        .Select(t => t.Trim())
-                        .Where(t => t.Length > 0),
-                ];
-                api.CollectibleTagRegistry.TryCreateTagSet(out coatableWeaponTagSet, tagList);
-                coatableWeaponTagSetCached = true;
-            }
-            return col.Tags.Overlaps(coatableWeaponTagSet);
-        }
-
-        public static bool IsCoatableProjectile(CollectibleObject col)
-        {
-            if (col?.Code == null)
-                return false;
-
-            string[] codes =
-            [
-                .. AlchemyConfig
-                    .Loaded.CoatableProjectilesCodes.Split(',')
-                    .Select(c => c.Trim())
-                    .Where(c => c.Length > 0),
-            ];
-            return WildcardUtil.Match(codes, col.Code.ToString());
         }
 
         // Get potion info, potency, and lazy JSON-only potion reg.

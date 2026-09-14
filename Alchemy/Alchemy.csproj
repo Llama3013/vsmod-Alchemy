@@ -47,9 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AlchemyCombatOverhaulCompat\AlchemyCombatOverhaulCompat.csproj"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="EmbeddedResource" />
     <!-- EffectLib lives in its own repo (vs-effectlib) and ships as its own mod, so compile
          against the prebuilt dll but never copy it into Alchemy's output - the game loads
          effectlib.dll from the effectlib mod zip. -->
@@ -60,8 +57,7 @@
   </ItemGroup>
 
   <Target Name="EnsureEffectLibDll" BeforeTargets="CoreCompile">
-    <Error Condition="!Exists('..\Dependencies\effectlib.dll')"
-           Text="..\Dependencies\effectlib.dll is missing. Build the EffectLib project (vs-effectlib repo) and copy effectlib.dll into the Dependencies folder." />
+    <Error Condition="!Exists('..\Dependencies\effectlib.dll')" Text="..\Dependencies\effectlib.dll is missing. Build the EffectLib project (vs-effectlib repo) and copy effectlib.dll into the Dependencies folder." />
   </Target>
 <ItemGroup>
     <Content Include="..\resources\**">

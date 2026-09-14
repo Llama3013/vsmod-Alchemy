@@ -7,14 +7,12 @@ vertexFlags: {
    healingeffectivness, maxhealthExtraPoints, walkspeed, hungerrate, rangedWeaponsAcc, rangedWeaponsSpeed
    rangedWeaponsDamage, meleeWeaponsDamage, mechanicalsDamage, animalLootDropRate, forageDropRate, wildCropDropRate
    vesselContentsDropRate, oreDropRate, rustyGearDropRate, miningSpeedMul, animalSeekingRange, armorDurabilityLoss, bowDrawingStrength, wholeVesselLootChance, temporalGearTLRepairCost, animalHarvestingTime*/
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using EffectLib;
 using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -40,13 +38,10 @@ namespace Alchemy
                 harmony = new Harmony(HarmonyId);
                 harmony.PatchAll(Assembly.GetExecutingAssembly());
             }
-            CombatOverhaulCompat.Init(api);
             RegisterClasses(api);
             RegisterEffectsOnce(api.Logger);
-            RegisterWithEffectLib(api);
+            RegisterCoatingWithEffectLib();
 
-            // World config isn't a reliable sync channel for runtime values a client needs to
-            // read back (tooltips, behavior calculations) - PlayerJoin below sends this instead.
             api.Network
                 .RegisterChannel(ConfigSyncChannelName)
                 .RegisterMessageType<AlchemyConfigSyncPacket>();
@@ -65,45 +60,14 @@ namespace Alchemy
                 PotionEffects.RegisterAll();
                 PotionDefinitions.Validate(logger);
 
-                // Claims the ~25 built-in potion ids so a JSON-defined effect (scanned by a
-                // behavior's own OnLoaded, or a content patch like throwableacid.json) can never
-                // silently take one over - see PotionConsumableLogic.IsCodeOwned.
                 EffectRegistry.Reserve(PotionDefinitions.All.Select(def => def.Id));
 
                 effectsRegistered = true;
             }
         }
 
-        // Runs on every Start rather than once. The game creates a ModSystem per side and can
-        // recreate them on a world reload, so a one-shot guard here would leave EffectLib
-        // pointed at a stale gate for the rest of the process. Both calls below are idempotent.
-        private static void RegisterWithEffectLib(ICoreAPI api)
-        {
-            // EffectLib ships no config of its own, so point its capability gate at ours.
-            EffectPolicy.SetGate(capability =>
-                capability switch
-                {
-                    EffectCapability.Fly => AlchemyConfig.Loaded.AllowFlightPotion,
-                    EffectCapability.Climb => AlchemyConfig.Loaded.AllowClimbPotion,
-                    EffectCapability.Fall => AlchemyConfig.Loaded.AllowFallPotion,
-                    EffectCapability.Refresh => AlchemyConfig.Loaded.AllowPotionRefresh,
-                    EffectCapability.RetainOnDisconnect =>
-                        AlchemyConfig.Loaded.RetainEffectsOnDisconnect,
-                    EffectCapability.Resize =>
-                        AlchemyConfig.Loaded.AllowGrowPotion || AlchemyConfig.Loaded.AllowShrinkPotion,
-                    _ => true,
-                }
-            );
-
-            // Recall, reshape, nutrition, temporal and resizing are carried out by EffectLib's
-            // own built-in handler now - nothing to register here for them. The HUD provider is
-            // client-only, registered from StartClientSide instead.
-
-            RegisterCoatingWithEffectLib(api);
-        }
-
-        // Same idempotency note as RegisterWithEffectLib above.
-        private static void RegisterCoatingWithEffectLib(ICoreAPI api)
+        // Setup for registering coating behavior with EffectLib.
+        private static void RegisterCoatingWithEffectLib()
         {
             CoatingPolicy.Configure(
                 new CoatingConfig
@@ -111,8 +75,6 @@ namespace Alchemy
                     AllowCoating = () => AlchemyConfig.Loaded.AllowWeaponCoating,
                     MaxCharges = () => AlchemyConfig.Loaded.WeaponCoatCharges,
                     EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier,
-                    IsCoatableWeapon = col => PotionConsumableLogic.HasWeaponTag(api, col),
-                    IsCoatableProjectile = PotionConsumableLogic.IsCoatableProjectile,
                     IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed,
                     ResolveLiquidEffect = stack =>
                         PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul)
@@ -128,22 +90,6 @@ namespace Alchemy
                     AllowBarrelCoating = () => AlchemyConfig.Loaded.AllowBarrelCoating,
                     BarrelConsumeLitres = () => AlchemyConfig.Loaded.WeaponCoatConsumeLitres,
                     BarrelCheckLitres = () => AlchemyConfig.Loaded.WeaponCoatCheckLitres,
-
-                    CombatOverhaulManagesWeapon = CombatOverhaulCompat.ShouldUseBuffStorage,
-                    CombatOverhaulManagesProjectile =
-                        CombatOverhaulCompat.ShouldUseProjectileBuffStorage,
-                    ReadCombatOverhaulCoat = stack =>
-                        CombatOverhaulCompat.TryGetCoating(
-                            stack,
-                            out string id,
-                            out string code,
-                            out float mul,
-                            out int charges
-                        )
-                            ? (id, code, mul, charges)
-                            : null,
-                    WriteCombatOverhaulWeaponCoat = CombatOverhaulCompat.SetCoating,
-                    WriteCombatOverhaulProjectileCoat = CombatOverhaulCompat.SetProjectileCoating,
                 }
             );
         }
@@ -162,10 +108,6 @@ namespace Alchemy
             api.RegisterCollectibleBehaviorClass(
                 "PotionConsumableLiquid",
                 typeof(PotionConsumableLiquidBehavior)
-            );
-            api.RegisterCollectibleBehaviorClass(
-                "PotionCoat",
-                typeof(EffectLib.CollectibleBehaviorCoatable)
             );
             api.RegisterCollectibleBehaviorClass(
                 "PotionCoatSource",
@@ -213,49 +155,9 @@ namespace Alchemy
             base.StartPre(api);
         }
 
-        public override void AssetsFinalize(ICoreAPI api)
-        {
-            if (api.Side != EnumAppSide.Client)
-                return;
-
-            List<string> tagList =
-            [
-                .. AlchemyConfig
-                    .Loaded.CoatableWeaponTags.Split(',')
-                    .Select(t => t.Trim())
-                    .Where(t => t.Length > 0),
-            ];
-
-            api.CollectibleTagRegistry.TryCreateTagSet(out TagSet coatableTags, tagList);
-
-            foreach (CollectibleObject obj in api.World.Collectibles)
-            {
-                if (obj?.Code == null)
-                    continue;
-
-                // Coatable weapons are tag-matched; coatable projectiles are wildcard-code matched
-                // against the admin-configured CoatableProjectilesCodes (default "*arrow*").
-                bool isCoatable =
-                    obj.Tags.Overlaps(coatableTags)
-                    || PotionConsumableLogic.IsCoatableProjectile(obj);
-
-                if (!isCoatable)
-                    continue;
-
-                obj.CollectibleBehaviors =
-                [
-                    .. obj.CollectibleBehaviors,
-                    new EffectLib.CollectibleBehaviorCoatable(obj),
-                ];
-            }
-        }
-
         public override void StartClientSide(ICoreClientAPI api)
         {
-            // The effect HUD (grow/shrink row and potion icons included) is entirely EffectLib's
-            // now - nothing to register. Size resync and the CanClimbAnywhere mirror are handled
-            // by EffectLibMod.StartClientSide. JSON-defined potions register themselves via
-            // PotionConsumableBehavior's OnLoaded - nothing to scan here either.
+            // JSON-defined potions register themselves via PotionConsumableBehavior's OnLoaded.
             api.Network
                 .GetChannel(ConfigSyncChannelName)
                 .SetMessageHandler<AlchemyConfigSyncPacket>(packet =>
@@ -281,7 +183,6 @@ namespace Alchemy
 
         public override void Dispose()
         {
-            CombatOverhaulCompat.Shutdown();
             harmony?.UnpatchAll(HarmonyId);
             harmony = null;
 

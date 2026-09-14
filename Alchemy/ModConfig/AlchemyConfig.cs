@@ -177,8 +177,6 @@ namespace Alchemy
         public bool AllowBarrelCoating { get; set; } = true;
         public bool AllowVanillaContainerDrinking { get; set; } = false;
         public bool OnlyOnePotionAtATime { get; set; } = false;
-        public bool AllowPotionRefresh { get; set; } = false;
-        public bool RetainEffectsOnDisconnect { get; set; } = true;
         public bool SideEffectStrengthMultiplier { get; set; } = true;
 
         public bool AllowPotionExclusivity { get; set; } = false;
@@ -241,6 +239,33 @@ namespace Alchemy
         public bool FallPotionResetsEffects { get; set; } = false;
         public bool ClimbPotionResetsEffects { get; set; } = false;
         public bool FlightPotionResetsEffects { get; set; } = false;
+
+        public bool ArcherPotionReplaceIfActive { get; set; } = false;
+        public bool HealingEffectPotionReplaceIfActive { get; set; } = false;
+        public bool HungerEnhancePotionReplaceIfActive { get; set; } = false;
+        public bool HungerSupressPotionReplaceIfActive { get; set; } = false;
+        public bool HunterPotionReplaceIfActive { get; set; } = false;
+        public bool LooterPotionReplaceIfActive { get; set; } = false;
+        public bool MeleePotionReplaceIfActive { get; set; } = false;
+        public bool MiningPotionReplaceIfActive { get; set; } = false;
+        public bool PoisonPotionReplaceIfActive { get; set; } = false;
+        public bool PredatorPotionReplaceIfActive { get; set; } = false;
+        public bool RegenPotionReplaceIfActive { get; set; } = false;
+        public bool ScentMaskPotionReplaceIfActive { get; set; } = false;
+        public bool SpeedPotionReplaceIfActive { get; set; } = false;
+        public bool VitalityPotionReplaceIfActive { get; set; } = false;
+        public bool RecallPotionReplaceIfActive { get; set; } = false;
+        public bool GlowPotionReplaceIfActive { get; set; } = false;
+        public bool WaterBreathePotionReplaceIfActive { get; set; } = false;
+        public bool ColdResistPotionReplaceIfActive { get; set; } = false;
+        public bool NutritionPotionReplaceIfActive { get; set; } = false;
+        public bool TemporalPotionReplaceIfActive { get; set; } = false;
+        public bool ReshapePotionReplaceIfActive { get; set; } = false;
+        public bool GrowPotionReplaceIfActive { get; set; } = false;
+        public bool ShrinkPotionReplaceIfActive { get; set; } = false;
+        public bool FallPotionReplaceIfActive { get; set; } = false;
+        public bool ClimbPotionReplaceIfActive { get; set; } = false;
+        public bool FlightPotionReplaceIfActive { get; set; } = false;
 
         public bool AllowDrinkingArcher { get; set; } = true;
         public bool AllowDrinkingHealingEffect { get; set; } = true;
@@ -403,9 +428,6 @@ namespace Alchemy
         public float PotionDrinkCheckLitres { get; set; } = 0.24f;
         public float WeaponCoatConsumeLitres { get; set; } = 0.25f;
         public float WeaponCoatCheckLitres { get; set; } = 0.24f;
-
-        public string CoatableWeaponTags { get; set; } = "weapon-melee";
-        public string CoatableProjectilesCodes { get; set; } = "*arrow*";
 
         public float ThrowableFlaskSplashRadius { get; set; } = 2.5f;
         public float ThrowableFlaskEffectMultiplier { get; set; } = 0.5f;
