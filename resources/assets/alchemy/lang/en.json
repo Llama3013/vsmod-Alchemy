@@ -8,7 +8,9 @@
   "item-potionbase*": "A potion base used to make potions",
   "item-potionbase-basic": "Basic potion base",
   "itemdesc-potionbase-basic": "Used to make every potion",
+
   "potion-when-used": "When potion is used: ",
+
   "potion-archer-accuracy-effect": "+{0}% ranged accuracy",
   "potion-animal-loot-effect": "+{0}% more animal loot",
   "potion-animal-harvest-effect": "+{0}% faster animal harvest",
@@ -41,6 +43,7 @@
   "potion-side-psychedelic-reduce-effect": "-{0}% of max psychedelic effect",
   "potion-side-saturation-gain-effect": "+{0} saturation gain",
   "potion-side-saturation-loss-effect": "-{0} saturation loss",
+
   "item-potionbase-archer-weak": "Archer's Flask (weak) base",
   "itemdesc-potionbase-archer-weak": "Used to make Archer's Flask (weak) potion",
   "item-potionbase-healingeffect-weak": "Potent Oil (weak) base",
@@ -69,6 +72,7 @@
   "itemdesc-potionbase-speed-weak": "Used to make Sprinter's Flask (weak) potion",
   "item-potionbase-vitality-weak": "Vitality Flask (weak) base",
   "itemdesc-potionbase-vitality-weak": "Used to make Vitality Flask (weak) potion",
+
   "item-potionbase-archer-medium": "Archer's Flask (medium) base",
   "itemdesc-potionbase-archer-medium": "Used to make Archer's Flask (medium) potion",
   "item-potionbase-healingeffect-medium": "Potent Oil (medium) base",
@@ -97,6 +101,7 @@
   "itemdesc-potionbase-speed-medium": "Used to make Sprinter's Flask (medium) potion",
   "item-potionbase-vitality-medium": "Vitality Flask (medium) base",
   "itemdesc-potionbase-vitality-medium": "Used to make Vitality Flask (medium) potion",
+
   "item-potionbase-archer-strong": "Archer's Flask (strong) base",
   "itemdesc-potionbase-archer-strong": "Used to make Archer's Flask (strong) potion",
   "item-potionbase-healingeffect-strong": "Potent Oil (strong) base",
@@ -125,6 +130,7 @@
   "itemdesc-potionbase-speed-strong": "Used to make Sprinter's Flask (strong) potion",
   "item-potionbase-vitality-strong": "Vitality Flask (strong) base",
   "itemdesc-potionbase-vitality-strong": "Used to make Vitality Flask (strong) potion",
+
   "item-utilitypotionbase-recall": "Recall Flask base",
   "itemdesc-utilitypotionbase-recall": "Used to make Recall Flask potion",
   "item-utilitypotionbase-glow": "Glow Flask base",
@@ -149,6 +155,7 @@
   "itemdesc-utilitypotionbase-climb": "Used to make Spider Flask potion",
   "item-utilitypotionbase-flight": "Flight Flask base",
   "itemdesc-utilitypotionbase-flight": "Used to make Flight Flask potion",
+
   "alchemy:incontainer-item-potionportion-archer-weak": "Archer's Flask (weak)",
   "alchemy:incontainer-item-potionportion-healingeffect-weak": "Potent Oil (weak)",
   "alchemy:incontainer-item-potionportion-hungerenhance-weak": "Purging Brew (weak)",
@@ -163,6 +170,7 @@
   "alchemy:incontainer-item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "alchemy:incontainer-item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Vitality Flask (weak)",
+
   "alchemy:incontainer-item-potionportion-archer-medium": "Archer's Flask (medium)",
   "alchemy:incontainer-item-potionportion-healingeffect-medium": "Potent Oil (medium)",
   "alchemy:incontainer-item-potionportion-hungerenhance-medium": "Purging Brew (medium)",
@@ -177,6 +185,7 @@
   "alchemy:incontainer-item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "alchemy:incontainer-item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Vitality Flask (medium)",
+
   "alchemy:incontainer-item-potionportion-archer-strong": "Archer's Flask (strong)",
   "alchemy:incontainer-item-potionportion-healingeffect-strong": "Potent Oil (strong)",
   "alchemy:incontainer-item-potionportion-hungerenhance-strong": "Purging Brew (strong)",
@@ -191,6 +200,7 @@
   "alchemy:incontainer-item-potionportion-predator-strong": "Predator Pheromones (strong)",
   "alchemy:incontainer-item-potionportion-scentmask-strong": "Scent Mask (strong)",
   "alchemy:incontainer-item-potionportion-vitality-strong": "Vitality Flask (strong)",
+
   "alchemy:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "alchemy:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "alchemy:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
@@ -203,7 +213,9 @@
   "alchemy:incontainer-item-utilitypotionportion-fall": "Featherfall Flask",
   "alchemy:incontainer-item-utilitypotionportion-climb": "Spider Flask",
   "alchemy:incontainer-item-utilitypotionportion-flight": "Flight Flask",
+
   "alchemy:incontainer-item-potionteaportion": "Potion tea",
+
   "game:incontainer-item-potionportion-archer-weak": "Archer's Flask (weak)",
   "game:incontainer-item-potionportion-healingeffect-weak": "Potent Oil (weak)",
   "game:incontainer-item-potionportion-hungerenhance-weak": "Purging Brew (weak)",
@@ -218,6 +230,7 @@
   "game:incontainer-item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "game:incontainer-item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "game:incontainer-item-potionportion-vitality-weak": "Vitality Flask (weak)",
+
   "game:incontainer-item-potionportion-archer-medium": "Archer's Flask (medium)",
   "game:incontainer-item-potionportion-healingeffect-medium": "Potent Oil (medium)",
   "game:incontainer-item-potionportion-hungerenhance-medium": "Purging Brew (medium)",
@@ -232,6 +245,7 @@
   "game:incontainer-item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "game:incontainer-item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "game:incontainer-item-potionportion-vitality-medium": "Vitality Flask (medium)",
+
   "game:incontainer-item-potionportion-archer-strong": "Archer's Flask (strong)",
   "game:incontainer-item-potionportion-healingeffect-strong": "Potent Oil (strong)",
   "game:incontainer-item-potionportion-hungerenhance-strong": "Purging Brew (strong)",
@@ -246,6 +260,7 @@
   "game:incontainer-item-potionportion-predator-strong": "Predator Pheromones (strong)",
   "game:incontainer-item-potionportion-scentmask-strong": "Scent Mask (strong)",
   "game:incontainer-item-potionportion-vitality-strong": "Vitality Flask (strong)",
+
   "game:incontainer-item-utilitypotionportion-recall": "Recall Flask",
   "game:incontainer-item-utilitypotionportion-glow": "Glow Flask",
   "game:incontainer-item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
@@ -258,8 +273,11 @@
   "game:incontainer-item-utilitypotionportion-fall": "Featherfall Flask",
   "game:incontainer-item-utilitypotionportion-climb": "Spider Flask",
   "game:incontainer-item-utilitypotionportion-flight": "Flight Flask",
+
   "game:incontainer-item-potionteaportion": "Potion tea",
+
   "alchemy:item-potionteaportion": "Potion tea",
+
   "item-utilitypotionportion-recall": "Recall Flask",
   "item-utilitypotionportion-glow": "Glow Flask",
   "item-utilitypotionportion-waterbreathe": "Water Breathing Flask",
@@ -272,6 +290,7 @@
   "item-utilitypotionportion-fall": "Featherfall Flask",
   "item-utilitypotionportion-climb": "Spider Flask",
   "item-utilitypotionportion-flight": "Flight Flask",
+
   "block-claypotionflask-blue-raw": "Raw blue clay potion flask",
   "block-claypotionflask-fire-raw": "Raw fire clay potion flask",
   "block-claypotionflask-red-raw": "Raw red clay potion flask",
@@ -304,6 +323,7 @@
   "block-claythrowableflask-tan-fired": "Tan ceramic throwable flask",
   "block-claythrowableflask-earthyorange-fired": "Earthy orange ceramic throwable flask",
   "block-claythrowableflask-*-fired": "Ceramic Throwable Flask",
+
   "throwableflask-info": "Shatters on impact when thrown, applying its potion to all creatures within {0}m.",
   "throwableflask-notfull": "The contents of the flask don't feel heavy enough to take effect.",
   "throwableflask-splash-notfull": "The splash feels too light to take effect.",
@@ -324,6 +344,7 @@
   "item-herbball-scentmask": "Edible Herbs Scentmask (weak)",
   "item-herbball-speed": "Edible Herbs Speed (weak)",
   "item-herbball-vitality": "Edible Herbs Vitality (weak)",
+
   "item-potionportion-archer-weak": "Archer's Flask (weak)",
   "item-potionportion-healingeffect-weak": "Potent Oil (weak)",
   "item-potionportion-hungerenhance-weak": "Purging Brew (weak)",
@@ -338,6 +359,7 @@
   "item-potionportion-scentmask-weak": "Scent Mask (weak)",
   "item-potionportion-speed-weak": "Sprinter's Flask (weak)",
   "item-potionportion-vitality-weak": "Vitality Flask (weak)",
+
   "item-potionportion-archer-medium": "Archer's Flask (medium)",
   "item-potionportion-healingeffect-medium": "Potent Oil (medium)",
   "item-potionportion-hungerenhance-medium": "Purging Brew (medium)",
@@ -352,6 +374,7 @@
   "item-potionportion-predator-medium": "Predator Pheromones (medium)",
   "item-potionportion-scentmask-medium": "Scent Mask (medium)",
   "item-potionportion-vitality-medium": "Vitality Flask (medium)",
+
   "item-potionportion-archer-strong": "Archer's Flask (strong)",
   "item-potionportion-healingeffect-strong": "Potent Oil (strong)",
   "item-potionportion-hungerenhance-strong": "Purging Brew (strong)",
@@ -366,6 +389,7 @@
   "item-potionportion-predator-strong": "Predator Pheromones (strong)",
   "item-potionportion-scentmask-strong": "Scent Mask (strong)",
   "item-potionportion-vitality-strong": "Vitality Flask (strong)",
+
   "potion-recall-effect": "You teleport back to your returning point",
   "potion-glow-effect": "You glow brightly",
   "potion-waterbreathe-effect": "You can breathe underwater",
@@ -385,6 +409,7 @@
   "potion-climb-reach-effect": "Your climbing reach changes by {0} blocks",
   "potion-weight-effect": "Your weight changes by {0}kg",
   "potion-purge-effect": "Removes all active potion effects",
+
   "item-cuttings-*-raw": "Raw Cuttings",
   "item-cuttings-catmint-raw": "Raw Cuttings (catmint)",
   "item-cuttings-forgetmenot-raw": "Raw Cuttings (forgetmenot)",
@@ -448,6 +473,7 @@
   "item-cuttings-purplelilyofthevalley-raw": "Raw Cuttings (lily of the valley, lavender)",
   "item-cuttings-pinkforgetmenot-raw": "Raw Cuttings (forget me not, pink)",
   "item-cuttings-blueforgetmenot-raw": "Raw Cuttings (forget me not, blue)",
+
   "item-cuttings-*-dried": "Dried Cuttings",
   "item-cuttings-catmint-dried": "Dried Cuttings (catmint)",
   "item-cuttings-forgetmenot-dried": "Dried Cuttings (forgetmenot)",
@@ -511,6 +537,7 @@
   "item-cuttings-purplelilyofthevalley-dried": "Dried Cuttings (lily of the valley, lavender)",
   "item-cuttings-pinkforgetmenot-dried": "Dried Cuttings (forget me not, pink)",
   "item-cuttings-blueforgetmenot-dried": "Dried Cuttings (forget me not, blue)",
+
   "item-cuttings-*-cooked": "Cooked Cuttings",
   "item-cuttings-catmint-cooked": "Cooked Cuttings (catmint)",
   "item-cuttings-forgetmenot-cooked": "Cooked Cuttings (forgetmenot)",
@@ -574,6 +601,7 @@
   "item-cuttings-purplelilyofthevalley-cooked": "Cooked Cuttings (lily of the valley, lavender)",
   "item-cuttings-pinkforgetmenot-cooked": "Cooked Cuttings (forget me not, pink)",
   "item-cuttings-blueforgetmenot-cooked": "Cooked Cuttings (forget me not, blue)",
+
   "item-herbrackhook-*": "Herb Rack Hook",
   "item-herbrackhook-bismuth": "Herb Rack Hook (Bismuth)",
   "item-herbrackhook-bismuthbronze": "Herb Rack Hook (Bismuth bronze)",
@@ -599,6 +627,7 @@
   "item-herbrackhook-uranium": "Herb Rack Hook (Uranium)",
   "item-herbrackhook-zinc": "Herb Rack Hook (Zinc)",
   "item-herbrackhook-molybdochalkos": "Herb Rack Hook (Molybdochalkos)",
+
   "item-herbracktop-*": "Herb Rack Frame",
   "item-herbracktop-bismuth": "Herb Rack Frame (Bismuth)",
   "item-herbracktop-bismuthbronze": "Herb Rack Frame (Bismuth bronze)",
@@ -624,6 +653,7 @@
   "item-herbracktop-uranium": "Herb Rack Frame (Uranium)",
   "item-herbracktop-zinc": "Herb Rack Frame (Zinc)",
   "item-herbracktop-molybdochalkos": "Herb Rack Frame (Molybdochalkos)",
+
   "block-herbrackmold-blue-raw-herbracktop": "Raw blue herb rack top mold",
   "block-herbrackmold-fire-raw-herbracktop": "Raw fire herb rack top mold",
   "block-herbrackmold-red-raw-herbracktop": "Raw red herb rack top mold",
@@ -654,6 +684,7 @@
   "block-herbrackmold-*-fired-herbrackhook": "Ceramic herb rack hook mold",
   "block-herbrackmold-*-raw-herbracktop": "Raw herb rack top mold",
   "block-herbrackmold-*-fired-herbracktop": "Ceramic herb rack top mold",
+
   "block-potioncauldron-oldworld": "Brewing Cauldron (Old World)",
   "block-potioncauldron-copper": "Brewing Cauldron (Copper)",
   "block-potioncauldron-tinbronze": "Brewing Cauldron (Tin bronze)",
@@ -664,14 +695,18 @@
   "block-potioncauldron-meteoriciron": "Brewing Cauldron (Meteoric iron)",
   "block-potioncauldron-*": "Brewing Cauldron",
   "block-potioncauldron": "Brewing Cauldron",
+
   "blockdesc-potioncauldron-*": "Not designed for meal-making. Specially crafted for brewing potions.",
+
   "cauldron-warning-no-spoon": "A stirring spoon is required to brew potions",
   "cauldron-warning-glass-spoon": "A glass stirring spoon is required for strong potions",
   "cauldron-warning-output-full": "Output slot is full, remove it to continue brewing",
+
   "blockhelp-cauldron-addgrass": "Add dry grass",
   "blockhelp-cauldron-addfirewood": "Add firewood",
   "blockhelp-cauldron-detachspoon": "Remove stirring spoon",
   "blockhelp-cauldron-attachspoon": "Attach stirring spoon",
+
   "item-stirringspoon": "Wooden Stirring Spoon",
   "item-stirringspoon-glass-quartz": "Quartz Glass Stirring Spoon",
   "item-stirringspoon-glass-blue": "Blue Glass Stirring Spoon",
@@ -682,8 +717,10 @@
   "item-stirringspoon-glass-brown": "Brown Glass Stirring Spoon",
   "item-stirringspoon-glass-pink": "Pink Glass Stirring Spoon",
   "item-stirringspoon-glass-smoky": "Smoky Glass Stirring Spoon",
+
   "block-handbooktitle-potioncauldron": "Potion cauldron",
   "block-handbooktext-potioncauldron": "Acts like a large residue covered pot, the brewing cauldron is a large vessel too big to fit inside a firepit. Place it directly on the ground, build a firepit inside of it and ignite it. It has a greater capacity which allows for much larger batches, allowing up to 50 litres of potion liquid in one batch. A stirring spoon is required to brew potions. Not suitable for cooking food.",
+
   "block-herbrack-*": "Herb Rack",
   "item-mortarpestle-*": "Mortar & pestle",
   "itemdesc-mortarpestle-*": "Used to make potion base",
@@ -691,8 +728,11 @@
   "block-potionflask-round-*": "Medium potion flask",
   "block-potionflask-tube-*": "Small potion flask",
   "blockdesc-potionflask": "Used to hold {0} litres of potions",
+
   "potioneffectTrue": "Potion effects active",
+
   "game:tabname-alchemy": "Alchemy",
+
   "alchemy:alchemyguide-title": "Alchemy: Making Potions",
   "alchemy:alchemyguide-text": "Alchemy allows you to brew potions that enhance your abilities, grant utility effects, and more. There are three tiers of potions, each requiring progressively more advanced equipment.\n\n<a href=\"handbook://alchemyguide-herbs\">Tier 1 - Edible Herbs</a>: The earliest form of alchemy. Only a mortar & pestle required.\n\n<a href=\"handbook://alchemyguide-medium\">Tier 2 - Medium Potions</a>: Liquid potions brewed in a cauldron firepit. Requires copper age, with a barrel, a cauldron and wooden stirring spoon.\n\n<a href=\"handbook://alchemyguide-strong\">Tier 3 - Strong Potions</a>: Can you handle my strongest potions? Requires herb racks, glassworking and aqua vitae.\n\n<a href=\"handbook://alchemyguide-coat\">Weapon Coating</a>: Apply potions to your weapons and arrows to deliver their effects on hit.\n\n<a href=\"handbook://alchemyguide-throw\">Throwable Flasks</a>: Throw filled flasks to splash potion effects onto all creatures in range on impact.\n\nThe Alchemy mod is highly configurable. I highly reccomend you use the mod ConfigLib if you want to change anything about this mod, the are hundreds of different config values for you to adjust.\nIf you have any suggestions or find any bugs, preferably let me know on the official Vintage Story discord in the alchemy mod thread, or just leave a comment on the mod page.",
   "alchemy:alchemyguide-herbs-title": "Alchemy: Tier 1 - Edible Herbs",
