@@ -22,7 +22,7 @@ namespace Alchemy
         public static bool TryReadPotionId(CollectibleObject collectible, out string potionId)
         {
             JsonObject potion = collectible?.Attributes?[AttributeKey];
-            potionId = potion?.Exists == true ? potion["effectId"].AsString()?.ToLowerInvariant() : null;
+            potionId = EffectIds.Read(potion, "effectId", collectible);
 
             if (string.IsNullOrWhiteSpace(potionId))
             {
@@ -132,6 +132,16 @@ namespace Alchemy
             };
         }
 
+        public static float GetDurationMultiplier(string strength)
+        {
+            return strength switch
+            {
+                "strong" => AlchemyConfig.Loaded.StrongPotionDurationMultiplier,
+                "medium" => AlchemyConfig.Loaded.MediumPotionDurationMultiplier,
+                _ => AlchemyConfig.Loaded.WeakPotionDurationMultiplier,
+            };
+        }
+
         public static (
             float damage,
             float intox,
@@ -200,10 +210,12 @@ namespace Alchemy
         internal static bool TryResolvePotion(
             ItemStack stack,
             out string potionId,
-            out float potencyMul
+            out float potencyMul,
+            out float durationMul
         )
         {
             potencyMul = 1f;
+            durationMul = 1f;
 
             if (!TryReadPotionInfo(stack, out potionId, out string strength))
             {
@@ -212,6 +224,7 @@ namespace Alchemy
             }
 
             potencyMul = GetStrengthMultiplier(strength);
+            durationMul = PotionDefinitions.ScalesDuration(potionId) ? GetDurationMultiplier(strength) : 1f;
 
             if (!EffectRegistry.IsRegistered(potionId))
             {
@@ -344,10 +357,15 @@ namespace Alchemy
         }
 
         // The full tooltip for a resolved potion. Shared by both consumable behaviors, which
-        // differ only in how they resolve (potionId, potencyMul) in the first place.
-        internal static void AppendPotionTooltip(StringBuilder dsc, string potionId, float potencyMul)
+        // differ only in how they resolve (potionId, potencyMul, durationMul) in the first place.
+        internal static void AppendPotionTooltip(
+            StringBuilder dsc,
+            string potionId,
+            float potencyMul,
+            float durationMul
+        )
         {
-            EffectContext ctx = EffectRegistry.Build(potionId, potencyMul);
+            EffectContext ctx = EffectRegistry.Build(potionId, potencyMul, null, durationMul);
             if (ctx == null)
                 return;
 

@@ -77,8 +77,8 @@ namespace Alchemy
                     EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier,
                     IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed,
                     ResolveLiquidEffect = stack =>
-                        PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul)
-                            ? (id, mul)
+                        PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul, out float durationMul)
+                            ? (id, mul, durationMul)
                             : null,
 
                     // Drinking-style side effects and exclusivity groups apply to a coated hit too.

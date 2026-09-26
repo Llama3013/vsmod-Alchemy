@@ -267,6 +267,21 @@ namespace Alchemy
         public bool ClimbPotionReplaceIfActive { get; set; } = false;
         public bool FlightPotionReplaceIfActive { get; set; } = false;
 
+        public bool ArcherPotionScalesDuration { get; set; } = true;
+        public bool HealingEffectPotionScalesDuration { get; set; } = true;
+        public bool HungerEnhancePotionScalesDuration { get; set; } = true;
+        public bool HungerSupressPotionScalesDuration { get; set; } = true;
+        public bool HunterPotionScalesDuration { get; set; } = true;
+        public bool LooterPotionScalesDuration { get; set; } = true;
+        public bool MeleePotionScalesDuration { get; set; } = true;
+        public bool MiningPotionScalesDuration { get; set; } = true;
+        public bool PoisonPotionScalesDuration { get; set; } = false;
+        public bool PredatorPotionScalesDuration { get; set; } = true;
+        public bool RegenPotionScalesDuration { get; set; } = false;
+        public bool ScentMaskPotionScalesDuration { get; set; } = true;
+        public bool SpeedPotionScalesDuration { get; set; } = true;
+        public bool VitalityPotionScalesDuration { get; set; } = true;
+
         public bool AllowDrinkingArcher { get; set; } = true;
         public bool AllowDrinkingHealingEffect { get; set; } = true;
         public bool AllowDrinkingHungerEnhance { get; set; } = true;
@@ -364,6 +379,10 @@ namespace Alchemy
         public float WeakPotionMultiplier { get; set; } = 1.0f;
         public float MediumPotionMultiplier { get; set; } = 2.0f;
         public float StrongPotionMultiplier { get; set; } = 3.0f;
+
+        public float WeakPotionDurationMultiplier { get; set; } = 0.75f;
+        public float MediumPotionDurationMultiplier { get; set; } = 1.0f;
+        public float StrongPotionDurationMultiplier { get; set; } = 2.0f;
 
         public float ArcherPotionAcc { get; set; } = 0.05f;
         public float ArcherPotionDamage { get; set; } = 0.2f;

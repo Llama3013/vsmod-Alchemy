@@ -27,9 +27,10 @@ namespace Alchemy
         protected override bool TryResolveEffect(
             ItemStack sourceStack,
             out string effectId,
-            out float potencyMul
+            out float potencyMul,
+            out float durationMul
         ) =>
-            PotionConsumableLogic.TryResolvePotion(sourceStack, out effectId, out potencyMul)
+            PotionConsumableLogic.TryResolvePotion(sourceStack, out effectId, out potencyMul, out durationMul)
             && PotionConsumableLogic.IsCoatingAllowed(effectId);
     }
 }

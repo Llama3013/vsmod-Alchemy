@@ -29,9 +29,10 @@ namespace Alchemy
             ItemSlot slot,
             EntityAgent byEntity,
             out string effectId,
-            out float potencyMul
+            out float potencyMul,
+            out float durationMul
         ) =>
-            PotionConsumableLogic.TryResolvePotion(slot.Itemstack, out effectId, out potencyMul)
+            PotionConsumableLogic.TryResolvePotion(slot.Itemstack, out effectId, out potencyMul, out durationMul)
             && PotionConsumableLogic.IsDrinkingAllowed(effectId);
 
         protected override float GetConsumeTime(EntityAgent byEntity) =>
@@ -67,8 +68,8 @@ namespace Alchemy
             bool withDebugInfo
         )
         {
-            if (TryResolveEffect(slot, null, out string potionId, out float potencyMul))
-                PotionConsumableLogic.AppendPotionTooltip(dsc, potionId, potencyMul);
+            if (TryResolveEffect(slot, null, out string potionId, out float potencyMul, out float durationMul))
+                PotionConsumableLogic.AppendPotionTooltip(dsc, potionId, potencyMul, durationMul);
         }
     }
 }

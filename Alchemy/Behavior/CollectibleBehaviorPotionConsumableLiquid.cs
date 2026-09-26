@@ -35,11 +35,12 @@ namespace Alchemy
             ItemSlot slot,
             EntityAgent byEntity,
             out string effectId,
-            out float potencyMul
+            out float potencyMul,
+            out float durationMul
         )
         {
             ItemStack content = (collObj as BlockLiquidContainerBase)?.GetContent(slot.Itemstack);
-            return PotionConsumableLogic.TryResolvePotion(content, out effectId, out potencyMul)
+            return PotionConsumableLogic.TryResolvePotion(content, out effectId, out potencyMul, out durationMul)
                 && PotionConsumableLogic.IsDrinkingAllowed(effectId);
         }
 
@@ -79,8 +80,8 @@ namespace Alchemy
             bool withDebugInfo
         )
         {
-            if (TryResolveEffect(slot, null, out string potionId, out float potencyMul))
-                PotionConsumableLogic.AppendPotionTooltip(dsc, potionId, potencyMul);
+            if (TryResolveEffect(slot, null, out string potionId, out float potencyMul, out float durationMul))
+                PotionConsumableLogic.AppendPotionTooltip(dsc, potionId, potencyMul, durationMul);
         }
     }
 }

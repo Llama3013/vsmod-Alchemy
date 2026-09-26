@@ -34,6 +34,7 @@ namespace Alchemy
                 !PotionConsumableLogic.TryResolvePotion(
                     GetContent(flaskStack),
                     out string potionId,
+                    out _,
                     out _
                 )
             )

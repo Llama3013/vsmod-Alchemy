@@ -254,7 +254,8 @@ namespace Alchemy
                 !PotionConsumableLogic.TryResolvePotion(
                     contentStack,
                     out string potionId,
-                    out float potencyMul
+                    out float potencyMul,
+                    out float durationMul
                 )
             )
                 return;
@@ -279,7 +280,7 @@ namespace Alchemy
             string displayName = ResolveDisplayName(contentStack);
 
             foreach (Entity entity in targets)
-                EffectLib.CoatedEffects.Apply(potionId, entity, multiplier, displayName);
+                EffectLib.CoatedEffects.Apply(potionId, entity, multiplier, displayName, null, durationMul);
         }
 
         private Entity[] GetSplashTargets()

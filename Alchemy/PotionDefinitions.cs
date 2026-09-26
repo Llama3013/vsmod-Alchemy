@@ -12,32 +12,32 @@ namespace Alchemy
     {
         public static readonly PotionDefinition[] All =
         [
-            new("archerpotionid", "Archer", false),
-            new("healingeffectpotionid", "HealingEffect", false),
-            new("hungerenhancepotionid", "HungerEnhance", false),
-            new("hungersupresspotionid", "HungerSupress", false),
-            new("hunterpotionid", "Hunter", false),
-            new("looterpotionid", "Looter", false),
-            new("meleepotionid", "Melee", false),
-            new("miningpotionid", "Mining", false),
-            new("poisontickpotionid", "Poison", false),
-            new("predatorpotionid", "Predator", false),
-            new("regentickpotionid", "Regen", false),
-            new("scentmaskpotionid", "ScentMask", false),
-            new("speedpotionid", "Speed", false),
-            new("vitalitypotionid", "Vitality", false),
-            new("recallpotionid", "Recall", true),
-            new("glowpotionid", "Glow", true),
-            new("waterbreathepotionid", "WaterBreathe", true),
-            new("coldresistpotionid", "ColdResist", true),
-            new("nutritionpotionid", "Nutrition", true),
-            new("temporalpotionid", "Temporal", true),
-            new("reshapepotionid", "Reshape", true),
-            new("growpotionid", "Grow", true),
-            new("shrinkpotionid", "Shrink", true),
-            new("fallpotionid", "Fall", true),
-            new("climbpotionid", "Climb", true),
-            new("flightpotionid", "Flight", true),
+            new("alchemy:archerpotionid", "Archer", false),
+            new("alchemy:healingeffectpotionid", "HealingEffect", false),
+            new("alchemy:hungerenhancepotionid", "HungerEnhance", false),
+            new("alchemy:hungersupresspotionid", "HungerSupress", false),
+            new("alchemy:hunterpotionid", "Hunter", false),
+            new("alchemy:looterpotionid", "Looter", false),
+            new("alchemy:meleepotionid", "Melee", false),
+            new("alchemy:miningpotionid", "Mining", false),
+            new("alchemy:poisontickpotionid", "Poison", false),
+            new("alchemy:predatorpotionid", "Predator", false),
+            new("alchemy:regentickpotionid", "Regen", false),
+            new("alchemy:scentmaskpotionid", "ScentMask", false),
+            new("alchemy:speedpotionid", "Speed", false),
+            new("alchemy:vitalitypotionid", "Vitality", false),
+            new("alchemy:recallpotionid", "Recall", true),
+            new("alchemy:glowpotionid", "Glow", true),
+            new("alchemy:waterbreathepotionid", "WaterBreathe", true),
+            new("alchemy:coldresistpotionid", "ColdResist", true),
+            new("alchemy:nutritionpotionid", "Nutrition", true),
+            new("alchemy:temporalpotionid", "Temporal", true),
+            new("alchemy:reshapepotionid", "Reshape", true),
+            new("alchemy:growpotionid", "Grow", true),
+            new("alchemy:shrinkpotionid", "Shrink", true),
+            new("alchemy:fallpotionid", "Fall", true),
+            new("alchemy:climbpotionid", "Climb", true),
+            new("alchemy:flightpotionid", "Flight", true),
         ];
 
         private static readonly Dictionary<string, PotionDefinition> byId = All.ToDictionary(
@@ -71,6 +71,13 @@ namespace Alchemy
         {
             PotionDefinition def = Get(potionId);
             return def != null && Read(AlchemyConfig.Loaded, "AllowCoating" + def.Name, false);
+        }
+
+        public static bool ScalesDuration(string potionId)
+        {
+            PotionDefinition def = Get(potionId);
+            return def == null
+                || (!def.Utility && Read(AlchemyConfig.Loaded, def.Name + "PotionScalesDuration", true));
         }
 
         public static string GroupOf(string potionId)
@@ -138,6 +145,8 @@ namespace Alchemy
             yield return "AllowThrowing" + def.Name;
             yield return "AllowCoating" + def.Name;
             yield return def.Name + "PotionGroup";
+            if (!def.Utility)
+                yield return def.Name + "PotionScalesDuration";
             yield return def.Name + "PotionDrinkingDamage";
             yield return def.Name + "PotionDrinkingIntoxication";
             yield return def.Name + "PotionDrinkingPsychedelic";
