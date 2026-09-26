@@ -124,8 +124,6 @@
   "item-utilitypotionbase-nutrition": "Zacier Naparu Odżywczego",
   "itemdesc-utilitypotionbase-nutrition": "Zrobisz z niego Napar Odżywczy",
 
-  "alchemy:incontainer-item-potionportion-all-weak": "Mikstura Deweloperska (słaba)",
-  "alchemy:incontainer-item-potionportion-alltick-weak": "Czasowa Mikstura Deweloperska (słaba)",
   "alchemy:incontainer-item-potionportion-archer-weak": "Mikstura Łucznika (słaba)",
   "alchemy:incontainer-item-potionportion-healingeffect-weak": "Aktywny Olej (słaby)",
   "alchemy:incontainer-item-potionportion-hungerenhance-weak": "Oczyszczający Napar (słaby)",
@@ -141,8 +139,6 @@
   "alchemy:incontainer-item-potionportion-speed-weak": "Mikstura Biegacza (słaba)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Mikstura Witalności (słaba)",
 
-  "alchemy:incontainer-item-potionportion-all-medium": "Mikstura Deweloperska (normalna)",
-  "alchemy:incontainer-item-potionportion-alltick-medium": "Czasowa Mikstura Deweloperska (normalna)",
   "alchemy:incontainer-item-potionportion-archer-medium": "Mikstura Łucznika (normalna)",
   "alchemy:incontainer-item-potionportion-healingeffect-medium": "Aktywny Olej (normalny)",
   "alchemy:incontainer-item-potionportion-hungerenhance-medium": "Oczyszczający Napar (normalny)",
@@ -158,8 +154,6 @@
   "alchemy:incontainer-item-potionportion-scentmask-medium": "Mikstura Maskująca (normalna)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Mikstura Witalności (normalna)",
 
-  "alchemy:incontainer-item-potionportion-all-strong": "Mikstura Deweloperska (silna)",
-  "alchemy:incontainer-item-potionportion-alltick-strong": "Czasowa Mikstura Deweloperska (silna)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Mikstura Łucznika (silna)",
   "alchemy:incontainer-item-potionportion-healingeffect-strong": "Aktywny Olej (silny)",
   "alchemy:incontainer-item-potionportion-hungerenhance-strong": "Oczyszczający Napar (silny)",
@@ -183,8 +177,6 @@
 
   "alchemy:incontainer-item-potionteaportion": "Baza Alchemiczna",
 
-  "game:incontainer-item-potionportion-all-weak": "Mikstura Deweloperska (słaba)",
-  "game:incontainer-item-potionportion-alltick-weak": "Czasowa Mikstura Deweloperska (słaba)",
   "game:incontainer-item-potionportion-archer-weak": "Mikstura Łucznika (słaba)",
   "game:incontainer-item-potionportion-healingeffect-weak": "Aktywny Olej (słaby)",
   "game:incontainer-item-potionportion-hungerenhance-weak": "Oczyszczający Napar (słaby)",
@@ -200,8 +192,6 @@
   "game:incontainer-item-potionportion-speed-weak": "Mikstura Biegacza (słaba)",
   "game:incontainer-item-potionportion-vitality-weak": "Mikstura Witalności (słaba)",
 
-  "game:incontainer-item-potionportion-all-medium": "Mikstura Deweloperska (normalna)",
-  "game:incontainer-item-potionportion-alltick-medium": "Czasowa Mikstura Deweloperska (normalna)",
   "game:incontainer-item-potionportion-archer-medium": "Mikstura Łucznika (normalna)",
   "game:incontainer-item-potionportion-healingeffect-medium": "Aktywny Olej (normalny)",
   "game:incontainer-item-potionportion-hungerenhance-medium": "Oczyszczający Napar (normalny)",
@@ -217,8 +207,6 @@
   "game:incontainer-item-potionportion-scentmask-medium": "Mikstura Maskująca (normalna)",
   "game:incontainer-item-potionportion-vitality-medium": "Mikstura Witalności (normalna)",
 
-  "game:incontainer-item-potionportion-all-strong": "Mikstura Deweloperska (silna)",
-  "game:incontainer-item-potionportion-alltick-strong": "Czasowa Mikstura Deweloperska (silna)",
   "game:incontainer-item-potionportion-archer-strong": "Mikstura Łucznika (silna)",
   "game:incontainer-item-potionportion-healingeffect-strong": "Aktywny Olej (silny)",
   "game:incontainer-item-potionportion-hungerenhance-strong": "Oczyszczający Napar (silny)",
@@ -252,8 +240,6 @@
 
   "block-claypotionflask-*-raw": "Gliniana fiolka (Surowa)",
   "block-claypotionflask-*-fired": "Gliniana fiolka (Wypalona)",
-  "item-herbball-all": "Deweloperskie Jadalne Zioła (słabe)",
-  "item-herbball-alltick": "Deweloperskie Czasowe Jadalne Zioła (słabe)",
   "item-herbball-archer": "Jadalne Zioła Łucznika (słabe)",
   "item-herbball-healingeffect": "Aktywne Jadalne Zioła (słabe)",
   "item-herbball-hungerenhance": "Czyszczące Jadalne Zioła (słabe)",
@@ -269,8 +255,6 @@
   "item-herbball-speed": "Jadalne Zioła Szybkości (słabe)",
   "item-herbball-vitality": "Witalne Jadalne Zioła (słabe)",
 
-  "item-potionportion-all-weak": "Mikstura Deweloperska (słaba)",
-  "item-potionportion-alltick-weak": "Czasowa Mikstura Deweloperska (słaba)",
   "item-potionportion-archer-weak": "Mikstura Łucznika (słaba)",
   "item-potionportion-healingeffect-weak": "Aktywny Olej (słaby)",
   "item-potionportion-hungerenhance-weak": "Oczyszczający Napar (słaby)",
@@ -286,8 +270,6 @@
   "item-potionportion-speed-weak": "Miksutra Biegacza (słaba)",
   "item-potionportion-vitality-weak": "Miksutra Witalności (słaba)",
 
-  "item-potionportion-all-medium": "Mikstura Deweloperska (normalna)",
-  "item-potionportion-alltick-medium": "Czasowa Mikstura Deweloperska (normalna)",
   "item-potionportion-archer-medium": "Mikstura Łucznika (normalna)",
   "item-potionportion-healingeffect-medium": "Aktywny Olej (normalny)",
   "item-potionportion-hungerenhance-medium": "Oczyszczający Napar (normalny)",
@@ -303,8 +285,6 @@
   "item-potionportion-scentmask-medium": "Mikstura Maskująca (normalna)",
   "item-potionportion-vitality-medium": "Miksutra Witalności (normalna)",
 
-  "item-potionportion-all-strong": "Mikstura Deweloperska (silna)",
-  "item-potionportion-alltick-strong": "Czasowa Mikstura Deweloperska (silna)",
   "item-potionportion-archer-strong": "Mikstura Łucznika (silna)",
   "item-potionportion-healingeffect-strong": "Aktywny Olej (silny)",
   "item-potionportion-hungerenhance-strong": "Oczyszczający Napar (silny)",
@@ -319,11 +299,6 @@
   "item-potionportion-predator-strong": "Drapieżne Piżmo (silne)",
   "item-potionportion-scentmask-strong": "Miksutra Maskująca (silna)",
   "item-potionportion-vitality-strong": "Miksutra Witalności (silna)",
-  "itemdesc-utilitypotionportion-recall": "Po użyciu: Zostaniesz przeteleportowany do punktu odrodzenia",
-  "itemdesc-utilitypotionportion-glow": "Po użyciu: Jasno świecisz",
-  "itemdesc-utilitypotionportion-waterbreathe": "Po użyciu: Możesz oddychać pod wodą",
-  "itemdesc-utilitypotionportion-temporal": "Po użyciu: Przywróci tobie trochę stabilności temporalnej",
-  "itemdesc-utilitypotionportion-nutrition": "Po użyciu: Zyskujesz punkty odżywcze w najniższych kategoriach",
 
   "item-cuttings-*-raw": "Świeże Przycięte Zioła",
   "item-cuttings-catmint-raw": "Świeże Przycięte Zioła (Kocimiętka)",
@@ -470,15 +445,11 @@
   "itemdesc-mortarpestle-*": "Wytworzysz dzięki niej zaciery",
 
   "block-potionflask-normal-*": "Duża fiolka",
-  "blockdesc-potionflask-normal-*": "Do przechowywania mikstur",
 
   "block-potionflask-round-*": "Średnia fiolka",
-  "blockdesc-potionflask-round-*": "Do przechowywania mikstur",
 
   "block-potionflask-tube-*": "Mała fiolka",
-  "blockdesc-potionflask-tube-*": "Do przechowywania mikstur",
 
-  "potioneffectFalse": "Brak efektów mikstur",
   "potioneffectTrue": "Aktywne efekty mikstur",
 
   "alchemy:alchemyguide-title": "Alchemia: Wyrób mikstur",

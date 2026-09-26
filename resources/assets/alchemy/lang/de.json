@@ -124,8 +124,6 @@
   "item-utilitypotionbase-nutrition": "Basis Nährflaschen",
   "itemdesc-utilitypotionbase-nutrition": "Wird zur Herstellung eines Nährflaschentranks verwendet",
 
-  "alchemy:incontainer-item-potionportion-all-weak": "Debug-Trank (schwach)",
-  "alchemy:incontainer-item-potionportion-alltick-weak": "Debug-Gametick-Trank (schwach)",
   "alchemy:incontainer-item-potionportion-archer-weak": "Bogenschützen-Trank (schwach)",
   "alchemy:incontainer-item-potionportion-healingeffect-weak": "Starkes Öl (schwach)",
   "alchemy:incontainer-item-potionportion-hungerenhance-weak": "Reinigungstrank (schwach)",
@@ -141,8 +139,6 @@
   "alchemy:incontainer-item-potionportion-speed-weak": "Sprintertrank (schwach)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Vitalitätstrank (schwach)",
 
-  "alchemy:incontainer-item-potionportion-all-medium": "Debug-Trank (mittel)",
-  "alchemy:incontainer-item-potionportion-alltick-medium": "Debug-Gametick-Trank (mittel)",
   "alchemy:incontainer-item-potionportion-archer-medium": "Bogenschützen-Trank (mittel)",
   "alchemy:incontainer-item-potionportion-healingeffect-medium": "Starkes Öl (mittel)",
   "alchemy:incontainer-item-potionportion-hungerenhance-medium": "Reinigungstrank (mittel)",
@@ -158,8 +154,6 @@
   "alchemy:incontainer-item-potionportion-speed-medium": "Sprintertrank (mittel)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Vitalitätstrank (mittel)",
 
-  "alchemy:incontainer-item-potionportion-all-strong": "Debug-Trank (stark)",
-  "alchemy:incontainer-item-potionportion-alltick-strong": "Debug-Gametick-Trank (stark)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Bogenschützen-Trank (stark)",
   "alchemy:incontainer-item-potionportion-healingeffect-strong": "Starkes Öl (stark)",
   "alchemy:incontainer-item-potionportion-hungerenhance-strong": "Reinigungstrank (stark)",
@@ -183,8 +177,6 @@
 
   "alchemy:incontainer-item-potionteaportion": "Trank-Tee",
 
-  "game:incontainer-item-potionportion-all-weak": "Debug-Trank (schwach)",
-  "game:incontainer-item-potionportion-alltick-weak": "Debug-Gametick-Trank (schwach)",
   "game:incontainer-item-potionportion-archer-weak": "Bogenschützen-Trank (schwach)",
   "game:incontainer-item-potionportion-healingeffect-weak": "Starkes Öl (schwach)",
   "game:incontainer-item-potionportion-hungerenhance-weak": "Reinigungstrank (schwach)",
@@ -200,8 +192,6 @@
   "game:incontainer-item-potionportion-speed-weak": "Sprintertrank (schwach)",
   "game:incontainer-item-potionportion-vitality-weak": "Vitalitätstrank (schwach)",
 
-  "game:incontainer-item-potionportion-all-medium": "Debug-Trank (mittel)",
-  "game:incontainer-item-potionportion-alltick-medium": "Debug-Gametick-Trank (mittel)",
   "game:incontainer-item-potionportion-archer-medium": "Bogenschützen-Trank (mittel)",
   "game:incontainer-item-potionportion-healingeffect-medium": "Starkes Öl (mittel)",
   "game:incontainer-item-potionportion-hungerenhance-medium": "Reinigungstrank (mittel)",
@@ -217,8 +207,6 @@
   "game:incontainer-item-potionportion-speed-medium": "Sprintertrank (mittel)",
   "game:incontainer-item-potionportion-vitality-medium": "Vitalitätstrank (mittel)",
 
-  "game:incontainer-item-potionportion-all-strong": "Debug-Trank (stark)",
-  "game:incontainer-item-potionportion-alltick-strong": "Debug-Gametick-Trank (stark)",
   "game:incontainer-item-potionportion-archer-strong": "Bogenschützen-Trank (stark)",
   "game:incontainer-item-potionportion-healingeffect-strong": "Starkes Öl (stark)",
   "game:incontainer-item-potionportion-hungerenhance-strong": "Reinigungstrank (stark)",
@@ -252,8 +240,6 @@
 
   "block-claypotionflask-*-raw": "Keramiktrankflasche (roh)",
   "block-claypotionflask-*-fired": "Keramiktrankflasche (gebrannt)",
-  "item-herbball-all": "Essbare Kräuter Alle (schwach)",
-  "item-herbball-alltick": "Essbare Kräuter Alltick (schwach)",
   "item-herbball-archer": "Essbare Kräuter Bogenschütze (schwach)",
   "item-herbball-healingeffect": "Essbare Kräuter Potent (schwach)",
   "item-herbball-hungerenhance": "Essbare Kräuter Reinigend (schwach)",
@@ -269,8 +255,6 @@
   "item-herbball-speed": "Essbare Kräuter Schnelligkeit (schwach)",
   "item-herbball-vitality": "Essbare Kräuter Vitalität (schwach)",
 
-  "item-potionportion-all-weak": "Debug-Trank (schwach)",
-  "item-potionportion-alltick-weak": "Debug-Gametick-Trank (schwach)",
   "item-potionportion-archer-weak": "Bogenschützen-Trank (schwach)",
   "item-potionportion-healingeffect-weak": "Starkes Öl (schwach)",
   "item-potionportion-hungerenhance-weak": "Reinigungstrank (schwach)",
@@ -286,8 +270,6 @@
   "item-potionportion-speed-weak": "Sprintertrank (schwach)",
   "item-potionportion-vitality-weak": "Vitalitätstrank (schwach)",
 
-  "item-potionportion-all-medium": "Debug-Trank (mittel)",
-  "item-potionportion-alltick-medium": "Debug-Gametick-Trank (mittel)",
   "item-potionportion-archer-medium": "Bogenschützen-Trank (mittel)",
   "item-potionportion-healingeffect-medium": "Starkes Öl (mittel)",
   "item-potionportion-hungerenhance-medium": "Reinigungstrank (mittel)",
@@ -303,8 +285,6 @@
   "item-potionportion-speed-medium": "Sprintertrank (mittel)",
   "item-potionportion-vitality-medium": "Vitalitätstrank (mittel)",
 
-  "item-potionportion-all-strong": "Debug-Trank (stark)",
-  "item-potionportion-alltick-strong": "Debug-Gametick-Trank (stark)",
   "item-potionportion-archer-strong": "Bogenschützen-Trank (stark)",
   "item-potionportion-healingeffect-strong": "Starkes Öl (stark)",
   "item-potionportion-hungerenhance-strong": "Reinigungstrank (stark)",
@@ -319,11 +299,6 @@
   "item-potionportion-scentmask-strong": "Duftmaske (stark)",
   "item-potionportion-speed-strong": "Sprintertrank (stark)",
   "item-potionportion-vitality-strong": "Vitalitätstrank (stark)",
-  "itemdesc-utilitypotionportion-recall": "Bei Nutzung des Tranks: Du teleportierst dich zurück zu deinem Rückkehrpunkt",
-  "itemdesc-utilitypotionportion-glow": "Bei Nutzung des Tranks: Du strahlst hell",
-  "itemdesc-utilitypotionportion-waterbreathe": "Bei Nutzung des Tranks: Du kannst unter Wasser atmen",
-  "itemdesc-utilitypotionportion-temporal": "Bei Nutzung des Tranks: Du erhälst etwas temporale Stabilität",
-  "itemdesc-utilitypotionportion-nutrition": "Bei Nutzung des Tranks: Du erreichst ein Sättigungsgefühl bei niedrigeren Ernährungsniveaus",
 
   "item-cuttings-*-raw": "Rohe Stecklinge",
   "item-cuttings-catmint-raw": "Rohe Stecklinge (Katzenminze)",
@@ -470,15 +445,11 @@
   "itemdesc-mortarpestle-*": "Wird zur Herstellung einer Trankbasis verwendet",
 
   "block-potionflask-normal-*": "Große Trankflasche",
-  "blockdesc-potionflask-normal-*": "Wird zur Aufbewahrung von Tränken verwendet",
 
   "block-potionflask-round-*": "Mittlere Trankflasche",
-  "blockdesc-potionflask-round-*": "Wird zur Aufbewahrung von Tränken verwendet",
 
   "block-potionflask-tube-*": "Kleine Trankflasche",
-  "blockdesc-potionflask-tube-*": "Wird zur Aufbewahrung von Tränken verwendet",
 
-  "potioneffectFalse": "Keine Trankeffekte aktiv",
   "potioneffectTrue": "Trankeffekte aktiv",
 
   "alchemy:alchemyguide-title": "Alchemie: Zaubertränke herstellen",

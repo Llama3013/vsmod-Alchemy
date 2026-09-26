@@ -99,8 +99,6 @@
   "item-utilitypotionbase-nutrition": "Base de frasco de nutrición",
   "itemdesc-utilitypotionbase-nutrition": "Se usa para hacer la poción de frasco de nutrición",
 
-  "alchemy:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
-  "alchemy:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "alchemy:incontainer-item-potionportion-archer-weak": "Frasco del arquero (débil)",
   "alchemy:incontainer-item-potionportion-healingeffect-weak": "Aceite potente (débil)",
   "alchemy:incontainer-item-potionportion-hungerenhance-weak": "Bebida purgante (débil)",
@@ -116,8 +114,6 @@
   "alchemy:incontainer-item-potionportion-speed-weak": "Frasco del corredor (débil)",
   "alchemy:incontainer-item-potionportion-vitality-weak": "Frasco de vitalidad (débil)",
 
-  "alchemy:incontainer-item-potionportion-all-medium": "Debug potion (medium)",
-  "alchemy:incontainer-item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "alchemy:incontainer-item-potionportion-archer-medium": "Frasco del arquero (mediano)",
   "alchemy:incontainer-item-potionportion-healingeffect-medium": "Aceite potente (mediano)",
   "alchemy:incontainer-item-potionportion-hungerenhance-medium": "Bebida purgante (mediano)",
@@ -133,8 +129,6 @@
   "alchemy:incontainer-item-potionportion-scentmask-medium": "Máscara de aroma (mediano)",
   "alchemy:incontainer-item-potionportion-vitality-medium": "Frasco de vitalidad (mediano)",
 
-  "alchemy:incontainer-item-potionportion-all-strong": "Debug potion (strong)",
-  "alchemy:incontainer-item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "alchemy:incontainer-item-potionportion-archer-strong": "Frasco del arquero (fuerte)",
   "alchemy:incontainer-item-potionportion-healingeffect-strong": "Aceite potente (fuerte)",
   "alchemy:incontainer-item-potionportion-hungerenhance-strong": "Bebida purgante (fuerte)",
@@ -157,8 +151,6 @@
 
   "alchemy:incontainer-item-potionteaportion": "Poción de Té",
 
-  "game:incontainer-item-potionportion-all-weak": "Debug potion (weak)",
-  "game:incontainer-item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "game:incontainer-item-potionportion-archer-weak": "Frasco de Arquero (Débil)",
   "game:incontainer-item-potionportion-healingeffect-weak": "Aceite Potente (Débil)",
   "game:incontainer-item-potionportion-hungerenhance-weak": "Poción Purificante (Débil)",
@@ -174,8 +166,6 @@
   "game:incontainer-item-potionportion-speed-weak": "Frasco del Velocista (Débil)",
   "game:incontainer-item-potionportion-vitality-weak": "Frasco de Vitalidad (Débil)",
 
-  "game:incontainer-item-potionportion-all-medium": "Debug potion (medium)",
-  "game:incontainer-item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "game:incontainer-item-potionportion-archer-medium": "Frasco de arquero (medio)",
   "game:incontainer-item-potionportion-healingeffect-medium": "Aceite potente (medio)",
   "game:incontainer-item-potionportion-hungerenhance-medium": "Bebida purgante (medio)",
@@ -191,8 +181,6 @@
   "game:incontainer-item-potionportion-speed-medium": "Frasco de velocista (medio)",
   "game:incontainer-item-potionportion-vitality-medium": "Frasco de vitalidad (medio)",
 
-  "game:incontainer-item-potionportion-all-strong": "Debug potion (strong)",
-  "game:incontainer-item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "game:incontainer-item-potionportion-archer-strong": "Frasco de arquero (fuerte)",
   "game:incontainer-item-potionportion-healingeffect-strong": "Aceite potente (fuerte)",
   "game:incontainer-item-potionportion-hungerenhance-strong": "Bebida purgante (fuerte)",
@@ -224,8 +212,6 @@
 
   "block-claypotionflask-*-raw": "Frasco de poción de cerámica (crudo)",
   "block-claypotionflask-*-fired": "Frasco de Poción de Cerámica (Cocido)",
-  "item-herbball-all": "Hierbas Comestibles de Poción (Todas)",
-  "item-herbball-alltick": "Hierbas Comestibles de Poción (AllTicks)",
   "item-herbball-archer": "Hierbas Comestibles de Poción (Arquero)",
   "item-herbball-healingeffect": "Hierbas Comestibles de Poción (Efecto de Curación)",
   "item-herbball-hungerenhance": "Hierbas Comestibles de Poción (Estimulante de Hambre)",
@@ -241,8 +227,6 @@
   "item-herbball-speed": "Hierbas Comestibles de Poción (Velocidad)",
   "item-herbball-vitality": "Hierbas Comestibles de Poción (Vitalidad)",
 
-  "item-potionportion-all-weak": "Debug potion (weak)",
-  "item-potionportion-alltick-weak": "Debug gametick potion (weak)",
   "item-potionportion-archer-weak": "Frasco del arquero (débiles)",
   "item-potionportion-healingeffect-weak": "Aceite potente (débil)",
   "item-potionportion-hungerenhance-weak": "Bebida purgante (débil)",
@@ -258,8 +242,6 @@
   "item-potionportion-speed-weak": "Frasco del corredor (débiles)",
   "item-potionportion-vitality-weak": "Frasco de vitalidad (débiles)",
 
-  "item-potionportion-all-medium": "Debug potion (medium)",
-  "item-potionportion-alltick-medium": "Debug gametick potion (medium)",
   "item-potionportion-archer-medium": "Frasco del arquero (mediano)",
   "item-potionportion-healingeffect-medium": "Aceite potente (mediano)",
   "item-potionportion-hungerenhance-medium": "Bebida purgante (mediano)",
@@ -275,8 +257,6 @@
   "item-potionportion-scentmask-medium": "Máscara de aroma (mediano)",
   "item-potionportion-vitality-medium": "Frasco de vitalidad (mediano)",
 
-  "item-potionportion-all-strong": "Debug potion (strong)",
-  "item-potionportion-alltick-strong": "Debug gametick potion (strong)",
   "item-potionportion-archer-strong": "Frasco del Arquero (fuerte)",
   "item-potionportion-healingeffect-strong": "Aceite Potente (fuerte)",
   "item-potionportion-hungerenhance-strong": "Bebida purgante (fuerte)",
@@ -291,10 +271,6 @@
   "item-potionportion-predator-strong": "Feromonas del Depredador (fuerte)",
   "item-potionportion-scentmask-strong": "Máscara de Olores (fuerte)",
   "item-potionportion-vitality-strong": "Frasco de Vitalidad (fuerte)",
-  "itemdesc-utilitypotionportion-recall": "Cuando se usa la poción: Teletransporta de vuelta a tu punto de retorno",
-  "itemdesc-utilitypotionportion-glow": "Cuando se usa la poción: Resplandeces intensamente",
-  "itemdesc-utilitypotionportion-waterbreathe": "Cuando se usa la poción: Puedes respirar bajo el agua",
-  "itemdesc-utilitypotionportion-nutrition": "Cuando se usa la poción: Aumenta tu saciedad en tus niveles de nutrición más bajos",
 
   "item-cuttings-catmint-raw": "Recortes crudos (catmint)",
   "item-cuttings-forgetmenot-raw": "Recortes crudos (no me olvides)",
@@ -427,21 +403,16 @@
 
   "block-herbrack-*": "Estante de hierbas",
 
-  "item-mortarpestle-": "Mortero y mano",
-  "itemdesc-mortarpestle-": "Se utiliza para hacer la base de pociones",
+  "item-mortarpestle-*": "Mortero y mano",
+  "itemdesc-mortarpestle-*": "Se utiliza para hacer la base de pociones",
 
-  "block-potionflask-normal-": "Frasco grande de poción",
-  "blockdesc-potionflask-normal-": "Se utiliza para contener pociones",
+  "block-potionflask-normal-*": "Frasco grande de poción",
 
-  "block-potionflask-round-": "Frasco mediano de poción",
-  "blockdesc-potionflask-round-": "Se utiliza para contener pociones",
+  "block-potionflask-round-*": "Frasco mediano de poción",
 
-  "block-potionflask-tube-": "Frasco pequeño de poción",
-  "blockdesc-potionflask-tube-": "Se utiliza para contener pociones",
+  "block-potionflask-tube-*": "Frasco pequeño de poción",
 
-  "potioneffectFalse": "No hay efectos de poción activos",
   "potioneffectTrue": "Efectos de poción activos",
 
-  "alchemyguide-title": "Alquimia - Guía para hacer pociones",
-  "alchemyguide-text": "<strong>Como hacer pociones</strong> \n\n<i>Desactualizado</i> \n\nPara hacer pociones necesitarás algunas cosas. Primero necesitarás frascos de poción, segundo necesitarás un mortero y mano y, por último, necesitarás flores/hierbas (las hierbas solo son accesibles cuando tienes instalado el mod de cultivo silvestre). <i>Frascos</i> Hay 3 frascos de diferentes formas y 5 colores diferentes. Las diferentes formas y colores no afectan las pociones, son solo por apariencia. Si no te importa la apariencia, recomendaría el <a href=\"handbook://block-alchemy:potionflask-normal-quartz-raw\">frasco</a> de cuarzo con forma normal.  Aquí hay una lista de diferentes tipos de <a href=\"handbooksearch://potion flask\">frascos</a>.  <i>Mortero & Mano</i> Se requiere mortero y mano para moler las flores/hierbas en bases de pociones. Puedes crear dos tipos diferentes de <a href=\"handbook://item-alchemy:mortarpestle-wood\">madera</a> o <a href=\"handbook://item-alchemy:mortarpestle-stone\">piedra</a> <i>Bases de Poción</i> Necesitarás <a href=\"handbook://item-alchemy:potionbase-basic\">Base de pocion basica</a> para hacer cualquier poción. La base de una poción está hecha de hongos de agárico de mosca, flor de cola de caballo y un mortero & mano. Para hacer una base de poción que no sea la versión básica, necesita dos flores/hierbas específicas diferentes que combine con un mortero & mano. Ejemplo: <a href=\"handbook://item-alchemy:potionbase-regen-weak\">Base de pocion curativa</a>. Puede aumentar la fuerza de la poción, lo que aumentará los efectos de la poción. Para hacer mejores bases de pociones de fuerza necesitarás combinar tijeras con la flor/hierba deseada que te dará esquejes crudos. Ejemplo: <a href=\"handbook://item-alchemy:cuttings-catmint-raw\">Esquejes crudos</a> Con esto puedes dejarlo en un lugar seguro o colocarlo en un <a href=\"handbook://block-alchemy:herbrack-oak-copper-copper\">herbario</a> para un secado más rápido (tambien <a href=\"handbook://block-expandedfoods:meathooks-oak-copper-east\">ganchos de carne</a> si tienes el mod expanded foods). Ejemplo de base (medio): <a href=\"handbook://item-alchemy:cuttings-catmint-dried\">Esquejes secos</a> Una vez que haya adquirido esquejes secos, puede elaborar una poción de fuerza media o cocinar los esquejes secos en una hoguera. Ejemplo: <a href=\"handbook://item-alchemy:cuttings-catmint-cooked\">Esquejes Cocinados</a> <i>Poción</i> Todo lo que queda es crear una poción. Ejemplo: <a href=\"handbook://block-alchemy:potion-regen-weak\">Aceite curativo</a>. Lista de pociones: <a href=\"handbooksearch://when potion is used\">Pociones</a>. "
+  "alchemy:alchemyguide-title": "Alquimia - Guía para hacer pociones"
 }
