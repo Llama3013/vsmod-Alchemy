@@ -1200,10 +1200,6 @@
   "alchemy:arrow-coated": "Arrow coated with {0}",
   "alchemy:weapon-coated": "Weapon coated with {0} ({1} charges remaining)",
   "potion-already-active": "This potion effect is already active",
-  "coating-not-allowed": "This potion cannot be used for weapon coating",
-  "arrow-already-coated": "This arrow is already coated",
-  "coating-max-charges": "This weapon's coating is already at maximum charges",
-  "coating-conflict": "This weapon is already coated with a different potion",
 
   "Allow-WeaponCoating-Config": "Allow weapon coatings by potion type",
   "Allow-Throwing-Config": "Allow throwing by potion type",

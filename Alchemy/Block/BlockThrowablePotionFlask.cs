@@ -45,14 +45,8 @@ namespace Alchemy
                 : !IsFull(flaskStack) ? "alchemy:throwableflask-notfull"
                 : null;
 
-            if (warning == null)
-                return;
-
-            serverPlayer.SendMessage(
-                GlobalConstants.InfoLogChatGroup,
-                Lang.Get(warning),
-                EnumChatType.Notification
-            );
+            if (warning != null)
+                EffectLib.EffectLang.Send(serverPlayer, warning);
         }
 
         public override void OnHeldInteractStart(
@@ -152,8 +146,6 @@ namespace Alchemy
                 ref behaviorHandling
             );
         }
-
-        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity) { }
 
         public override void GetHeldItemInfo(
             ItemSlot inSlot,

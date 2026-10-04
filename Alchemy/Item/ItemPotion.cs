@@ -15,18 +15,6 @@ namespace Alchemy
             return "eat";
         }
 
-        // This is needed as a workaround for now because there is no such OnHeldIdle override on behaviors and hopefully it will be implemented into VS eventually
-        public override void OnHeldIdle(ItemSlot slot, EntityAgent byEntity)
-        {
-            base.OnHeldIdle(slot, byEntity);
-            foreach (CollectibleBehavior bh in CollectibleBehaviors)
-                if (bh is EffectLib.CollectibleBehaviorCoatSource coat)
-                {
-                    coat.CoatingIdle(slot, byEntity);
-                    return;
-                }
-        }
-
         public override void OnGroundIdle(EntityItem entityItem)
         {
             if (entityItem.Itemstack.Item.MatterState == EnumMatterState.Liquid)

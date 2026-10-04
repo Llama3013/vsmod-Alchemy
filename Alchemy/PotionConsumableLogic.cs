@@ -345,12 +345,10 @@ namespace Alchemy
 
             ApplySideEffects(playerEntity, potionId, ctx.PotencyMul);
 
-            serverPlayer.SendMessage(
-                GlobalConstants.InfoLogChatGroup,
-                ctx.Reshape
-                    ? Lang.Get("alchemy:reshape-gain", displayName)
-                    : EffectLang.Get(potionId, "effect-gain", displayName),
-                EnumChatType.Notification
+            EffectLang.Send(
+                serverPlayer,
+                ctx.Reshape ? "alchemy:reshape-gain" : "effectlib:effect-gain",
+                displayName
             );
 
             return true;

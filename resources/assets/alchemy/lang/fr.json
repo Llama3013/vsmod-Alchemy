@@ -1134,10 +1134,6 @@
   "alchemy:arrow-coated": "Flèche enduite de {0}",
   "alchemy:weapon-coated": "Arme enduite de {0} ({1} charges restantes)",
   "potion-already-active": "Cet effet de potion est déjà actif",
-  "coating-not-allowed": "Cette potion ne peut pas servir d'enduit d'arme",
-  "arrow-already-coated": "Cette flèche est déjà enduite",
-  "coating-max-charges": "L'enduit de cette arme est déjà au maximum de charges",
-  "coating-conflict": "Cette arme est déjà enduite d'une autre potion",
 
   "Allow-WeaponCoating-Config": "Autoriser l'enduit d'arme par type de potion",
   "Allow-Throwing-Config": "Autoriser le lancer par type de potion",

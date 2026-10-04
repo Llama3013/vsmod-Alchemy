@@ -238,11 +238,7 @@ namespace Alchemy
         {
             foreach (Entity entity in targets)
                 if (entity is EntityPlayer { Player: IServerPlayer splashedPlayer })
-                    splashedPlayer.SendMessage(
-                        GlobalConstants.InfoLogChatGroup,
-                        Lang.Get(langKey),
-                        EnumChatType.Notification
-                    );
+                    EffectLib.EffectLang.Send(splashedPlayer, langKey);
         }
 
         private void ApplyContentsEffect(ItemStack contentStack)

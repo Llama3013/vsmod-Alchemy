@@ -1055,10 +1055,6 @@
   "alchemy:arrow-coated": "涂有 {0} 的箭矢",
   "alchemy:weapon-coated": "涂有 {0} 的武器（剩余 {1} 次充能）",
   "potion-already-active": "此药剂效果已激活",
-  "coating-not-allowed": "此药剂不能用作武器涂层",
-  "arrow-already-coated": "此箭矢已涂层",
-  "coating-max-charges": "此武器的涂层已达到最大充能次数",
-  "coating-conflict": "此武器已涂有其他药剂",
 
   "Allow-WeaponCoating-Config": "按药剂类型允许武器涂层",
   "PotionGroups-Config": "药剂独占分组",
