@@ -75,4 +75,26 @@ namespace Alchemy
             }
         }
     }
+
+    // PlayerModelLib resets size here, after Initialize.
+    [HarmonyPatch(typeof(Entity), nameof(Entity.OnEntitySpawn))]
+    public static class EntityPlayerSpawnSizePatch
+    {
+        public static void Postfix(Entity __instance)
+        {
+            if (__instance is EntityPlayer player)
+                EntityPlayerSizePatch.ApplySize(player);
+        }
+    }
+
+    // PlayerModelLib resets size here, after Initialize.
+    [HarmonyPatch(typeof(Entity), nameof(Entity.OnEntityLoaded))]
+    public static class EntityPlayerLoadedSizePatch
+    {
+        public static void Postfix(Entity __instance)
+        {
+            if (__instance is EntityPlayer player)
+                EntityPlayerSizePatch.ApplySize(player);
+        }
+    }
 }
