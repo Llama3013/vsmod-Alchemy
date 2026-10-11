@@ -1,0 +1,1164 @@
+[
+  {
+    "ingredientPattern": "KF",
+    "ingredients": {
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-*-free", "name": "flower", "allowedVariants": ["allocasuarinarobusta", "atriplexnummularia", "byblispilbarana", "calandriniabalonensis", "calytrixtetragona", "eremophilalatrobei", "gossypiumsturtianum", "hakearostrata", "ipomoeacostata", "ixodiaachillaeoides", "maireanasedifolia", "polycalymmastuartii", "ptilotusexaltatus", "ptilotusxerophilus", "sennapleurocarpa", "tecticorniaverrucosa", "thryptomenemicrantha"] },
+      "K": { "type": "item", "code": "game:shears-*", "isTool": true }
+    },
+    "width": 2,
+    "height": 1,
+    "output": { "type": "item", "code": "alchemy:cuttings-{flower}-raw" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-atriplexnummularia-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calandriniabalonensis-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-eremophilalatrobei-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-gossypiumsturtianum-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-tecticorniaverrucosa-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-atriplexnummularia-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calandriniabalonensis-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-eremophilalatrobei-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-gossypiumsturtianum-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-tecticorniaverrucosa-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-archer-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-flyagaric-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-earthball-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-deathcap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-elfinsaddle-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-jackolantern-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-devilbolete-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bitterbolete-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-devilstooth-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-golddropmilkcap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-funeralbell-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-pinkbonnet-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-laughingjim-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-foolsconecap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-sickener-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bluemeanie-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-goldcap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-libertycap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-wavycap-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-orange-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calytrixtetragona-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-healingeffect-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-orange-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calytrixtetragona-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-healingeffect-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-hakearostrata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-hakearostrata-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungerenhance-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "game:flower-orangemallow-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-atriplexnummularia-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calandriniabalonensis-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-eremophilalatrobei-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-gossypiumsturtianum-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-cornflower-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-tecticorniaverrucosa-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-atriplexnummularia-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calandriniabalonensis-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-eremophilalatrobei-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-gossypiumsturtianum-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-tecticorniaverrucosa-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-orangemallow-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-atriplexnummularia-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calandriniabalonensis-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-eremophilalatrobei-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-gossypiumsturtianum-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-cornflower-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-tecticorniaverrucosa-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-atriplexnummularia-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calandriniabalonensis-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-eremophilalatrobei-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-gossypiumsturtianum-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-tecticorniaverrucosa-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hunter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-maireanasedifolia-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-sennapleurocarpa-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-blue-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-maireanasedifolia-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-sennapleurocarpa-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-blue-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "game:herbbundle-chamomile" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-maireanasedifolia-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "game:herbbundle-chamomile" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-sennapleurocarpa-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-looter-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusxerophilus-*" },
+      "F": { "type": "block", "code": "game:flower-cowparsley-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ptilotusxerophilus-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cowparsley-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-melee-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-byblispilbarana-*" },
+      "F": { "type": "block", "code": "game:flower-wilddaisy-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ipomoeacostata-*" },
+      "F": { "type": "block", "code": "game:flower-wilddaisy-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-goldenpoppy-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-polycalymmastuartii-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-byblispilbarana-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-polycalymmastuartii-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ipomoeacostata-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-polycalymmastuartii-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-byblispilbarana-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-wilddaisy-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ipomoeacostata-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-wilddaisy-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-goldenpoppy-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-polycalymmastuartii-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-byblispilbarana-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-polycalymmastuartii-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ipomoeacostata-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-polycalymmastuartii-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-mining-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-thryptomenemicrantha-*" },
+      "F": { "type": "block", "code": "game:flower-forgetmenot-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-poison-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-thryptomenemicrantha-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-forgetmenot-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-poison-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "item", "code": "alchemy:cuttings-allocasuarinarobusta-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ptilotusexaltatus-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "item", "code": "alchemy:cuttings-ptilotusexaltatus-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ixodiaachillaeoides-*" },
+      "F": { "type": "block", "code": "game:flower-catmint-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lilyofthevalley-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calytrixtetragona-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ixodiaachillaeoides-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-calytrixtetragona-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ixodiaachillaeoides-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-catmint-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lilyofthevalley-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calytrixtetragona-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ixodiaachillaeoides-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-calytrixtetragona-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-regen-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:flower-forgetmenot-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-allocasuarinarobusta-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "alchemy:cuttings-forgetmenot-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-allocasuarinarobusta-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-hakearostrata-*" },
+      "F": { "type": "block", "code": "game:flower-heather-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-westerngorse-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-thryptomenemicrantha-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-hakearostrata-*" },
+      "F": { "type": "block", "code": "floralzonescentralaustralianregion:flower-thryptomenemicrantha-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-hakearostrata-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-heather-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-westerngorse-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-thryptomenemicrantha-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-hakearostrata-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-thryptomenemicrantha-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-byblispilbarana-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescentralaustralianregion:flower-ipomoeacostata-*" },
+      "F": { "type": "block", "code": "game:flower-lupine-purple-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-byblispilbarana-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-ipomoeacostata-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-lupine-purple-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  }
+]

@@ -14,7 +14,6 @@
   "creativeinventory": { "general": ["*"], "items": ["*"], "alchemy": ["*"] },
   "maxstacksize": 64,
   "materialDensity": 620,
-  "combustibleProps": { "burnTemperature": 400, "burnDuration": 6 },
   "guiTransform": {
     "translation": { "x": 3, "y": 0, "z": 0 },
     "rotation": { "x": -28, "y": 23, "z": 180 },

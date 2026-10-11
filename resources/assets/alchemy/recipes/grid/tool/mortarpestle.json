@@ -11,6 +11,17 @@
     "output": { "type": "item", "code": "alchemy:mortarpestle-wood", "quantity": 1 }
   },
   {
+    "ingredientPattern": "K_,WS",
+    "ingredients": {
+      "K": { "type": "item", "code": "game:knife-*", "isTool": true },
+      "W": { "type": "block", "code": "game:logsection-placed-*" },
+      "S": { "type": "item", "code": "game:stick" }
+    },
+    "width": 2,
+    "height": 2,
+    "output": { "type": "item", "code": "alchemy:mortarpestle-wood", "quantity": 1 }
+  },
+  {
     "ingredientPattern": "HC,RS",
     "ingredients": {
       "H": { "type": "item", "code": "game:hammer-*", "isTool": true },

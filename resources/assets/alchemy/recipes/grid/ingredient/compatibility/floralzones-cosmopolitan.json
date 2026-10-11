@@ -1,0 +1,432 @@
+[
+  {
+    "ingredientPattern": "KF",
+    "ingredients": {
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-*-free", "name": "flower", "allowedVariants": ["chamaenerionangustifolium", "cladoniarangiferina", "crinumasiaticum", "ludwigiapeploides", "menyanthestrifoliata", "rhododendrontomentosum", "surianamaritima"] },
+      "K": { "type": "item", "code": "game:shears-*", "isTool": true }
+    },
+    "width": 2,
+    "height": 1,
+    "output": { "type": "item", "code": "alchemy:cuttings-{flower}-raw" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-flyagaric-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-earthball-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-deathcap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-elfinsaddle-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-jackolantern-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-devilbolete-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bitterbolete-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-devilstooth-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-golddropmilkcap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-funeralbell-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-pinkbonnet-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-laughingjim-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-foolsconecap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-sickener-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-bluemeanie-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-goldcap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-libertycap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:mushroom-wavycap-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-basic" }
+  },
+  {
+    "ingredientPattern": "F,M,T",
+    "ingredients": {
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-surianamaritima-*" },
+      "M": { "type": "item", "code": "game:coke" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:utilitypotionbase-coldresist" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescosmopolitanregion:flower-chamaenerionangustifolium-*" },
+      "F": { "type": "block", "code": "game:flower-edelweiss-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-lupine-red-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-cladoniarangiferina-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescosmopolitanregion:flower-chamaenerionangustifolium-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-cladoniarangiferina-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-chamaenerionangustifolium-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-edelweiss-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-lupine-red-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cladoniarangiferina-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-chamaenerionangustifolium-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-cladoniarangiferina-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-hungersupress-strong" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "floralzonescosmopolitanregion:flower-rhododendrontomentosum-*" },
+      "F": { "type": "block", "code": "game:flower-forgetmenot-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-poison-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-rhododendrontomentosum-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-forgetmenot-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-poison-strong" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "game:*meat-*" },
+      "F": { "type": "item", "code": "alchemy:cuttings-menyanthestrifoliata-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-predator-strong" }
+  },
+  {
+    "ingredientPattern": "G,F,T",
+    "ingredients": {
+      "G": { "type": "item", "code": "game:nugget-nativegold" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-crinumasiaticum-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:utilitypotionbase-reshape" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "block", "code": "game:flower-forgetmenot-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-menyanthestrifoliata-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-weak" }
+  },
+  {
+    "ingredientPattern": "M,F,T",
+    "ingredients": {
+      "M": { "type": "item", "code": "alchemy:cuttings-forgetmenot-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-menyanthestrifoliata-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-scentmask-strong" }
+  },
+  {
+    "ingredientPattern": "V,F,T",
+    "ingredients": {
+      "V": { "type": "item", "code": "game:vegetable-turnip" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-ludwigiapeploides-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:utilitypotionbase-shrink" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "block", "code": "game:flower-westerngorse-*" },
+      "F": { "type": "block", "code": "floralzonescosmopolitanregion:flower-rhododendrontomentosum-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-weak" }
+  },
+  {
+    "ingredientPattern": "H,F,T",
+    "ingredients": {
+      "H": { "type": "item", "code": "alchemy:cuttings-westerngorse-cooked" },
+      "F": { "type": "item", "code": "alchemy:cuttings-rhododendrontomentosum-cooked" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:potionbase-speed-strong" }
+  }
+]
