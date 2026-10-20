@@ -40,7 +40,9 @@ namespace Alchemy
             }
             RegisterClasses(api);
             RegisterEffectsOnce(api.Logger);
-            RegisterCoatingWithEffectLib();
+
+            CoatingPolicy.Init(api);
+            CombatOverhaulCompat.Init(api);
 
             api.Network
                 .RegisterChannel(ConfigSyncChannelName)
@@ -64,34 +66,6 @@ namespace Alchemy
 
                 effectsRegistered = true;
             }
-        }
-
-        // Setup for registering coating behavior with EffectLib.
-        private static void RegisterCoatingWithEffectLib()
-        {
-            CoatingPolicy.Configure(
-                new CoatingConfig
-                {
-                    AllowCoating = () => AlchemyConfig.Loaded.AllowWeaponCoating,
-                    MaxCharges = () => AlchemyConfig.Loaded.WeaponCoatCharges,
-                    EffectMultiplier = () => AlchemyConfig.Loaded.WeaponCoatEffectMultiplier,
-                    IsEffectCoatable = PotionConsumableLogic.IsCoatingAllowed,
-                    ResolveLiquidEffect = stack =>
-                        PotionConsumableLogic.TryResolvePotion(stack, out string id, out float mul, out float durationMul)
-                            ? (id, mul, durationMul)
-                            : null,
-
-                    // Drinking-style side effects and exclusivity groups apply to a coated hit too.
-                    ApplySideEffects = (potionId, entity, mul) =>
-                        PotionConsumableLogic.ApplySideEffects(entity, potionId, mul),
-                    GetBlockReason = (potionId, player, ctx) =>
-                        PotionConsumableLogic.GetCoatingBlockReason(player, potionId, ctx),
-
-                    AllowBarrelCoating = () => AlchemyConfig.Loaded.AllowBarrelCoating,
-                    BarrelConsumeLitres = () => AlchemyConfig.Loaded.WeaponCoatConsumeLitres,
-                    BarrelCheckLitres = () => AlchemyConfig.Loaded.WeaponCoatCheckLitres,
-                }
-            );
         }
 
         public static void RegisterClasses(ICoreAPI api)
@@ -155,14 +129,42 @@ namespace Alchemy
             base.StartPre(api);
         }
 
+        public override void AssetsFinalize(ICoreAPI api)
+        {
+            base.AssetsFinalize(api);
+
+            if (api.Side != EnumAppSide.Client)
+                return;
+
+            AttachCoatableBehaviors(api);
+        }
+
+        private static void AttachCoatableBehaviors(ICoreAPI api)
+        {
+            foreach (CollectibleObject obj in api.World.Collectibles)
+            {
+                if (obj?.Code == null || obj.CollectibleBehaviors.Any(b => b is CoatableBehavior))
+                    continue;
+
+                if (!CoatingPolicy.IsCoatableWeapon(obj) && !CoatingPolicy.IsCoatableProjectile(obj))
+                    continue;
+
+                obj.CollectibleBehaviors = [.. obj.CollectibleBehaviors, new CoatableBehavior(obj)];
+            }
+        }
+
         public override void StartClientSide(ICoreClientAPI api)
         {
             // JSON-defined potions register themselves via PotionConsumableBehavior's OnLoaded.
             api.Network
                 .GetChannel(ConfigSyncChannelName)
                 .SetMessageHandler<AlchemyConfigSyncPacket>(packet =>
-                    AlchemyConfig.Loaded.ApplySyncPacket(packet)
-                );
+                {
+                    AlchemyConfig.Loaded.ApplySyncPacket(packet);
+                    // The server's coatable tags/codes may differ from this client's own config.
+                    CoatingPolicy.InvalidateCaches();
+                    AttachCoatableBehaviors(api);
+                });
         }
 
         public override void StartServerSide(ICoreServerAPI api)
@@ -189,6 +191,8 @@ namespace Alchemy
             // remove our player join listener so we don't create memory leaks
             if (api is ICoreServerAPI sapi)
                 sapi.Event.PlayerJoin -= SendConfigSync;
+
+            CombatOverhaulCompat.Shutdown();
 
             // Deliberately not unregistering from EffectLib: both are process-wide statics that
             // Start re-establishes, and dropping them here would disable every handler-driven

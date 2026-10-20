@@ -59,6 +59,12 @@
   <Target Name="EnsureEffectLibDll" BeforeTargets="CoreCompile">
     <Error Condition="!Exists('..\Dependencies\effectlib.dll')" Text="..\Dependencies\effectlib.dll is missing. Build the EffectLib project (vs-effectlib repo) and copy effectlib.dll into the Dependencies folder." />
   </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AlchemyCombatOverhaulCompat\AlchemyCombatOverhaulCompat.csproj"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="EmbeddedResource" />
+  </ItemGroup>
 <ItemGroup>
     <Content Include="..\resources\**">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

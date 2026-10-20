@@ -276,7 +276,7 @@ namespace Alchemy
             string displayName = ResolveDisplayName(contentStack);
 
             foreach (Entity entity in targets)
-                EffectLib.CoatedEffects.Apply(potionId, entity, multiplier, displayName, null, durationMul);
+                CoatedEffects.Apply(potionId, entity, multiplier, displayName, null, durationMul);
         }
 
         private Entity[] GetSplashTargets()

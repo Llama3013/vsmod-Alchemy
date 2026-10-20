@@ -1,4 +1,3 @@
-using EffectLib;
 using Vintagestory.API.Common;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -6,26 +5,42 @@ namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     /// <summary>
-    /// Alchemy's item-form coating sources (herb balls) on top of EffectLib's generic
-    /// <see cref="CollectibleBehaviorCoatSource"/>. Resolves a potion id/strength and injects
-    /// Alchemy's config into the consume time, the same way
-    /// <see cref="PotionConsumableBehavior"/> does for drinking. See
+    /// Held in the off hand, coats the main hand's weapon or arrows with this item's potion while
+    /// the player holds sneak + right mouse. Driven by <see cref="CoatSourceIdlePatch"/>. See
     /// <see cref="PotionCoatSourceLiquidBehavior"/> for the flask/liquid-container form.
     /// </summary>
-    public class PotionCoatSourceBehavior(CollectibleObject collObj)
-        : CollectibleBehaviorCoatSource(collObj)
+    public class PotionCoatSourceBehavior(CollectibleObject collObj) : CollectibleBehavior(collObj)
     {
-        protected override void RegisterOwnEffect() { }
+        protected virtual ItemStack GetSourceStack(ItemSlot slot) => slot.Itemstack;
 
-        protected override float GetConsumeTime() => AlchemyConfig.Loaded.WeaponCoatApplyTime;
+        protected virtual bool HasEnoughSource(ItemSlot slot) => (slot.Itemstack?.StackSize ?? 0) > 0;
 
-        protected override bool TryResolveEffect(
-            ItemStack sourceStack,
-            out string effectId,
-            out float potencyMul,
-            out float durationMul
-        ) =>
-            PotionConsumableLogic.TryResolvePotion(sourceStack, out effectId, out potencyMul, out durationMul)
-            && PotionConsumableLogic.IsCoatingAllowed(effectId);
+        protected virtual bool ConsumeSource(ItemSlot slot, EntityAgent byEntity)
+        {
+            slot.TakeOut(1);
+            slot.MarkDirty();
+            return true;
+        }
+
+        public void CoatingIdle(ItemSlot slot, EntityAgent byEntity)
+        {
+            ItemStack sourceStack = GetSourceStack(slot);
+            PotionConsumableLogic.TryResolvePotion(
+                sourceStack,
+                out string potionId,
+                out float potencyMul,
+                out float durationMul
+            );
+
+            CoatingInteraction.HandleIdle(
+                slot,
+                byEntity,
+                potionId,
+                potencyMul,
+                durationMul,
+                CoatedEffects.DefaultItemCode(sourceStack?.Collectible),
+                s => HasEnoughSource(s) && ConsumeSource(s, byEntity)
+            );
+        }
     }
 }

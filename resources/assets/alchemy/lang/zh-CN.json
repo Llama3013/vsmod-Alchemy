@@ -1054,6 +1054,9 @@
 
   "alchemy:arrow-coated": "涂有 {0} 的箭矢",
   "alchemy:weapon-coated": "涂有 {0} 的武器（剩余 {1} 次充能）",
+  "alchemy:arrow-already-coated": "此箭矢已涂层",
+  "alchemy:coating-max-charges": "此武器的涂层已达到最大充能次数",
+  "alchemy:coating-disabled-suffix": "已被服务器管理员配置禁用！",
   "potion-already-active": "此药剂效果已激活",
 
   "Allow-WeaponCoating-Config": "按药剂类型允许武器涂层",
@@ -1081,6 +1084,10 @@
   "WeaponCoatConsumeLitres-Comment": "每次从药剂瓶中涂抹涂层消耗的升数（液体容器源）",
   "WeaponCoatCheckLitres": "武器涂层最低量",
   "WeaponCoatCheckLitres-Comment": "药剂瓶中药剂必须达到的最低升数才能涂抹涂层。通常设置略低于涂层用量，以避免浮点数问题",
+  "CoatableWeaponTags": "可涂层的武器标签",
+  "CoatableWeaponTags-Comment": "逗号分隔的 VS 物品标签，用于可以用药剂涂层的武器。默认是 \"weapon-melee\"。这意味着所有原版武器和具有该标签的模组武器都可以涂层。如果你想只允许带有不同标签的特定武器涂层，例如将其替换为 \"weapon-sword, tool-cleaver\"，则只有剑和屠宰刀可以涂层。请确保标签有效，否则无效！",
+  "CoatableProjectilesCodes": "可涂层投射物代码",
+  "CoatableProjectilesCodes-Comment": "逗号分隔的可涂层投射物通配符物品代码。默认为 \"*arrow*\"，使所有原版和模组箭矢均可涂层。模式匹配完整物品代码（域:路径），因此可使用类似 \"*arrow*\"、\"game:arrow-*\" 或 \"mymod:bolt-*\" 的形式。例如 \"game:arrow-*, mymod:bolt-*\" 仅允许原版箭矢和该模组的弩箭。留空以完全禁用投射物涂层。",
   "OnlyOnePotionAtATime": "一次只允许激活一种药剂",
   "AllowPotionExclusivity": "启用药剂独占分组",
   "AllowPotionExclusivity-Comment": "启用时，每种药剂会被分配一个下方的独占分组。共享同一分组的两种药剂不能同时激活，设置为“独占”的药剂不能与任何其他药剂组合。“无”表示药剂不受限制。这是“一次只允许激活一种药剂”的更宽松替代方案。默认禁用。",

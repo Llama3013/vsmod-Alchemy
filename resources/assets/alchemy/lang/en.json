@@ -1199,6 +1199,11 @@
 
   "alchemy:arrow-coated": "Arrow coated with {0}",
   "alchemy:weapon-coated": "Weapon coated with {0} ({1} charges remaining)",
+  "alchemy:coating-not-allowed": "This cannot be used for coating",
+  "alchemy:arrow-already-coated": "This arrow is already coated",
+  "alchemy:coating-max-charges": "This weapon's coating is already at maximum charges",
+  "alchemy:coating-conflict": "This weapon is already coated with something else",
+  "alchemy:coating-disabled-suffix": "Disabled by server admin config!",
   "potion-already-active": "This potion effect is already active",
 
   "Allow-WeaponCoating-Config": "Allow weapon coatings by potion type",
@@ -1227,6 +1232,10 @@
   "WeaponCoatConsumeLitres-Comment": "How many litres are consumed each time a coating is applied from a flask (liquidcontent source)",
   "WeaponCoatCheckLitres": "Weapon coat minimum",
   "WeaponCoatCheckLitres-Comment": "The minimum litres that must be in a flask before a coating can be applied. Usually set slightly below the coat amount to avoid floating point issues",
+  "CoatableWeaponTags": "Coatable weapon tags",
+  "CoatableWeaponTags-Comment": "Comma-separated VS item tags for weapons that can be coated with effects. \"weapon-melee\" is the default, meaning every vanilla weapon and every modded weapon with that tag can be coated. Replace it with something like \"weapon-sword, tool-cleaver\" to only allow specific tags. Requires valid tags to work.",
+  "CoatableProjectilesCodes": "Coatable projectile codes",
+  "CoatableProjectilesCodes-Comment": "Comma-separated wildcard item codes for projectiles that can be coated with effects. \"*arrow*\" is the default, matching every vanilla and modded arrow. Patterns are matched against the full item code (domain:path), e.g. \"game:arrow-*, mymod:bolt-*\". Leave empty to disable projectile coating entirely.",
   "OnlyOnePotionAtATime": "Only allow one potion active at a time",
   "AllowPotionExclusivity": "Enable potion exclusivity groups",
   "AllowPotionExclusivity-Comment": "When enabled, each potion is assigned an exclusivity group below. Two potions sharing the same group cannot be active at the same time, and a potion set to 'Solo' cannot be combined with any other potion. 'None' leaves a potion unrestricted. This is a softer alternative to 'Only allow one potion active at a time'. Disabled by default.",

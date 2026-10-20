@@ -448,6 +448,11 @@ namespace Alchemy
         public float WeaponCoatConsumeLitres { get; set; } = 0.25f;
         public float WeaponCoatCheckLitres { get; set; } = 0.24f;
 
+        // Weapons are matched by vanilla item/block tags (comma-separated); arrows as of VS 1.22.7 have no
+        // reliable tag of their own, so projectiles are matched by wildcard item code instead.
+        public string CoatableWeaponTags { get; set; } = "weapon-melee";
+        public string CoatableProjectilesCodes { get; set; } = "*arrow*";
+
         public float ThrowableFlaskSplashRadius { get; set; } = 2.5f;
         public float ThrowableFlaskEffectMultiplier { get; set; } = 0.5f;
 

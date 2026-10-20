@@ -3480,6 +3480,20 @@
       }
     },
     "string": {
+      "COATABLEWEAPONTAGS": {
+        "name": "CoatableWeaponTags",
+        "ingui": "alchemy:CoatableWeaponTags",
+        "weight": 25.3,
+        "comment": "alchemy:CoatableWeaponTags-Comment",
+        "default": "weapon-melee"
+      },
+      "COATABLEPROJECTILESCODES": {
+        "name": "CoatableProjectilesCodes",
+        "ingui": "alchemy:CoatableProjectilesCodes",
+        "weight": 25.4,
+        "comment": "alchemy:CoatableProjectilesCodes-Comment",
+        "default": "*arrow*"
+      },
       "ARCHERPOTIONGROUP": {
         "name": "ArcherPotionGroup",
         "ingui": "alchemy:ArcherPotionGroup",

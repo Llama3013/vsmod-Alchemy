@@ -1,20 +1,21 @@
-using EffectLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
+using Vintagestory.GameContent;
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace Alchemy
 #pragma warning restore IDE0130 // Namespace does not match folder structure
 {
     /// <summary>
-    /// Alchemy's flask/liquid-container coating sources on top of EffectLib's generic
-    /// <see cref="CollectibleBehaviorCoatSourceLiquid"/>. Same shape as
-    /// <see cref="PotionCoatSourceBehavior"/> - resolves a potion id/strength and injects
-    /// Alchemy's config into consume time and litres.
+    /// Flask/liquid-container form of <see cref="PotionCoatSourceBehavior"/> - coats from the
+    /// container's contents, consuming litres instead of items.
     /// </summary>
     public class PotionCoatSourceLiquidBehavior(CollectibleObject collObj)
-        : CollectibleBehaviorCoatSourceLiquid(collObj)
+        : PotionCoatSourceBehavior(collObj)
     {
+        private float consumeLitres;
+        private float checkLitres;
+
         public override void Initialize(JsonObject properties)
         {
             base.Initialize(properties);
@@ -22,15 +23,27 @@ namespace Alchemy
             checkLitres = properties["checkLitres"].AsFloat(AlchemyConfig.Loaded.WeaponCoatCheckLitres);
         }
 
-        protected override float GetConsumeTime() => AlchemyConfig.Loaded.WeaponCoatApplyTime;
+        protected override ItemStack GetSourceStack(ItemSlot slot) =>
+            (collObj as BlockLiquidContainerBase)?.GetContent(slot.Itemstack);
 
-        protected override bool TryResolveEffect(
-            ItemStack sourceStack,
-            out string effectId,
-            out float potencyMul,
-            out float durationMul
-        ) =>
-            PotionConsumableLogic.TryResolvePotion(sourceStack, out effectId, out potencyMul, out durationMul)
-            && PotionConsumableLogic.IsCoatingAllowed(effectId);
+        protected override bool HasEnoughSource(ItemSlot slot) =>
+            collObj is BlockLiquidContainerBase container
+            && container.GetCurrentLitres(slot.Itemstack) >= checkLitres;
+
+        protected override bool ConsumeSource(ItemSlot slot, EntityAgent byEntity)
+        {
+            if (collObj is not BlockLiquidContainerBase container)
+                return false;
+
+            EntityPlayer player = byEntity as EntityPlayer;
+            int consumed = container.SplitStackAndPerformAction(
+                player,
+                slot,
+                stack => container.TryTakeLiquid(stack, consumeLitres)?.StackSize ?? 0
+            );
+            slot.MarkDirty();
+            player?.Player?.InventoryManager?.BroadcastHotbarSlot();
+            return consumed > 0;
+        }
     }
 }

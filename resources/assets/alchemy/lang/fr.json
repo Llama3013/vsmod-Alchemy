@@ -1133,6 +1133,9 @@
 
   "alchemy:arrow-coated": "Flèche enduite de {0}",
   "alchemy:weapon-coated": "Arme enduite de {0} ({1} charges restantes)",
+  "alchemy:arrow-already-coated": "Cette flèche est déjà enduite",
+  "alchemy:coating-max-charges": "L'enduit de cette arme est déjà au maximum de charges",
+  "alchemy:coating-disabled-suffix": "Désactivé par la configuration administrateur du serveur !",
   "potion-already-active": "Cet effet de potion est déjà actif",
 
   "Allow-WeaponCoating-Config": "Autoriser l'enduit d'arme par type de potion",
@@ -1161,6 +1164,10 @@
   "WeaponCoatConsumeLitres-Comment": "Litres consommés à chaque application d'enduit depuis une fiole",
   "WeaponCoatCheckLitres": "Minimum pour enduire",
   "WeaponCoatCheckLitres-Comment": "Litres minimum dans une fiole avant de pouvoir enduire. Souvent un peu sous la quantité d'enduit pour éviter les erreurs de flottants",
+  "CoatableWeaponTags": "Tags d'armes enduisables",
+  "CoatableWeaponTags-Comment": "Tags d'objets VS séparés par des virgules pour les armes enduisables. « weapon-melee » est la valeur par défaut. Toutes les armes vanilla et moddées avec ce tag seront enduisables. Pour n'autoriser que certaines armes, remplacez par exemple par « weapon-sword, tool-cleaver » : seules les épées et le couperet le seront. UTILISEZ DES TAGS VALIDES SINON CELA NE FONCTIONNERA PAS !",
+  "CoatableProjectilesCodes": "Codes de projectiles enduisables",
+  "CoatableProjectilesCodes-Comment": "Codes d'objets joker séparés par des virgules pour les projectiles enduisables. « *arrow* » est la valeur par défaut (toutes les flèches vanilla et moddées). Les motifs sont comparés au code complet (domaine:chemin), ex. « *arrow* », « game:arrow-* », « mymod:bolt-* ». Laissez vide pour désactiver l'enduit de projectiles.",
   "OnlyOnePotionAtATime": "N'autoriser qu'une potion active à la fois",
   "AllowPotionExclusivity": "Activer les groupes d'exclusivité des potions",
   "AllowPotionExclusivity-Comment": "Si activé, chaque potion a un groupe d'exclusivité ci-dessous. Deux potions du même groupe ne peuvent pas être actives en même temps, et une potion « Solo » ne peut se combiner avec aucune autre. « Aucun » la laisse sans restriction. Alternative plus souple à « N'autoriser qu'une potion active à la fois ». Désactivé par défaut.",

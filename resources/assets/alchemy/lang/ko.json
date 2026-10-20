@@ -683,6 +683,8 @@
     "WeaponCoatEffectMultiplier-Comment": "무기/화살 코팅 효과의 강도를 마실 수 있는 물약의 강도로 환산한 비율 (0.5 = 강도의 절반)",
     "WeaponCoatCharges": "무기 코팅 횟수",
     "WeaponCoatCharges-Comment": "무기 코팅이 견딜 수 있는 근접 공격의 최대 횟수",
+    "CoatableWeaponTags": "코팅 가능한 무기 태그",
+    "CoatableWeaponTags-Comment": "물약으로 코팅할 수 있는 무기의 항목 태그를 쉼표로 구분하여 입력합니다. 기본값은 \"weapon-melee\"입니다. 이 경우 해당 태그가 지정된 모든 기본 무기와 모드 무기를 코팅할 수 있습니다. 다른 태그를 가진 특정 무기만 코팅할 수 있도록 하려면, 예를 들어 \"weapon-sword, tool-cleaver\"로 대체하면 검과 도끼만 코팅할 수 있게 됩니다. 유효한 태그를 사용해야만 작동합니다!",
     "AllowVanillaContainerDrinking": "바닐라 저장고에서 음료를 마실 수 있도록 허용",
     "AllowVanillaContainerDrinking-Comment": "일반 그릇, 양동이, 물병에서 물약을 마실 수 있게 허용합니다. 플라스크는 바닐라 저장고와 상호작용 방식이 약간 다르기 때문에 아직 버그가 있을 수 있다고 생각합니다.",
     "heldhelp-coat-weapon": "무기나 화살에 코팅하려면 반대편 손에 드세요"
