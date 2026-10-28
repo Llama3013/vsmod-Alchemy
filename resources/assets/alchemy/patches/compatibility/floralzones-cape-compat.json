@@ -101,5 +101,6 @@
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/97/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/98/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/99/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] },
-  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/100/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] }
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/100/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] },
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json", "op": "addmerge", "path": "/101/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescaperegion", "invert": true }] }
 ]
