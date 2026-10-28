@@ -1340,5 +1340,17 @@
     "width": 1,
     "height": 3,
     "output": { "type": "item", "code": "alchemy:potionbase-vitality-strong" }
+  },
+  {
+    "ingredientPattern": "G,F,T",
+    "ingredients": {
+      "G": { "type": "item", "code": "game:metalbit-gold" },
+      "F": { "type": "block", "code": "floralzonesmediterraneanregion:flower-narcissusjonquilla-*" },
+      "T": { "type": "item", "code": "alchemy:mortarpestle-*", "isTool": true }
+    },
+    "shapeless": true,
+    "width": 1,
+    "height": 3,
+    "output": { "type": "item", "code": "alchemy:utilitypotionbase-reshape" }
   }
 ]

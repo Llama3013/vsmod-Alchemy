@@ -25,6 +25,13 @@
    "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
   },
   {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/19/enabled",
+   "value": false,
+   "condition": { "when": "AllowColdResistPotion", "isValue": "false" }
+  },
+  {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
    "op": "replace",
    "path": "/attributesByType/*-coldresist/handbook",
@@ -122,6 +129,13 @@
    "condition": { "when": "AllowFallPotion", "isValue": "false" }
   },
   {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/19/enabled",
+   "value": false,
+   "condition": { "when": "AllowFallPotion", "isValue": "false" }
+  },
+  {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
    "op": "replace",
    "path": "/attributesByType/*-fall/handbook",
@@ -155,6 +169,20 @@
    "file": "alchemy:recipes/grid/ingredient/shrinkbase.json",
    "op": "addmerge",
    "path": "/enabled",
+   "value": false,
+   "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/84/enabled",
+   "value": false,
+   "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/33/enabled",
    "value": false,
    "condition": { "when": "AllowShrinkPotion", "isValue": "false" }
   },
@@ -196,6 +224,13 @@
    "condition": { "when": "AllowGrowPotion", "isValue": "false" }
   },
   {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/3/enabled",
+   "value": false,
+   "condition": { "when": "AllowGrowPotion", "isValue": "false" }
+  },
+  {
    "file": "alchemy:itemtypes/liquid/utilitypotionportion.json",
    "op": "replace",
    "path": "/attributesByType/*-grow/handbook",
@@ -228,7 +263,70 @@
   {
    "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
    "op": "addmerge",
-   "path": "/enabled",
+   "path": "/0/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
+   "op": "addmerge",
+   "path": "/1/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/73/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/101/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/30/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/36/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/97/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/112/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json",
+   "op": "addmerge",
+   "path": "/29/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotion", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json",
+   "op": "addmerge",
+   "path": "/46/enabled",
    "value": false,
    "condition": { "when": "AllowReshapePotion", "isValue": "false" }
   },
@@ -252,6 +350,13 @@
    "file": "alchemy:recipes/grid/ingredient/fallbase.json",
    "op": "addmerge",
    "path": "/enabled",
+   "value": false,
+   "condition": { "when": "AllowFallPotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/19/enabled",
    "value": false,
    "condition": { "when": "AllowFallPotionRecipe", "isValue": "false" }
   },
@@ -302,6 +407,20 @@
    "condition": { "when": "AllowShrinkPotionRecipe", "isValue": "false" }
   },
   {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/84/enabled",
+   "value": false,
+   "condition": { "when": "AllowShrinkPotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/33/enabled",
+   "value": false,
+   "condition": { "when": "AllowShrinkPotionRecipe", "isValue": "false" }
+  },
+  {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
    "op": "replace",
    "path": "/attributesByType/utilitypotionbase-shrink/handbook",
@@ -325,6 +444,13 @@
    "condition": { "when": "AllowGrowPotionRecipe", "isValue": "false" }
   },
   {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/3/enabled",
+   "value": false,
+   "condition": { "when": "AllowGrowPotionRecipe", "isValue": "false" }
+  },
+  {
    "file": "alchemy:itemtypes/ingredient/utilitypotionbase.json",
    "op": "replace",
    "path": "/attributesByType/utilitypotionbase-grow/handbook",
@@ -343,7 +469,70 @@
   {
    "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
    "op": "addmerge",
-   "path": "/enabled",
+   "path": "/0/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/reshapebase.json",
+   "op": "addmerge",
+   "path": "/1/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/73/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cape.json",
+   "op": "addmerge",
+   "path": "/101/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/30/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json",
+   "op": "addmerge",
+   "path": "/36/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/97/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json",
+   "op": "addmerge",
+   "path": "/112/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json",
+   "op": "addmerge",
+   "path": "/29/enabled",
+   "value": false,
+   "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
+  },
+  {
+   "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json",
+   "op": "addmerge",
+   "path": "/46/enabled",
    "value": false,
    "condition": { "when": "AllowReshapePotionRecipe", "isValue": "false" }
   },

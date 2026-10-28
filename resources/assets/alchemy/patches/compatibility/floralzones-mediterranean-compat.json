@@ -112,5 +112,6 @@
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/108/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/109/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/110/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] },
-  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/111/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] }
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/111/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] },
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-mediterranean.json", "op": "addmerge", "path": "/112/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesmediterraneanregion", "invert": true }] }
 ]

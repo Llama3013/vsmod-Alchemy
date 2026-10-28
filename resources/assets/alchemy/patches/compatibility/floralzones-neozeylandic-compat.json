@@ -46,5 +46,6 @@
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/42/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/43/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/44/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] },
-  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/45/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] }
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/45/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] },
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-neozeylandic.json", "op": "addmerge", "path": "/46/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonesneozeylandicregion", "invert": true }] }
 ]

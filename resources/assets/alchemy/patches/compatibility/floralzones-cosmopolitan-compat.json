@@ -36,5 +36,6 @@
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/32/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/33/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] },
   { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/34/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] },
-  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/35/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] }
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/35/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] },
+  { "file": "alchemy:recipes/grid/ingredient/compatibility/floralzones-cosmopolitan.json", "op": "addmerge", "path": "/36/enabled", "value": false, "side": "server", "dependsOn": [{ "modid": "floralzonescosmopolitanregion", "invert": true }] }
 ]
